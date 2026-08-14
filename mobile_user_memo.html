@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bidbuy | 사용자메모 내역</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Roboto:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --rose:#E8385A; --rose-h:#C42F4C;
+      --navy:#1A3C6E;
+      --bg:#F5F7FA; --white:#fff;
+      --border:#E0E4EB; --border-soft:#F0EDE9;
+      --bg-warm:#FBF7F5;
+      --tp:#1A1A2E; --ts:#666680; --tm:#999BAA;
+      --green:#2e9e4f; --amber:#e09a00;
+    }
+    *{box-sizing:border-box}
+    html{background:var(--bg)}
+    body{
+      margin:0 auto; max-width:480px; min-width:320px;
+      color:var(--tp); background:var(--bg);
+      font-family:Pretendard,'Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+      font-size:14px; line-height:1.5; overflow-x:hidden;
+    }
+    button,input{font:inherit} button{cursor:pointer} a{text-decoration:none;color:inherit}
+
+    /* ── 헤더 (mobile_auction 이식) ── */
+    .m-header{
+      background:var(--white); border-bottom:1px solid var(--border);
+      position:sticky; top:0; z-index:100;
+    }
+    .m-header-top{
+      display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:12px;
+      padding:1px;min-height:56px;}
+    .m-brand-area{display:flex; align-items:center; gap:10px; min-width:0}
+    .hb{width:34px;height:34px;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0;background:none;border:none;cursor:pointer;flex-shrink:0}
+    .hb span{display:block;width:18px;height:2px;background:var(--tp);border-radius:999px}
+    .m-logo{display:inline-flex; align-items:center;width:76px;line-height:0;}
+.m-logo img{width:100%;height:auto;display:block;}
+    .m-header-right{display:flex; gap:4px; align-items:center; justify-self:end}
+    .m-icon-btn{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:none;background:none;color:var(--tp);font-size:16px;border-radius:5px;cursor:pointer;position:relative}
+    .m-icon-btn .badge{position:absolute;top:3px;right:2px;background:var(--rose);color:#fff;font-size:7px;font-weight:700;min-width:13px;height:13px;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:0 2px}
+    .m-login-btn{min-width:62px;height:30px;background:var(--rose);color:#fff;border:none;padding:0 14px;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit}
+    .m-user-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--rose),#F5A623);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;cursor:pointer;border:none;font-family:inherit;flex-shrink:0}
+    .m-header-search{display:flex;align-items:center;height:38px;background:#F4EEEA;border:1px solid #E6DDDA;border-radius:10px;overflow:hidden;margin:0 14px 10px}
+    .m-header-search::before{content:"";width:15px;height:15px;margin-left:12px;flex:0 0 auto;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238b95a5' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m16.5 16.5 4 4'/%3E%3C/svg%3E") center/contain no-repeat}
+    .m-header-search input{flex:1;min-width:0;height:100%;border:0;outline:0;background:transparent;padding:0 8px 0 8px;color:#333;font-size:13px;font-family:inherit}
+    .m-header-search input::placeholder{color:#99A2B0}
+    .m-header-search button{width:40px;height:100%;border:0;background:var(--rose);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+    .m-header-search button i{font-size:13px}
+
+    /* ── 페이지 타이틀 바 ── */
+    .page-title-bar{
+      display:flex; align-items:center; gap:8px;
+      padding:16px 16px 12px;
+      background:var(--white); border-bottom:1px solid var(--border);
+    }
+    .page-title-bar h2{margin:0; font-size:17px; font-weight:700; color:var(--tp); display:flex; align-items:center; gap:8px}
+    .page-title-bar h2 i{color:var(--rose); font-size:15px}
+
+    /* ── 국가 탭 ── */
+    .country-tabs{
+      display:flex; gap:8px;
+      padding:12px 16px;
+      background:var(--white); border-bottom:1px solid var(--border);
+      overflow-x:auto; -webkit-overflow-scrolling:touch;
+    }
+    .country-tabs::-webkit-scrollbar{display:none}
+    .country-tab{
+      flex-shrink:0; height:32px; padding:0 16px;
+      border:1px solid var(--border); border-radius:99px;
+      background:var(--white); color:var(--ts);
+      font-size:12px; font-weight:700;
+    }
+    .country-tab.active{border-color:var(--rose); background:var(--rose); color:#fff}
+
+    /* ── 사용자메모 목록 ── */
+    .memo-list{background:var(--white)}
+    .memo-item{
+      display:flex; flex-direction:column; gap:6px;
+      padding:14px 16px;
+      border-bottom:1px solid var(--border-soft);
+    }
+    .memo-item:active{background:var(--bg-warm)}
+    .memo-item-head{display:flex; align-items:center; justify-content:space-between; gap:8px}
+    .memo-cat-row{display:flex; align-items:center; gap:6px; min-width:0}
+    .memo-flag{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:22px; height:15px; border:1px solid #d9e0e9; background:#fff;
+      position:relative; overflow:hidden; flex-shrink:0;
+    }
+    .memo-flag.jp::before{content:""; width:7px; height:7px; border-radius:50%; background:#d50024}
+    .memo-flag.us{background:repeating-linear-gradient(to bottom,#b22234 0 1.1px,#fff 1.1px 2.2px)}
+    .memo-flag.us::before{content:""; position:absolute; left:0; top:0; width:9px; height:7px; background:#3c3b6e}
+    .memo-flag.uk{background:#012169}
+    .memo-flag.uk::before,.memo-flag.uk::after{content:""; position:absolute; left:50%; top:50%; background:#fff; transform:translate(-50%,-50%)}
+    .memo-flag.uk::before{width:100%; height:3px}
+    .memo-flag.uk::after{width:3px; height:100%}
+    .memo-cat-badge{
+      display:inline-flex; align-items:center;
+      height:20px; padding:0 7px;
+      border:1px solid var(--border); border-radius:4px;
+      background:var(--bg); color:var(--ts);
+      font-size:11px; font-weight:700; white-space:nowrap;
+    }
+    .memo-order-no{font-size:11px; color:var(--tm); font-family:'Roboto',sans-serif}
+    .reply-badge{
+      flex-shrink:0; font-size:11px; font-weight:700; color:var(--rose);
+      white-space:nowrap;
+    }
+    .reply-badge.wait{color:var(--tm)}
+    .memo-title{
+      font-size:13px; font-weight:600; color:var(--tp);
+      line-height:1.5; overflow:hidden; display:-webkit-box;
+      -webkit-line-clamp:1; -webkit-box-orient:vertical;
+    }
+    .memo-item:active .memo-title{color:var(--rose)}
+    .memo-meta{display:flex; align-items:center; gap:10px; font-size:11px; color:var(--tm)}
+
+    /* 빈 목록 */
+    .memo-empty{
+      padding:60px 20px; text-align:center; color:var(--tm);
+      display:none;
+    }
+    .memo-empty i{font-size:36px; margin-bottom:12px; display:block; color:var(--border)}
+
+    /* ── 페이지네이션 ── */
+    .pagination{
+      display:flex; justify-content:center; align-items:center; gap:6px;
+      padding:20px 16px 40px;
+    }
+    .page-btn{
+      width:32px; height:32px;
+      border:1px solid var(--border); border-radius:6px;
+      background:var(--white); color:var(--ts);
+      font-size:12px; font-weight:700;
+      display:grid; place-items:center;
+    }
+    .page-btn:disabled{color:var(--border); cursor:default}
+    .page-info{font-size:12px; color:var(--ts); font-weight:700; padding:0 6px}
+  </style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<header class="m-header">
+  <div class="m-header-top">
+    <div class="m-brand-area">
+      <button class="hb" type="button" aria-label="메뉴 열기" aria-expanded="false" onclick="openDrawer()"><span></span><span></span><span></span></button>
+      <a class="m-logo" href="mobile_main.html" aria-label="BidBuy 홈">
+        <img src="Bidbuy logo.png" alt="BidBuy Korea">
+      </a>
+    </div>
+    <div class="m-header-right" id="m-guest-area">
+      <button class="m-login-btn" onclick="doMLogin()">로그인</button>
+    </div>
+    <div class="m-header-right" id="m-user-area" style="display:none">
+      <button class="m-icon-btn" aria-label="알림">
+        <i class="fa-regular fa-bell"></i><span class="badge">3</span>
+      </button>
+      <button class="m-icon-btn" aria-label="장바구니">
+        <i class="fa-solid fa-cart-shopping"></i><span class="badge">2</span>
+      </button>
+      <button class="m-user-avatar" onclick="alert('마이페이지')" aria-label="회원 메뉴">한</button>
+    </div>
+  </div>
+  <div class="m-header-search">
+    <input type="text" placeholder="키워드 또는 URL을 입력하세요." aria-label="검색어 입력">
+    <button type="button" onclick="location.href='mobile_totalsearch.html'" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></button>
+  </div>
+</header>
+
+<!-- 페이지 타이틀 -->
+<div class="page-title-bar">
+  <h2><i class="fa-solid fa-location-dot" aria-hidden="true"></i>사용자메모</h2>
+</div>
+
+<!-- 국가 탭 -->
+<div class="country-tabs" aria-label="국가별 사용자메모 필터">
+  <button class="country-tab active" type="button" data-country="jp">일본</button>
+  <button class="country-tab" type="button" data-country="us">미국</button>
+  <button class="country-tab" type="button" data-country="uk">영국</button>
+</div>
+
+<!-- 사용자메모 목록 -->
+<div class="memo-list" id="memoList">
+
+  <a class="memo-item" data-country="jp" href="mobile_payment_detail.html">
+    <div class="memo-item-head">
+      <div class="memo-cat-row">
+        <span class="memo-flag jp" aria-label="일본"></span>
+        <span class="memo-cat-badge">구매대행</span>
+      </div>
+      <span class="reply-badge">답변완료</span>
+    </div>
+    <div class="memo-title">指輪 リング レディース ニッケルフリー 金属アレルギー アクセサリー ワンサイズ 13号 クリア...</div>
+    <div class="memo-meta"><span class="memo-order-no">BJP0220006636</span><span>2026-06-26</span></div>
+  </a>
+
+  <a class="memo-item" data-country="jp" href="mobile_payment_detail.html">
+    <div class="memo-item-head">
+      <div class="memo-cat-row">
+        <span class="memo-flag jp" aria-label="일본"></span>
+        <span class="memo-cat-badge">구매대행</span>
+      </div>
+      <span class="reply-badge">답변완료</span>
+    </div>
+    <div class="memo-title">いきもの大図鑑アドバンス モトイカブトトカゲ</div>
+    <div class="memo-meta"><span class="memo-order-no">BJP0219728972</span><span>2026-06-18</span></div>
+  </a>
+
+  <a class="memo-item" data-country="jp" href="mobile_payment_detail.html">
+    <div class="memo-item-head">
+      <div class="memo-cat-row">
+        <span class="memo-flag jp" aria-label="일본"></span>
+        <span class="memo-cat-badge">구매대행</span>
+      </div>
+      <span class="reply-badge wait">답변대기</span>
+    </div>
+    <div class="memo-title">txt 7TH YEAR weverse album 新品未開封 バムギュ</div>
+    <div class="memo-meta"><span class="memo-order-no">BJP0218899632</span><span>2026-05-27</span></div>
+  </a>
+
+  <a class="memo-item" data-country="jp" href="mobile_payment_detail.html">
+    <div class="memo-item-head">
+      <div class="memo-cat-row">
+        <span class="memo-flag jp" aria-label="일본"></span>
+        <span class="memo-cat-badge">구매대행</span>
+      </div>
+      <span class="reply-badge">답변완료</span>
+    </div>
+    <div class="memo-title">キーリング(黄)アルファベット ビーズ/ARASHI</div>
+    <div class="memo-meta"><span class="memo-order-no">BJP0218664412</span><span>2026-05-18</span></div>
+  </a>
+
+  <a class="memo-item" data-country="jp" href="mobile_payment_detail.html">
+    <div class="memo-item-head">
+      <div class="memo-cat-row">
+        <span class="memo-flag jp" aria-label="일본"></span>
+        <span class="memo-cat-badge">경매대행</span>
+      </div>
+      <span class="reply-badge">답변완료</span>
+    </div>
+    <div class="memo-title">YAMAHA オーディオインターフェース AG03 MK2 ホワイト</div>
+    <div class="memo-meta"><span class="memo-order-no">BJA0214217788</span><span>2026-02-04</span></div>
+  </a>
+
+  <a class="memo-item" data-country="us" href="mobile_payment_detail.html">
+    <div class="memo-item-head">
+      <div class="memo-cat-row">
+        <span class="memo-flag us" aria-label="미국"></span>
+        <span class="memo-cat-badge">구매대행</span>
+      </div>
+      <span class="reply-badge wait">답변대기</span>
+    </div>
+    <div class="memo-title">Apple AirPods Pro 2nd Generation MagSafe Charging Case</div>
+    <div class="memo-meta"><span class="memo-order-no">BUS0260019284</span><span>2026-06-22</span></div>
+  </a>
+
+  <a class="memo-item" data-country="us" href="mobile_payment_detail.html">
+    <div class="memo-item-head">
+      <div class="memo-cat-row">
+        <span class="memo-flag us" aria-label="미국"></span>
+        <span class="memo-cat-badge">경매대행</span>
+      </div>
+      <span class="reply-badge">답변완료</span>
+    </div>
+    <div class="memo-title">Vintage Levi's 501 Denim Jacket Made in USA</div>
+    <div class="memo-meta"><span class="memo-order-no">BUA0259917742</span><span>2026-06-17</span></div>
+  </a>
+
+  <a class="memo-item" data-country="us" href="mobile_payment_detail.html" style="display:none">
+    <div class="memo-item-head">
+      <div class="memo-cat-row">
+        <span class="memo-flag us" aria-label="미국"></span>
+        <span class="memo-cat-badge">구매대행</span>
+      </div>
+      <span class="reply-badge">답변완료</span>
+    </div>
+    <div class="memo-title">Nike Air Jordan 1 Retro High OG Chicago Size 9</div>
+    <div class="memo-meta"><span class="memo-order-no">BUS0258800194</span><span>2026-05-29</span></div>
+  </a>
+
+  <a class="memo-item" data-country="uk" href="mobile_payment_detail.html">
+    <div class="memo-item-head">
+      <div class="memo-cat-row">
+        <span class="memo-flag uk" aria-label="영국"></span>
+        <span class="memo-cat-badge">구매대행</span>
+      </div>
+      <span class="reply-badge">답변완료</span>
+    </div>
+    <div class="memo-title">Burberry Vintage Nova Check Scarf Made in England</div>
+    <div class="memo-meta"><span class="memo-order-no">BUK0260091142</span><span>2026-06-24</span></div>
+  </a>
+
+  <a class="memo-item" data-country="uk" href="mobile_payment_detail.html">
+    <div class="memo-item-head">
+      <div class="memo-cat-row">
+        <span class="memo-flag uk" aria-label="영국"></span>
+        <span class="memo-cat-badge">경매대행</span>
+      </div>
+      <span class="reply-badge wait">답변대기</span>
+    </div>
+    <div class="memo-title">Dr. Martens 1460 Smooth Leather Boots UK 7</div>
+    <div class="memo-meta"><span class="memo-order-no">BUK0259402220</span><span>2026-06-09</span></div>
+  </a>
+
+</div>
+
+<div class="memo-empty" id="memoEmpty">
+  <i class="fa-regular fa-folder-open"></i>
+  <p>해당 국가의 사용자메모가 없습니다.</p>
+</div>
+
+<!-- 페이지네이션 -->
+<div class="pagination">
+  <button class="page-btn" type="button" aria-label="이전" data-page-prev><i class="fa-solid fa-chevron-left"></i></button>
+  <span class="page-info" data-page-info>1 / 1</span>
+  <button class="page-btn" type="button" aria-label="다음" data-page-next><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+
+<script>
+const memoItems = Array.from(document.querySelectorAll('.memo-item'));
+const countryTabs = Array.from(document.querySelectorAll('.country-tab'));
+const memoEmpty = document.getElementById('memoEmpty');
+const pageInfo = document.querySelector('[data-page-info]');
+const prevBtn = document.querySelector('[data-page-prev]');
+const nextBtn = document.querySelector('[data-page-next]');
+let activeCountry = 'jp';
+
+function renderMemoList() {
+  let visible = 0;
+  memoItems.forEach((item) => {
+    const show = item.dataset.country === activeCountry;
+    item.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  memoEmpty.style.display = visible === 0 ? 'block' : 'none';
+  if (pageInfo) pageInfo.textContent = '1 / 1';
+  if (prevBtn) prevBtn.disabled = true;
+  if (nextBtn) nextBtn.disabled = true;
+}
+
+countryTabs.forEach((tab) => {
+  tab.addEventListener('click', () => {
+    countryTabs.forEach((t) => t.classList.remove('active'));
+    tab.classList.add('active');
+    activeCountry = tab.dataset.country;
+    renderMemoList();
+  });
+});
+
+renderMemoList();
+function doMLogin(){
+  document.getElementById('m-guest-area').style.display = 'none';
+  document.getElementById('m-user-area').style.display = '';
+}
+</script>
+<script src="bb-common-mobile.js"></script>
+</body>
+</html>

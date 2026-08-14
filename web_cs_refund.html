@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bidbuy 취소·반품·환불·교환</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --rose: #E8385A;
+      --rose-h: #C42F4C;
+      --navy: #1A3C6E;
+      --ink: #20242b;
+      --text: #33363d;
+      --muted: #777985;
+      --faint: #a1a5b3;
+      --line: #e5dbd7;
+      --line-soft: #eee6e2;
+      --warm: #fbf7f5;
+      --warm-2: #f7f3f0;
+      --stage-left: max(16px, calc((100vw - 1180px) / 2));
+      --sidebar-w: 231px;
+      --main-w: 925px;
+      --gap: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { background: #fff; }
+    body {
+      margin: 0; min-width: 320px;
+      color: var(--text); background: #fff;
+      font-family: Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;
+      font-size: 14px; line-height: 1.5;
+    }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    a { text-decoration: none; color: inherit; }
+
+    .top-notice-spacer { height: 34px; }
+
+    /* ── 상단바 ── */
+    .topbar { height: 67px; width: min(calc(100vw - 32px), 1057px); margin: 0 auto; display: grid; grid-template-columns: 221px minmax(0, 714px) 221px; align-items: center; gap: 16px; background: #fff; }
+    .brand-area { display: flex; align-items: center; gap: 22px; min-width: 0; }
+    .menu-button { width: 25px; height: 25px; border: 0; border-radius: 5px; background: transparent; padding: 0; display: grid; place-items: center; }
+    .menu-lines { width: 23px; display: grid; gap: 6px; }
+    .menu-lines span { height: 2.5px; border-radius: 999px; background: #1f2530; }
+    .logo-link { display: inline-flex; align-items: center; width: 122px; line-height: 0; }
+    .logo-link img { width: 100%; height: auto; display: block; }
+    .search { height: 43px; display: flex; min-width: 0; border: 1px solid var(--line); border-radius: 13px; overflow: hidden; background: var(--warm-2); }
+    .search input { flex: 1; min-width: 0; border: 0; outline: 0; padding: 0 18px; background: transparent; color: var(--text); font-size: 13px; }
+    .search input::placeholder { color: #8c8985; }
+    .search button { width: 111px; border: 0; background: var(--rose); color: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 700; }
+    .user-tools { justify-self: end; display: grid; grid-template-columns: 28px 28px auto; align-items: center; gap: 10px; }
+    .icon-btn { width: 28px; height: 28px; border: 0; border-radius: 5px; background: transparent; font-size: 15px; color: var(--text); display: grid; place-items: center; }
+    .user-name { font-size: 13px; font-weight: 700; color: var(--text); white-space: nowrap; }
+    .premium-chip { display: inline-block; padding: 1px 6px; border-radius: 4px; background: var(--rose); color: #fff; font-size: 10px; font-weight: 800; letter-spacing: .04em; vertical-align: middle; }
+
+    /* ── 스테이지 ── */
+    .stage {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) var(--main-w);
+      gap: var(--gap);
+      width: calc(var(--sidebar-w) + var(--gap) + var(--main-w));
+      margin-left: var(--stage-left);
+      padding-top: 24px;
+      padding-bottom: 80px;
+    }
+
+    /* ── 사이드바 ── */
+    .side-nav { padding-top: 9px; }
+    .side-title {
+      margin: 0 0 4px; padding: 0 15px 14px;
+      border-bottom: 1px solid #dcd9d6;
+    }
+    .side-title strong { display: block; color: var(--navy); font-size: 22px; font-weight: 900; }
+    .side-title span { display: block; color: var(--navy); font-size: 11px; font-weight: 700; letter-spacing: .06em; margin-top: 1px; }
+    .nav-list { display: grid; gap: 0; margin-top: 6px; }
+    .nav-list a {
+      display: block; padding: 9px 20px;
+      color: #4a4f5a; font-size: 13px; font-weight: 500;
+      border-left: 3px solid transparent;
+    }
+    .nav-list a:hover { color: var(--rose); }
+    .nav-list a.active { color: var(--rose); font-weight: 800; border-left-color: var(--rose); background: #fff5f7; }
+
+    /* ── 메인 ── */
+    .page-head {
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--navy);
+      margin-bottom: 24px;
+    }
+    .page-head h2 { margin: 0; color: #111; font-size: 22px; font-weight: 900; }
+
+    /* ── 대분류 탭 ── */
+    .cs-tabs {
+      display: flex;
+      gap: 34px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 0;
+    }
+    .cs-tab {
+      position: relative;
+      min-height: 56px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      font-size: 17px; font-weight: 900;
+      color: #111;
+      border: none; background: none;
+      white-space: nowrap;
+    }
+    .cs-tab::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 10px;
+      height: 3px;
+      background: transparent;
+    }
+    .cs-tab.active { color: #111; }
+    .cs-tab.active::after { background: var(--rose); }
+    .cs-tab:hover:not(.active) { color: var(--rose); }
+
+    /* ── 소분류 탭 (스토어) ── */
+    .store-tabs {
+      display: flex;
+      align-items: center;
+      gap: 64px;
+      min-height: 64px;
+      padding: 0 28px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 34px;
+    }
+    .store-tab {
+      position: relative;
+      height: auto; padding: 0 0 8px;
+      border: 0; border-radius: 0;
+      background: none; color: #111;
+      font-size: 15px; font-weight: 500;
+    }
+    .store-tab::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 2px;
+      background: transparent;
+    }
+    .store-tab.active { color: #111; background: none; }
+    .store-tab.active::after { background:var(--rose); }
+    .store-tab:hover:not(.active) { color:var(--rose); }
+    .claim-content { display: none; }
+    .claim-content.active { display: block; }
+
+    /* ── 콘텐츠 탭 패널 ── */
+    .cs-panel { display: none; }
+    .cs-panel.active { display: block; }
+
+    /* ── 섹션 제목 ── */
+    .cs-section-title {
+      font-size: 17px; font-weight: 900;
+      color: var(--navy);
+      margin: 0 0 14px;
+    }
+
+    /* ── 정책 박스 ── */
+    .policy-box {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px 26px;
+      background: #fff;
+      margin-bottom: 20px;
+    }
+    .policy-box p {
+      margin: 0 0 16px;
+      font-size: 13px; color: var(--text); line-height: 1.75;
+    }
+    .policy-box p:last-child { margin-bottom: 0; }
+    .policy-box .em { color: var(--rose); font-weight: 700; }
+    .policy-box .note { color: var(--muted); }
+
+    /* ── 취소 정책 표 ── */
+    .policy-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 13px; margin-bottom: 20px;
+    }
+    .policy-table th, .policy-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      text-align: left; vertical-align: top;
+      line-height: 1.6;
+    }
+    .policy-table th {
+      background: var(--warm); font-weight: 800;
+      color: #2b2f37; width: 160px;
+    }
+    .policy-table td { color: var(--text); }
+    .content-section { margin-bottom: 44px; scroll-margin-top: 18px; }
+    .content-section:last-child { margin-bottom: 0; }
+    .policy-table.center th,
+    .policy-table.center td { text-align: center; vertical-align: middle; }
+    .policy-table.center td.text-left { text-align: left; }
+    .policy-table .col-narrow { width: 150px; }
+    .policy-table .col-wide { width: auto; }
+    .info-note {
+      display: flex; align-items: flex-start; gap: 8px;
+      margin: 14px 0 0; padding: 12px 14px;
+      border: 1px solid var(--line); background: #fafafa;
+      color: var(--text); font-size: 13px; line-height: 1.65;
+    }
+    .info-note i { color: #111; margin-top: 3px; }
+    .plain-list { margin: 0; padding-left: 0; list-style: none; line-height: 1.85; }
+    .tag {
+      display: inline-block; padding: 1px 7px;
+      border-radius: 3px; font-size: 11px; font-weight: 800;
+      margin-right: 4px; vertical-align: middle;
+    }
+    .tag-ok { background: #e6f7ec; color: #1e8a3e; }
+    .tag-no { background: #fde8ec; color: var(--rose); }
+    .tag-warn { background: #fff4e0; color: #c87800; }
+  </style>
+</head>
+<body>
+
+<div class="top-notice-spacer"></div>
+
+<!-- ── 상단바 ── -->
+<header class="topbar">
+  <div class="brand-area">
+    <button class="menu-button" type="button" aria-label="전체 메뉴">
+      <span class="menu-lines"><span></span><span></span><span></span></span>
+    </button>
+    <a class="logo-link" href="web_main.html" aria-label="Bidbuy 홈">
+      <img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency">
+    </a>
+  </div>
+  <form class="search" role="search" onsubmit="return false">
+    <input type="search" placeholder="키워드 또는 URL을 입력하세요." aria-label="통합검색">
+    <button type="submit"><i class="fas fa-magnifying-glass"></i> 검색</button>
+  </form>
+  <div class="user-tools">
+    <button class="icon-btn" type="button" aria-label="알림"><i class="far fa-bell"></i></button>
+    <button class="icon-btn" type="button" aria-label="장바구니"><i class="fas fa-cart-shopping"></i></button>
+    <div class="user-name">홍길동 님 <span class="premium-chip">PREMIUM</span></div>
+  </div>
+</header>
+
+<!-- ── 본문 ── -->
+<div class="stage">
+
+  <!-- 사이드바 -->
+  <aside>
+    <nav class="side-nav" aria-label="고객센터 메뉴">
+      <div class="side-title">
+        <strong>고객센터</strong>
+        <span>C/S CENTER</span>
+      </div>
+      <div class="nav-list">
+        <a href="#">공지사항</a>
+        <a href="#">자주하는질문</a>
+        <a href="web_qna.html">1:1 문의하기</a>
+        <a href="#">경매이용시 주의사항</a>
+        <a href="#">경매대행 이용안내</a>
+        <a href="#">구매대행 이용안내</a>
+        <a href="#">회원 서비스</a>
+        <a href="#">수수료·비용 안내</a>
+        <a href="#">배송·통관·관세</a>
+        <a href="web_cs_refund.html" class="active">취소·반품·환불·교환</a>
+        <a href="web_cs_damage.html">안심케어 보상 / 파손 접수</a>
+        <a href="web_fakenotice.html">가품 관련 주의사항</a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- 메인 -->
+  <main>
+    <div class="page-head">
+      <h2>취소 · 반품 · 환불 · 교환</h2>
+    </div>
+
+    <!-- 대분류 탭 -->
+    <div class="cs-tabs" role="tablist">
+      <button class="cs-tab active" type="button" onclick="switchTab(this,'cancel')">취 소</button>
+      <button class="cs-tab" type="button" onclick="switchTab(this,'return')">반품 · 환불 · 교환</button>
+      <button class="cs-tab" type="button" onclick="switchTab(this,'claim')">클레임 기한</button>
+    </div>
+
+    <!-- ──────────────────────────────────
+         취소 패널
+    ────────────────────────────────── -->
+    <div class="cs-panel active" id="panel-cancel">
+      <!-- 소분류 탭 -->
+      <div class="store-tabs" role="tablist">
+        <button class="store-tab active" type="button" onclick="switchStore(this,'cancel','cancel-auction')">해외 경매 취소</button>
+        <button class="store-tab" type="button" onclick="switchStore(this,'cancel','cancel-purchase')">해외 구매 취소</button>
+      </div>
+
+      <section class="content-section" id="cancel-auction">
+        <p class="cs-section-title">해외 경매 취소</p>
+        <div class="policy-box">
+          <p>경매 낙찰은 반드시 물품을 구매하겠다는 출품자와의 약속이며 계약입니다.<br>
+          비드바이는 모든 회원님들이 공유하고 있는 입찰 아이디 보호를 위하여 낙찰 취소를 하실 경우 보증금 환수 등의 제도를 시행하고 있습니다.</p>
+          <p><strong>01. 입찰취소</strong><br>
+          입찰이 반영된 건은 취소가 불가능<br>
+          예약입찰일 경우 입찰 설정시간 5분 전까지 해당 경매 상세내역에서 예약입찰 취소로 직접 취소가 가능.</p>
+          <p><strong>02. 낙찰취소</strong></p>
+          <table class="policy-table center">
+            <thead>
+              <tr><th class="col-narrow">취소회수</th><th class="col-wide">낙찰 취소 패널티</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1회차</td><td class="text-left">등급 포인트 100점 차감<br>낙찰 금액에 따른 보증금 환수<br>보증금 결제 제한 10일<br>"이달의 쿠폰" 다운로드 제한 (익월 한 달간)</td></tr>
+              <tr><td>2회차</td><td class="text-left">등급포인트 200점 차감<br>낙찰 금액에 따른 보증금 환수<br>보증금 결제 제한 90일<br>"이달의 쿠폰" 다운로드 제한 (익월부터 3개월간)</td></tr>
+              <tr><td>3회차</td><td class="text-left">등급 포인트 200점 차감<br>낙찰 금액에 따른 보증금 환수<br>보증금 결제 영구 제한<br>"이달의 쿠폰" 다운로드 영구 제한</td></tr>
+            </tbody>
+          </table>
+          <p><strong>03. 낙찰금액에 따른 보증금 환수금액</strong></p>
+          <table class="policy-table center">
+            <thead>
+              <tr><th>환수보증금</th><th colspan="3">낙찰가 기준</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>30,000원</td><td>일본 ￥30,000 이하</td><td>미국 $300 이하</td><td>영국 £300 이하</td></tr>
+              <tr><td>50,000원</td><td>일본 ￥50,000 이하</td><td>미국 $500 이하</td><td>영국 £500 이하</td></tr>
+              <tr><td>100,000원</td><td>일본 ￥50,000 초과</td><td>미국 $500 초과</td><td>영국 £500 초과</td></tr>
+            </tbody>
+          </table>
+          <div class="info-note"><i class="fas fa-exclamation-square" aria-hidden="true"></i><span>보증금 미납부 회원의 낙찰취소시 상기표와 동일한 금액을 차감후 환불됩니다.</span></div>
+        </div>
+      </section>
+
+      <section class="content-section" id="cancel-purchase">
+        <p class="cs-section-title">해외 구매 취소</p>
+        <div class="policy-box">
+          <p>결제 안내 후 1주일이 경과하여도 미결제인 물품은 자동삭제 처리 되실 수 있습니다.</p>
+          <table class="policy-table center">
+            <thead>
+              <tr><th class="col-narrow">주문상태</th><th class="col-wide">구매취소 패널티</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>신청<br>결제대기 / 결제완료</td><td class="text-left">패널티없이 취소 가능<br>
+                마이페이지에서 직접 취소가능 / 해당 구매건의 사용자 메모를 통해 취소요청</td></tr>
+              <tr><td>결제완료/ 주문완료<br>  현지도착</td><td class="text-left">결제완료 상태라도 실제 주문이 완료된 경우에는 취소 불가
+                <br>주문한 샵에서 반품을 허가할 경우 취소가능(대행수수료와 반품실제비용 청구)</td></tr>
+              <tr><td>2차결제/ 국제배송</td><td class="text-left"><strong>취소불가</strong></td></tr>
+            </tbody>
+          </table>
+          <div class="info-note"><i class="fas fa-exclamation-square" aria-hidden="true"></i><span>결제완료 상태라도 실제 주문이 완료된 경우에는 취소 불가합니다.</span></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ──────────────────────────────────
+         반품·환불·교환 패널
+    ────────────────────────────────── -->
+    <div class="cs-panel" id="panel-return">
+      <div class="store-tabs" role="tablist">
+        <button class="store-tab active" type="button" onclick="switchStore(this,'return')">해외경매/구매</button>
+        <button class="store-tab" type="button" onclick="switchStore(this,'return')">주의사항</button>
+      </div>
+
+      <section class="content-section">
+          <table class="policy-table center" style="border:none;">
+            <thead>
+              <tr>
+                <th class="col-narrow" style="border:none; background:var(--warm);">과실의 주체</th>
+                <th class="col-wide" style="border:none; background:var(--warm);">해외경매에서 반품, 환불, 교환에 대한 처리</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="border:none;">고객의 단순변심</td>
+                <td class="text-left" style="border:none;">고객의 단순변심으로 인한 반품 환불 및 교환 불가</td>
+              </tr>
+              <tr>
+                <td style="border:none;">출품자 과실</td>
+                <td class="text-left" style="border:none;">반품시 : 대행수수료 포함 환불<br>교환시 : 교환시 발생한 국제운송료중 1회를 비드바이가 부담<br><strong>단, 가품의 경우에는 대행수수료 환불 불가 및 국제운송료 고객 부담</strong></td>
+              </tr>
+              <tr>
+                <td style="border:none;">비드바이 과실</td>
+                <td class="text-left" style="border:none;">1:1 문의하기로 자료 첨부하여 접수요망</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="margin-top:18px; font-size:13px; color:var(--text); line-height:1.8;">
+            * 우체국 정책 변경으로 인해, 리튬 배터리 내장 상품이 발송 제한 품목으로 지정되어 현재는 해외 반송이 불가능한 점 안내드립니다.<br>
+            이에 따라 관련 상품 구매를 고려 중인 회원님께서는 반품이 어려울 수 있는 점을 충분히 확인하신 후 신중하게 구매해 주시기 바랍니다.
+          </p>
+      </section>
+
+      <section class="content-section">
+        <p class="cs-section-title">주의사항</p>
+        <div class="policy-box">
+          <p>아래사항은 미국 이베이 경매대행 혹은 구매대행시 반품에 대하여 새로이 적용되는 내용입니다. (2011년 01월 01일 이후, 1년단위로 갱신됨)</p>
+          <p>전제)비드바이 과실이 아닌 경우,</p>
+          <ul class="plain-list">
+            <li><strong>1. 물품의 작동이상</strong></li>
+            <li>2. 고객의 단순변심</li>
+          </ul>
+          <p>경매대행의 경우,<br>
+          <strong>1. 세건이상 반품하면 반품 처리불가.</strong><br>
+          <strong>2. 보름이 세건이상 반품한 경우, 건당 20달러의 반품대행 수수료를 부과합니다.</strong><br>
+          (2011년 1월 1일 ~ 2011년 12월 31일까지 총 3건초과하면 20달러가 청구됩니다.)<br>
+          (예시, 2011년에 5건을 반품요청한 고객이 새로이 2012년에 반품 요청시에는 3건까지는 무료로 처리가 됩니다.)</p>
+          <p>구매대행의 경우,<br>
+          미국사무실 도착 기준으로 7-15일(업체별로 다름)이 지난 물품의 반품시 <strong>20% restocking fee를 납부하셔야합니다.</strong></p>
+          <div class="info-note"><i class="fas fa-exclamation-square" aria-hidden="true"></i><span>restocking fee란? 반품 기간이 지나서 반품처리시 판매처에 지불해야 하는 비용입니다.</span></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ──────────────────────────────────
+         클레임 기한 패널
+    ────────────────────────────────── -->
+    <div class="cs-panel" id="panel-claim">
+      <div class="store-tabs" role="tablist">
+        <button class="store-tab active" type="button" onclick="switchClaim(this,'yahoo')">야후 클레임</button>
+        <button class="store-tab" type="button" onclick="switchClaim(this,'ebay')">미국/영국 이베이</button>
+      </div>
+
+      <!-- 일본 야후 옥션 -->
+      <div class="claim-content active" id="claim-yahoo">
+        <p class="cs-section-title">클레임 기한</p>
+        <div class="policy-box">
+      ※ 물품 누락, 배송 중 파손 등 <span class="em">모든 클레임은 수령 후 10일 이내</span>에 접수해야 합니다.
+ <br>수령 물품 사진 및 박스 사진 제출이 필요합니다.<br>
+ 접수에 필요한 사진이 누락되는경우 클레임 접수가 불가할수 있습니다<div class=""></div> <br>
+※ 클레임 가능 여부는 출품자 대응에 따라 달라질 수 있으니 옥션 페이지 확인을 부탁드립니다.
+ <br> <br>
+<span style="font-size: 15px;"><strong>주의사항 </strong></span>
+ <br>수령 후 10일 이내라도 현지 창고 도착 후 20일이 지나면 클레임 접수가 불가합니다.
+ <br>주말·공휴일로 처리 기간이 지연될 수 있으므로 현지 창고 도착 후 15일 이내 접수를 권장합니다.
+       <br><br> ※ <span class="em">음향기기(턴테이블, 앰프, 스피커, 카세트테이프 등) 및 계측기 등 기계류</span>의 작동 불량은 클레임 대상에서 제외됩니다.
+        </div>
+      </div>
+
+      <!-- 미국/영국 이베이 -->
+      <div class="claim-content" id="claim-ebay">
+        <p class="cs-section-title">클레임 기한</p>
+        <div class="policy-box">
+          <p>※ 클레임접수건 일체 : 예) 물품누락, 작동불량, 배송 중 파손 등<br>
+          <span class="em">모두 수취 후 10일 이내로 접수</span>해 주셔야 클레임 접수가 가능합니다.</p>
+          <p>※ 기본적으로 클레임 가능 여부는 <span class="em">이베이 클레임가능기간내</span>입니다.<br>
+          <span class="note">( 출품자에 따라 현지 창고 도착후 15일 ~ 30일 이내입니다. )</span></p>
+          <p>※ 주의사항1) 수취 후 10일 이내라고 하더라도 장기간 현지 창고 보관 후 인수하실 경우,<br>
+          이베이 클레임기간인 <span class="em">현지창고 도착 후 30일이 지나면 클레임을 진행할 수 없습니다.</span></p>
+          <p>※ 주의사항2) 회원님이 클레임 글을 작성한 시점이 현지 창고 도착 후 30일 이내라고해도<br>
+          주말/공휴일/시차로 인해 30일이 넘어갈 수 있습니다. 따라서 <span class="em">25일 이내로 하는것이 안전합니다.</span></p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+function switchTab(btn, panelId) {
+  document.querySelectorAll('.cs-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.cs-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + panelId).classList.add('active');
+}
+
+function switchStore(btn, scope, targetId) {
+  const parent = btn.closest('.store-tabs');
+  parent.querySelectorAll('.store-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  if(targetId){
+    document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function switchClaim(btn, id) {
+  const parent = btn.closest('.store-tabs');
+  parent.querySelectorAll('.store-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.claim-content').forEach(p => p.classList.remove('active'));
+  document.getElementById('claim-' + id).classList.add('active');
+}
+</script>
+</body>
+</html>

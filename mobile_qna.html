@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bidbuy | 1:1 문의내역</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Roboto:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --rose:#E8385A; --rose-h:#C42F4C;
+      --navy:#1A3C6E;
+      --bg:#F5F7FA; --white:#fff;
+      --border:#E0E4EB; --border-soft:#F0EDE9;
+      --bg-warm:#FBF7F5;
+      --tp:#1A1A2E; --ts:#666680; --tm:#999BAA;
+      --green:#2e9e4f; --amber:#e09a00;
+    }
+    *{box-sizing:border-box}
+    html{background:var(--bg)}
+    body{
+      margin:0 auto; max-width:480px; min-width:320px;
+      color:var(--tp); background:var(--bg);
+      font-family:Pretendard,'Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+      font-size:14px; line-height:1.5; overflow-x:hidden;
+    }
+    button,input{font:inherit} button{cursor:pointer} a{text-decoration:none;color:inherit}
+
+    /* ── 헤더 (mobile_auction 이식) ── */
+    .m-header{
+      background:var(--white); border-bottom:1px solid var(--border);
+      position:sticky; top:0; z-index:100;
+    }
+    .m-header-top{
+      display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:12px;
+      padding:1px;min-height:56px;}
+    .m-brand-area{display:flex; align-items:center; gap:10px; min-width:0}
+    .hb{width:34px;height:34px;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0;background:none;border:none;cursor:pointer;flex-shrink:0}
+    .hb span{display:block;width:18px;height:2px;background:var(--tp);border-radius:999px}
+    .m-logo{display:inline-flex; align-items:center;width:76px;line-height:0;}
+.m-logo img{width:100%;height:auto;display:block;}
+    .m-header-right{display:flex; gap:4px; align-items:center; justify-self:end}
+    .m-icon-btn{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:none;background:none;color:var(--tp);font-size:16px;border-radius:5px;cursor:pointer;position:relative}
+    .m-icon-btn .badge{position:absolute;top:3px;right:2px;background:var(--rose);color:#fff;font-size:7px;font-weight:700;min-width:13px;height:13px;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:0 2px}
+    .m-login-btn{min-width:62px;height:30px;background:var(--rose);color:#fff;border:none;padding:0 14px;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit}
+    .m-user-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--rose),#F5A623);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;cursor:pointer;border:none;font-family:inherit;flex-shrink:0}
+    .m-header-search{display:flex;align-items:center;height:38px;background:#F4EEEA;border:1px solid #E6DDDA;border-radius:10px;overflow:hidden;margin:0 14px 10px}
+    .m-header-search::before{content:"";width:15px;height:15px;margin-left:12px;flex:0 0 auto;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238b95a5' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m16.5 16.5 4 4'/%3E%3C/svg%3E") center/contain no-repeat}
+    .m-header-search input{flex:1;min-width:0;height:100%;border:0;outline:0;background:transparent;padding:0 8px 0 8px;color:#333;font-size:13px;font-family:inherit}
+    .m-header-search input::placeholder{color:#99A2B0}
+    .m-header-search button{width:40px;height:100%;border:0;background:var(--rose);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+    .m-header-search button i{font-size:13px}
+
+    /* ── 페이지 타이틀 바 ── */
+    .page-title-bar{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 16px 12px;
+      background:var(--white); border-bottom:1px solid var(--border);
+    }
+    .page-title-bar h2{margin:0; font-size:17px; font-weight:700; color:var(--tp)}
+    .write-btn{
+      display:inline-flex; align-items:center; gap:5px;
+      height:32px; padding:0 14px;
+      border:1px solid var(--rose); border-radius:5px;
+      background:var(--rose); color:#fff;
+      font-size:12px; font-weight:700;
+    }
+
+    /* ── 상태 필터 탭 ── */
+    .status-tabs{
+      display:flex; gap:8px;
+      padding:12px 16px;
+      background:var(--white); border-bottom:1px solid var(--border);
+      overflow-x:auto; -webkit-overflow-scrolling:touch;
+    }
+    .status-tabs::-webkit-scrollbar{display:none}
+    .status-tab{
+      flex-shrink:0; height:32px; padding:0 14px;
+      border:1px solid var(--border); border-radius:99px;
+      background:var(--white); color:var(--ts);
+      font-size:12px; font-weight:700;
+    }
+    .status-tab small{color:var(--tm); margin-left:2px}
+    .status-tab.active{border-color:var(--rose); color:var(--rose)}
+    .status-tab.active small{color:var(--rose)}
+
+    /* ── 문의 목록 ── */
+    .qna-list{background:var(--white)}
+    .qna-item{
+      display:flex; flex-direction:column; gap:6px;
+      padding:14px 16px;
+      border-bottom:1px solid var(--border-soft);
+    }
+    .qna-item:active{background:var(--bg-warm)}
+    .qna-item-head{display:flex; align-items:center; justify-content:space-between; gap:8px}
+    .qna-cat-row{display:flex; align-items:center; gap:6px}
+    .qna-cat-badge{
+      display:inline-flex; align-items:center;
+      height:20px; padding:0 7px;
+      border:1px solid var(--border); border-radius:4px;
+      background:var(--bg); color:var(--ts);
+      font-size:11px; font-weight:700;
+    }
+    .status-chip{
+      flex-shrink:0; font-size:12px; font-weight:700;
+    }
+    .status-chip.waiting{color:var(--tm)}
+    .status-chip.done{color:var(--rose)}
+    .qna-title{
+      font-size:14px; font-weight:600; color:var(--tp);
+      overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    }
+    .qna-item:active .qna-title{color:var(--rose)}
+    .qna-meta{display:flex; align-items:center; gap:10px; font-size:12px; color:var(--tm)}
+    .qna-reply{color:var(--rose); font-weight:700; font-size:12px}
+    .qna-attach{color:var(--tm); font-size:11px}
+
+    /* 빈 목록 */
+    .qna-empty{
+      padding:60px 20px; text-align:center; color:var(--tm);
+      display:none;
+    }
+    .qna-empty i{font-size:36px; margin-bottom:12px; display:block; color:var(--border)}
+
+    /* ── 페이지네이션 ── */
+    .pagination{
+      display:flex; justify-content:center; align-items:center; gap:6px;
+      padding:20px 16px 40px;
+    }
+    .page-btn{
+      width:32px; height:32px;
+      border:1px solid var(--border); border-radius:6px;
+      background:var(--white); color:var(--ts);
+      font-size:12px; font-weight:700;
+      display:grid; place-items:center;
+    }
+    .page-btn.active{border-color:var(--rose); background:var(--rose); color:#fff}
+  </style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<header class="m-header">
+  <div class="m-header-top">
+    <div class="m-brand-area">
+      <button class="hb" type="button" aria-label="메뉴 열기" aria-expanded="false" onclick="openDrawer()"><span></span><span></span><span></span></button>
+      <a class="m-logo" href="mobile_main.html" aria-label="BidBuy 홈">
+        <img src="Bidbuy logo.png" alt="BidBuy Korea">
+      </a>
+    </div>
+    <div class="m-header-right" id="m-guest-area">
+      <button class="m-login-btn" onclick="doMLogin()">로그인</button>
+    </div>
+    <div class="m-header-right" id="m-user-area" style="display:none">
+      <button class="m-icon-btn" aria-label="알림">
+        <i class="fa-regular fa-bell"></i><span class="badge">3</span>
+      </button>
+      <button class="m-icon-btn" aria-label="장바구니">
+        <i class="fa-solid fa-cart-shopping"></i><span class="badge">2</span>
+      </button>
+      <button class="m-user-avatar" onclick="alert('마이페이지')" aria-label="회원 메뉴">한</button>
+    </div>
+  </div>
+  <div class="m-header-search">
+    <input type="text" placeholder="키워드 또는 URL을 입력하세요." aria-label="검색어 입력">
+    <button type="button" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></button>
+  </div>
+</header>
+
+<!-- 페이지 타이틀 -->
+<div class="page-title-bar">
+  <h2>1:1 문의내역</h2>
+  <a class="write-btn" href="mobile_qna_form.html"><i class="fa-solid fa-pen" style="font-size:11px"></i> 문의하기</a>
+</div>
+
+<!-- 상태 필터 -->
+<div class="status-tabs" role="tablist">
+  <button class="status-tab active" type="button" data-filter="all" onclick="filterStatus(this)">전체<small>(6)</small></button>
+  <button class="status-tab" type="button" data-filter="waiting" onclick="filterStatus(this)">답변 대기<small>(2)</small></button>
+  <button class="status-tab" type="button" data-filter="done" onclick="filterStatus(this)">답변완료<small>(4)</small></button>
+</div>
+
+<!-- 문의 목록 -->
+<div class="qna-list" id="qnaList">
+
+  <a class="qna-item" data-status="done" href="mobile_qna_details.html">
+    <div class="qna-item-head">
+      <div class="qna-cat-row">
+        <span class="qna-cat-badge">일본</span>
+        <span class="qna-cat-badge">배송문의</span>
+      </div>
+      <span class="status-chip done">답변완료</span>
+    </div>
+    <div class="qna-title">묶음배송 신청건 국제배송 일정 문의드립니다</div>
+    <div class="qna-meta">
+      <span>2026-06-10</span>
+      <span class="qna-reply">[3]</span>
+      <span class="qna-attach"><i class="fa-solid fa-paperclip"></i></span>
+    </div>
+  </a>
+
+  <a class="qna-item" data-status="waiting" href="mobile_qna_details.html">
+    <div class="qna-item-head">
+      <div class="qna-cat-row">
+        <span class="qna-cat-badge">일본</span>
+        <span class="qna-cat-badge">입찰해제</span>
+      </div>
+      <span class="status-chip waiting">답변 대기</span>
+    </div>
+    <div class="qna-title">야후옥션 입찰 취소 요청합니다 (경매번호 A20260601-0182)</div>
+    <div class="qna-meta"><span>2026-06-09</span></div>
+  </a>
+
+  <a class="qna-item" data-status="done" href="mobile_qna_details.html">
+    <div class="qna-item-head">
+      <div class="qna-cat-row">
+        <span class="qna-cat-badge">미국</span>
+        <span class="qna-cat-badge">구매문의</span>
+      </div>
+      <span class="status-chip done">답변완료</span>
+    </div>
+    <div class="qna-title">이베이 상품 재고 확인 가능할까요?</div>
+    <div class="qna-meta">
+      <span>2026-06-05</span>
+      <span class="qna-reply">[1]</span>
+    </div>
+  </a>
+
+  <a class="qna-item" data-status="waiting" href="mobile_qna_details.html">
+    <div class="qna-item-head">
+      <div class="qna-cat-row">
+        <span class="qna-cat-badge">한국</span>
+        <span class="qna-cat-badge">결제문의</span>
+      </div>
+      <span class="status-chip waiting">답변 대기</span>
+    </div>
+    <div class="qna-title">1차 결제 영수증 발급 문의</div>
+    <div class="qna-meta"><span>2026-06-03</span></div>
+  </a>
+
+  <a class="qna-item" data-status="done" href="mobile_qna_details.html">
+    <div class="qna-item-head">
+      <div class="qna-cat-row">
+        <span class="qna-cat-badge">영국</span>
+        <span class="qna-cat-badge">경매문의</span>
+      </div>
+      <span class="status-chip done">답변완료</span>
+    </div>
+    <div class="qna-title">영국이베이 경매 자동입찰 설정 방법 문의</div>
+    <div class="qna-meta">
+      <span>2026-05-28</span>
+      <span class="qna-reply">[2]</span>
+    </div>
+  </a>
+
+  <a class="qna-item" data-status="done" href="mobile_qna_details.html">
+    <div class="qna-item-head">
+      <div class="qna-cat-row">
+        <span class="qna-cat-badge">한국</span>
+        <span class="qna-cat-badge">반품환불문의</span>
+      </div>
+      <span class="status-chip done">답변완료</span>
+    </div>
+    <div class="qna-title">파손 상품 환불 처리 진행 상황 문의</div>
+    <div class="qna-meta">
+      <span>2026-05-21</span>
+      <span class="qna-reply">[4]</span>
+      <span class="qna-attach"><i class="fa-solid fa-paperclip"></i></span>
+    </div>
+  </a>
+
+</div>
+
+<div class="qna-empty" id="qnaEmpty">
+  <i class="fa-regular fa-folder-open"></i>
+  <p>해당 상태의 문의가 없습니다.</p>
+</div>
+
+<!-- 페이지네이션 -->
+<div class="pagination">
+  <button class="page-btn" type="button" aria-label="이전"><i class="fa-solid fa-chevron-left"></i></button>
+  <button class="page-btn active" type="button">1</button>
+  <button class="page-btn" type="button">2</button>
+  <button class="page-btn" type="button">3</button>
+  <button class="page-btn" type="button" aria-label="다음"><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+
+<script>
+function doMLogin(){
+  document.getElementById('m-guest-area').style.display = 'none';
+  document.getElementById('m-user-area').style.display = '';
+}
+function filterStatus(tab) {
+  document.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  const filter = tab.dataset.filter;
+  let visible = 0;
+  document.querySelectorAll('.qna-item').forEach(item => {
+    const show = filter === 'all' || item.dataset.status === filter;
+    item.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('qnaEmpty').style.display = visible === 0 ? 'block' : 'none';
+}
+</script>
+<script src="bb-common-mobile.js"></script>
+</body>
+</html>

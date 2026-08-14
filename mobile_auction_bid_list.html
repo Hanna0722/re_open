@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>경매 입찰/유찰 | BidBuy Korea</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{
+  --rose:#E8385A;--rose-h:#C42F4C;--amber:#F5A623;
+  --brand:#E8385A;
+  --navy:#1A3C6E;--green:#3AAD4E;
+  --bg:#F5F7FA;--white:#fff;--border:#E0E4EB;--line:#e0e4eb;--line-soft:#eee6e2;
+  --tp:#1A1A2E;--ts:#666680;--tm:#999BAA;--muted:#666680;--faint:#999baa;
+  --warm:#fbf7f5;
+  --frame-w:480px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:Pretendard,'Noto Sans KR',sans-serif;background:#fff;color:var(--tp);font-size:14px;line-height:1.5;max-width:var(--frame-w);margin:0 auto}
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+button,select{cursor:pointer}
+.roboto{font-family:'Roboto',sans-serif}
+
+/* ══ 헤더 ══ */
+.header{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid #d9e0e9;box-shadow:0 1px 0 rgba(32,36,43,.04)}
+.header-top{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:1px;min-height:56px;}
+.brand-area{display:flex;align-items:center;gap:10px;min-width:0}
+.menu-button{width:34px;height:34px;border-radius:5px;border:0;background:transparent;padding:0;display:grid;place-items:center;flex-shrink:0}
+.menu-lines{width:18px;display:grid;gap:4px}
+.menu-lines span{height:2px;border-radius:999px;background:#1f2530}
+.logo-link{display:inline-flex;align-items:center;width:76px;line-height:0;}
+.logo-link img{width:100%;height:auto;display:block;}
+.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:4px}
+.icon-btn{width:34px;height:34px;border-radius:5px;background:none;border:0;color:#333;display:flex;align-items:center;justify-content:center;position:relative;padding:0}
+.icon-btn i{font-size:19px;line-height:19px}
+.i-badge{position:absolute;top:3px;right:2px;min-width:13px;height:13px;padding:0 2px;border-radius:7px;background:var(--brand);color:#fff;font-size:7px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.user-avatar-sm{width:30px;height:30px;border:0;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--amber));color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:inherit}
+.search-bar{display:flex;align-items:center;min-width:0;height:40px;margin:0 14px 10px;border:1px solid #e6ddda;border-radius:10px;overflow:hidden;background:#f4eeea;color:var(--muted)}
+.search-bar input{flex:1;min-width:0;height:100%;padding:0 12px;border:0;outline:0;background:transparent;color:var(--tp);font-size:14px}
+.search-bar input::placeholder{color:#8c8985}
+.search-submit{width:42px;height:100%;border:0;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:0}
+.search-submit i{font-size:16px;line-height:16px}
+
+/* ── 페이지 타이틀 ── */
+.page-title-bar{padding:16px 16px 12px;background:#fff;border-bottom:0}
+.page-title-bar h2{margin:0;font-size:18px;font-weight:700;color:var(--tp)}
+
+/* ── 나의 거래 현황 ── */
+.shopping-head{margin:24px 10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:42px;padding-bottom:7px;border-bottom:1.5px solid var(--brand)}
+.shopping-head h3{margin:0;color:var(--brand);font-size:15px;font-weight:700}
+.status-links{display:flex;align-items:center;gap:8px}
+.outline-pill{display:inline-flex;align-items:center;justify-content:center;height:32px;min-width:74px;padding:0 13px;border:1px solid #e5dcd8;border-radius:999px;background:#fff;color:#6d6470;font-size:12px;font-weight:700;text-align:center;line-height:1}
+
+.status-board{display:flex;flex-direction:column;gap:8px;margin:0 10px 18px}
+.status-stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.status-flow-row{display:grid;grid-template-columns:minmax(0,1fr) 10px minmax(0,1fr) 10px minmax(0,1fr);align-items:center;gap:4px}
+.flow-arr{display:block;width:7px;height:7px;border-top:1.5px solid #c7cdd6;border-right:1.5px solid #c7cdd6;transform:rotate(45deg);justify-self:center;flex-shrink:0}
+.status-card{
+  height:80px;min-height:80px;padding:12px 6px;border:1px solid #e5dcd8;border-radius:8px;background:#fff;
+  box-shadow:none;display:grid;place-items:center;text-align:center;cursor:pointer;transition:border-color .16s,box-shadow .16s;
+}
+.status-card:hover{border-color:rgba(232,56,90,.55);box-shadow:0 0 0 2px rgba(232,56,90,.08);outline:0}
+.status-card.active{border-color:var(--brand);box-shadow:0 0 0 2px rgba(232,56,90,.12)}
+.status-card-primary{height:54px;min-height:54px;padding:7px 6px}
+.status-card-flow{height:116px;min-height:116px}
+.status-card em{display:block;margin-bottom:4px;color:#0f2a4a;font-style:normal;font-size:18px;font-weight:700;line-height:1}
+.status-card em.hot{color:var(--brand)}
+.status-card strong{display:block;color:#172238;font-size:12px;font-weight:700;line-height:1.35}
+.status-local-stack{display:grid;gap:8px}
+.status-card-local{height:54px;min-height:54px;padding:7px 6px}
+
+/* ── 입찰/유찰 목록 (web_auction_bid_list 기준) ── */
+.bid-area{border-top:8px solid #f0f2f5;margin-top:4px}
+.bid-head{margin:18px 10px 14px;min-height:42px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:7px;border-bottom:1.5px solid var(--rose)}
+.bid-head h3{margin:0;color:var(--rose);font-size:15px;font-weight:900}
+
+.bid-tabs{display:flex;align-items:flex-end;gap:18px;padding:0 10px;margin-bottom:14px}
+.bid-tab{height:30px;padding:0 0 8px;border:0;border-bottom:2px solid transparent;background:none;color:#8a8f98;font-size:13px;font-weight:800;white-space:nowrap}
+.bid-tab.active{color:var(--rose);border-bottom-color:var(--rose)}
+
+.bid-toolbar{display:flex;flex-wrap:wrap;gap:8px;padding:0 10px;margin-bottom:12px}
+.bid-count-select{
+  width:100%;height:32px;padding:0 24px 0 12px;border:1px solid #e5dbd7;border-radius:6px;background:#fff;
+  color:var(--text,#33363d);font-size:12px;font-weight:700;line-height:1;outline:0;
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='6'%3E%3Cpath d='M0 0l4.5 6 4.5-6z' fill='%235d6470'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 10px center;
+}
+.bid-search{display:flex;gap:6px;width:100%}
+.bid-search input{flex:1;min-width:0;height:32px;padding:0 12px;border:1px solid #e5dbd7;border-radius:6px;font-size:12px;outline:0}
+.bid-search input:focus{border-color:var(--rose)}
+.btn-search{height:32px;padding:0 16px;border:0;border-radius:5px;background:var(--rose);color:#fff;font-size:12px;font-weight:800;white-space:nowrap}
+.btn-bulk{height:32px;padding:0 14px;border:1px solid #1675cf;border-radius:5px;background:#fff;color:#1675cf;font-size:12px;font-weight:800;white-space:nowrap}
+
+/* ── 입찰 카드 (web bid-row 이식) ── */
+.bid-list{display:flex;flex-direction:column;gap:14px;padding:0 10px}
+.bid-row{border:1px solid #e5dbd7;border-radius:8px;background:#fff;overflow:hidden}
+.bid-row-head{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:42px;padding:8px 14px;background:#FBF7F5;border-bottom:1px solid #DED8D4}
+.bid-status{display:flex;align-items:center;gap:6px;color:#3d4452;font-size:12px;font-weight:700;white-space:nowrap}
+.bid-status::before{content:'';width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;flex-shrink:0}
+.bid-row[data-status="auction-bid"] .bid-status,
+.bid-row[data-status="successful-bid"] .bid-status{color:var(--navy)}
+.bid-row[data-status="failed-bid"] .bid-status{color:#aaa}
+.bid-oid{color:#999;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* 웹의 가로 4컬럼 body를 모바일에서 세로 스택 */
+.bid-body{display:flex;flex-direction:column}
+.bid-product{display:flex;align-items:center;gap:14px;min-width:0;padding:14px;border-bottom:1px solid #eee6e2}
+.bid-thumb{width:72px;height:72px;flex:0 0 auto;border-radius:6px;background:#2b3546;overflow:hidden}
+.bid-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.bid-title-wrap{min-width:0}
+.bid-title{margin:0;color:#1f2530;font-size:13px;font-weight:700;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bid-title-origin{display:block;margin-top:3px;color:#999;font-size:11px;font-weight:400;line-height:1.4}
+.bid-meta{display:grid;gap:6px;min-width:0;padding:12px 14px}
+.bid-meta + .bid-meta{padding-top:0}
+.bid-meta-row{display:flex;gap:8px;font-size:12px}
+.bid-meta-row .ml{flex:0 0 96px;color:#9aa3b2;font-size:12px;font-weight:700}
+.bid-meta-row .mv{color:#33363d;font-size:12px;font-weight:700;min-width:0}
+.bidder-status-win{color:var(--rose) !important}
+.bid-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:10px 14px;border-top:1px solid #eee6e2}
+.btn-view,.btn-rebid{min-width:96px;height:36px;padding:0 12px;border-radius:5px;font-size:12px;font-weight:800}
+.btn-view{border:1px solid #1675cf;background:#fff;color:#1675cf}
+.btn-rebid{border:0;background:var(--rose);color:#fff}
+.bid-list .empty{display:flex;min-height:84px;align-items:center;justify-content:center;border:1px solid #e5dbd7;border-radius:11px;color:#9da2af;font-size:13px;font-weight:800;background:#fff}
+
+.bottom-safe{height:28px}
+</style>
+</head>
+<body>
+
+<!-- ══ 헤더 ══ -->
+<header class="header">
+  <div class="header-top">
+    <div class="brand-area">
+      <button class="menu-button" type="button" aria-label="메뉴 열기" onclick="openDrawer()">
+        <span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+      <a class="logo-link" href="mobile_main.html" aria-label="Bidbuy 홈">
+        <img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency">
+      </a>
+    </div>
+    <div class="header-actions" id="userArea">
+      <button class="icon-btn" type="button" aria-label="알림"><i class="fa-regular fa-bell" aria-hidden="true"></i><span class="i-badge">3</span></button>
+      <button class="icon-btn" type="button" aria-label="장바구니"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></button>
+      <button class="user-avatar-sm" type="button" aria-label="회원 메뉴">한</button>
+    </div>
+  </div>
+  <form class="search-bar" role="search" onsubmit="event.preventDefault(); location.href='mobile_totalsearch.html'">
+    <input type="text" placeholder="키워드 또는 URL을 입력하세요." aria-label="검색어 입력">
+    <button class="search-submit" type="submit" aria-label="검색"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
+  </form>
+</header>
+
+<!-- ── 나의 거래 현황 ── -->
+<div class="shopping-head">
+  <h3>나의 거래 현황</h3>
+  <div class="status-links">
+    <a class="outline-pill" href="mobile_mainlist.html">거래완료</a>
+    <a class="outline-pill" href="mobile_mainlist.html">취소/반품</a>
+  </div>
+</div>
+
+<div class="status-board">
+  <div class="status-stack">
+    <a class="status-card status-card-primary active" href="mobile_auction_bid_list.html"><div><em>12</em><strong>경매입찰</strong></div></a>
+    <a class="status-card status-card-primary" href="mobile_mainlist.html"><div><em>20</em><strong>구매 신청</strong></div></a>
+  </div>
+  <div class="status-flow-row">
+    <a class="status-card status-card-flow" href="mobile_mainlist.html"><div><em class="hot">1</em><strong>1차<br>결제대기</strong></div></a>
+    <span class="flow-arr" aria-hidden="true"></span>
+    <a class="status-card status-card-flow" href="mobile_mainlist.html"><div><em>1,062</em><strong>1차<br>결제완료</strong></div></a>
+    <span class="flow-arr" aria-hidden="true"></span>
+    <div class="status-local-stack">
+      <a class="status-card status-card-local" href="mobile_mainlist.html"><div><em>8</em><strong>현지도착</strong></div></a>
+      <a class="status-card status-card-local" href="mobile_mainlist.html"><div><em>0</em><strong>배송대기</strong></div></a>
+    </div>
+  </div>
+  <div class="status-flow-row">
+    <a class="status-card status-card-flow" href="mobile_mainlist.html"><div><em class="hot">9</em><strong>2차<br>결제대기</strong></div></a>
+    <span class="flow-arr" aria-hidden="true"></span>
+    <a class="status-card status-card-flow" href="mobile_mainlist.html"><div><em>2</em><strong>2차<br>결제 완료</strong></div></a>
+    <span class="flow-arr" aria-hidden="true"></span>
+    <a class="status-card status-card-flow" href="mobile_mainlist.html"><div><em class="hot">11</em><strong>국제배송</strong></div></a>
+  </div>
+</div>
+
+<!-- ── 입찰/유찰 목록 (web_auction_bid_list 동일 내용) ── -->
+<div class="bid-area">
+  <div class="bid-head"><h3 id="bid-list-title">경매 입찰/유찰 목록</h3></div>
+
+  <div class="bid-tabs" role="tablist" aria-label="입찰 상태">
+    <button class="bid-tab active" type="button" role="tab" aria-selected="true" data-bid-tab="bidding">입찰</button>
+    <button class="bid-tab" type="button" role="tab" aria-selected="false" data-bid-tab="failed">유찰</button>
+  </div>
+
+  <div class="bid-toolbar">
+    <select class="bid-count-select" id="marketFilterSelect" aria-label="국가 필터">
+      <option value="all">전체 (12건)</option>
+      <option value="JP">일본</option>
+      <option value="US">미국</option>
+      <option value="UK">영국</option>
+    </select>
+    <div class="bid-search">
+      <input type="search" id="auctionCodeSearch" placeholder="경매코드 검색" aria-label="경매코드 검색">
+      <button class="btn-search" type="button" id="auctionCodeSearchBtn">검색</button>
+      <button class="btn-bulk" type="button">일괄조회</button>
+    </div>
+  </div>
+
+  <div class="bid-list" data-bid-panel="bidding" id="biddingList"></div>
+
+  <div class="bid-list" data-bid-panel="failed" id="failedList" style="display:none">
+    <article class="bid-row" data-market="JP" data-status="failed-bid">
+      <div class="bid-row-head">
+        <span class="bid-status">유찰</span>
+        <span class="bid-oid">야후경매 · a2024032210</span>
+      </div>
+      <div class="bid-body">
+        <div class="bid-product">
+          <div class="bid-thumb"><img src="https://images.unsplash.com/photo-1585011664466-b7bbf827d51d?auto=format&fit=crop&w=200&q=80" alt="닌텐도 스위치 게임 카트리지"></div>
+          <div class="bid-title-wrap">
+            <p class="bid-title">닌텐도 스위치 게임 카트리지 젤다의 전설 왕국의 눈물</p>
+            <span class="bid-title-origin">ニンテンドースイッチ ゲームカートリッジ ゼルダの伝説 王国の涙</span>
+          </div>
+        </div>
+        <div class="bid-meta">
+          <div class="bid-meta-row"><span class="ml">종료일시</span><span class="mv">2024.03.22 21:00</span></div>
+          <div class="bid-meta-row"><span class="ml">예약시간</span><span class="mv">2024.03.22 20:59</span></div>
+        </div>
+        <div class="bid-meta">
+          <div class="bid-meta-row"><span class="ml">입찰금액</span><span class="mv">1개 / 4,500 엔</span></div>
+          <div class="bid-meta-row"><span class="ml">낙찰가/입찰수</span><span class="mv">6,200 엔 / 3명</span></div>
+        </div>
+        <div class="bid-actions">
+          <button class="btn-view" type="button" onclick="location.href='mobile_payment_detail.html'">조회</button>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div class="bottom-safe"></div>
+
+<script>
+const biddingItems = [
+  { market: "US", site: "EBAY", code: "375604375357", title: "Transformers G1 G2 Go Bots Collector Case Bumblebee Skywarp Blurr Bl", image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=200&q=80", bid: "13.00 달러", reserve: "18.00 달러", hoursLeft: 0.5 },
+  { market: "US", site: "EBAY", code: "297323435868", title: "Mario Kart 64 Toy Biz Mario & Wario With Kart And Projectile", image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=200&q=80", bid: "24.00 달러", reserve: "31.00 달러", hoursLeft: 0.9 },
+  { market: "UK", site: "EBAY UK", code: "UK9081745521", title: "Vintage Barbour Wax Jacket Made in England Navy Size M", image: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=200&q=80", bid: "42.00 파운드", reserve: "55.00 파운드", hoursLeft: 2.5 },
+  { market: "JP", site: "Yahoo JP", code: "j1102849304", title: "Nintendo Switch Pokemon Scarlet Violet Double Pack Japan", origin: "ニンテンドースイッチ ポケットモンスター スカーレット・バイオレット ダブルパック 日本版", image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=200&q=80", bid: "6,800 엔", reserve: "8,200 엔", hoursLeft: 5.2 },
+  { market: "US", site: "EBAY", code: "126908552032", title: "Apple iPod Classic 7th Generation 160GB Silver Working", image: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?auto=format&fit=crop&w=200&q=80", bid: "86.00 달러", reserve: "102.00 달러", hoursLeft: 8 },
+  { market: "JP", site: "Yahoo JP", code: "r1150092841", title: "Seiko Prospex Diver Automatic Watch Used Japan Limited", origin: "セイコー プロスペックス ダイバー 自動巻き 中古 日本限定", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=200&q=80", bid: "18,500 엔", reserve: "22,000 엔", hoursLeft: 12 },
+  { market: "UK", site: "EBAY UK", code: "UK7742198306", title: "The Beatles Original Vinyl LP Collection UK Pressing", image: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=200&q=80", bid: "68.00 파운드", reserve: "81.00 파운드", hoursLeft: 18 },
+  { market: "JP", site: "Mercari JP", code: "m83920147562", title: "Studio Ghibli Totoro Plush Set Original Japan", origin: "スタジオジブリ トトロ ぬいぐるみセット オリジナル 日本製", image: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=200&q=80", bid: "4,200 엔", reserve: "5,000 엔", hoursLeft: 23 },
+  { market: "US", site: "EBAY", code: "404912875620", title: "Sony Walkman WM-FX Vintage Cassette Player Tested", image: "https://images.unsplash.com/photo-1558584673-c834fb1cc3ca?auto=format&fit=crop&w=200&q=80", bid: "57.00 달러", reserve: "70.00 달러", hoursLeft: 31 },
+  { market: "UK", site: "EBAY UK", code: "UK5529081774", title: "Burberry Nova Check Scarf Lambswool Classic Beige", image: "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&w=200&q=80", bid: "35.00 파운드", reserve: "44.00 파운드", hoursLeft: 44 },
+  { market: "JP", site: "Rakuten JP", code: "rak2026071501", title: "Canon EF 50mm F1.8 STM Lens Excellent Condition", origin: "キヤノン EF 50mm F1.8 STM レンズ 美品", image: "https://images.unsplash.com/photo-1500634245200-e5245c7574ef?auto=format&fit=crop&w=200&q=80", bid: "9,900 엔", reserve: "12,000 엔", hoursLeft: 67 },
+  { market: "US", site: "EBAY", code: "995120774412", title: "LEGO Star Wars Retired Minifigure Lot Collector Set", image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=200&q=80", bid: "112.00 달러", reserve: "135.00 달러", hoursLeft: 86 }
+];
+
+function pad2(value) {
+  return String(value).padStart(2, "0");
+}
+
+let activeMarketFilter = "all";
+let activeCodeSearch = "";
+
+function futureDateFromHours(hours) {
+  const future = new Date(Date.now() + hours * 60 * 60 * 1000);
+  return `${future.getFullYear()}-${pad2(future.getMonth() + 1)}-${pad2(future.getDate())} ${pad2(future.getHours())}:${pad2(future.getMinutes())}`;
+}
+
+function formatTimeLeft(hoursLeft) {
+  const totalMinutes = Math.max(1, Math.round(hoursLeft * 60));
+  const days = Math.floor(totalMinutes / 1440);
+  const hours = Math.floor((totalMinutes % 1440) / 60);
+  const minutes = totalMinutes % 60;
+  if (days > 0) return `${days}일 ${hours}시간 ${minutes}분`;
+  if (hours > 0) return `${hours}시간 ${minutes}분`;
+  return `${minutes}분`;
+}
+
+function getFilteredBiddingItems() {
+  return biddingItems.filter((item) => {
+    const matchesMarket = activeMarketFilter === "all" || item.market === activeMarketFilter;
+    const matchesCode = !activeCodeSearch || item.code.toLowerCase().includes(activeCodeSearch);
+    return matchesMarket && matchesCode;
+  });
+}
+
+function updateMarketFilterCounts() {
+  const select = document.getElementById("marketFilterSelect");
+  if (!select) return;
+  const labels = { all: "전체", JP: "일본", US: "미국", UK: "영국" };
+  Array.from(select.options).forEach((option) => {
+    const value = option.value;
+    const count = value === "all"
+      ? biddingItems.length
+      : biddingItems.filter((item) => item.market === value).length;
+    option.textContent = `${labels[value] || option.textContent} (${count}건)`;
+  });
+}
+
+function renderBiddingItems() {
+  const list = document.getElementById("biddingList");
+  if (!list) return;
+  const filteredItems = getFilteredBiddingItems();
+  list.innerHTML = filteredItems.map((item) => {
+    const originalIndex = biddingItems.indexOf(item);
+    return `
+      <article class="bid-row" data-bid-index="${originalIndex}" data-market="${item.market}" data-status="auction-bid">
+        <div class="bid-row-head">
+          <span class="bid-status">입찰중 · 종료 ${formatTimeLeft(item.hoursLeft)} 전</span>
+          <span class="bid-oid">${item.site} · ${item.code}</span>
+        </div>
+        <div class="bid-body">
+          <div class="bid-product">
+            <div class="bid-thumb"><img src="${item.image}" alt=""></div>
+            <div class="bid-title-wrap">
+              <p class="bid-title">[${item.market}] ${item.title}</p>
+              ${item.origin ? `<span class="bid-title-origin">${item.origin}</span>` : ""}
+            </div>
+          </div>
+          <div class="bid-meta">
+            <div class="bid-meta-row"><span class="ml">입찰금액/수량</span><span class="mv">1개 / ${item.bid}</span></div>
+            <div class="bid-meta-row"><span class="ml">종료일시</span><span class="mv">${futureDateFromHours(item.hoursLeft)}</span></div>
+            <div class="bid-meta-row"><span class="ml">예약시간</span><span class="mv">${futureDateFromHours(Math.max(0.25, item.hoursLeft - 0.1))}</span></div>
+          </div>
+          <div class="bid-meta">
+            <div class="bid-meta-row"><span class="ml">현재가격/입찰수</span><span class="mv" data-current-price>-</span></div>
+            <div class="bid-meta-row"><span class="ml">입찰예약가</span><span class="mv">${item.reserve}</span></div>
+            <div class="bid-meta-row"><span class="ml">최고입찰여부</span><span class="mv" data-bidder-status>-</span></div>
+          </div>
+          <div class="bid-actions">
+            <button class="btn-view" type="button" data-check-bid>조회</button>
+            <button class="btn-rebid" type="button">재입찰</button>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
+  if (!filteredItems.length) {
+    list.innerHTML = '<div class="empty">해당 조건의 입찰 상품이 없습니다.</div>';
+  }
+  bindBidLookup();
+}
+
+function bindBidLookup() {
+  document.querySelectorAll("[data-check-bid]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const row = button.closest(".bid-row");
+      if (!row) return;
+      const index = Number(row.dataset.bidIndex || 0);
+      const currentPrice = row.querySelector("[data-current-price]");
+      const bidderStatus = row.querySelector("[data-bidder-status]");
+      const spinnerMarkup = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>';
+
+      if (button.disabled) return;
+      button.disabled = true;
+      if (currentPrice) currentPrice.innerHTML = spinnerMarkup;
+      if (bidderStatus) bidderStatus.innerHTML = spinnerMarkup;
+
+      setTimeout(() => {
+        const bidCount = 2 + ((index * 3) % 18);
+        const currentText = biddingItems[index]?.bid || "-";
+        if (currentPrice) currentPrice.textContent = `${currentText} / ${bidCount}건`;
+        if (bidderStatus) {
+          const isWinning = index % 3 === 0;
+          bidderStatus.textContent = isWinning ? "최고입찰자 입니다" : "최고 입찰자가 아닙니다.";
+          bidderStatus.classList.toggle("bidder-status-win", isWinning);
+        }
+        button.disabled = false;
+      }, 700);
+    });
+  });
+}
+
+function applyFailedMarketFilter() {
+  const failedList = document.getElementById("failedList");
+  if (!failedList) return;
+  const rows = Array.from(failedList.querySelectorAll(".bid-row"));
+  let visibleCount = 0;
+  rows.forEach((row) => {
+    const isVisible = activeMarketFilter === "all" || row.dataset.market === activeMarketFilter;
+    row.style.display = isVisible ? "" : "none";
+    if (isVisible) visibleCount += 1;
+  });
+  let empty = failedList.querySelector(".empty");
+  if (!visibleCount) {
+    if (!empty) {
+      empty = document.createElement("div");
+      empty.className = "empty";
+      empty.textContent = "해당 조건의 유찰 상품이 없습니다.";
+      failedList.append(empty);
+    }
+  } else {
+    empty?.remove();
+  }
+}
+
+updateMarketFilterCounts();
+renderBiddingItems();
+applyFailedMarketFilter();
+
+document.getElementById("marketFilterSelect")?.addEventListener("change", (event) => {
+  activeMarketFilter = event.target.value || "all";
+  renderBiddingItems();
+  applyFailedMarketFilter();
+});
+
+function applyAuctionCodeSearch() {
+  activeCodeSearch = (document.getElementById("auctionCodeSearch")?.value || "").trim().toLowerCase();
+  renderBiddingItems();
+}
+
+document.getElementById("auctionCodeSearchBtn")?.addEventListener("click", applyAuctionCodeSearch);
+document.getElementById("auctionCodeSearch")?.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    applyAuctionCodeSearch();
+  }
+});
+
+const bidTabs = document.querySelectorAll(".bid-tab");
+const bidPanels = document.querySelectorAll("[data-bid-panel]");
+bidTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    bidTabs.forEach((t) => { t.classList.remove("active"); t.setAttribute("aria-selected", "false"); });
+    tab.classList.add("active");
+    tab.setAttribute("aria-selected", "true");
+
+    const target = tab.dataset.bidTab;
+    bidPanels.forEach((panel) => {
+      panel.style.display = panel.dataset.bidPanel === target ? "flex" : "none";
+    });
+    applyFailedMarketFilter();
+  });
+});
+</script>
+<script src="bb-common-mobile.js"></script>
+</body>
+</html>

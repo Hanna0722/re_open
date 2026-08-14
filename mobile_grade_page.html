@@ -1,0 +1,284 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --text-strong:#000;--text-primary:#333;--text-secondary:#707070;--text-muted:#9BA0AE;
+  --bg-primary:#fff;--bg-tertiary:#F4EEEA;
+  --border-default:#E6DDDA;--border-strong:#D7CBC7;--divider:#EEE5E2;
+  --brand:#E8385A;
+  --warm: #fbf7f5;
+  --grade-std:#D4891A;--grade-pre:#1f477d;--grade-vip:#3AAD4E;--grade-prs:#E8385A;
+  --r-card:12px;--r-pill:999px;--r-badge:8px;
+}
+.phone{width:100%;max-width:390px;margin:0 auto;background:#fff;font-family:Pretendard,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--text-primary);padding-bottom:32px;overflow-x:hidden}
+
+.topbar{background:#fff;border-bottom:1px solid #D9E0E9;min-height:56px;padding:1px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;position:sticky;top:0;z-index:10;box-shadow:0 1px 0 rgba(32,36,43,.04)}
+.brand-area{display:flex;align-items:center;gap:10px;min-width:0}
+.menu-button{width:34px;height:34px;border-radius:5px;border:0;background:transparent;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer}
+.menu-button span{display:block;width:18px;height:2px;background:#242836;border-radius:999px}
+.logo-link{display:inline-flex;align-items:center;width:76px;line-height:0;}
+.logo-link img{display:block;width:100%;height:auto;}
+.topbar-actions{display:flex;align-items:center;justify-content:flex-end;gap:4px}
+.login-btn-sm{min-width:66px;height:32px;background:var(--brand);color:#fff;border:none;padding:0 14px;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit}
+.icon-btn{width:34px;height:34px;border-radius:5px;background:none;border:none;cursor:pointer;color:#333;display:flex;align-items:center;justify-content:center;position:relative;padding:0}
+.icon-btn i{font-size:19px;line-height:19px}
+.i-badge{position:absolute;top:3px;right:2px;background:var(--brand);color:#fff;font-size:7px;font-weight:700;min-width:13px;height:13px;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:0 2px}
+.user-avatar-sm{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--brand),#F5A623);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;cursor:pointer;border:0;font-family:inherit}
+
+.page-title-bar{background:#fff;border-bottom:1px solid var(--divider);padding:14px 16px 12px}
+.page-title-bar h1{font-size:18px;font-weight:700;color:var(--text-strong);line-height:1.3}
+.page-title-bar p{font-size:12px;color:var(--text-secondary);margin-top:2px;line-height:1.4}
+
+.hero-card{margin:16px 16px 0;background:#fff;border:1px solid var(--border-default);border-radius:var(--r-card);padding:20px}
+.hero-grade-chip{display:inline-flex;align-items:center;background:#fff;border:1px solid var(--border-strong);border-radius:var(--r-pill);font-size:11px;font-weight:700;padding:3px 12px;margin-bottom:12px;color:var(--grade-pre);letter-spacing:.04em}
+.hero-sub{font-size:12px;color:var(--text-secondary);margin-bottom:4px;line-height:1.4}
+.hero-summary{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px}
+.hero-label{font-size:13px;font-weight:700;color:var(--text-primary);line-height:1.2;white-space:nowrap;margin-bottom:4px}
+.hero-amount{font-size:18px;font-weight:700;color:var(--text-strong);letter-spacing:-1px;line-height:1;margin:0;white-space:nowrap}
+.hero-amount span{font-size:16px;font-weight:600;margin-left:2px;color:var(--text-primary)}
+.hero-period{font-size:12px;color:var(--text-muted);margin-bottom:10px;line-height:1.4}
+.hero-divider{height:1px;background:var(--border-default);margin-bottom:14px}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hero-item-label{font-size:11px;color:var(--text-muted);margin-bottom:3px;line-height:1.3}
+.hero-item-val{font-size:13px;font-weight:700;color:var(--text-strong);line-height:1.3}
+.status-title-wrap .hero-label{margin-bottom:2px}
+.status-title-wrap .hero-period{margin-bottom:0}
+
+.grade-status-card{margin:12px 16px 0;background:#fff;border:1px solid var(--border-default);border-radius:var(--r-card);padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.status-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
+.grade-badge-chip{display:inline-block;padding:1px 0;font-size:12px;font-weight:700;color:#000}
+.renewal{font-size:12px;color:var(--text-muted)}
+.progress-labels{display:flex;justify-content:space-between;margin-bottom:6px}
+.progress-labels span{font-size:12px;font-weight:600}
+.lbl-cur{color:var(--grade-pre)}.lbl-nxt{color:var(--grade-vip)}
+.progress-track{height:8px;background:var(--bg-tertiary);border-radius:var(--r-pill);overflow:hidden;margin-bottom:10px}
+.progress-fill{height:100%;width:42%;background:var(--grade-pre);border-radius:var(--r-pill)}
+.progress-hint{font-size:12px;color:var(--text-secondary);line-height:1.5}
+.progress-hint b{color:var(--brand);font-weight:700}
+
+.section-head{font-size:16px;font-weight:700;color:var(--text-strong);padding:20px 16px 10px}
+
+/* 탭 기본 */
+.grade-tabs{display:flex;gap:6px;padding:0 16px 12px;overflow-x:auto;scrollbar-width:none}
+.grade-tabs::-webkit-scrollbar{display:none}
+.gtab{
+  flex-shrink:0;padding:7px 16px;border-radius:5px;
+  font-size:13px;font-weight:600;
+  border:1px solid var(--border-default);
+  background:#fff;color:var(--text-secondary);
+  cursor:pointer;white-space:nowrap;
+}
+
+/* 일반 선택 상태 */
+.gtab.sel-std{background:#f5f5f5;color:var(--grade-std);border-color:var(--border-strong)}
+.gtab.sel-vip{background:#f5f5f5;color:var(--grade-vip);border-color:var(--grade-vip)}
+.gtab.sel-prs{background:#fef4e7;color:var(--grade-prs);border-color:var(--grade-prs)}
+
+/* 현재 등급 탭 — 테두리 2px + 그림자 하이라이트, dot 없음 */
+.gtab.sel-pre{
+  background:#eef5ff;
+  color:var(--grade-pre);
+  border-color:var(--grade-pre);
+}
+/* 현재 등급이지만 다른 탭 선택 중일 때 — 테두리+그림자만 유지 */
+.gtab.is-current:not(.sel-pre){
+  border:0.5px solid #9aa0ad;
+  color:var(--grade-pre);
+  background:#fff;
+}
+
+.benefit-card{margin:0 16px;background:#fff;border:1px solid var(--border-default);border-radius:var(--r-card);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.bc-head{padding:16px;border-bottom:1px solid var(--divider)}
+.bc-head.current{position:relative;padding-right:86px}
+.bc-current-label{position:absolute;top:16px;right:16px;display:inline-block;font-size:12px;font-weight:400;color:#fff;background:var(--grade-pre);border-radius:50px;padding:4px 10px;letter-spacing:.04em}
+.bc-grade{font-size:16px;font-weight:700;margin-bottom:2px}
+.bc-cond{font-size:12px;color:var(--text-muted)}
+.bc-body{padding:0 16px}
+.bc-divider{font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--text-muted);padding:12px 0 8px;text-transform:uppercase}
+.bc-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--divider)}
+.bc-row:last-child{border-bottom:none;padding-bottom:14px}
+.bc-label{font-size:14px;color:var(--text-secondary)}
+.bc-val{font-size:14px;font-weight:600;color:var(--text-strong)}
+.bc-val.pre{color:var(--grade-pre)}.bc-val.vip{color:var(--grade-vip)}.bc-val.prs{color:var(--grade-prs)}.bc-val.muted{color:var(--text-muted);font-weight:400}
+
+.downgrade-notice{margin:16px 16px 0;background:#fbf7f5;border-radius:var(--r-badge);padding:15px 18px 14px}
+.downgrade-notice p{position:relative;padding-left:13px;color:#555;font-size:14px;line-height:1.75}
+.downgrade-notice p::before{content:"•";position:absolute;left:0;top:0}
+
+    .member-tier-icon { background:#E4E9EF !important; color:#1f477d !important; }
+    .member-tier-icon i { line-height:1; }
+  </style>
+
+<div class="phone">
+
+  <div class="topbar">
+    <div class="brand-area">
+      <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="logo-link" href="mobile_main.html" aria-label="Bidbuy 홈"><img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency"></a>
+    </div>
+    <div class="topbar-actions" id="guestArea">
+      <button class="login-btn-sm" type="button">로그인</button>
+    </div>
+    <div class="topbar-actions" id="userArea" style="display:none">
+      <button class="icon-btn" type="button" aria-label="알림"><i class="fa-regular fa-bell" aria-hidden="true"></i><span class="i-badge">3</span></button>
+      <button class="icon-btn" type="button" aria-label="장바구니"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></button>
+      <button class="user-avatar-sm tier-premium member-tier-icon" type="button" aria-label="회원 메뉴"><i class="fa-solid fa-gem" aria-hidden="true"></i></button>
+    </div>
+  </div>
+
+  <div class="page-title-bar">
+    <h1>MY 등급</h1>
+    <p>등급별 혜택을 확인하고 다음 등급을 목표로 거래를 이어가세요.</p>
+  </div>
+
+  <div class="hero-card">
+    <div class="hero-label">홍길동님이 받은 혜택</div>
+    <div class="hero-period">2026.06.01 ~ 현재(2026.08.03)</div>
+    <div class="hero-summary">
+      <div class="hero-sub">3개월 동안 받은 혜택</div>
+      <div class="hero-amount">70,500<span>원</span></div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-grid">
+      <div><div class="hero-item-label">대행수수료 할인</div><div class="hero-item-val">28,500원</div></div>
+      <div><div class="hero-item-label">국제운송료 할인</div><div class="hero-item-val">42,000원</div></div>
+    </div>
+  </div>
+
+  <div class="grade-status-card">
+    <div class="status-head">
+      <div class="status-title-wrap">
+        <div class="hero-label">현재 등급</div>
+        <div class="hero-period">2026.08.01 기준</div>
+      </div>
+    </div>
+    <div class="progress-labels">
+      <span class="lbl-cur">Premium</span>
+      <span class="lbl-nxt">VIP</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill"></div></div>
+    <div class="progress-hint"><b>5건</b> 또는 <b>₩850,000</b> 더 구매하면 다음달 VIP 승급 확정!</div>
+  </div>
+
+  <div class="section-head">등급별 혜택</div>
+
+  <div class="grade-tabs">
+    <div class="gtab" id="tab-std" onclick="switchGrade('std',this)">Standard</div>
+    <div class="gtab sel-pre is-current" id="tab-pre" onclick="switchGrade('pre',this)">Premium</div>
+    <div class="gtab" id="tab-vip" onclick="switchGrade('vip',this)">VIP</div>
+    <div class="gtab" id="tab-prs" onclick="switchGrade('prs',this)">Prestige</div>
+  </div>
+
+  <!-- Standard -->
+  <div class="benefit-card" id="bp-std" style="display:none">
+    <div class="bc-head"><div class="bc-grade" style="color:var(--grade-std)">Standard</div><div class="bc-cond">월 0~6건 이하</div></div>
+    <div class="bc-body">
+      <div class="bc-divider">마일리지 혜택</div>
+      <div class="bc-row"><span class="bc-label">월간 마일리지</span><span class="bc-val">5,000원</span></div>
+      <div class="bc-row"><span class="bc-label">구매수수료 적립률</span><span class="bc-val">2%</span></div>
+      <div class="bc-divider">배송 혜택</div>
+      <div class="bc-row"><span class="bc-label">무료 보관</span><span class="bc-val">30일</span></div>
+      <div class="bc-row"><span class="bc-label">묶음 배송 비용</span><span class="bc-val" style="font-size:13px">건당 ¥100 (6건~)</span></div>
+      <div class="bc-row"><span class="bc-label">국제운임 할인율</span><span class="bc-val muted">-</span></div>
+      <div class="bc-divider">생일 혜택</div>
+      <div class="bc-row"><span class="bc-label">비바항공 국제운임 쿠폰</span><span class="bc-val" style="color:var(--grade-std)">5,000원 * 1장</span></div>
+    </div>
+  </div>
+
+  <!-- Premium (현재 등급 — 디폴트 노출) -->
+  <div class="benefit-card" id="bp-pre" style="display:block">
+    <div class="bc-head current">
+      <div class="bc-current-label">현재 등급</div>
+      <div class="bc-grade" style="color:var(--grade-pre)">Premium</div>
+      <div class="bc-cond">월 7건 이상 또는 70만원 이상</div>
+    </div>
+    <div class="bc-body">
+      <div class="bc-divider">마일리지 혜택</div>
+      <div class="bc-row"><span class="bc-label">월간 마일리지</span><span class="bc-val pre">10,000원</span></div>
+      <div class="bc-row"><span class="bc-label">구매수수료 적립률</span><span class="bc-val pre">5%</span></div>
+      <div class="bc-divider">배송 혜택</div>
+      <div class="bc-row"><span class="bc-label">무료 보관</span><span class="bc-val">30일</span></div>
+      <div class="bc-row"><span class="bc-label">묶음 배송 비용</span><span class="bc-val" style="font-size:13px">건당 ¥100 (6건~)</span></div>
+      <div class="bc-row"><span class="bc-label">국제운임 할인율</span><span class="bc-val pre">비바항공 5% 할인</span></div>
+      <div class="bc-divider">생일 혜택</div>
+      <div class="bc-row"><span class="bc-label">비바항공 국제운임 쿠폰</span><span class="bc-val" style="color:var(--grade-pre)">5,000원 * 2장</span></div>
+    </div>
+  </div>
+
+  <!-- VIP -->
+  <div class="benefit-card" id="bp-vip" style="display:none">
+    <div class="bc-head"><div class="bc-grade" style="color:var(--grade-vip)">VIP</div><div class="bc-cond">월 15건 이상 또는 150만원 이상</div></div>
+    <div class="bc-body">
+      <div class="bc-divider">마일리지 혜택</div>
+      <div class="bc-row"><span class="bc-label">월간 마일리지</span><span class="bc-val vip">20,000원</span></div>
+      <div class="bc-row"><span class="bc-label">구매수수료 적립률</span><span class="bc-val vip">10%</span></div>
+      <div class="bc-divider">배송 혜택</div>
+      <div class="bc-row"><span class="bc-label">무료 보관</span><span class="bc-val vip">45일</span></div>
+      <div class="bc-row"><span class="bc-label">묶음 배송 비용</span><span class="bc-val vip">무료 (최대 10건)</span></div>
+      <div class="bc-row"><span class="bc-label">국제운임 할인율</span><span class="bc-val vip" style="font-size:13px">비바항공 10% / EMS 5% 할인</span></div>
+      <div class="bc-row"><span class="bc-label">안심 케어(일본만 적용)</span><span class="bc-val vip">무료 적용</span></div>
+      <div class="bc-divider">생일 혜택</div>
+      <div class="bc-row"><span class="bc-label">비바항공 국제운임 쿠폰</span><span class="bc-val vip">5,000원 * 3장</span></div>
+    </div>
+  </div>
+
+  <!-- Prestige -->
+  <div class="benefit-card" id="bp-prs" style="display:none">
+    <div class="bc-head"><div class="bc-grade" style="color:var(--grade-prs)"><i class="fas fa-crown" aria-hidden="true"></i> Prestige</div><div class="bc-cond">월 30건 이상 또는 1,000만원 이상</div></div>
+    <div class="bc-body">
+      <div class="bc-divider">마일리지 혜택</div>
+      <div class="bc-row"><span class="bc-label">월간 마일리지</span><span class="bc-val prs">30,000원</span></div>
+      <div class="bc-row"><span class="bc-label">구매수수료 적립률</span><span class="bc-val prs">15%</span></div>
+      <div class="bc-divider">배송 혜택</div>
+      <div class="bc-row"><span class="bc-label">무료 보관</span><span class="bc-val" style="color:var(--grade-prs)">45일</span></div>
+      <div class="bc-row"><span class="bc-label">묶음배송 비용</span><span class="bc-val" style="color:var(--grade-prs)">무료 (최대 10건)</span></div>
+      <div class="bc-row"><span class="bc-label">국제운임 할인율</span><span class="bc-val" style="font-size:13px;color:var(--grade-prs)">비바항공 10% / EMS,선편 5%</span></div>
+      <div class="bc-row"><span class="bc-label">안심 케어(일본만 적용)</span><span class="bc-val" style="color:var(--grade-prs)">무료 적용</span></div>
+      <div class="bc-divider">생일 혜택</div>
+      <div class="bc-row"><span class="bc-label">비바항공 국제운임 쿠폰</span><span class="bc-val" style="color:var(--grade-prs)">5,000원 * 4장</span></div>
+      <div class="bc-divider">Prestige 전용</div>
+      <div class="bc-row"><span class="bc-label">연간 추가 마일리지</span><span class="bc-val prs">30,000원 지급</span></div>
+      <div class="bc-row"><span class="bc-label"><i class="fas fa-gift" aria-hidden="true"></i> Prestige 전용 Gift 제공</span></div>
+    </div>
+  </div>
+
+  <div class="downgrade-notice">
+        <p>월 거래 금액 기준은 수수료를 제외한 낙찰가(물품가)의 합산을 의미하며, 2차결제 비용은 포함되지 않습니다.</p>
+        <p>거래 기준 만족 시 다음달 1일 승급, 2개월 연속 미달 시 한 단계 강등</p>
+        <p>Prestige 등급은 3개월 기준 미달 시 VIP로 강등 (3개월 100건 / 3,000만원 유지)</p>
+        <p>거래 기준은 거래건수 또는 거래금액 중 하나만 충족하면 됩니다.</p>
+        <p>등급 혜택을 부정한 방법으로 이용한 사실이 확인될 경우, 지급된 마일리지는 회수될 수 있으며 관리자 확인 후 등급 및 혜택이 조정될 수 있습니다.</p>
+  </div>
+
+</div>
+
+<script>
+function activateMobileHeaderUser() {
+  const guestArea = document.getElementById('guestArea');
+  const userArea = document.getElementById('userArea');
+  if (guestArea) guestArea.style.display = 'none';
+  if (userArea) userArea.style.display = 'flex';
+}
+
+document.querySelectorAll('.login-btn-sm').forEach(button => {
+  button.addEventListener('click', activateMobileHeaderUser);
+});
+
+const SEL = {std:'sel-std', pre:'sel-pre', vip:'sel-vip', prs:'sel-prs'};
+const CURRENT_GRADE = 'pre';
+
+function switchGrade(key, el) {
+  ['std','pre','vip','prs'].forEach(k => {
+    document.getElementById('bp-'+k).style.display = (k===key) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.gtab').forEach(t => {
+    Object.values(SEL).forEach(c => t.classList.remove(c));
+  });
+  el.classList.add(SEL[key]);
+}
+</script>
+<script src="bb-common-mobile.js"></script>
+</body>
+</html>

@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bidbuy 야후옥션</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --brand: #E8385A;
+      --brand-dark: #f23c62;
+      --text: #263447;
+      --muted: #6f7785;
+      --line: #d8dde6;
+      --warm: #f3f1ed;
+      --thumb: #d3e0ec;
+      --page-w: 1380px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0; min-width: 320px; background: #fff; color: var(--text);
+      font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;
+      font-size:14px; line-height:1.5;
+    }
+
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+
+    /* ── Header ── */
+    .top-notice-spacer { height: 34px; }
+    .site-header { background: #fff; }
+
+    .header-main {
+      width: min(calc(100vw - 60px), var(--page-w));
+      height: 104px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 234px minmax(360px, 714px) 234px;
+      align-items: center; gap: 24px;
+    }
+
+    .brand-area { display: flex; align-items: center; gap: 24px; min-width: 0; }
+
+    .menu-button { width: 28px; height: 28px; padding: 0; border: 0; border-radius: 5px; background: transparent; display: grid; place-items: center; }
+
+    .menu-lines,
+    .menu-lines::before,
+    .menu-lines::after { content: ""; display: block; width: 23px; height: 2px; border-radius: 999px; background: #151b2a; }
+    .menu-lines { position: relative; }
+    .menu-lines::before, .menu-lines::after { position: absolute; left: 0; }
+    .menu-lines::before { top: -8px; }
+    .menu-lines::after { top: 8px; }
+
+    .logo-link { width: 118px; display: block; line-height: 0; }
+    .logo-link img { width: 100%; height: auto; display: block; }
+
+    .header-search-area { position: relative; min-width: 0; display: grid; gap: 8px; align-content: center; }
+
+    .global-search {
+      height: 43px; display: grid;
+      grid-template-columns: minmax(0, 1fr) 112px;
+      overflow: hidden; border: 1px solid #dedbd5; border-radius: 10px; background: var(--warm);
+    }
+    .global-search input { min-width: 0; padding: 0 14px; border: 0; outline: 0; background: transparent; color: var(--text); font-size: 13px; }
+    .global-search input::placeholder { color: #8d8d8d; }
+    .global-search button { border: 0; background: var(--brand); color: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 7px; font-weight: 900; }
+    .global-search button:active { background: var(--brand-dark); }
+    .global-search i, .icon-btn i { font-size: 18px; }
+
+    .chip-list { min-height: 26px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; padding-left: 8px; }
+    .search-chip { height: 24px; padding: 0 10px; border: 0; border-radius: 3px; background: #f2f0ec; color: #111; display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 900; white-space: nowrap; }
+    .search-chip button { width: 14px; height: 14px; padding: 0; border: 0; background: transparent; color: #111; font-size: 13px; line-height: 1; }
+
+    .user-tools { justify-self: end; display: flex; align-items: center; gap: 18px; }
+    .icon-btn { width: 22px; height: 22px; padding: 0; border: 0; border-radius: 5px; background: transparent; color: #6d7483; display: grid; place-items: center; }
+    .user-name { display: grid; gap: 2px; color: #1d2430; font-size: 13px; font-weight: 900; text-align: center; white-space: nowrap; }
+    .premium-chip { padding: 2px 9px; border-radius: 999px; background: #fff1cf; color: #f2a300; font-size: 10px; font-weight: 900; }
+
+    /* ── Store strip ── */
+    .store-strip { padding: 14px 0; background: #fff; width: 100vw; }
+    .store-list { width: min(calc(100vw - 60px), 900px); margin: 0 auto; display: grid; grid-template-columns: repeat(8, 1fr); gap: 16px; }
+    .store-chip { position: relative; color: #666680; text-align: center; text-decoration: none; font-size: 11px; font-weight: 500; min-width: 80px; padding: 4px 14px; display: flex; flex-direction: column; align-items: center; gap: 6px; transition: opacity .15s; }
+    .store-chip:hover { opacity: .8; }
+    .store-chip.active { color: #666680; }
+    .store-badge { position: relative; width: 56px; height: 56px; margin: 0 auto; border: 1px solid #E0E4EB; border-radius: 50%; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; color: #1A1A2E; font-size: 12px; font-weight: 900; line-height: 1.1; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.07); transition: box-shadow .15s; }
+    .store-badge .flag { font-size: 16px; line-height: 1; }
+    .store-badge .brand { font-size: 8px; font-weight: 700; color: #1a1a2e; white-space: nowrap; }
+    .store-chip:hover .store-badge { box-shadow: 0 4px 14px rgba(0,0,0,.13); }
+    .store-chip.active .store-badge { border-color: #E0E4EB; box-shadow: 0 2px 8px rgba(0,0,0,.07); transform: none; }
+    .store-yahoo { color: #e43e2e; transform: rotate(-42deg); font-size: 11px; }
+    .store-mercari { background: #ff1f2f; color: #fff; font-size: 28px; }
+    .store-rakuten { color: #c9272d; font-size: 34px; }
+    .store-cart { color: #ff8a38; }
+    .store-cart svg { width: 27px; height: 27px; stroke-width: 1.8; }
+    .flag-us, .flag-uk { border-radius: 50%; color: #fff; font-size: 12px; text-shadow: 0 1px 1px rgba(0,0,0,.2); }
+    .flag-us { background: linear-gradient(#c9263b 0 12%, #fff 12% 24%, #c9263b 24% 36%, #fff 36% 48%, #c9263b 48% 60%, #fff 60% 72%, #c9263b 72% 84%, #fff 84%); color: #223f87; }
+    .flag-uk { background: linear-gradient(45deg, #153f8f 0 38%, #fff 38% 44%, #d6223b 44% 56%, #fff 56% 62%, #153f8f 62%); }
+
+    /* ── Main ── */
+    main { width: min(calc(100vw - 60px), var(--page-w)); margin: 0 auto; padding-bottom: 56px; }
+
+    /* URL bar */
+    .url-bar { display: grid; grid-template-columns: 120px minmax(0, 1fr) 160px; height: 40px; margin-bottom: 22px; border: 1px solid var(--line); background: #fff; }
+    .url-label { display: grid; place-items: center; border-right: 1px solid var(--line); background: #f3f1ed; color: #111; font-size: 15px; font-weight: 700; }
+    .url-input { min-width: 0; padding: 0 18px; border: 0; outline: 0; color: var(--text); font-size: 14px; }
+    .url-input::placeholder { color: #7c7c7c; }
+    .move-button { border: 0; border-left: 1px solid var(--line); background: #f3f1ed; color: #111; font-size: 15px; font-weight: 700; }
+
+    /* Result copy */
+    .result-copy { margin: 0 0 18px; color: #111; font-size: 20px; font-weight: 700; text-align: center; }
+    .result-copy .red, .result-title .red { color: red; font-weight: 700; }
+
+    /* ── Category panel ── */
+    .category-panel { margin-bottom: 0; border: 1px solid var(--line); border-bottom: 0; background: #fff; }
+    .category-grid { padding: 24px 28px 18px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 32px; }
+    .category-group { display: grid; gap: 11px; align-content: start; }
+    .category-group a { color: #2d3747; font-size: 15px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+    .category-group a.active { color: var(--brand); }
+
+    .sub-category-row { padding: 10px 28px 14px; border-top: 1px solid var(--line); background: #fafaf8; }
+    .sub-category-row + .sub-category-row { background: #f4f3f0; border-top: 1px dashed #d0d5de; }
+    .sub-cat-list { display: flex; flex-wrap: wrap; gap: 7px; }
+    .sub-cat-item { padding: 4px 14px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: #2d3747; font-size: 13px; font-weight: 700; cursor: pointer; transition: border-color .12s, color .12s, background .12s; }
+    .sub-cat-item:hover { border-color: #b0b8c4; color: #111; }
+    .sub-cat-item.active { border-color: var(--brand); background: #fff5f7; color: var(--brand); }
+
+    .category-more-wrap { padding: 0 28px 16px; display: flex; justify-content: flex-end; }
+    .all-category-button { min-width: 116px; height: 30px; border: 0; border-radius: 5px; background: #f7f6f4; color: #111; font-size: 13px; font-weight: 700; }
+
+    /* Category search bar */
+    .category-search-bar { display: grid; grid-template-columns: 108px minmax(72px, .65fr) minmax(320px, 420px) 140px minmax(40px, 1fr); height: 50px; margin-bottom: 0; border: 1px solid var(--line); background: #f7f6f4; }
+    .category-store-label { display: flex; align-items: center; justify-content: flex-start; gap: 8px; padding: 0 14px; color: #2d3747; font-size: 15px; font-weight: 800; white-space: nowrap; }
+    .category-store-label svg { width: 18px; height: 18px; color: #6f7785; flex: 0 0 auto; }
+    .category-breadcrumb { color: var(--muted); font-size: 14px; font-weight: 700; }
+    .category-search-input { grid-column: 3; min-width: 0; margin: 8px 0; padding: 0 14px; border: 1px solid #d8dde6; background: #fff; color: var(--text); font-size: 14px; outline: 0; }
+    .category-search-input::placeholder { color: #8b919d; }
+    .category-search-button { grid-column: 4; margin: 8px 0; border: 0; background: var(--brand); color: #fff; font-size: 15px; font-weight: 700; }
+
+    /* ── Filter panel ── */
+    .filter-panel { padding: 20px; border: 1px solid #e2e2e2; border-radius: 10px; background: #fff; }
+    .filter-title { margin: 0 0 18px; color: #111; font-size: 19px; font-weight: 800; }
+    .filter-block { margin-bottom: 22px; }
+    .filter-block:last-of-type { margin-bottom: 18px; }
+    .filter-block-title { margin-bottom: 10px; color: #111; font-size: 14px; font-weight: 700; }
+    .price-range-fields { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; }
+    .range-sep { color: var(--muted); font-size: 13px; text-align: center; }
+    .filter-text-input, .filter-select {
+      width: 100%; height: 38px; padding: 0 10px; border: 1px solid #ddd; border-radius: 6px;
+      background: #fff; color: var(--text); font-size: 13px; outline: 0;
+    }
+    .filter-text-input:focus, .filter-select:focus { border-color: var(--brand); }
+    .filter-checkbox-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; color: var(--text); font-size: 13px; font-weight: 600; }
+    .filter-checkbox-row input { width: 16px; height: 16px; accent-color: var(--brand); }
+    .filter-submit { width: 100%; height: 46px; margin-top: 4px; border: 0; border-radius: 5px; background: var(--brand); color: #fff; font-size: 14px; font-weight: 700; }
+
+    /* ── Best section (메인 모드) ── */
+    .section-title { margin: 0 0 12px; color: #1d2636; font-size: 21px; font-weight: 700; }
+
+    /* ── Result section (검색 모드) ── */
+    .result-title-row { display: grid; grid-template-columns: minmax(280px, 1fr) minmax(360px, 595px); align-items: center; gap: 24px; padding: 0 0 12px; border-bottom: 1px solid #111; }
+    .result-title-wrap { min-width: 0; display: flex; align-items: center; gap: 10px; }
+    .result-title { margin: 0; color: #111827; font-size: 17px; font-weight: 700; line-height: 1.25; word-break: keep-all; }
+    .favorite-search { width: 22px; height: 22px; padding: 0; border: 0; background: transparent; color: #111; display: grid; place-items: center; }
+    .favorite-search svg { width: 17px; height: 17px; stroke-width: 1.8; }
+    .result-rescan { height: 34px; display: grid; grid-template-columns: minmax(0, 1fr) 124px; }
+    .result-rescan input { min-width: 0; padding: 0 14px; border: 1px solid var(--line); border-right: 0; outline: 0; background: #fff; color: var(--text); font-size: 13px; }
+    .result-rescan button { border: 0; background: var(--brand); color：#fff; font-size: 13px; font-weight: 700; }
+    .result-control-row { min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .result-tabs { display: flex; align-items: center; gap: 32px; padding-left: 14px; }
+    .result-tab { padding: 0; border: 0; background: transparent; color: #111; font-size: 12px; font-weight: 700; }
+    .result-tab.active { color: var(--brand); text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 2px; }
+    .filter-actions { display: flex; align-items: center; gap: 12px; }
+    .sort-select { width: 112px; height: 30px; padding: 0 28px 0 12px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: #1f497a; font-size: 12px; font-weight: 700; }
+    .view-buttons { display: inline-flex; align-items: center; gap: 5px; }
+    .view-button { width: 28px; height: 28px; padding: 0; border: 1px solid var(--line); background: #fff; color: #a7adb7; display: grid; place-items: center; }
+    .view-button.active { color: #1675cf; }
+    .view-list, .view-grid { width: 14px; height: 14px; display: grid; gap: 2px; }
+    .view-list { grid-template-rows: repeat(3, 1fr); }
+    .view-grid { grid-template-columns: repeat(2, 1fr); }
+    .view-list span, .view-grid span { display: block; background: currentColor; }
+
+    /* ── Product grid ── */
+    .product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 16px; }
+    .reveal-grid-wrap { position: relative; overflow: hidden; transition: max-height .28s ease; }
+    .reveal-grid-wrap.is-collapsed::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 150px; pointer-events: none; background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 76%); }
+    .product-card { position: relative; min-width: 0; border: 1px solid var(--line); border-radius: 8px; background: #fff; overflow: hidden; cursor: pointer; }
+    .product-card:hover .product-name { text-decoration: underline; text-underline-offset: 2px; }
+    .product-thumb { position: relative; width: 100%; aspect-ratio: 1 / 1; background: var(--thumb); overflow: hidden; }
+    .product-thumb img { width: 100%; height: 100%; display: block; object-fit: cover; }
+    .thumb-actions { position: absolute; left: 12px; right: 12px; bottom: 10px; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .thumb-action,
+    .heart { width: 34px; height: 34px; padding: 0; border: 1px solid #e0e3e8; border-radius: 50%; background: rgba(255,255,255,.96); color: #9aa1ad; font-size: 15px; line-height: 1; display: flex; align-items: center; justify-content: center; box-shadow: none; transition: border-color .16s, background .16s, color .16s, transform .16s; }
+    .thumb-action:hover,
+    .heart:hover { border-color: #c9ced7; background: #fff; color: var(--brand); }
+    .heart.active { background: var(--brand); color: #fff; transform: scale(1.04); }
+    .site-badge { width: calc(100% - 24px); display: inline-flex; align-items: center; gap: 6px; margin: 10px 12px 0; padding: 5px 10px; border: 1px solid var(--line); border-radius: 4px; color: #333; font-size: 12px; font-weight: 700; }
+    .site-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); flex: 0 0 auto; }
+    .site-flag-us { width: 16px; height: 12px; border-radius: 2px; flex: 0 0 auto; background: linear-gradient(#c9263b 0 12%, #fff 12% 24%, #c9263b 24% 36%, #fff 36% 48%, #c9263b 48% 60%, #fff 60% 72%, #c9263b 72% 84%, #fff 84%); }
+    .site-flag-uk { width: 16px; height: 12px; border-radius: 2px; flex: 0 0 auto; background: linear-gradient(45deg, #153f8f 0 38%, #fff 38% 44%, #d6223b 44% 56%, #fff 56% 62%, #153f8f 62%); }
+    .product-name { margin: 10px 14px 0; overflow: hidden; color: #1a1a1a; font-size: 14px; font-weight: 600; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; min-height: 41px; }
+    .price-row { display: block; margin: 12px 14px 16px; }
+    .price { color: #111; font-size: 17px; font-weight: 800; font-family: 'Roboto', sans-serif; }
+    .auction-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 14px; color: #7c8490; font-size: 12px; font-weight: 600; }
+    .auction-meta > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bids { flex: 0 0 auto; color: var(--muted); font-size: 12px; font-weight: 600; white-space: nowrap; }
+
+    /* More / footer */
+    .more-row { position: relative; z-index: 2; height: 36px; margin-top: -18px; border: 1px dashed #d7d1cc; border-radius: 7px; background: rgba(255,255,255,.94); display: flex; align-items: center; justify-content: center; gap: 6px; color: #8d93a1; font-size: 12px; font-weight: 800; cursor: pointer; }
+    .more-row::before { content: ""; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 10px solid currentColor; }
+    .more-footer { padding: 30px 0; background: #fff; }
+    .more-footer button { width: min(calc(100vw - 60px), var(--page-w)); height: 36px; margin: 0 auto; display: flex; border: 1px dashed #d7d1cc; border-radius: 5px; background: #111; color: #fff; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 900; }
+    .more-footer button::before { content: ""; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid #fff; }
+
+    /* ── Content layout (sidebar + main area) ── */
+    .content-layout { display: grid; grid-template-columns: 290px minmax(0, 1fr); align-items: start; gap: 28px; margin-top: 28px; }
+    .content-area { min-width: 0; }
+
+    .content-layout .product-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 16px; }
+
+    /* ── Responsive ── */
+    
+
+    
+  </style>
+</head>
+<body>
+  <div class="top-notice-spacer" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-main">
+      <div class="brand-area">
+        <button class="menu-button" type="button" aria-label="메뉴 열기"><span class="menu-lines"></span></button>
+        <a class="logo-link" href="web_main.html" aria-label="Bidbuy 홈">
+          <img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency">
+        </a>
+      </div>
+
+      <div class="header-search-area">
+        <form class="global-search" data-global-search>
+          <input type="search" placeholder="키워드 또는 URL을 입력하세요.">
+          <button type="submit">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            검색
+          </button>
+        </form>
+        <div class="chip-list" data-keyword-list aria-label="검색 키워드"></div>
+      </div>
+
+      <div class="user-tools" aria-label="회원 메뉴">
+        <button class="icon-btn" type="button" aria-label="알림">
+          <i class="fa-regular fa-bell" aria-hidden="true"></i>
+        </button>
+        <button class="icon-btn" type="button" aria-label="장바구니">
+          <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+        </button>
+        <div class="user-name">이한나님<span class="premium-chip">PREMIUM</span></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="store-strip">
+    <nav class="store-list" aria-label="스토어 바로가기">
+      <a class="store-chip active" href="#" data-store-name="야후 옥션" data-best-title="야후옥션 베스트" aria-current="page">
+        <div class="store-badge"><span class="flag">JP</span><span class="brand" style="color:#E60026;font-size:9px;font-weight:900">YAHOO!</span></div><strong>야후 옥션</strong>
+      </a>
+      <a class="store-chip" href="#" data-store-name="메루카리" data-best-title="메루카리 베스트">
+        <div class="store-badge"><span class="flag" style="font-size:18px;color:#19ce60;font-weight:900">M</span></div><strong>메루카리</strong>
+      </a>
+      <a class="store-chip" href="#" data-store-name="라쿠텐" data-best-title="라쿠텐 베스트">
+        <div class="store-badge"><span class="flag" style="font-size:14px;color:#BF0000;font-weight:900">楽天</span></div><strong>라쿠텐</strong>
+      </a>
+      <a class="store-chip" href="#" data-store-name="라쿠마" data-best-title="라쿠마 베스트">
+        <div class="store-badge"><span class="flag" style="font-size:12px;color:#BF0000;font-weight:700">Rakuten</span></div><strong>라쿠마</strong>
+      </a>
+      <a class="store-chip" href="#" data-store-name="야후 쇼핑" data-best-title="야후 쇼핑 베스트">
+        <div class="store-badge"><span class="flag" style="font-size:12px;color:#FF9900;font-weight:900">amazon</span></div><strong>야후 쇼핑</strong>
+      </a>
+      <a class="store-chip" href="#" data-store-name="일본 아마존" data-best-title="일본 아마존 베스트">
+        <div class="store-badge"><span class="flag" style="font-size:12px;color:#FF9900;font-weight:900">amazon</span></div><strong>일본 아마존</strong>
+      </a>
+      <a class="store-chip" href="#" data-store-name="미국 이베이" data-best-title="미국 이베이 베스트">
+        <div class="store-badge"><span class="flag">US</span><span class="brand" style="font-size:9px;font-weight:700;color:#E53238">eBay</span></div><strong>미국 이베이</strong>
+      </a>
+      <a class="store-chip" href="#" data-store-name="영국 이베이" data-best-title="영국 이베이 베스트">
+        <div class="store-badge"><span class="flag">UK</span><span class="brand" style="font-size:9px;font-weight:700;color:#E53238">eBay</span></div><strong>영국 이베이</strong>
+      </a>
+    </nav>
+  </div>
+
+  <main>
+    <!-- URL 입력바 (항상 표시) -->
+    <div class="url-bar">
+      <div class="url-label">URL 입력</div>
+      <input class="url-input" type="text" placeholder="야후옥션 상품 URL을 입력하세요.">
+      <button class="move-button" type="button">이동</button>
+    </div>
+
+    <!-- 검색결과 안내 (검색 모드에서만 표시) -->
+    <p class="result-copy" data-result-copy hidden></p>
+
+    <!-- 카테고리 패널 -->
+    <section class="category-panel" aria-label="카테고리 바로가기">
+      <div class="category-grid">
+        <div class="category-group">
+          <a href="#">가전, AV, 카메라</a>
+          <a href="#">뷰티, 건강 관리</a>
+          <a href="#">영화, 동영상</a>
+          <a href="#">취미, 문화</a>
+        </div>
+        <div class="category-group">
+          <a href="#">거주지, 인테리어</a>
+          <a href="#">사무, 점포 용품</a>
+          <a href="#">음식, 음료</a>
+          <a href="#">컴퓨터</a>
+        </div>
+        <div class="category-group">
+          <a href="#">골동품, 컬렉션</a>
+          <a href="#">스포츠, 레저</a>
+          <a href="#">음악</a>
+          <a href="#">탤런트 상품</a>
+        </div>
+        <div class="category-group">
+          <a href="#">기타</a>
+          <a href="#">아기 용품</a>
+          <a href="#">자동차, 오토바이</a>
+          <a href="#">티켓, 금권, 숙박예약</a>
+        </div>
+        <div class="category-group">
+          <a href="#">꽃, 원예</a>
+          <a href="#">애완 동물, 생물</a>
+          <a href="#">장난감, 게임</a>
+          <a href="#">패션</a>
+        </div>
+        <div class="category-group">
+          <a href="#">만화, 애니메이션 상품</a>
+          <a href="#">액세서리, 시계</a>
+          <a href="#">책, 잡지</a>
+          <a href="#">브랜드 소품</a>
+        </div>
+      </div>
+      <div class="sub-category-row" id="subCatRow1" hidden>
+        <div class="sub-cat-list" id="subCatList1"></div>
+      </div>
+      <div class="sub-category-row" id="subCatRow2" hidden>
+        <div class="sub-cat-list" id="subCatList2"></div>
+      </div>
+      <div class="category-more-wrap">
+        <button class="all-category-button" type="button">전체 카테고리</button>
+      </div>
+    </section>
+
+    <!-- 카테고리 검색바 (항상 표시) -->
+    <form class="category-search-bar" data-category-search-form aria-label="카테고리 검색">
+      <div class="category-store-label">
+        <i class="fa-solid fa-house" aria-hidden="true"></i>
+        <span data-category-store-name>야후 옥션</span><span class="category-breadcrumb" data-category-breadcrumb></span>
+      </div>
+      <input class="category-search-input" type="search" name="q" placeholder="전체 카테고리에서 검색" data-category-search-input>
+      <button class="category-search-button" type="submit">검색</button>
+    </form>
+
+    <div class="content-layout">
+    <!-- 왼쪽: 검색 필터 사이드바 -->
+    <section class="filter-panel" aria-label="검색 필터">
+      <h2 class="filter-title">검색 필터</h2>
+
+      <div class="filter-block">
+        <div class="filter-block-title">가격</div>
+        <div class="price-range-fields">
+          <input type="text" class="filter-text-input" placeholder="최소" aria-label="최소 가격">
+          <span class="range-sep" aria-hidden="true">~</span>
+          <input type="text" class="filter-text-input" placeholder="최대" aria-label="최대 가격">
+        </div>
+      </div>
+
+      <div class="filter-block">
+        <div class="filter-block-title">상품상태</div>
+        <select class="filter-select" aria-label="상품상태">
+          <option>전체</option>
+          <option>신품</option>
+          <option>중고</option>
+        </select>
+      </div>
+
+      <div class="filter-block">
+        <div class="filter-block-title">거래방식</div>
+        <label class="filter-checkbox-row"><input type="checkbox"><span>무료배송</span></label>
+        <select class="filter-select" aria-label="거래방식">
+          <option>거래방식 전체</option>
+          <option>경매</option>
+          <option>즉시구매</option>
+        </select>
+      </div>
+
+            <div class="filter-block">
+        <div class="filter-block-title">판매자</div>
+        <select class="filter-select" aria-label="거래방식">
+          <option>전체</option>
+          <option>스토어</option>
+          <option>개인</option>
+        </select>
+      </div>
+
+
+      <button class="filter-submit" type="button">적용</button>
+    </section>
+
+    <!-- 오른쪽: 컨텐츠 영역 -->
+    <div class="content-area">
+    <!-- 베스트 섹션 (메인 모드) -->
+    <section data-view-main aria-labelledby="best-title">
+      <h2 class="section-title" id="best-title">야후옥션 베스트</h2>
+      <div class="product-grid">
+        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/fashion?lock=1" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
+        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/food?lock=2" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
+        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/toys?lock=3" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
+        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/fashion?lock=4" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
+        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/food?lock=5" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
+        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/toys?lock=6" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
+        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/fashion?lock=7" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
+        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/food?lock=8" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
+      </div>
+      <div class="more-row">펼쳐보기</div>
+    </section>
+
+    <!-- 검색결과 섹션 (검색 모드, 기본 hidden) -->
+    <section data-view-search hidden aria-label="검색 결과">
+      <div class="result-title-row">
+        <div class="result-title-wrap">
+          <h1 class="result-title" data-result-title>검색 결과</h1>
+          <button class="favorite-search" type="button" aria-label="검색조건 저장">
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+          </button>
+        </div>
+        <form class="result-rescan" data-result-rescan>
+          <input type="search" placeholder="결과 내 재검색" aria-label="결과 내 재검색">
+          <button type="submit">검색</button>
+        </form>
+      </div>
+
+      <div class="result-control-row">
+        <div class="result-tabs" role="tablist" aria-label="거래 방식">
+          <button class="result-tab active" type="button" role="tab" aria-selected="true">전체</button>
+          <button class="result-tab" type="button" role="tab" aria-selected="false">경매</button>
+          <button class="result-tab" type="button" role="tab" aria-selected="false">즉시낙찰</button>
+        </div>
+        <div class="filter-actions">
+          <select class="sort-select" aria-label="정렬">
+            <option>인기상품순</option>
+            <option>마감임박순</option>
+            <option>낮은가격순</option>
+            <option>높은가격순</option>
+            <option>입찰수높은순</option>
+            <option>입찰수낮은순</option>
+            <option>신상품순</option>
+          </select>
+          <div class="view-buttons">
+            <button class="view-button" type="button" aria-label="목록 보기">
+              <span class="view-list" aria-hidden="true"><span></span><span></span><span></span></span>
+            </button>
+            <button class="view-button active" type="button" aria-label="그리드 보기">
+              <span class="view-grid" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-grid">
+        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/toys?lock=9" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
+        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/fashion?lock=10" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
+        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/food?lock=11" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
+        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/toys?lock=12" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
+        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/fashion?lock=13" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
+        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/food?lock=14" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
+        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/toys?lock=15" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
+        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/fashion?lock=16" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
+      </div>
+    </section>
+    </div><!-- /.content-area -->
+    </div><!-- /.content-layout -->
+  </main>
+
+  <footer class="more-footer" data-more-footer hidden>
+    <button type="button">펼쳐보기</button>
+  </footer>
+
+  <script>
+    // ── DOM refs ──
+    const keywordList       = document.querySelector("[data-keyword-list]");
+    const globalSearch      = document.querySelector("[data-global-search]");
+    const catSearchForm     = document.querySelector("[data-category-search-form]");
+    const catSearchInput    = document.querySelector("[data-category-search-input]");
+    const catStoreName      = document.querySelector("[data-category-store-name]");
+    const catBreadcrumb     = document.querySelector("[data-category-breadcrumb]");
+    const resultCopy        = document.querySelector("[data-result-copy]");
+    const resultTitleEl     = document.querySelector("[data-result-title]");
+    const resultRescan      = document.querySelector("[data-result-rescan]");
+    const bestTitleEl       = document.getElementById("best-title");
+    const viewMain          = document.querySelector("[data-view-main]");
+    const viewSearch        = document.querySelector("[data-view-search]");
+    const moreFooter        = document.querySelector("[data-more-footer]");
+
+    // ── State ──
+    let keywords = [];
+    let mode = "main";
+
+    // ── Mode switching ──
+    function switchToSearch() {
+      mode = "search";
+      viewMain.hidden = true;
+      viewSearch.hidden = false;
+      moreFooter.hidden = false;
+      resultCopy.hidden = false;
+      updateResultText();
+    }
+
+    function switchToMain() {
+      mode = "main";
+      viewMain.hidden = false;
+      viewSearch.hidden = true;
+      moreFooter.hidden = true;
+      resultCopy.hidden = true;
+      keywords = [];
+      syncUrl();
+      renderKeywords();
+    }
+
+    // ── Keywords ──
+    function joined() { return keywords.join(" "); }
+
+    function syncUrl() {
+      const q = joined();
+      window.history.replaceState(null, "", q ? `?q=${encodeURIComponent(q)}` : window.location.pathname);
+    }
+
+    function countNode() {
+      const s = document.createElement("span");
+      s.className = "red";
+      s.textContent = "2,859";
+      return s;
+    }
+
+    function updateResultText() {
+      if (!keywords.length) {
+        resultCopy.textContent = "검색어를 입력해 주세요.";
+        resultTitleEl.replaceChildren("검색 결과 (전체 ", countNode(), "건)");
+        catSearchInput.value = "";
+        return;
+      }
+      const hl = document.createElement("span");
+      hl.className = "red";
+      hl.textContent = `'${joined()}'`;
+      resultCopy.replaceChildren(hl, "에 대한 검색결과 입니다.");
+      resultTitleEl.replaceChildren(`'${joined()}' 검색 결과 (전체 `, countNode(), "건)");
+      catSearchInput.value = joined();
+    }
+
+    function renderKeywords() {
+      keywordList.replaceChildren();
+      keywords.forEach((kw, i) => {
+        const chip = document.createElement("span");
+        chip.className = "search-chip";
+        chip.append(document.createTextNode(kw + " "));
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.setAttribute("aria-label", kw + " 삭제");
+        btn.dataset.keywordIndex = String(i);
+        btn.innerHTML = '<i class="fa-solid fa-xmark" aria-hidden="true"></i>';
+        chip.append(btn);
+        keywordList.append(chip);
+      });
+      if (mode === "search") updateResultText();
+    }
+
+    function addKeywords(value) {
+      const next = value.trim().split(/\s+/).filter(Boolean);
+      if (!next.length) return;
+      keywords = next;
+      syncUrl();
+      renderKeywords();
+      switchToSearch();
+    }
+
+    // ── Category data ──
+    const categoryData = {
+      '가전, AV, 카메라': {
+        subs: ['TV, 영상기기', '카메라', '오디오기기', '생활가전', '스마트기기', '계절가전', '조명기기'],
+        children: {
+          'TV, 영상기기': ['TV', 'DVD/블루레이', '프로젝터', '모니터', '셋톱박스'],
+          '카메라': ['DSLR', '미러리스', '콤팩트', '필름카메라', '액션캠', '렌즈', '액세서리'],
+          '오디오기기': ['스피커', '헤드폰/이어폰', 'AV리시버', 'CD플레이어', '레코드플레이어'],
+          '생활가전': ['냉장고', '세탁기', '청소기', '전자레인지', '식기세척기'],
+        }
+      },
+      '뷰티, 건강 관리': {
+        subs: ['스킨케어', '메이크업', '헤어케어', '바디케어', '향수', '건강보조식품', '의료기기'],
+        children: {
+          '스킨케어': ['클렌징', '토너/로션', '에센스/세럼', '크림', '마스크팩', '선케어'],
+          '메이크업': ['파운데이션', '립메이크업', '아이메이크업', '블러셔', '네일아트'],
+        }
+      },
+      '영화, 동영상': {
+        subs: ['DVD/블루레이', 'VHS', '영화', 'TV방송', '애니메이션', '다큐멘터리'],
+        children: { 'DVD/블루레이': ['국내영화', '외국영화', '드라마', '애니메이션', '다큐', '음악DVD'] }
+      },
+      '취미, 문화': { subs: ['독서', '영화감상', '음악감상', '여행', '요리', '미술/공예', '사진'], children: {} },
+      '거주지, 인테리어': {
+        subs: ['가구', '조명', '커튼/블라인드', '침구류', '수납/정리', '인테리어소품', '주방용품'],
+        children: {
+          '가구': ['소파', '침대', '책상/책장', '식탁', '수납장', 'TV장'],
+          '조명': ['실링라이트', '스탠드', '벽조명', '야외조명', 'LED조명'],
+        }
+      },
+      '사무, 점포 용품': {
+        subs: ['문구류', '사무기기', '점포용품', '사무가구', 'POS/결제시스템', '진열/쇼케이스', '포장재'],
+        children: {
+          '문구류': ['볼펜/만년필', '연필/샤프', '노트/다이어리', '파일/바인더', '테이프/접착제', '수정용품'],
+          '사무기기': ['프린터', '복사기', '스캐너', '팩스', '문서세단기', '제본기'],
+          '점포용품': ['쇼핑백', '영수증용지', '가격태그', '쇼케이스', '행거'],
+        }
+      },
+      '음식, 음료': {
+        subs: ['과자/스낵', '음료수', '주류', '인스턴트식품', '건강식품', '조미료/소스', '냉동식품'],
+        children: { '주류': ['맥주', '와인', '소주/위스키', '사케', '막걸리', '양주'] }
+      },
+      '컴퓨터': {
+        subs: ['데스크탑', '노트북', '모니터', '주변기기', 'CPU/메모리', 'HDD/SSD', '네트워크'],
+        children: {
+          '노트북': ['게이밍노트북', '울트라북', '비즈니스노트북', '크롬북', '2in1노트북'],
+          '주변기기': ['키보드', '마우스', '웹캠', 'USB허브', '프린터', '스캐너'],
+        }
+      },
+      '골동품, 컬렉션': { subs: ['도자기', '그림/서예', '동전/화폐', '우표', '장난감/피규어', '포카드', '고서적'], children: {} },
+      '스포츠, 레저': {
+        subs: ['구기종목', '수상스포츠', '겨울스포츠', '캠핑/아웃도어', '자전거', '요가/피트니스', '낚시'],
+        children: {
+          '캠핑/아웃도어': ['텐트', '침낭', '코펠/버너', '랜턴', '배낭', '등산화'],
+          '자전거': ['로드바이크', '산악자전거', '폴딩바이크', '자전거 액세서리'],
+        }
+      },
+      '음악': {
+        subs: ['기타', '피아노/건반', '드럼/퍼커션', '관악기', '현악기', '악보/교재', '음향장비'],
+        children: { '기타': ['어쿠스틱기타', '일렉기타', '베이스기타', '클래식기타', '기타 액세서리'] }
+      },
+      '탤런트 상품': { subs: ['K-POP', 'J-POP', '연예인 굿즈', '포토카드', '응원용품', '공식 MD', '한정판'], children: {} },
+      '기타': { subs: ['기타 물품', '미분류'], children: {} },
+      '아기 용품': { subs: ['유모차/카시트', '수유용품', '이유식', '기저귀', '아기옷', '장난감', '침구/가구'], children: {} },
+      '자동차, 오토바이': { subs: ['자동차 부품', '오토바이 부품', '카오디오', '네비게이션', '차량용품', '타이어/휠'], children: {} },
+      '티켓, 금권, 숙박예약': { subs: ['공연티켓', '스포츠티켓', '상품권', '숙박쿠폰', '여행패키지', '항공권'], children: {} },
+      '꽃, 원예': { subs: ['생화', '조화', '화분/화분받침', '비료/흙', '원예도구', '씨앗/구근'], children: {} },
+      '애완 동물, 생물': {
+        subs: ['강아지 용품', '고양이 용품', '조류 용품', '어류/수족관', '소동물', '사료'],
+        children: {
+          '강아지 용품': ['사료', '간식', '장난감', '의류', '이동장', '목욕용품'],
+          '고양이 용품': ['사료', '간식', '장난감', '캣타워', '이동장', '화장실'],
+        }
+      },
+      '장난감, 게임': {
+        subs: ['피규어', '프라모델', 'RC카/드론', '보드게임', '비디오게임', '트레이딩카드', '퍼즐'],
+        children: {
+          '피규어': ['애니메이션 피규어', '히어로/캐릭터', '군사 피규어', '스태츄', '가샤폰'],
+          '비디오게임': ['플레이스테이션', '닌텐도', 'Xbox', 'PC게임', '레트로게임'],
+        }
+      },
+      '패션': {
+        subs: ['남성의류', '여성의류', '아동의류', '신발', '가방', '모자/소품', '언더웨어/양말'],
+        children: {
+          '남성의류': ['티셔츠/폴로', '셔츠', '바지', '아우터', '정장', '스포츠웨어'],
+          '여성의류': ['블라우스/셔츠', '원피스', '바지', '아우터', '정장', '스포츠웨어'],
+          '신발': ['스니커즈', '구두', '샌들/슬리퍼', '부츠', '운동화'],
+        }
+      },
+      '만화, 애니메이션 상품': { subs: ['만화책', '애니메이션 DVD', '피규어/굿즈', '코스튬/코스프레', '포스터/아트', '원화'], children: {} },
+      '액세서리, 시계': {
+        subs: ['반지', '목걸이', '귀걸이', '팔찌', '시계', '브로치', '헤어액세서리'],
+        children: { '시계': ['남성시계', '여성시계', '스마트워치', '빈티지시계', '시계부품'] }
+      },
+      '책, 잡지': { subs: ['소설', '실용서', '만화', '잡지', '교재/참고서', '외국서적', '사전'], children: {} },
+      '브랜드 소품': {
+        subs: ['명품가방', '명품지갑', '명품시계', '명품의류', '명품신발', '명품액세서리'],
+        children: {
+          '명품가방': ['루이비통', '구찌', '샤넬', '에르메스', '프라다', '버버리'],
+          '명품시계': ['롤렉스', '오메가', '태그호이어', '까르띠에', 'IWC'],
+        }
+      },
+    };
+
+    // ── Category DOM ──
+    const subCatRow1  = document.getElementById("subCatRow1");
+    const subCatList1 = document.getElementById("subCatList1");
+    const subCatRow2  = document.getElementById("subCatRow2");
+    const subCatList2 = document.getElementById("subCatList2");
+
+    let selCat  = null;
+    let selSub1 = null;
+
+    function updateBreadcrumb() {
+      const parts = [];
+      if (selCat)  parts.push(selCat);
+      if (selSub1) parts.push(selSub1);
+      catBreadcrumb.textContent = parts.length ? " > " + parts.join(" > ") : "";
+    }
+
+    function resetCategories() {
+      selCat = null; selSub1 = null;
+      document.querySelectorAll(".category-group a").forEach(a => a.classList.remove("active"));
+      subCatRow1.hidden = true;
+      subCatRow2.hidden = true;
+      updateBreadcrumb();
+    }
+
+    function renderSubCats(container, row, items) {
+      container.replaceChildren();
+      items.forEach(name => {
+        const btn = document.createElement("button");
+        btn.type = "button"; btn.className = "sub-cat-item";
+        btn.textContent = name; btn.dataset.subCatName = name;
+        container.append(btn);
+      });
+      row.hidden = false;
+    }
+
+    document.querySelectorAll(".category-group a").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const name = link.textContent.trim();
+        if (selCat === name) { resetCategories(); return; }
+        document.querySelectorAll(".category-group a").forEach(a => a.classList.remove("active"));
+        link.classList.add("active");
+        selCat = name; selSub1 = null;
+        const data = categoryData[name];
+        if (data?.subs?.length) renderSubCats(subCatList1, subCatRow1, data.subs);
+        else subCatRow1.hidden = true;
+        subCatRow2.hidden = true;
+        updateBreadcrumb();
+      });
+    });
+
+    subCatList1.addEventListener("click", e => {
+      const btn = e.target.closest(".sub-cat-item");
+      if (!btn) return;
+      const name = btn.dataset.subCatName;
+      if (selSub1 === name) {
+        selSub1 = null; btn.classList.remove("active");
+        subCatRow2.hidden = true; updateBreadcrumb(); return;
+      }
+      subCatList1.querySelectorAll(".sub-cat-item").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active"); selSub1 = name;
+      const children = categoryData[selCat]?.children?.[name];
+      if (children?.length) renderSubCats(subCatList2, subCatRow2, children);
+      else subCatRow2.hidden = true;
+      updateBreadcrumb();
+    });
+
+    subCatList2.addEventListener("click", e => {
+      const btn = e.target.closest(".sub-cat-item");
+      if (!btn) return;
+      subCatList2.querySelectorAll(".sub-cat-item").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+
+    // ── Store chips ──
+    let activeStore = "야후 옥션";
+
+    function updateSiteBadges() {
+      const isUK = activeStore === "영국 이베이";
+      const isEbay = isUK || activeStore === "미국 이베이";
+      document.querySelectorAll("[data-site-badge]").forEach(badge => {
+        badge.innerHTML = isEbay
+          ? '<span class="' + (isUK ? "site-flag-uk" : "site-flag-us") + '" aria-hidden="true"></span>이베이'
+          : '<span class="site-dot" aria-hidden="true"></span>야후';
+      });
+    }
+
+    updateSiteBadges = function() {
+      const raw = activeStore || "야후경매";
+      const isUK = raw.includes("영국");
+      const isEbay = raw.includes("이베이");
+      const label = isEbay
+        ? "이베이"
+        : raw.includes("라쿠마")
+          ? "라쿠마"
+          : raw.includes("쇼핑")
+            ? "야후 쇼핑"
+            : "야후경매";
+      document.querySelectorAll("[data-site-badge]").forEach(badge => {
+        badge.innerHTML = isEbay
+          ? '<span class="' + (isUK ? "site-flag-uk" : "site-flag-us") + '" aria-hidden="true"></span>' + label
+          : '<span class="site-dot" aria-hidden="true"></span>' + label;
+      });
+    };
+
+    document.querySelectorAll(".store-chip").forEach(chip => {
+      chip.addEventListener("click", e => {
+        e.preventDefault();
+        document.querySelectorAll(".store-chip").forEach(c => { c.classList.remove("active"); c.removeAttribute("aria-current"); });
+        chip.classList.add("active"); chip.setAttribute("aria-current", "page");
+        const sn = chip.dataset.storeName || chip.querySelector("strong")?.textContent.trim();
+        activeStore = sn || "야후 옥션";
+        if (sn) {
+          if (catStoreName) catStoreName.textContent = sn;
+          if (bestTitleEl) bestTitleEl.textContent = chip.dataset.bestTitle || sn + " 베스트";
+        }
+        updateSiteBadges();
+        resetCategories();
+      });
+    });
+
+    // ── Result tabs ──
+    document.querySelectorAll(".result-tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".result-tab").forEach(t => {
+          const on = t === tab;
+          t.classList.toggle("active", on);
+          t.setAttribute("aria-selected", String(on));
+        });
+      });
+    });
+
+    // ── View buttons ──
+    const productStores = [
+      { name: "야후경매", price: "¥ 2,500", auction: true },
+      { name: "라쿠마", price: "¥ 1,800", auction: false },
+      { name: "야후 쇼핑", price: "¥ 2,499", auction: false },
+      { name: "이베이", price: "$ 21.79", auction: true, flag: "us" }
+    ];
+    const auctionCloseOffsets = [30, 120, 480, 1440, 2880];
+
+    function formatRemainingTime(offsetMinutes) {
+      if (offsetMinutes >= 1440) return Math.floor(offsetMinutes / 1440) + "일";
+      if (offsetMinutes >= 60) return Math.floor(offsetMinutes / 60) + "시간";
+      return Math.max(1, Math.round(offsetMinutes)) + "분";
+    }
+
+    function formatAuctionCloseTime(offsetMinutes) {
+      const d = new Date(Date.now() + offsetMinutes * 60000);
+      const pad = n => String(n).padStart(2, "0");
+      const dateStr = d.getFullYear() + "." + pad(d.getMonth() + 1) + "." + pad(d.getDate());
+      const timeStr = pad(d.getHours()) + ":" + pad(d.getMinutes());
+      return dateStr + " " + timeStr + " (" + formatRemainingTime(offsetMinutes) + ")";
+    }
+
+    function renderStoreBadge(badge, store) {
+      const icon = store.flag === "us"
+        ? '<span class="site-flag-us" aria-hidden="true"></span>'
+        : '<span class="site-dot" aria-hidden="true"></span>';
+      badge.innerHTML = icon + store.name;
+    }
+
+    function enhanceProductCards() {
+      document.querySelectorAll(".product-card").forEach((card, index) => {
+        const store = productStores[index % productStores.length];
+        const badge = card.querySelector(".site-badge");
+        if (badge) renderStoreBadge(badge, store);
+
+        const price = card.querySelector(".price");
+        if (price) price.textContent = store.price;
+
+        const priceRow = card.querySelector(".price-row");
+        if (priceRow && !priceRow.querySelector(".auction-meta")) {
+          const meta = document.createElement("div");
+          meta.className = "auction-meta";
+          meta.innerHTML = store.auction
+            ? '<span>' + formatAuctionCloseTime(auctionCloseOffsets[index % auctionCloseOffsets.length]) + '</span><span class="bids">(' + (((index * 13) % 99) + 1) + 'bids)</span>'
+            : '<span></span><span></span>';
+          priceRow.append(meta);
+        }
+
+        const thumb = card.querySelector(".product-thumb");
+        const heart = card.querySelector(".heart");
+        if (thumb && heart && !thumb.querySelector(".thumb-actions")) {
+          const actions = document.createElement("div");
+          actions.className = "thumb-actions";
+          actions.innerHTML =
+            '<button class="thumb-action" type="button" aria-label="상품 간편 보기" title="상품 간편 보기"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>' +
+            '<button class="thumb-action" type="button" aria-label="새창으로 보기" title="새창으로 보기"><i class="fa-regular fa-window-restore" aria-hidden="true"></i></button>' +
+            '<button class="thumb-action" type="button" aria-label="원문페이지보기" title="원문페이지보기"><i class="fa-solid fa-globe" aria-hidden="true"></i></button>';
+          actions.append(heart);
+          thumb.append(actions);
+
+          const actionButtons = actions.querySelectorAll(".thumb-action");
+          actionButtons[0].addEventListener("click", event => {
+            event.preventDefault();
+            event.stopPropagation();
+            window.openQuickView(window.collectQuickViewDataFromCard(card));
+          });
+          actionButtons[1].addEventListener("click", event => {
+            event.preventDefault();
+            event.stopPropagation();
+            window.open("web_auction.html", "_blank");
+          });
+          actionButtons[2].addEventListener("click", event => {
+            event.preventDefault();
+            event.stopPropagation();
+            window.open("https://auctions.yahoo.co.jp/", "_blank");
+          });
+        }
+
+        if (heart && !heart.dataset.bound) {
+          heart.dataset.bound = "true";
+          heart.setAttribute("aria-pressed", "false");
+          heart.addEventListener("click", event => {
+            event.preventDefault();
+            event.stopPropagation();
+            const active = heart.classList.toggle("active");
+            heart.setAttribute("aria-pressed", String(active));
+            heart.innerHTML = '<i class="' + (active ? "fa-solid" : "fa-regular") + ' fa-heart" aria-hidden="true"></i>';
+          });
+        }
+      });
+    }
+
+    enhanceProductCards();
+
+    function ensureRevealItems(grid, targetCount) {
+      const cards = Array.from(grid.querySelectorAll(".product-card"));
+      if (!cards.length) return;
+      for (let i = cards.length; i < targetCount; i += 1) {
+        const clone = cards[i % cards.length].cloneNode(true);
+        const thumb = clone.querySelector(".product-thumb");
+        const actions = clone.querySelector(".thumb-actions");
+        const heart = clone.querySelector(".heart");
+        if (thumb && actions && heart) {
+          thumb.append(heart);
+          actions.remove();
+        }
+        if (heart) {
+          delete heart.dataset.bound;
+          heart.classList.remove("active");
+          heart.setAttribute("aria-pressed", "false");
+          heart.innerHTML = '<i class="fa-regular fa-heart" aria-hidden="true"></i>';
+        }
+        const img = clone.querySelector(".product-thumb img");
+        if (img) img.src = img.src.replace(/lock=\d+/, "lock=" + (100 + i));
+        grid.append(clone);
+      }
+      enhanceProductCards();
+    }
+
+    function setupRevealGrid(grid, trigger, options = {}) {
+      if (!grid || !trigger || grid.dataset.revealReady) return;
+      grid.dataset.revealReady = "true";
+      ensureRevealItems(grid, options.targetCount || 24);
+
+      const wrap = document.createElement("div");
+      wrap.className = "reveal-grid-wrap";
+      grid.parentNode.insertBefore(wrap, grid);
+      wrap.append(grid);
+
+      const rowsPerStep = options.rowsPerStep || 2;
+      let visibleRows = options.initialRows || 2;
+
+      function getColumnCount() {
+        const columns = getComputedStyle(grid).gridTemplateColumns.split(" ").filter(Boolean);
+        return Math.max(1, columns.length);
+      }
+
+      function applyHeight() {
+        const cards = Array.from(grid.querySelectorAll(".product-card"));
+        const columns = getColumnCount();
+        const totalRows = Math.ceil(cards.length / columns);
+        const first = cards[0];
+        if (!first) return;
+        const rowGap = parseFloat(getComputedStyle(grid).rowGap) || 0;
+        const rowHeight = first.getBoundingClientRect().height;
+        const fullHeight = (rowHeight * visibleRows) + (rowGap * Math.max(0, visibleRows - 1));
+        const hasMore = visibleRows < totalRows;
+        wrap.style.maxHeight = hasMore ? (fullHeight + Math.min(92, rowHeight * .45)) + "px" : "none";
+        wrap.classList.toggle("is-collapsed", hasMore);
+        trigger.hidden = !hasMore;
+      }
+
+      trigger.addEventListener("click", () => {
+        visibleRows += rowsPerStep;
+        applyHeight();
+      });
+
+      window.addEventListener("resize", applyHeight);
+      requestAnimationFrame(applyHeight);
+    }
+
+    setupRevealGrid(document.querySelector("[data-view-main] .product-grid"), document.querySelector("[data-view-main] .more-row"));
+
+    document.querySelectorAll(".view-button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".view-button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+      });
+    });
+
+    // ── Product card navigation ──
+    document.querySelectorAll("[data-view-main] .product-card").forEach(card => {
+      card.addEventListener("click", e => {
+        if (e.target.closest("button, a")) return;
+        if (activeStore === "메루카리") {
+          window.location.href = "web_purchase merukari.html";
+        } else {
+          window.location.href = "web_auction.html";
+        }
+      });
+    });
+
+    document.querySelectorAll("[data-view-search] .product-card").forEach(card => {
+      card.addEventListener("click", e => {
+        if (e.target.closest("button, a")) return;
+        window.location.href = "web_bill_1st.html";
+      });
+    });
+
+    // ── Keyword chip removal ──
+    keywordList.addEventListener("click", e => {
+      const btn = e.target.closest("[data-keyword-index]");
+      if (!btn) return;
+      keywords.splice(Number(btn.dataset.keywordIndex), 1);
+      syncUrl(); renderKeywords();
+      if (!keywords.length) switchToMain();
+    });
+
+    // ── Form submissions ──
+    globalSearch.addEventListener("submit", e => {
+      e.preventDefault();
+      const inp = globalSearch.querySelector("input");
+      addKeywords(inp.value); inp.value = "";
+    });
+
+    catSearchForm.addEventListener("submit", e => {
+      e.preventDefault();
+      const q = catSearchInput.value.trim();
+      if (q) addKeywords(q);
+    });
+
+    resultRescan.addEventListener("submit", e => {
+      e.preventDefault();
+      const inp = resultRescan.querySelector("input");
+      addKeywords(joined() + " " + inp.value); inp.value = "";
+    });
+
+    // ── Init ──
+    const initialQuery = new URLSearchParams(window.location.search).get("q") || "";
+    if (initialQuery.trim()) {
+      keywords = initialQuery.trim().split(/\s+/).filter(Boolean);
+      renderKeywords();
+      switchToSearch();
+    }
+  </script>
+<script src="bb-common.js"></script>
+<script src="bb-quickview.js"></script>
+</body>
+</html>

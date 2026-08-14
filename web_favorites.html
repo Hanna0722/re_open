@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bidbuy 관심항목 관리</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --rose: #E8385A;
+      --rose-h: #C42F4C;
+      --navy: #1A3C6E;
+      --ink: #1A1A2E;
+      --text: #1A1A2E;
+      --muted: #666680;
+      --faint: #999BAA;
+      --line: #E0E4EB;
+      --line-soft: #EEF0F3;
+      --bg-soft: #F5F7FA;
+      --warm: #fbf7f5;
+      --sidebar-w: 231px;
+      --main-w: 925px;
+      --gap: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: #fff;
+      color: var(--text);
+      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+
+    .mypage-shell {
+      width: calc(var(--sidebar-w) + var(--gap) + var(--main-w));
+      max-width: calc(100vw - 32px);
+      margin: 24px auto 70px;
+      display: grid;
+      grid-template-columns: var(--sidebar-w) minmax(0, var(--main-w));
+      gap: var(--gap);
+      align-items: start;
+    }
+    .sidebar { min-width: 0; }
+    .profile-card {
+      display: grid;
+      align-content: center;
+      gap: 14px;
+      padding: 18px 22px;
+      background: var(--warm);
+    }
+    .profile-main { display: flex; align-items: center; gap: 13px; }
+    .vip-copy { margin: 18px 0 6px; color: #5c6270; font-size: 12px; font-weight: 600; }
+    .vip-copy b { color: #454b58; font-weight: 800; }
+    .vip-row { display: flex; align-items: center; gap: 8px; }
+    .vip-progress { flex: 1; height: 5px; overflow: hidden; border-radius: 999px; background: #eee2de; }
+    .vip-progress span { display: block; width: 72%; height: 100%; background: var(--rose); }
+    .help-dot {
+      width: 16px;
+      height: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #d8dde6;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #eef5ff;
+      color: var(--navy);
+      font-size: 22px;
+      flex: 0 0 auto;
+    }
+    .profile-name { display: block; margin-bottom: 3px; color: #262a31; font-size: 16px; font-weight: 700; }
+    .profile-tier {
+      display: inline-flex;
+      align-items: center;
+      min-height: 19px;
+      padding: 2px 9px;
+      border-radius: 999px;
+      background: #fff0c9;
+      color: #f4a200;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .profile-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .soft-btn {
+      height: 26px;
+      border: 1px solid #e5dbd7;
+      border-radius: 5px;
+      background: #fff;
+      color: #5c606b;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .side-nav { padding-top: 33px; }
+    .side-title {
+      margin: 0 0 18px;
+      padding: 0 15px 17px;
+      border-bottom: 1px solid #dcd9d6;
+      color: #111;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .side-title a, .side-title a:visited { color: inherit; text-decoration: none; }
+    .nav-section { padding: 0 20px; margin-bottom: 14px; }
+    .nav-section strong {
+      display: block;
+      margin: 0 0 9px;
+      padding: 7px 0;
+      border-radius: 0;
+      color: #111;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .nav-list { display: grid; gap: 6px; }
+    .nav-list a { color: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: -0.22px; }
+    .nav-list a:hover, .nav-list a.active { color: var(--rose); }
+    .biz-convert-link {
+      display: block;
+      margin-top: 8px;
+      padding: 13px 14px;
+      border: 1px solid #e5dbd7;
+      background: #fff;
+    }
+    .biz-convert-inner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .biz-convert-icon {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #eef5ff;
+      color: var(--navy);
+      flex: 0 0 auto;
+    }
+    .biz-convert-text {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+    .biz-convert-text strong {
+      margin: 0;
+      color: #292d35;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .biz-chev {
+      margin-left: auto;
+      color: #a8b0bd;
+      font-size: 11px;
+    }
+
+    .main { min-width: 0; }
+    .page-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 16px;
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.32px;
+    }
+    .page-title i { color: var(--rose); }
+
+    /* ── 탭 (언더바) ── */
+    .fav-tabs {
+      display: flex;
+      margin: 0 0 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    .fav-tab {
+      min-width: 132px;
+      height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 0 18px;
+      border: 0;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.22px;
+      white-space: nowrap;
+    }
+    .fav-tab:hover { color: var(--ink); }
+    .fav-tab .cnt {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .fav-tab.active {
+      border-bottom-color: var(--rose);
+      color: var(--rose);
+      font-weight: 700;
+    }
+    .fav-tab.active .cnt { background: rgba(232,56,90,.1); color: var(--rose); }
+
+    .fav-panel[hidden] { display: none; }
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0 0 10px;
+    }
+    .panel-head h2 {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .panel-head h2 i { color: var(--rose); font-size: 14px; }
+    .panel-head .total { color: var(--muted); font-size: 12px; font-weight: 600; }
+    .panel-head .total b { color: var(--rose); font-weight: 800; }
+
+    /* ── 국가 필터 (버튼형) ── */
+    .country-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 12px;
+    }
+    .country-tab {
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .country-tab:hover { border-color: var(--rose); color: var(--rose); }
+    .country-tab span {
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .country-tab.active {
+      border-color: var(--rose);
+      background: var(--rose);
+      color: #fff;
+      font-weight: 700;
+    }
+    .country-tab.active span { color: rgba(255,255,255,.82); }
+
+    .fav-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+    }
+    .fav-table {
+      width: 100%;
+      min-width: 880px;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    .fav-table th,
+    .fav-table td {
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+      vertical-align: middle;
+    }
+    .fav-table th {
+      height: 52px;
+      background: var(--bg-soft);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .fav-table th:last-child,
+    .fav-table td:last-child { border-right: 0; }
+    .fav-table td {
+      height: 60px;
+      padding: 10px 8px;
+      color: var(--ink);
+      font-size: 12px;
+      letter-spacing: -0.22px;
+    }
+    .fav-table tbody tr:last-child td { border-bottom: 0; }
+    .fav-table tbody tr[hidden] { display: none; }
+    .fav-table td.al { text-align: left; }
+    .fav-table td.memo-cell { color: var(--muted); }
+    .fav-table tbody tr.ended td { background: #fafafa; }
+
+    .chk {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--rose);
+      cursor: pointer;
+    }
+    .site-name { color: var(--muted); font-weight: 600; }
+    .seller-name { font-weight: 700; }
+    .kw-origin { font-weight: 700; }
+    .kw-reco { color: var(--muted); }
+    .kw-reco span {
+      display: inline-block;
+      margin: 2px 3px;
+      padding: 3px 9px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--bg-soft);
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .del-btn {
+      width: 22px;
+      height: 22px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: var(--faint);
+      font-size: 10px;
+    }
+    .del-btn:hover { border-color: var(--rose); color: var(--rose); }
+
+    /* 국가 플래그 */
+    .flag {
+      width: 24px;
+      height: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #d9e0e9;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .flag.jp::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #d50024; }
+    .flag.us { background: repeating-linear-gradient(to bottom, #b22234 0 1.2px, #fff 1.2px 2.4px); }
+    .flag.us::before { content: ""; position: absolute; left: 0; top: 0; width: 10px; height: 8px; background: #3c3b6e; }
+    .flag.uk { background: #012169; }
+    .flag.uk::before, .flag.uk::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      background: #fff;
+      transform: translate(-50%, -50%);
+    }
+    .flag.uk::before { width: 100%; height: 4px; }
+    .flag.uk::after { width: 4px; height: 100%; }
+
+    /* 상품정보 셀 */
+    .item-cell { display: flex; align-items: flex-start; gap: 11px; text-align: left; }
+    .item-thumb {
+      width: 62px;
+      height: 62px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--bg-soft);
+      color: var(--faint);
+      font-size: 16px;
+      overflow: hidden;
+    }
+    .item-info { min-width: 0; display: grid; gap: 3px; }
+    .item-src { color: var(--faint); font-size: 11px; font-weight: 600; }
+    .item-src b { color: var(--muted); font-weight: 700; }
+    .item-name {
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .item-name:hover { color: var(--rose); }
+    .price { font-weight: 800; font-size: 13px; }
+    .price small { display: block; color: var(--faint); font-size: 11px; font-weight: 600; }
+    .bid-cnt { color: var(--muted); font-weight: 600; }
+    .end-date { color: var(--muted); }
+    .end-date b { display: block; color: var(--rose); font-size: 11px; font-weight: 700; }
+    .end-date.done b { color: var(--faint); }
+    .reg-date { color: var(--muted); }
+
+    /* 바로가기 */
+    .sc-title { font-weight: 600; }
+    .sc-url {
+      color: var(--muted);
+      font-size: 12px;
+      word-break: break-all;
+    }
+    .sc-url a:hover { color: var(--rose); text-decoration: underline; }
+
+    /* ── 경매현황 (중첩 표 + 조회) ── */
+    .fav-table td.bs-cell { padding: 0; }
+    .bid-status {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 86px;
+      align-items: stretch;
+    }
+    .bs-rows { display: grid; min-width: 0; }
+    .bs-row {
+      display: grid;
+      grid-template-columns: 78px minmax(0, 1fr);
+      align-items: center;
+      min-height: 34px;
+      border-bottom: 1px solid var(--line);
+    }
+    .bs-row:last-child { border-bottom: 0; }
+    .bs-lb {
+      align-self: stretch;
+      display: grid;
+      place-items: center;
+      border-right: 1px solid var(--line);
+      background: var(--bg-soft);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .bs-val {
+      padding: 6px 10px;
+      text-align: center;
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 600;
+      word-break: break-all;
+    }
+    .bs-val.is-loaded { color: var(--ink); font-weight: 800; }
+    .bs-val.is-loading { color: var(--faint); }
+    .bs-val.is-loading i { font-size: 13px; }
+    .bs-end { color: #33363d; font-weight: 700; }
+    .bs-end b { display: block; color:#33363d; font-size: 11px; font-weight: 700; }
+    .ended .bs-end b { color: var(--faint); }
+    /* 조회 · 입찰: 아이콘 박스 + 하단 라벨, 같은 세로 중심 */
+    .icon-act {
+      width: 58px;
+      display: grid;
+      justify-items: center;
+      gap: 5px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+    .refresh-btn { align-self: center; justify-self: center; }
+    .bid-btn { margin: 0 auto; }
+    .ia-box {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .ia-box.is-fill {
+      border-color: #1675cf;
+      background: #1675cf;
+      color: #fff;
+      font-size: 15px;
+    }
+    .ia-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1;
+    }
+    .icon-act:hover .ia-box { border-color: var(--rose); color: var(--rose); }
+    .icon-act:hover .ia-box.is-fill { background: var(--rose-h); border-color: var(--rose-h); color: #fff; }
+    .icon-act:hover .ia-label { color: var(--rose); }
+    .icon-act:disabled { cursor: default; }
+    .icon-act:disabled .ia-box,
+    .icon-act:disabled:hover .ia-box {
+      border-color: var(--line);
+      background: var(--bg-soft);
+      color: var(--faint);
+    }
+    .icon-act:disabled .ia-label,
+    .icon-act:disabled:hover .ia-label { color: var(--faint); }
+
+    .act-col { display: grid; gap: 5px; justify-items: stretch; }
+    .act-btn {
+      height: 28px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .act-btn:hover { border-color: var(--rose); color: var(--rose); }
+    .act-btn.primary {
+      border-color: var(--rose);
+      background: var(--rose);
+      color: #fff;
+    }
+    .act-btn.primary:hover { background: var(--rose-h); border-color: var(--rose-h); color: #fff; }
+    .act-btn:disabled {
+      border-color: var(--line);
+      background: var(--bg-soft);
+      color: var(--faint);
+      cursor: default;
+    }
+
+    .list-empty {
+      padding: 60px 20px;
+      color: var(--faint);
+      text-align: center;
+      font-size: 13px;
+    }
+    .list-empty i { display: block; margin-bottom: 10px; color: var(--line); font-size: 32px; }
+
+    .panel-foot {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .bulk-del {
+      height: 32px;
+      padding: 0 14px;
+      border: 0;
+      border-radius: 5px;
+      background: #4a4f5a;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .bulk-del:hover { background: #333844; }
+    .bulk-del.ghost {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+    }
+    .bulk-del.ghost:hover { border-color: var(--rose); background: #fff; color: var(--rose); }
+    .foot-hint { color: var(--faint); font-size: 12px; }
+
+    .pager {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .pager-btn {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .pager-btn:disabled {
+      color: var(--faint);
+      background: var(--bg-soft);
+      cursor: default;
+    }
+    .pager-info {
+      min-width: 54px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .mypage-shell {
+        width: calc(100% - 24px);
+        grid-template-columns: 1fr;
+      }
+      .sidebar { display: none; }
+      .fav-tabs { overflow-x: auto; }
+      .fav-tab { flex: 0 0 auto; min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="mypage-shell">
+    <aside class="sidebar">
+      <section class="profile-card" aria-label="회원 정보">
+        <div class="profile-main">
+          <div class="avatar" aria-label="Premium 등급"><i class="fa-solid fa-gem" aria-hidden="true"></i></div>
+          <div>
+            <strong class="profile-name">홍길동님</strong>
+            <span class="profile-tier">Premium</span>
+          </div>
+        </div>
+        <p class="vip-copy">VIP까지 <b>₩215,000</b> 또는 <b>3건</b></p>
+        <div class="vip-row">
+          <div class="vip-progress"><span></span></div>
+          <span class="help-dot" aria-label="등급 안내">?</span>
+        </div>
+        <div class="profile-actions">
+          <button class="soft-btn" type="button" onclick="location.href='web_qna_form.html'">1:1 문의</button>
+          <button class="soft-btn" type="button" onclick="toggleLogin()">로그아웃</button>
+        </div>
+      </section>
+
+      <section class="side-nav" aria-label="마이페이지 메뉴">
+        <h2 class="side-title"><a href="web_mypage.html">마이페이지</a></h2>
+        <div class="nav-section">
+          <strong>나의 거래 현황</strong>
+          <div class="nav-list">
+            <a href="web_mainlist.html">거래 전체 목록</a>
+            <a href="web_auction_bid_list.html">경매 입찰/유찰</a>
+            <a href="#">구매 신청 목록</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>배송관리</strong>
+          <div class="nav-list">
+            <a href="web_bundle_shipping_management.html">배송신청/변경</a>
+            <a href="#">배송지 관리</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>관심 항목 관리</strong>
+          <div class="nav-list">
+            <a href="web_favorites.html?tab=seller">관심 출품자</a>
+            <a href="web_favorites.html?tab=auction">경매 관심물품</a>
+            <a href="web_favorites.html?tab=purchase">구매 관심물품</a>
+            <a href="web_favorites.html?tab=keyword">관심 키워드</a>
+            <a href="web_favorites.html?tab=shortcut">바로가기</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>MY 혜택</strong>
+          <div class="nav-list">
+            <a href="web_mileage.html">마일리지 / 쿠폰</a>
+            <a href="web_grade_page.html">MY 등급</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>나의 정보관리</strong>
+          <div class="nav-list">
+            <a href="#">예치금 관리</a>
+            <a href="#">보증금 관리</a>
+            <a href="#">회원정보 수정</a>
+            <a href="#">비밀번호 변경</a>
+            <a href="#">회원 탈퇴</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>고객상담</strong>
+          <div class="nav-list">
+            <a href="web_user_memo.html">사용자메모</a>
+            <a href="web_qna.html">1:1 문의내역</a>
+            <a href="web_qna_form.html">1:1 문의하기</a>
+          </div>
+        </div>
+        <div class="nav-section biz-convert-section">
+          <a href="web_biz.html" class="biz-convert-link">
+            <span class="biz-convert-inner">
+              <span class="biz-convert-icon"><i class="fas fa-building"></i></span>
+              <span class="biz-convert-text">
+                <strong>사업자 회원 전환</strong>
+                <span>사업자 전용 혜택을 확인해보세요</span>
+              </span>
+              <i class="fas fa-chevron-right biz-chev"></i>
+            </span>
+          </a>
+        </div>
+      </section>
+    </aside>
+
+    <main class="main">
+      <h1 class="page-title"><i class="fa-solid fa-heart" aria-hidden="true"></i>관심항목 관리</h1>
+
+      <div class="fav-tabs" role="tablist" aria-label="관심항목 종류">
+        <button class="fav-tab active" type="button" role="tab" data-tab="seller" aria-selected="true">관심 출품자 <span class="cnt" data-cnt="seller">0</span></button>
+        <button class="fav-tab" type="button" role="tab" data-tab="auction" aria-selected="false">경매 관심물품 <span class="cnt" data-cnt="auction">0</span></button>
+        <button class="fav-tab" type="button" role="tab" data-tab="purchase" aria-selected="false">구매 관심물품 <span class="cnt" data-cnt="purchase">0</span></button>
+        <button class="fav-tab" type="button" role="tab" data-tab="keyword" aria-selected="false">관심 키워드 <span class="cnt" data-cnt="keyword">0</span></button>
+        <button class="fav-tab" type="button" role="tab" data-tab="shortcut" aria-selected="false">바로가기 <span class="cnt" data-cnt="shortcut">0</span></button>
+      </div>
+
+      <!-- ── 관심 출품자 ── -->
+      <section class="fav-panel" data-panel="seller" role="tabpanel">
+        <div class="panel-head">
+          <h2><i class="fa-solid fa-location-dot" aria-hidden="true"></i>관심판매자 목록</h2>
+          <span class="total">전체 <b data-total>0</b>건</span>
+        </div>
+        <div class="fav-table-wrap">
+          <table class="fav-table">
+            <colgroup>
+              <col style="width: 56px">
+              <col style="width: 140px">
+              <col style="width: 240px">
+              <col>
+              <col style="width: 80px">
+            </colgroup>
+            <thead>
+              <tr>
+                <th><input class="chk" type="checkbox" data-all aria-label="전체 선택"></th>
+                <th>사이트</th>
+                <th>판매자</th>
+                <th>메모</th>
+                <th>삭제</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="site-name">미국이베이</td>
+                <td class="seller-name">saveasuit</td>
+                <td class="memo-cell al">정장/셔츠 위주 셀러</td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="site-name">야후경매</td>
+                <td class="seller-name">tokyo_hobby_shop</td>
+                <td class="memo-cell al">피규어 신품 다수, 동시낙찰 묶음배송 가능</td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="site-name">메루카리</td>
+                <td class="seller-name">mercari_vintage88</td>
+                <td class="memo-cell al">-</td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="site-name">라쿠텐</td>
+                <td class="seller-name">rakuten-outdoor</td>
+                <td class="memo-cell al">캠핑용품 정품 판매점</td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="site-name">영국이베이</td>
+                <td class="seller-name">uk_vinyl_records</td>
+                <td class="memo-cell al">LP 상태 표기 정확함</td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="list-empty" hidden>
+            <i class="fa-regular fa-face-smile"></i>
+            등록된 관심 출품자가 없습니다.
+          </div>
+        </div>
+        <div class="panel-foot">
+          <button class="bulk-del" type="button" data-bulk>선택삭제</button>
+        </div>
+        <div class="pager" aria-label="페이지 이동">
+          <button class="pager-btn" type="button" data-page-prev aria-label="이전 페이지"><i class="fa-solid fa-chevron-left"></i></button>
+          <span class="pager-info" data-page-info>1 / 1</span>
+          <button class="pager-btn" type="button" data-page-next aria-label="다음 페이지"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </section>
+
+      <!-- ── 경매 관심물품 ── -->
+      <section class="fav-panel" data-panel="auction" role="tabpanel" data-country-filter hidden>
+        <div class="panel-head">
+          <h2><i class="fa-solid fa-location-dot" aria-hidden="true"></i>경매 관심물품 목록</h2>
+          <span class="total">전체 <b data-total>0</b>건</span>
+        </div>
+        <div class="country-tabs" role="group" aria-label="국가 필터">
+          <button class="country-tab active" type="button" data-country="all">전체<span data-country-cnt="all">0</span></button>
+          <button class="country-tab" type="button" data-country="jp">일본<span data-country-cnt="jp">0</span></button>
+          <button class="country-tab" type="button" data-country="us">미국<span data-country-cnt="us">0</span></button>
+          <button class="country-tab" type="button" data-country="uk">영국<span data-country-cnt="uk">0</span></button>
+        </div>
+        <div class="fav-table-wrap">
+          <table class="fav-table">
+            <colgroup>
+              <col style="width: 48px">
+              <col style="width: 60px">
+              <col>
+              <col style="width: 330px">
+              <col style="width: 78px">
+            </colgroup>
+            <thead>
+              <tr>
+                <th><input class="chk" type="checkbox" data-all aria-label="전체 선택"></th>
+                <th>국가</th>
+                <th>상품정보</th>
+                <th>경매현황</th>
+                <th>입찰</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-country="jp" data-price="2,728 엔" data-bids="1 건">
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td><span class="flag jp" aria-label="일본"></span></td>
+                <td class="al">
+                  <span class="item-cell">
+                    <span class="item-thumb"><i class="fa-regular fa-image"></i></span>
+                    <span class="item-info">
+                      <span class="item-src">[YAHOO] v1237304150</span>
+                      <a class="item-name" href="web_auction.html">RKGOD 특가! ONKYO/서라운드 시스템/PR-155/SWA-155/D-L1X 5개/스탠드 2대 부착/정크</a>
+                    </span>
+                  </span>
+                </td>
+                <td class="bs-cell">
+                  <div class="bid-status">
+                    <div class="bs-rows">
+                      <div class="bs-row"><span class="bs-lb">가격</span><span class="bs-val" data-field="price">조회버튼을 클릭하세요.</span></div>
+                      <div class="bs-row"><span class="bs-lb">입찰수</span><span class="bs-val" data-field="bids">조회버튼을 클릭하세요.</span></div>
+                      <div class="bs-row"><span class="bs-lb">종료일시</span><span class="bs-val bs-end">2026.07.28 23:23:08<b>(11시간 25분)</b></span></div>
+                    </div>
+                    <button class="icon-act refresh-btn" type="button" data-refresh aria-label="경매현황 조회">
+                      <span class="ia-box"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></span>
+                      <span class="ia-label">조회</span>
+                    </button>
+                  </div>
+                </td>
+                <td><button class="icon-act bid-btn" type="button" onclick="location.href='web_auction.html'" aria-label="입찰하기"><span class="ia-box is-fill"><i class="fa-solid fa-check" aria-hidden="true"></i></span><span class="ia-label">입찰</span></button></td>
+              </tr>
+              <tr data-country="jp" data-price="12,500 엔" data-bids="6 건">
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td><span class="flag jp" aria-label="일본"></span></td>
+                <td class="al">
+                  <span class="item-cell">
+                    <span class="item-thumb"><i class="fa-regular fa-image"></i></span>
+                    <span class="item-info">
+                      <span class="item-src">[YAHOO] m1108822451</span>
+                      <a class="item-name" href="web_auction.html">MIROCK TOY マッシブアタック ソフビ フィギュア 未開封 限定カラー</a>
+                    </span>
+                  </span>
+                </td>
+                <td class="bs-cell">
+                  <div class="bid-status">
+                    <div class="bs-rows">
+                      <div class="bs-row"><span class="bs-lb">가격</span><span class="bs-val" data-field="price">조회버튼을 클릭하세요.</span></div>
+                      <div class="bs-row"><span class="bs-lb">입찰수</span><span class="bs-val" data-field="bids">조회버튼을 클릭하세요.</span></div>
+                      <div class="bs-row"><span class="bs-lb">종료일시</span><span class="bs-val bs-end">2026.08.02 21:30:00<b>(5일 남음)</b></span></div>
+                    </div>
+                    <button class="icon-act refresh-btn" type="button" data-refresh aria-label="경매현황 조회">
+                      <span class="ia-box"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></span>
+                      <span class="ia-label">조회</span>
+                    </button>
+                  </div>
+                </td>
+                <td><button class="icon-act bid-btn" type="button" onclick="location.href='web_auction.html'" aria-label="입찰하기"><span class="ia-box is-fill"><i class="fa-solid fa-check" aria-hidden="true"></i></span><span class="ia-label">입찰</span></button></td>
+              </tr>
+              <tr data-country="jp" data-price="8,800 엔" data-bids="22 건">
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td><span class="flag jp" aria-label="일본"></span></td>
+                <td class="al">
+                  <span class="item-cell">
+                    <span class="item-thumb"><i class="fa-regular fa-image"></i></span>
+                    <span class="item-info">
+                      <span class="item-src">[YAHOO] k9922034112</span>
+                      <a class="item-name" href="web_auction.html">ポケモンカードゲーム 拡張パック BOX シュリンク付き</a>
+                    </span>
+                  </span>
+                </td>
+                <td class="bs-cell">
+                  <div class="bid-status">
+                    <div class="bs-rows">
+                      <div class="bs-row"><span class="bs-lb">가격</span><span class="bs-val" data-field="price">조회버튼을 클릭하세요.</span></div>
+                      <div class="bs-row"><span class="bs-lb">입찰수</span><span class="bs-val" data-field="bids">조회버튼을 클릭하세요.</span></div>
+                      <div class="bs-row"><span class="bs-lb">종료일시</span><span class="bs-val bs-end">2026.07.29 22:15:00<b>(1일 남음)</b></span></div>
+                    </div>
+                    <button class="icon-act refresh-btn" type="button" data-refresh aria-label="경매현황 조회">
+                      <span class="ia-box"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></span>
+                      <span class="ia-label">조회</span>
+                    </button>
+                  </div>
+                </td>
+                <td><button class="icon-act bid-btn" type="button" onclick="location.href='web_auction.html'" aria-label="입찰하기"><span class="ia-box is-fill"><i class="fa-solid fa-check" aria-hidden="true"></i></span><span class="ia-label">입찰</span></button></td>
+              </tr>
+              <tr data-country="us" data-price="$320.00" data-bids="14 건">
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td><span class="flag us" aria-label="미국"></span></td>
+                <td class="al">
+                  <span class="item-cell">
+                    <span class="item-thumb"><i class="fa-regular fa-image"></i></span>
+                    <span class="item-info">
+                      <span class="item-src">[EBAY US] 3856201947</span>
+                      <a class="item-name" href="web_auction.html">Nike Air Jordan 1 Retro High OG Chicago Size 9 Deadstock</a>
+                    </span>
+                  </span>
+                </td>
+                <td class="bs-cell">
+                  <div class="bid-status">
+                    <div class="bs-rows">
+                      <div class="bs-row"><span class="bs-lb">가격</span><span class="bs-val" data-field="price">조회버튼을 클릭하세요.</span></div>
+                      <div class="bs-row"><span class="bs-lb">입찰수</span><span class="bs-val" data-field="bids">조회버튼을 클릭하세요.</span></div>
+                      <div class="bs-row"><span class="bs-lb">종료일시</span><span class="bs-val bs-end">2026.08.05 03:10:00<b>(7일 남음)</b></span></div>
+                    </div>
+                    <button class="icon-act refresh-btn" type="button" data-refresh aria-label="경매현황 조회">
+                      <span class="ia-box"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></span>
+                      <span class="ia-label">조회</span>
+                    </button>
+                  </div>
+                </td>
+                <td><button class="icon-act bid-btn" type="button" onclick="location.href='web_auction.html'" aria-label="입찰하기"><span class="ia-box is-fill"><i class="fa-solid fa-check" aria-hidden="true"></i></span><span class="ia-label">입찰</span></button></td>
+              </tr>
+              <tr data-country="uk" data-price="£145.00" data-bids="3 건">
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td><span class="flag uk" aria-label="영국"></span></td>
+                <td class="al">
+                  <span class="item-cell">
+                    <span class="item-thumb"><i class="fa-regular fa-image"></i></span>
+                    <span class="item-info">
+                      <span class="item-src">[EBAY UK] 2244109887</span>
+                      <a class="item-name" href="web_auction.html">Barbour Bedale Wax Jacket Sage Green Size 38</a>
+                    </span>
+                  </span>
+                </td>
+                <td class="bs-cell">
+                  <div class="bid-status">
+                    <div class="bs-rows">
+                      <div class="bs-row"><span class="bs-lb">가격</span><span class="bs-val" data-field="price">조회버튼을 클릭하세요.</span></div>
+                      <div class="bs-row"><span class="bs-lb">입찰수</span><span class="bs-val" data-field="bids">조회버튼을 클릭하세요.</span></div>
+                      <div class="bs-row"><span class="bs-lb">종료일시</span><span class="bs-val bs-end">2026.07.30 19:00:00<b>(2일 남음)</b></span></div>
+                    </div>
+                    <button class="icon-act refresh-btn" type="button" data-refresh aria-label="경매현황 조회">
+                      <span class="ia-box"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></span>
+                      <span class="ia-label">조회</span>
+                    </button>
+                  </div>
+                </td>
+                <td><button class="icon-act bid-btn" type="button" onclick="location.href='web_auction.html'" aria-label="입찰하기"><span class="ia-box is-fill"><i class="fa-solid fa-check" aria-hidden="true"></i></span><span class="ia-label">입찰</span></button></td>
+              </tr>
+              <tr class="ended" data-country="jp" data-ended="1" data-price="6,400 엔" data-bids="0 건">
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td><span class="flag jp" aria-label="일본"></span></td>
+                <td class="al">
+                  <span class="item-cell">
+                    <span class="item-thumb"><i class="fa-regular fa-image"></i></span>
+                    <span class="item-info">
+                      <span class="item-src">[YAHOO] x8811223344</span>
+                      <a class="item-name" href="web_auction.html">無印良品 ステンレスユニットシェルフ 追加棚セット</a>
+                    </span>
+                  </span>
+                </td>
+                <td class="bs-cell">
+                  <div class="bid-status">
+                    <div class="bs-rows">
+                      <div class="bs-row"><span class="bs-lb">가격</span><span class="bs-val" data-field="price">조회버튼을 클릭하세요.</span></div>
+                      <div class="bs-row"><span class="bs-lb">입찰수</span><span class="bs-val" data-field="bids">조회버튼을 클릭하세요.</span></div>
+                      <div class="bs-row"><span class="bs-lb">종료일시</span><span class="bs-val bs-end">2026.07.20 21:00:00<b>(종료됨)</b></span></div>
+                    </div>
+                    <button class="icon-act refresh-btn" type="button" data-refresh aria-label="경매현황 조회">
+                      <span class="ia-box"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></span>
+                      <span class="ia-label">조회</span>
+                    </button>
+                  </div>
+                </td>
+                <td><button class="icon-act bid-btn" type="button" disabled aria-label="입찰 종료"><span class="ia-box is-fill"><i class="fa-solid fa-check" aria-hidden="true"></i></span><span class="ia-label">입찰</span></button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="list-empty" hidden>
+            <i class="fa-solid fa-gavel"></i>
+            해당 국가의 경매 관심물품이 없습니다.
+          </div>
+        </div>
+        <div class="panel-foot">
+          <button class="bulk-del" type="button" data-bulk>선택삭제</button>
+          <button class="bulk-del ghost" type="button" data-bulk-ended>종료 물품삭제</button>
+        </div>
+        <div class="pager" aria-label="페이지 이동">
+          <button class="pager-btn" type="button" data-page-prev aria-label="이전 페이지"><i class="fa-solid fa-chevron-left"></i></button>
+          <span class="pager-info" data-page-info>1 / 1</span>
+          <button class="pager-btn" type="button" data-page-next aria-label="다음 페이지"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </section>
+
+      <!-- ── 구매 관심물품 ── -->
+      <section class="fav-panel" data-panel="purchase" role="tabpanel" hidden>
+        <div class="panel-head">
+          <h2><i class="fa-solid fa-location-dot" aria-hidden="true"></i>구매 관심물품 목록</h2>
+          <span class="total">전체 <b data-total>0</b>건</span>
+        </div>
+        <div class="fav-table-wrap">
+          <table class="fav-table">
+            <colgroup>
+              <col style="width: 56px">
+              <col>
+              <col style="width: 130px">
+              <col style="width: 160px">
+              <col style="width: 80px">
+            </colgroup>
+            <thead>
+              <tr>
+                <th><input class="chk" type="checkbox" data-all aria-label="전체 선택"></th>
+                <th>상품정보</th>
+                <th>가격</th>
+                <th>등록일</th>
+                <th>삭제</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="al">
+                  <span class="item-cell">
+                    <span class="item-thumb"><i class="fa-regular fa-image"></i></span>
+                    <span class="item-info">
+                      <span class="item-src"><b>메루카리</b></span>
+                      <a class="item-name" href="web_purchase_merukari.html">WILLY CHAVARRIA ブラック フリースジャケット</a>
+                    </span>
+                  </span>
+                </td>
+                <td class="price">10,000 엔</td>
+                <td class="reg-date">2026-07-28 10:34:17</td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="al">
+                  <span class="item-cell">
+                    <span class="item-thumb"><i class="fa-regular fa-image"></i></span>
+                    <span class="item-info">
+                      <span class="item-src"><b>메루카리</b></span>
+                      <a class="item-name" href="web_purchase_merukari.html">韓国 TWS サノク 事前収録 シニュ トレカ</a>
+                    </span>
+                  </span>
+                </td>
+                <td class="price">5,200 엔</td>
+                <td class="reg-date">2025-10-22 08:04:16</td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="al">
+                  <span class="item-cell">
+                    <span class="item-thumb"><i class="fa-regular fa-image"></i></span>
+                    <span class="item-info">
+                      <span class="item-src"><b>라쿠텐</b></span>
+                      <a class="item-name" href="web_purchase_store.html">無印良品 ステンレスユニットシェルフ 追加棚セット</a>
+                    </span>
+                  </span>
+                </td>
+                <td class="price">6,400 엔</td>
+                <td class="reg-date">2026-06-11 19:22:05</td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="al">
+                  <span class="item-cell">
+                    <span class="item-thumb"><i class="fa-regular fa-image"></i></span>
+                    <span class="item-info">
+                      <span class="item-src"><b>야후쇼핑</b></span>
+                      <a class="item-name" href="web_purchase_store.html">Nintendo Switch Joy-Con パステルカラー セット 新品</a>
+                    </span>
+                  </span>
+                </td>
+                <td class="price">9,980 엔</td>
+                <td class="reg-date">2026-05-30 09:12:44</td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="al">
+                  <span class="item-cell">
+                    <span class="item-thumb"><i class="fa-regular fa-image"></i></span>
+                    <span class="item-info">
+                      <span class="item-src"><b>아마존재팬</b></span>
+                      <a class="item-name" href="web_purchase_url.html">いきもの大図鑑アドバンス モトイカブトトカゲ 全6種セット</a>
+                    </span>
+                  </span>
+                </td>
+                <td class="price">4,300 엔</td>
+                <td class="reg-date">2026-04-18 14:05:31</td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="list-empty" hidden>
+            <i class="fa-regular fa-heart"></i>
+            등록된 구매 관심물품이 없습니다.
+          </div>
+        </div>
+        <div class="panel-foot">
+          <button class="bulk-del" type="button" data-bulk>선택삭제</button>
+        </div>
+        <div class="pager" aria-label="페이지 이동">
+          <button class="pager-btn" type="button" data-page-prev aria-label="이전 페이지"><i class="fa-solid fa-chevron-left"></i></button>
+          <span class="pager-info" data-page-info>1 / 1</span>
+          <button class="pager-btn" type="button" data-page-next aria-label="다음 페이지"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </section>
+
+      <!-- ── 관심 키워드 ── -->
+      <section class="fav-panel" data-panel="keyword" role="tabpanel" hidden>
+        <div class="panel-head">
+          <h2><i class="fa-solid fa-location-dot" aria-hidden="true"></i>관심키워드 목록</h2>
+          <span class="total">전체 <b data-total>0</b>건</span>
+        </div>
+        <div class="fav-table-wrap">
+          <table class="fav-table">
+            <colgroup>
+              <col style="width: 56px">
+              <col style="width: 140px">
+              <col style="width: 280px">
+              <col>
+              <col style="width: 80px">
+            </colgroup>
+            <thead>
+              <tr>
+                <th><input class="chk" type="checkbox" data-all aria-label="전체 선택"></th>
+                <th>사이트</th>
+                <th>키워드(원문)</th>
+                <th>추천키워드</th>
+                <th>삭제</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="site-name">야후경매</td>
+                <td class="kw-origin">컴퓨터 (パソコン)</td>
+                <td class="kw-reco al"><span>ノートパソコン</span><span>デスクトップPC</span></td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="site-name">야후경매</td>
+                <td class="kw-origin">ポケモンカード</td>
+                <td class="kw-reco al"><span>포켓몬카드</span><span>ポケカ</span><span>拡張パック</span></td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="site-name">미국이베이</td>
+                <td class="kw-origin">Air Jordan 1 Chicago</td>
+                <td class="kw-reco al"><span>Jordan 1 OG</span><span>AJ1 Retro High</span></td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="site-name">메루카리</td>
+                <td class="kw-origin">ソフビ フィギュア</td>
+                <td class="kw-reco al"><span>소프비</span><span>ミロックトイ</span><span>限定</span></td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="site-name">영국이베이</td>
+                <td class="kw-origin">Barbour Bedale</td>
+                <td class="kw-reco al"><span>Wax Jacket</span><span>Barbour Beaufort</span></td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="list-empty" hidden>
+            <i class="fa-regular fa-star"></i>
+            등록된 관심 키워드가 없습니다.
+          </div>
+        </div>
+        <div class="panel-foot">
+          <button class="bulk-del" type="button" data-bulk>선택삭제</button>
+        </div>
+        <div class="pager" aria-label="페이지 이동">
+          <button class="pager-btn" type="button" data-page-prev aria-label="이전 페이지"><i class="fa-solid fa-chevron-left"></i></button>
+          <span class="pager-info" data-page-info>1 / 1</span>
+          <button class="pager-btn" type="button" data-page-next aria-label="다음 페이지"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </section>
+
+      <!-- ── 바로가기 ── -->
+      <section class="fav-panel" data-panel="shortcut" role="tabpanel" hidden>
+        <div class="panel-head">
+          <h2><i class="fa-solid fa-location-dot" aria-hidden="true"></i>바로가기 목록</h2>
+          <span class="total">전체 <b data-total>0</b>건</span>
+        </div>
+        <div class="fav-table-wrap">
+          <table class="fav-table">
+            <colgroup>
+              <col style="width: 56px">
+              <col style="width: 300px">
+              <col>
+              <col style="width: 80px">
+            </colgroup>
+            <thead>
+              <tr>
+                <th><input class="chk" type="checkbox" data-all aria-label="전체 선택"></th>
+                <th>제목</th>
+                <th>링크 URL</th>
+                <th>삭제</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="sc-title al">책 / 서적 - 커피는 맥심</td>
+                <td class="sc-url al"><a href="#">www.bidbuy.co.kr/auctions/usa/listings.asp?item_gb=all&amp;orderby=...</a></td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="sc-title al">고객센터 - 회원 서비스 이용안내</td>
+                <td class="sc-url al"><a href="#">www.bidbuy.co.kr/cs/guide_customer.asp?</a></td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="sc-title al">야후경매 - 피규어 신착</td>
+                <td class="sc-url al"><a href="#">www.bidbuy.co.kr/auctions/japan/listings.asp?cate=figure&amp;sort=new</a></td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td><input class="chk" type="checkbox" aria-label="선택"></td>
+                <td class="sc-title al">배송비 계산기</td>
+                <td class="sc-url al"><a href="#">www.bidbuy.co.kr/guide/ship_calculator.asp</a></td>
+                <td><button class="del-btn" type="button" aria-label="삭제"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="list-empty" hidden>
+            <i class="fa-solid fa-link"></i>
+            등록된 바로가기가 없습니다.
+          </div>
+        </div>
+        <div class="panel-foot">
+          <button class="bulk-del" type="button" data-bulk>선택 삭제</button>
+          <span class="foot-hint">자주 찾는 목록 페이지를 저장해 두고 바로 이동할 수 있습니다.</span>
+        </div>
+        <div class="pager" aria-label="페이지 이동">
+          <button class="pager-btn" type="button" data-page-prev aria-label="이전 페이지"><i class="fa-solid fa-chevron-left"></i></button>
+          <span class="pager-info" data-page-info>1 / 1</span>
+          <button class="pager-btn" type="button" data-page-next aria-label="다음 페이지"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const PAGE_SIZE = 10;
+      const ALIAS = { item: 'auction' };
+      const tabs = Array.from(document.querySelectorAll('.fav-tab'));
+      const panels = Array.from(document.querySelectorAll('.fav-panel'));
+      const state = {};
+
+      panels.forEach((panel) => {
+        const key = panel.dataset.panel;
+        state[key] = { page: 1, country: 'all', panel: panel };
+        bindPanel(panel, key);
+      });
+
+      function rowsOf(panel) {
+        return Array.from(panel.querySelectorAll('tbody tr'));
+      }
+
+      function filteredRows(key) {
+        const st = state[key];
+        const rows = rowsOf(st.panel);
+        if (!st.panel.hasAttribute('data-country-filter') || st.country === 'all') return rows;
+        return rows.filter((row) => row.dataset.country === st.country);
+      }
+
+      function render(key) {
+        const st = state[key];
+        const panel = st.panel;
+        const all = rowsOf(panel);
+        const rows = filteredRows(key);
+        const totalPages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+        st.page = Math.min(Math.max(1, st.page), totalPages);
+        const start = (st.page - 1) * PAGE_SIZE;
+        const visible = rows.slice(start, start + PAGE_SIZE);
+
+        all.forEach((row) => { row.hidden = true; });
+        visible.forEach((row) => { row.hidden = false; });
+
+        panel.querySelector('.list-empty').hidden = rows.length > 0;
+        panel.querySelector('.fav-table').style.display = rows.length ? '' : 'none';
+
+        const info = panel.querySelector('[data-page-info]');
+        if (info) info.textContent = st.page + ' / ' + totalPages;
+        panel.querySelector('[data-page-prev]').disabled = st.page <= 1;
+        panel.querySelector('[data-page-next]').disabled = st.page >= totalPages;
+
+        const cnt = document.querySelector('[data-cnt="' + key + '"]');
+        if (cnt) cnt.textContent = all.length;
+        const total = panel.querySelector('[data-total]');
+        if (total) total.textContent = all.length;
+
+        panel.querySelectorAll('[data-country-cnt]').forEach((el) => {
+          const c = el.dataset.countryCnt;
+          const n = c === 'all' ? all.length : all.filter((row) => row.dataset.country === c).length;
+          el.textContent = n;
+        });
+
+        syncAllCheck(panel);
+      }
+
+      function visibleBoxes(panel) {
+        return rowsOf(panel)
+          .filter((row) => !row.hidden)
+          .map((row) => row.querySelector('.chk'))
+          .filter(Boolean);
+      }
+
+      function syncAllCheck(panel) {
+        const all = panel.querySelector('[data-all]');
+        if (!all) return;
+        const boxes = visibleBoxes(panel);
+        all.checked = boxes.length > 0 && boxes.every((b) => b.checked);
+      }
+
+      function bindPanel(panel, key) {
+        const all = panel.querySelector('[data-all]');
+        if (all) {
+          all.addEventListener('change', () => {
+            visibleBoxes(panel).forEach((b) => { b.checked = all.checked; });
+          });
+        }
+
+        panel.addEventListener('change', (e) => {
+          if (e.target.classList.contains('chk') && !e.target.hasAttribute('data-all')) {
+            syncAllCheck(panel);
+          }
+        });
+
+        panel.querySelectorAll('.del-btn').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            if (!confirm('선택한 항목을 삭제하시겠습니까?')) return;
+            btn.closest('tr').remove();
+            render(key);
+          });
+        });
+
+        const bulk = panel.querySelector('[data-bulk]');
+        if (bulk) {
+          bulk.addEventListener('click', () => {
+            const checked = rowsOf(panel).filter((row) => {
+              const box = row.querySelector('.chk');
+              return box && box.checked;
+            });
+            if (!checked.length) { alert('삭제할 항목을 선택해 주세요.'); return; }
+            if (!confirm('선택한 ' + checked.length + '건을 삭제하시겠습니까?')) return;
+            checked.forEach((row) => row.remove());
+            render(key);
+          });
+        }
+
+        const bulkEnded = panel.querySelector('[data-bulk-ended]');
+        if (bulkEnded) {
+          bulkEnded.addEventListener('click', () => {
+            const ended = rowsOf(panel).filter((row) => row.dataset.ended === '1');
+            if (!ended.length) { alert('종료된 물품이 없습니다.'); return; }
+            if (!confirm('종료된 ' + ended.length + '건을 삭제하시겠습니까?')) return;
+            ended.forEach((row) => row.remove());
+            render(key);
+          });
+        }
+
+        // 조회 버튼: 가격·입찰수를 로딩 후 불러온다.
+        panel.querySelectorAll('[data-refresh]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const row = btn.closest('tr');
+            const fields = [
+              [row.querySelector('[data-field="price"]'), row.dataset.price],
+              [row.querySelector('[data-field="bids"]'), row.dataset.bids]
+            ];
+            btn.disabled = true;
+            fields.forEach(([el]) => {
+              el.classList.remove('is-loaded');
+              el.classList.add('is-loading');
+              el.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>';
+            });
+            setTimeout(() => {
+              fields.forEach(([el, value]) => {
+                el.classList.remove('is-loading');
+                el.classList.add('is-loaded');
+                el.textContent = value;
+              });
+              btn.disabled = false;
+            }, 900);
+          });
+        });
+
+        panel.querySelectorAll('.country-tab').forEach((tab) => {
+          tab.addEventListener('click', () => {
+            panel.querySelectorAll('.country-tab').forEach((t) => t.classList.toggle('active', t === tab));
+            state[key].country = tab.dataset.country;
+            state[key].page = 1;
+            render(key);
+          });
+        });
+
+        panel.querySelector('[data-page-prev]').addEventListener('click', () => {
+          state[key].page -= 1;
+          render(key);
+        });
+        panel.querySelector('[data-page-next]').addEventListener('click', () => {
+          state[key].page += 1;
+          render(key);
+        });
+      }
+
+      function activate(key) {
+        key = ALIAS[key] || key;
+        if (!state[key]) key = 'seller';
+        tabs.forEach((tab) => {
+          const on = tab.dataset.tab === key;
+          tab.classList.toggle('active', on);
+          tab.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        panels.forEach((panel) => {
+          panel.hidden = panel.dataset.panel !== key;
+        });
+        render(key);
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          activate(tab.dataset.tab);
+          history.replaceState(null, '', 'web_favorites.html?tab=' + tab.dataset.tab);
+        });
+      });
+
+      Object.keys(state).forEach(render);
+
+      const params = new URLSearchParams(location.search);
+      activate(params.get('tab') || 'seller');
+    })();
+  </script>
+  <script src="bb-common.js"></script>
+</body>
+</html>

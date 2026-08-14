@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bidbuy | 1:1 문의 상세</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Roboto:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --rose:#E8385A; --rose-h:#C42F4C;
+      --navy:#1A3C6E;
+      --bg:#F5F7FA; --white:#fff;
+      --border:#E0E4EB; --border-soft:#F0EDE9;
+      --bg-warm:#FBF7F5;
+      --tp:#1A1A2E; --ts:#666680; --tm:#999BAA;
+      --green:#2e9e4f;
+    }
+    *{box-sizing:border-box}
+    html{background:var(--bg)}
+    body{
+      margin:0 auto; max-width:480px; min-width:320px;
+      color:var(--tp); background:var(--bg);
+      font-family:Pretendard,'Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+      font-size:14px; line-height:1.5; overflow-x:hidden;
+    }
+    button,input,textarea{font:inherit} button{cursor:pointer} a{text-decoration:none;color:inherit}
+
+    /* ── 헤더 (mobile_auction 이식) ── */
+    .m-header{
+      background:var(--white); border-bottom:1px solid var(--border);
+      position:sticky; top:0; z-index:100;
+    }
+    .m-header-top{
+      display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:12px;
+      padding:1px;min-height:56px;}
+    .m-brand-area{display:flex; align-items:center; gap:10px; min-width:0}
+    .hb{width:34px;height:34px;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0;background:none;border:none;cursor:pointer;flex-shrink:0}
+    .hb span{display:block;width:18px;height:2px;background:var(--tp);border-radius:999px}
+    .m-logo{display:inline-flex; align-items:center;width:76px;line-height:0;}
+.m-logo img{width:100%;height:auto;display:block;}
+    .m-header-right{display:flex; gap:4px; align-items:center; justify-self:end}
+    .m-icon-btn{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:none;background:none;color:var(--tp);font-size:16px;border-radius:5px;cursor:pointer;position:relative}
+    .m-icon-btn .badge{position:absolute;top:3px;right:2px;background:var(--rose);color:#fff;font-size:7px;font-weight:700;min-width:13px;height:13px;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:0 2px}
+    .m-login-btn{min-width:62px;height:30px;background:var(--rose);color:#fff;border:none;padding:0 14px;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit}
+    .m-user-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--rose),#F5A623);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;cursor:pointer;border:none;font-family:inherit;flex-shrink:0}
+    .m-header-search{display:flex;align-items:center;height:38px;background:#F4EEEA;border:1px solid #E6DDDA;border-radius:10px;overflow:hidden;margin:0 14px 10px}
+    .m-header-search::before{content:"";width:15px;height:15px;margin-left:12px;flex:0 0 auto;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238b95a5' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m16.5 16.5 4 4'/%3E%3C/svg%3E") center/contain no-repeat}
+    .m-header-search input{flex:1;min-width:0;height:100%;border:0;outline:0;background:transparent;padding:0 8px 0 8px;color:#333;font-size:13px;font-family:inherit}
+    .m-header-search input::placeholder{color:#99A2B0}
+    .m-header-search button{width:40px;height:100%;border:0;background:var(--rose);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+    .m-header-search button i{font-size:13px}
+
+    /* ── 페이지 타이틀 ── */
+    .page-title-bar{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 16px 12px;
+      background:var(--white); border-bottom:1px solid var(--border);
+    }
+    .page-title-bar h2{margin:0; font-size:17px; font-weight:700}
+    .list-link{
+      display:inline-flex; align-items:center; gap:5px;
+      font-size:12px; font-weight:700; color:var(--ts);
+    }
+
+    /* ── 문의 헤더 카드 ── */
+    .detail-head{
+      background:var(--white); border-bottom:1px solid var(--border);
+      padding:14px 16px; margin-bottom:8px;
+    }
+    .detail-title-row{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+      padding-bottom:10px; border-bottom:1px solid var(--border-soft); margin-bottom:10px;
+    }
+    .detail-title{font-size:15px; font-weight:700; color:var(--tp); flex:1; line-height:1.5}
+    .status-chip{flex-shrink:0; font-size:12px; font-weight:700; color:var(--green); padding-top:2px}
+    .detail-meta{display:flex; flex-direction:column; gap:5px}
+    .detail-meta-row{display:flex; gap:6px; font-size:12px; color:var(--ts); flex-wrap:wrap}
+    .meta-key{font-weight:700; color:var(--ts); flex-shrink:0}
+    .item-tag{color:var(--rose); font-weight:700}
+    .new-n{
+      color:var(--rose); font-family:Roboto,sans-serif;
+      font-size:9px; font-weight:700; vertical-align:super; margin-left:1px;
+    }
+
+    /* ── 대화 스레드 ── */
+    .thread{display:flex; flex-direction:column; gap:0}
+
+    .msg{padding:14px 16px; border-bottom:1px solid var(--border-soft)}
+    .msg.agent{background:var(--bg-warm)}
+    .msg.is-new{background:#fff5f7}
+
+    .msg-head{display:flex; align-items:baseline; gap:6px; margin-bottom:8px}
+    .msg-label{font-size:11px; font-weight:700; color:var(--tm)}
+    .msg.agent .msg-label{color:var(--navy)}
+    .msg.is-new .msg-label{color:var(--rose)}
+    .msg-who{font-size:13px; font-weight:700; color:var(--tp)}
+    .msg.agent .msg-who{color:var(--navy)}
+    .msg.is-new .msg-who{color:var(--rose)}
+    .msg-date{font-size:11px; color:var(--tm); margin-left:auto}
+
+    .msg-bubble{font-size:13px; color:var(--ts); line-height:1.75}
+    .msg.agent .msg-bubble{
+      padding-left:12px; border-left:2px solid #dde4ee;
+    }
+    .msg-bubble p{margin:0 0 6px}
+    .msg-bubble p:last-child{margin-bottom:0}
+
+    .msg-attach{
+      display:inline-flex; align-items:center; gap:6px;
+      margin-top:10px; padding:6px 12px;
+      border:1px solid var(--border); border-radius:5px;
+      background:var(--white); color:var(--ts); font-size:12px; font-weight:600;
+    }
+    .msg-attach i{color:var(--tm); font-size:11px}
+
+    /* ── 재문의 작성 ── */
+    .reinquiry-wrap{
+      background:var(--white); border-top:1px solid var(--border);
+      padding:16px;
+    }
+    .reinquiry-title{
+      display:flex; align-items:center; gap:7px;
+      font-size:14px; font-weight:700; color:var(--tp); margin-bottom:10px;
+    }
+    .reinquiry-title i{color:var(--rose); font-size:13px}
+    .textarea{
+      width:100%; min-height:100px;
+      border:1px solid var(--border); border-radius:10px;
+      padding:12px 14px; font-size:14px; color:var(--tp);
+      resize:none; outline:none; line-height:1.7; background:var(--white);
+    }
+    .textarea:focus{border-color:var(--navy)}
+    .reinquiry-foot{
+      display:flex; align-items:center; justify-content:space-between; margin-top:10px; gap:10px;
+    }
+    .file-btn-sm{
+      display:inline-flex; align-items:center; gap:6px;
+      height:36px; padding:0 14px;
+      border:1px solid var(--border); border-radius:5px;
+      background:var(--white); color:var(--ts); font-size:12px; font-weight:700;
+    }
+    .send-btn{
+      height:36px; padding:0 18px;
+      border:none; border-radius:5px;
+      background:var(--rose); color:#fff;
+      font-size:13px; font-weight:700;
+      display:flex; align-items:center; gap:6px;
+    }
+    .send-btn:active{background:var(--rose-h)}
+
+    /* ── 하단 CTA ── */
+    .cta-wrap{
+      padding:16px; background:var(--white);
+      border-top:1px solid var(--border);
+    }
+    .cta-btn{
+      width:100%; height:48px; border-radius:5px;
+      border:1px solid var(--border); background:var(--white); color:var(--ts);
+      font-size:15px; font-weight:700;
+      display:flex; align-items:center; justify-content:center; gap:7px;
+    }
+    .cta-btn:active{background:var(--bg)}
+  </style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<header class="m-header">
+  <div class="m-header-top">
+    <div class="m-brand-area">
+      <button class="hb" type="button" aria-label="메뉴 열기" aria-expanded="false" onclick="openDrawer()"><span></span><span></span><span></span></button>
+      <a class="m-logo" href="mobile_main.html" aria-label="BidBuy 홈">
+        <img src="Bidbuy logo.png" alt="BidBuy Korea">
+      </a>
+    </div>
+    <div class="m-header-right" id="m-guest-area">
+      <button class="m-login-btn" onclick="doMLogin()">로그인</button>
+    </div>
+    <div class="m-header-right" id="m-user-area" style="display:none">
+      <button class="m-icon-btn" aria-label="알림">
+        <i class="fa-regular fa-bell"></i><span class="badge">3</span>
+      </button>
+      <button class="m-icon-btn" aria-label="장바구니">
+        <i class="fa-solid fa-cart-shopping"></i><span class="badge">2</span>
+      </button>
+      <button class="m-user-avatar" onclick="alert('마이페이지')" aria-label="회원 메뉴">한</button>
+    </div>
+  </div>
+  <div class="m-header-search">
+    <input type="text" placeholder="키워드 또는 URL을 입력하세요." aria-label="검색어 입력">
+    <button type="button" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></button>
+  </div>
+</header>
+
+<!-- 페이지 타이틀 -->
+<div class="page-title-bar">
+  <h2>1:1 문의 상세</h2>
+  <a class="list-link" href="mobile_qna.html"><i class="fa-solid fa-list" style="font-size:11px"></i> 목록</a>
+</div>
+
+<!-- 문의 헤더 -->
+<div class="detail-head">
+  <div class="detail-title-row">
+    <div class="detail-title">묶음배송 신청건 국제배송 일정 문의드립니다</div>
+    <span class="status-chip">답변완료</span>
+  </div>
+  <div class="detail-meta">
+    <div class="detail-meta-row">
+      <span class="meta-key">질문유형</span><span>배송문의</span>
+      <span class="meta-key" style="margin-left:8px">국가</span><span>일본</span>
+    </div>
+    <div class="detail-meta-row">
+      <span class="meta-key">문의일</span><span>2026-06-10</span>
+    </div>
+    <div class="detail-meta-row">
+      <span class="meta-key">문의물품</span>
+      <span class="item-tag">[경매] A20260601-0182 · Relirium 사운드트랙 음원 DL버전</span>
+    </div>
+  </div>
+</div>
+
+<!-- 대화 스레드 -->
+<div class="thread">
+
+  <!-- 1차 문의 -->
+  <div class="msg customer">
+    <div class="msg-head">
+      <span class="msg-label">문의</span>
+      <span class="msg-who">홍길동</span>
+      <span class="msg-date">2026-06-10 09:42</span>
+    </div>
+    <div class="msg-bubble">
+      <p>안녕하세요. 6월 6일에 묶음배송 신청한 건(#B20230606-01)이 아직 발송 준비중으로 표시되는데, 국제배송이 언제쯤 시작되는지 알 수 있을까요?</p>
+      <p>수령이 급한 물품이 포함되어 있어서 일정 확인 부탁드립니다.</p>
+      <a class="msg-attach" href="#"><i class="fa-solid fa-paperclip"></i> 주문내역_캡처.png</a>
+    </div>
+  </div>
+
+  <!-- 1차 답변 -->
+  <div class="msg agent">
+    <div class="msg-head">
+      <span class="msg-label">답변</span>
+      <span class="msg-who">비드바이 cs팀</span>
+      <span class="msg-date">2026-06-10 14:18</span>
+    </div>
+    <div class="msg-bubble">
+      <p>안녕하세요, 비드바이코리아 cs팀입니다.</p>
+      <p>문의주신 묶음배송 건은 현재 현지 물류센터에서 검수 및 합포장 작업 중입니다. 2차 결제가 완료되어 6월 12일(금) 항공편으로 출고 예정이며, 출고 후 통상 3~5일 내 국내 도착합니다.</p>
+      <p>출고 시 운송장 번호를 알림으로 안내드리겠습니다. 감사합니다.</p>
+    </div>
+  </div>
+
+  <!-- 2차 문의 -->
+  <div class="msg customer">
+    <div class="msg-head">
+      <span class="msg-label">문의</span>
+      <span class="msg-who">홍길동</span>
+      <span class="msg-date">2026-06-11 10:05</span>
+    </div>
+    <div class="msg-bubble">
+      <p>답변 감사합니다. 혹시 출고 전에 박스 안에 완충재를 추가로 넣어주실 수 있나요? 도자기 제품이 포함되어 있어 파손이 걱정됩니다.</p>
+    </div>
+  </div>
+
+  <!-- 2차 답변 -->
+  <div class="msg agent">
+    <div class="msg-head">
+      <span class="msg-label">답변</span>
+      <span class="msg-who">비드바이 cs팀</span>
+      <span class="msg-date">2026-06-11 11:32</span>
+    </div>
+    <div class="msg-bubble">
+      <p>네, 가능합니다. 해당 묶음 건에 "파손주의 상품 포함" 메모를 등록하여 에어캡 2중 포장 + 완충재 보강으로 처리하겠습니다.</p>
+      <p>보강 포장으로 부피가 일부 증가할 수 있으며, 부피 무게 변동 시 2차 결제 차액이 발생하면 별도 안내드립니다.</p>
+    </div>
+  </div>
+
+  <!-- 3차 문의 -->
+  <div class="msg customer">
+    <div class="msg-head">
+      <span class="msg-label">문의</span>
+      <span class="msg-who">홍길동</span>
+      <span class="msg-date">2026-06-12 09:15</span>
+    </div>
+    <div class="msg-bubble">
+      <p>확인 감사합니다. 마지막으로 하나만 더요 — 출고되면 통관 진행 상황도 마이페이지에서 확인 가능한가요?</p>
+    </div>
+  </div>
+
+  <!-- 3차 답변 (신규) -->
+  <div class="msg agent is-new">
+    <div class="msg-head">
+      <span class="msg-label">답변<sup class="new-n">N</sup></span>
+      <span class="msg-who">비드바이 cs팀</span>
+      <span class="msg-date">2026-06-12 10:47</span>
+    </div>
+    <div class="msg-bubble">
+      <p>네, 마이페이지 &gt; 배송관리 &gt; 배송 신청 완료 목록에서 [배송 조회]를 누르시면 출고 → 통관 → 국내배송 단계별 현황을 실시간으로 확인하실 수 있습니다.</p>
+      <p>통관 단계에서 관·부가세 납부가 필요한 경우 알림과 문자로 함께 안내드립니다. 이용해 주셔서 감사합니다.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- 재문의 작성 -->
+<div class="reinquiry-wrap">
+  <div class="reinquiry-title"><i class="fa-solid fa-reply"></i> 재문의 작성</div>
+  <textarea class="textarea" placeholder="추가로 문의하실 내용을 입력하세요. 등록하시면 동일 문의에 이어서 답변을 받으실 수 있습니다."></textarea>
+  <div class="reinquiry-foot">
+    <button class="file-btn-sm" type="button"><i class="fa-solid fa-camera"></i> 사진 첨부</button>
+    <button class="send-btn" type="button"><i class="fa-solid fa-paper-plane" style="font-size:11px"></i> 재문의 등록</button>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-wrap">
+  <button class="cta-btn" type="button" onclick="location.href='mobile_qna.html'">
+    <i class="fa-solid fa-list" style="font-size:12px"></i> 목록으로
+  </button>
+</div>
+
+<script>
+function doMLogin(){
+  document.getElementById('m-guest-area').style.display = 'none';
+  document.getElementById('m-user-area').style.display = '';
+}
+</script>
+<script src="bb-common-mobile.js"></script>
+</body>
+</html>

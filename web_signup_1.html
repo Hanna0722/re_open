@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회원 가입 - 혜택 및 약관 | BidBuy Korea</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{
+  --rose:#E8385A;--rose-h:#C42F4C;--navy:#1A3C6E;--amber:#F5A623;
+  --bg:#F5F7FA;--border:#E0E4EB;--line:#EDF0F4;
+  --tp:#1A1A2E;--ts:#666680;--tm:#999BAA;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Pretendard,'Apple SD Gothic Neo','Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif;color:var(--tp);font-size:14px;line-height:1.5;background:#fff;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+button{cursor:pointer}
+
+/* ── 스텝 히어로 ── */
+.page-wrap{max-width:1180px;margin:0 auto;padding:28px 24px 60px}
+.join-hero{position:relative;overflow:hidden;background:var(--bg);border-radius:10px;padding:34px 24px 40px;text-align:center}
+.join-hero::after{content:"";position:absolute;right:-90px;bottom:-140px;width:420px;height:420px;border-radius:50%;background:#EDEFF2}
+.join-hero-sub{position:relative;z-index:1;font-size:13px;color:var(--ts);font-weight:600}
+.join-hero-title{position:relative;z-index:1;margin:6px 0 26px;font-size:22px;font-weight:800;color:var(--tp)}
+.step-list{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:14px}
+.step-item{width:190px;padding:20px 10px 18px;border:1px solid var(--border);border-radius:8px;background:#fff;text-align:center}
+.step-item.active{border:2px solid var(--navy)}
+.step-num{width:48px;height:48px;margin:0 auto 14px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700;line-height:1.25}
+.step-name{font-size:14px;font-weight:700;color:var(--tp)}
+.step-arrow{color:var(--tm);font-size:13px}
+
+/* ── 혜택 카드 ── */
+.benefit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:760px;margin:34px auto 0}
+.benefit-box{border-radius:4px;padding:16px 12px 18px;text-align:center;color:#fff}
+.benefit-box.a{background:var(--navy)}
+.benefit-box.b{background:var(--rose)}
+.benefit-tag{display:inline-block;margin-bottom:8px;padding:3px 12px;border-radius:999px;background:rgba(255,255,255,.92);color:var(--tp);font-size:11px;font-weight:700}
+.benefit-copy{font-size:11px;line-height:1.5;opacity:.95}
+.benefit-copy strong{display:block;margin-top:2px;font-size:15px;font-weight:800;opacity:1}
+
+/* ── 약관 카드 ── */
+.terms-card{max-width:600px;margin:26px auto 0;border:1px solid var(--border);border-radius:8px;padding:22px}
+.terms-block + .terms-block{margin-top:22px}
+.terms-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.terms-title{font-size:14px;font-weight:700;color:var(--tp)}
+.chk{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--ts);cursor:pointer;white-space:nowrap}
+.chk input{width:15px;height:15px;margin:0;accent-color:var(--navy)}
+.terms-body{max-height:78px;overflow-y:auto;padding:14px 16px;border-radius:4px;background:#F7F8FA;color:var(--ts);font-size:12px;line-height:1.7}
+.terms-body::-webkit-scrollbar{width:6px}
+.terms-body::-webkit-scrollbar-thumb{background:#D5DAE1;border-radius:999px}
+
+/* ── 만 14세 · 전체동의 ── */
+.age-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:22px;font-size:13px;color:var(--tp)}
+.radio{display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.radio input{width:15px;height:15px;margin:0;accent-color:var(--navy)}
+.agree-all{display:flex;justify-content:center;margin-top:12px}
+
+/* ── CTA ── */
+.join-actions{display:flex;justify-content:center;gap:12px;margin-top:26px}
+.btn{height:46px;padding:0 40px;border:1px solid transparent;border-radius:5px;font-size:14px;font-weight:700;font-family:inherit;transition:background .15s}
+.btn-primary{background:var(--rose);color:#fff}
+.btn-primary:hover{background:var(--rose-h)}
+.btn-outline{background:#fff;border-color:var(--border);color:var(--tp);display:inline-flex;align-items:center;gap:10px}
+.btn-outline:hover{border-color:var(--navy);color:var(--navy)}
+.sns-list{display:inline-flex;align-items:center;gap:6px}
+.sns-ico{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:800;color:#fff}
+.sns-n{background:#03C75A}.sns-k{background:#FEE500;color:#3C1E1E}.sns-g{background:#fff;border:1px solid var(--border);color:#4285F4}.sns-a{background:#111}
+
+/* ── 푸터 ── */
+footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
+.footer-inner{max-width:1180px;margin:0 auto}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px;font-size:12px}
+.footer-links a{color:var(--ts)}
+.footer-links a.bold{font-weight:700;color:var(--tp)}
+.footer-biz{font-size:11px;color:var(--tm);line-height:2}
+.footer-copy{font-size:11px;color:var(--tm);margin-top:12px}
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- 스텝 히어로 -->
+  <section class="join-hero">
+    <p class="join-hero-sub">글로벌쇼핑의 탁월한 경험!</p>
+    <h1 class="join-hero-title">비드바이코리아 회원 가입</h1>
+    <div class="step-list">
+      <div class="step-item active">
+        <div class="step-num">Step<br>01</div>
+        <div class="step-name">회원 혜택 및 약관</div>
+      </div>
+      <i class="fa-solid fa-chevron-right step-arrow" aria-hidden="true"></i>
+      <div class="step-item">
+        <div class="step-num">Step<br>02</div>
+        <div class="step-name">가입 정보입력</div>
+      </div>
+      <i class="fa-solid fa-chevron-right step-arrow" aria-hidden="true"></i>
+      <div class="step-item">
+        <div class="step-num">Step<br>03</div>
+        <div class="step-name">회원가입완료</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 회원 혜택 -->
+  <section class="benefit-grid" aria-label="회원 혜택">
+  <div class="benefit-box a">
+    <span class="benefit-tag">가입 혜택 1</span>
+    <p class="benefit-copy">회원가입을 축하드려요!<strong>마일리지 5천원 즉시 지급</strong></p>
+  </div>
+  <div class="benefit-box b">
+    <span class="benefit-tag">가입 혜택 2</span>
+    <p class="benefit-copy">국제운임 부담을 덜어드려요!<strong>국제운임 할인 쿠폰 5천원권 지급</strong></p>
+  </div>
+  <div class="benefit-box a">
+    <span class="benefit-tag">가입 혜택 3</span>
+    <p class="benefit-copy">가입 즉시 STANDARD 등급 적용!<strong>대행수수료의 2% 마일리지 적립</strong></p>
+  </div>
+</section>
+
+  <!-- 필수 약관 -->
+  <section class="terms-card">
+    <div class="terms-block">
+      <div class="terms-head">
+        <span class="terms-title">비드바이 회원 이용약관 (필수)</span>
+        <label class="chk"><input type="checkbox" class="agree-item" data-required="1" id="agreeTerms"> 이용약관 동의함</label>
+      </div>
+      <div class="terms-body">
+        제 1조 목적이 약관은 주)비드바이 코리아가 제공하는 해외 경매 대행 서비스와 위임형 구매대행 관련 서비스(이하 "서비스")를 이용함에 있어 회사와 이용자 간의 권리,의무,책임사항 및 절차 등을 규정함을 목적으로 합니다.
+      </div>
+    </div>
+    <div class="terms-block">
+      <div class="terms-head">
+        <span class="terms-title">개인정보의 수집 및 이용목적 (필수)</span>
+        <label class="chk"><input type="checkbox" class="agree-item" data-required="1" id="agreePrivacy"> 개인정보의 수집목적 및 이용목적에 동의함</label>
+      </div>
+      <div class="terms-body">
+        제 1조 목적이 약관은 주)비드바이 코리아가 제공하는 해외 경매 대행 서비스와 위임형 구매대행 관련 서비스(이하 "서비스")를 이용함에 있어 회사와 이용자 간의 권리,의무,책임사항 및 절차 등을 규정함을 목적으로 합니다.<br>
+        제 1조 목적이 약관은 주)비드바이 코리아가 제공하는 해외 경매 대행 서비스와 위임형 구매대행 관련 서비스(이하 "서비스")를 이용함에 있어 회사와 이용자 간의 권리,의무,책임사항 및 절차 등을 규정함을 목적으로 합니다.
+      </div>
+    </div>
+  </section>
+
+  <!-- 선택 약관 -->
+  <section class="terms-card">
+    <div class="terms-block">
+      <div class="terms-head">
+        <span class="terms-title">이메일 수신 동의 (선택)</span>
+        <label class="chk"><input type="checkbox" class="agree-item" id="agreeEmail"> 동의함</label>
+      </div>
+      <div class="terms-body">경매대행 및 국제배송 수수료 할인쿠폰과 최신 마케팅 정보를 이메일로 받아볼 수 있습니다.</div>
+    </div>
+    <div class="terms-block">
+      <div class="terms-head">
+        <span class="terms-title">SNS 수신 동의 (선택)</span>
+        <label class="chk"><input type="checkbox" class="agree-item" id="agreeSns"> 동의함</label>
+      </div>
+      <div class="terms-body">경매대행 및 국제배송 수수료 할인쿠폰과 최신 마케팅 정보를 SMS로 받아볼 수 있습니다.</div>
+    </div>
+  </section>
+
+  <!-- 만 14세 확인 -->
+  <div class="age-row">
+    <span>본인은 만 14세 이상 입니까?</span>
+    <label class="radio"><input type="radio" name="age14" value="yes" checked> 예</label>
+    <label class="radio"><input type="radio" name="age14" value="no"> 아니오</label>
+  </div>
+  <div class="agree-all">
+    <label class="chk"><input type="checkbox" id="agreeAll" onchange="toggleAgreeAll(this)"> 전체동의</label>
+  </div>
+
+  <!-- CTA -->
+  <div class="join-actions">
+    <button class="btn btn-primary" type="button" id="btnJoinNext" onclick="goNextStep()">일반 회원가입</button>
+    <button class="btn btn-outline" type="button">
+      소셜간편 회원가입
+      <span class="sns-list" aria-hidden="true">
+        <span class="sns-ico sns-n">N</span>
+        <span class="sns-ico sns-k">K</span>
+        <span class="sns-ico sns-g">G</span>
+        <span class="sns-ico sns-a"><i class="fa-brands fa-apple"></i></span>
+      </span>
+    </button>
+  </div>
+</div>
+
+<!-- 푸터 -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a class="bold" href="#">이용약관</a>
+      <a class="bold" href="#">개인정보처리방침</a>
+      <a href="#">회사소개</a>
+      <a href="#">국제전자상거래피해상담</a>
+      <a href="#">이메일무단수집거부</a>
+    </div>
+    <div class="footer-biz">
+      (주)비드바이 코리아 &nbsp; 사업자등록번호 : 107-87-03406 &nbsp; 통신판매업신고 : 제2015-서울영등포-0315호 &nbsp; 무역업고유번호 : 30636624<br>
+      구매대행업 등록번호 : B-1-22-00009 &nbsp; 수입식품등 인터넷구매대행업 등록번호 : 제 20160002885호<br>
+      주소 : 서울특별시 영등포구 경인로 775 에이스하이테크시티 1동 1506호 &nbsp; 대표자 : 예창민 &nbsp; Email : korea@bidbuy.co.kr
+    </div>
+    <div class="footer-copy">Copyright(C) 2024 BIDBUY KOREA All Rights Reserved.</div>
+  </div>
+</footer>
+
+<script>
+/* 전체동의 → 개별 약관 일괄 체크 */
+function toggleAgreeAll(el) {
+  document.querySelectorAll('.agree-item').forEach(function (chk) { chk.checked = el.checked; });
+}
+
+/* 개별 약관 변경 시 전체동의 상태 동기화 */
+document.querySelectorAll('.agree-item').forEach(function (chk) {
+  chk.addEventListener('change', function () {
+    var items = Array.prototype.slice.call(document.querySelectorAll('.agree-item'));
+    document.getElementById('agreeAll').checked = items.every(function (i) { return i.checked; });
+  });
+});
+
+/* 필수 약관 확인 후 다음 단계 */
+function goNextStep() {
+  var required = Array.prototype.slice.call(document.querySelectorAll('.agree-item[data-required="1"]'));
+  if (!required.every(function (i) { return i.checked; })) {
+    alert('필수 약관에 동의해 주세요.');
+    return;
+  }
+  if (document.querySelector('input[name="age14"]:checked').value !== 'yes') {
+    alert('만 14세 미만은 회원 가입이 제한됩니다.');
+    return;
+  }
+  location.href = 'web_signup_2.html';
+}
+</script>
+<script src="bb-common.js"></script>
+</body>
+</html>

@@ -1,0 +1,2624 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bidbuy 마이페이지</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --brand: #E8385A;
+      --brand-hot: #ff4969;
+      --navy: #1A3C6E;
+      --ink: #20242b;
+      --text: #33363d;
+      --muted: #777985;
+      --faint: #a1a5b3;
+      --line: #e5dbd7;
+      --line-soft: #eee6e2;
+      --paper: #fff;
+      --warm: #fbf7f5;
+      --warm-2: #f7f3f0;
+      --yellow: #F5A623;
+      --green: #3AAD4E;
+      --sidebar-w: 221px;
+      --main-w: 812px;
+      --gap: 24px;
+      --asset-w: 861px;
+      --stage-left: max(16px, calc((100vw - 1057px) / 2));
+      --mobile-w: 390px;
+    }
+    * { box-sizing: border-box; }
+    html { background: #f0f5fa; }
+    body {
+      margin: 0; min-width: var(--mobile-w); color: var(--text); background: #f0f5fa;
+      font-family: Pretendard, "Noto Sans KR", -apple-system, sans-serif;
+      font-size: 13px; line-height: 1.45;
+    }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    a { text-decoration: none; }
+    .page {
+      width: var(--mobile-w);
+      min-width: var(--mobile-w);
+      max-width: var(--mobile-w);
+      min-height: 100vh;
+      margin: 0 auto;
+      background: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      min-height:56px;
+      width: min(calc(100vw - 32px), 1057px);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 221px minmax(0, 1fr) 221px;
+      align-items: center; gap:12px;padding:1px;}
+    .brand-area { display: flex; align-items: center; gap:10px; min-width: 0; }
+    .menu-button {
+      width: 25px; height: 25px; border: 0; border-radius: 5px; background: transparent;
+      padding: 0; display: grid; place-items: center;
+    }
+    .menu-lines { width: 23px; display: grid; gap: 6px; }
+    .menu-lines span { height: 2.5px; border-radius: 999px; background: #1f2530; }
+    .logo-link { display:inline-flex; align-items:center; width:76px; line-height:0; }
+    .logo-link img { width:100%; height:auto; display:block; }
+    .search {
+      height: 43px; display: flex; min-width: 0;
+      border: 1px solid var(--line); border-radius: 13px;
+      overflow: hidden; background: var(--warm-2);
+    }
+    .search input {
+      flex: 1; min-width: 0; border: 0; outline: 0;
+      padding: 0 18px; background: transparent; color: var(--text); font-size: 13px;
+    }
+    .search input::placeholder { color: #8c8985; }
+    .search button {
+      width: 111px; border: 0; background: var(--brand-hot); color: #fff;
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px; font-size: 13px; font-weight: 700;
+    }
+    .search button svg { width: 15px; height: 15px; stroke-width: 3; }
+    .user-tools {
+      justify-self: end;
+      display: grid; grid-template-columns: 28px 28px auto;
+      align-items: center; gap: 10px; color: #1d2430;
+    }
+    .icon-btn {
+      width: 28px; height: 28px; display: grid; place-items: center;
+      border: 0; border-radius: 5px; background: transparent; color: #687385; padding: 0;
+    }
+    .icon-btn svg { width: 23px; height: 23px; stroke-width: 1.8; }
+    .user-name { display: grid; justify-items: center; gap: 3px; color: #111827; font-size: 13px; font-weight:700; white-space: nowrap; }
+    .premium-chip {
+      min-width: 70px; min-height: 18px; padding: 2px 10px;
+      border-radius: 999px; background: #fff0c9; color: #f4a200;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight:700;
+    }
+    .mobile-channel-tabs { display: none; }
+    .login-pill { display: none; }
+
+    /* ── STAGE ── */
+    .stage {
+      position: relative;
+      display: grid;
+      grid-template-columns: var(--sidebar-w) var(--main-w);
+      gap: var(--gap);
+      width: calc(var(--sidebar-w) + var(--gap) + var(--main-w));
+      margin-left: var(--stage-left);
+    }
+
+    /* ── ASSET STRIP ── */
+    .asset-strip {
+      position: absolute; top: 0; left: var(--sidebar-w);
+      width: var(--asset-w); height: 36px;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      align-items: center; background: var(--warm);
+      border-bottom: 1px solid #f2e9e5; z-index: 1;
+    }
+    .asset-item {
+      display: flex; align-items: center; justify-content: center;
+      gap: 50px; color: #111; white-space: nowrap;
+    }
+    .asset-item span { font-size: 13px; font-weight: 600; }
+    .asset-item strong { font-size: 15px; font-weight:700; }
+
+    /* ── SIDEBAR (desktop) ── */
+    .sidebar { min-width: 0; }
+    .profile-card { height: 172px; padding: 19px 22px 12px; background: var(--warm); }
+    .profile-main { display: flex; align-items: center; gap: 13px; }
+    .profile-member { display: flex; align-items: center; gap: 6px; min-width: 0; }
+    .avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: grid; place-items: center; flex: 0 0 auto;
+      background: #ffe7ef; color: var(--brand); font-size: 22px; font-weight:700;
+    }
+    .profile-name { display: inline-flex; margin-bottom: 0; color: #262a31; font-size: 16px; font-weight:700; line-height: 1; white-space: nowrap; }
+    .profile-tier { display: inline-flex; align-items: center; color: var(--brand); font-size: 12px; font-weight:700; line-height: 1; white-space: nowrap; }
+    .vip-copy { margin: 18px 0 6px; color: #5c6270; font-size: 12px; font-weight: 600; }
+    .vip-copy b { color: #454b58; font-weight:700; }
+    .vip-row { display: grid; grid-template-columns: 1fr 16px; align-items: center; gap: 8px; }
+    .vip-progress { height: 8px; border-radius: 999px; background: #eee2de; overflow: hidden; }
+    .vip-progress span { display: block; width: 84%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #ff8499, var(--brand)); }
+    .help-dot {
+      width: 16px; height: 16px; border: 1.5px solid #9ea1aa; border-radius: 50%;
+      display: inline-grid; place-items: center; color: #838793; font-size: 11px; font-weight:700;
+    }
+    .profile-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 11px; }
+    .soft-btn {
+      height: 26px; border: 1px solid var(--line); border-radius: 5px;
+      background: #fff; color: #5c606b; font-size: 12px; font-weight: 700;
+    }
+    .side-nav { padding-top: 33px; }
+    .side-title { margin: 0 0 18px; padding: 0 15px 17px; border-bottom: 1px solid #dcd9d6; color: #111; font-size: 16px; font-weight:700; }
+    .nav-section { padding: 0 20px; margin-bottom: 14px; }
+    .nav-section strong { display: block; margin-bottom: 11px; color: #292d35; font-size: 12px; font-weight:700; }
+    .nav-list { display: grid; gap: 13px; list-style: none; margin: 0; padding: 0; }
+    .nav-list a { color: #666b75; font-size: 12px; font-weight: 500; }
+    .nav-list a:hover, .nav-list a.active { color: var(--brand); font-weight:700; }
+
+    /* ── MAIN ── */
+    .main { min-width: 0; padding-top: 58px; padding-bottom: 40px; }
+    .shopping-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 27px 11px 6px; }
+    .shopping-head h2, .list-title { margin: 0; color: #2b2f37; font-size: 15px; font-weight:700; }
+    .status-links { display: flex; align-items: center; gap: 16px; }
+    .outline-pill {
+      height: 31px; padding: 0 15px; border: 1px solid var(--line); border-radius: 999px;
+      background: #fff; color: #8a7f7a; font-size: 12px; font-weight: 700;
+    }
+    .status-board { display: grid; grid-template-columns: 127px repeat(6, 87px); gap: 20px; align-items: stretch; margin-left: 6px; }
+    .status-stack { display: grid; gap: 19px; }
+    .status-card {
+      min-height: 151px; border: 1px solid #ded8d5; border-radius: 7px;
+      background: #fff; color: #383b40; display: grid; place-items: center; text-align: center; padding: 10px 8px;
+    }
+    .status-card[data-status], .status-card .sub[data-status] { cursor: pointer; transition: border-color .16s, box-shadow .16s; }
+    .status-card[data-status]:hover { border-color: rgba(232,56,90,.55); box-shadow: 0 0 0 2px rgba(232,56,90,.08); outline: 0; }
+    .status-card.status-active { border-color: var(--brand); box-shadow: 0 0 0 2px rgba(232,56,90,.12); }
+    .status-stack .status-card { min-height: 66px; }
+    .status-card em { display: block; margin-bottom: 5px; color: #3c3f45; font-style: normal; font-size: 18px; font-weight:700; line-height: 1; }
+    .status-card em.hot { color: var(--brand); }
+    .status-card strong { display: block; color: #3e4249; font-size: 14px; font-weight: 500; line-height: 1.45; }
+    .status-card .sub { display: block; margin-top: 17px; padding-top: 13px; border-top: 1px solid #e4dedb; }
+    .status-card .sub em { margin-bottom: 4px; color: var(--yellow); font-size: 15px; }
+    .trade-area { margin-top: 56px; }
+    .filter-row { min-height: 34px; display: flex; align-items: center; gap: 22px; margin-bottom: 9px; }
+    .filter-group, .utility-group { display: flex; align-items: center; gap: 12px; }
+    .filter-group { gap: 18px; }
+    .utility-group { margin-left: auto; gap: 6px; }
+    .tab {
+      position: relative; min-width: 0; height: 34px; padding: 0 0 7px;
+      border: 0; border-radius: 0; background: transparent; color: #9da2af;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight:700; line-height: 1; white-space: nowrap;
+    }
+    .tab::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; border-radius: 999px; background: transparent; }
+    .tab.active { color: var(--brand); }
+    .tab.active::after { background: var(--brand); }
+    .divider { width: 1px; height: 19px; background: #e1d8d5; margin: 0 4px; }
+    .filter-dropdown { position: relative; flex: 0 0 auto; }
+    .dropdown-toggle {
+      height: 28px; min-width: 96px; padding: 0 10px 0 14px;
+      border: 1px solid var(--line); border-radius: 7px; background: #fff; color: var(--navy);
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 6px; font-size: 11px; font-weight:700; line-height: 1; white-space: nowrap;
+    }
+    .dropdown-toggle:focus-visible { outline: 2px solid rgba(232,56,90,.25); outline-offset: 2px; }
+    .chevron {
+      width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent;
+      border-top: 6px solid #5d6470; transition: transform .16s ease;
+    }
+    .filter-dropdown.is-open .chevron { transform: rotate(180deg); }
+    .dropdown-panel {
+      position: absolute; top: calc(100% + 8px); right: 0; z-index: 20; display: none;
+      border: 1px solid var(--line); border-radius: 10px; background: #fff;
+      box-shadow: 0 14px 34px rgba(30,34,42,.12);
+    }
+    .filter-dropdown.is-open .dropdown-panel { display: block; }
+    .country-panel { width: 112px; padding: 8px; }
+    .dropdown-item {
+      width: 100%; height: 32px; border: 0; border-radius: 7px; background: #fff; color: #4f5662;
+      display: flex; align-items: center; justify-content: flex-start;
+      padding: 0 10px; font-size: 12px; font-weight:700;
+    }
+    .dropdown-item:hover, .dropdown-item.active { background: #fff3f6; color: var(--brand); }
+    .status-panel {
+      width: 128px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 14px 28px rgba(30, 34, 42, 0.14);
+      overflow: hidden;
+    }
+    .status-filter-option {
+      width: 100%; height: 28px; margin-bottom: 8px; border: 1px solid var(--line); border-radius: 7px;
+      background: #fff; color: var(--navy); display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight:700; line-height: 1; white-space: nowrap;
+    }
+    .status-filter-option:hover, .status-filter-option.status-active {
+      border-color: rgba(232,56,90,.65); background: #fff3f6; color: var(--brand);
+    }
+    .status-filter-option:last-child { margin-bottom: 0; }
+    .calendar-panel { width: 300px; padding: 14px; }
+    .range-shortcuts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 13px; }
+    .range-shortcuts button {
+      height: 30px; border: 1px solid var(--line); border-radius: 7px; background: #fff;
+      color: #6b717d; font-size: 12px; font-weight:700;
+    }
+    .range-shortcuts button.active, .range-shortcuts button:hover {
+      border-color: var(--brand); background: var(--brand); color: #fff;
+    }
+    .calendar-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px; color: #252a32; font-size: 14px; font-weight:700;
+    }
+    .calendar-head button {
+      width: 28px; height: 28px; border: 1px solid var(--line); border-radius: 7px;
+      background: #fff; color: #59606d; font-size: 15px; line-height: 1;
+    }
+    .calendar-week, .calendar-days { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; }
+    .calendar-week { margin-bottom: 6px; color: #9ca1ad; font-size: 10px; font-weight:700; }
+    .calendar-days { gap: 4px; }
+    .calendar-days button {
+      height: 30px; border: 0; border-radius: 7px; background: transparent;
+      color: #505762; font-size: 12px; font-weight: 700;
+    }
+    .calendar-days button:hover, .calendar-days button.selected { background: var(--brand); color: #fff; }
+    .calendar-days button.is-muted { color: #c1c5cf; }
+    .calendar-actions {
+      display: flex; justify-content: flex-end; gap: 6px;
+      margin-top: 13px; padding-top: 12px; border-top: 1px solid var(--line-soft);
+    }
+    .calendar-actions button {
+      height: 29px; min-width: 58px; border: 1px solid var(--line); border-radius: 7px;
+      background: #fff; color: #606672; font-size: 12px; font-weight:700;
+    }
+    .calendar-actions button.primary { border-color: var(--brand); background: var(--brand); color: #fff; }
+    .trade-table { border: 1px solid var(--line); border-radius: 11px; overflow: hidden; background: #fff; }
+    .table-head, .trade-row { display: grid; grid-template-columns: 120px minmax(0,1fr) 132px 180px; align-items: center; column-gap: 12px; }
+    .table-head { min-height: 37px; padding: 0 16px; background: var(--warm); color: #5a5e66; font-size: 11px; font-weight:700; }
+    .table-head div:last-child { text-align: center; }
+    .trade-row { min-height: 85px; padding: 0 16px; border-top: 1px solid var(--line-soft); }
+    .trade-row.is-hidden { display: none; }
+    .trade-row.status-extra { display: none; }
+    .trade-table.status-filtered .trade-row:not(.is-hidden) { display: grid; }
+    .trade-date { color: #9a9fa8; font-size: 11px; }
+    .product { display: flex; align-items: flex-start; gap: 10px; }
+    .thumb { width: 46px; height: 46px; flex: 0 0 auto; border-radius: 5px; background: #ede7e4; }
+    .product-info { min-width: 0; }
+    .seller { color: #a09499; font-size: 11px; margin-bottom: 3px; }
+    .product-title { color: #2c3038; font-size: 12px; font-weight: 600; line-height: 1.4; }
+    .price-main { color: var(--brand); font-size: 13px; font-weight:700; font-family: Roboto, sans-serif; }
+    .price-sub { margin-top: 3px; color: #9da2af; font-size: 11px; }
+    .progress-cell { display: grid; gap: 8px; }
+    .progress-cell > span { color: #5e4f4b; font-size: 11px; font-weight:700; padding: 3px 9px; border-radius: 999px; background: var(--warm); text-align: center; white-space: nowrap; }
+    .row-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .mini-btn { height: 28px; border: 1px solid #e2d4cf; border-radius: 7px; color: #5f6571; background: #fff; font-size: 11px; font-weight: 700; }
+    .mini-btn.primary { border-color: var(--brand); background: var(--brand); color: #fff; }
+    .trade-empty { display: none; padding: 40px; text-align: center; color: #9da2af; font-size: 13px; }
+    .trade-empty.is-visible { display: block; }
+    .pager { display: flex; justify-content: center; gap: 5px; margin-top: 18px; }
+    .pager button { width: 34px; height: 34px; border-radius: 8px; border: 1px solid #e2d4cf; background: #fffdfb; color: #6f7584; font-size: 13px; }
+    .pager button.current { border-color: var(--brand); background: var(--brand); color: #fff; }
+
+    /* ── DRAWER ── */
+    .drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px 16px; border-bottom: 1px solid #eee6e2; }
+    .drawer-user { display: flex; align-items: center; gap: 10px; }
+    .drawer-crown { font-size: 20px; }
+    .drawer-user-name { display: block; color: #1a1d24; font-size: 15px; font-weight:700; }
+    .drawer-user-grade { color: #f4a200; font-size: 11px; font-weight: 700; }
+    .drawer-close { width: 28px; height: 28px; border: 0; background: transparent; color: #555; font-size: 20px; display: grid; place-items: center; }
+    .drawer-section { padding: 16px 20px; border-bottom: 1px solid #f0ebe8; }
+    .drawer-section-title { margin: 0 0 12px; color: #888; font-size: 11px; font-weight:700; letter-spacing: .04em; }
+    .drawer-quick-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .drawer-quick-item { display: flex; flex-direction: column; align-items: center; gap: 6px; color: #2c3038; }
+    .drawer-quick-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--warm); border: 1px solid #ede7e3; display: grid; place-items: center; font-size: 18px; font-weight:700; }
+    .drawer-quick-icon svg { width: 20px; height: 20px; stroke-width: 1.7; }
+    .drawer-quick-item span:last-child { font-size: 11px; font-weight: 600; color: #3d4049; }
+    .drawer-category-list { display: grid; gap: 2px; }
+    .drawer-category-item { display: flex; align-items: center; gap: 10px; padding: 9px 4px; color: #2c3038; font-size: 13px; font-weight: 600; border-bottom: 1px solid #f3ede9; }
+    .drawer-country { width: 28px; height: 18px; border-radius: 3px; background: #eee6e2; display: grid; place-items: center; color: #6f7078; font-size: 10px; font-weight:700; flex: 0 0 auto; }
+    .drawer-chevron { margin-left: auto; color: #b0a9a6; font-size: 16px; }
+    .drawer-mypage-list { display: grid; gap: 4px; }
+    .drawer-mypage-item { min-height: 48px; display: flex; align-items: center; gap: 16px; color: #172033; font-size: 15px; font-weight: 600; border: 0; background: transparent; padding: 0; text-align: left; }
+    .drawer-mypage-item svg { width: 24px; height: 24px; stroke-width: 2; flex: 0 0 auto; color: #111; }
+    .drawer-mypage-item .drawer-chevron { transition: transform .18s ease; }
+    .drawer-mypage-item.is-open .drawer-chevron { transform: rotate(180deg); }
+    .drawer-mypage-panel { display: none; margin: -2px 0 8px 40px; padding: 4px 0 6px 12px; border-left: 1px solid #eef0f3; }
+    .drawer-mypage-panel.is-open { display: grid; }
+    .drawer-mypage-link { min-height: 34px; display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #343946; font-size: 13px; font-weight: 500; border-bottom: 1px solid #f1f2f4; }
+    .drawer-mypage-link:last-child { border-bottom: 0; }
+    .drawer-mypage-link.active, .drawer-mypage-link.danger { color: var(--brand); font-weight:700; }
+    .drawer-mypage-link::after { content: "›"; color: #c0c5cf; font-size: 18px; line-height: 1; }
+    .drawer-link-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; }
+    .drawer-link-grid a { color: #5a5f6b; font-size: 12px; font-weight: 600; }
+    .drawer-biz-switch {
+      margin-top: 18px;
+      min-height: 66px;
+      padding: 13px 13px 13px 14px;
+      border: 1px solid var(--navy);
+      border-radius: 12px;
+      background: #eef5ff;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .drawer-biz-icon {
+      width: 31px;
+      height: 31px;
+      border-radius: 9px;
+      background: #1b477e;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+    .drawer-biz-icon svg {
+      width: 17px;
+      height: 17px;
+      stroke-width: 2;
+    }
+    .drawer-biz-copy {
+      min-width: 0;
+      flex: 1;
+      display: grid;
+      gap: 3px;
+    }
+    .drawer-biz-title {
+      color: #0d3570;
+      font-size: 13px;
+      font-weight:700;
+      line-height: 1.25;
+    }
+    .drawer-biz-desc {
+      color: #356098;
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .drawer-biz-arrow {
+      color: #30598d;
+      font-size: 16px;
+      font-weight: 700;
+      flex: 0 0 auto;
+    }
+    .drawer-scrim { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 39; }
+    body.drawer-open .drawer-scrim { display: block; }
+
+    /* 모바일 전용 컴포넌트: 기본 hidden */
+    .mobile-profile-card { display: none; }
+    .mypage-menu-section { display: none; }
+
+    /* ================================================================
+       MOBILE
+    ================================================================ */
+    @media screen {
+      .topbar {
+        height: 62px; width: 100%; padding:1px;
+        display: flex; align-items: center; justify-content: space-between; gap:12px;min-height:56px;}
+      .brand-area { gap:10px; }
+      .user-tools { grid-template-columns: auto; gap: 0; }
+      .icon-btn { display: none; }
+      .user-name { display: none; }
+      .login-pill {
+        display: inline-flex; min-width: 66px; height: 32px; border: 0;
+        border-radius: 5px; background: var(--brand); color: #fff;
+        align-items: center; justify-content: center; font-size: 11px; font-weight:700;
+      }
+      .logo-link { display:inline-flex;align-items:center;width:76px;line-height:0;}
+      .search { display: none; height: 34px; border-radius: 9px; background: #f4f7fb; border-color: #d1d8e3; }
+      .search input { padding: 0 10px 0 12px; font-size: 13px; }
+      .search button { display: none; }
+
+      .mobile-channel-tabs {
+        display: flex; overflow-x: auto; scrollbar-width: none;
+        margin: 0; padding: 0 14px;
+        border-bottom: 1px solid #e2e7ef; background: #fff;
+        scroll-snap-type: x proximity;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        touch-action: pan-x;
+      }
+      .mobile-channel-tabs::-webkit-scrollbar { display: none; }
+      .mobile-channel-tabs span {
+        flex: 0 0 auto; padding: 9px 12px 10px; font-size: 11px; font-weight: 700;
+        color: #707070; white-space: nowrap; cursor: pointer;
+        border-bottom: 2px solid transparent; margin-bottom: -1px;
+        scroll-snap-align: start;
+      }
+      .mobile-channel-tabs span.active { color: var(--brand); border-bottom-color: var(--brand); }
+
+      /* stage: 그리드 해제 */
+      .stage { display: block; width: 100%; margin-left: 0; }
+
+      /* 모바일 인라인 프로필 카드 */
+      .mobile-profile-card {
+        display: block; padding: 12px 14px 6px; background: var(--warm);
+      }
+      .mpc-inner {
+        background: transparent; border-radius: 0;
+        padding: 0; border: 0;
+      }
+      .mpc-top { display: flex; align-items: center; gap: 12px; margin-bottom: 21px; }
+      .mpc-member { display: flex; align-items: center; gap: 6px; min-width: 0; }
+      .mpc-avatar {
+        width: 44px; height: 44px; border-radius: 50%;
+        background: #ffe7ef; color: var(--brand);
+        display: grid; place-items: center; font-size: 20px; font-weight:700; flex: 0 0 auto;
+      }
+      .mpc-name { display: inline-flex; font-size: 17px; font-weight:700; color: #141820; margin-bottom: 0; line-height: 1; white-space: nowrap; }
+      .mpc-grade { display: inline-flex; align-items: center; font-size: 13px; font-weight:700; color: var(--brand); line-height: 1; white-space: nowrap; }
+      .mpc-vip { font-size: 12px; color: #4d5361; margin-bottom: 8px; font-weight: 500; }
+      .mpc-vip b { color: #2c3038; font-weight:700; }
+      .mpc-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 0; }
+      .mpc-bar { flex: 1; height: 7px; border-radius: 999px; background: #eee2de; overflow: hidden; }
+      .mpc-bar span { display: block; width: 84%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #ff8499, var(--brand)); }
+      .mpc-help {
+        width: 15px; height: 15px; border: 1.5px solid #aaa; border-radius: 50%;
+        display: inline-grid; place-items: center; color: #888; font-size: 10px; font-weight:700; flex: 0 0 auto;
+      }
+      .mpc-actions { display: none; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .mpc-btn {
+        height: 32px; border: 1px solid var(--line); border-radius: 5px;
+        background: #fff; color: #4a4f5b; font-size: 12px; font-weight: 700;
+      }
+      .mpc-btn.primary { border-color: var(--brand); color: var(--brand); font-weight:700; }
+
+      /* asset strip: 인라인 */
+      .asset-strip {
+        position: static; width: 100%; margin: 0;
+        grid-template-columns: repeat(4, minmax(0,1fr));
+        height: 41px; border-top: 1px solid #ede6e2; border-bottom: 1px solid #ede6e2;
+        background: var(--warm);
+      }
+      .asset-item { flex-direction: column; gap: 1px; padding: 0 4px; justify-content: center; }
+      .asset-item span { font-size: 10px; font-weight: 600; color: #888; }
+      .asset-item strong { font-size: 11px; font-weight:700; color: #2c3038; }
+
+      /* sidebar → drawer */
+      .sidebar {
+        position: fixed; top: 2px; left: calc((100vw - var(--mobile-w)) / 2 - 420px); bottom: 2px;
+        width: calc(var(--mobile-w) - 24px); max-width: none; background: #fff; z-index: 40;
+        overflow-y: auto; transition: left .25s ease;
+        border-radius: 8px; box-shadow: 0 18px 34px rgba(0,0,0,.24);
+      }
+      body.drawer-open .sidebar { left: calc((100vw - var(--mobile-w)) / 2 + 12px); }
+      .profile-card { display: none; }
+      .side-nav { display: none; }
+      .drawer-head { min-height: 78px; padding: 17px 20px; border-bottom-color: #e5e7eb; }
+      .drawer-crown { color: #ffb000; font-size: 22px; line-height: 1; }
+      .drawer-user { gap: 12px; }
+      .drawer-user-name { font-size: 20px; line-height: 1.2; }
+      .drawer-user-grade { display: block; margin-top: 3px; color: #7d8492; font-size: 12px; font-weight: 500; }
+      .drawer-close { color: #9aa3b2; font-size: 28px; }
+      .drawer-section { padding: 22px 20px 24px; border-bottom: 1px solid #e5e7eb; }
+      .drawer-section-title { margin-bottom: 20px; color: #111827; font-size: 15px; letter-spacing: 0; }
+      .drawer-quick-grid { gap: 10px; }
+      .drawer-quick-icon { width: 48px; height: 42px; border: 0; border-radius: 0; background: transparent; color: var(--brand); }
+      .drawer-quick-icon svg { width: 33px; height: 33px; stroke-width: 1.6; }
+      .drawer-quick-item span:last-child { color: #202633; font-size: 12px; font-weight: 600; }
+      .drawer-category-list { gap: 8px; }
+      .drawer-category-item { min-height: 40px; padding: 3px 0; border-bottom: 0; gap: 16px; font-size: 15px; font-weight: 600; }
+      .drawer-country { width: 36px; background: transparent; color: #4b5563; font-size: 12px; }
+      .drawer-chevron { color: #a8b0bd; font-size: 18px; }
+      .drawer-link-grid { gap: 14px 36px; }
+      .drawer-link-grid a { color: #596173; font-size: 14px; font-weight: 500; }
+      .drawer-mypage-list { gap: 8px; }
+
+      /* main */
+      .main { padding: 24px 14px 56px; }
+      .shopping-head { margin: 0 0 14px; }
+      .shopping-head h2, .list-title { font-size: 18px; }
+      .status-links { gap: 10px; }
+      .outline-pill { min-width: 79px; height: 31px; padding: 0 14px; }
+
+      /* status board: 모바일 그리드 */
+      .status-board {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px; margin-left: 0; margin-bottom: 20px;
+      }
+      .status-stack {
+        grid-column: span 3;
+        grid-template-columns: 1fr 1fr; gap: 8px;
+      }
+      .status-stack .status-card { min-height: 64px; }
+      .status-card { min-height: 80px; padding: 10px 6px; border-radius: 8px; }
+      .status-card em { font-size: 16px; margin-bottom: 4px; }
+      .status-card strong { font-size: 12px; }
+      .status-card .sub { margin-top: 10px; padding-top: 8px; }
+
+      /* filter row */
+      .filter-row { flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+      .list-title { width: 100%; font-size: 16px; font-weight:700; color: #111; }
+      .filter-group { gap: 14px; }
+      .utility-group { width: 100%; margin-left: 0; gap: 8px; }
+      .filter-dropdown { flex: 1 1 0; min-width: 0; }
+      .dropdown-toggle {
+        width: 100%; height: 34px; border-radius: 8px;
+        font-size: 12px; background-color: #fff;
+      }
+
+      /* trade table → card */
+      .trade-table { border: 0; border-radius: 0; background: transparent; }
+      .table-head { display: none; }
+      .trade-row {
+        display: flex; flex-direction: column; gap: 0;
+        min-height: auto; padding: 0; margin-bottom: 10px;
+        border: 1px solid #E6DDDA; border-radius: 12px; background: #fff;
+        overflow: hidden; box-shadow: none;
+      }
+      .trade-row.status-extra { display: flex; }
+      .trade-row.is-hidden { display: none; }
+      .trade-table.status-filtered .trade-row:not(.is-hidden) { display: flex; }
+      .card-top {
+        width: 100%; min-height: 40px;
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 10px; padding: 10px 14px 9px; background: #FCF8F6; border-bottom: 1px solid #EEE5E2;
+        flex: 0 0 auto; line-height: 1.3;
+      }
+      .card-top.alert {
+        display: flex; width: 100%; justify-content: space-between;
+        background: #FCEAED; border-bottom-color: #F2C2CB;
+      }
+      .card-top.alert > .card-status {
+        flex: 0 0 auto;
+      }
+      .card-status {
+        display: inline-flex; align-items: center; min-height: 16px;
+        color: #111; font-size: 12px; font-weight:700; line-height: 1.3; white-space: nowrap;
+        flex: 0 0 auto; text-align: left;
+      }
+      .card-status.alert { color: var(--brand); }
+      .card-time {
+        display: inline-flex; align-items: center; min-height: 16px;
+        min-width: 0; color: #707070; font-size: 12px; font-weight: 500; line-height: 1.3;
+        flex: 1 1 0; overflow: hidden; text-align: right; text-overflow: ellipsis; white-space: nowrap; justify-content: flex-end;
+      }
+      .card-time.alert {
+        color: var(--brand); font-weight: 700;
+        margin-left: auto; justify-content: flex-end;
+      }
+      .card-body { display: flex; gap: 12px; align-items: flex-start; padding: 14px; }
+      .thumb {
+        width: 54px; height: 54px; flex: 0 0 auto; border-radius: 8px;
+        background: #F4EEEA; border: 1px solid #E6DDDA;
+      }
+      .card-info { flex: 1; min-width: 0; }
+      .seller { color: #707070; font-size: 12px; margin-bottom: 4px; }
+      .product-title { color: #333; font-size: 13px; font-weight: 600; line-height: 1.5; margin-bottom: 8px; }
+      .price-row { display: flex; align-items: baseline; gap: 3px; }
+      .price-main { color: #111; font-size: 16px; font-weight:700; font-family: Roboto, sans-serif; }
+      .price-main.bid { color: var(--brand); }
+      .price-unit { color: #707070; font-size: 12px; }
+      .card-foot {
+        display: flex; width: 100%; gap: 8px; justify-content: flex-end;
+        padding: 10px 14px; border-top: 1px solid #EEE5E2;
+      }
+      .btn {
+        height: 34px; padding: 0 14px; border-radius: 10px;
+        font-size: 13px; font-weight: 700; cursor: pointer;
+      }
+      .btn.ghost { border: 1px solid #D7CBC7; background: #fff; color: #333; }
+      .btn.primary { border: 0; background: var(--brand); color: #fff; }
+      .btn.dark { border: 0; background: #111; color: #fff; }
+      .btn.navy { border: 0; background: var(--navy); color: #fff; }
+      .pager { gap: 4px; flex-wrap: wrap; margin-top: 16px; }
+      .pager button {
+        width: 32px; height: 32px; border-radius: 8px;
+        border-color: #E6DDDA; background: #fff; color: #707070; font-size: 12px;
+      }
+
+      /* ── 마이페이지 메뉴 섹션 ── */
+      .mypage-menu-section {
+        display: none; margin-top: 32px;
+        border-top: 8px solid #f0ebe7;
+      }
+      .mypage-menu-title {
+        font-size: 16px; font-weight:700; color: #1a1d24;
+        padding: 18px 14px 14px; margin: 0;
+        border-bottom: 1px solid #e8e2de;
+      }
+      .mypage-menu-grid { display: grid; grid-template-columns: 1fr 1fr; }
+      .mypage-menu-group { padding: 16px 14px; border-bottom: 1px solid #f0ebe7; }
+      .mypage-menu-group:nth-child(odd) { border-right: 1px solid #f0ebe7; }
+      .mypage-menu-group-title { font-size: 11px; font-weight:700; color: #9da2af; letter-spacing: .04em; margin: 0 0 8px; }
+      .mypage-menu-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+      .mypage-menu-list li a {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 9px 0; color: #3a3f4a; font-size: 13px; font-weight: 500;
+        border-bottom: 1px solid #f5f0ee;
+      }
+      .mypage-menu-list li:last-child a { border-bottom: 0; }
+      .mypage-menu-list li a:hover { color: var(--brand); }
+      .mypage-menu-list li a.active { color: var(--brand); font-weight: 700; }
+      .mypage-menu-list li a svg { width: 14px; height: 14px; stroke: #ccc; stroke-width: 2.5; flex: 0 0 auto; }
+      .mypage-logout-row { padding: 14px 14px 24px; display: flex; gap: 10px; }
+      .mypage-cs-btn { flex: 1; height: 38px; border: 1px solid var(--navy); border-radius: 8px; background: #fff; color: var(--navy); font-size: 13px; font-weight: 700; }
+      .mypage-logout-btn { flex: 1; height: 38px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: #6b7280; font-size: 13px; font-weight: 700; }
+    }
+
+    /* 공통 모바일 헤더 / 로그인 상태 */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 70;
+      width: 100%;
+      height: auto;
+      margin: 0;
+      padding:1px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap:12px;
+      background: #fff;
+      border-bottom: 1px solid #d9e0e9;
+      box-shadow: 0 1px 0 rgba(32, 36, 43, .04);min-height:56px;}
+    .brand-area { display: flex; align-items: center; gap:10px; min-width: 0; }
+    .menu-button {
+      width: 34px; height: 34px; border: 0; border-radius: 5px;
+      background: transparent; padding: 0; display: grid; place-items: center;
+    }
+    .menu-lines { width: 18px; display: grid; gap: 4px; }
+    .menu-lines span { height: 2px; border-radius: 999px; background: #242836; }
+    .logo-link { display:inline-flex; align-items:center; width:76px; line-height:0; }
+    .logo-link img { width:100%; height:auto; display:block; }
+    .user-tools {
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .guest-tools, .member-tools { display: flex; align-items: center; gap: 4px; }
+    body.is-logged-in .is-guest-only { display: none !important; }
+    body:not(.is-logged-in) .is-member-only { display: none !important; }
+    .login-pill {
+      min-width: 66px; height: 32px; border: 0; border-radius: 5px;
+      background: var(--brand); color: #fff; display: inline-flex;
+      align-items: center; justify-content: center; font-size: 11px; font-weight:700;
+    }
+    .member-tools .icon-btn {
+      width: 34px; height: 34px; border: 0; border-radius: 5px;
+      background: transparent; color: #333; display: grid !important;
+      place-items: center; padding: 0; position: relative;
+    }
+    .member-tools .icon-btn svg { width: 20px; height: 20px; stroke-width: 1.9; }
+    .i-badge {
+      position: absolute; top: 3px; right: 2px; min-width: 13px; height: 13px;
+      padding: 0 2px; border-radius: 999px; background: var(--brand);
+      color: #fff; font-size: 7px; font-weight:700; line-height: 13px; text-align: center;
+    }
+    .user-avatar-sm {
+      width: 30px; height: 30px; border: 0; border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand), var(--yellow));
+      color: #fff; display: grid; place-items: center; font-size: 12px; font-weight:700;
+    }
+    .search {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      height: 40px;
+      display: flex !important;
+      min-width: 0;
+      border: 1px solid #e6ddda;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #f4eeea;
+    }
+    .search input {
+      flex: 1; min-width: 0; height: 100%;
+      border: 0; outline: 0; background: transparent;
+      padding: 0 10px 0 12px; color: #333; font-size: 13px;
+    }
+    .search input::placeholder { color: #99a2b0; }
+    .search button {
+      width: 42px; height: 100%; border: 0; background: var(--brand);
+      color: #fff; display: grid !important; place-items: center; gap: 0; font-size: 0;
+    }
+    .search button svg { width: 16px; height: 16px; stroke-width: 3; }
+    .mobile-channel-tabs {
+      position: sticky;
+      top: 103px;
+      z-index: 69;
+      display: flex !important;
+      overflow-x: auto;
+      scrollbar-width: none;
+      margin: 0;
+      padding: 0 14px;
+      border-bottom: 1px solid #d9e0e9;
+      background: #fff;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      touch-action: pan-x;
+    }
+    .mobile-channel-tabs::-webkit-scrollbar { display: none; }
+    .mobile-channel-tabs button,
+    .mobile-channel-tabs span {
+      flex: 0 0 auto; padding: 9px 12px 10px; border: 0;
+      border-bottom: 2px solid transparent; background: transparent;
+      color: #707070; font-size: 11px; font-weight: 700; white-space: nowrap;
+      font-family: inherit;
+      scroll-snap-align: start;
+    }
+    .mobile-channel-tabs .active { color: var(--brand); border-bottom-color: var(--brand); }
+    .drawer-guest-panel {
+      padding: 18px 20px;
+      border-bottom: 1px solid #e5e7eb;
+      background: #fff8f5;
+    }
+    .drawer-guest-title { margin: 0 0 5px; color: #111827; font-size: 16px; font-weight:700; }
+    .drawer-guest-copy { margin: 0 0 13px; color: #6b7280; font-size: 12px; line-height: 1.45; }
+    .drawer-login-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .drawer-action-btn {
+      height: 36px; border: 1px solid var(--brand); border-radius: 5px;
+      background: var(--brand); color: #fff; font-size: 12px; font-weight:700;
+    }
+    .drawer-action-btn.secondary { background: #fff; color: #4b5563; border-color: #d9e0e9; }
+    .drawer-asset-strip {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      margin: 12px 20px 0; border: 1px solid #e5e7eb; border-radius: 10px;
+      overflow: hidden; background: #fff;
+    }
+    .drawer-asset-strip div { padding: 9px 6px; text-align: center; }
+    .drawer-asset-strip div + div { border-left: 1px solid #e5e7eb; }
+    .drawer-asset-strip span { display: block; margin-bottom: 2px; color: #8b95a5; font-size: 10px; }
+    .drawer-asset-strip strong { display: block; color: #1f2530; font-size: 13px; font-weight:700; }
+
+    /* 이미지 반영: 마이페이지 모바일 화면 */
+    html { background: #000; }
+    body {
+      min-width: 320px;
+      background: #000;
+      color: #121827;
+    }
+    .page {
+      width: min(100%, 390px);
+      min-width: 0;
+      max-width: 390px;
+      background: #fff;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      background: #fff;
+      border-bottom: 1px solid #d9e0e9;
+      box-shadow: 0 1px 0 rgba(32, 36, 43, .04);
+    }
+    .topbar {
+      position: relative;
+      top: auto;
+      z-index: auto;
+      padding:1px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap:12px;
+      border-bottom: 0;
+      box-shadow: none;min-height:56px;}
+    .brand-area { gap:10px; }
+    .menu-button { width: 34px; height: 34px; border-radius: 5px; }
+    .menu-lines { width: 18px; gap: 4px; }
+    .menu-lines span { height: 2px; background: #101827; }
+    .logo-link { width:76px; display:inline-flex;align-items:center;line-height:0;}
+    .login-pill {
+      min-width: 64px;
+      height: 32px;
+      border-radius: 5px;
+      background: var(--brand);
+      font-size: 11px;
+      font-weight:700;
+    }
+    .member-tools .icon-btn { display: grid !important; }
+    .member-tools .icon-btn i { font-size: 16px; }
+    .user-avatar-sm {
+      width: 32px;
+      height: 32px;
+      background: #ffe7ef;
+      color: var(--brand);
+      font-size: 15px;
+    }
+    .search {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      height: 40px;
+      margin: 0;
+      border-color: #e6ddda;
+      border-radius: 10px;
+      background: #f4eeea;
+    }
+    .search::before { content: none; }
+    .search input { padding: 0 10px 0 12px; font-size: 13px; }
+    .search button {
+      display: flex !important;
+      width: 42px;
+      height: 100%;
+      border: 0;
+      background: var(--brand);
+      color: #fff;
+      align-items: center;
+      justify-content: center;
+      font-size: 0;
+    }
+    .search button i { color: #fff; font-size: 14px; }
+    .mobile-channel-tabs {
+      position: static;
+      grid-column: 1 / -1;
+      grid-row: 3;
+      margin: 0;
+      padding: 0 14px;
+      border-top: 1px solid #e6ddda;
+      border-bottom: 0;
+      background: #fff;
+    }
+    .mobile-channel-tabs button {
+      padding: 9px 12px 10px;
+      color: #707070;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .mobile-channel-tabs .active {
+      color: var(--brand);
+      border-bottom-color: var(--brand);
+    }
+    .stage { display: block; width: 100%; margin: 0; }
+    .mobile-profile-card,
+    .asset-strip { display: none !important; }
+    .main { padding: 24px 10px 68px; background: #fff; }
+    .shopping-head {
+      margin: 0 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .shopping-head h2 {
+      color: #1d2330;
+      font-size: 18px;
+      font-weight:700;
+    }
+    .status-links { gap: 8px; }
+    .outline-pill {
+      height: 32px;
+      min-width: 74px;
+      padding: 0 13px;
+      border-color: #e5dcd8;
+      border-radius: 999px;
+      background: #fff;
+      color: #6d6470;
+      font-size: 12px;
+      font-weight:700;
+    }
+    .status-board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 0 0 44px;
+    }
+    .status-stack {
+      display: grid;
+      grid-column: 1 / -1;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .status-card {
+      min-height: 80px;
+      padding: 12px 6px;
+      border: 1px solid #e5dcd8;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: none;
+    }
+    .status-stack .status-card { min-height: 66px; }
+    .status-card em {
+      margin-bottom: 3px;
+      color: #272d38;
+      font-size: 17px;
+      font-weight:700;
+    }
+    .status-card em.hot { color: var(--brand); }
+    .status-card strong {
+      color: #343a45;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    .status-card .sub {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid #e9e2de;
+    }
+    .status-card .sub em { color: #f5a623; }
+    .trade-area { margin-top: 0; }
+    .filter-row {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 9px 12px;
+      margin-bottom: 12px;
+    }
+    .list-title {
+      grid-column: 1 / -1;
+      margin: 0 0 10px;
+      color: #222936;
+      font-size: 18px;
+      font-weight:700;
+    }
+    .filter-group {
+      gap: 14px;
+      min-width: 0;
+    }
+    .filter-group { grid-column: 1; }
+    .divider { display: none; }
+    .tab {
+      height: 28px;
+      padding-bottom: 7px;
+      color: #8d95a3;
+      font-size: 12px;
+      font-weight:700;
+    }
+    .tab.active { color: var(--brand); }
+    .utility-group {
+      grid-column: 1 / -1;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin: 0;
+    }
+    .filter-dropdown {
+      min-width: 0;
+      width: 100%;
+    }
+    .dropdown-toggle {
+      width: 100%;
+      height: 28px;
+      border-color: #e5dcd8;
+      border-radius: 7px;
+      color: #1a3c6e;
+      font-size: 12px;
+      font-weight:700;
+      text-align: center;
+      padding: 0 8px;
+    }
+    .dropdown-panel {
+      top: calc(100% + 7px);
+    }
+    .country-panel {
+      width: 112px;
+      left: 0;
+      right: auto;
+    }
+    .status-panel {
+      width: 104px;
+      right: 0;
+    }
+    .calendar-panel {
+      width: 340px;
+      max-width: calc(var(--mobile-w) - 24px);
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+    }
+    .trade-table { display: flex; flex-direction: column; border: 0; border-radius: 0; background: transparent; }
+    .table-head { display: none; }
+    .trade-row,
+    .trade-row.status-extra {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 12px;
+      border: 1px solid #ece2df;
+      border-radius: 11px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .trade-row.is-hidden { display: none; }
+    .trade-table.status-filtered .trade-row:not(.is-hidden) { display: flex; }
+    .trade-row[data-status="first-payment-wait"] { order: 1; }
+    .trade-row[data-status="local-arrived"] { order: 2; }
+    .trade-row[data-status="auction-bid"] { order: 3; }
+    .trade-row[data-status="second-payment-wait"] { order: 4; }
+    .trade-row[data-status="purchase-request"] { order: 5; }
+    .trade-row[data-status="shipping-wait"] { order: 6; }
+    .trade-row[data-status="international-shipping"] { order: 7; }
+    .trade-empty { order: 99; }
+    .card-top {
+      min-height: 39px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee5e2;
+      background: #fcf8f6;
+    }
+    .card-top.alert {
+      background: #fce7ed;
+      border-bottom-color: #f4c5ce;
+    }
+    .card-status {
+      color: #202633;
+      font-size: 12px;
+      font-weight:700;
+      white-space: nowrap;
+    }
+    .card-status.alert,
+    .card-time.alert { color: var(--brand); }
+    .card-time {
+      color: #7d8490;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .card-body { display: flex; gap: 12px; align-items: flex-start; padding: 14px; }
+    .thumb {
+      width: 54px;
+      height: 54px;
+      border-radius: 8px;
+      border: 1px solid #e6ddda;
+      background: #f3eeeb;
+      flex: 0 0 auto;
+    }
+    .card-info { min-width: 0; flex: 1; }
+    .seller { margin-bottom: 3px; color: #8c8f98; font-size: 12px; }
+    .product-title {
+      margin-bottom: 7px;
+      color: #1d2330;
+      font-size: 13px;
+      font-weight:700;
+      line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .price-row { display: flex; align-items: baseline; gap: 4px; }
+    .price-main {
+      color: #111827;
+      font-family: Roboto, sans-serif;
+      font-size: 17px;
+      font-weight:700;
+    }
+    .price-main.bid { color: var(--brand); }
+    .price-unit { color: #777; font-size: 11px; font-weight: 700; }
+    .card-foot {
+      min-height: 50px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      border-top: 1px solid #f1ebe8;
+    }
+    .btn {
+      height: 34px;
+      min-width: 78px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid #e5dcd8;
+      background: #fff;
+      color: #333;
+      font-size: 13px;
+      font-weight:700;
+    }
+    .btn.primary {
+      border-color: var(--brand);
+      background: var(--brand);
+      color: #fff;
+    }
+    .btn.dark {
+      border-color: #111;
+      background: #111;
+      color: #fff;
+    }
+    .btn.navy {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: #fff;
+    }
+    .pager {
+      margin-top: 26px;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: nowrap;
+    }
+    .pager button {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #e5dcd8;
+      border-radius: 7px;
+      background: #fff;
+      color: #333;
+      font-size: 12px;
+      font-weight:700;
+    }
+    .pager button.current {
+      border-color: var(--brand);
+      background: var(--brand);
+      color: #fff;
+    }
+    body.drawer-open,
+    body.user-drawer-open { overflow: hidden; }
+    .drawer-scrim,
+    .user-drawer-scrim {
+      display: block;
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(0,0,0,.48);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease;
+    }
+    body.drawer-open .drawer-scrim,
+    body.user-drawer-open .user-drawer-scrim {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .sidebar {
+      position: fixed;
+      top: 2px;
+      bottom: 18px;
+      left: calc(50% - min(50vw, 195px) + 12px);
+      z-index: 100;
+      width: 88%;
+      max-width: 340px;
+      overflow-y: auto;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 18px 44px rgba(0,0,0,.35);
+      transform: translateX(calc(-100% - 24px));
+      visibility: hidden;
+      pointer-events: none;
+      transition: transform .24s cubic-bezier(.4,0,.2,1), visibility 0s linear .24s;
+      scrollbar-width: none;
+    }
+    .sidebar::-webkit-scrollbar { display: none; }
+    body.drawer-open .sidebar {
+      transform: translateX(0);
+      visibility: visible;
+      pointer-events: auto;
+      transition-delay: 0s;
+    }
+    .sidebar .drawer-head.is-guest-only,
+    .sidebar .drawer-guest-panel.is-guest-only { display: none !important; }
+    .sidebar .drawer-head.is-member-only { display: flex !important; }
+    .sidebar .drawer-vip-copy.is-member-only { display: block !important; }
+    .sidebar .drawer-vip-row.is-member-only,
+    .sidebar .drawer-asset-strip.is-member-only { display: grid !important; }
+    .drawer-head {
+      min-height: 70px;
+      padding: 17px 20px 8px;
+      border-bottom: 0;
+    }
+    .drawer-user { gap: 12px; }
+    .drawer-crown {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #ffe6ef;
+      font-size: 24px;
+    }
+    .drawer-user-name {
+      display: inline-block;
+      color: #151b29;
+      font-size: 19px;
+      line-height: 1.2;
+    }
+    .drawer-user-grade {
+      margin-left: 6px;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight:700;
+    }
+    .drawer-close {
+      color: #9aa3b2;
+      font-size: 28px;
+      background: transparent;
+    }
+    .drawer-member-summary { padding: 0 26px 22px; }
+    .drawer-vip-copy {
+      margin: 0 26px 8px;
+      color: #596173;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .drawer-vip-copy b { color: #111827; font-weight:700; }
+    .drawer-vip-row { margin: 0 26px; display: grid; grid-template-columns: 1fr 17px; gap: 8px; align-items: center; }
+    .drawer-vip-bar { height: 7px; border-radius: 999px; background: #eee2de; overflow: hidden; }
+    .drawer-vip-bar span { display: block; width: 84%; height: 100%; background: var(--brand); border-radius: inherit; }
+    .drawer-vip-help {
+      width: 17px;
+      height: 17px;
+      border: 1px solid #a8afba;
+      border-radius: 50%;
+      color: #8b93a0;
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      font-weight:700;
+    }
+    .drawer-asset-strip {
+      margin: 24px 26px 24px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+    .drawer-asset-strip div { padding: 0; text-align: left; }
+    .drawer-asset-strip div + div { border-left: 0; }
+    .drawer-asset-strip span {
+      color: #8b95a5;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .drawer-asset-strip strong {
+      color: #182033;
+      font-size: 13px;
+      font-weight:700;
+    }
+    .drawer-quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      padding: 0;
+    }
+    .sidebar > .drawer-section:first-of-type .drawer-section-title { display: none; }
+    .drawer-mypage-section { display: none !important; }
+    .drawer-quick-item {
+      gap: 8px;
+      color: #202633;
+      text-align: center;
+    }
+    .drawer-quick-icon {
+      width: 46px;
+      height: 46px;
+      margin: 0 auto;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: var(--brand);
+    }
+    .drawer-quick-icon svg { width: 36px; height: 36px; stroke-width: 1.6; }
+    .drawer-quick-item span:last-child {
+      color: #202633;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .drawer-section {
+      padding: 18px 26px 20px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .drawer-section-title {
+      margin-bottom: 18px;
+      color: #111827;
+      font-size: 17px;
+      font-weight:700;
+      letter-spacing: 0;
+    }
+    .drawer-category-list { gap: 0; }
+    .drawer-category-item {
+      min-height: 46px;
+      padding: 4px 0;
+      border-bottom: 0;
+      gap: 20px;
+      color: #202633;
+      font-size: 15px;
+      font-weight:700;
+    }
+    .drawer-country {
+      width: 32px;
+      height: auto;
+      border-radius: 0;
+      background: transparent;
+      color: #596173;
+      font-size: 13px;
+      font-weight:700;
+    }
+    .drawer-chevron {
+      color: #a8b0bd;
+      font-size: 18px;
+    }
+    .drawer-link-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 42px;
+    }
+    .drawer-link-grid a {
+      color: #596173;
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .drawer-cs-card {
+      margin: 22px 26px 34px;
+      padding: 18px 14px;
+      background: #fcfcfd;
+      text-align: center;
+    }
+    .drawer-cs-tel {
+      color: var(--navy);
+      font-family: Roboto, sans-serif;
+      font-size: 26px;
+      font-weight:700;
+    }
+    .drawer-cs-time {
+      margin: 8px 0 16px;
+      color: #7b8494;
+      font-size: 11px;
+    }
+    .drawer-cs-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .drawer-cs-actions button {
+      height: 34px;
+      border: 1px solid #d9e0e9;
+      border-radius: 5px;
+      background: #fff;
+      color: #1f2530;
+      font-size: 12px;
+      font-weight:700;
+    }
+    .drawer-cs-actions button:first-child {
+      border-color: var(--brand);
+      background: var(--brand);
+      color: #fff;
+    }
+    .drawer-guest-panel { margin: 0 18px 18px; border-radius: 12px; }
+    .user-drawer {
+      position: fixed;
+      top: 30px;
+      right: calc(50% - min(50vw, 195px) + 14px);
+      z-index: 110;
+      width: min(78vw, 280px);
+      max-height: calc(100vh - 60px);
+      overflow-y: auto;
+      border-radius: 15px;
+      background: #fff;
+      box-shadow: 0 18px 44px rgba(0,0,0,.35);
+      transform: translateX(calc(100% + 24px));
+      visibility: hidden;
+      pointer-events: none;
+      transition: transform .24s cubic-bezier(.4,0,.2,1), visibility 0s linear .24s;
+      scrollbar-width: none;
+    }
+    .user-drawer::-webkit-scrollbar { display: none; }
+    body.user-drawer-open .user-drawer {
+      transform: translateX(0);
+      visibility: visible;
+      pointer-events: auto;
+      transition-delay: 0s;
+    }
+    .user-drawer-head {
+      padding: 18px 14px 12px;
+      background: #fff8f5;
+      border-bottom: 1px solid #efe6e2;
+    }
+    .user-member-row { display: flex; align-items: center; gap: 12px; }
+    .user-crown {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #ffe6ef;
+      font-size: 26px;
+      flex: 0 0 auto;
+    }
+    .user-name-strong {
+      display: block;
+      color: #111827;
+      font-size: 18px;
+      font-weight:700;
+    }
+    .user-vip-chip {
+      display: inline-flex;
+      margin-top: 5px;
+      padding: 2px 12px;
+      border-radius: 999px;
+      background: var(--brand);
+      color: #fff;
+      font-size: 11px;
+      font-weight:700;
+    }
+    .user-vip-copy {
+      margin: 13px 0 4px;
+      color: var(--brand);
+      font-size: 11px;
+      font-weight:700;
+    }
+    .user-vip-bar {
+      height: 5px;
+      border-radius: 999px;
+      background: #eee2de;
+      overflow: hidden;
+    }
+    .user-vip-bar span { display: block; width: 100%; height: 100%; background: var(--brand); }
+    .user-asset-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 12px;
+      border: 1px solid #d9e0e9;
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .user-asset-box div { padding: 8px 12px; }
+    .user-asset-box div + div { border-left: 1px solid #d9e0e9; }
+    .user-asset-box span {
+      display: block;
+      color: #a4acb8;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .user-asset-box strong {
+      display: block;
+      color: #151b29;
+      font-size: 16px;
+      font-weight:700;
+    }
+    .user-status-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid #e5e7eb;
+      background: #fff;
+    }
+    .user-status-grid div {
+      min-height: 70px;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 4px;
+      text-align: center;
+    }
+    .user-status-grid div + div { border-left: 1px solid #e5e7eb; }
+    .user-status-grid strong {
+      color: #151b29;
+      font-family: Roboto, sans-serif;
+      font-size: 26px;
+      line-height: 1;
+      font-weight:700;
+    }
+    .user-status-grid div:nth-child(2) strong { color: var(--brand); }
+    .user-status-grid span { color: #9aa3b2; font-size: 10px; font-weight: 700; }
+    .user-menu-list { padding: 0 0 12px; }
+    .user-menu-title {
+      margin: 0;
+      padding: 22px 14px 17px;
+      border-bottom: 1px solid #e5e7eb;
+      color: #111;
+      font-size: 17px;
+      font-weight:700;
+    }
+    .user-menu-item {
+      min-height: 45px;
+      padding: 0 18px 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #111827;
+      font-size: 14px;
+      font-weight:700;
+      border-bottom: 0;
+    }
+    button.user-menu-item {
+      width: 100%;
+      border-top: 0;
+      border-right: 0;
+      border-left: 0;
+      background: #fff;
+      text-align: left;
+      font-family: inherit;
+    }
+    .user-menu-item .emoji,
+    .user-menu-item .user-menu-icon {
+      width: 22px;
+      text-align: center;
+      font-size: 17px;
+      flex: 0 0 auto;
+    }
+    .user-menu-item .chev {
+      margin-left: auto;
+      color: #a8b0bd;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 1;
+    }
+    .user-menu-section {
+      border-bottom: 0;
+    }
+    .user-menu-trigger {
+      color: #111827;
+    }
+    .user-menu-panel {
+      display: none;
+      padding: 0 0 8px 56px;
+    }
+    .user-menu-section.is-open .user-menu-panel {
+      display: grid;
+      gap: 0;
+    }
+    .user-menu-link {
+      min-height: 33px;
+      display: flex;
+      align-items: center;
+      color: #666b75;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .user-menu-link.danger {
+      color: #8f949f;
+    }
+    .user-menu-item.logout {
+      margin-top: 6px;
+      border-top: 1px solid #e5e7eb;
+      color: #9aa3b2;
+      font-weight: 700;
+    }
+    .user-menu-item.logout .emoji { font-size: 15px; }
+
+      /* ════════ 결제상세 (모바일) ════════ */
+    .pay-detail { padding: 14px 14px 24px !important; background: #fff; }
+    .pd-heading { display: flex; align-items: center; justify-content:center; gap: 8px; margin-bottom: 18px; text-align:center; }
+    .pd-heading .pd-back { width: 30px; height: 30px; border: 0; background: transparent; color: #333; font-size: 16px; display: grid; place-items: center; }
+    .pd-heading h2 { margin: 0; font-size: 24px; font-weight:700; color: #2b2f37; line-height: 1.3; }
+
+    .pd-order-banner { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border: 1px solid var(--line-soft); border-radius: 12px; background: #fafafa; }
+    .pd-order-label { display: block; font-size: 11px; color: #888; margin-bottom: 2px; }
+    .pd-order-no { font-size: 15px; font-weight:700; color: var(--navy); font-family: Roboto, sans-serif; letter-spacing: .3px; }
+    .pd-status { font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+    .pd-status.done { background: #eaf8f0; color: #278a46; }
+    .pd-order-date { font-size: 12px; color: #999; margin: 6px 2px 0; }
+
+    .pd-sec { margin-top: 26px; }
+    .pd-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 12px; font-size: 18px; font-weight:700; color: #2b2f37; line-height: 1.35; }
+    .pd-sub { font-size: 14px; font-weight: 600; color: #666; text-decoration: underline; text-underline-offset: 2px; }
+
+    .pd-item { display: grid; gap: 10px; padding: 14px; border: 1px solid var(--line-soft); border-radius: 12px; background: #fff; }
+    .pd-item__top { display: grid; gap: 7px; min-width: 0; }
+    .pd-item__content-row { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 12px; align-items: start; }
+    .pd-item__img { width: 72px; height: 72px; flex: 0 0 auto; border-radius: 8px; background: #f5f5f5; display: grid; place-items: center; color: #ccc; font-size: 22px; }
+    .pd-item__body { min-width: 0; }
+    .pd-item__platform { display: flex; align-items: center; justify-content:flex-start; gap: 6px; font-size: 13px; color: #444; text-align:left; }
+    .pd-item__platform img { width: 16px; height: 16px; border-radius: 50%; object-fit: cover; }
+    .pd-item__name { display: block; font-size: 14px; font-weight:700; color: #000; line-height: 1.55; }
+    .pd-item__origin { font-size:12px; color:var(--faint); line-height:1.5; }
+    .pd-item__meta { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 14px; color: #666; }
+    .pd-item__meta b { color: #444; font-weight: 700; margin-right: 4px; }
+    .pd-item__meta-list { display:grid; grid-template-columns:64px minmax(0,1fr); gap:7px 8px; margin:0; font-size:13px; line-height:1.45; }
+    .pd-item__meta-list dt { color:#6d7481; font-weight:700; }
+    .pd-item__meta-list dd { margin:0; color:#263142; font-weight:500; word-break:break-word; }
+
+    .pd-list { padding: 16px; border: 1px solid var(--line-soft); border-radius: 12px; background: #fff; }
+    .pd-row { display: flex; gap: 12px; padding: 7px 0; }
+    .pd-row .k { flex: 0 0 78px; font-size: 14px; font-weight: 700; color: #000; }
+    .pd-row .v { flex: 1; font-size: 14px; color: #333; line-height: 1.55; }
+    .pd-row .v.mono { font-family: Roboto, monospace; }
+    .collapse-toggle { width:100%; height:36px; margin-top:8px; border:1px solid var(--line); border-radius:5px; background:#fff; color:var(--navy); font-size:13px; font-weight:700; font-family:inherit; }
+    .collapsible-list.is-collapsed .pd-bundle:nth-of-type(n+2) { display:none; }
+    .memo-collapse { transition:max-height .2s ease; }
+    .memo-collapse.is-collapsed { position:relative; max-height:78px; overflow:hidden; }
+    .memo-collapse.admin-memo-collapse.is-collapsed { max-height:156px; }
+    .memo-collapse.is-collapsed::after { content:""; position:absolute; left:0; right:0; bottom:0; height:26px; background:linear-gradient(rgba(255,255,255,0), #fff); pointer-events:none; }
+
+    .pay-2col { display:grid; grid-template-columns:1fr; gap:16px; align-items:stretch; }
+    .pay-card { display:flex; flex-direction:column; border: 1px solid var(--line); border-radius: 12px; background: #fff; padding: 20px; margin-bottom: 0; }
+    .pay-card[hidden] { display: none; }
+    .pay-secondary-stack { min-width:0; }
+    .pay-secondary-stack .pay-card[hidden] { display:none; }
+    .pay-card__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom:10px; border-bottom:1px solid var(--line); }
+    .pay-badge { font-size: 16px; font-weight:700; padding: 0; border-radius: 0; background: transparent; color:var(--navy); }
+    .pay-badge.first,
+    .pay-badge.second { color: var(--navy); }
+    .pay-card__date { font-size: 12px; color: #444444; font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, monospace; }
+    .pay-card__receipt { border:0; background:none; padding:0; color:#444444; font:inherit; font-size:12px; cursor:pointer; }
+    .pay-rows { list-style: none; margin: 0; padding: 0; }
+    .pay-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid #f6f6f6; }
+    .pay-row--spacer { visibility:hidden; pointer-events:none; }
+    .pay-row .lbl { font-size: 14px; color: #555; }
+    .pay-row .val { font-size: 14px; color: #000; font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, monospace; }
+    .pay-row .val.muted { color: #000000; }
+    .pay-row .val.discount { color: var(--brand); }
+    .pay-row .val.fee { color: var(--navy); }
+    .pay-row.is-toggle { padding: 0; border-bottom:1px solid #f6f6f6; }
+    .pay-etc { width: 100%; }
+    .pay-etc > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; padding: 9px 0; font-size: 14px; color: #555; }
+    .pay-etc > summary::-webkit-details-marker { display: none; }
+    .pay-etc > summary .chev { font-size: 11px; color: #aaa; transition: transform .2s; }
+    .pay-etc[open] > summary .chev { transform: rotate(180deg); }
+    .pay-etc__inner { padding: 2px 0 8px; }
+    .pay-etc__inner .pay-row { padding: 7px 12px; border-bottom: 0; background: #fff; border-radius: 6px; margin-top: 4px; }
+    .pay-etc__inner .pay-row .lbl { font-size: 14px; color: #777; }
+    .pay-foot { margin-top:auto; padding-top: 10px; }
+    .pay-meta { font-size: 14px; color: #777; line-height: 1.5; margin-bottom: 10px; }
+    .pay-meta b { color: #666; font-weight: 700; }
+    .pay-total { display: flex; align-items: center; justify-content: space-between; padding: 10px 0 4px; }
+    .pay-total .lbl { font-size: 16px; font-weight:700; color: var(--navy); }
+    .pay-total .val { font-size: 16px; font-weight:700; color: #000; font-family: Roboto, monospace; }
+    .pay-total .val-group { display: grid; justify-items:end; gap:2px; line-height: 1.3; }
+    .pay-total .calc-sm { font-size: 12px; font-weight: 600; color: rgba(28,28,28,.6); font-family: Roboto, monospace; }
+    .pay-rate-note { color:#555; font-size:13px; font-weight:500; white-space:nowrap; }
+    .pay-grandtotal { display: flex; align-items: center; justify-content: space-between; padding: 11.75px 22px; border-radius: 12px; background: var(--warm); margin-top: 16px; }
+    .pay-grandtotal__label { display:grid; gap:3px; }
+    .pay-grandtotal .lbl { font-size: 16px; font-weight:700; color: #000000; }
+    .pay-grandtotal .val-group { display: grid; justify-items:end; gap:2px; line-height: 1.3; }
+    .pay-grandtotal .val { font-size: 20px; font-weight:700; color: #000; font-family: Roboto, monospace; }
+    .pay-grandtotal .val-sm { font-size: 13px; font-weight: 600; color: rgba(28,28,28,.6); font-family: Roboto, monospace; }
+    .pay-tooltip { display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; margin-left: 5px; border: 1px solid var(--line); border-radius: 50%; background: #fff; color: var(--navy); font-size: 9px; vertical-align: -2px; }
+
+    /* 관리자 메모 */
+    .admin-memo-day { padding: 14px 0; border-bottom: 1px solid var(--line-soft); }
+    .admin-memo-day:first-child { padding-top: 0; }
+    .admin-memo-day:last-child { border-bottom: 0; padding-bottom: 0; }
+    .admin-memo-date { font-size: 12px; font-weight:700; color: var(--navy); margin-bottom: 8px; }
+    .admin-memo-entry { padding: 12px 14px; border-radius: 8px; background: var(--warm); margin-bottom: 8px; }
+    .admin-memo-entry:last-child { margin-bottom: 0; }
+    .admin-memo-head time { font-size: 11px; font-weight: 700; color: var(--faint); font-family: Roboto, sans-serif; }
+    .admin-memo-content { margin-top: 6px; font-size: 13px; line-height: 1.75; color: #444; }
+    .admin-memo-content p { margin: 0 0 8px; }
+    .admin-memo-content p:last-child { margin-bottom: 0; }
+    .admin-memo-highlight { font-weight:700; color: var(--navy); }
+    .payment-title-row { display: flex; align-items: center; justify-content:space-between; gap: 12px; flex-wrap:wrap; }
+    .payment-title-left { display:inline-flex; align-items:center; gap:8px; }
+    .payment-switch { display: inline-flex; align-items: center; gap: 8px; margin-left: 0; }
+    .payment-switch__label { min-width: 72px; text-align: center; color: #555; font-size: 14px; font-weight:700; }
+    .payment-switch__btn {
+      width: 30px; height: 30px; border: 1px solid var(--line); border-radius: 50%;
+      background: #fff; color: var(--navy); font-size: 16px; font-weight:700; cursor:pointer;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+
+    .pd-bundle { display: flex; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid #f2f2f2; }
+    .pd-bundle:first-child { padding-top: 0; }
+    .pd-bundle:last-child { border-bottom: 0; padding-bottom: 0; }
+    .pd-bundle__img { width: 48px; height: 48px; flex: 0 0 auto; border-radius: 6px; background: #f5f5f5; display: grid; place-items: center; color: #ccc; }
+    .pd-bundle__body { flex: 1; min-width: 0; }
+    .pd-bundle__name { font-size: 14px; color: #000; line-height: 1.45; margin: 0 0 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .pd-bundle__meta { font-size: 14px; color: #888; }
+    .pd-tag { flex: 0 0 auto; font-size: 11px; font-weight: 700; padding: 4px 10px; border: 1px solid var(--line); border-radius: 6px; color: #666; background: #fff; }
+    .pd-tag.done { background: #eaf8f0; color: #278a46; border-color: #b2dfce; }
+
+    .pd-memo-input { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    .pd-memo-input textarea { width: 100%; min-height: 72px; resize: vertical; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; font-size: 14px; color: #333; outline: 0; font-family: inherit; }
+    .pd-memo-input textarea:focus { border-color: var(--navy); }
+    .pd-memo-btn { align-self: flex-end; height: 38px; padding: 0 22px; background: #707070; color: #fff; border: 0; border-radius: 5px; font-size: 14px; font-weight: 700; }
+    .pd-memo { padding-top: 14px; border-top: 1px solid #f2f2f2; }
+    .pd-memo__head { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; flex-wrap: wrap; }
+    .pd-memo-admin,
+    .pd-memo-customer { border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
+    .pd-memo-admin { background: #f0f4fb; color: var(--navy); }
+    .pd-memo-customer { background: #f5f5f5; color: #555; }
+    .pd-memo__head b { font-size: 14px; font-weight: 700; color: #000; }
+    .pd-memo-date { font-size: 11px; color: #999; margin-left: auto; }
+    .pd-memo__body { font-size: 14px; color: #444; line-height: 1.6; }
+    .pd-thread { padding-top: 14px; border-top: 1px solid #f2f2f2; }
+    .pd-thread .msg { padding: 14px 0; border-bottom: 1px solid var(--line-soft); }
+    .pd-thread .msg.agent { background: var(--warm); margin: 0 -16px; padding: 14px 16px; }
+    .pd-thread .msg-head { display: flex; align-items: baseline; gap: 6px; margin-bottom: 8px; }
+    .pd-thread .msg-label { font-size: 11px; font-weight:700; color: var(--faint); }
+    .pd-thread .msg.agent .msg-label { color: var(--navy); }
+    .pd-thread .msg-who { font-size: 13px; font-weight:700; color: var(--ink); }
+    .pd-thread .msg.agent .msg-who { color: var(--navy); }
+    .pd-thread .msg-date { font-size: 11px; color: var(--faint); margin-left: auto; }
+    .pd-thread .msg-bubble { font-size: 13px; color: #444; line-height: 1.75; }
+    .pd-thread .msg.agent .msg-bubble { padding-left: 12px; border-left: 2px solid #dde4ee; }
+    .pd-thread .msg-bubble p { margin: 0 0 6px; }
+    .pd-thread .msg-bubble p:last-child { margin-bottom: 0; }
+
+    /* 하단 고정 CTA (앱 네이티브 패턴) */
+    .pd-fixed-cta { position: sticky; bottom: 0; z-index: 5; display: flex; gap: 18px; padding: 12px 14px; background: #fff; border-top: 1px solid var(--line-soft); }
+    .pd-cta-line,
+    .pd-cta-fill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+    .pd-cta-line,
+    .pd-cta-fill { flex: 1 1 0; height: 48px; padding: 0 18px; border: 1px solid var(--line); border-radius: 5px; background: #fff; color: #555; font-size: 14px; font-weight: 700; }
+
+  
+    .member-tier-icon { background:#E4E9EF !important; color:#1f477d !important; }
+    .member-tier-icon i { line-height:1; }
+  </style>
+  <style>
+    /* mobile_main 타이포 스케일 동기화 */
+    body {
+      font-family: Pretendard, "Noto Sans KR", sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .page {
+      font-family: Pretendard, "Noto Sans KR", sans-serif;
+    }
+    .list-title {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    .tab {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    .dropdown-toggle {
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .status-card em {
+      font-size: 18px;
+      font-weight:700;
+    }
+    .status-card strong {
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .card-status {
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    .seller {
+      font-size: 11px;
+    }
+    .product-title {
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .price-main {
+      font-family: "Roboto", sans-serif;
+      font-size: 16px;
+      font-weight:700;
+    }
+    .price-unit {
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .user-menu-link {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.4;
+      text-decoration: none;
+    }
+    /* user-drawer를 mobile_main 스케일로 정렬 */
+    .user-drawer {
+      width: 84%;
+      max-width: 300px;
+    }
+    .user-drawer-head {
+      padding: 18px 14px 12px;
+    }
+    .user-crown {
+      width: 48px;
+      height: 48px;
+      font-size: 26px;
+    }
+    .user-name-strong {
+      font-size: 18px;
+      font-weight:700;
+      line-height: 1.2;
+    }
+    .user-vip-chip {
+      font-size: 11px;
+      font-weight:700;
+    }
+    .user-vip-copy {
+      margin: 13px 0 4px;
+      font-size: 11px;
+      font-weight:700;
+    }
+    .user-asset-box div {
+      padding: 8px 12px;
+    }
+    .user-asset-box span {
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .user-asset-box strong {
+      font-size: 16px;
+      font-weight:700;
+    }
+    .user-status-grid div {
+      min-height: 70px;
+      gap: 4px;
+    }
+    .user-status-grid strong {
+      font-size: 26px;
+      font-weight:700;
+      line-height: 1;
+    }
+    .user-status-grid span {
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .user-menu-list {
+      padding: 0 0 12px;
+    }
+    .user-menu-item {
+      min-height: 45px;
+      padding: 0 18px 0 14px;
+      gap: 12px;
+      font-size: 14px;
+      font-weight:700;
+    }
+    .user-menu-item .user-menu-icon,
+    .user-menu-item .emoji {
+      width: 22px;
+      font-size: 17px;
+    }
+    .user-menu-item .chev {
+      font-size: 15px;
+    }
+    .user-menu-panel {
+      padding: 0 0 8px 56px;
+    }
+    .user-menu-link {
+      min-height: 33px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .user-menu-item.logout {
+      margin-top: 6px;
+      font-weight: 700;
+    }
+  
+    .member-tier-icon { background:#E4E9EF !important; color:#1f477d !important; }
+    .member-tier-icon i { line-height:1; }
+  </style>
+</head>
+<body class="is-logged-out">
+<div class="page">
+
+  <!-- ── 헤더 ── -->
+  <header>
+    <div class="topbar">
+      <div class="brand-area">
+        <button class="menu-button" type="button" aria-label="메뉴 열기" onclick="openDrawer()">
+          <span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <a class="logo-link" href="mobile_main.html" aria-label="Bidbuy 홈">
+          <img src="Bidbuy logo.png" alt="Bidbuy">
+        </a>
+      </div>
+      <form class="search">
+        <input type="text" placeholder="키워드 또는 URL을 입력하세요">
+        <button type="submit">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          검색
+        </button>
+      </form>
+      <div class="user-tools">
+        <div class="guest-tools is-guest-only">
+          <button class="login-pill js-auth-toggle" type="button">로그인</button>
+        </div>
+        <div class="member-tools is-member-only">
+          <button class="icon-btn" type="button" aria-label="알림">
+            <i class="fa-regular fa-bell" aria-hidden="true"></i>
+            <span class="i-badge">3</span>
+          </button>
+          <button class="icon-btn" type="button" aria-label="장바구니">
+            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+          </button>
+          
+          <button class="user-avatar-sm tier-premium member-tier-icon" type="button" aria-label="회원 메뉴" aria-expanded="false"><i class="fa-solid fa-gem" aria-hidden="true"></i></button>
+        
+        </div>
+      </div>
+    </div>
+    <nav class="mobile-channel-tabs" aria-label="경매 채널">
+      <button class="active" type="button">야후옥션</button>
+      <button type="button">메루카리</button>
+      <button type="button">라쿠텐</button>
+      <button type="button">라쿠마</button>
+      <button type="button">미국이베이</button>
+      <button type="button">영국이베이</button>
+    </nav>
+  </header>
+
+  <div class="stage">
+    <!-- ① 모바일 전용: 인라인 프로필 -->
+    <div class="mobile-profile-card is-member-only" aria-label="회원 프로필">
+      <div class="mpc-inner">
+        <div class="mpc-top">
+          <div class="mpc-avatar tier-premium member-tier-icon" aria-label="Premium 등급"><i class="fa-solid fa-gem" aria-hidden="true"></i></div>
+          <div class="mpc-member">
+            <span class="mpc-name">홍길동님</span>
+            <span class="mpc-grade">Premium</span>
+          </div>
+        </div>
+        <div class="mpc-vip">VIP까지 <b>₩23,000</b> 또는 <b>2건</b></div>
+        <div class="mpc-bar-row">
+          <div class="mpc-bar"><span></span></div>
+          <span class="mpc-help">?</span>
+        </div>
+        <div class="mpc-actions">
+          <button class="mpc-btn primary" type="button">1:1 문의</button>
+          <button class="mpc-btn js-auth-toggle" type="button">로그아웃</button>
+        </div>
+      </div>
+    </div>
+    <!-- ② 자산 스트립 -->
+    <section class="asset-strip is-member-only" aria-label="나의 자산 요약">
+      <div class="asset-item"><span>마일리지</span><strong>4,500 원</strong></div>
+      <div class="asset-item"><span>예치금</span><strong>21,560 원</strong></div>
+      <div class="asset-item"><span>보증금</span><strong>50,000원</strong></div>
+      <div class="asset-item"><span>쿠폰</span><strong>8장</strong></div>
+    </section>
+
+
+    <!-- ④ 메인 콘텐츠 -->
+        <main class="main pay-detail">
+
+      <div class="pd-heading">
+        <h2>주문상세정보</h2>
+      </div>
+
+      <section class="pd-sec">
+        <h3 class="pd-title">주문상품 정보 <a class="pd-sub" href="#">본 입찰내역 조회</a></h3>
+        <article class="pd-item">
+          <div class="pd-item__top">
+            <div class="pd-item__platform"><img src="https://flagcdn.com/w20/jp.png" alt="jp" onerror="this.style.display='none'"> <b>야후경매</b> <span style="color:var(--faint)">물품아이디 : k12345678901</span></div>
+            <a href="#" class="pd-item__name">아버지의 날 선물 스위츠 쿠키 피스타치오 샌드 10종 어소트 랑그드샤 초콜릿</a>
+            <div class="pd-item__origin">父の日 ギフト スイーツ クッキー プレゼント 2024 ピスタチオ ピスタチオサンド 10 アソート ラングドシャ チョコレート</div>
+          </div>
+          <div class="pd-item__content-row">
+            <div class="pd-item__img"><i class="far fa-image" aria-hidden="true"></i></div>
+            <dl class="pd-item__meta-list">
+              <dt>낙찰가</dt><dd>￥ 46,000</dd>
+              <dt>주문수량</dt><dd>1개</dd>
+              <dt>주문옵션</dt><dd>OOOOOOO</dd>
+            </dl>
+          </div>
+        </article>
+        <article class="pd-list" style="margin-top:10px">
+          <div class="pd-row"><span class="k">현재상태</span><span class="v" style="font-weight:700">현지도착</span></div>
+          <div class="pd-row"><span class="k">입찰일자</span><span class="v mono">2024-04-04 12:12:32</span></div>
+          <div class="pd-row"><span class="k">낙찰일자</span><span class="v mono">2024-04-05 12:00:00</span></div>
+          <div class="pd-row"><span class="k">낙찰상품</span><span class="v">비공개 <button class="row-btn" type="button" style="height:24px;padding:0 10px;margin-left:6px;border:1px solid var(--line);border-radius:5px;background:#fff;color:#555;font-size:11px;font-weight:700">공개로 변경</button></span></div>
+          <div class="pd-row"><span class="k">총 결제금액</span><span class="v mono">₩42,000</span></div>
+        </article>
+      </section>
+
+      <section class="pd-sec">
+        <h3 class="pd-title">주문배송정보</h3>
+        <article class="pd-list">
+          <div class="pd-row"><span class="k">수취인명</span><span class="v">홍길동</span></div>
+          <div class="pd-row"><span class="k">개인통관고유부호<br>(사업자번호)</span><span class="v mono">P932150008388</span></div>
+          <div class="pd-row"><span class="k">배송지</span><span class="v">06234<br>서울특별시 강남구 테헤란로 123<br>비드바이빌딩 401호</span></div>
+          <div class="pd-row"><span class="k">연락처</span><span class="v mono">010-1234-5678</span></div>
+          <div class="pd-row"><span class="k">발송방법</span><span class="v">비바항공특송</span></div>
+          <div class="pd-row"><span class="k">운송장번호</span><span class="v mono">EJ123456789JP <button class="row-btn" type="button" style="height:24px;padding:0 10px;margin-left:6px;border:1px solid var(--line);border-radius:5px;background:#c9c9c9;color:#555;font-size:11px;font-weight:700">배송조회</button></span></div>
+          <div class="pd-row"><span class="k">현지도착일</span><span class="v mono">2025-12-09 10:15:00</span></div>
+          <div class="pd-row"><span class="k">국제 배송일</span><span class="v mono">2025-12-14</span></div>
+          <div class="pd-row"><span class="k">묶음상태</span><span class="v">묶음배송 <button class="row-btn" type="button" style="height:24px;padding:0 10px;margin-left:6px;border:1px solid var(--line);border-radius:5px;background:#fff;color:#555;font-size:11px;font-weight:700">묶음 해제</button></span></div>
+          <div class="pd-row"><span class="k">안심케어플러스</span><span class="v" style="color:var(--brand);font-weight:700">신청 <button class="row-btn" type="button" style="height:24px;padding:0 10px;margin-left:6px;border:1px solid var(--line);border-radius:5px;background:#fff;color:#555;font-size:11px;font-weight:700">신청 해제</button></span></div>
+        </article>
+      </section>
+
+      <section class="pd-sec">
+        <h3 class="pd-title">묶음배송 구성 상품 <span style="color:var(--brand);font-size:13px;font-weight:700">10건</span> <a class="pd-sub" href="mobile_bundle_shipping_management_2.html">묶음배송관리</a></h3>
+        <article class="pd-list collapsible-list is-collapsed" data-collapsible="bundle">
+          <div class="pd-bundle">
+            <div class="pd-bundle__img"><i class="far fa-image" aria-hidden="true"></i></div>
+            <div class="pd-bundle__body">
+              <p class="pd-bundle__name">[YAHOO] k19410009001 ホンダ XR 100 モタード 純正</p>
+              <div class="pd-bundle__meta">3,100엔 · 37,200원 · 2026-06-29</div>
+            </div>
+            <span class="pd-tag done">현지도착</span>
+          </div>
+          <div class="pd-bundle">
+            <div class="pd-bundle__img"><i class="far fa-image" aria-hidden="true"></i></div>
+            <div class="pd-bundle__body">
+              <p class="pd-bundle__name">[YAHOO] k19410009002 ホンダ エイプ XR100 フロント</p>
+              <div class="pd-bundle__meta">1,200엔 · 14,400원 · 2026-06-28</div>
+            </div>
+            <span class="pd-tag done">현지도착</span>
+          </div>
+          <div class="pd-bundle">
+            <div class="pd-bundle__img"><i class="far fa-image" aria-hidden="true"></i></div>
+            <div class="pd-bundle__body">
+              <p class="pd-bundle__name">[YAHOO] k19410009003 ホンダ 純正 ウインカー 部品</p>
+              <div class="pd-bundle__meta">900엔 · 10,800원 · 2026-06-28</div>
+            </div>
+            <span class="pd-tag done">현지도착</span>
+          </div>
+          <div class="pd-bundle">
+            <div class="pd-bundle__img"><i class="far fa-image" aria-hidden="true"></i></div>
+            <div class="pd-bundle__body">
+              <p class="pd-bundle__name">[YAHOO] k19410009004 スズキ GSX-R 純正ミラー セット</p>
+              <div class="pd-bundle__meta">2,500엔 · 30,000원 · 2026-06-27</div>
+            </div>
+            <span class="pd-tag done">현지도착</span>
+          </div>
+          <div class="pd-bundle">
+            <div class="pd-bundle__img"><i class="far fa-image" aria-hidden="true"></i></div>
+            <div class="pd-bundle__body">
+              <p class="pd-bundle__name">[YAHOO] k19410009005 カワサキ Z900 タンクパッド</p>
+              <div class="pd-bundle__meta">780엔 · 9,360원 · 2026-06-26</div>
+            </div>
+            <span class="pd-tag">1차 결제완료<br>(현지배송중)</span>
+          </div>
+          <div class="pd-bundle">
+            <div class="pd-bundle__img"><i class="far fa-image" aria-hidden="true"></i></div>
+            <div class="pd-bundle__body">
+              <p class="pd-bundle__name">[YAHOO] k19410009006 ヤマハ MT-07 レバーセット</p>
+              <div class="pd-bundle__meta">1,560엔 · 18,720원 · 2026-06-26</div>
+            </div>
+            <span class="pd-tag">1차 결제완료<br>(송금완료)</span>
+          </div>
+          <div class="pd-bundle">
+            <div class="pd-bundle__img"><i class="far fa-image" aria-hidden="true"></i></div>
+            <div class="pd-bundle__body">
+              <p class="pd-bundle__name">[YAHOO] k19410009007 ホンダ CBR600RR フェンダーレス</p>
+              <div class="pd-bundle__meta">4,200엔 · 50,400원 · 2026-06-25</div>
+            </div>
+            <span class="pd-tag">1차 결제대기</span>
+          </div>
+          <div class="pd-bundle">
+            <div class="pd-bundle__img"><i class="far fa-image" aria-hidden="true"></i></div>
+            <div class="pd-bundle__body">
+              <p class="pd-bundle__name">[YAHOO] k19410009008 スズキ バンディット グリップ ペア</p>
+              <div class="pd-bundle__meta">650엔 · 7,800원 · 2026-06-25</div>
+            </div>
+            <span class="pd-tag">1차 결제대기</span>
+          </div>
+          <div class="pd-bundle">
+            <div class="pd-bundle__img"><i class="far fa-image" aria-hidden="true"></i></div>
+            <div class="pd-bundle__body">
+              <p class="pd-bundle__name">[YAHOO] k19410009009 カワサキ Ninja ZX-6R スクリーン</p>
+              <div class="pd-bundle__meta">3,300엔 · 39,600원 · 2026-06-24</div>
+            </div>
+            <span class="pd-tag done">현지도착</span>
+          </div>
+          <div class="pd-bundle">
+            <div class="pd-bundle__img"><i class="far fa-image" aria-hidden="true"></i></div>
+            <div class="pd-bundle__body">
+              <p class="pd-bundle__name">[YAHOO] k19410009010 ヤマハ YZF-R1 チェーンスライダー</p>
+              <div class="pd-bundle__meta">1,900엔 · 22,800원 · 2026-06-24</div>
+            </div>
+            <span class="pd-tag done">현지도착</span>
+          </div>
+        </article>
+        <button class="collapse-toggle" type="button" data-collapse-toggle="bundle" aria-expanded="false">전체보기</button>
+      </section>
+
+      <section class="pd-sec">
+        <h3 class="pd-title payment-title-row">
+          <span class="payment-title-left">
+            <span>주문결제정보</span>
+            <span class="payment-switch" data-payment-switch>
+              <button class="payment-switch__btn" type="button" data-payment-switch-dir="-1" aria-label="이전 2차 결제 카드">&lt;</button>
+              <span class="payment-switch__label" data-payment-switch-label>현지배송</span>
+              <button class="payment-switch__btn" type="button" data-payment-switch-dir="1" aria-label="다음 2차 결제 카드">&gt;</button>
+            </span>
+          </span>
+          <span class="pay-rate-note">¥ 환율 9.3원/엔</span>
+        </h3>
+
+        <div class="pay-2col">
+          <div class="pay-card" data-payment-card="primary">
+            <div class="pay-card__head"><span class="pay-badge first">1차 결제비용</span><button class="pay-card__date pay-card__receipt" type="button">2025-12-08 결제완료</button></div>
+            <ul class="pay-rows">
+              <li class="pay-row"><span class="lbl">물품가</span><span class="val" data-pay-kind="base">4,300엔</span></li>
+              <li class="pay-row"><span class="lbl">대행수수료</span><span class="val" data-pay-kind="base">860엔</span></li>
+              <li class="pay-row pay-row--spacer" aria-hidden="true"><span class="lbl">&nbsp;</span><span class="val">&nbsp;</span></li>
+              <li class="pay-row is-toggle">
+                <details class="pay-etc" open>
+                  <summary>할인/쿠폰 <i class="fa-solid fa-chevron-down chev" aria-hidden="true"></i></summary>
+                  <div class="pay-etc__inner">
+                    <div class="pay-row"><span class="lbl">쿠폰 할인</span><span class="val discount" data-pay-kind="discount">- 1,000엔</span></div>
+                    <div class="pay-row"><span class="lbl">마일리지 할인</span><span class="val discount" data-pay-kind="discount">- 298엔</span></div>
+                  </div>
+                </details>
+              </li>
+            </ul>
+            <div class="pay-foot">
+              <div class="pay-total"><span class="lbl">1차 합계</span><span class="val-group"><span class="val" data-pay-total>35,927원</span><span class="calc-sm" data-pay-total-calc>3,862엔</span></span></div>
+            </div>
+          </div>
+
+          <div class="pay-secondary-stack" data-payment-secondary-stack>
+            <div class="pay-card" data-payment-card="secondary" data-payment-variant="일본내배송">
+              <div class="pay-card__head"><span class="pay-badge second">2차 결제비용</span><button class="pay-card__date pay-card__receipt" type="button">2025-12-14 결제완료</button></div>
+              <ul class="pay-rows">
+                <li class="pay-row"><span class="lbl">현지세금</span><span class="val muted" data-pay-kind="base">—</span></li>
+                <li class="pay-row"><span class="lbl">현지운송료</span><span class="val" data-pay-kind="base">2,500엔</span></li>
+                <li class="pay-row pay-row--spacer" aria-hidden="true"><span class="lbl">&nbsp;</span><span class="val">&nbsp;</span></li>
+                <li class="pay-row is-toggle">
+                  <details class="pay-etc" open>
+                    <summary>추가 비용 <i class="fa-solid fa-chevron-down chev" aria-hidden="true"></i></summary>
+                    <div class="pay-etc__inner">
+                      <div class="pay-row"><span class="lbl">튼튼 포장비</span><span class="val fee" data-pay-kind="extra">+ 1,500엔</span></div>
+                      <div class="pay-row"><span class="lbl">일본내배송 수수료</span><span class="val fee" data-pay-kind="extra">+ 3,000엔</span></div>
+                    </div>
+                  </details>
+                </li>
+              </ul>
+              <div class="pay-foot">
+                <div class="pay-total"><span class="lbl">2차 합계</span><span class="val-group"><span class="val" data-pay-total>63,221원</span><span class="calc-sm" data-pay-total-calc>6,798엔</span></span></div>
+              </div>
+            </div>
+
+            <div class="pay-card" data-payment-card="secondary" data-payment-variant="국제배송" hidden>
+              <div class="pay-card__head"><span class="pay-badge second">2차 결제비용</span><button class="pay-card__date pay-card__receipt" type="button">2025-12-14 결제완료</button></div>
+              <ul class="pay-rows">
+                <li class="pay-row"><span class="lbl">현지세금</span><span class="val muted" data-pay-kind="base">—</span></li>
+                <li class="pay-row"><span class="lbl">현지운송료</span><span class="val" data-pay-kind="base">무료</span></li>
+                <li class="pay-row"><span class="lbl">국제운송료<span class="pay-tooltip" title="무게 2.5kg · 국제운임 2,600엔"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span></span><span class="val" data-pay-kind="base">2,600엔</span></li>
+                <li class="pay-row is-toggle">
+                  <details class="pay-etc" open>
+                    <summary>추가 비용 <i class="fa-solid fa-chevron-down chev" aria-hidden="true"></i></summary>
+                    <div class="pay-etc__inner">
+                      <div class="pay-row"><span class="lbl">안심케어플러스</span><span class="val fee" data-pay-kind="extra">+ 1,000엔</span></div>
+                      <div class="pay-row"><span class="lbl">튼튼 포장비</span><span class="val fee" data-pay-kind="extra">+ 3,000엔</span></div>
+                      <div class="pay-row"><span class="lbl">사진 촬영 서비스</span><span class="val fee" data-pay-kind="extra">+ 300엔</span></div>
+                    </div>
+                  </details>
+                </li>
+              </ul>
+              <div class="pay-foot">
+                <div class="pay-total"><span class="lbl">2차 합계</span><span class="val-group"><span class="val" data-pay-total>100,421원</span><span class="calc-sm" data-pay-total-calc>10,798엔</span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pay-grandtotal">
+          <span class="pay-grandtotal__label"><span class="lbl">총 결제금액 (1차 + 2차)</span></span>
+          <span class="val-group">
+            <span class="val" data-pay-grand-total>99,138원</span>
+            <span class="val-sm" data-pay-grand-yen>10,660엔</span>
+          </span>
+        </div>
+      </section>
+
+      <section class="pd-sec" id="admin-memo">
+        <h3 class="pd-title">관리자 메모</h3>
+        <article class="pd-list memo-collapse admin-memo-collapse is-collapsed" data-collapsible="admin-memo">
+          <div class="admin-memo-day">
+            <div class="admin-memo-date">2026-06-30</div>
+            <div class="admin-memo-entry">
+              <div class="admin-memo-head"><time datetime="2026-06-30T21:22:23">21:22:23</time></div>
+              <div class="admin-memo-content">
+                <p>안녕하세요.<br>
+                낙찰받으신 후 24시간이 경과하였습니다.<br>
+                출품자에게 일방적인 낙찰취소를 당할수 있는 가능성이 있어 알려드립니다.<br>
+                만약 낙찰취소되시면 보증금 환수 및 등급포인트가 차감되시오니<br>
+                빠른 결제처리를 부탁드립니다.<br>
+                감사합니다.</p>
+              </div>
+            </div>
+            <div class="admin-memo-entry">
+              <div class="admin-memo-head"><time datetime="2026-06-30T10:22:23">10:22:23</time></div>
+              <div class="admin-memo-content">
+                <p>안녕하세요.<br>
+                낙찰받으신 후 12시간이 경과하였습니다.<br>
+                출품자에게 일방적인 낙찰취소를 당할수 있는 가능성이 있어 알려드립니다.<br>
+                만약 낙찰취소되시면 보증금 환수 및 등급포인트가 차감되시오니<br>
+                빠른 결제처리를 부탁드립니다.<br>
+                감사합니다.</p>
+              </div>
+            </div>
+          </div>
+          <div class="admin-memo-day">
+            <div class="admin-memo-date">2026-06-26</div>
+            <div class="admin-memo-entry">
+              <div class="admin-memo-head"><time datetime="2026-06-26T15:55:23">15:55:23</time></div>
+              <div class="admin-memo-content">
+                <p>안녕하세요, 고객님.<br>
+                구매신청 감사합니다.<br>
+                가격변동 및 품절 등 있을 경우에는 관리자메모로 안내 드리도록 하겠습니다.<br>
+                구매완료되면 "결제완료" 에서 "주문완료" 로 상태 변경 됩니다.</p>
+                <p class="admin-memo-highlight">[청약 철회에 대한 안내]</p>
+                <p>실제 주문완료 이후에는 구매대행계약의 청약철회를 할 수 없습니다.<br>
+                다만, 판매자가 환불에 동의한 경우 고객님의 비용부담으로 반품, 환불 절차를 대행합니다. (메루카리/라쿠마/페이페이프리마 제외)<br>
+                이 경우 대행 수수료는 환불 대상이 아닙니다.</p>
+                <p>또한 부피, 무게 등의 차이로 인한 송료 차액은 2차 결제 시 실제 금액으로 정산 될 수 있는 점 참고 바랍니다.<br>
+                감사합니다.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+        <button class="collapse-toggle" type="button" data-collapse-toggle="admin-memo" aria-expanded="false">전체보기</button>
+      </section>
+
+      <section class="pd-sec">
+        <h3 class="pd-title">사용자 메모 내역</h3>
+        <article class="pd-list">
+          <div class="pd-memo-input">
+            <textarea placeholder="메모 또는 문의 내용 입력 (최대 500자)" maxlength="500"></textarea>
+            <button type="button" class="pd-memo-btn">등록</button>
+          </div>
+          <div class="pd-thread thread memo-collapse is-collapsed" data-collapsible="user-memo">
+            <div class="msg agent">
+              <div class="msg-head">
+                <span class="msg-label">답변</span>
+                <span class="msg-who">관리자</span>
+                <span class="msg-date">2025-12-15 14:32</span>
+              </div>
+              <div class="msg-bubble">
+                <p>상품이 정상적으로 국내 도착하였습니다. 배송 완료 확인 부탁드립니다.</p>
+              </div>
+            </div>
+            <div class="msg customer">
+              <div class="msg-head">
+                <span class="msg-label">문의</span>
+                <span class="msg-who">홍길동</span>
+                <span class="msg-date">2025-12-15 15:08</span>
+              </div>
+              <div class="msg-bubble">
+                <p>배송 일정 확인 부탁드립니다.</p>
+              </div>
+            </div>
+            <div class="msg agent">
+              <div class="msg-head">
+                <span class="msg-label">답변</span>
+                <span class="msg-who">비드바이 cs팀</span>
+                <span class="msg-date">2025-12-15 15:24</span>
+              </div>
+              <div class="msg-bubble">
+                <p>현재 국내 배송 준비 중이며 출고 완료 시 송장번호를 안내드리겠습니다.</p>
+              </div>
+            </div>
+            <div class="msg customer">
+              <div class="msg-head">
+                <span class="msg-label">문의</span>
+                <span class="msg-who">홍길동</span>
+                <span class="msg-date">2025-12-16 09:12</span>
+              </div>
+              <div class="msg-bubble">
+                <p>추가 배송비 결제는 어디에서 확인하면 되나요?</p>
+              </div>
+            </div>
+            <div class="msg agent">
+              <div class="msg-head">
+                <span class="msg-label">답변</span>
+                <span class="msg-who">비드바이 cs팀</span>
+                <span class="msg-date">2025-12-16 09:30</span>
+              </div>
+              <div class="msg-bubble">
+                <p>주문 상세의 2차 결제 비용 영역에서 확인 및 결제하실 수 있습니다.</p>
+              </div>
+            </div>
+            <div class="msg customer">
+              <div class="msg-head">
+                <span class="msg-label">문의</span>
+                <span class="msg-who">홍길동</span>
+                <span class="msg-date">2025-12-16 13:05</span>
+              </div>
+              <div class="msg-bubble">
+                <p>묶음배송으로 변경 가능한지 확인 부탁드립니다.</p>
+              </div>
+            </div>
+            <div class="msg agent">
+              <div class="msg-head">
+                <span class="msg-label">답변</span>
+                <span class="msg-who">비드바이 cs팀</span>
+                <span class="msg-date">2025-12-16 13:26</span>
+              </div>
+              <div class="msg-bubble">
+                <p>동일 배송지 주문 건 확인 후 묶음배송 가능 여부를 안내드리겠습니다.</p>
+              </div>
+            </div>
+          </div>
+          <button class="collapse-toggle" type="button" data-collapse-toggle="user-memo" aria-expanded="false">전체보기</button>
+        </article>
+      </section>
+
+    </main>
+
+    <div class="pd-fixed-cta">
+      <button class="pd-cta-line" type="button" onclick="history.back()"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i> 뒤로가기</button>
+      <a class="pd-cta-fill" href="mobile_mypage.html"><i class="fa-solid fa-list" aria-hidden="true"></i> 주문목록</a>
+    </div>
+  </div><!-- /.stage -->
+
+</div><!-- /.page -->
+
+<script>
+  let pageLoggedIn = false;
+
+  function renderAuthState() {
+    document.body.classList.toggle("is-logged-in", pageLoggedIn);
+    document.body.classList.toggle("is-logged-out", !pageLoggedIn);
+    document.querySelectorAll(".is-guest-only .js-auth-toggle").forEach(button => { button.textContent = "로그인"; });
+    document.querySelectorAll(".is-member-only .js-auth-toggle").forEach(button => { button.textContent = "로그아웃"; });
+  }
+
+  document.querySelectorAll(".js-auth-toggle").forEach(button => {
+    button.addEventListener("click", () => {
+      pageLoggedIn = !pageLoggedIn;
+      renderAuthState();
+    });
+  });
+
+  document.querySelector(".search")?.addEventListener("submit", event => {
+    event.preventDefault();
+  });
+
+  document.querySelectorAll(".mobile-channel-tabs button").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".mobile-channel-tabs button").forEach(item => item.classList.remove("active"));
+      tab.classList.add("active");
+    });
+  });
+
+  document.querySelectorAll(".user-menu-trigger").forEach(triggerButton => {
+    triggerButton.addEventListener("click", () => {
+      const section = triggerButton.closest(".user-menu-section");
+      const isOpen = section?.classList.toggle("is-open");
+      triggerButton.setAttribute("aria-expanded", String(Boolean(isOpen)));
+    });
+  });
+
+  renderAuthState();
+
+  // 탭 필터
+  document.querySelectorAll(".filter-group").forEach(group => {
+    const tabs = group.querySelectorAll("button");
+    tabs.forEach(tab => {
+      tab.setAttribute("aria-pressed", String(tab.classList.contains("active")));
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => { const a = t===tab; t.classList.toggle("active",a); t.setAttribute("aria-pressed",String(a)); });
+      });
+    });
+  });
+
+  // 거래 목록 상단 드롭다운
+  const dropdowns = document.querySelectorAll("[data-dropdown]");
+
+  function closeDropdowns(exceptDropdown) {
+    dropdowns.forEach(dropdown => {
+      if (dropdown === exceptDropdown) return;
+      dropdown.classList.remove("is-open");
+      dropdown.querySelector(".dropdown-toggle")?.setAttribute("aria-expanded", "false");
+    });
+  }
+
+  dropdowns.forEach(dropdown => {
+    const toggle = dropdown.querySelector(".dropdown-toggle");
+    toggle?.addEventListener("click", () => {
+      const willOpen = !dropdown.classList.contains("is-open");
+      closeDropdowns(dropdown);
+      dropdown.classList.toggle("is-open", willOpen);
+      toggle.setAttribute("aria-expanded", String(willOpen));
+    });
+  });
+
+  document.addEventListener("click", event => {
+    if (!event.target.closest("[data-dropdown]")) closeDropdowns();
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeDropdowns();
+  });
+
+  const countryLabel = document.querySelector('[data-dropdown-label="country"]');
+  document.querySelectorAll(".country-panel .dropdown-item").forEach(item => {
+    item.addEventListener("click", () => {
+      document.querySelectorAll(".country-panel .dropdown-item").forEach(option => {
+        option.classList.toggle("active", option === item);
+      });
+      if (countryLabel) countryLabel.textContent = item.textContent.trim();
+      closeDropdowns();
+    });
+  });
+
+  const periodLabel = document.querySelector('[data-dropdown-label="period"]');
+  const rangeButtons = document.querySelectorAll(".range-shortcuts button");
+  const calendarDays = document.querySelectorAll(".calendar-days button:not(.is-muted)");
+
+  rangeButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      rangeButtons.forEach(item => item.classList.toggle("active", item === button));
+      if (periodLabel) periodLabel.textContent = button.dataset.periodLabel || button.textContent.trim();
+    });
+  });
+
+  calendarDays.forEach(day => {
+    day.addEventListener("click", () => {
+      calendarDays.forEach(item => item.classList.toggle("selected", item === day));
+    });
+  });
+
+  document.querySelector("[data-calendar-reset]")?.addEventListener("click", () => {
+    rangeButtons.forEach(item => item.classList.toggle("active", item.dataset.periodLabel === "최근 1개월"));
+    calendarDays.forEach(item => item.classList.toggle("selected", item.textContent.trim() === "17"));
+    if (periodLabel) periodLabel.textContent = "최근 1개월";
+  });
+
+  document.querySelector("[data-calendar-apply]")?.addEventListener("click", () => {
+    closeDropdowns();
+  });
+
+  // 쇼핑 현황 필터
+  const statusTriggers = document.querySelectorAll(".status-card[data-status], .status-card .sub[data-status], .status-filter-option[data-status]");
+  const statusOptions = document.querySelectorAll(".status-filter-option[data-status]");
+  const tradeTable = document.querySelector(".trade-table");
+  const tradeRows = document.querySelectorAll(".trade-row[data-status]");
+  const tradeEmpty = document.querySelector(".trade-empty");
+  const tradeTitle = document.querySelector("#trade-list-title");
+  const statusDropdownLabel = document.querySelector('[data-dropdown-label="status"]');
+  let activeStatus = "";
+
+  function updateStatusDropdown(status, label) {
+    let selectedLabel = label || "진행 상태";
+
+    statusOptions.forEach(option => {
+      const isActive = (option.dataset.status || "") === status;
+      option.classList.toggle("status-active", isActive);
+      option.setAttribute("aria-pressed", String(isActive));
+
+      if (isActive && status) {
+        selectedLabel = option.dataset.label || option.textContent.trim();
+      }
+    });
+
+    if (statusDropdownLabel) {
+      statusDropdownLabel.textContent = status ? selectedLabel : "진행 상태";
+    }
+  }
+
+  function setFilter(status, label, forceSelection = false) {
+    const nextStatus = status || "";
+    const same = activeStatus === nextStatus;
+    activeStatus = !forceSelection && same ? "" : nextStatus;
+
+    statusTriggers.forEach(t => { t.classList.remove("status-active"); t.setAttribute("aria-pressed","false"); });
+
+    if (activeStatus) {
+      statusTriggers.forEach(item => {
+        if ((item.dataset.status || "") !== activeStatus) return;
+        item.classList.add("status-active");
+        item.setAttribute("aria-pressed", "true");
+        const p = item.closest(".status-card");
+        if (item.classList.contains("sub") && p) {
+          p.classList.add("status-active");
+          p.setAttribute("aria-pressed", "true");
+        }
+      });
+    } else {
+      statusOptions.forEach(option => {
+        const isAll = (option.dataset.status || "") === "";
+        option.classList.toggle("status-active", isAll);
+        option.setAttribute("aria-pressed", String(isAll));
+      });
+    }
+
+    updateStatusDropdown(activeStatus, label);
+
+    if (!activeStatus) {
+      const allOption = document.querySelector('.status-filter-option[data-status=""]');
+      allOption?.classList.add("status-active");
+      allOption?.setAttribute("aria-pressed", "true");
+    }
+
+    tradeTable?.classList.toggle("status-filtered", Boolean(activeStatus));
+    let vis = 0;
+    tradeRows.forEach(r => { const show = !activeStatus || r.dataset.status===activeStatus; r.classList.toggle("is-hidden",!show); if(activeStatus&&show) vis++; });
+    tradeEmpty?.classList.toggle("is-visible", Boolean(activeStatus) && vis===0);
+    if (tradeTitle) tradeTitle.textContent = activeStatus ? `${label} 거래 목록` : "거래 전체 목록";
+  }
+
+  statusTriggers.forEach(el => {
+    el.setAttribute("aria-pressed","false");
+    el.addEventListener("click", e => {
+      e.stopPropagation();
+      const isDropdownOption = el.classList.contains("status-filter-option");
+      setFilter(el.dataset.status, el.dataset.label, isDropdownOption);
+      if (isDropdownOption) closeDropdowns();
+    });
+    el.addEventListener("keydown", e => {
+      if(e.key==="Enter"||e.key===" ") {
+        e.preventDefault();
+        e.stopPropagation();
+        const isDropdownOption = el.classList.contains("status-filter-option");
+        setFilter(el.dataset.status, el.dataset.label, isDropdownOption);
+        if (isDropdownOption) closeDropdowns();
+      }
+    });
+  });
+
+  updateStatusDropdown(activeStatus);
+
+  function parsePaymentYenText(text) {
+    const normalized = String(text || "").replace(/,/g, "");
+    const yen = normalized.match(/(\d+(?:\.\d+)?)\s*엔/);
+    if (yen) return Math.abs(Number(yen[1]));
+    const won = normalized.match(/(\d+(?:\.\d+)?)\s*원/);
+    if (won) return Math.abs(Number(won[1]) / 9.3);
+    return 0;
+  }
+
+  function formatPaymentYen(value) {
+    return `${Math.round(value).toLocaleString("ko-KR")}엔`;
+  }
+
+  function formatPaymentWon(value) {
+    return `${Math.round(value * 9.3).toLocaleString("ko-KR")}원`;
+  }
+
+  function updatePaymentTotals() {
+    let primaryTotal = 0;
+    let secondaryTotal = 0;
+
+    document.querySelectorAll("[data-payment-card]").forEach(card => {
+      if (card.hidden) return;
+      const sum = kind => Array.from(card.querySelectorAll(`[data-pay-kind="${kind}"]`))
+        .reduce((total, el) => total + parsePaymentYenText(el.textContent), 0);
+      const base = sum("base");
+      const discount = sum("discount");
+      const extra = sum("extra");
+      const cardTotal = card.dataset.paymentCard === "primary" ? base - discount : base + extra;
+      const totalEl = card.querySelector("[data-pay-total]");
+      const calcEl = card.querySelector("[data-pay-total-calc]");
+
+      if (card.dataset.paymentCard === "primary") primaryTotal = cardTotal;
+      if (card.dataset.paymentCard === "secondary") secondaryTotal = cardTotal;
+      if (totalEl) totalEl.textContent = formatPaymentWon(cardTotal);
+      if (calcEl) calcEl.textContent = formatPaymentYen(cardTotal);
+    });
+
+    const grandTotal = primaryTotal + secondaryTotal;
+    document.querySelectorAll("[data-pay-grand-yen]").forEach(el => {
+      el.textContent = formatPaymentYen(grandTotal);
+    });
+    document.querySelectorAll("[data-pay-grand-total]").forEach(el => {
+      el.textContent = formatPaymentWon(grandTotal);
+    });
+  }
+
+  function setupPaymentSwitch() {
+    const switchEl = document.querySelector("[data-payment-switch]");
+    const cards = Array.from(document.querySelectorAll('[data-payment-card="secondary"]'));
+    if (!switchEl || cards.length < 2) return;
+
+    const label = switchEl.querySelector("[data-payment-switch-label]");
+    let activeIndex = cards.findIndex(card => !card.hidden);
+    if (activeIndex < 0) activeIndex = 0;
+
+    const render = () => {
+      cards.forEach((card, index) => {
+        card.hidden = index !== activeIndex;
+      });
+      if (label) label.textContent = cards[activeIndex].dataset.paymentVariant || "";
+      updatePaymentTotals();
+    };
+
+    switchEl.querySelectorAll("[data-payment-switch-dir]").forEach(button => {
+      button.addEventListener("click", () => {
+        const dir = Number(button.dataset.paymentSwitchDir) || 1;
+        activeIndex = (activeIndex + dir + cards.length) % cards.length;
+        render();
+      });
+    });
+
+    render();
+  }
+
+  document.querySelectorAll("[data-collapse-toggle]").forEach(button => {
+    const target = document.querySelector(`[data-collapsible="${button.dataset.collapseToggle}"]`);
+    if (!target) return;
+
+    button.addEventListener("click", () => {
+      const isOpen = target.classList.toggle("is-collapsed") === false;
+      button.textContent = isOpen ? "접기" : "전체보기";
+      button.setAttribute("aria-expanded", String(isOpen));
+    });
+  });
+
+  updatePaymentTotals();
+  setupPaymentSwitch();
+</script>
+<script src="bb-common-mobile.js"></script>
+</body>
+</html>

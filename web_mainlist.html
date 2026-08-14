@@ -1,0 +1,3373 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bidbuy 거래 전체 목록</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --rose: #E8385A;
+      --rose-h: #C42F4C;
+      --tp: #1a1a2e;
+      --ts: #666680;
+      --tm: #999baa;
+      --border: #e0e4eb;
+      --navy: #1A3C6E;
+      --ink: #20242b;
+      --text: #33363d;
+      --muted: #777985;
+      --faint: #a1a5b3;
+      --line: #e5dbd7;
+      --line-soft: #eee6e2;
+      --paper: #fff;
+      --warm: #fbf7f5;
+      --warm-2: #f7f3f0;
+      --yellow: #f4b400;
+      --stage-left: max(16px, calc((100vw - 1180px) / 2));
+      --sidebar-w: 231px;
+      --main-w: 925px;
+      --gap: 24px;
+      --asset-w: 710px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: #fff;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--text);
+      background: #fff;
+      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .notice-bar {
+      background: #F1F3F5;
+      color: #111;
+      text-align: center;
+      font-size: 13px;
+      padding: 9px 16px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .notice-bar b {
+      color: var(--rose);
+    }
+
+    .channel-bar {
+      background: #fff;
+      padding: 14px 0;
+    }
+
+    .channel-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .channel-icons {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 16px;
+      width: min(calc(100vw - 60px), 900px);
+      margin: 0 auto;
+    }
+
+    .channel-icons::-webkit-scrollbar {
+      display: none;
+    }
+
+    .ch-icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      cursor: pointer;
+      min-width: 80px;
+      flex-shrink: 0;
+      transition: opacity 0.15s;
+    }
+
+    .ch-icon-item:hover {
+      opacity: 0.8;
+    }
+
+    .ch-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+      transition: box-shadow 0.15s;
+    }
+
+    .ch-icon-item:hover .ch-circle {
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.13);
+    }
+
+    .ch-circle-logo {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1px;
+    }
+
+    .ch-circle-logo .flag {
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .ch-circle-logo .brand {
+      font-size: 8px;
+      font-weight: 700;
+      color: var(--tp);
+      white-space: nowrap;
+    }
+
+    .ch-label {
+      font-size: 11px;
+      color: var(--ts);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .page {
+      min-height: 100vh;
+      background: #fff;
+    }
+
+    .topbar {
+      height: 67px;
+      width: min(calc(100vw - 32px), 1057px);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 221px minmax(0, 714px) 221px;
+      align-items: center;
+      gap: 16px;
+      padding: 0;
+      background: #fff;
+    }
+
+    .brand-area {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      min-width: 0;
+    }
+
+    .menu-button {
+      width: 25px;
+      height: 25px;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      padding: 0;
+      display: grid;
+      place-items: center;
+    }
+
+    .menu-lines {
+      width: 23px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .menu-lines span {
+      height: 2.5px;
+      border-radius: 999px;
+      background: #1f2530;
+    }
+
+    .logo-link {
+      display: inline-flex;
+      align-items: center;
+      width: 122px;
+      line-height: 0;
+    }
+
+    .logo-link img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .search {
+      height: 43px;
+      display: flex;
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      overflow: hidden;
+      background: var(--warm-2);
+    }
+
+    .search input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      padding: 0 18px;
+      background: transparent;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .search input::placeholder {
+      color: #8c8985;
+    }
+
+    .search button {
+      width: 111px;
+      border: 0;
+      background: var(--brand-hot);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .search button i {
+      font-size: 15px;
+    }
+
+    .user-tools {
+      justify-self: end;
+      display: grid;
+      grid-template-columns: 28px 28px auto;
+      align-items: center;
+      gap: 12px;
+      color: #1d2430;
+    }
+
+    .icon-btn {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      color: #687385;
+      padding: 0;
+    }
+
+    .icon-btn i {
+      font-size: 23px;
+    }
+
+    .user-name {
+      display: grid;
+      justify-items: center;
+      gap: 3px;
+      color: #111827;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .premium-chip {
+      min-width: 70px;
+      min-height: 18px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: #fff0c9;
+      color: #f4a200;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .stage {
+      position: relative;
+      display: grid;
+      grid-template-columns: var(--sidebar-w) var(--main-w);
+      gap: var(--gap);
+      width: calc(var(--sidebar-w) + var(--gap) + var(--main-w));
+      margin-left: var(--stage-left);
+      overflow: visible;
+    }
+
+    .asset-strip {
+      position: absolute;
+      top: 0;
+      left: var(--sidebar-w);
+      width: var(--asset-w);
+      height: 36px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: center;
+      background: var(--warm);
+      border-bottom: 1px solid #f2e9e5;
+      z-index: 1;
+    }
+
+    .asset-item {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      color: #111;
+      white-space: nowrap;
+    }
+
+    .asset-item span {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .asset-item strong {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .sidebar {
+      min-width: 0;
+    }
+
+    .profile-card {
+      height: 172px;
+      padding: 19px 22px 12px;
+      background: var(--warm);
+    }
+
+    .profile-main {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      background: #ffe7ef;
+      color: var(--rose);
+      font-size: 22px;
+      font-weight: 800;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.65);
+    }
+
+    .avatar i {
+      line-height: 1;
+    }
+
+    .avatar.tier-standard {
+      background: #eef2f7;
+      color: #64748b;
+    }
+
+    .avatar.tier-premium {
+      background: #eef5ff;
+      color: var(--navy);
+    }
+
+    .avatar.tier-vip {
+      background: #fff7e6;
+      color: #f5a623;
+    }
+
+    .avatar.tier-prestige {
+      background: #fff0f4;
+      color: var(--rose);
+    }
+
+    .profile-name {
+      display: block;
+      margin-bottom: 3px;
+      color: #262a31;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .profile-tier {
+      color: var(--rose);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .vip-copy {
+      margin: 18px 0 6px;
+      color: #5c6270;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .vip-copy b {
+      color: #454b58;
+      font-weight: 800;
+    }
+
+    .vip-row {
+      display: grid;
+      grid-template-columns: 1fr 16px;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .vip-progress {
+      height: 8px;
+      border-radius: 999px;
+      background: #eee2de;
+      overflow: hidden;
+    }
+
+    .vip-progress span {
+      display: block;
+      width: 84%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #ff8499 0%, var(--rose) 100%);
+    }
+
+    .help-dot {
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid #9ea1aa;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      color: #838793;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .profile-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 11px;
+    }
+
+    .soft-btn {
+      height: 26px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: #5c606b;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .side-nav {
+      padding-top: 33px;
+    }
+
+    .side-title {
+      margin: 0 0 18px;
+      padding: 0 15px 17px;
+      border-bottom: 1px solid #dcd9d6;
+      color: #111;
+      font-size: 16px;
+      font-weight: 900;
+    }
+    .side-title a, .side-title a:visited { color: inherit; text-decoration: none; }
+
+    .nav-section {
+      padding: 0 20px;
+      margin-bottom: 14px;
+    }
+
+    .nav-section strong {
+      display: block;
+      margin-bottom: 11px;
+      color: #292d35;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .nav-list {
+      display: grid;
+      gap: 13px;
+    }
+
+    .nav-list a {
+      color: #666b75;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .nav-list a:hover,
+    .nav-list a.active {
+      color: var(--rose);
+      font-weight: 800;
+    }
+
+    .drawer-section {
+      padding: 18px 20px 24px;
+      border-bottom: 1px solid #e5e7eb;
+      background: #fff;
+    }
+
+    .drawer-section-title {
+      margin: 0 0 18px;
+      color: #111827;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .user-menu-list {
+      padding: 0;
+      display: grid;
+      gap: 0;
+    }
+
+    .user-menu-item {
+      min-height: 45px;
+      padding: 0 18px 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      color: #111827;
+      font-size: 14px;
+      font-weight: 900;
+      text-decoration: none;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .user-menu-item:hover,
+    .user-menu-link:hover {
+      color: var(--rose);
+    }
+
+    .user-menu-item .user-menu-icon,
+    .user-menu-item .emoji {
+      width: 22px;
+      text-align: center;
+      font-size: 17px;
+      flex: 0 0 auto;
+    }
+
+    .user-menu-item .chev {
+      margin-left: auto;
+      color: #a8b0bd;
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .user-menu-section {
+      border-bottom: 1px solid #f0f0f3;
+    }
+
+    .user-menu-panel {
+      display: none;
+      padding: 0 0 8px 56px;
+    }
+
+    .user-menu-section.is-open .user-menu-panel {
+      display: grid;
+      gap: 0;
+    }
+
+    .user-menu-link {
+      min-height: 34px;
+      display: flex;
+      align-items: center;
+      color: #666b75;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .user-menu-link.danger {
+      color: #8f949f;
+    }
+
+    .user-menu-item.logout {
+      margin-top: 6px;
+      border-top: 1px solid #e5e7eb;
+      color: #9aa3b2;
+      font-weight: 700;
+    }
+
+    .user-name {
+      cursor: pointer;
+    }
+
+    .drawer-ov{
+      position:fixed;inset:0;background:rgba(0,0,0,0);z-index:1000;pointer-events:none;transition:background .3s
+    }
+    .drawer-ov.open{background:rgba(0,0,0,.45);pointer-events:all}
+    .drawer{
+      position:fixed;top:0;left:-100%;bottom:0;
+      width:88%;max-width:340px;
+      background:#fff;z-index:1001;overflow-y:auto;scrollbar-width:none;
+      transition:left .3s cubic-bezier(.4,0,.2,1);
+      display:flex;flex-direction:column;
+      box-shadow:4px 0 20px rgba(0,0,0,.12);
+      border-top-right-radius:16px;border-bottom-right-radius:16px;
+    }
+    .drawer::-webkit-scrollbar{display:none}
+    .drawer.open{left:0}
+    .dr-head{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:18px 16px 16px;
+      border-bottom:1px solid #D8D8DE;
+    }
+    .dr-login-link{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:0;border:none;background:none;
+      color:var(--tp);font-size:17px;font-weight:800;
+      font-family:inherit;cursor:pointer;
+    }
+    .dr-login-link i{font-size:16px;color:var(--rose)}
+    .dr-close{
+      width:32px;height:32px;border:none;background:none;
+      color:var(--tp);font-size:22px;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .dr-user-mini{display:flex;align-items:center;gap:10px}
+    .u-av{
+      border-radius:50%;background:#FFE7EF;color:var(--rose);
+      display:grid;place-items:center;font-size:18px;font-weight:800;
+    }
+    .u-av.tier-standard{background:#eef2f7;color:#64748b}
+    .u-av.tier-premium{background:#eef5ff;color:var(--navy)}
+    .u-av.tier-vip{background:#fff7e6;color:#f5a623}
+    .u-av.tier-prestige{background:#fff0f4;color:var(--rose)}
+    .dr-user-mini .u-av{width:38px;height:38px}
+    .dr-user-mini-name{font-size:15px;font-weight:700;color:var(--tp)}
+    .dr-user-mini-grade{font-size:11px;color:var(--ts);margin-top:2px}
+    .dr-guest-card{
+      padding:14px 16px 16px;
+      background:#FFF8F5;border-bottom:1px solid #E5E7EB;
+    }
+    .dr-guest-title{font-size:16px;font-weight:800;color:#111827;margin-bottom:4px}
+    .dr-guest-copy{font-size:12px;color:#6B7280;line-height:1.45;margin-bottom:12px}
+    .dr-login-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .dr-action-btn{
+      height:36px;border-radius:5px;border:1px solid var(--rose);
+      background:var(--rose);color:#fff;font-size:12px;font-weight:800;
+      font-family:inherit;cursor:pointer;
+    }
+    .dr-action-btn.secondary{background:#fff;color:#4B5563;border-color:#D9E0E9}
+    .dr-user-assets{
+      display:grid;grid-template-columns:1fr 1px 1fr;
+      margin:12px 16px 0;border:1px solid #E5E7EB;border-radius:10px;
+      overflow:hidden;background:#fff;
+    }
+    .dr-user-asset{text-align:center;padding:9px 6px}
+    .dr-user-asset span{display:block;font-size:10px;color:#8B95A5;margin-bottom:2px}
+    .dr-user-asset strong{display:block;font-size:13px;color:#1F2530;font-family:'Roboto',sans-serif}
+    .dr-user-asset-div{background:#E5E7EB}
+    .dr-mypage-list{display:grid;gap:6px;padding:0 16px 6px}
+    .dr-mypage-item{
+      min-height:40px;display:flex;align-items:center;gap:12px;
+      color:#202633;font-size:14px;font-weight:700;text-decoration:none;
+    }
+    .dr-mypage-item i{width:20px;color:#111827;text-align:center;font-size:15px}
+    .dr-mypage-item .dr-cat-arrow{margin-left:auto}
+    .dr-mypage-sub{
+      display:grid;gap:2px;margin:-2px 0 8px 32px;
+      padding:4px 0 6px 12px;border-left:1px solid #EEF0F3;
+    }
+    .dr-mypage-sub a{
+      min-height:30px;display:flex;align-items:center;
+      color:#4B5563;font-size:12px;font-weight:500;text-decoration:none;
+    }
+    .dr-mypage-sub a.active{color:var(--rose);font-weight:800}
+    .dr-sec{padding:14px 0 10px;border-bottom:1px solid #D8D8DE}
+    .dr-sec:last-child{border-bottom:none}
+    .dr-sec-title{
+      padding:0 16px 14px;
+      color:var(--tp);font-size:13px;font-weight:800;
+    }
+    .dr-quick{
+      display:grid;grid-template-columns:repeat(4,1fr);
+      gap:4px;padding:0 8px;
+    }
+    .dr-quick-item{
+      display:flex;flex-direction:column;align-items:center;gap:10px;
+      padding:10px 4px 14px;cursor:pointer;
+    }
+    .dr-quick-icon{
+      width:44px;height:44px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:28px;flex-shrink:0;color:var(--rose);
+    }
+    .dr-quick-label{font-size:13px;color:var(--ts);word-break:keep-all;text-align:center}
+    .dr-cat-list{padding:0 0 2px}
+    .dr-cat-item{
+      display:flex;align-items:center;gap:12px;
+      padding:15px 16px;border-top:1px solid #D8D8DE;
+      font-size:15px;color:var(--tp);cursor:pointer;
+    }
+    .dr-cat-item:first-child{border-top:none}
+    .dr-cat-flag{
+      width:30px;flex-shrink:0;
+      color:var(--tp);font-size:14px;font-weight:700;
+    }
+    .dr-cat-label{flex:1}
+    .dr-cat-arrow{font-size:12px;color:var(--tm)}
+    .dr-link-grid{
+      display:grid;grid-template-columns:repeat(2,1fr);
+      row-gap:14px;column-gap:24px;
+      padding:0 16px 14px;
+    }
+    .dr-link-grid a{font-size:14px;color:var(--ts);text-decoration:none}
+
+    .main {
+      min-width: 0;
+      padding-top: 0;
+      padding-bottom: 40px;
+    }
+
+    .shopping-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 42px;
+      margin: 0;
+      padding-bottom: 7px;
+      border-bottom: 1.5px solid var(--rose);
+    }
+
+    .shopping-head h2 {
+      margin: 0;
+      color: var(--rose);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .list-title {
+      margin: 0;
+      color: var(--rose);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .status-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 16px;
+      margin: 0;
+    }
+
+    .outline-pill {
+      height: 31px;
+      padding: 0 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: #8a7f7a;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .status-board {
+      display: grid;
+      grid-template-columns: 1.45fr repeat(6, minmax(0, 1fr));
+      align-items: stretch;
+      column-gap: 20px;
+      row-gap: 12px;
+      width: 100%;
+      margin-left: 0;
+      padding: 22px 0 0;
+    }
+
+    .status-step {
+      position: relative;
+      min-width: 0;
+      display: grid;
+    }
+
+    .status-step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -13px;
+      width: 7px;
+      height: 7px;
+      border-top: 1.5px solid #b5bac2;
+      border-right: 1.5px solid #b5bac2;
+      transform: translateY(-50%) rotate(45deg);
+      pointer-events: none;
+    }
+
+    .status-stack {
+      display: grid;
+      gap: 19px;
+    }
+
+    .status-card {
+      min-height: 151px;
+      border: 1px solid #ded8d5;
+      border-radius: 7px;
+      background: #fff;
+      color: #383b40;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 10px 8px;
+      overflow: hidden;
+    }
+
+    .status-card > div {
+      width: 100%;
+    }
+
+    .status-card[data-status],
+    .status-card .sub[data-status] {
+      cursor: pointer;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+    }
+
+    .status-card[data-status]:hover,
+    .status-card[data-status]:focus-visible {
+      border-color: rgba(240, 59, 99, 0.55);
+      box-shadow: 0 0 0 2px rgba(240, 59, 99, 0.08);
+      outline: 0;
+    }
+
+    .status-card.status-active {
+      border-color: var(--rose);
+      box-shadow: 0 0 0 2px rgba(240, 59, 99, 0.12);
+    }
+
+    .status-stack .status-card {
+      min-height: 66px;
+    }
+
+    .status-split {
+      gap: 19px;
+    }
+
+    .status-card em {
+      display: block;
+      margin-bottom: 5px;
+      color: #3c3f45;
+      font-style: normal;
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .status-card em.hot {
+      color: var(--rose);
+    }
+
+    .status-card em.status-payment-wait {
+      color: var(--rose);
+    }
+
+    .status-card em.status-shipping-wait {
+      color: #f59e0b;
+    }
+
+    .status-card strong {
+      display: block;
+      color: #3e4249;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.45;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .status-card .sub {
+      display: block;
+      margin-top: 17px;
+      padding-top: 13px;
+      border-top: 1px solid #e4dedb;
+    }
+
+    .status-card .sub[data-status]:hover,
+    .status-card .sub[data-status]:focus-visible,
+    .status-card .sub.status-active {
+      border-top-color: rgba(240, 59, 99, 0.45);
+      color: var(--rose);
+      outline: 0;
+    }
+
+    .status-card .sub em {
+      margin-bottom: 4px;
+      color: var(--yellow);
+      font-size: 15px;
+    }
+
+    .status-card .muted {
+      display: block;
+      margin-bottom: 4px;
+      color: #8d929d;
+      font-size: 13px;
+    }
+
+    .trade-area {
+      margin-top: 22px;
+    }
+
+    .trade-head {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .trade-head .list-title {
+      color: #222831;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .filter-row {
+      min-height: 34px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin: -38px 0 12px;
+      padding-left: 136px;
+    }
+
+    .filter-group,
+    .country-group,
+    .utility-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .filter-group {
+      gap: 18px;
+    }
+
+    .country-group {
+      gap: 18px;
+    }
+
+    .utility-group {
+      margin-left: auto;
+      gap: 8px;
+    }
+
+    .tab,
+    .country-tab {
+      position: relative;
+      min-width: 0;
+      height: 34px;
+      padding: 0 0 7px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: #7f8794;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .tab::after,
+    .country-tab::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      border-radius: 5px;
+      background: transparent;
+    }
+
+    .tab.active,
+    .country-tab.active {
+      color: var(--rose);
+    }
+
+    .tab.active::after,
+    .country-tab.active::after {
+      background: var(--rose);
+    }
+
+    .tab:focus-visible,
+    .country-tab:focus-visible {
+      outline: 2px solid rgba(240, 59, 99, 0.28);
+      outline-offset: 3px;
+    }
+
+    .divider {
+      width: 1px;
+      height: 19px;
+      background: #e1d8d5;
+      margin: 0 4px;
+    }
+
+    .filter-dropdown {
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .dropdown-toggle {
+      height: 28px;
+      min-width: 100px;
+      padding: 0 24px 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1;
+      letter-spacing: 0;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .dropdown-toggle:focus-visible {
+      outline: 2px solid rgba(37, 99, 235, 0.22);
+      outline-offset: 2px;
+    }
+
+    .chevron {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--text);
+      border-bottom: 1.5px solid var(--text);
+      transform: translateY(-65%) rotate(45deg);
+      transition: transform 0.16s ease;
+    }
+
+    .filter-dropdown.is-open .chevron {
+      transform: translateY(-35%) rotate(225deg);
+    }
+
+    .dropdown-panel {
+      position: absolute;
+      top: calc(100% + 2px);
+      right: 0;
+      z-index: 20;
+      display: none;
+      border: 1px solid var(--line);
+      border-radius: 0;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(30, 34, 42, 0.08);
+      color: var(--text);
+      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .filter-dropdown.is-open .dropdown-panel {
+      display: block;
+    }
+
+    .country-panel {
+      width: 112px;
+      padding: 0;
+    }
+
+    .dropdown-item {
+      width: 100%;
+      height: 28px;
+      border: 0;
+      border-radius: 0;
+      background: #fff;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 10px;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .dropdown-item:hover,
+    .dropdown-item.active {
+      background: #1f6bd6;
+      color: #fff;
+    }
+
+    .status-panel {
+      width: 112px;
+      padding: 0;
+    }
+
+    .status-filter-option {
+      width: 100%;
+      height: 28px;
+      margin-bottom: 0;
+      border: 0;
+      border-radius: 0px;
+      background: #fff;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 10px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
+      line-height: 0;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .status-filter-option:hover,
+    .status-filter-option.status-active {
+      background: #1f6bd6;
+      color: #fff;
+    }
+
+    .status-filter-option:last-child {
+      margin-bottom: 0;
+    }
+
+    .calendar-panel {
+      width: 300px;
+      padding: 14px;
+    }
+
+    .range-shortcuts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 13px;
+    }
+
+    .range-shortcuts button {
+      height: 30px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: #6b717d;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .range-shortcuts button.active,
+    .range-shortcuts button:hover {
+      border-color: var(--rose);
+      background: var(--rose);
+      color: #fff;
+    }
+
+    .calendar-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      color: #252a32;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .calendar-head button {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: #59606d;
+      font-size: 15px;
+      line-height: 1;
+    }
+
+    .calendar-week,
+    .calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+    }
+
+    .calendar-week {
+      margin-bottom: 6px;
+      color: #9ca1ad;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .calendar-days {
+      gap: 4px;
+    }
+
+    .calendar-days button {
+      height: 30px;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      color: #505762;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .calendar-days button:hover,
+    .calendar-days button.selected {
+      background: var(--rose);
+      color: #fff;
+    }
+
+    .calendar-days button.is-muted {
+      color: #c1c5cf;
+    }
+
+    .calendar-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 6px;
+      margin-top: 13px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .calendar-actions button {
+      height: 29px;
+      min-width: 58px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: #606672;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .calendar-actions button.primary {
+      border-color: var(--rose);
+      background: var(--rose);
+      color: #fff;
+    }
+
+    /* ── 거래 목록 ── */
+    .trade-table {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .order-card {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .bundle-group-wrap {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .order-card.bundle-group-start {
+      position: relative;
+      border: 0;
+      border-radius: 0;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .trade-table.status-filtered .order-card.bundle-group-start {
+      margin-bottom: -10px;
+    }
+
+    .order-card.bundle-group-end {
+      margin-top: -10px;
+      border: 0;
+      border-top: 0;
+      border-radius: 0;
+    }
+
+    /* 묶음배송 헤더 바 */
+    .bundle-nav-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-height: 42px;
+      padding: 8px 18px;
+      background: #FBF7F5;
+      border-radius: 8px 8px 0 0;
+      border-bottom: 1px solid #DED8D4;
+    }
+    .bnh-chip {
+      font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 6px;
+      color: var(--rose); white-space: nowrap;
+    }
+    .bnh-chip::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; display: inline-block; }
+    .bnh-sep { width: 1px; height: 14px; background: #ccc; flex-shrink: 0; }
+    .bnh-meta { display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+    .bnh-ml { font-size: 11px; color: #999; }
+    .bnh-mv { font-size: 12px; font-weight: 800; color: var(--navy); }
+    .bnh-spacer { flex: 1; }
+    .btn-bundle-pay {
+      height: 34px; padding: 0 18px; border: 1px solid #1675cf; border-radius: 5px;
+      background: #fff; color: #1675cf;
+      font-size: 13px; font-weight: 700; white-space: nowrap; cursor: pointer;
+      outline: 0; -webkit-tap-highlight-color: transparent;
+    }
+    .btn-bundle-pay:hover {
+      background: #1675cf;
+      color: #fff;
+    }
+    .bundle-group-end .trade-row .tr-pay { display: none; }
+
+    .bundle-group-pay {
+      position: absolute;
+      top: 43px;
+      right: 0;
+      bottom: 0;
+      width: 118px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border-left: 1px solid var(--line-soft);
+    }
+
+    /* 묶음 아이템 내 소스·ID 텍스트 */
+    .tr-prod-src { font-size: 11px; color: #999; margin-bottom: 4px; }
+
+    /* 결제하기 버튼 (행별) */
+    .btn-pay-row {
+      display: inline-flex; align-items: center; justify-content: center;
+      height: 38px; padding: 0 16px; border: 0; border-radius: 5px;
+      background: var(--rose); color: #fff;
+      font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap;
+    }
+    .btn-pay-row:hover { background: var(--rose-h); }
+
+    /* 카드 상단 헤더 바 */
+    .tr-header {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 42px;
+      padding: 8px 18px; background: #FBF7F5;
+      border-bottom: 1px solid #DED8D4;
+    }
+    .tr-chip {
+      font-size: 13px; font-weight: 700; color: #3d4452;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .tr-chip::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; display: inline-block; }
+    .tr-oid { font-size: 11px; color: #999; }
+
+    /* 상태별 chip 색상 */
+    .order-card[data-status="first-payment-wait"]  .tr-chip,
+    .order-card[data-status="second-payment-wait"] .tr-chip { color: var(--rose); }
+    .order-card[data-status="auction-bid"]         .tr-chip { color: var(--navy); }
+    .order-card[data-status="shipping-wait"]       .tr-chip { color: #d97706; }
+    .order-card[data-status="local-arrived"]       .tr-chip { color: #059669; }
+    .order-card[data-status="international-shipping"] .tr-chip { color: #2563eb; }
+    .order-card[data-status="second-payment-complete"] .tr-chip { color: #059669; }
+    .order-card[data-status="first-payment-complete"]  .tr-chip { color: #3d4452; }
+    .order-card[data-status="failed-bid"]          .tr-chip,
+    .order-card[data-status="trade-cancel"]        .tr-chip { color: #aaa; }
+    .order-card[data-status="purchase-request"]    .tr-chip { color: #6b7280; }
+    .order-card[data-status="trade-complete"]      .tr-chip { color: #059669; }
+
+    /* 3컬럼 거래행 (묶음/개별 공통) */
+    .trade-row {
+      display: grid;
+      grid-template-columns: minmax(0,1.12fr) minmax(0,1.12fr) 118px;
+      min-height: 100px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .trade-row:last-child { border-bottom: 0; }
+
+    .tr-product {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 15px 18px;
+      background: #fff;
+      border-right: 1px solid #DED8D4;
+    }
+    .tr-product .thumb {
+      width: 68px; height: 68px;
+      background: #eae6e3;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    .tr-prod-info { min-width: 0; }
+    .tr-prod-id { font-size: 11px; color: #999; margin-bottom: 3px; }
+    .tr-prod-name {
+      font-size: 13px; font-weight: 700; color: #222; line-height: 1.42;
+      margin-bottom: 5px;
+      text-decoration: none;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .tr-prod-name:hover,
+    .tr-prod-name:focus,
+    .tr-prod-name:visited { color: #222; text-decoration: none; }
+    .tr-prod-origin { display: block; margin-top: -2px; margin-bottom: 5px; color: #999; font-size: 11px; font-weight: 400; }
+    .tr-prod-status { font-size: 12px; font-weight: 700; color: #5c6270; }
+    .tr-prod-status.hot { color: var(--rose); }
+
+    .tr-amount {
+      display: grid;
+      grid-template-columns: auto minmax(0,1fr) auto minmax(0,1fr);
+      align-content: center;
+      gap: 7px 10px;
+      padding: 14px 16px;
+      background: #fff;
+      border-right: 1px solid #DED8D4;
+    }
+    .trl { font-size: 12px; font-weight: 700; color: #9aa3b2; white-space: nowrap; }
+    .trv { font-size: 12px; font-weight: 700; color: #222; white-space: nowrap; }
+    .trv.accent { color: #222; font-weight: 700; }
+
+    .tr-pay {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      padding: 0 10px;
+    }
+    .btn-pay-row.btn-outline { background: #fff; color: var(--navy); border: 1.5px solid var(--navy); }
+    .btn-pay-row.btn-outline:hover { background: var(--navy); color: #fff; }
+
+    .bundle-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 11px 20px;
+      background: #f8f9fb;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .bundle-summary-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: #4b5260;
+      font-size: 12px;
+    }
+
+    .bundle-summary-list b {
+      margin-right: 5px;
+      color: #4b5260;
+      font-weight: 700;
+    }
+
+    .bundle-summary-list span {
+      color: #151922;
+      font-weight: 800;
+    }
+
+    .bundle-summary-list .hot {
+      color: var(--rose);
+    }
+
+    .bundle-chip {
+      flex: 0 0 auto;
+      height: 32px;
+      padding: 0 13px;
+      border: 0;
+      border-radius: 7px;
+      background: #394554;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .order-card.status-extra { display: none; }
+    .trade-table.status-filtered .order-card.status-extra { display: block; }
+    .order-card.is-hidden { display: none !important; }
+
+    .trade-empty {
+      display: none;
+      min-height: 84px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      color: #9da2af;
+      font-size: 13px;
+      font-weight: 800;
+      background: #fff;
+    }
+
+    .trade-empty.is-visible { display: flex; }
+
+    .order-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .order-table .col-product-head,
+    .order-table .col-order-head,
+    .order-table .col-ship-head {
+      height: 46px;
+      background: var(--warm);
+      color: transparent;
+      font-size: 0;
+      font-weight: 800;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .order-table .col-product-head { border-right: 0; text-align: left; }
+    .order-table .col-order-head   { text-align: left; }
+    .order-table .col-ship-head    { width: 112px; text-align: right; }
+
+    .order-table td.col-thumb {
+      width: 112px;
+      min-width: 112px;
+      padding: 20px 10px 20px 20px;
+      vertical-align: middle;
+    }
+
+    .order-table td.col-info {
+      padding: 18px 18px 18px 0;
+      vertical-align: middle;
+      border-right: 1px solid var(--line);
+      width: 220px;
+    }
+
+    .order-table td.col-label {
+      color: #6b7280;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 6px 8px 6px 14px;
+      white-space: nowrap;
+      border: 0;
+      width: 88px;
+    }
+
+    .order-table td.col-val {
+      color: #4d5666;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 6px 8px 6px 0;
+      border: 0;
+      white-space: nowrap;
+      width: 96px;
+    }
+
+    .order-table tr:first-child td.col-label,
+    .order-table tr:first-child td.col-val {
+      padding-top: 20px;
+    }
+
+    .order-table tr:nth-child(3) td.col-label,
+    .order-table tr:nth-child(3) td.col-val {
+      padding-bottom: 20px;
+    }
+
+    .order-table td.col-ship {
+      text-align: center;
+      vertical-align: middle;
+      font-size: 13px;
+      font-weight: 800;
+      color: #4d5666;
+      padding: 18px 10px;
+      border-left: 1px solid var(--line);
+      width: 112px;
+      line-height: 1.7;
+    }
+
+    .ship-btn {
+      display: block;
+      margin: 8px auto 0;
+      height: 36px;
+      padding: 0 16px;
+      border: 1px solid #aeb8c6;
+      border-radius: 5px;
+      background: #fff;
+      color: #4d5666;
+      font-size: 13px;
+      font-weight: 800;
+      font-family: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .ship-btn:hover { background: var(--navy); color: #fff; }
+
+    .order-table td.col-actions {
+      text-align: right;
+      padding: 9px 14px;
+      background: #fff;
+      border-top: 0;
+    }
+
+    .order-table tr.is-actions-moved {
+      display: none;
+    }
+
+    .action-stack {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 6px;
+      width: 100%;
+      max-width: 88px;
+      margin: 0 auto;
+    }
+
+    .action-stack .mini-btn {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .thumb {
+      width: 80px;
+      height: 80px;
+      border-radius: 6px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.75), rgba(246,246,246,0.2)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 110 110'%3E%3Crect width='110' height='110' rx='10' fill='%23f3f4f6'/%3E%3Cpath d='M28 23 43 14h24l15 9 13 23-15 8-6-10v44H36V44l-6 10-15-8Z' fill='%23ffffff' stroke='%23d8dce3' stroke-width='2'/%3E%3Cpath d='M43 14c2 9 6 14 12 14s10-5 12-14' fill='none' stroke='%23d8dce3' stroke-width='2'/%3E%3Cpath d='M46 39c5-4 15-4 20 0' fill='none' stroke='%23d12f45' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M42 49h27' stroke='%23d12f45' stroke-width='4' stroke-linecap='round'/%3E%3Ctext x='55' y='61' text-anchor='middle' font-family='Arial' font-size='8' font-weight='700' fill='%23e23346'%3EDUCATI%3C/text%3E%3Cpath d='M28 23 15 46l15 8 6-10M82 23l13 23-15 8-6-10' fill='%23f9fafb' stroke='%23d8dce3' stroke-width='2'/%3E%3C/svg%3E") center / cover no-repeat;
+    }
+
+    .order-id {
+      color: #59606d;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .order-title {
+      color: #151922;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .detail-link,
+    .product-detail-link {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .thumb-link {
+      display: inline-block;
+      line-height: 0;
+    }
+
+    .product-detail-link:hover { color: var(--rose); }
+
+    .order-status-link {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      max-width: 100%;
+      margin-bottom: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #eef3fb;
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.3;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .order-table .col-product-head .order-status-link {
+      margin: 0;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .order-card .col-product-head .order-status-link { color: #111; }
+    .order-card[data-status="auction-bid"] .col-product-head .order-status-link { color: #111; }
+    .order-card[data-status="first-payment-wait"] .col-product-head .order-status-link,
+    .order-card[data-status="second-payment-wait"] .col-product-head .order-status-link { color: var(--rose); }
+    .order-card[data-status="local-arrived"] .col-product-head .order-status-link { color: #111; }
+    .order-card[data-status="shipping-wait"] .col-product-head .order-status-link,
+    .order-card[data-status="international-shipping"] .col-product-head .order-status-link { color: #111; }
+    .order-card[data-status="failed-bid"] .col-product-head .order-status-link,
+    .order-card[data-status="trade-cancel"] .col-product-head .order-status-link { color: #111; }
+    .order-card[data-status="first-payment-complete"] .col-product-head .order-status-link,
+    .order-card[data-status="second-payment-complete"] .col-product-head .order-status-link { color: #111; }
+
+    .row-actions {
+      display: inline-flex;
+      gap: 6px;
+    }
+
+    .mini-btn {
+      height: 29px;
+      min-width: 76px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: #626672;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      text-decoration: none;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .mini-btn.primary {
+      min-width: 86px;
+      height: 45px;
+      border-color: var(--rose);
+      background: var(--rose);
+      color: #fff;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .quick-bid-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 900;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(15, 23, 42, 0.48);
+    }
+
+    .quick-bid-overlay.is-open { display: flex; }
+
+    .quick-bid-modal {
+      width: min(420px, 100%);
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 18px 60px rgba(15, 23, 42, 0.22);
+      overflow: hidden;
+    }
+
+    .quick-bid-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .quick-bid-title {
+      margin: 0;
+      color: #151922;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .quick-bid-close {
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 5px;
+      background: #f4f6fa;
+      color: #5f6673;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .quick-bid-body {
+      display: grid;
+      gap: 14px;
+      padding: 20px;
+    }
+
+    .quick-bid-field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .quick-bid-field label {
+      color: #343b48;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .quick-bid-input {
+      height: 42px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      color: #151922;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .quick-bid-input:focus {
+      outline: none;
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(26, 60, 110, 0.12);
+    }
+
+    .quick-bid-help {
+      color: var(--rose);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .quick-bid-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: 16px 20px 20px;
+    }
+
+    .quick-bid-btn {
+      height: 38px;
+      min-width: 82px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: #626672;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .quick-bid-btn.primary {
+      border-color: var(--rose);
+      background: var(--rose);
+      color: #fff;
+    }
+
+    .order-table .col-ship-head .detail-top-btn {
+      display: inline;
+      flex: initial;
+      min-width: 0;
+      width: auto;
+      height: auto;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1;
+      text-decoration: none;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .order-table .col-ship-head .detail-top-btn:hover {
+      color: var(--rose);
+      background: transparent;
+    }
+
+    .order-table td.col-ship .detail-top-btn {
+      display: inline-flex;
+      justify-content: center;
+      width: 100%;
+      height: auto;
+      margin: 0 0 9px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--rose);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .pager {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 16px;
+    }
+
+    .pager button {
+      width: 31px;
+      height: 32px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: #777b85;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .pager button.current {
+      border-color: var(--rose);
+      background: var(--rose);
+      color: #fff;
+    }
+    /* 사업자 전환 배너 */
+    .biz-convert-section {
+      margin-top: 6px;
+      padding: 0 12px 20px;
+    }
+    .biz-convert-link {
+      display: block;
+      text-decoration: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #eef3fb 0%, #e6edf8 100%);
+      border: 1px solid #c8d8ef;
+      overflow: hidden;
+      transition: box-shadow 0.16s;
+    }
+    .biz-convert-link:hover {
+      box-shadow: 0 2px 10px rgba(26,60,110,0.12);
+    }
+    .biz-convert-inner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 12px 12px 14px;
+    }
+    .biz-convert-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: #1a3c6e;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      color: #fff;
+      font-size: 14px;
+    }
+    .biz-convert-text {
+      flex: 1;
+      min-width: 0;
+    }
+    .biz-convert-text strong {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      color: #1a3c6e;
+      margin-bottom: 2px;
+    }
+    .biz-convert-text span {
+      display: block;
+      font-size: 11px;
+      color: #4f6b9a;
+      line-height: 1.35;
+    }
+    .biz-chev {
+      font-size: 11px;
+      color: #4f6b9a;
+      flex-shrink: 0;
+    }
+  
+    .member-tier-icon { background:#eef5ff !important; color:#1A3C6E !important; }
+    .member-tier-icon i { line-height:1; }
+  </style>
+</head>
+<body>
+  <div class="channel-bar">
+    <div class="channel-inner">
+      <div class="channel-icons">
+        <div class="ch-icon-item" onclick="location.href='web_sub_main.html'">
+          <div class="ch-circle">
+            <div class="ch-circle-logo"><span class="flag">JP</span><span class="brand" style="color:#E60026;font-size:9px;font-weight:900">YAHOO!</span></div>
+          </div>
+          <span class="ch-label">야후 옥션</span>
+        </div>
+        <div class="ch-icon-item" onclick="location.href='web_sub_main.html'">
+          <div class="ch-circle">
+            <div class="ch-circle-logo"><span class="flag" style="font-size:18px;color:#19ce60;font-weight:900">M</span></div>
+          </div>
+          <span class="ch-label">메루카리</span>
+        </div>
+        <div class="ch-icon-item" onclick="location.href='web_sub_main.html'">
+          <div class="ch-circle">
+            <div class="ch-circle-logo"><span class="flag" style="font-size:14px;color:#BF0000;font-weight:900">楽天</span></div>
+          </div>
+          <span class="ch-label">일본 라쿠텐</span>
+        </div>
+        <div class="ch-icon-item" onclick="location.href='web_sub_main.html'">
+          <div class="ch-circle">
+            <div class="ch-circle-logo"><span class="flag" style="font-size:12px;color:#BF0000;font-weight:700">Rakuten</span></div>
+          </div>
+          <span class="ch-label">일본 라쿠마</span>
+        </div>
+        <div class="ch-icon-item" onclick="location.href='web_sub_main.html'">
+          <div class="ch-circle">
+            <div class="ch-circle-logo"><span class="flag" style="font-size:12px;color:#FF9900;font-weight:900">amazon</span></div>
+          </div>
+          <span class="ch-label">야후 쇼핑</span>
+        </div>
+        <div class="ch-icon-item" onclick="location.href='web_sub_main.html'">
+          <div class="ch-circle">
+            <div class="ch-circle-logo"><span class="flag" style="font-size:12px;color:#FF9900;font-weight:900">amazon</span></div>
+          </div>
+          <span class="ch-label">일본 아마존</span>
+        </div>
+        <div class="ch-icon-item" onclick="location.href='web_sub_main.html'">
+          <div class="ch-circle">
+            <div class="ch-circle-logo"><span class="flag">US</span><span class="brand" style="font-size:9px;font-weight:700;color:#E53238">eBay</span></div>
+          </div>
+          <span class="ch-label">미국 이베이</span>
+        </div>
+        <div class="ch-icon-item" onclick="location.href='web_sub_main.html'">
+          <div class="ch-circle">
+            <div class="ch-circle-logo"><span class="flag">UK</span><span class="brand" style="font-size:9px;font-weight:700;color:#E53238">eBay</span></div>
+          </div>
+          <span class="ch-label">영국 이베이</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page">
+    <header class="topbar">
+      <div class="brand-area">
+        <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" onclick="openDrawer()">
+          <span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <a class="logo-link" href="web_main.html" aria-label="Bidbuy 홈">
+          <img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency">
+        </a>
+      </div>
+
+      <form class="search">
+        <input type="text" placeholder="키워드 또는 URL을 입력하세요.">
+        <button type="submit">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          검색
+        </button>
+      </form>
+
+      <div class="user-tools" aria-label="회원 메뉴">
+        <button class="icon-btn" type="button" aria-label="알림">
+          <i class="far fa-bell" aria-hidden="true"></i>
+        </button>
+        <button class="icon-btn" type="button" aria-label="장바구니">
+          <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+        </button>
+        <div class="user-name">
+          홍길동님
+          <span class="premium-chip">PREMIUM</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="stage">
+     <aside class="sidebar">
+        <section class="profile-card" aria-label="회원 정보">
+          <div class="profile-main">
+            <div class="avatar tier-premium member-tier-icon" aria-label="Premium 등급"><i class="fa-solid fa-gem" aria-hidden="true"></i></div>
+            <div>
+              <strong class="profile-name">홍길동님</strong>
+              <span class="profile-tier">Premium</span>
+            </div>
+          </div>
+          <p class="vip-copy">VIP까지 <b>₩215,000</b> 또는 <b>3건</b></p>
+          <div class="vip-row">
+            <div class="vip-progress"><span></span></div>
+            <span class="help-dot">?</span>
+          </div>
+          <div class="profile-actions">
+            <button class="soft-btn" type="button" onclick="location.href='web_qna.html'">나의 문의 내역</button>
+            <button class="soft-btn" type="button" onclick="toggleLogin()">로그아웃</button>
+          </div>
+        </section>
+
+        <section class="side-nav" aria-label="마이페이지 메뉴">
+        <h2 class="side-title"><a href="web_mypage.html">마이페이지</a></h2>
+        <div class="nav-section">
+          <strong>나의 거래 현황</strong>
+          <div class="nav-list">
+            <a class="active" href="web_mainlist.html">거래 전체 목록</a>
+            <a href="web_auction_bid_list.html">경매 입찰/유찰</a>
+            <a href="#">구매 신청 목록</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>배송관리</strong>
+          <div class="nav-list">
+            <a href="web_bundle_shipping_management.html">배송신청/변경</a>
+            <a href="#">배송지 관리</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>관심 항목 관리</strong>
+          <div class="nav-list">
+            <a href="web_favorites.html?tab=seller">관심 출품자</a>
+            <a href="web_favorites.html?tab=auction">경매 관심물품</a>
+            <a href="web_favorites.html?tab=purchase">구매 관심물품</a>
+            <a href="web_favorites.html?tab=keyword">관심 키워드</a>
+            <a href="web_favorites.html?tab=shortcut">바로가기</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>MY 혜택</strong>
+          <div class="nav-list">
+            <a href="web_mileage.html">마일리지 / 쿠폰</a>
+            <a href="web_grade_page.html">MY 등급</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>나의 정보관리</strong>
+          <div class="nav-list">
+            <a href="#">예치금 관리</a>
+            <a href="#">보증금 관리</a>
+            <a href="#">회원정보 수정</a>
+            <a href="#">비밀번호 변경</a>
+            <a href="#">회원 탈퇴</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>고객상담</strong>
+          <div class="nav-list">
+            <a href="web_user_memo.html">사용자메모</a>
+            <a href="web_qna.html">나의 문의내역</a>
+            <a href="web_qna_form.html">1:1 문의하기</a>
+          </div>
+        </div>
+        <div class="nav-section biz-convert-section" style="display: none;">
+          <a href="web_biz.html" class="biz-convert-link">
+            <span class="biz-convert-inner">
+              <span class="biz-convert-icon"><i class="fas fa-building"></i></span>
+              <span class="biz-convert-text">
+                <strong>사업자 회원 전환</strong>
+                <span>사업자 전용 혜택을 확인해보세요</span>
+              </span>
+              <i class="fas fa-chevron-right biz-chev"></i>
+            </span>
+          </a>
+        </div>
+      </section>
+      </aside>
+
+      <main class="main">
+        <section aria-labelledby="shopping-status-title">
+          <div class="shopping-head">
+            <h2 id="shopping-status-title">나의 거래 현황</h2>
+            <div class="status-links">
+              <button class="outline-pill" type="button">거래완료</button>
+              <button class="outline-pill" type="button">취소/반품</button>
+            </div>
+          </div>
+
+          <div class="status-board">
+            <div class="status-step status-stack">
+              <div class="status-card" role="button" tabindex="0" data-status="auction-bid" data-label="경매입찰">
+                <div><em>5</em><strong>경매 입찰 상품</strong></div>
+              </div>
+              <div class="status-card" role="button" tabindex="0" data-status="purchase-request" data-label="구매 신청">
+                <div><em>5</em><strong>구매 신청 상품</strong></div>
+              </div>
+            </div>
+            <div class="status-step">
+              <div class="status-card" role="button" tabindex="0" data-status="first-payment-wait" data-label="1차 결제대기"><div><em class="hot">5</em><strong>1차<br>결제대기</strong></div></div>
+            </div>
+            <div class="status-step">
+              <div class="status-card" role="button" tabindex="0" data-status="first-payment-complete" data-label="1차 결제완료"><div><em>5</em><strong>1차<br>결제완료</strong></div></div>
+            </div>
+            <div class="status-step status-stack status-split">
+              <div class="status-card" role="button" tabindex="0" data-status="local-arrived" data-label="현지도착"><div><em>5</em><strong>현지도착</strong></div></div>
+              <div class="status-card" role="button" tabindex="0" data-status="shipping-wait" data-label="배송대기"><div><em>3</em><strong>배송대기</strong></div></div>
+            </div>
+            <div class="status-step">
+              <div class="status-card" role="button" tabindex="0" data-status="second-payment-wait" data-label="2차 결제대기"><div><em class="hot">5</em><strong>2차<br>결제대기</strong></div></div>
+            </div>
+            <div class="status-step">
+              <div class="status-card" role="button" tabindex="0" data-status="second-payment-complete" data-label="2차 결제 완료"><div><em>5</em><strong>2차<br>결제 완료</strong></div></div>
+            </div>
+            <div class="status-step">
+              <div class="status-card" role="button" tabindex="0" data-status="international-shipping" data-label="국제배송"><div><em class="hot">5</em><strong>국제배송</strong></div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="trade-area" aria-labelledby="trade-list-title">
+          <div class="trade-head">
+            <h2 class="list-title" id="trade-list-title">거래 전체 목록</h2>
+          </div>
+          <div class="filter-row">
+            <div class="filter-group" aria-label="거래 유형">
+              <button class="tab active" type="button" data-trade-type="">전체</button>
+              <button class="tab" type="button" data-trade-type="auction">경매</button>
+              <button class="tab" type="button" data-trade-type="purchase">구매</button>
+            </div>
+            <div class="utility-group">
+              <div class="filter-dropdown" data-dropdown>
+                <button class="dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                  <span data-dropdown-label="country">거래 국가</span>
+                  <span class="chevron" aria-hidden="true"></span>
+                </button>
+                <div class="dropdown-panel country-panel" role="menu" aria-label="거래 국가 선택">
+                  <button class="dropdown-item active" type="button" role="menuitem" data-country="" data-label="전체 국가">전체 국가</button>
+                  <button class="dropdown-item" type="button" role="menuitem" data-country="jp" data-label="일본">일본</button>
+                  <button class="dropdown-item" type="button" role="menuitem" data-country="us" data-label="미국">미국</button>
+                  <button class="dropdown-item" type="button" role="menuitem" data-country="uk" data-label="영국">영국</button>
+                </div>
+              </div>
+              <div class="filter-dropdown" data-dropdown>
+                <button class="dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                  <span data-dropdown-label="period">최근 1개월</span>
+                  <span class="chevron" aria-hidden="true"></span>
+                </button>
+                <div class="dropdown-panel calendar-panel" role="dialog" aria-label="조회 기간 선택">
+                  <div class="range-shortcuts" aria-label="빠른 기간 선택">
+                    <button type="button" data-period-label="1주일">1주일</button>
+                    <button class="active" type="button" data-period-label="최근 1개월">1개월</button>
+                    <button type="button" data-period-label="6개월">6개월</button>
+                    <button type="button" data-period-label="1년">1년</button>
+                  </div>
+                  <div class="calendar-head">
+                    <button type="button" aria-label="이전 달">‹</button>
+                    <strong>2024.04</strong>
+                    <button type="button" aria-label="다음 달">›</button>
+                  </div>
+                  <div class="calendar-week" aria-hidden="true">
+                    <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+                  </div>
+                  <div class="calendar-days" aria-label="날짜 선택">
+                    <button class="is-muted" type="button">31</button>
+                    <button type="button">1</button>
+                    <button type="button">2</button>
+                    <button type="button">3</button>
+                    <button type="button">4</button>
+                    <button type="button">5</button>
+                    <button type="button">6</button>
+                    <button type="button">7</button>
+                    <button type="button">8</button>
+                    <button type="button">9</button>
+                    <button type="button">10</button>
+                    <button type="button">11</button>
+                    <button type="button">12</button>
+                    <button type="button">13</button>
+                    <button type="button">14</button>
+                    <button type="button">15</button>
+                    <button type="button">16</button>
+                    <button class="selected" type="button">17</button>
+                    <button type="button">18</button>
+                    <button type="button">19</button>
+                    <button type="button">20</button>
+                    <button type="button">21</button>
+                    <button type="button">22</button>
+                    <button type="button">23</button>
+                    <button type="button">24</button>
+                    <button type="button">25</button>
+                    <button type="button">26</button>
+                    <button type="button">27</button>
+                    <button type="button">28</button>
+                    <button type="button">29</button>
+                    <button type="button">30</button>
+                    <button class="is-muted" type="button">1</button>
+                    <button class="is-muted" type="button">2</button>
+                    <button class="is-muted" type="button">3</button>
+                    <button class="is-muted" type="button">4</button>
+                  </div>
+                  <div class="calendar-actions">
+                    <button type="button" data-calendar-reset>초기화</button>
+                    <button class="primary" type="button" data-calendar-apply>적용</button> 
+                  </div>
+                </div>
+              </div>
+              <div class="filter-dropdown" data-dropdown>
+                <button class="dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                  <span data-dropdown-label="status">진행 단계</span>
+                  <span class="chevron" aria-hidden="true"></span>
+                </button>
+                <div class="dropdown-panel status-panel" role="menu" aria-label="진행 단계 선택">
+                  <button class="status-filter-option status-active" type="button" role="menuitem" data-status="" data-label="전체">전체</button>
+                  <button class="status-filter-option" type="button" role="menuitem" data-status="auction-bid" data-label="입찰중">입찰중</button>
+                  <button class="status-filter-option" type="button" role="menuitem" data-status="failed-bid" data-label="유찰">유찰</button>
+                  <button class="status-filter-option" type="button" role="menuitem" data-status="trade-cancel" data-label="거래취소">거래취소</button>
+                  <button class="status-filter-option" type="button" role="menuitem" data-status="first-payment-wait" data-label="결제대기">결제대기</button>
+                  <button class="status-filter-option" type="button" role="menuitem" data-status="first-payment-complete" data-label="1차 결제완료">1차 결제완료</button>
+                  <button class="status-filter-option" type="button" role="menuitem" data-status="second-payment-wait" data-label="결제대기">결제대기</button>
+                  <button class="status-filter-option" type="button" role="menuitem" data-status="second-payment-complete" data-label="2차 결제완료">2차 결제완료</button>
+                  <button class="status-filter-option" type="button" role="menuitem" data-status="international-shipping" data-label="국제배송">국제배송</button>
+                  <button class="status-filter-option" type="button" role="menuitem" data-status="trade-complete" data-label="거래완료">거래완료</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trade-table" aria-label="거래 목록">
+
+            <!-- 입찰중 -->
+            <div class="order-card" data-trade-type="auction" data-country="jp" data-status="auction-bid">
+              <div class="tr-header">
+                <span class="tr-chip">입찰중 · 종료 2시간 14분 전</span>
+                <span class="tr-oid">야후경매 · a2024041701</span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div class="tr-prod-info">
+                    <a class="tr-prod-name" href="web_payment_detail.html">닌텐도 스위치 OLED 화이트 본체 풀박스 중고</a>
+                    <span class="tr-prod-origin">Nintendo Switch 有機ELモデル ホワイト 本体 フルボックス 中古</span>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">1개 / 23,900 엔</span><span class="trl">총상품가격</span><span class="trv accent">23,900 엔</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">-</span>
+                  <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                </div>
+                <div class="tr-pay"><button class="btn-pay-row js-quick-bid-open" type="button">재입찰</button></div>
+              </div>
+            </div>
+
+            <!-- 결제대기 -->
+            <div class="order-card" data-trade-type="auction" data-country="jp" data-status="first-payment-wait">
+              <div class="tr-header">
+                <span class="tr-chip">1차 결제대기</span>
+                <span class="tr-oid">야후경매 · e2024041702</span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div class="tr-prod-info">
+                    <a class="tr-prod-name" href="web_payment_detail.html">소니 워크맨 빈티지 카세트 플레이어 한정 컬러</a>
+                    <span class="tr-prod-origin">ソニー ウォークマン ヴィンテージ カセットプレーヤー 限定カラー</span>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">2개 / 28,500 엔</span><span class="trl">총상품가격</span><span class="trv accent">8,500 엔</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">82,450원</span>
+                  <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                </div>
+                <div class="tr-pay"><a class="btn-pay-row" href="web_bill_1st.html">결제하기</a></div>
+              </div>
+            </div>
+
+            <!-- 묶음배송 그룹 (BJP2024041703 + 04) -->
+            <div class="bundle-group-wrap">
+            <div class="order-card bundle-group-start" data-trade-type="purchase" data-country="jp" data-status="second-payment-wait">
+              <div class="bundle-nav-header">
+                <span class="bnh-chip">2차 결제대기</span>
+                <span class="bnh-sep"></span>
+                <span class="bnh-meta"><span class="bnh-ml">대표주문번호</span><span class="bnh-mv">BJP2024041703</span></span>
+                <span class="bnh-meta"><span class="bnh-ml">묶음상품</span><span class="bnh-mv">2건</span></span>
+                <span class="bnh-meta"><span class="bnh-ml">총상품가격</span><span class="bnh-mv">57,000 엔</span></span>
+                <span class="bnh-spacer"></span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div>
+                    <div class="tr-prod-src">야후구매 · BJP2024041703</div>
+                    <div class="tr-prod-info">
+                      <a class="tr-prod-name" href="web_payment_detail.html">스타벅스 재팬 사쿠라 머그컵 텀블러 세트</a>
+                      <span class="tr-prod-origin">スターバックス ジャパン 桜 マグカップ タンブラーセット</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">2개 / 28,500 엔</span><span class="trl">총상품가격</span><span class="trv accent">28,500 엔</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">-</span>
+                  <span class="trl">현지도착일</span><span class="trv">2024.04.20</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                </div>
+                <div class="tr-pay"></div>
+              </div>
+            </div>
+
+            <!-- BJP2024041704 묶음 (bundle-group-end) -->
+            <div class="order-card bundle-group-end" data-trade-type="purchase" data-country="jp" data-status="second-payment-wait">
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div>
+                    <div class="tr-prod-src">야후구매 · BJP2024041704</div>
+                    <div class="tr-prod-info">
+                      <a class="tr-prod-name" href="web_payment_detail.html">무인양품 원목 수납박스 데스크 정리함 묶음</a>
+                      <span class="tr-prod-origin">無印良品 木製収納ボックス デスク整理ケース まとめ</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">2개 / 28,500 엔</span><span class="trl">총상품가격</span><span class="trv accent">28,500 엔</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">-</span>
+                  <span class="trl">현지도착일</span><span class="trv">2024.04.22</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                </div>
+                <div class="tr-pay"></div>
+              </div>
+            </div>
+            <div class="bundle-group-pay">
+              <button class="btn-bundle-pay" type="button" onclick="location.href='web_bill_2nd.html'">통합결제</button>
+            </div>
+            </div>
+
+            <!-- 현지도착 711 (단독/개별) -->
+            <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="local-arrived">
+              <div class="tr-header">
+                <span class="tr-chip">현지도착 · 보관 D+3</span>
+                <span class="tr-oid">야후구매 · BJP2024041711</span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div class="tr-prod-info">
+                    <a class="tr-prod-name" href="web_payment_detail.html">스타벅스 재팬 사쿠라 플레이트 한정 컬렉션</a>
+                    <span class="tr-prod-origin">スターバックス ジャパン 桜 プレート 限定コレクション</span>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">1개 / 9,800 엔</span><span class="trl">총상품가격</span><span class="trv accent">9,800 엔</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">-</span>
+                  <span class="trl">현지도착일</span><span class="trv">2024.04.20</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                </div>
+                <div class="tr-pay"><button class="btn-pay-row" type="button">결제하기</button></div>
+              </div>
+            </div>
+
+            <!-- 현지도착 개별배송 -->
+            <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="local-arrived">
+              <div class="tr-header">
+                <span class="tr-chip">현지도착 · 보관 D+1</span>
+                <span class="tr-oid">메루카리 · BJP2024041706</span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div class="tr-prod-info">
+                    <a class="tr-prod-name" href="web_payment_detail.html">스투시 재팬 로고 반팔 티셔츠 블랙</a>
+                    <span class="tr-prod-origin">ステューシー ジャパン ロゴ 半袖Tシャツ ブラック</span>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">1개 / 7,900 엔</span><span class="trl">총상품가격</span><span class="trv accent">7,900 엔</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.18</span><span class="trl">결제금액</span><span class="trv">-</span>
+                  <span class="trl">현지도착일</span><span class="trv">2024.04.21</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                </div>
+                <div class="tr-pay"><button class="btn-pay-row" type="button">결제하기</button></div>
+              </div>
+            </div>
+
+            <!-- 국제배송 -->
+            <div class="order-card" data-trade-type="auction" data-country="us" data-status="international-shipping">
+              <div class="tr-header">
+                <span class="tr-chip">국제배송중</span>
+                <span class="tr-oid">미국이베이 · g2024041705</span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <a class="tr-prod-name" href="web_payment_detail.html">애플 매직키보드 일본어 배열 실버 모델</a>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">1개 / 23,900 엔</span><span class="trl">총상품가격</span><span class="trv accent">23,900 엔</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">286,740원</span>
+                  <span class="trl">현지도착일</span><span class="trv">2024.04.20</span><span class="trl">국제배송일</span><span class="trv">2024.04.24</span>
+                </div>
+                <div class="tr-pay"><button class="btn-pay-row" type="button">배송조회</button></div>
+              </div>
+            </div>
+
+            <!-- 구매신청 -->
+            <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="purchase-request">
+              <div class="tr-header">
+                <span class="tr-chip">구매신청 접수</span>
+                <span class="tr-oid">구매대행 · BJP2024041606</span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div class="tr-prod-info">
+                    <a class="tr-prod-name" href="web_payment_detail.html">산리오 쿠로미 한정 아크릴 키링 랜덤 박스</a>
+                    <span class="tr-prod-origin">サンリオ クロミ 限定 アクリルキーホルダー ランダムボックス</span>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">1개 / 12,400 엔</span><span class="trl">총상품가격</span><span class="trv accent">12,400 엔</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.16</span><span class="trl">결제금액</span><span class="trv">-</span>
+                  <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                </div>
+                <div class="tr-pay"><span style="font-size:12px;color:#aaa;">진행중</span></div>
+              </div>
+            </div>
+
+            <!-- 1차 결제완료 - 송금준비중 -->
+            <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="first-payment-complete">
+              <div class="tr-header">
+                <span class="tr-chip">배송신청 가능</span>
+                <span class="tr-oid">야후경매 · BJP2024041607</span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div class="tr-prod-info">
+                    <a class="tr-prod-name" href="web_payment_detail.html">요코하마 기념 한정 우표 앨범 컬렉션</a>
+                    <span class="tr-prod-origin">横浜記念 限定切手アルバム コレクション</span>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">1개 / 18,900 엔</span><span class="trl">총상품가격</span><span class="trv accent">18,900 엔</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.16</span><span class="trl">결제금액</span><span class="trv">226,800원</span>
+                  <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                </div>
+                <div class="tr-pay"><button class="btn-pay-row btn-outline" type="button">배송신청/변경</button></div>
+              </div>
+            </div>
+
+            <!-- 1차 결제완료 - 송금완료 -->
+            <div class="order-card status-extra" data-trade-type="auction" data-country="jp" data-status="first-payment-complete">
+              <div class="tr-header">
+                <span class="tr-chip">1차 결제완료</span>
+                <span class="tr-oid">야후경매 · i2024041608</span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div class="tr-prod-info">
+                    <a class="tr-prod-name" href="web_payment_detail.html">원피스 월드콜렉터블 피규어 루피 스페셜</a>
+                    <span class="tr-prod-origin">ワンピース ワールドコレクタブルフィギュア ルフィ スペシャル</span>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">1개 / 12,500 엔</span><span class="trl">총상품가격</span><span class="trv accent">12,500 엔</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.16</span><span class="trl">결제금액</span><span class="trv">150,000원</span>
+                  <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                </div>
+                <div class="tr-pay"></div>
+              </div>
+            </div>
+
+            <!-- 1차 결제완료 - 현지배송중 -->
+            <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="first-payment-complete">
+              <div class="tr-header">
+                <span class="tr-chip">1차 결제완료</span>
+                <span class="tr-oid">구매대행 · BJP2024041609</span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div class="tr-prod-info">
+                    <a class="tr-prod-name" href="web_payment_detail.html">파이오니어 빈티지 오디오 앰프 부품 세트</a>
+                    <span class="tr-prod-origin">パイオニア ヴィンテージ オーディオアンプ 部品セット</span>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">1개 / 8,900 엔</span><span class="trl">총상품가격</span><span class="trv accent">8,900 엔</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.16</span><span class="trl">결제금액</span><span class="trv">106,800원</span>
+                  <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                </div>
+                <div class="tr-pay"></div>
+              </div>
+            </div>
+
+            <!-- 배송대기 1 -->
+            <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="shipping-wait">
+              <div class="tr-header">
+                <span class="tr-chip">배송신청 가능 · 보관 D+30</span>
+                <span class="tr-oid">메루카리 · BJP2024041510</span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div class="tr-prod-info">
+                    <a class="tr-prod-name" href="web_payment_detail.html">미개봉 포켓몬 카드 프로모 팩 10매 묶음</a>
+                    <span class="tr-prod-origin">未開封 ポケモンカード プロモパック 10枚 まとめ</span>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">1개 / 8,700 엔</span><span class="trl">총상품가격</span><span class="trv accent">8,700 엔</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.15</span><span class="trl">결제금액</span><span class="trv">104,400원</span>
+                  <span class="trl">현지도착일</span><span class="trv">2024.04.16</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                </div>
+                <div class="tr-pay"><button class="btn-pay-row" type="button">배송신청</button></div>
+              </div>
+            </div>
+
+            <!-- 배송대기 2 -->
+            <div class="order-card status-extra" data-trade-type="auction" data-country="jp" data-status="shipping-wait">
+              <div class="tr-header">
+                <span class="tr-chip">배송신청 가능 · 보관 D+12</span>
+                <span class="tr-oid">야후경매 · j2024041511</span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div class="tr-prod-info">
+                    <a class="tr-prod-name" href="web_payment_detail.html">캐논 필름카메라 AE-1 렌즈 포함 세트</a>
+                    <span class="tr-prod-origin">キヤノン フィルムカメラ AE-1 レンズ付きセット</span>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">1개 / 18,900 엔</span><span class="trl">총상품가격</span><span class="trv accent">18,900 엔</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.15</span><span class="trl">결제금액</span><span class="trv">226,800원</span>
+                  <span class="trl">현지도착일</span><span class="trv">2024.04.16</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                </div>
+                <div class="tr-pay"><button class="btn-pay-row" type="button">배송신청</button></div>
+              </div>
+            </div>
+
+            <!-- 배송대기 3 -->
+            <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="shipping-wait">
+              <div class="tr-header">
+                <span class="tr-chip">배송신청 가능 · 보관 D+7</span>
+                <span class="tr-oid">구매대행 · BJP2024041512</span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div class="tr-prod-info">
+                    <a class="tr-prod-name" href="web_payment_detail.html">건담 메탈빌드 한정판 피규어 미개봉</a>
+                    <span class="tr-prod-origin">ガンダム メタルビルド 限定版フィギュア 未開封</span>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">2개 / 12,400 엔</span><span class="trl">총상품가격</span><span class="trv accent">12,400 엔</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.15</span><span class="trl">결제금액</span><span class="trv">148,800원</span>
+                  <span class="trl">현지도착일</span><span class="trv">2024.04.17</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                </div>
+                <div class="tr-pay"><button class="btn-pay-row" type="button">배송신청</button></div>
+              </div>
+            </div>
+
+            <!-- 2차 결제완료 -->
+            <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="second-payment-complete">
+              <div class="tr-header">
+                <span class="tr-chip">2차 결제완료</span>
+                <span class="tr-oid">야후경매 · BJP2024041413</span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div class="tr-prod-info">
+                    <a class="tr-prod-name" href="web_payment_detail.html">다이슨 슈퍼소닉 드라이어 니켈 코퍼</a>
+                    <span class="tr-prod-origin">ダイソン スーパーソニック ドライヤー ニッケル/コッパー</span>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">2개 / 31,000 엔</span><span class="trl">총상품가격</span><span class="trv accent">31,000 엔</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.14</span><span class="trl">결제금액</span><span class="trv">372,000원</span>
+                  <span class="trl">현지도착일</span><span class="trv">2024.04.17</span><span class="trl">국제배송일</span><span class="trv">2024.04.22</span>
+                </div>
+                <div class="tr-pay"><button class="btn-pay-row" type="button">배송조회</button></div>
+              </div>
+            </div>
+
+            <!-- 국제배송 2 -->
+            <div class="order-card status-extra" data-trade-type="auction" data-country="uk" data-status="international-shipping">
+              <div class="tr-header">
+                <span class="tr-chip">국제배송중</span>
+                <span class="tr-oid">일본라쿠텐 · o2024041314</span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div class="tr-prod-info">
+                    <a class="tr-prod-name" href="web_payment_detail.html">일본 한정 레고 미니피규어 시리즈 묶음</a>
+                    <span class="tr-prod-origin">日本限定 レゴ ミニフィギュアシリーズ まとめ</span>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">3개 / 44,200 엔</span><span class="trl">총상품가격</span><span class="trv accent">44,200 엔</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.13</span><span class="trl">결제금액</span><span class="trv">530,400원</span>
+                  <span class="trl">현지도착일</span><span class="trv">2024.04.16</span><span class="trl">국제배송일</span><span class="trv">2024.04.20</span>
+                </div>
+                <div class="tr-pay"><button class="btn-pay-row" type="button">배송조회</button></div>
+              </div>
+            </div>
+
+            <!-- 유찰 -->
+            <div class="order-card status-extra" data-trade-type="auction" data-country="jp" data-status="failed-bid">
+              <div class="tr-header">
+                <span class="tr-chip">유찰</span>
+                <span class="tr-oid">야후경매 · q2024041315</span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div class="tr-prod-info">
+                    <a class="tr-prod-name" href="web_payment_detail.html">슈퍼패미컴 본체 컨트롤러 게임팩 세트</a>
+                    <span class="tr-prod-origin">スーパーファミコン 本体 コントローラー ゲームパックセット</span>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">1개 / 15,000 엔</span><span class="trl">총상품가격</span><span class="trv">-</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.13</span><span class="trl">결제금액</span><span class="trv">-</span>
+                  <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                </div>
+                <div class="tr-pay"></div>
+              </div>
+            </div>
+
+            <!-- 1차 결제대기 (구 낙찰) -->
+            <div class="order-card status-extra" data-trade-type="auction" data-country="jp" data-status="first-payment-wait">
+              <div class="tr-header">
+                <span class="tr-chip">1차 결제대기</span>
+                <span class="tr-oid">야후경매 · s2024041316</span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div class="tr-prod-info">
+                    <a class="tr-prod-name" href="web_payment_detail.html">마블 아이언맨 프리미엄 액션 피규어 미개봉</a>
+                    <span class="tr-prod-origin">マーベル アイアンマン プレミアムアクションフィギュア 未開封</span>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">1개 / 21,400 엔</span><span class="trl">총상품가격</span><span class="trv accent">21,400 엔</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.13</span><span class="trl">결제금액</span><span class="trv">-</span>
+                  <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                </div>
+                <div class="tr-pay"><a class="btn-pay-row" href="web_bill_1st.html">결제하기</a></div>
+              </div>
+            </div>
+
+            <!-- 거래취소 -->
+            <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="trade-cancel">
+              <div class="tr-header">
+                <span class="tr-chip">거래취소</span>
+                <span class="tr-oid">구매대행 · BJP2024041217</span>
+              </div>
+              <div class="trade-row">
+                <div class="tr-product">
+                  <a href="web_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+                  <div class="tr-prod-info">
+                    <a class="tr-prod-name" href="web_payment_detail.html">아식스 젤카야노 한정 컬러 운동화</a>
+                    <span class="tr-prod-origin">アシックス ゲルカヤノ 限定カラー スニーカー</span>
+                  </div>
+                </div>
+                <div class="tr-amount">
+                  <span class="trl">상품금액</span><span class="trv">1개 / 6,200 엔</span><span class="trl">총상품가격</span><span class="trv">-</span>
+                  <span class="trl">주문일자</span><span class="trv">2024.04.12</span><span class="trl">결제금액</span><span class="trv">-</span>
+                  <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                </div>
+                <div class="tr-pay"></div>
+              </div>
+            </div>
+
+            <div class="trade-empty">선택한 쇼핑 현황에 해당하는 거래가 없습니다.</div>
+          </div>
+
+          <div class="pager" aria-label="페이지 이동">
+            <button type="button">≪</button>
+            <button type="button">?</button>
+            <button type="button">1</button>
+            <button class="current" type="button">2</button>
+            <button type="button">3</button>
+            <button type="button">4</button>
+            <button type="button">5</button>
+            <button type="button">?</button>
+            <button type="button">≫</button>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <div class="quick-bid-overlay" id="quickBidModal" aria-hidden="true">
+    <div class="quick-bid-modal" role="dialog" aria-modal="true" aria-labelledby="quickBidTitle">
+      <div class="quick-bid-head">
+        <h2 class="quick-bid-title" id="quickBidTitle">빠른 입찰</h2>
+        <button class="quick-bid-close" type="button" aria-label="닫기" data-quick-bid-close>&times;</button>
+      </div>
+      <div class="quick-bid-body">
+        <div class="quick-bid-field">
+          <label for="quickBidQty">수량</label>
+          <input class="quick-bid-input" id="quickBidQty" type="text" inputmode="numeric" value="1">
+        </div>
+        <div class="quick-bid-field">
+          <label for="quickBidAmount">입찰 금액</label>
+          <input class="quick-bid-input" id="quickBidAmount" type="text" inputmode="numeric" placeholder="13,900">
+          <div class="quick-bid-help">다음 입찰 금액은 13,900 엔 이상</div>
+        </div>
+      </div>
+      <div class="quick-bid-actions">
+        <button class="quick-bid-btn" type="button" data-quick-bid-close>취소</button>
+        <button class="quick-bid-btn primary" type="button">입찰하기</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="drawer-ov" id="drawerOv" onclick="closeDrawer()"></div>
+
+  <div class="drawer" id="drawer">
+    <div id="drGuestHd" class="dr-head" style="display:none">
+      <button class="dr-login-link" onclick="toggleLogin();closeDrawer()"><span>로그인하기</span><i class="fas fa-chevron-right"></i></button>
+      <button class="dr-close" onclick="closeDrawer()"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div id="drUserHd" class="dr-head">
+      <div class="dr-user-mini">
+        <div class="u-av tier-premium member-tier-icon" aria-label="Premium 등급"><i class="fa-solid fa-gem" aria-hidden="true"></i></div>
+        <div>
+          <div class="dr-user-mini-name">홍길동님</div>
+          <div class="dr-user-mini-grade">PREMIUM 회원</div>
+        </div>
+      </div>
+      <button class="dr-close" onclick="closeDrawer()"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div id="drGuestPanel" class="dr-guest-card" style="display:none">
+      <div class="dr-guest-title">비드바이 로그인</div>
+      <div class="dr-guest-copy">로그인하고 입찰 현황, 마일리지, 관심 상품을 빠르게 확인하세요.</div>
+      <div class="dr-login-actions">
+        <button class="dr-action-btn" type="button" onclick="toggleLogin();closeDrawer()">로그인</button>
+        <button class="dr-action-btn secondary" type="button">회원가입</button>
+      </div>
+    </div>
+
+    <div id="drUserAssets" class="dr-user-assets">
+      <div class="dr-user-asset"><span>마일리지</span><strong>4,500원</strong></div>
+      <div class="dr-user-asset-div"></div>
+      <div class="dr-user-asset"><span>예치금</span><strong>29,870원</strong></div>
+    </div>
+
+    <div class="dr-sec">
+      <div class="dr-sec-title">바로가기</div>
+      <div class="dr-quick">
+        <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-truck-fast"></i></div><div class="dr-quick-label">배송현황</div></div>
+        <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-won-sign"></i></div><div class="dr-quick-label">비용계산기</div></div>
+        <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-file-invoice"></i></div><div class="dr-quick-label">관세안내</div></div>
+        <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-calendar-check"></i></div><div class="dr-quick-label">출석부</div></div>
+      </div>
+    </div>
+
+    <div class="dr-sec">
+      <div class="dr-sec-title">카테고리</div>
+      <div class="dr-cat-list">
+        <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본야후경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
+        <div class="dr-cat-item"><span class="dr-cat-flag">US</span><span class="dr-cat-label">미국이베이경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
+        <div class="dr-cat-item"><span class="dr-cat-flag">GB</span><span class="dr-cat-label">영국이베이경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
+        <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본메루카리</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
+        <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본구매대행</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
+      </div>
+    </div>
+
+     <div class="dr-sec">
+      <div class="dr-sec-title">이용가이드</div>
+      <div class="dr-link-grid">
+        <a href="#">초보자가이드</a>
+        <a href="#">수수료안내</a>
+        <a href="#">배송비안내</a>
+        <a href="#">관부가세안내</a>
+      </div>
+    </div>
+
+    <div class="dr-sec" style="border-bottom:none">
+      <div class="dr-sec-title">고객센터</div>
+      <div class="dr-link-grid">
+        <a href="#">공지사항</a>
+        <a href="#">자주하는질문</a>
+        <a href="#">1:1 문의하기</a>
+        <a href="#">커뮤니티</a>
+      </div>
+    </div>
+    <div style="height:24px"></div>
+  </div>
+  <script>
+    document.querySelectorAll(".filter-group").forEach((group) => {
+      const tabs = group.querySelectorAll("button");
+
+      tabs.forEach((tab) => {
+        tab.setAttribute("aria-pressed", String(tab.classList.contains("active")));
+
+        tab.addEventListener("click", () => {
+          tabs.forEach((item) => {
+            const isActive = item === tab;
+            item.classList.toggle("active", isActive);
+            item.setAttribute("aria-pressed", String(isActive));
+          });
+          activeType = tab.dataset.tradeType || "";
+          applyTradeFilters();
+        });
+      });
+    });
+
+    const dropdowns = document.querySelectorAll("[data-dropdown]");
+
+    function closeDropdowns(exceptDropdown) {
+      dropdowns.forEach((dropdown) => {
+        if (dropdown === exceptDropdown) {
+          return;
+        }
+
+        dropdown.classList.remove("is-open");
+        const toggle = dropdown.querySelector(".dropdown-toggle");
+        if (toggle) {
+          toggle.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+
+    dropdowns.forEach((dropdown) => {
+      const toggle = dropdown.querySelector(".dropdown-toggle");
+      if (!toggle) {
+        return;
+      }
+
+      toggle.addEventListener("click", () => {
+        const willOpen = !dropdown.classList.contains("is-open");
+        closeDropdowns(dropdown);
+        dropdown.classList.toggle("is-open", willOpen);
+        toggle.setAttribute("aria-expanded", String(willOpen));
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest("[data-dropdown]")) {
+        closeDropdowns();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeDropdowns();
+      }
+    });
+
+    const countryLabel = document.querySelector('[data-dropdown-label="country"]');
+    document.querySelectorAll(".country-panel .dropdown-item").forEach((item) => {
+      item.addEventListener("click", () => {
+        document.querySelectorAll(".country-panel .dropdown-item").forEach((option) => {
+          option.classList.toggle("active", option === item);
+        });
+
+        activeCountry = item.dataset.country || "";
+        if (countryLabel) {
+          countryLabel.textContent = item.dataset.label || item.textContent.trim();
+        }
+
+        applyTradeFilters();
+        closeDropdowns();
+      });
+    });
+
+    const periodLabel = document.querySelector('[data-dropdown-label="period"]');
+    const rangeButtons = document.querySelectorAll(".range-shortcuts button");
+    const calendarDays = document.querySelectorAll(".calendar-days button:not(.is-muted)");
+
+    rangeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        rangeButtons.forEach((item) => item.classList.toggle("active", item === button));
+
+        if (periodLabel) {
+          periodLabel.textContent = button.dataset.periodLabel || button.textContent.trim();
+        }
+      });
+
+    });
+
+    calendarDays.forEach((day) => {
+      day.addEventListener("click", () => {
+        calendarDays.forEach((item) => item.classList.toggle("selected", item === day));
+      });
+    });
+
+    document.querySelector("[data-calendar-reset]")?.addEventListener("click", () => {
+      rangeButtons.forEach((item) => item.classList.toggle("active", item.dataset.periodLabel === "최근 1개월"));
+      calendarDays.forEach((item) => item.classList.toggle("selected", item.textContent.trim() === "17"));
+
+      if (periodLabel) {
+        periodLabel.textContent = "최근 1개월";
+      }
+    });
+
+    document.querySelector("[data-calendar-apply]")?.addEventListener("click", () => {
+      closeDropdowns();
+    });
+
+    const statusTriggers = document.querySelectorAll(".status-card[data-status], .status-card .sub[data-status], .status-filter-option[data-status]");
+    const statusOptions = document.querySelectorAll(".status-filter-option[data-status]");
+    const tradeTable = document.querySelector(".trade-table");
+    const tradeRows = document.querySelectorAll(".order-card[data-status]");
+    const tradeEmpty = document.querySelector(".trade-empty");
+    const tradeTitle = document.querySelector("#trade-list-title");
+    const statusDropdownLabel = document.querySelector('[data-dropdown-label="status"]');
+    let activeStatus = "";
+    let activeType = "";
+    let activeCountry = "";
+
+    function placeOrderActionsAtTableEnd() {
+      document.querySelectorAll(".order-table").forEach((table) => {
+        if (table.dataset.actionsReflowed === "true") {
+          return;
+        }
+
+        const actionsCell = table.querySelector("td.col-actions");
+        const actionsRow = actionsCell?.closest("tr");
+        const actionWrap = actionsCell?.querySelector(".row-actions");
+        const shipHead = table.querySelector(".col-ship-head");
+        const shipCell = table.querySelector("td.col-ship");
+
+        if (!actionsCell || !actionsRow || !actionWrap || !shipHead || !shipCell) {
+          return;
+        }
+
+        const actions = Array.from(actionWrap.querySelectorAll("button, a"));
+
+        const stack = document.createElement("div");
+        stack.className = "action-stack";
+        const existingShipButtonLabels = Array.from(shipCell.querySelectorAll("button, a")).map((action) => action.textContent.trim());
+
+        actions.forEach((action) => {
+          const label = action.textContent.trim();
+          if (!existingShipButtonLabels.includes(label)) {
+            stack.appendChild(action);
+          }
+        });
+
+        // 주요 액션 버튼 → 배송 셀
+        if (stack.children.length) {
+          if (shipCell.textContent.trim() === "-") {
+            shipCell.textContent = "";
+          }
+          shipCell.appendChild(stack);
+        }
+
+        actionsRow.classList.add("is-actions-moved");
+        table.dataset.actionsReflowed = "true";
+      });
+    }
+
+    function placeOrderStatusInCardHeader() {
+      document.querySelectorAll(".order-table td.col-info").forEach((info) => {
+        const status = info.querySelector(".order-status-link");
+        const table = info.closest(".order-table");
+        const head = table?.querySelector(".col-product-head");
+        if (!status || !head || head.contains(status)) {
+          return;
+        }
+        head.textContent = "";
+        head.appendChild(status);
+      });
+    }
+
+    placeOrderStatusInCardHeader();
+    placeOrderActionsAtTableEnd();
+
+    function updateStatusCounts() {
+      const counts = {};
+      tradeRows.forEach((row) => {
+        const status = row.dataset.status || "";
+        if (!status) return;
+        counts[status] = (counts[status] || 0) + 1;
+      });
+
+      statusOptions.forEach((option) => {
+        const status = option.dataset.status || "";
+        const baseLabel = option.dataset.baseLabel || option.textContent.replace(/\s*\(\d+\)$/, "").trim();
+        option.dataset.baseLabel = baseLabel;
+        if (!status) {
+          const total = tradeRows.length;
+          option.textContent = `${baseLabel} (${total})`;
+          return;
+        }
+        option.textContent = `${baseLabel} (${counts[status] || 0})`;
+      });
+
+      document.querySelectorAll(".status-card[data-status], .status-card .sub[data-status]").forEach((item) => {
+        const status = item.dataset.status || "";
+        const count = counts[status] || 0;
+        const countEl = item.querySelector("em");
+        if (countEl) {
+          countEl.textContent = count;
+          countEl.classList.remove("hot", "status-payment-wait", "status-shipping-wait");
+          countEl.classList.toggle("status-payment-wait", status === "first-payment-wait" || status === "second-payment-wait");
+          countEl.classList.toggle("status-shipping-wait", status === "shipping-wait");
+        }
+      });
+    }
+
+    function updateStatusDropdown(status, label) {
+      let selectedLabel = label || "진행 단계";
+
+      statusOptions.forEach((option) => {
+        const isActive = (option.dataset.status || "") === status;
+        option.classList.toggle("status-active", isActive);
+        option.setAttribute("aria-pressed", String(isActive));
+
+        if (isActive && status) {
+          selectedLabel = option.dataset.label || option.textContent.trim();
+        }
+      });
+
+      if (statusDropdownLabel) {
+        statusDropdownLabel.textContent = status ? selectedLabel : "진행 단계";
+      }
+    }
+
+    function applyTradeFilters() {
+      if (tradeTable) {
+        tradeTable.classList.toggle("status-filtered", Boolean(activeStatus || activeType || activeCountry));
+      }
+
+      let visibleCount = 0;
+      tradeRows.forEach((row) => {
+        const matchesStatus = !activeStatus || row.dataset.status === activeStatus;
+        const matchesType = !activeType || row.dataset.tradeType === activeType;
+        const matchesCountry = !activeCountry || row.dataset.country === activeCountry;
+        const shouldShow = matchesStatus && matchesType && matchesCountry;
+        row.classList.toggle("is-hidden", !shouldShow);
+        if (shouldShow) {
+          visibleCount += 1;
+        }
+      });
+
+      if (tradeEmpty) {
+        tradeEmpty.classList.toggle("is-visible", visibleCount === 0);
+      }
+
+      if (tradeTitle) {
+        const parts = [];
+        if (activeCountry) {
+          parts.push(document.querySelector(`.country-panel .dropdown-item[data-country="${activeCountry}"]`)?.dataset.label || "거래 국가");
+        }
+        if (activeType) {
+          parts.push(activeType === "auction" ? "경매" : "구매");
+        }
+        if (activeStatus) {
+          parts.push(document.querySelector(`.status-filter-option[data-status="${activeStatus}"]`)?.dataset.baseLabel || "진행 단계");
+        }
+        tradeTitle.textContent = parts.length ? `${parts.join(" ")} 목록` : "전체 거래 목록";
+      }
+    }
+    function setStatusFilter(status, label, forceSelection = false) {
+      const nextStatus = status || "";
+      const isSameStatus = activeStatus === nextStatus;
+      activeStatus = !forceSelection && isSameStatus ? "" : nextStatus;
+
+      statusTriggers.forEach((item) => {
+        item.classList.remove("status-active");
+        item.setAttribute("aria-pressed", "false");
+      });
+
+      if (activeStatus) {
+        statusTriggers.forEach((item) => {
+          if ((item.dataset.status || "") !== activeStatus) {
+            return;
+          }
+
+          item.classList.add("status-active");
+          item.setAttribute("aria-pressed", "true");
+
+          const parentCard = item.closest(".status-card");
+          if (item.classList.contains("sub") && parentCard) {
+            parentCard.classList.add("status-active");
+            parentCard.setAttribute("aria-pressed", "true");
+          }
+        });
+      } else {
+        statusOptions.forEach((option) => {
+          const isAll = (option.dataset.status || "") === "";
+          option.classList.toggle("status-active", isAll);
+          option.setAttribute("aria-pressed", String(isAll));
+        });
+      }
+
+      updateStatusDropdown(activeStatus, label);
+
+      if (!activeStatus) {
+        const allOption = document.querySelector('.status-filter-option[data-status=""]');
+        if (allOption) {
+          allOption.classList.add("status-active");
+          allOption.setAttribute("aria-pressed", "true");
+        }
+      }
+
+      applyTradeFilters();
+    }
+
+    updateStatusCounts();
+    applyTradeFilters();
+
+    statusTriggers.forEach((trigger) => {
+      trigger.setAttribute("aria-pressed", "false");
+
+      trigger.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const isDropdownOption = trigger.classList.contains("status-filter-option");
+        setStatusFilter(trigger.dataset.status, trigger.dataset.label, isDropdownOption);
+
+        if (isDropdownOption) {
+          closeDropdowns();
+        }
+      });
+
+      trigger.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          event.stopPropagation();
+          const isDropdownOption = trigger.classList.contains("status-filter-option");
+          setStatusFilter(trigger.dataset.status, trigger.dataset.label, isDropdownOption);
+
+          if (isDropdownOption) {
+            closeDropdowns();
+          }
+        }
+      });
+    });
+
+    updateStatusDropdown(activeStatus);
+
+    const initialStatus = new URLSearchParams(location.search).get("status");
+    if (initialStatus) {
+      const initialOption = document.querySelector(`.status-filter-option[data-status="${initialStatus}"]`);
+      if (initialOption) {
+        setStatusFilter(initialStatus, initialOption.dataset.label, true);
+      }
+    }
+
+    let drawerLoggedIn = true;
+
+    function renderDrawerState() {
+      document.getElementById("drGuestHd").style.display = drawerLoggedIn ? "none" : "flex";
+      document.getElementById("drUserHd").style.display = drawerLoggedIn ? "flex" : "none";
+      document.getElementById("drGuestPanel").style.display = drawerLoggedIn ? "none" : "block";
+      document.getElementById("drUserAssets").style.display = drawerLoggedIn ? "grid" : "none";
+      document.getElementById("drMemberPanel").style.display = drawerLoggedIn ? "block" : "none";
+    }
+
+    function toggleLogin() {
+      drawerLoggedIn = !drawerLoggedIn;
+      closeDrawer();
+      renderDrawerState();
+    }
+
+    function openDrawer() {
+      const drawer = document.getElementById("drawer");
+      const overlay = document.getElementById("drawerOv");
+      renderDrawerState();
+      drawer?.classList.add("open");
+      overlay?.classList.add("open");
+      document.querySelectorAll(".menu-button").forEach((button) => {
+        button.setAttribute("aria-expanded", "true");
+      });
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeDrawer() {
+      const drawer = document.getElementById("drawer");
+      const overlay = document.getElementById("drawerOv");
+      drawer?.classList.remove("open");
+      overlay?.classList.remove("open");
+      document.querySelectorAll(".menu-button").forEach((button) => {
+        button.setAttribute("aria-expanded", "false");
+      });
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".user-menu-trigger").forEach((triggerButton) => {
+      triggerButton.addEventListener("click", () => {
+        const section = triggerButton.closest(".user-menu-section");
+        const isOpen = section?.classList.toggle("is-open");
+        triggerButton.setAttribute("aria-expanded", String(Boolean(isOpen)));
+      });
+    });
+
+    document.querySelectorAll(".user-name").forEach((userName) => {
+      userName.addEventListener("click", openDrawer);
+    });
+
+    const quickBidModal = document.getElementById("quickBidModal");
+    const quickBidAmount = document.getElementById("quickBidAmount");
+
+    function openQuickBidModal() {
+      quickBidModal?.classList.add("is-open");
+      quickBidModal?.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      setTimeout(() => quickBidAmount?.focus(), 0);
+    }
+
+    function closeQuickBidModal() {
+      quickBidModal?.classList.remove("is-open");
+      quickBidModal?.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".js-quick-bid-open").forEach((button) => {
+      button.addEventListener("click", openQuickBidModal);
+    });
+
+    document.querySelectorAll("[data-quick-bid-close]").forEach((button) => {
+      button.addEventListener("click", closeQuickBidModal);
+    });
+
+    quickBidModal?.addEventListener("click", (event) => {
+      if (event.target === quickBidModal) closeQuickBidModal();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && quickBidModal?.classList.contains("is-open")) {
+        closeQuickBidModal();
+      }
+    });
+
+    renderDrawerState();
+  </script>
+<script src="bb-common.js"></script>
+</body>
+</html>

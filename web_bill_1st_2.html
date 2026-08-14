@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1차 결제 - BidBuy Korea</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif; font-size:14px; color: #222; background: #fff; padding-top: 64px;line-height:1.5;}
+  .bb-header{position:fixed;top:0;left:0;right:0;z-index:300;background:#fff;border-bottom:1px solid #E0E4EB;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+  .bb-hdr{max-width:1440px;height:64px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:16px}
+  .bb-hb{display:flex;flex-direction:column;gap:4.5px;padding:8px;margin-right:4px;border:0;border-radius:5px;background:none;cursor:pointer}.bb-hb:hover{background:#F5F7FA}.bb-hb span{display:block;width:17px;height:2px;border-radius:1px;background:#1A1A2E}
+  .bb-logo{display:flex;align-items:center;flex:0 0 160px}.bb-logo img{display:block;width:100px;height:auto}
+  .bb-search{flex:0 1 540px;max-width:540px;display:flex;border:1.5px solid #E0E4EB;border-radius:8px;overflow:hidden}.bb-search:focus-within{border-color:#E8385A}.bb-search input{flex:1;min-width:0;border:0;outline:0;background:#F5F7FA;padding:10px 14px;font-size:14px;font-family:inherit}.bb-search button{border:0;background:#E8385A;color:#fff;padding:0 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+  .bb-hdr-right{flex:1;display:flex;align-items:center;justify-content:flex-end;gap:4px}.bb-hbtn{min-width:52px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 9px;border:0;border-radius:5px;background:none;color:#666680;font-size:10px;cursor:pointer;position:relative;font-family:inherit}.bb-hbtn:hover,.bb-user:hover{background:#F5F7FA}.bb-hbtn i{font-size:18px;line-height:18px}.bb-badge{position:absolute;top:4px;right:7px;min-width:14px;height:14px;padding:0 2px;border-radius:7px;background:#E8385A;color:#fff;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700}
+  .bb-user{display:flex;align-items:center;gap:8px;padding:6px 10px;border:0;border-radius:5px;background:none;cursor:pointer;font-family:inherit}.bb-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#E8385A,#F5A623);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700}.bb-user-name{font-size:13px;font-weight:700;color:#1A1A2E;line-height:1.2;text-align:left}.bb-user-grade{display:inline-block;margin-top:2px;padding:1px 6px;border-radius:8px;background:#FFF8E6;color:#F5A623;font-size:9px;font-weight:700}
+  .bb-drawer-ov{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .2s ease}.bb-drawer-ov.open{opacity:1;pointer-events:auto}.bb-drawer{position:fixed;top:0;bottom:0;left:-360px;z-index:501;width:340px;max-width:88vw;background:#fff;box-shadow:4px 0 20px rgba(0,0,0,.12);transition:left .24s cubic-bezier(.4,0,.2,1);overflow-y:auto}.bb-drawer.open{left:0}.bb-drawer-head{display:flex;align-items:center;justify-content:space-between;padding:18px 16px 16px;border-bottom:1px solid #E0E4EB}.bb-drawer-title{font-size:17px;font-weight:800;color:#1A1A2E}.bb-drawer-close{width:32px;height:32px;border:0;background:none;font-size:24px;cursor:pointer}.bb-drawer-section{padding:16px;border-bottom:1px solid #F0F2F5}.bb-drawer-section strong{display:block;margin-bottom:12px;color:#1A3C6E;font-size:13px}.bb-drawer-links{display:grid;gap:10px}.bb-drawer-links a{color:#333;text-decoration:none;font-size:13px}
+
+  /* ── 페이지 레이아웃 ── */
+  .page-wrap { max-width: 1220px; margin: 0 auto; padding: 30px 20px 60px; }
+  .page-title { display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 700; color: #1A1A2E; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 2px solid #1A3C6E; }
+  .page-back-link { width: 28px; height: 28px; border: 1px solid #D8DCE3; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #1A3C6E; font-size: 13px; text-decoration: none; }
+  .page-back-link:hover { border-color: #1A3C6E; background: #F5F7FA; }
+
+  /* 2단 그리드 */
+  .bill-layout { display: grid; grid-template-columns: 7fr 3fr; gap: 28px; align-items: start; }
+  .bill-main { min-width: 0; }
+
+  /* ── 우측 비용 패널 ── */
+  .bill-panel { position: sticky; top: 80px; background: #fff; border: 1px solid #dde1e7; border-radius: 8px; overflow: hidden; }
+  .bill-panel-head { background: #fff; padding: 14px 18px 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #eee; }
+  .bill-panel-title { color: #1A3C6E; font-size: 14px; font-weight: 700; }
+  .bill-panel-sub { color: #666; font-size: 12px; font-weight: 500; white-space: nowrap; }
+  .fee-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 18px; border-bottom: 1px solid #f0f2f5; gap: 8px; }
+  .fee-row:last-child { border-bottom: none; }
+  .fee-row-label { font-size: 13px; color: #555; white-space: nowrap; }
+  .fee-row-val { font-family: 'Roboto', sans-serif; font-size: 13px; font-weight: 500; color: #222; text-align: right; }
+  .fee-row.is-discount .fee-row-label { color: #E8385A; }
+  .fee-disc-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+  .fee-disc-line { display: flex; align-items: center; gap: 5px; }
+  .fee-disc-val { font-family: 'Roboto', sans-serif; font-size: 13px; font-weight: 700; color: #E8385A; }
+  .fee-disc-badge { font-size: 10px; padding: 1px 6px; border-radius: 3px; }
+  .badge-mile-s   { background: #E6F1FB; color: #185FA5; }
+  .fee-row-rate { background: #f8f9fb; }
+  .fee-row-rate .fee-row-label { color: #888; font-size: 12px; }
+  .fee-row-rate .fee-row-val { color: #888; font-size: 12px; }
+  .fee-row-subtotal { background: #fafbfc; border-top: 1px solid #dde1e7 !important; }
+  .fee-row-subtotal .fee-row-label { color: #333; font-weight: 600; }
+  .fee-row-subtotal .fee-row-val { color: #333; font-weight: 700; font-size: 14px; }
+  .fee-row-total { background: #f0f4fb; border-top: 2px solid #1A3C6E !important; padding: 16px 18px; }
+  .fee-row-total .fee-row-label { font-size: 14px; font-weight: 700; color: #1A3C6E; }
+  .fee-row-total .fee-row-val { font-size: 18px; font-weight: 700; color: #E8385A; }
+  .fee-row-toggle { cursor: pointer; }
+  .fee-row-action { display: inline-flex; align-items: center; justify-content: flex-end; gap: 6px; }
+  .fee-toggle-btn { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border: 0; background: transparent; color: #1A3C6E; cursor: pointer; padding: 0; }
+  .fee-toggle-btn i { font-size: 12px; transition: transform .18s ease; }
+  .fee-toggle-btn[aria-expanded="true"] i { transform: rotate(180deg); }
+  .fee-detail { display: none; padding: 2px 18px 12px 26px; border-bottom: 1px solid #f0f2f5; background: #fbfcfe; }
+  .fee-detail.is-open { display: block; }
+  .fee-extra-item { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 28px; font-size: 12px; color: #666; border-bottom: 1px dashed #d6dce6; }
+  .fee-extra-item:last-child { border-bottom: none; }
+  .fee-extra-item strong { font-family: 'Roboto', Pretendard, sans-serif; font-size: 12px; color: #222; font-weight: 600; white-space: nowrap; }
+  .fee-section-title { padding: 14px 18px 8px; border-top: 1px solid #1A3C6E; border-bottom: 1px solid #f0f2f5; color: #1A3C6E; font-size: 13px; font-weight: 700; background: #fff; }
+  .fee-summary-box { margin: 0; padding: 14px 18px 16px; border: 0; border-radius: 0; background: #f8fafd; }
+  .fee-summary-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 5px 0; font-size: 13px; color: #333; font-weight: 600; }
+  .fee-summary-row.is-discount .fee-summary-val { color: #E8385A; }
+  .fee-summary-divider { border-top: 1px dashed #bfc9d8; margin: 8px 0; }
+  .fee-summary-total { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 2px; color: #1A3C6E; font-size: 15px; font-weight: 700; }
+  .fee-summary-total .fee-summary-val { font-family: 'Roboto', Pretendard, sans-serif; color: #E8385A; font-size: 20px; font-weight: 700; white-space: nowrap; }
+  .val-undecided { color: #aaa; font-size: 12px; }
+  .tax-toggle { display: inline-flex; border: 1px solid #dde1e7; border-radius: 4px; overflow: hidden; }
+  .tax-toggle-btn { border: none; background: #fff; color: #888; font-size: 11px; font-weight: 600; padding: 3px 7px; cursor: pointer; font-family: Pretendard, 'Noto Sans KR', sans-serif; }
+  .tax-toggle-btn + .tax-toggle-btn { border-left: 1px solid #dde1e7; }
+  .tax-toggle-btn.is-active { background: #1A3C6E; color: #fff; }
+  .panel-action-btn { height: 26px; padding: 0 10px; border: 1px solid #1A3C6E; border-radius: 5px; background: #fff; color: #1A3C6E; font-family: Pretendard, 'Noto Sans KR', sans-serif; font-size: 11px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+  .panel-action-btn:hover { background: #1A3C6E; color: #fff; }
+  .panel-action-btn.is-applied { background: #e9eaec; border-color: #bbb; color: #888; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 15px; font-weight: 700; color: #1A3C6E; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #e8ecf2; }
+
+  /* ── 공통 테이블 ── */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .payment-table th, .care-table th, .coupon-table th { background: #f5f7fa; border: 1px solid #dde1e7; padding: 10px 14px; text-align: left; font-weight: 500; color: #444; width: 160px; white-space: nowrap; vertical-align: middle; font-size: 13px; }
+  .payment-table td, .care-table td, .coupon-table td { border: 1px solid #dde1e7; padding: 10px 14px; vertical-align: middle; font-size: 13px; }
+  .member-badge { display: inline-flex; width:30px; align-items: center; justify-content: center; height: 18px; min-width: 32px; padding: 0 6px; border-radius: 3px; background: #0b3b82; color: #fff; font-size: 10px; font-weight: 700; vertical-align: middle; }
+  .packing-cost-table th[rowspan] {
+  vertical-align: middle;
+}
+  /* 구매 혜택 패널 */
+  .benefit-panel { border: 1px solid #dde1e7; border-radius: 8px; overflow: hidden; margin-top: 6px; }
+  .benefit-panel-head { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #f8fafd; }
+  .benefit-panel-label { font-size: 13px; font-weight: 700; color: #333; }
+  .benefit-panel-max { font-size: 13px; font-weight: 700; color: #1A3C6E; }
+  .benefit-panel-max em { font-style: normal; color: #E8385A; }
+  .benefit-body { padding: 12px 16px 14px; }
+  .benefit-row { display: flex; align-items: center; justify-content: space-between; padding: 5px 0; font-size: 13px; }
+  .benefit-row-lbl { color: #333; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+  .benefit-row-val { color: #333; font-weight: 600; white-space: nowrap; }
+  .benefit-sub { display: flex; align-items: center; justify-content: space-between; padding: 3px 0 3px 14px; font-size: 12px; }
+  .benefit-sub-lbl { color: #666; display: flex; align-items: center; gap: 5px; }
+  .benefit-sub-val { color: #444; }
+  .benefit-event-badge { display: inline-flex; width:30px; align-items: center; height: 17px; padding: 0 5px; border-radius: 3px; background: #E8385A; color: #fff; font-size: 10px; font-weight: 700; }
+  .benefit-help { display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; border-radius: 50%; border: 1px solid #bbb; color: #888; font-size: 10px; font-weight: 700; cursor: help; line-height: 1; flex-shrink: 0; }
+  .benefit-divider { border: none; border-top: 1px solid #f0f0f0; margin: 8px 0; }
+  .benefit-note { font-size: 11px; color: #888; margin-top: 6px; line-height: 1.65; }
+  .deposit-ui { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px; max-width: 362px; align-items: end; }
+  .deposit-panel { background: transparent; }
+  .dep-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 7px; }
+  .dep-title { font-size: 13px; color: #1A3C6E; }
+  .dep-available { font-family: 'Roboto', monospace; font-size: 13px; color: #1A3C6E; white-space: nowrap; }
+  .dep-input-row { display: grid; grid-template-columns: minmax(120px,1fr) auto; align-items: center; column-gap: 6px; min-height: 36px; border: 1px solid #aaa; background: #fff; padding: 0 10px; }
+  .dep-use-label { display: none; }
+  .dep-input { border: none; padding: 0 4px; font-size: 13px; width: 100%; height: 34px; font-family: 'Roboto', monospace; color: #111; font-weight: 700; text-align: right; background: transparent; }
+  .dep-input:focus { outline: none; }
+  .dep-input.error { color: #E8385A; }
+  .dep-unit-wrap { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+  .dep-unit { font-size: 13px; color: #555; font-weight: 700; }
+  .dep-reset { width: 16px; height: 16px; border: none; border-radius: 50%; background: #8e939a; color: #fff; font-size: 13px; line-height: 16px; padding: 0; cursor: pointer; }
+  .dep-reset[hidden] { display: none; }
+  .dep-feedback { grid-column: 1/-1; font-size: 12px; display: flex; align-items: center; gap: 6px; }
+  .dep-remain { color: #1A3C6E; display: none; }
+  .dep-remain span { font-family: 'Roboto', monospace; font-weight: 500; }
+  .dep-warn { color: #E8385A; display: none; }
+  .dep-apply-btn { width: 74px; height: 36px; border: 1px solid #d3d8df; border-radius: 5px; background: #f8f8f8; color: #111; font-family: Pretendard, 'Noto Sans KR', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .dep-apply-btn.is-active { border: none; color: #fff; background: #cfd3d8; }
+  /* ── 마일리지 모바일형 UI ── */
+  .mob-mile-wrap { display: flex; flex-direction: column; gap: 10px; max-width: 100%; }
+  .mob-mile-top { display: grid; grid-template-columns: 104px minmax(0,1fr) auto; align-items: center; column-gap: 0; position: relative; }
+  .mob-mile-label { grid-column: 1; margin-right: 8px; font-size: 14px; color: #222; font-weight: 700; display: inline-flex; align-items: center; white-space: nowrap; }
+  .mob-mile-max-btn { grid-column: 3; margin-left: 5px; width: 64px; height: 28px; padding: 0 5px; border: 1px solid #d8dbe1; border-radius: 5px; background: #fff; color: #555; font-family: Pretendard, 'Noto Sans KR', sans-serif; font-size: 11px; font-weight: 800; cursor: pointer; white-space: nowrap; transition: background .15s, border-color .15s, color .15s; }
+  .mob-mile-max-btn.is-active { background: #d6d9df; border-color: #b6bac2; color: #666; }
+  .mob-mile-summary { display: flex; align-items: center; justify-content: flex-end; gap: 8px; color: #8a9099; font-size: 14px; line-height: 1.4; }
+  .mob-mile-summary strong { font-family: 'Roboto', sans-serif; font-size: 12px; font-weight: 800; color: #111; }
+  .mob-mile-summary-divider { color: #c3c8d0; font-weight: 700; }
+  .mob-mile-note { font-size: 12px; color: #888; line-height: 1.6; text-align: right; }
+  .mob-mile-clear-btn { display: none; align-items: center; justify-content: center; width: 20px; height: 20px; border: 0; border-radius: 50%; background: #E5E7EB; color: #666; font-size: 14px; font-weight: 600; line-height: 1; cursor: pointer; flex-shrink: 0; position: absolute; right: 6px; top: 50%; transform: translateY(-50%);margin-left: 10px; }
+  .mob-mile-clear-btn.show { display: inline-flex; }
+  .mob-mile-input-wrap { display:flex; align-items:center; gap:1px; }
+  .mob-mile-input-row { grid-column: 2; position: relative; display:flex; align-items:center; width:100%; height: 25px; padding: 0 29px 0 16px; border:1px solid #e1e5eb; border-radius:5px; background:#fff; }
+  .mob-mile-input-lbl { display:none; }
+  .mob-mile-inp { flex:1; min-width:0; border:none; outline:none; font-family:'Roboto',sans-serif; font-size:13px; font-weight:700; color:#111; text-align:right; background:transparent; }
+  .mob-mile-inp::placeholder { color:#a9adb6; font-weight:500; }
+  .mob-mile-inp.over { color:#E8385A; }
+  .mob-mile-inp-unit { display:none; }
+  @media (max-width: 520px) {
+    .mob-mile-top { grid-template-columns: 40px minmax(0,1fr) auto; column-gap: 0; }
+    .mob-mile-label { font-size: 14px; margin-right: 6px; }
+    .mob-mile-max-btn { width: 60px; height: 28px; font-size: 11px; margin-left: 5px; }
+    .mob-mile-input-row { height: 25px; padding: 0 29px 0 12px; }
+    .mob-mile-inp { font-size: 13px; }
+    .mob-mile-summary { font-size: 13px; gap: 6px; }
+    .mob-mile-summary strong { font-size: 13px; }
+    .mob-mile-note { font-size: 13px; }
+  }
+  .deposit-ui.is-applied .dep-input-row { background: #f3f4f6; }
+  .method-label { display: inline-flex; align-items: center; justify-content: center; min-width: 150px; min-height: 38px; padding: 0 18px; border: 1px solid #d3d8df; border-radius: 4px; background: #fff; color: #333; font-size: 13px; font-weight: 700; cursor: pointer; margin-right: 8px; transition: background 0.15s, border-color 0.15s, color 0.15s; }
+  .method-label:hover { border-color: #1A3C6E; color: #1A3C6E; }
+  .method-label input { position: absolute; opacity: 0; pointer-events: none; }
+  .method-label.is-selected { border-color: #1A3C6E; background: #1A3C6E; color: #fff; }
+  .method-wrap-required { background:#FFF8F0; box-shadow:inset 0 0 0 2px rgba(232,56,90,.18); border-radius:4px; padding:10px; }
+  .method-wrap-required .method-label { border-color:#E8385A; box-shadow:0 0 0 2px rgba(232,56,90,.12); }
+  .banner-tax { background:#FFF8EC; border-left:3px solid #F5A623; padding:12px 14px; margin-top:20px; margin-bottom:8px; font-size:12px; line-height:1.7; color:#664400; }
+  .banner-tax strong { color:#7A5500; }
+  .banner-tax a { color:#C47D00; text-decoration:none; font-size:11px; }
+  .banner-tax-title { display:block; font-size:12px; font-weight:700; margin-bottom:2px; }
+  .banner-tax-divider { border:0; border-top:1px dashed rgba(122,85,0,.28); margin:10px 0; }
+  .banner-receipt-title { font-size:12px; font-weight:700; color:#7A5500; margin-bottom:4px; }
+  .banner-receipt-notice { font-size:11px; line-height:1.6; color:#664400; margin-bottom:6px; }
+  .banner-receipt-radio-group { display:flex; gap:18px; }
+  .banner-receipt-radio { display:inline-flex; align-items:center; gap:5px; font-size:12px; color:#664400; cursor:pointer; }
+  .banner-receipt-radio input { accent-color:#1A3C6E; width:14px; height:14px; }
+  .radio-label { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; cursor: pointer; }
+  .disc-row th { background: #fff8f0; border-color: #f5c88a !important; color: #854F0B; }
+  .disc-row td { background: #fff8f0; border-color: #f5c88a !important; }
+  .disc-inner { display: flex; flex-direction: column; gap: 6px; }
+  .disc-line  { display: flex; align-items: center; gap: 8px; }
+  .disc-val   { font-family: 'Roboto', sans-serif; font-size: 13px; font-weight: 700; color: #E8385A; min-width: 60px; }
+  .disc-badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 1px 8px; border-radius: 3px; }
+  .badge-mile    { background: #E6F1FB; color: #185FA5; }
+  .amount-total { font-family: Pretendard, 'Noto Sans KR', sans-serif; font-size: 13px; color: #333; }
+  .formula { font-family: 'Roboto', sans-serif; font-size: 13px; color: #555; margin-right: 6px; }
+  .amount-red { font-family: 'Roboto', sans-serif; font-weight: 700; color: #E8385A; font-size: 15px; }
+  .paid-option-table th { width: 230px; min-width: 230px; max-width: 230px; vertical-align: top; }
+  .paid-option-common-note { margin: 2px 0 12px; padding: 10px 12px; border: 1px solid rgba(232,56,90,0.18); background: #fff8fa; color: #E8385A; font-size: 12px; font-weight: 700; line-height: 1.5; }
+  .paid-option-name { display: block; margin-bottom: 5px; color: #555; font-weight: 700; }
+  .paid-option-meta { display: grid; gap: 2px; color: #777; font-size: 12px; font-weight: 400; line-height: 1.45; }
+  .paid-option-price { color: #E8385A; font-family: 'Roboto', sans-serif; font-weight: 700; }
+  .paid-option-choice { color: #333; }
+  .packing-choice-list { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 2px; }
+  .packing-choice { display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 10px; border: 1px solid #d6dee9; border-radius: 5px; background: #fff; color: #28344d; font-size: 12px; font-weight: 800; cursor: pointer; white-space: nowrap; transition: border-color .15s, background .15s; }
+  .packing-choice input { width: 14px; height: 14px; margin: 0; accent-color: #1A3C6E; flex: 0 0 auto; }
+  .packing-choice:has(input:checked) { border-color: #1A3C6E; background: #f7faff; }
+  .packing-choice span { overflow: hidden; text-overflow: ellipsis; }
+  .care-grade-badge { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+  .care-grade-badge-text { display: none; align-items: center; gap: 5px; color: #1a9e5c; font-size: 12px; font-weight: 700; white-space: nowrap; }
+  .care-grade-badge-text i { color: #1a9e5c; font-size: 11px; }
+  .care-grade-badge:not(.is-blank) .care-grade-badge-text { display: inline-flex; }
+  .care-scenario-btn { width: 22px; height: 22px; padding: 0; border: 1px solid #d9d2c7; border-radius: 4px; background: #fff; color: #8a5a00; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; cursor: pointer; flex: 0 0 auto; }
+  .photo-option-select { width: 120px; height: 34px; padding: 0 10px; border: 1px solid #ccd3dc; border-radius: 4px; background: #fff; color: #333; font-family: Pretendard, 'Noto Sans KR', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .photo-option-select:focus { outline: none; border-color: #1A3C6E; box-shadow: 0 0 0 3px rgba(26,60,110,0.12); }
+  .paid-option-desc { margin-top: 12px; color: #555; line-height: 1.65; }
+  .paid-option-desc p + p { margin-top: 8px; }
+  .paid-option-desc ul { margin: 4px 0 10px; padding-left: 18px; list-style-position: outside; }
+  .paid-option-desc li { margin: 2px 0; word-break: keep-all; overflow-wrap: anywhere; }
+  .bold-red { color: #E8385A; }
+  .paid-option-detail { height: 30px; padding: 0 12px; border: 1px solid #1A3C6E; border-radius: 5px; background: #fff; color: #1A3C6E; font-family: Pretendard, 'Noto Sans KR', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .paid-option-detail.care-guide-detail { margin-left: 8px; border-color: #E8385A; color: #E8385A; }
+  .care-desc.is-hidden { display: none; }
+  .btn-area { display: flex; justify-content: center; gap: 12px; margin-top: 32px; }
+  .btn { padding: 13px 50px; font-size: 15px; font-weight: 700; font-family: Pretendard, 'Noto Sans KR', sans-serif; border: none; border-radius: 5px; cursor: pointer; transition: background 0.2s; }
+  .btn-primary { background: #1A3C6E; color: #fff; }
+  .btn-primary:hover { background: #152f58; }
+  .btn-cancel  { background: #aaa; color: #fff; }
+  .btn-cancel:hover { background: #888; }
+  .bill-panel .btn-area { margin: 0; padding: 14px 18px 18px; border-top: 1px solid #dde1e7; background: #fff; }
+  .bill-panel .btn { flex: 1; padding: 11px 0; font-size: 13px; }
+  .modal-overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(0,0,0,0.45); opacity: 0; visibility: hidden; transition: opacity 0.2s, visibility 0.2s; z-index: 1000; }
+  .modal-overlay.is-open { opacity: 1; visibility: visible; }
+  .modal { width: min(560px,100%); background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.18); }
+  .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid #eee; background: #fbfbfb; }
+  .modal-title { margin: 0; font-size: 17px; font-weight: 700; color: #1A3C6E; }
+  .modal-close { border: none; background: transparent; color: #555; font-size: 20px; cursor: pointer; }
+  .modal-body { max-height: 70vh; overflow-y: auto; padding: 20px; font-size: 13px; line-height: 1.8; color: #333; }
+  .modal-body ul { margin: 12px 0 0; padding-left: 20px; list-style: disc outside; }
+  .modal-body li { margin-bottom: 10px; }
+  .packing-modal { width: min(1120px,100%); }
+  .packing-modal-meta { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 0 8px; }
+  .packing-unit { margin: 0; text-align: left; color: #333; font-size: 13px; font-weight: 700; }
+  .packing-detail-link { color: #1A3C6E; font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+  .packing-detail-link:hover { color: #E14B6A; }
+  .packing-table-wrap { overflow-x: auto; }
+  .packing-cost-table { width: 100%; min-width: 980px; border-collapse: collapse; border: 1px solid #d7dce3; color: #5f6770; font-size: 13px; text-align: center; }
+  .packing-cost-table + .packing-cost-table { margin-top: 30px; }
+  .packing-cost-table th, .packing-cost-table td { border: 1px solid #e7e7e7; padding: 7px 8px; line-height: 1.35; vertical-align: middle; white-space: nowrap; }
+  .packing-cost-table thead th { background: #f4f4f4; font-weight: 700; }
+  .packing-cost-table .thick-right { border-right: 1px solid #d7dce3; }
+  .packing-cost-table .thick-bottom { border-bottom: 1px solid #d7dce3; }
+  .packing-cost-table .muted-cell { color: #777; font-weight: 700; line-height: 1.8; }
+  .packing-cost-table .tier-note { display: block; color: #888; font-size: 11px; font-weight: 400; margin-top: 2px; }
+  .packing-note { margin: 10px 0 0; color: #888; font-size: 12px; line-height: 1.6; }
+
+  /* ── 우측 패널 하단 적립 예정 블록 ── */
+  .panel-earn { border-top: 1px solid #dde1e7; background: #fff; }
+  .panel-earn-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 18px; cursor: pointer; }
+  .panel-earn-label { font-size: 12px; font-weight: 700; color: #555; }
+  .panel-earn-action { display: inline-flex; align-items: center; justify-content: flex-end; gap: 6px; margin-left: auto; min-width: 120px; }
+  .panel-earn-max { font-size: 12px; font-weight: 700; color: #1A3C6E; }
+  .panel-earn-max em { font-style: normal; color: #E8385A; }
+  .panel-earn-toggle { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border: 0; background: transparent; color: #7b8490; padding: 0; cursor: pointer; }
+  .panel-earn-toggle i { font-size: 12px; transition: transform .18s ease; }
+  .panel-earn.is-open .panel-earn-toggle i { transform: rotate(180deg); }
+  .panel-earn-body { display: none; padding: 8px 18px 12px; border-top: 1px solid #eef0f4; }
+  .panel-earn.is-open .panel-earn-body { display: block; }
+  .panel-earn-body .benefit-row { padding: 5px 0 6px; font-weight: 700; }
+  .panel-earn-body .benefit-sub { position: relative; padding: 5px 0 5px 20px; margin-left: 6px; border-left: 2px solid #e4e9f1; }
+  .panel-earn-body .benefit-sub::before { content: ""; position: absolute; left: -5px; top: 50%; width: 8px; height: 8px; border-radius: 50%; background: #fff; border: 2px solid #b8c6d8; transform: translateY(-50%); }
+  .panel-earn-body .benefit-sub + .benefit-sub { margin-top: 1px; }
+  /* 적립률 뱃지 */
+  .earn-rate-total { font-size: 10px; font-weight: 700; color: #1A3C6E; background: #e8eef8; padding: 1px 6px; border-radius: 3px; margin-left: 4px; }
+  .earn-badge { display: inline-flex; align-items: center; height: 16px; padding: 0 5px; border-radius: 3px; font-size: 10px; font-weight: 700; }
+  .earn-badge-base { background: #e8eef8; color: #1A3C6E; }
+  .earn-badge-vip  { background: #fff0f3; color: #E8385A; }
+</style>
+</head>
+<body>
+<header class="bb-header">
+  <div class="bb-hdr">
+    <button class="bb-hb" type="button" aria-label="메뉴 열기" aria-expanded="false" onclick="bbOpenDrawer()"><span></span><span></span><span></span></button>
+    <a href="web_main.html" class="bb-logo" aria-label="Bidbuy 홈"><img src="bidbuy logo.png" alt="Bidbuy World Auction Agency"></a>
+    <form class="bb-search" role="search" onsubmit="bbSubmitSearch(event)">
+      <input type="search" name="q" placeholder="키워드 또는 URL을 입력하세요" aria-label="검색어 입력">
+      <button type="submit">AI 검색</button>
+    </form>
+    <div class="bb-hdr-right">
+      <button class="bb-hbtn" type="button" aria-label="알림"><i class="fa-regular fa-bell" aria-hidden="true"></i><span class="bb-badge">3</span><span>알림</span></button>
+      <button class="bb-hbtn" type="button" aria-label="장바구니"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><span>장바구니</span></button>
+      <button class="bb-user" type="button" aria-label="회원 메뉴"><span class="bb-avatar">홍</span><span class="bb-user-name-wrap"><span class="bb-user-name">홍길동님</span><br><span class="bb-user-grade">PREMIUM</span></span></button>
+    </div>
+  </div>
+</header>
+<div class="bb-drawer-ov" id="bbDrawerOv" onclick="bbCloseDrawer()"></div>
+<aside class="bb-drawer" id="bbDrawer" aria-label="사이트 메뉴" aria-hidden="true">
+  <div class="bb-drawer-head"><span class="bb-drawer-title">Bidbuy 메뉴</span><button class="bb-drawer-close" type="button" aria-label="메뉴 닫기" onclick="bbCloseDrawer()"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div>
+  <div class="bb-drawer-section"><strong>바로가기</strong><div class="bb-drawer-links"><a href="web_main.html">홈</a><a href="web_totalsearch.html">통합검색</a><a href="web_mypage.html">마이페이지</a><a href="web_mileage.html">마일리지 / 쿠폰</a></div></div>
+</aside>
+
+<div class="page-wrap">
+  <div class="page-title">
+    <a class="page-back-link" href="web_bill_1st.html" aria-label="1차 결제 이전 화면으로 이동"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a>
+    <span>1차 결제</span>
+  </div>
+
+  <div class="bill-layout">
+
+    <!-- 좌측 메인 -->
+    <div class="bill-main">
+
+      <!-- 유료 옵션 -->
+      <div class="section">
+        <div class="section-title">선택 옵션</div>
+        <table class="care-table paid-option-table">
+          <tbody>
+            <tr>
+              <th>
+                <div class="packing-choice-list" aria-label="안심 케어 옵션 선택">
+                  <label class="packing-choice"><input type="checkbox" name="careOption" value="carePlus" data-paid-option-yen="1000"><span>안심 케어 플러스(1,000엔)</span></label>
+                  <label class="packing-choice"><input type="checkbox" name="careOption" value="care" data-paid-option-yen="200" checked><span>안심 케어(200엔)</span></label>
+                </div>
+                <div class="care-grade-badge" data-scenario="2">
+                  <button type="button" class="care-scenario-btn" data-dir="-1" aria-label="이전 예시 보기"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+                  <span class="care-grade-badge-text"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i><b></b></span>
+                  <button type="button" class="care-scenario-btn" data-dir="1" aria-label="다음 예시 보기"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+                </div>
+              </th>
+              <td class="paid-option-choice">
+                <div class="paid-option-desc">
+                  <p style="font-size:14px;"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>  국제배송중 파손에 대비한 선택 옵션입니다.</p>
+                  <!-- 안심 케어 플러스 설명 (기본) -->
+                  <div class="care-desc" data-care-desc="carePlus">
+                    <ul>
+                      <li>신청 건에 한하여 파손시 <strong>최대 50만 원 한도 내 지원</strong>해드리며,<strong> 파손 방지를 위한 튼튼포장이 포함</strong>됩니다.</li>
+                      <li>지원 범위에는 <strong>물품가 + 국제 운송료 + 수입신고 시 발생한 세금</strong>이 포함됩니다.</li>
+                      <li>해당 서비스 신청 건은 <strong>개별배송으로만 진행</strong>되며, 서비스 비용은 <strong>2차 결제시 청구</strong>됩니다.</li>
+                    </ul>
+                    <p><strong><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> 주의사항</strong></p>
+                    <ul>
+                      <li><strong class="bold-red">파손 지원 불가 품목</strong>은 안심케어플러스 신청 여부와 관계없이 <strong class="bold-red">지원 대상에서 제외</strong>됩니다.</li>
+                      <li><strong class="bold-red">신청 전 신청 가능 품목을 반드시 확인해 주세요.</strong></li>
+                      <li>현지 입고 후 불가 품목으로 확인될 경우, <strong class="bold-red">별도 안내 후 서비스가 취소될 수 있습니다.</strong></li>
+                      <li>튼튼 포장비가 500엔을 초과하는 경우, 초과 금액은  <strong class="bold-red">2차 결제 시 별도 청구됩니다.</strong></li>
+                    </ul>
+                  </div>
+                  <!-- 안심 케어 설명 -->
+                  <div class="care-desc is-hidden" data-care-desc="care">
+                    <ul>
+                      <li>신청 송장 건에 한하여 파손시 <strong>최대 20만 원 한도 내 지원</strong>해드립니다.</li>
+                      <li>선택한 송장 건의 <strong>물품 총액을 기준</strong>으로 지원됩니다.</li>
+                      <li>서비스 비용은 <strong>2차 결제시 청구</strong>됩니다.</li>
+                    </ul>
+                    <p><strong><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> 주의사항</strong></p>
+                    <ul>
+                      <li><strong class="bold-red">파손 지원 불가 품목</strong>은 안심 케어를 신청하더라도 <strong class="bold-red">지원이 불가</strong>하므로, 신청 전 반드시 확인해 주세요.</li>
+                      <li>전체 물품중 파손 지원 불가 품목이 포함된 경우, <strong class="bold-red">해당 품목을 제외하고 지원이 적용됩니다.</strong></li>
+                      <li>미신청시 파손 물품에 대해 <strong class="bold-red">지원이 일체 불가</strong>합니다.</li>
+                    </ul>
+                  </div>
+                  <button class="paid-option-detail damage-detail" type="button">파손지원 불가 품목 보기</button>
+                  <button class="paid-option-detail care-guide-detail" type="button" onclick="window.location.href='web_cs_damage.html#care'">안심케어 서비스 안내</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <span class="paid-option-name">사진 촬영서비스(3장)</span>
+                <span class="paid-option-meta">
+                  <span class="paid-option-price">기본 300엔/3달러/3파운드<br> ※추가 1장당 100엔</span>
+                </span>
+              </th>
+              <td class="paid-option-choice">
+                <select class="photo-option-select" aria-label="사진 촬영서비스 신청 수량">
+                  <option value="0">신청안함</option>
+                  <option value="3">3장</option>
+                  <option value="5">5장</option>
+                  <option value="7">7장</option>
+                </select>
+                <div class="paid-option-desc">
+                  <p><strong><i class="fa-solid fa-circle-info"aria-hidden="true"></i> 상품 입고 후 상품의 사진을 촬영해 안내드리는 옵션입니다.</strong></p>
+                  <ul>
+                    <li>해당 서비스 신청 시 <strong class="bold-red">미신청 건보다 진행 시간이 더 소요될 수 있습니다.</strong></li>
+                    <li>상품 상태, 수량, 촬영 범위에 따라 담당자 안내 또는 추가 청구가 필요할 수 있습니다.</li>
+                    <li>아래 상품은 사진 촬영 서비스가 제공되지 않습니다.
+                      <ul>
+                        <li>묶음 판매 상품 (예: LP 세트, 피규어 묶음 등 여러 개가 한 박스에 패키징된 경우)</li>
+                        <li>10kg 초과 대형 상품</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+                <div class="paid-option-common-note">선택한 유료 옵션 금액은 즉시 결제되지 않으며, 2차 결제 시 청구됩니다.</div>
+      </div>
+
+      <!-- 결제정보 확인 -->
+      <div class="section">
+        <div class="section-title">결제정보 확인 <font color="red">*</font></div>
+        <table class="payment-table">
+          <tbody>
+            <tr>
+              <th>청구 금액</th>
+              <td><span class="amount-total" id="txtTotalWon">14,400 원</span></td>
+            </tr>
+            <tr>
+              <th>결제할 예치금</th>
+              <td>
+                <div class="deposit-ui" id="depositUi">
+                  <div class="deposit-panel">
+                    <div class="dep-top">
+                      <span class="dep-title">예치금</span>
+                      <span class="dep-available" id="availableDeposit">3,961 원</span>
+                    </div>
+                    <div class="dep-input-row">
+                      <span class="dep-use-label">사용</span>
+                      <input type="text" class="dep-input" id="depositInput" value="0">
+                      <span class="dep-unit-wrap"><span class="dep-unit">원</span><button class="dep-reset" type="button" id="depositReset" aria-label="예치금 사용 취소" hidden><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></span>
+                      <div class="dep-feedback">
+                        <span class="dep-remain" id="depRemain">차감 후 잔액 : <span>3,961</span> 원</span>
+                        <span class="dep-warn" id="depWarn">사용가능 예치금을 초과했습니다</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="dep-apply-btn" type="button" id="useAllDeposit">전액사용</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>결제하실 금액</th>
+              <td>
+                <span class="formula" id="txtFormula">1,500 엔 × 9.6 원 =</span>
+                <span class="amount-red" id="txtPayWon">14,400 원</span>
+              </td>
+            </tr>
+            <tr>
+              <th>결제 방법 선택 <span style="color:#E8385A;">*</span></th>
+              <td>
+                <div id="methodWrap">
+                  <label class="method-label"><input type="radio" name="paymentMethod" value="card"> 카드결제</label>
+                  <label class="method-label"><input type="radio" name="paymentMethod" value="bank"> 무통장입금(가상계좌)</label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>현금영수증 발급</th>
+              <td>
+                <div style="font-size:12px; color:#664400; margin-bottom:8px; line-height:1.6;">현금영수증 소득공제 혜택을 위해 본 거래 정보를 국세청에 통보합니다. 현금영수증을 발급 받으시겠습니까?</div>
+                <div style="display:flex; gap:18px;">
+                  <label style="display:inline-flex; align-items:center; gap:5px; font-size:13px; cursor:pointer; color:#664400;"><input type="radio" name="receipt" value="yes" style="accent-color:#1A3C6E;"> 예</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px; font-size:13px; cursor:pointer; color:#664400;"><input type="radio" name="receipt" value="no" checked style="accent-color:#1A3C6E;"> 아니오</label>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ── 관·부가세 안내 ── -->
+      <div style="background:#FFF8EC; border-left:3px solid #F5A623; border-radius:0 4px 4px 0; padding:14px 16px; margin-bottom:24px; font-size:13px; line-height:1.75; color:#664400;">
+        <div style="display:flex; align-items:flex-start; gap:8px;">
+          <span style="color:#D4891A; font-size:15px; flex-shrink:0; margin-top:1px;">&#9888;</span>
+          <div>
+            <strong style="color:#7A5500; display:block; margin-bottom:3px;">관·부가세 안내</strong>
+            [과세 기준] 물품가액이 $150 초과 시, 과세가격을 기준으로 관세 및 부가세가 부과됩니다.
+            <br>※ 과세가격 = 물품가 + 현지세금 + 현지배송비 + 국제운임 + 보험료 + 포장비 (CIF)
+<br>※ 물품가액 = 물품가 + 현지세금 + 현지배송비 (국제운임·보험료 제외)
+<br>※ 사업자 통관 = 사업자 판매 목적 수입은 물품가와 무관하게 일반통관이 적용
+            <br>
+            <a href="#" style="font-size:12px; color:#C47D00; text-decoration:none; margin-top:2px; display:inline-block;">이용가이드 자세히 보기 ›</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 우측 1차 결제 비용 패널 (sticky) -->
+    <div class="bill-panel">
+      <div class="bill-panel-head">
+        <span class="bill-panel-title">1차 결제 비용</span>
+        <span class="bill-panel-sub">적용 환율 <span id="panelRate">9.6</span>원</span>
+      </div>
+      <div class="bill-panel-body">
+        <div class="fee-row fee-row-toggle" data-panel-toggle="panelLocalDetail">
+          <span class="fee-row-label">상품 및 현지비용</span>
+          <span class="fee-row-action">
+            <span class="fee-row-val" id="panelLocalTotal">1,320 엔</span>
+            <button class="fee-toggle-btn" type="button" aria-expanded="false" aria-controls="panelLocalDetail">
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div>
+        <div class="fee-detail" id="panelLocalDetail">
+          <div class="fee-extra-item"><span>상품가</span><strong>1,200 엔</strong></div>
+          <div class="fee-extra-item">
+            <span>소비세</span>
+            <strong style="display:flex; align-items:center; gap:6px;">
+              <span class="tax-toggle" id="panelTaxToggle" role="group" aria-label="소비세 기준 전환">
+                <button type="button" class="tax-toggle-btn is-active" data-tax-mode="taxed">상품가 10%</button>
+                <button type="button" class="tax-toggle-btn" data-tax-mode="exempt">0엔</button>
+              </span>
+              <span id="panelTaxVal">120 엔</span>
+            </strong>
+          </div>
+        </div>
+
+        <div class="fee-row">
+          <span class="fee-row-label">구매수수료</span>
+          <span class="fee-row-val">800 엔</span>
+        </div>
+
+        <!-- 예치금 차감 (사용 시에만 노출) -->
+        <div class="fee-row fee-row-deposit" id="panelDepositRow" style="display:none;">
+          <span class="fee-row-label" style="color:#E8385A;">예치금 사용</span>
+          <span class="fee-row-val" style="color:#E8385A; font-weight:700;">− <span id="panelDepositWon">0</span>원</span>
+        </div>
+
+        <div class="fee-section-title">할인/혜택</div>
+
+        <!-- 마일리지 (패널 내 모바일형 UI) -->
+        <div style="padding:10px 18px; border-top:1px solid #dde1e7; border-bottom:1px solid #f0f2f5;">
+          <div class="mob-mile-wrap" style="max-width:100%;">
+            <div class="mob-mile-top">
+              <span class="mob-mile-label">마일리지</span>
+              <div class="mob-mile-input-row">
+                <span class="mob-mile-input-lbl">사용</span>
+                <input type="text" class="mob-mile-inp" id="mileageDirectInput" value="" placeholder="사용 금액 입력" inputmode="numeric" autocomplete="off">
+                <button class="mob-mile-clear-btn" id="mileageClearBtn" type="button" aria-label="마일리지 초기화">×</button>
+              </div>
+              <span class="mob-mile-inp-unit">원</span>
+              <button class="mob-mile-max-btn" id="mileageMaxBtn" type="button">최대사용</button>
+            </div>
+            <div class="mob-mile-summary">
+              <span>사용 한도 <strong id="usableMileage">3,840</strong>원</span>
+              <span class="mob-mile-summary-divider">/</span>
+              <span>보유 <strong id="availableMileage">58,961</strong>원</span>
+            </div>
+            <p class="mob-mile-note">마일리지는 구매수수료의 50%까지 사용 가능합니다.</p>
+          </div>
+          <!-- 숨김 헬퍼: 원래 보유량 기준값 -->
+          <span id="mileageAvailOrig" style="display:none">58,961</span>
+          <input type="text" id="mileageInput" value="0" hidden>
+          <button type="button" id="useAllMileage" hidden>전액사용</button>
+          <button type="button" id="mileageReset" hidden>취소</button>
+        </div>
+
+        <!-- 구매 혜택: 마일리지 적립 예정 -->
+        <div class="panel-earn">
+          <div class="panel-earn-head" onclick="toggleEarnPanel(this)">
+            <span class="panel-earn-label">마일리지 적립 예정</span>
+            <span class="panel-earn-action">
+              <span class="panel-earn-max">최대 <em><span id="earnGrandTotal">768</span>원</em></span>
+              <button class="panel-earn-toggle" type="button" aria-expanded="false" aria-label="마일리지 적립 예정 펼치기"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+            </span>
+          </div>
+          <div class="panel-earn-body">
+            <div class="benefit-row">
+              <span class="benefit-row-lbl" style="font-size:12px;">구매수수료 적립 <span class="earn-rate-total">10%</span></span>
+              <span class="benefit-row-val" style="font-size:12px;">총 <span id="earnFeeTotal">768</span>원</span>
+            </div>
+            <div class="benefit-sub">
+              <span class="benefit-sub-lbl">기본 적립 <span class="earn-badge earn-badge-base">2%</span></span>
+              <span class="benefit-sub-val"><span id="earnFeeWon">154</span>원</span>
+            </div>
+            <div class="benefit-sub">
+              <span class="benefit-sub-lbl">VIP 추가 적립 <span class="earn-badge earn-badge-vip">+8%</span></span>
+              <span class="benefit-sub-val"><span id="earnEventWon">614</span>원</span>
+            </div>
+            <p class="benefit-note" style="margin-top:8px;">※ 적립 마일리지는 물품 현지 도착일 기준 익월 1일 지급됩니다.</p>
+          </div>
+        </div>
+
+        <div class="fee-summary-box">
+          <div class="fee-summary-row">
+            <span>전체 금액</span>
+            <span class="fee-summary-val" id="panelWholeAmount">2,120 엔</span>
+          </div>
+          <div class="fee-summary-row is-discount">
+            <span>할인/혜택</span>
+            <span class="fee-summary-val" id="panelMileageDiscount">-0 엔</span>
+          </div>
+          <div class="fee-summary-divider"></div>
+          <div class="fee-summary-total">
+            <span>총 결제 금액</span>
+            <span class="fee-summary-val" id="panelTotal">20,352원</span>
+          </div>
+        </div>
+
+        <div class="btn-area">
+          <button class="btn btn-cancel" type="button" onclick="window.location.href='web_totalsearch.html'">결제 취소</button>
+          <button class="btn btn-primary" type="button" id="btnApproveFinal">결제 승인</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- 파손보상 모달 -->
+<div class="modal-overlay" id="damageModal" role="dialog" aria-modal="true" aria-labelledby="damageModalTitle" hidden>
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="damageModalTitle">보상불가 품목 안내</h2>
+      <button class="modal-close" type="button" id="damageModalClose" aria-label="팝업 닫기"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <div class="modal-body">
+      <ul>
+        <li>주류포함 유리병 파손은 보상 가능하나, 코르크 손상 또는 누액은 보상 불가합니다.</li>
+        <li>턴테이블 및 턴테이블 부품(톤암, 카트리지, 더스트 커버 등)</li>
+        <li>열변형된 LP</li>
+        <li>전용 하드케이스에 포장되지 않은 악기류</li>
+        <li>도자기, 사기, 유리, 크리스탈 등으로 만들었거나 주재료인 물품<br>(브라운관 모니터, 조명, 진공관, 램프, 차량 유리 등)</li>
+        <li>정크 품위로 등록된 상품</li>
+        <li>앤틱, 빈티지, 골동품으로 표기된 상품</li>
+        <li>균열이 있거나 파손된 상태로 등록된 상품(추가파손 및 다른부위 파손도 보상불가)</li>
+        <li>미술 및 상업용으로 제작된 조각상, 프라모델 및 피규어</li>
+        <li>접착제가 사용된 부위가 떨어져 나왔을 때</li>
+        <li>본품 외부에서 충격이 확인되지 않는 내부 부품 등의 파손</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 튼튼 포장 참고표 모달 -->
+<div class="modal-overlay" id="packingCostModal" role="dialog" aria-modal="true" aria-labelledby="packingCostModalTitle" hidden>
+  <div class="modal packing-modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="packingCostModalTitle">튼튼 포장 비용 안내</h2>
+      <button class="modal-close" type="button" id="packingCostModalClose" aria-label="팝업 닫기"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="packing-modal-meta">
+        <p class="packing-unit">단위 : 엔(円)</p>
+      </div>
+      <div class="packing-table-wrap">
+        <table class="packing-cost-table">
+          <thead>
+            <tr>
+              <th class="thick-right thick-bottom">주요 상품<br>(1개 기준)</th>
+              <th class="thick-bottom">턴테이블</th>
+              <th class="thick-bottom">앰프, CD플레이어</th>
+              <th class="thick-bottom">휠 또는<br>휠 붙은 타이어</th>
+              <th class="thick-bottom">낚시대</th>
+              <th class="thick-bottom">악기 기타</th>
+              <th class="thick-bottom">중형 스피커 1쌍</th>
+              <th class="thick-bottom">대형 스피커 1쌍</th>
+              <th class="thick-bottom">범퍼</th>
+              <th class="thick-bottom">술</th>
+              <th class="thick-bottom">도자기</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="thick-right">포장비</th>
+              <td>1,000</td>
+              <td>500</td>
+              <td>1,000</td>
+              <td>1,000</td>
+              <td>500</td>
+              <td>1,000</td>
+              <td>2,000</td>
+              <td>1,500</td>
+              <td>500</td>
+              <td>500</td>
+            </tr>
+          </tbody>
+        </table>
+<table class="packing-cost-table">
+  <thead>
+    <tr>
+      <th class="thick-right thick-bottom">묶음 배송시</th>
+      <th class="thick-bottom">술</th>
+      <th class="thick-bottom">낚시대</th>
+      <th class="thick-bottom">골프채</th>
+      <th class="thick-bottom">휠</th>
+      <th class="thick-bottom">도자기</th>
+      <th class="thick-bottom" rowspan="2">세변의 합이 200CM 초과<br>조립 장난감 / 포장 커스텀 요청</th>
+    </tr>
+    <tr>
+      <th class="thick-right thick-bottom">수량</th>
+      <th class="thick-bottom">2~5병 / 6~10병</th>
+      <th class="thick-bottom">2~10개</th>
+      <th class="thick-bottom">1~3개/4~6개/7~10개</th>
+      <th class="thick-bottom">2개 초과당</th>
+      <th class="thick-bottom">2개 이상</th>
+      <!-- 여기 있던 마지막 <th></th> 삭제 -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th class="thick-right">총<br>포장비용</th>
+      <td>1,000/1,500</td>
+      <td>1,500</td>
+      <td>500/1,000/1,500</td>
+      <td>1,000엔씩 추가</td>
+      <td>1,000<span class="tier-note">(박스 추가시 +500)</span></td>
+      <td>2,000~3,000</td>
+    </tr>
+  </tbody>
+</table>
+        <p class="packing-note">※ 술·골프채·휠은 표시된 수량 구간 순서대로 총 포장비용입니다. (예: 술 3병 = 1,000엔, 골프채 6개 = 1,000엔, 휠 2개 = 1,000엔, 휠 4개 = 2,000엔)
+          <br>※ 도자기는 2개 이상 묶음시 1,000엔이며, 박스가 추가로 필요한 경우 박스 1개당 500엔이 추가됩니다.
+        <br>※ 팔레트 포장 비용은 1장당 5,000엔이며 팔레트 무게 약 11kg이 국제운송료에 포함되어 청구됩니다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function bbOpenDrawer(){document.getElementById('bbDrawer')?.classList.add('open');document.getElementById('bbDrawer')?.setAttribute('aria-hidden','false');document.getElementById('bbDrawerOv')?.classList.add('open');document.querySelector('.bb-hb')?.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+  function bbCloseDrawer(){document.getElementById('bbDrawer')?.classList.remove('open');document.getElementById('bbDrawer')?.setAttribute('aria-hidden','true');document.getElementById('bbDrawerOv')?.classList.remove('open');document.querySelector('.bb-hb')?.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  function bbSubmitSearch(e){e.preventDefault();const q=e.currentTarget.querySelector('input[name="q"]')?.value.trim().replace(/\s+/g,' ');if(q)location.href=`web_totalsearch.html?q=${encodeURIComponent(q)}`;}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')bbCloseDrawer();});
+
+  const parseWon=v=>Number(String(v).replace(/[^\d]/g,''))||0;
+  const formatWon=v=>v.toLocaleString('ko-KR');
+  const rate=()=>Number(sessionStorage.getItem('bb_rate')||9.6);
+  const agencyBase=()=>Number(sessionStorage.getItem('bb_agency_base')||800);
+
+  const PRODUCT_YEN=1200;
+  let taxMode='taxed'; // 'taxed'(상품가 10%) | 'exempt'(0엔)
+  const taxYen=()=>taxMode==='taxed'?Math.round(PRODUCT_YEN*0.1):0;
+  document.querySelectorAll('[data-panel-toggle]').forEach(row=>{
+    row.addEventListener('click',(event)=>{
+      if(event.target.closest('button.tax-toggle-btn')) return;
+      const detail=document.getElementById(row.dataset.panelToggle);
+      const btn=row.querySelector('.fee-toggle-btn');
+      if(!detail) return;
+      const isOpen=detail.classList.toggle('is-open');
+      if(btn) btn.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+  function toggleEarnPanel(head){
+    const panel=head.closest('.panel-earn');
+    if(!panel) return;
+    const isOpen=panel.classList.toggle('is-open');
+    const btn=head.querySelector('.panel-earn-toggle');
+    if(btn) btn.setAttribute('aria-expanded', String(isOpen));
+  }
+
+  document.querySelectorAll('#panelTaxToggle .tax-toggle-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      taxMode=btn.dataset.taxMode;
+      document.querySelectorAll('#panelTaxToggle .tax-toggle-btn').forEach(b=>b.classList.toggle('is-active',b===btn));
+      window.renderPaymentSummary?.();
+    });
+  });
+
+  window.renderPaymentSummary=function(){
+    const mileageDisc=Number(sessionStorage.getItem('bb_mileage_discount')||0);
+    const baseYen=PRODUCT_YEN+800+taxYen();
+    const subtotalYen=Math.max(baseYen-mileageDisc,0);
+    const r=rate();
+    const totalWon=Math.floor(subtotalYen*r);
+
+    const wholeAmountEl=document.getElementById('panelWholeAmount');if(wholeAmountEl)wholeAmountEl.textContent=formatWon(baseYen)+' 엔';
+    const mileageDiscountEl=document.getElementById('panelMileageDiscount');if(mileageDiscountEl)mileageDiscountEl.textContent='-'+formatWon(mileageDisc)+' 엔';
+    document.getElementById('panelRate').textContent=r;
+    const taxValEl=document.getElementById('panelTaxVal');if(taxValEl)taxValEl.textContent=formatWon(taxYen())+' 엔';
+    const localTotalEl=document.getElementById('panelLocalTotal');if(localTotalEl)localTotalEl.textContent=formatWon(PRODUCT_YEN+taxYen())+' 엔';
+
+    const baseWon=Math.floor(baseYen*r);
+    const depWon=parseWon(document.getElementById('depositInput')?.value||0);
+    const payWon=Math.max(totalWon-depWon,0);
+
+    // 우측 패널 예치금 행 표시/숨김
+    const depRow=document.getElementById('panelDepositRow');
+    const depValEl=document.getElementById('panelDepositWon');
+    if(depRow){depRow.style.display=depWon>0?'flex':'none';}
+    if(depValEl)depValEl.textContent=formatWon(depWon);
+
+    // 총 결제금액 = 환산금액 - 예치금
+    document.getElementById('panelTotal').textContent=formatWon(payWon)+'원';
+
+    const tw=document.getElementById('txtTotalWon');if(tw)tw.textContent=formatWon(baseWon)+' 원';
+    const tp=document.getElementById('txtPayWon');if(tp)tp.textContent=formatWon(payWon)+' 원';
+    const tf=document.getElementById('txtFormula');if(tf)tf.textContent=`${formatWon(subtotalYen)} 엔 × ${r} 원 =`;
+
+    // 구매 혜택 — 마일리지 적립 예정 업데이트
+    // 총 적립률 10%(VIP), 기본 2%, VIP 추가 = 10% - 2% = 8%
+    const ab       = agencyBase();
+    const feeTotal = Math.floor(ab * 0.10 * r);          // 총 적립 (10%)
+    const baseEarn = Math.floor(ab * 0.02 * r);          // 기본 적립 (2%)
+    const vipEarn  = feeTotal - baseEarn;                // VIP 추가 적립 (8%)
+    const el=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+    el('earnFeeWon',    formatWon(baseEarn));   // 기본 2%
+    el('earnEventWon',  formatWon(vipEarn));    // VIP +8%
+    el('earnFeeTotal',  formatWon(feeTotal));   // 합계 10%
+    el('earnGrandTotal',formatWon(feeTotal));
+
+  };
+
+  (() => {
+    /* 선택한 옵션에 맞는 설명 노출 (미선택 시 안심 케어 플러스 기준) */
+    const syncCareDesc = () => {
+      const selected = document.querySelector('input[name="careOption"]:checked');
+      const target = selected?.value === 'care' ? 'care' : 'carePlus';
+      document.querySelectorAll('.care-desc').forEach(desc=>{
+        desc.classList.toggle('is-hidden', desc.dataset.careDesc !== target);
+      });
+    };
+    document.querySelectorAll('input[name="careOption"]').forEach(input=>{
+      input.addEventListener('change',()=>{
+        if(input.checked){
+          document.querySelectorAll('input[name="careOption"]').forEach(other=>{
+            if(other!==input) other.checked=false;
+          });
+        }
+        syncCareDesc();
+        window.renderPaymentSummary?.();
+      });
+    });
+    syncCareDesc();
+  })();
+
+  (() => {
+    const badge = document.querySelector('.care-grade-badge');
+    if (!badge) return;
+    const labels = ['VIP등급은 무료 적용🎉', 'Prestige등급은 무료 적용🎉', ''];
+    const textEl = badge.querySelector('.care-grade-badge-text b');
+    const render = () => {
+      const i = Number(badge.dataset.scenario || 0);
+      textEl.textContent = labels[i];
+      badge.classList.toggle('is-blank', labels[i] === '');
+    };
+    badge.querySelectorAll('.care-scenario-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const dir = Number(btn.dataset.dir);
+        const i = ((Number(badge.dataset.scenario || 0) + dir) % labels.length + labels.length) % labels.length;
+        badge.dataset.scenario = i;
+        render();
+      });
+    });
+    render();
+  })();
+
+
+  (() => {
+    const ui=document.getElementById('depositUi');
+    const inp=document.getElementById('depositInput');
+    const useAll=document.getElementById('useAllDeposit');
+    const availEl=document.getElementById('availableDeposit');
+    const rst=document.getElementById('depositReset');
+    const rem=document.getElementById('depRemain');
+    const wrn=document.getElementById('depWarn');
+    if(!ui||!inp)return;
+    const getAvail=()=>parseWon(availEl?.textContent||0);
+    const setState=v=>{ui.classList.toggle('is-applied',v>0);useAll.classList.toggle('is-active',v>0&&v===getAvail());if(rst)rst.hidden=v<=0;if(rem)rem.style.display=v>0&&v<getAvail()?'inline':'none';if(rem?.querySelector('span'))rem.querySelector('span').textContent=formatWon(Math.max(getAvail()-v,0));};
+    const update=(val,clamp=false)=>{const avail=getAvail();const raw=parseWon(val);if(raw>avail){inp.classList.add('error');if(wrn)wrn.style.display='inline';if(clamp){inp.value=formatWon(avail);inp.classList.remove('error');if(wrn)wrn.style.display='none';setState(avail);window.renderPaymentSummary?.();}return;}inp.classList.remove('error');if(wrn)wrn.style.display='none';inp.value=formatWon(raw);setState(raw);window.renderPaymentSummary?.();};
+    useAll?.addEventListener('click',()=>{inp.value=formatWon(getAvail());update(inp.value,true);});
+    rst?.addEventListener('click',()=>{inp.value='0';if(wrn)wrn.style.display='none';inp.classList.remove('error');setState(0);window.renderPaymentSummary?.();});
+    inp.addEventListener('input',()=>update(inp.value));
+    inp.addEventListener('blur',()=>update(inp.value,true));
+    update(inp.value);
+  })();
+
+  (() => {
+    const availEl    = document.getElementById('availableMileage');  // <strong> — 잔액 표시
+    const origEl     = document.getElementById('mileageAvailOrig');   // 원래 보유량
+    const maxBtn     = document.getElementById('mileageMaxBtn');
+    const clearBtn   = document.getElementById('mileageClearBtn');
+    const directInp  = document.getElementById('mileageDirectInput');
+    const usableEl   = document.getElementById('usableMileage');
+    if(!availEl) return;
+    const MILE_AVAIL = parseWon(origEl?.textContent || availEl.textContent);
+    const getLimit   = () => Math.min(MILE_AVAIL, Math.floor(agencyBase() * 0.5 * rate()));
+    const getFeeCap  = () => Math.floor(agencyBase() * 0.5 * rate());
+
+    const updateUI = (usedWon) => {
+      const limit = getLimit();
+      if(availEl) availEl.textContent = formatWon(Math.max(MILE_AVAIL - usedWon, 0));
+      if(usableEl) usableEl.textContent = formatWon(getFeeCap());
+      if(maxBtn) maxBtn.classList.toggle('is-active', usedWon > 0 && usedWon >= limit);
+      if(clearBtn) clearBtn.classList.toggle('show', usedWon > 0);
+      // 직접 입력 필드 동기화 (포커스 중일 때는 건드리지 않음)
+      if(directInp && document.activeElement !== directInp)
+        directInp.value = usedWon > 0 ? formatWon(usedWon) : '';
+      const inp = document.getElementById('mileageInput');
+      if(inp) inp.value = formatWon(usedWon);
+    };
+
+    const persist = (usedWon) => {
+      const capped = Math.min(usedWon, getLimit(), MILE_AVAIL);
+      const d = Math.min(Math.floor(capped / rate()), agencyBase());
+      sessionStorage.setItem('bb_mileage_won', capped);
+      sessionStorage.setItem('bb_mileage_discount', d);
+      updateUI(capped);
+      window.renderPaymentSummary?.();
+    };
+
+    const applyMax  = () => { if(directInp) directInp.value = formatWon(getLimit()); persist(getLimit()); };
+    const clearMile = () => { if(directInp) directInp.value = ''; persist(0); };
+
+    // 직접 입력 이벤트
+    directInp?.addEventListener('input', () => {
+      const raw = parseWon(directInp.value);
+      const limit = getLimit();
+      directInp.classList.toggle('over', raw > limit);
+      if(maxBtn) maxBtn.classList.remove('is-active');
+      if(clearBtn) clearBtn.classList.toggle('show', raw > 0);
+    });
+    directInp?.addEventListener('blur', () => {
+      directInp.classList.remove('over');
+      persist(parseWon(directInp.value)); // persist가 clamp 처리
+    });
+
+    maxBtn?.addEventListener('click', applyMax);
+    clearBtn?.addEventListener('click', clearMile);
+    document.getElementById('useAllMileage')?.addEventListener('click', applyMax);
+    document.getElementById('mileageReset')?.addEventListener('click', clearMile);
+
+    // 초기화 + 세션 복원
+    updateUI(0);
+    const stored = Number(sessionStorage.getItem('bb_mileage_won') || 0);
+    if(stored > 0) persist(stored);
+  })();
+
+  (() => {
+    const btn = document.getElementById('btnApproveFinal');
+    const mi = document.getElementById('mileageInput');
+    const labels = Array.from(document.querySelectorAll('.method-label'));
+    const methodWrap = document.getElementById('methodWrap');
+    if (!btn) return;
+
+    let selectedMethod = '';
+
+    /* 결제방법 선택 */
+    const selectMethod = (value) => {
+      selectedMethod = value;
+      labels.forEach(l => {
+        const checked = l.querySelector('input[name="paymentMethod"]')?.value === value;
+        l.classList.toggle('is-selected', checked);
+      });
+      methodWrap?.classList.remove('method-wrap-required');
+    };
+    labels.forEach(l => {
+      l.addEventListener('click', () => {
+        const val = l.querySelector('input[name="paymentMethod"]')?.value;
+        if (val) selectMethod(val);
+      });
+    });
+
+    /* 결제승인 — 결제방법 미선택 시 차단 */
+    btn.addEventListener('click', () => {
+      if (!selectedMethod) {
+        methodWrap?.classList.add('method-wrap-required');
+        return;  /* 이후 로직 실행 안 됨 */
+      }
+      /* 결제방법 선택된 경우만 진행 */
+      if (!mi) { window.location.href = 'web_bill_2nd.html'; return; }
+      const r = rate(); const ab = agencyBase();
+      const am = parseWon(document.getElementById('mileageAvailOrig')?.textContent || 0);
+      const lw = Math.min(am, Math.floor(ab * r));
+      const mw = Math.min(parseWon(mi.value), lw);
+      const md = Math.min(Math.floor(mw / r), ab);
+      sessionStorage.setItem('bb_mileage_won', mw);
+      sessionStorage.setItem('bb_mileage_discount', md);
+      window.location.href = 'web_bill_2nd.html';
+    });
+  })();
+
+  (() => {
+    const btns=document.querySelectorAll('.damage-detail');
+    const modal=document.getElementById('damageModal');
+    const close=document.getElementById('damageModalClose');
+    if(!btns.length||!modal||!close)return;
+    const show=()=>{modal.hidden=false;modal.classList.add('is-open');document.body.style.overflow='hidden';};
+    const hide=()=>{modal.classList.remove('is-open');document.body.style.overflow='';requestAnimationFrame(()=>{if(!modal.classList.contains('is-open'))modal.hidden=true;});};
+    btns.forEach(btn=>btn.addEventListener('click',show));
+    close.addEventListener('click',hide);
+    modal.addEventListener('click',e=>{if(e.target===modal)hide();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('is-open'))hide();});
+  })();
+
+  (() => {
+    const btn=document.querySelector(".packing-cost-detail");
+    const modal=document.getElementById("packingCostModal");
+    const close=document.getElementById("packingCostModalClose");
+    if(!btn||!modal||!close)return;
+    const show=()=>{modal.hidden=false;modal.classList.add("is-open");document.body.style.overflow="hidden";};
+    const hide=()=>{modal.classList.remove("is-open");document.body.style.overflow="";requestAnimationFrame(()=>{if(!modal.classList.contains("is-open"))modal.hidden=true;});};
+    btn.addEventListener("click",show);
+    close.addEventListener("click",hide);
+    modal.addEventListener("click",e=>{if(e.target===modal)hide();});
+    document.addEventListener("keydown",e=>{if(e.key==="Escape"&&modal.classList.contains("is-open"))hide();});
+  })();
+
+  window.renderPaymentSummary();
+</script>
+<script src="bb-common.js"></script>
+</body>
+</html>

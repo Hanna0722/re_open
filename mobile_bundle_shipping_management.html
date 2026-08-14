@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>배송 신청 가능 목록 | BidBuy Korea</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{
+  --rose:#E8385A;--rose-h:#C42F4C;--amber:#F5A623;
+  --navy:#1A3C6E;--green:#3AAD4E;
+  --bg:#fbf7f5;--white:#fff;--border:#e5dbd7;
+  --tp:#1A1A2E;--ts:#666680;--tm:#999BAA;
+  --statusbar-h:25px;--appbar-h:56px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+/* 네이버 모바일 기본 타이포그래피: 시스템 한글 폰트 스택 / 14px / line-height 1.5, 여백 8px 그리드 */
+body{font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif;background:var(--bg);color:var(--tp);font-size:14px;line-height:1.5;max-width:480px;margin:0 auto;padding-top:81px}
+a{text-decoration:none;color:inherit}
+.roboto{font-family:'Roboto',sans-serif}
+
+/* ── 공통 앱 헤더 (모바일 상태바 + 앱바) ── */
+.app-header{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 0 rgba(32,36,43,.04);z-index:220}
+.app-header .phone-status-bar{border-bottom:0}
+.app-header-top{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:1px;min-height:56px;}
+.app-brand-area{display:flex;align-items:center;gap:10px;min-width:0}
+.hb{width:34px;height:34px;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0;background:none;border:none;cursor:pointer}
+.hb span{display:block;width:18px;height:2px;background:#242836;border-radius:999px}
+.app-logo{display:inline-flex;align-items:center;width:76px;line-height:0;}
+.app-logo img{display:block;width:100%;height:auto;}
+.app-header-right{margin-left:0;display:flex;gap:4px;align-items:center;justify-self:end}
+.login-btn-sm{min-width:66px;height:32px;background:var(--rose);color:#fff;border:none;padding:0 14px;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit}
+.icon-btn{width:34px;height:34px;border-radius:5px;background:none;border:none;cursor:pointer;color:#333;display:flex;align-items:center;justify-content:center;position:relative;padding:0}
+.icon-btn i{font-size:19px;line-height:19px}
+.i-badge{position:absolute;top:3px;right:2px;background:var(--rose);color:#fff;font-size:7px;font-weight:700;min-width:13px;height:13px;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:0 2px}
+.user-avatar-sm{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:0;font-size:13px}
+
+/* ── 페이지 헤더 ── */
+.page-header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:107px;z-index:200;display:flex;align-items:center;padding:0 16px;height:52px;gap:8px}
+.m-back-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:none;border-radius:5px;background:none;color:var(--tp);font-size:18px;cursor:pointer;margin-left:-8px}
+.m-hdr-title{flex:1;min-width:0;font-size:16px;font-weight:700;color:var(--tp);display:flex;flex-direction:column;line-height:1.15;white-space:nowrap}
+.m-hdr-sub{font-size:11px;font-weight:700;color:#9da2af;margin-top:2px}
+.m-hdr-link{font-size:12px;font-weight:600;color:var(--ts);display:flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0}
+.m-hdr-link i{font-size:10px}
+
+/* ── 국가 탭 (1/3 균등) ── */
+.country-tabs{display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border-bottom:1px solid var(--border);position:sticky;top:159px;z-index:190}
+.country-tab{position:relative;height:44px;border:none;background:none;color:var(--tm);display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;white-space:nowrap;line-height:1.2}
+.country-tab .ct-name{display:inline-flex;align-items:center;gap:5px}
+.country-tab small{font-size:10px;font-weight:700;color:inherit;opacity:.75;font-family:'Roboto',sans-serif}
+.country-tab::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:transparent}
+.country-tab.active{color:var(--rose)}
+.country-tab.active::after{background:var(--rose)}
+.flag{display:inline-block;width:18px;height:12px;border-radius:2px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);background:#fff center/cover no-repeat;flex-shrink:0}
+.flag.jp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'%3E%3Crect width='30' height='20' fill='%23ffffff'/%3E%3Ccircle cx='15' cy='10' r='6' fill='%23bc002d'/%3E%3C/svg%3E")}
+.flag.us{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'%3E%3Crect width='30' height='20' fill='%23ffffff'/%3E%3Cg fill='%23b22234'%3E%3Crect width='30' height='1.54'/%3E%3Crect y='3.08' width='30' height='1.54'/%3E%3Crect y='6.15' width='30' height='1.54'/%3E%3Crect y='9.23' width='30' height='1.54'/%3E%3Crect y='12.31' width='30' height='1.54'/%3E%3Crect y='15.38' width='30' height='1.54'/%3E%3Crect y='18.46' width='30' height='1.54'/%3E%3C/g%3E%3Crect width='12' height='10.77' fill='%233c3b6e'/%3E%3C/svg%3E")}
+.flag.uk{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'%3E%3Crect width='30' height='20' fill='%23012169'/%3E%3Cpath d='M0 0 30 20M30 0 0 20' stroke='%23ffffff' stroke-width='4'/%3E%3Cpath d='M0 0 30 20M30 0 0 20' stroke='%23C8102E' stroke-width='2'/%3E%3Cpath d='M15 0v20M0 10h30' stroke='%23ffffff' stroke-width='6'/%3E%3Cpath d='M15 0v20M0 10h30' stroke='%23C8102E' stroke-width='3.6'/%3E%3C/svg%3E")}
+
+/* ── 패널 ── */
+.bundle-panel{display:none;padding:1px 0 0}
+.bundle-panel.active{display:block}
+
+/* ── 전체 선택 바 ── */
+.select-all-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#fff;border-bottom:1px solid var(--border)}
+.select-all-label{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--tp)}
+.select-count{font-size:12px;color:var(--ts)}
+.select-count b{color:var(--rose)}
+
+/* ── 주문 카드 ── */
+.order-card{background:#fff;border-bottom:2px solid var(--bg);padding:12px 16px 14px}
+.order-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.order-status-wrap{display:flex;align-items:center;gap:8px}
+.order-status{font-size:13px;font-weight:700;color:var(--tp);white-space:nowrap}
+.order-status.hot{color:var(--rose)}
+.order-date{font-size:11px;color:var(--tm);font-family:'Roboto',sans-serif}
+.order-body{display:flex;gap:12px}
+.order-thumb{width:64px;height:64px;border-radius:8px;background:#EBEBEB;display:flex;align-items:center;justify-content:center;color:var(--tm);font-size:20px;flex-shrink:0}
+.order-info{flex:1;min-width:0}
+.order-market{font-size:11px;color:var(--ts);font-weight:600;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.order-market .flag{width:15px;height:10px;vertical-align:-1px;margin-right:4px}
+.order-market--with-badge{display:flex;align-items:center;gap:6px}
+.order-market-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.order-market-badge{flex-shrink:0;display:inline-flex;align-items:center;height:18px;padding:0 6px;border-radius:5px;background:#E6F1FB;color:#185FA5;font-size:10px;font-weight:700}
+.order-name{font-size:13px;color:var(--tp);line-height:1.5;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin-bottom:3px}
+.order-price{font-size:13px;font-weight:700;color:var(--tp);font-family:'Roboto',sans-serif}
+.order-meta-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:8px;margin-top:10px;padding:9px 12px;background:var(--bg);border-radius:8px}
+.order-meta-item{display:flex;flex-direction:column;gap:1px}
+.order-meta-label{font-size:10px;color:var(--tm);font-weight:600}
+.order-meta-val{font-size:12px;font-weight:700;color:var(--tp);font-family:'Roboto',sans-serif}
+
+/* 체크박스 */
+.check{position:relative;display:inline-flex;width:20px;height:20px;flex-shrink:0}
+.check input{position:absolute;inset:0;margin:0;opacity:0;cursor:pointer}
+.check .box{width:20px;height:20px;border:1.5px solid #c6cad2;border-radius:6px;background:#fff;display:grid;place-items:center;transition:all .16s;pointer-events:none}
+.check .box::after{content:"";width:10px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(0.5px,-1px);opacity:0}
+.check input:checked + .box{border-color:var(--rose);background:var(--rose)}
+.check input:checked + .box::after{opacity:1}
+
+/* ── 합계 바 ── */
+.sum-bar{background:#fff;padding:12px 16px;border-bottom:8px solid var(--bg)}
+.sum-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sum-label{font-size:13px;font-weight:700;color:var(--ts)}
+.sum-label .cnt{color:var(--tm);font-weight:600;font-size:12px;margin-left:3px}
+.sum-val{font-size:17px;font-weight:700;color:var(--tp);font-family:'Roboto',sans-serif;white-space:nowrap;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;line-height:1.25}
+.sum-val .sum-usd{font-size:11px;font-weight:700;color:var(--tm)}
+.sum-bar.caution .sum-val .sum-krw{color:var(--amber)}
+.sum-bar.danger .sum-val .sum-krw{color:var(--rose)}
+.duty-note{font-size:11px;color:var(--tm);margin-top:5px}
+.duty-flag{display:none;margin-top:6px;font-size:11px;font-weight:700;color:var(--rose)}
+.sum-bar.danger .duty-flag{display:block}
+
+/* ── 안내 ── */
+.note-box{margin:0 16px 16px;padding:12px 14px;background:#fff;border:1px solid var(--border);border-radius:10px;font-size:12px;color:var(--ts);line-height:1.7}
+.note-box li{list-style:none;display:flex;gap:6px;align-items:flex-start;word-break:keep-all}
+.note-box li::before{content:'·';color:var(--rose);font-weight:700}
+
+/* ── 빈 상태 ── */
+.empty-state{padding:64px 16px;text-align:center;color:var(--tm);background:#fff}
+.empty-state i{font-size:36px;margin-bottom:12px;display:block;color:#d3d8e0}
+.empty-state p{font-size:13px;font-weight:600}
+
+/* ── 하단 고정 바 ── */
+.m-sticky-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1.4fr;z-index:100;box-shadow:0 -2px 12px rgba(0,0,0,.08)}
+.m-sticky-line{background:#fff;color:var(--tp);border:none;border-right:1px solid var(--border);padding:16px 8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.m-sticky-primary{background:var(--rose);color:#fff;border:none;padding:16px 8px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.m-sticky-line:disabled{color:#b3b8c2;background:#f7f8fa;cursor:default}
+.m-sticky-primary:disabled{background:#d0d4db;cursor:default}
+.page-bottom-spacer{height:76px}
+
+/* ── 모달 ── */
+.modal{position:fixed;inset:0;z-index:1100;display:none;align-items:center;justify-content:center;padding:24px}
+.modal.open{display:flex}
+.modal-dim{position:absolute;inset:0;background:rgba(0,0,0,.45)}
+.modal-box{position:relative;width:100%;max-width:320px;border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 20px 50px rgba(30,34,42,.22)}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border)}
+.modal-title{font-size:15px;font-weight:700}
+.modal-close{width:28px;height:28px;border:0;background:none;color:var(--tm);font-size:17px;cursor:pointer}
+.modal-body{padding:22px 18px;text-align:center}
+.modal-text{font-size:14px;line-height:1.6;margin-bottom:8px}
+.modal-text .num{color:var(--rose);font-weight:700;font-family:'Roboto',sans-serif}
+.modal-small{font-size:12px;color:var(--tm);margin-bottom:16px}
+.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.modal-actions .line{border:1px solid var(--border);background:#fff;color:var(--ts);border-radius:5px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+.modal-actions .primary{border:none;background:var(--rose);color:#fff;border-radius:5px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+.modal-actions.wrap button{height:auto;min-height:44px;padding:8px 6px;font-size:12px;line-height:1.35;white-space:normal}
+.modal-bundle-box{background:var(--bg);border-radius:10px;padding:12px;margin-bottom:12px;font-size:13px;color:var(--ts);display:grid;gap:4px}
+.modal-bundle-box b{color:var(--tp);font-family:'Roboto',sans-serif}
+
+    .member-tier-icon { background:#E4E9EF !important; color:#1f477d !important; }
+    .member-tier-icon i { line-height:1; }
+  </style>
+</head>
+<body>
+
+<div class="app-header">
+  <!-- 모바일 상태바(시간/네트워크/배터리) : 항상 최상단 -->
+  <div class="phone-status-bar" aria-hidden="true">
+    <span class="psb-time">9:41</span>
+    <div class="psb-icons">
+      <i class="fas fa-signal"></i>
+      <i class="fas fa-wifi"></i>
+      <span class="psb-battery"><span class="psb-battery-body"><span class="psb-battery-fill"></span></span></span>
+    </div>
+  </div>
+  <div class="app-header-top">
+    <div class="app-brand-area">
+      <button class="hb" type="button" aria-label="메뉴 열기" aria-expanded="false" onclick="openDrawer()"><span></span><span></span><span></span></button>
+      <a class="app-logo" href="mobile_main.html" aria-label="Bidbuy 홈"><img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency"></a>
+    </div>
+    <div class="app-header-right" id="guestArea">
+      <button class="login-btn-sm" type="button">로그인</button>
+    </div>
+    <div class="app-header-right" id="userArea" style="display:none">
+      <button class="icon-btn" type="button" aria-label="알림"><i class="fa-regular fa-bell" aria-hidden="true"></i><span class="i-badge">3</span></button>
+      <button class="icon-btn" type="button" aria-label="장바구니"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></button>
+      <button class="user-avatar-sm tier-premium member-tier-icon" type="button" aria-label="회원 메뉴"><i class="fa-solid fa-gem" aria-hidden="true"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- ── 헤더 ── -->
+<div class="page-header">
+  <button class="m-back-btn" onclick="history.back()" aria-label="뒤로가기"><i class="fa-solid fa-arrow-left"></i></button>
+  <div class="m-hdr-title">배송 신청 관리 <span class="m-hdr-sub">배송 신청 가능 목록</span></div>
+  <a class="m-hdr-link" href="mobile_bundle_shipping_management_2.html">배송 신청 완료 목록 <i class="fa-solid fa-chevron-right"></i></a>
+</div>
+
+<!-- ── 국가 탭 ── -->
+<div class="country-tabs" role="tablist" aria-label="국가별 묶음 가능 주문">
+  <button class="country-tab active" type="button" role="tab" data-panel="jp" onclick="switchCountry(this)"><span class="ct-name"><span class="flag jp" role="img" aria-label="일본"></span>일본 묶음 가능건</span><small>(12건)</small></button>
+  <button class="country-tab" type="button" role="tab" data-panel="us" onclick="switchCountry(this)"><span class="ct-name"><span class="flag us" role="img" aria-label="미국"></span>미국 묶음 가능건</span><small>(4건)</small></button>
+  <button class="country-tab" type="button" role="tab" data-panel="uk" onclick="switchCountry(this)"><span class="ct-name"><span class="flag uk" role="img" aria-label="영국"></span>영국 묶음 가능건</span><small>(3건)</small></button>
+</div>
+
+<!-- ── 일본 패널 ── -->
+<div class="bundle-panel active" data-panel-id="jp">
+  <div class="select-all-bar">
+    <label class="select-all-label"><span class="check"><input type="checkbox" onchange="toggleAll(this)" aria-label="전체 선택"><span class="box"></span></span>전체 선택</label>
+    <span class="select-count"><b class="sel-cnt">0</b> / 12건 선택</span>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="78000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status">현지도착</span>
+      </div>
+      <span class="order-date">2023-06-06</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market order-market--with-badge"><span class="order-market-text"><span class="flag jp" role="img" aria-label="일본"></span>야후경매 - f1230346230</span><span class="order-market-badge">안심케어플러스</span></div>
+        <a class="order-name" href="mobile_auction.html">Nintendo Switch OLED 본체 화이트 Joy-Con 세트 미사용 보관품</a>
+        <div class="order-price">92,000 엔</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">78,000원</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="108000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status hot">1차 결제완료</span>
+      </div>
+      <span class="order-date">2023-06-07</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market"><span class="flag jp" role="img" aria-label="일본"></span>야후경매 - k9912048731</div>
+        <a class="order-name" href="mobile_auction.html">SONY WH-1000XM5 블랙 노이즈캔슬링 헤드폰 박스 포함</a>
+        <div class="order-price">38,500 엔</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">108,000원</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="73000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status">현지도착</span>
+      </div>
+      <span class="order-date">2023-06-08</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market"><span class="flag jp" role="img" aria-label="일본"></span>야후경매 - m4085721196</div>
+        <a class="order-name" href="mobile_auction.html">PORTER TANKER 숄더백 세이지 그린 빈티지 상태 양호</a>
+        <div class="order-price">21,800 엔</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">73,000원</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="142000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status hot">1차 결제완료</span>
+      </div>
+      <span class="order-date">2023-06-09</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market order-market--with-badge"><span class="order-market-text"><span class="flag jp" role="img" aria-label="일본"></span>야후경매 - r7603912845</span><span class="order-market-badge">안심케어플러스</span></div>
+        <a class="order-name" href="mobile_auction.html">BANDAI METAL BUILD 건담 아스트레이 레드프레임 피규어</a>
+        <div class="order-price">64,200 엔</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">142,000원</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="89000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status">현지도착</span>
+      </div>
+      <span class="order-date">2023-06-10</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market"><span class="flag jp" role="img" aria-label="일본"></span>야후경매 - p2358196042</div>
+        <a class="order-name" href="mobile_auction.html">Canon EF 50mm F1.4 USM 단렌즈 후드 포함 정상 작동</a>
+        <div class="order-price">29,700 엔</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">89,000원</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="61000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status hot">1차 결제완료</span>
+      </div>
+      <span class="order-date">2023-06-11</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market"><span class="flag jp" role="img" aria-label="일본"></span>야후경매 - c6841209375</div>
+        <a class="order-name" href="mobile_auction.html">Snow Peak 티타늄 머그 450ml 2개 세트 캠핑 용품</a>
+        <div class="order-price">12,400 엔</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">61,000원</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="121000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status">현지도착</span>
+      </div>
+      <span class="order-date">2023-06-12</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market order-market--with-badge"><span class="order-market-text"><span class="flag jp" role="img" aria-label="일본"></span>야후경매 - n5729401836</span><span class="order-market-badge">안심케어플러스</span></div>
+        <a class="order-name" href="mobile_auction.html">SEIKO Prospex 다이버 워치 솔라 충전식 SBDJ 모델</a>
+        <div class="order-price">46,900 엔</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">121,000원</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="44000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status hot">1차 결제완료</span>
+      </div>
+      <span class="order-date">2023-06-13</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market"><span class="flag jp" role="img" aria-label="일본"></span>야후경매 - h3186502749</div>
+        <a class="order-name" href="mobile_auction.html">Apple Magic Keyboard JIS 배열 화이트 중고품 상태 양호</a>
+        <div class="order-price">9,800 엔</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">44,000원</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="72000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status">현지도착</span>
+      </div>
+      <span class="order-date">2023-06-14</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market"><span class="flag jp" role="img" aria-label="일본"></span>야후경매 - t9027356814</div>
+        <a class="order-name" href="mobile_auction.html">YAMAHA AG03 MK2 오디오 인터페이스 화이트 방송 장비</a>
+        <div class="order-price">18,600 엔</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">72,000원</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="66000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status hot">1차 결제완료</span>
+      </div>
+      <span class="order-date">2023-06-15</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market"><span class="flag jp" role="img" aria-label="일본"></span>야후경매 - b1468095237</div>
+        <a class="order-name" href="mobile_auction.html">MUJI 스테인리스 유닛 선반 소형 파츠 포함 세트</a>
+        <div class="order-price">15,300 엔</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">66,000원</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="82000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status">현지도착</span>
+      </div>
+      <span class="order-date">2023-06-16</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market"><span class="flag jp" role="img" aria-label="일본"></span>야후경매 - d8054123960</div>
+        <a class="order-name" href="mobile_auction.html">Panasonic 나노케어 헤어드라이어 EH-NA0J 딥네이비</a>
+        <div class="order-price">24,900 엔</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">82,000원</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="104000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status hot">1차 결제완료</span>
+      </div>
+      <span class="order-date">2023-06-17</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market order-market--with-badge"><span class="order-market-text"><span class="flag jp" role="img" aria-label="일본"></span>야후경매 - w6275081943</span><span class="order-market-badge">안심케어플러스</span></div>
+        <a class="order-name" href="mobile_auction.html">Pokemon Card 게임 스칼렛 바이올렛 프로모 카드 묶음</a>
+        <div class="order-price">33,200 엔</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">104,000원</span></div>
+    </div>
+  </div>
+
+  <div class="sum-bar">
+    <div class="sum-row">
+      <span class="sum-label">선택건 예상 수입신고금액 합계<span class="cnt">(<span class="sel-cnt2">0</span>건)</span></span>
+      <span class="sum-val"><span class="sum-krw">0원</span><span class="sum-usd">(약 $0)</span></span>
+    </div>
+    <div class="duty-note">※ 달러 환산은 고시환율 1$ = 1,350원 기준입니다.</div>
+    <div class="duty-flag">관·부가세 부과 대상</div>
+  </div>
+
+  <ul class="note-box">
+    <li>정확한 무게 및 부피는 배송신청 후 포장이 완료된 뒤 확인 가능하며, 해당 내용은 2차 결제 안내시 확인 가능합니다.</li>
+    <li>예상 수입신고금액은 다음 항목입니다. (물품가 + 대행수수료)</li>
+    <li>2차 결제 시 추가되는 비용 및 물품 입항일 환율에 따라 면세 한도를 초과할 수 있습니다.</li>
+    <li>과세가격 = 물품가 + 현지세금 + 현지배송비 + 국제운임 + 보험료 + 포장비 (CIF)</li>
+    <li>물품가액 = 물품가 + 현지세금 + 현지배송비 (국제운임·보험료 제외)</li>
+  </ul>
+</div>
+
+<!-- ── 미국 패널 ── -->
+<div class="bundle-panel" data-panel-id="us">
+  <div class="select-all-bar">
+    <label class="select-all-label"><span class="check"><input type="checkbox" onchange="toggleAll(this)" aria-label="전체 선택"><span class="box"></span></span>전체 선택</label>
+    <span class="select-count"><b class="sel-cnt">0</b> / 4건 선택</span>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="85000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status">현지도착</span>
+      </div>
+      <span class="order-date">2023-06-06</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market"><span class="flag us" role="img" aria-label="미국"></span>이베이 - vintage_usa</div>
+        <a class="order-name" href="mobile_auction.html">Vintage Levi's 501 Denim Jacket 1980s Made in USA Size L</a>
+        <div class="order-price">920.00 달러</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">85,000원</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="129000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status hot">1차 결제완료</span>
+      </div>
+      <span class="order-date">2023-06-06</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market"><span class="flag us" role="img" aria-label="미국"></span>이베이 - vintage_usa</div>
+        <a class="order-name" href="mobile_auction.html">Vintage Levi's 501 Denim Jacket 1980s Made in USA Size L</a>
+        <div class="order-price">920.00 달러</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">129,000원</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="147000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status">현지도착</span>
+      </div>
+      <span class="order-date">2023-06-06</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market"><span class="flag us" role="img" aria-label="미국"></span>이베이 - vintage_usa</div>
+        <a class="order-name" href="mobile_auction.html">Vintage Levi's 501 Denim Jacket 1980s Made in USA Size L</a>
+        <div class="order-price">920.00 달러</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">147,000원</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="136000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status hot">1차 결제완료</span>
+      </div>
+      <span class="order-date">2023-06-06</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market"><span class="flag us" role="img" aria-label="미국"></span>이베이 - vintage_usa</div>
+        <a class="order-name" href="mobile_auction.html">Vintage Levi's 501 Denim Jacket 1980s Made in USA Size L</a>
+        <div class="order-price">920.00 달러</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">136,000원</span></div>
+    </div>
+  </div>
+
+  <div class="sum-bar">
+    <div class="sum-row">
+      <span class="sum-label">선택건 예상 수입신고금액 합계<span class="cnt">(<span class="sel-cnt2">0</span>건)</span></span>
+      <span class="sum-val"><span class="sum-krw">0원</span><span class="sum-usd">(약 $0)</span></span>
+    </div>
+    <div class="duty-note">※ 달러 환산은 고시환율 1$ = 1,350원 기준입니다.</div>
+    <div class="duty-flag">관·부가세 부과 대상</div>
+  </div>
+
+  <ul class="note-box">
+    <li>정확한 무게 및 부피는 배송신청 후 포장이 완료된 뒤 확인 가능하며, 해당 내용은 2차 결제 안내시 확인 가능합니다.</li>
+    <li>예상 수입신고금액은 다음 항목입니다. (물품가 + 대행수수료)</li>
+    <li>2차 결제 시 추가되는 비용 및 물품 입항일 환율에 따라 면세 한도를 초과할 수 있습니다.</li>
+    <li>과세가격 = 물품가 + 현지세금 + 현지배송비 + 국제운임 + 보험료 + 포장비 (CIF)</li>
+    <li>물품가액 = 물품가 + 현지세금 + 현지배송비 (국제운임·보험료 제외)</li>
+  </ul>
+</div>
+
+<!-- ── 영국 패널 ── -->
+<div class="bundle-panel" data-panel-id="uk">
+  <div class="select-all-bar">
+    <label class="select-all-label"><span class="check"><input type="checkbox" onchange="toggleAll(this)" aria-label="전체 선택"><span class="box"></span></span>전체 선택</label>
+    <span class="select-count"><b class="sel-cnt">0</b> / 3건 선택</span>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="252000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status">현지도착</span>
+      </div>
+      <span class="order-date">2023-06-08</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market"><span class="flag uk" role="img" aria-label="영국"></span>이베이 UK - 602948173506</div>
+        <a class="order-name" href="mobile_auction.html">Vintage Burberry Check Scarf Made in England Classic Nova Pattern</a>
+        <div class="order-price">132.00 파운드</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">252,000원</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="91000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status hot">1차 결제완료</span>
+      </div>
+      <span class="order-date">2023-06-09</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market"><span class="flag uk" role="img" aria-label="영국"></span>이베이 UK - 918274650382</div>
+        <a class="order-name" href="mobile_auction.html">Royal Doulton Tea Cup and Saucer Pair Fine Bone China Set</a>
+        <div class="order-price">47.00 파운드</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">91,000원</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-card-top">
+      <div class="order-status-wrap">
+        <label class="check"><input type="checkbox" data-declared="164000" onchange="updateSum()" aria-label="주문 선택"><span class="box"></span></label>
+        <span class="order-status">현지도착</span>
+      </div>
+      <span class="order-date">2023-06-10</span>
+    </div>
+    <div class="order-body">
+      <a class="order-thumb" href="mobile_auction.html" aria-label="상품 보기"><i class="fa-regular fa-image"></i></a>
+      <div class="order-info">
+        <div class="order-market"><span class="flag uk" role="img" aria-label="영국"></span>이베이 UK - 475839206184</div>
+        <a class="order-name" href="mobile_auction.html">Barbour Bedale Wax Jacket Olive Green Size 38 Made in England</a>
+        <div class="order-price">86.00 파운드</div>
+      </div>
+    </div>
+    <div class="order-meta-grid">
+      <div class="order-meta-item"><span class="order-meta-label">수취인</span><span class="order-meta-val" style="font-family:inherit">박비드</span></div>
+      <div class="order-meta-item"><span class="order-meta-label">예상 수입신고금액</span><span class="order-meta-val">164,000원</span></div>
+    </div>
+  </div>
+
+  <div class="sum-bar">
+    <div class="sum-row">
+      <span class="sum-label">선택건 예상 수입신고금액 합계<span class="cnt">(<span class="sel-cnt2">0</span>건)</span></span>
+      <span class="sum-val"><span class="sum-krw">0원</span><span class="sum-usd">(약 $0)</span></span>
+    </div>
+    <div class="duty-note">※ 달러 환산은 고시환율 1$ = 1,350원 기준입니다.</div>
+    <div class="duty-flag">관·부가세 부과 대상</div>
+  </div>
+
+  <ul class="note-box">
+    <li>정확한 무게 및 부피는 배송신청 후 포장이 완료된 뒤 확인 가능하며, 해당 내용은 2차 결제 안내시 확인 가능합니다.</li>
+    <li>예상 수입신고금액은 다음 항목입니다. (물품가 + 대행수수료)</li>
+    <li>2차 결제 시 추가되는 비용 및 물품 입항일 환율에 따라 면세 한도를 초과할 수 있습니다.</li>
+    <li>과세가격 = 물품가 + 현지세금 + 현지배송비 + 국제운임 + 보험료 + 포장비 (CIF)</li>
+    <li>물품가액 = 물품가 + 현지세금 + 현지배송비 (국제운임·보험료 제외)</li>
+  </ul>
+</div>
+
+<div class="page-bottom-spacer"></div>
+
+<!-- ── 하단 고정 바 ── -->
+<div class="m-sticky-bar">
+  <button class="m-sticky-line js-individual-btn" type="button" onclick="handleIndividualSubmit()" disabled>선택건 개별배송 신청</button>
+  <button class="m-sticky-primary js-bundle-btn" type="button" onclick="handleBundleSubmit()" disabled>선택건 묶음 신청</button>
+</div>
+
+<!-- MODAL :: 묶음배송처리안내 -->
+<div class="modal" id="modal-bundle-delivery" role="dialog" aria-modal="true">
+  <div class="modal-dim" onclick="closeModal('modal-bundle-delivery')"></div>
+  <section class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">묶음배송처리안내</div>
+      <button class="modal-close" type="button" aria-label="닫기" onclick="closeModal('modal-bundle-delivery')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-text"><span class="num">00</span>건의 배송대기 주문이<br>묶음배송 신청이 정상 처리 되었습니다.</p>
+      <div class="modal-bundle-box">
+        <p>묶음 총 무게 <b>21kg</b></p>
+        <p>2차 결제금액 <b>￦560,000원</b></p>
+      </div>
+      <p class="modal-small">마이페이지 1차결제/현지도착 목록에서 확인 가능 합니다.</p>
+      <div class="modal-actions">
+        <button class="line" type="button" onclick="closeModal('modal-bundle-delivery')">묶음 신청 취소</button>
+        <button class="primary" type="button" onclick="location.href='mobile_bundle_shipping_order.html'">확인</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- MODAL :: 안심케어플러스 묶음배송 불가 안내 -->
+<div class="modal" id="modal-carecare-guard" role="dialog" aria-modal="true">
+  <div class="modal-dim" onclick="closeModal('modal-carecare-guard')"></div>
+  <section class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">묶음배송 신청 불가 안내</div>
+      <button class="modal-close" type="button" aria-label="닫기" onclick="closeModal('modal-carecare-guard')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-text">안심케어플러스 신청 건은<br><span style="color:var(--rose)">개별배송</span>으로만 진행 가능합니다.</p>
+      <p class="modal-small">묶음 신청을 진행하시려면 안심케어플러스를 해지해 주세요.</p>
+      <div class="modal-actions wrap">
+        <button class="line" type="button" onclick="closeModal('modal-carecare-guard')">취소하기</button>
+        <button class="primary" type="button" onclick="confirmCareCancelAndBundle()">안심케어플러스 해지 후<br>묶음 신청하기</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+function setMobileHeaderLogin(loggedIn){
+  const guestArea = document.getElementById('guestArea');
+  const userArea = document.getElementById('userArea');
+  if(guestArea) guestArea.style.display = loggedIn ? 'none' : 'flex';
+  if(userArea) userArea.style.display = loggedIn ? 'flex' : 'none';
+  try { localStorage.setItem('bb_mobile_logged_in', loggedIn ? '1' : '0'); } catch(e) {}
+}
+
+function initMobileHeaderLogin(){
+  let loggedIn = false;
+  try { loggedIn = localStorage.getItem('bb_mobile_logged_in') === '1'; } catch(e) {}
+  setMobileHeaderLogin(loggedIn);
+  document.querySelectorAll('.login-btn-sm').forEach((button) => {
+    button.addEventListener('click', () => setMobileHeaderLogin(true));
+  });
+}
+
+initMobileHeaderLogin();
+
+// 국가 탭 전환
+function switchCountry(tab){
+  document.querySelectorAll('.country-tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  const id = tab.getAttribute('data-panel');
+  document.querySelectorAll('.bundle-panel').forEach(p=>{
+    p.classList.toggle('active', p.getAttribute('data-panel-id')===id);
+  });
+  updateActionButtons();
+}
+
+// 선택건 예상 수입신고금액 합계 (고시환율 1$ = 1,350원)
+const CUSTOMS_USD_RATE_KRW = 1350;
+const DUTY_CAUTION_KRW = 125 * CUSTOMS_USD_RATE_KRW;
+const DUTY_LIMIT_KRW = 150 * CUSTOMS_USD_RATE_KRW;
+
+function panelOf(el){ return el.closest('.bundle-panel'); }
+
+function parseMoney(text){
+  return parseInt(String(text || '').replace(/[^0-9]/g, ''), 10) || 0;
+}
+
+function declaredAmountOf(check){
+  const card = check.closest('.order-card');
+  if(!card) return parseMoney(check.dataset.declared);
+  const vals = card.querySelectorAll('.order-meta-item .order-meta-val');
+  const declared = vals[vals.length - 1];
+  return parseMoney(declared ? declared.textContent : check.dataset.declared);
+}
+
+function updateSum(){
+  document.querySelectorAll('.bundle-panel').forEach(panel=>{
+    const checks = panel.querySelectorAll('.order-card .check input');
+    if(!checks.length) return;
+    let sum=0, count=0;
+    checks.forEach(c=>{ if(c.checked){ sum += declaredAmountOf(c); count++; }});
+    const cnt = panel.querySelector('.sel-cnt');
+    const cnt2 = panel.querySelector('.sel-cnt2');
+    const krw = panel.querySelector('.sum-krw');
+    const usd = panel.querySelector('.sum-usd');
+    if(cnt) cnt.textContent = count;
+    if(cnt2) cnt2.textContent = count;
+    if(krw) krw.textContent = sum.toLocaleString('ko-KR') + '원';
+    if(usd) usd.textContent = '(약 $' + Math.round(sum / CUSTOMS_USD_RATE_KRW).toLocaleString('ko-KR') + ')';
+    const bar = panel.querySelector('.sum-bar');
+    if(bar){
+      bar.classList.remove('caution','danger');
+      if(sum > DUTY_LIMIT_KRW){
+        bar.classList.add('danger');
+      }else if(sum > DUTY_CAUTION_KRW){
+        bar.classList.add('caution');
+      }
+    }
+    // 전체선택 체크 동기화
+    const allBox = panel.querySelector('.select-all-bar .check input');
+    if(allBox) allBox.checked = count === checks.length;
+  });
+  updateActionButtons();
+}
+
+function toggleAll(box){
+  const panel = panelOf(box);
+  panel.querySelectorAll('.order-card .check input').forEach(c=>{ c.checked = box.checked; });
+  updateSum();
+}
+
+// 개별배송은 1건 선택 시, 묶음 신청은 2건 이상 선택 시에만 활성화
+function getActiveCheckedCards(){
+  const panel = document.querySelector('.bundle-panel.active');
+  if(!panel) return [];
+  return Array.from(panel.querySelectorAll('.order-card')).filter(card=>{
+    const box = card.querySelector('.check input');
+    return box && box.checked;
+  });
+}
+
+function updateActionButtons(){
+  const count = getActiveCheckedCards().length;
+  const individualBtn = document.querySelector('.js-individual-btn');
+  const bundleBtn = document.querySelector('.js-bundle-btn');
+  if(individualBtn) individualBtn.disabled = count !== 1;
+  if(bundleBtn) bundleBtn.disabled = count < 2;
+}
+
+function handleIndividualSubmit(){
+  if(getActiveCheckedCards().length !== 1) return;
+  location.href = 'mobile_individual_shipping_order.html';
+}
+
+// 모달
+function openModal(id){
+  const count = getActiveCheckedCards().length;
+  const modal = document.getElementById(id);
+  const num = modal.querySelector('.num');
+  if(num) num.textContent = String(count).padStart(2,'0');
+  modal.classList.add('open');
+}
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+
+// 안심케어플러스 신청 건이 포함된 경우 묶음 신청 차단
+function handleBundleSubmit(){
+  const checkedCards = getActiveCheckedCards();
+  if(checkedCards.length < 2) return;
+  const hasCareCare = checkedCards.some(card=>!!card.querySelector('.order-market-badge'));
+  if(hasCareCare){
+    openModal('modal-carecare-guard');
+    return;
+  }
+  location.href = 'mobile_bundle_shipping_order.html';
+}
+
+function confirmCareCancelAndBundle(){
+  closeModal('modal-carecare-guard');
+  location.href = 'mobile_bundle_shipping_order.html';
+}
+
+updateActionButtons();
+</script>
+<script src="bb-common-mobile.js"></script>
+</body>
+</html>

@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BidBuy Korea</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Inter:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{
+  --rose:#E8385A;--rose-h:#C42F4C;--amber:#F5A623;
+  --navy:#1A3C6E;--green:#3AAD4E;
+  --bg:#F5F7FA;--white:#fff;--border:#E0E4EB;
+  --tp:#1A1A2E;--ts:#666680;--tm:#999BAA;
+  --alert:#FFF8E6;
+  --notice-h:32px;
+  --header-h:0px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;background:var(--bg);color:var(--tp);font-size:14px;zoom:1;line-height:1.5;padding-top:calc(var(--notice-h) + var(--header-h))}
+a{text-decoration:none;color:inherit}
+
+/* ? ═ 공 ? ?? ═ */
+.notice-bar{background:#F1F3F5;color:#111;text-align:center;font-size:13px;padding:9px 16px;font-weight:500;min-height:var(--notice-h);display:flex;align-items:center;justify-content:center;white-space:pre-wrap;}
+.notice-bar b{color:#E8385A}
+
+/* ?먥븧 ?ㅻ뜑 ?먥븧 */
+.sticky-top{position:fixed;top:0;left:0;right:0;z-index:300}
+header{background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.hdr{max-width:1440px;margin:0 auto;padding:0 24px;height:var(--header-h);display:flex;align-items:center;gap:16px}
+.logo{display:flex;align-items:center;flex-shrink:0;flex:1}
+.logo img{display:block;width:100px;height:auto}
+.search{flex:0 0 540px;max-width:540px;display:flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .2s}
+.search:focus-within{border-color:var(--rose)}
+.search input{flex:1;border:none;background:var(--bg);padding:10px 14px;font-size:14px;font-family:inherit;outline:none}
+.search input::placeholder{color:var(--tm)}
+.search-btn{background:var(--rose);color:#fff;border:none;padding:0 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;white-space:nowrap;transition:background .15s}
+.search-btn:hover{background:var(--rose-h)}
+.hdr-right{flex:1;margin-left:0;display:flex;align-items:center;justify-content:flex-end;gap:4px;flex-shrink:0}
+.hbtn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 9px;border-radius:5px;cursor:pointer;color:var(--ts);font-size:10px;border:none;background:none;font-family:inherit;transition:background .15s;position:relative}
+.hbtn:hover{background:var(--bg)}
+.hbtn i{font-size:17px}
+.h-badge{position:absolute;top:4px;right:4px;background:var(--rose);color:#fff;font-size:8px;font-weight:700;min-width:14px;height:14px;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:0 2px}
+/* 비로그인 버튼 */
+.btn-su{background:#fff;color:var(--ts);border:1.5px solid var(--border);padding:8px 16px;border-radius:5px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
+.btn-su:hover{border-color:var(--rose);color:var(--rose)}
+.btn-li{background:var(--rose);color:#fff;border:none;padding:8px 18px;border-radius:5px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;white-space:nowrap}
+.btn-li:hover{background:var(--rose-h)}
+/* 로그???  ? ? 리 ?*/
+.user-trig{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:5px;cursor:pointer;border:none;background:none;font-family:inherit;transition:background .15s}
+.user-trig:hover,.user-trig.open{background:var(--bg)}
+.u-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--amber));display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;flex-shrink:0}
+.u-nm{font-size:13px;font-weight:700;color:var(--tp);line-height:1.2;text-align:left}
+.u-gr{display:inline-block;background:var(--alert);color:var(--amber);font-size:9px;font-weight:700;padding:1px 6px;border-radius:8px;margin-top:2px}
+.u-chv{font-size:9px;color:var(--tm);transition:transform .2s}
+.user-trig.open .u-chv{transform:rotate(180deg)}
+
+/* ? ═ ??? 안: 채널 ? 이 ? ?(? 형) ? ═ */
+.channel-bar{background:#fff;border-bottom:1px solid var(--border);padding:14px 0}
+.channel-inner{max-width:1440px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:0}
+/* ?버?*/
+.hb-btn{display:flex;flex-direction:column;gap:4.5px;padding:8px;border-radius:5px;cursor:pointer;background:none;border:none;margin-right:12px;transition:background .15s;flex-shrink:0}
+.hb-btn:hover{background:var(--bg)}
+.hb-btn span{display:block;width:17px;height:2px;background:var(--tp);border-radius:1px}
+/* ???형 채널 ?이?그리??*/
+.channel-icons{display:flex;gap:16px;width:min(calc(100vw - 60px),640px);margin:0 auto;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity;touch-action:pan-x;padding:0 8px 2px}
+.channel-icons::-webkit-scrollbar{display:none}
+.ch-icon-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:4px 14px;cursor:pointer;min-width:80px;flex:0 0 auto;scroll-snap-align:start;transition:opacity .15s}
+.ch-icon-item:hover{opacity:.8}
+/* ??? 심 변 ? ? 형 배경 ? 에 로고 */
+.ch-circle{
+  width:56px;height:56px;border-radius:50%;background:#fff;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.07);
+  transition:box-shadow .15s;
+}
+.ch-icon-item:hover .ch-circle{box-shadow:0 4px 14px rgba(0,0,0,.13)}
+.ch-circle img{width:38px;height:38px;object-fit:contain}
+/* ? 시 로고 (? 스??? 모지 조합) */
+.ch-circle-logo{width:38px;height:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+.ch-circle-logo .flag{font-size:16px;line-height:1}
+.ch-circle-logo .brand{font-size:8px;font-weight:700;color:var(--tp);white-space:nowrap}
+.ch-label{font-size:11px;color:var(--ts);font-weight:500;white-space:nowrap}
+/* ?곗륫 硫붾돱 */
+.ch-right{display:flex;gap:0;margin-left:auto;flex-shrink:0}
+.ch-right-item{padding:10px 14px;font-size:13px;font-weight:700;color:var(--navy);white-space:nowrap;cursor:pointer;border-radius:8px;transition:background .15s}
+.ch-right-item:hover{background:var(--bg)}
+
+/* ? ═ ????? 안: 배너( ? + ? 원? 널(?? 2컬럼 73:27 ? ═ */
+.main-hero{background:#fff;padding:0}
+.hero-inner{
+  max-width:1060px;margin:0 auto;padding:28px 0 18px;
+  display:grid;
+  grid-template-columns:73fr 27fr;
+  gap:16px;
+  align-items:stretch;
+}
+
+/* 배너 ? 라? 더 - 좌측 73% */
+.banner-wrap{position:relative;overflow:hidden;border-radius:12px;min-width:0}
+.banner-slider{height:300px;position:relative;overflow:hidden;border-radius:12px}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .5s;display:flex;align-items:center}
+.slide.active{opacity:1}
+/* 배너 배경: ?림/베이지 */
+.sl-1{background:linear-gradient(135deg,#FFF5EE,#FDEEE4)}
+.sl-2{background:linear-gradient(135deg,#EEF2FF,#DFE8FF)}
+.sl-3{background:linear-gradient(135deg,#EDFAF1,#D8EFE0)}
+.slide-inner{padding:0 40px;width:100%;display:flex;align-items:center;justify-content:space-between}
+.slide-tag{display:inline-block;background:var(--rose);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:12px}
+.slide-title{font-size:32px;font-weight:700;color:var(--tp);line-height:1.2;margin-bottom:8px}
+.slide-sub{font-size:13px;color:var(--ts);margin-bottom:18px}
+.slide-cta{background:var(--rose);color:#fff;border:none;padding:11px 24px;border-radius:5px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:8px;transition:background .15s}
+.slide-cta:hover{background:var(--rose-h)}
+.slide-obj{width:180px;height:180px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:72px}
+.sl-1 .slide-obj{background:radial-gradient(circle,#C8E6C9,#81C784 60%,#4CAF50)}
+.sl-2 .slide-obj{background:radial-gradient(circle,#BBDEFB,#64B5F6 60%,#2196F3)}
+.sl-3 .slide-obj{background:radial-gradient(circle,#F8BBD0,#F06292 60%,#E91E63)}
+.banner-nav{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:flex-end;padding:12px 16px;pointer-events:none;z-index:3;gap:6px}
+.bnav-btn{pointer-events:all;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.85);border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;color:var(--tp);box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.bnav-btn:hover{background:#fff}
+.banner-dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:3}
+.dot{width:6px;height:6px;border-radius:3px;background:rgba(0,0,0,.2);cursor:pointer;transition:all .3s}
+.dot.active{width:18px;background:var(--rose)}
+
+/* ????? 안: ? 측 ? 원 ? 널 - 27% (grid ?비율 결정) */
+.hero-panel{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+/* 비로그인 ? 널 */
+.panel-guest{
+  padding:32px 20px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  flex:1;
+}
+.panel-guest-msg{font-size:16px;font-weight:700;color:var(--tp);margin-bottom:6px}
+.panel-guest-sub{font-size:13px;color:var(--ts);margin-bottom:20px;line-height:1.6}
+.panel-login-btn{background:var(--rose);color:#fff;border:none;padding:12px;border-radius:5px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;width:100%;margin-bottom:8px}
+.panel-login-btn:hover{background:var(--rose-h)}
+.panel-signup-btn{background:#fff;color:var(--ts);border:1.5px solid var(--border);padding:10px;border-radius:5px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;width:100%}
+/* 로그??? 널 */
+.panel-user{display:none;flex-direction:column;flex:1;padding:14px}
+.panel-user-top{padding:0 0 10px;border-bottom:1px solid #F0F2F5}
+.panel-user-row{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.pu-crown{width:30px;height:30px;border-radius:50%;background:#FFF4D6;color:#F5A623;display:grid;place-items:center;font-size:15px;flex-shrink:0}
+.pu-name{font-size:14px;font-weight:800;color:var(--tp)}
+.pu-grade{display:inline-block;color:#8B94A3;font-size:10px;font-weight:700;margin-top:1px}
+.pu-manage-card{background:#FFF7F0;border:1px solid #FFE2C6;border-radius:8px;padding:8px 10px;margin-bottom:10px}
+.pu-manage-row{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;font-weight:800;color:#F08A24}
+.pu-grade-progress{height:5px;margin-top:7px;border-radius:999px;background:#FFE2C6;overflow:hidden}
+.pu-grade-progress span{display:block;width:0;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--rose),var(--amber));transition:width .2s ease}
+.pu-manage-sub{display:block;margin-top:6px;padding-top:5px;border-top:1px solid #FFE2C6;color:#B9A18D;font-size:10px;text-align:right;text-decoration:none}
+.pu-manage-sub:hover{color:var(--rose)}
+.pu-status{display:grid;gap:6px;padding:10px 0}
+.pu-st{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:22px}
+.pu-st-label{display:flex;align-items:center;gap:6px;color:#6B7280;font-size:12px;font-weight:700}
+.pu-st-label::before{content:"";width:6px;height:6px;border-radius:50%;background:#22C55E}
+.pu-st:nth-child(2) .pu-st-label::before{background:#E8385A}
+.pu-st:nth-child(3) .pu-st-label::before{background:#22C55E}
+.pu-st-num{font-size:13px;font-weight:900;color:var(--tp);font-family:'Roboto',sans-serif}
+.pu-st-num.red{color:var(--rose)}
+.pu-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:auto}
+.pu-btn{height:32px;border:1px solid var(--border);border-radius:5px;background:#fff;font-size:11px;font-weight:800;color:#5D6675;cursor:pointer;font-family:inherit;text-align:center;position:relative}
+.pu-btn:hover{background:var(--bg);color:var(--tp)}
+/* 신규 소식 표시: 오른쪽 위 N (1:1 문의내역과 동일) */
+.new-n{color:var(--rose);font-family:Roboto,sans-serif;font-size:9px;font-weight:900;line-height:1;vertical-align:super;margin-left:2px}
+k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
+
+/* ? ═ 멤버??배너 ? ═ */
+.member-bar{background:#fff;padding:16px 0}
+.member-inner{max-width:1060px;margin:0 auto;padding:0;display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.mb-lbl{font-size:13px;font-weight:700;color:var(--navy);flex-shrink:0}
+.mb-sub{font-size:12px;color:var(--ts);flex-shrink:0}
+/* 비로그인 3??*/
+.mb-tiers{display:flex;flex:1;gap:0}
+.mb-tier{flex:1;text-align:center;padding:4px 16px;border-right:1px solid var(--border)}
+.mb-tier:last-child{border-right:none}
+.mb-tier-name{font-size:13px;font-weight:700}
+.mb-tier-desc{font-size:11px;color:var(--tm);line-height:1.5;margin-top:2px}
+.mb-detail-btn{background:var(--rose);color:#fff;border:none;padding:9px 20px;border-radius:5px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;margin-left:auto;flex-shrink:0}
+.mb-detail-btn:hover{background:var(--rose-h)}
+
+/* ? ═ 전환 배너(멤버십 ??공지사항) ? ═ */
+.hero-banner{position:relative;background:#fff;border-top:0px solid var(--border);border-bottom:1px solid var(--border);padding-bottom:26px}
+.hb-slide{display:none;height:100px;overflow:hidden;animation:hbFade .35s ease}
+.hb-slide.active{display:block}
+@keyframes hbFade{from{opacity:0}to{opacity:1}}
+.mb-slide .member-bar{height:100px;padding:0;display:flex;align-items:center}
+.notice-slide .notice-banner-inner{position:relative;max-width:1060px;margin:0 auto;padding:10px 10px 0}
+.notice-slide .nb-more{position:absolute;right:10px;top:10px;z-index:2;font-size:12px;color:var(--tm);font-weight:700;display:inline-flex;align-items:center;gap:4px;background:#fff;padding-left:14px}
+.notice-slide .nb-more:hover{color:var(--rose)}
+.nb-viewport{height:78px;overflow-y:auto;scrollbar-width:none;cursor:grab;padding-right:76px}
+.nb-viewport::-webkit-scrollbar{display:none}
+.nb-viewport:active{cursor:grabbing}
+.ntk-row{display:flex;align-items:center;gap:8px;height:26px;padding:0;font-size:13px;cursor:pointer}
+.ntk-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.ntk-dot.ntk-jp{background:var(--rose)}
+.ntk-dot.ntk-kr{background:#1d74ff}
+.ntk-tag{flex-shrink:0;font-size:11px;font-weight:700;color:#374151;background:#F1F3F5;border-radius:4px;padding:2px 6px}
+.ntk-row .notice-txt{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hb-dots{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);display:flex;gap:6px}
+.hb-dot{width:6px;height:6px;padding:0;border:none;border-radius:50%;background:var(--border);cursor:pointer}
+.hb-dot.active{background:var(--rose);width:16px;border-radius:4px}
+
+/* ? ═ 바로가 ?? ═ */
+.sc-bar{background:#fff;border-bottom:1px solid var(--border);padding: 14px 0}
+.sc-inner{max-width:1060px;margin:0 auto;padding:0;display:flex;justify-content:space-between;gap:8px;overflow-x:auto;scrollbar-width:none}
+.sc-inner::-webkit-scrollbar{display:none}
+.sc-item{display:flex;flex-direction:column;align-items:center;gap:7px;padding:8px 10px;border-radius:10px;cursor:pointer;min-width:74px;border:1.5px solid transparent;transition:all .15s}
+.sc-item:hover{background:#FFF5F7;border-color:rgba(232,56,90,.15)}
+.sc-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
+.sc-icon i{font-size:17px;color:#fff}
+.si1{background:#6C63FF}.si2{background:#EC4899}.si3{background:#F59E0B}.si4{background:#10B981}
+.si5{background:#3B82F6}.si6{background:#F97316}.si7{background:#8B5CF6}.si8{background:#06B6D4}.si9{background:#14B8A6}.si10{background:#64748B}
+.sc-lbl{font-size:11px;color:var(--ts);font-weight:500;white-space:nowrap}
+
+/* 환율/근무시간 팝업 */
+.market-info-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(17,24,39,.46);z-index:900}
+.market-info-overlay.open{display:flex}
+.market-info-popup{width:min(742px,calc(100vw - 32px));background:#f5f7fa;border:1px solid #d9dee6;box-shadow:0 18px 48px rgba(15,23,42,.2);position:relative}
+.market-info-close{position:absolute;top:10px;right:10px;width:28px;height:28px;border:0;background:#fff;color:#697386;border-radius:4px;display:grid;place-items:center;z-index:2}
+.market-info-body{display:grid;grid-template-columns:1fr;gap:20px;padding:14px}
+.office-grid{display:grid;grid-template-columns:1fr 1fr;background:#fff;border:0}
+.office-card{min-height:92px;padding:10px 12px 8px 10px;border:0;display:flex;align-items:center;gap:8px}
+.office-card:nth-child(2n){border-right:0}
+.office-card:nth-last-child(-n+2){border-bottom:0}
+.office-status{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 auto;background:#d9dee6;color:#fff;font-size:12px;font-weight:600}
+.office-status.is-open{background:#E8385A;color:#fff}
+.office-info{min-width:0}
+.office-country{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#111827;margin-bottom:4px}
+.office-country .flag{width:18px;height:13px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+.office-country .flag img{width:100%;height:100%;display:block;object-fit:cover;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.office-time{font-family:pretendard,Arial,sans-serif;font-size:13px;color:#1d74ff;white-space:nowrap}
+
+@media (max-width:720px){
+  .market-info-body{grid-template-columns:1fr}
+  .office-grid{grid-template-columns:1fr}
+  .office-card,.office-card:nth-child(2n),.office-card:nth-last-child(-n+2){border:0}
+  .office-card:last-child{border-bottom:0}
+}
+
+/* 편의도구 팝업 */
+.convenience-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(17,24,39,.46);z-index:910}
+.convenience-overlay.open{display:flex}
+.convenience-popup{width:min(680px,calc(100vw - 32px));background:#fff;border:1px solid #d9dee6;box-shadow:0 18px 48px rgba(15,23,42,.2);position:relative}
+.convenience-head{height:54px;padding:0 54px 0 20px;border-bottom:1px solid var(--border);display:flex;align-items:center}
+.convenience-title{font-size:16px;font-weight:900;color:#111827}
+.convenience-close{position:absolute;top:12px;right:12px;width:30px;height:30px;border:0;background:#F5F7FA;color:#697386;border-radius:4px;display:grid;place-items:center}
+.convenience-close:hover{background:#EEF1F5;color:#111827}
+.convenience-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--border);background:#fbfcfd}
+.convenience-tab{min-height:50px;padding:9px 10px;border:0;border-right:1px solid var(--border);background:transparent;color:#5D6675;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer;word-break:keep-all;line-height:1.25}
+.convenience-tab:last-child{border-right:0}
+.convenience-tab:hover,.convenience-tab.active{background:#fff;color:var(--rose)}
+.convenience-tab.active{box-shadow:inset 0 -3px 0 var(--rose)}
+.convenience-body{padding:22px 24px 26px;min-height:190px;background:#fff}
+.convenience-panel{display:none}
+.convenience-panel.active{display:block}
+.convenience-panel-title{font-size:15px;font-weight:900;color:#111827;margin-bottom:8px}
+.convenience-panel-desc{font-size:13px;color:#6B7280;line-height:1.6}
+@media (max-width:720px){
+  .convenience-tabs{grid-template-columns:1fr 1fr}
+  .convenience-tab:nth-child(2){border-right:0}
+  .convenience-tab:nth-child(-n+2){border-bottom:1px solid var(--border)}
+}
+
+/* ? ═ ? 션 공통 ? ═ */
+.section{max-width:1060px;margin:0 auto;padding:34px 0}
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.sec-title{font-size:18px;font-weight:700}
+.sec-more{font-size:13px;color:var(--tm);display:flex;align-items:center;gap:4px}
+.sec-more:hover{color:var(--rose)}
+.sec-meta{font-size:12px;color:var(--tm)}
+
+/* ? ═ 브랜??? ═ */
+.brand-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:16px;padding-bottom:4px}
+.br-chip{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;cursor:pointer}
+.br-img{width:64px;height:56px;border-radius:12px;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--tp);overflow:hidden;transition:box-shadow .15s}
+.br-chip:hover .br-img{box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.br-img img{width:100%;height:100%;object-fit:contain;padding:10px}
+.br-name{font-size:11px;color:var(--ts);font-weight:500;text-align:center;line-height:1.35}
+
+/* 실시간 베스트 */
+.live-best-section{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:34px 0}
+.live-best-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.live-card{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:box-shadow .15s;cursor:pointer}
+.live-card:hover{box-shadow:0 5px 18px rgba(0,0,0,.08)}
+.live-thumb{position:relative;width:100%;aspect-ratio:1;background:#F2F3F5;overflow:hidden}
+.live-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.live-actions{position:absolute;left:12px;right:12px;bottom:10px;z-index:2;display:flex;align-items:center;justify-content:center;gap:6px}
+.live-action,
+.live-fav{width:34px;height:34px;padding:0;border:1px solid #e0e3e8;border-radius:50%;background:rgba(255,255,255,.96);color:#9aa1ad;display:flex;align-items:center;justify-content:center;font-size:15px;line-height:1;box-shadow:none;transition:border-color .16s,background .16s,color .16s,transform .16s}
+.live-action:hover,
+.live-fav:hover{border-color:#c9ced7;background:#fff;color:var(--rose)}
+.live-fav.active{background:var(--rose);color:#fff;transform:scale(1.04)}
+.live-info{padding:10px 12px 12px}
+.live-source{height:24px;border:1px solid #EEEFF3;border-radius:4px;display:flex;align-items:center;gap:6px;padding:0 8px;color:#6B7280;font-size:10px;margin-bottom:8px}
+.live-source::before{content:"";width:7px;height:7px;border-radius:50%;background:#E60026}
+.live-name{min-height:34px;color:#111827;font-size:12px;font-weight:700;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.live-price-line{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;min-width:0;margin-top:8px}
+.live-price{margin-top:8px;color:#111827;font-size:17px;font-weight:900;font-family:'Roboto',sans-serif}
+.live-price-line .live-price{margin-top:0}
+.live-buy-now{flex:0 0 auto;margin:0 0 2px;color:#111;font-size:12px;font-weight:600;white-space:nowrap}
+.live-buy-now strong{font-family:'Roboto',sans-serif;font-weight:600}
+.live-meta{display:flex;justify-content:space-between;gap:8px;margin-top:8px;color:#8B94A3;font-size:12px;font-weight:600}
+.live-meta span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ? ═ 카테고리 BEST ? ═ */
+.best-sec{background:#fff;padding:32px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.best-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.best-card{background:#fff;overflow:hidden;cursor:pointer}
+.best-thumb{position:relative;width:100%;aspect-ratio:1 / 1;background:var(--bg);overflow:hidden;border:1px solid var(--border)}
+.best-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.best-badge{position:absolute;top:0;left:0;background:#fff;color:var(--rose);font-size:11px;font-weight:700;padding:4px 7px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.best-fav{position:absolute;right:10px;bottom:10px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.88);display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;text-shadow:0 1px 3px rgba(0,0,0,.15)}
+.best-fav i{color:var(--rose);font-size:16px;text-shadow:none}
+.best-info{padding:6px 2px 12px}
+.best-name{font-size:13px;color:#3358d4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px}
+.best-price-label{font-size:12px;color:var(--ts);margin-bottom:1px}
+.best-price{font-size:18px;font-weight:700;color:var(--tp);font-family:'Roboto',sans-serif}
+.prod-timer{font-size:10px;color:var(--tm);margin-top:1px}
+
+/* ? ═ 고객? 기 ? ═ */
+.rv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.rv-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:16px;cursor:pointer;transition:box-shadow .15s}
+.rv-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.rv-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.rv-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;background:#FFF5F7;color:var(--rose)}
+.rv-badge.mc{background:#E8F5E9;color:var(--green)}
+.rv-time{font-size:11px;color:var(--tm)}
+.rv-thumb{width:100%;aspect-ratio:1;border-radius:8px;background:var(--bg);margin-bottom:10px;overflow:hidden}
+.rv-thumb img{width:100%;height:100%;object-fit:cover}
+.rv-stars{color:var(--amber);font-size:12px;margin-bottom:5px}
+.rv-title{font-size:13px;font-weight:700;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rv-text{font-size:12px;color:var(--ts);line-height:1.6}
+.rv-item{font-size:11px;color:var(--tm);margin-top:8px}
+
+/* ? ═ 공 ?+CS ? ═ */
+.info-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.info-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:20px;min-width:0}
+.info-title{font-size:14px;font-weight:700;margin-bottom:14px}
+.notice-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #F5F7FA;font-size:13px;cursor:pointer}
+.notice-row:last-child{border-bottom:none}
+.notice-txt{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.notice-date{font-size:11px;color:var(--tm);white-space:nowrap}
+.rate-title{font-size:16px;font-weight:800;color:#111827;margin-bottom:10px}
+.rate-desc{font-size:11px;color:#111827;line-height:1.55;margin-bottom:8px}
+.rate-period{font-size:11px;font-weight:800;color:#111827;margin-bottom:8px}
+.rate-list{display:grid;gap:0}
+.rate-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;min-height:25px;border-bottom:1px solid #d9dee6;font-size:11px}
+.rate-currency{display:flex;align-items:center;gap:5px;color:#111827}
+.rate-flag{width:16px;height:11px;object-fit:cover;display:block;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.rate-value{font-family:Roboto,Arial,sans-serif;color:#ff4b00;font-weight:800;white-space:nowrap}
+.rate-delta{color:#1f2937;font-weight:600}
+.rate-more{display:flex;justify-content:flex-end;margin-top:9px;color:#0067ff;font-size:11px;font-weight:700}
+.cs-num{font-size:30px;font-weight:900;color:var(--rose);font-family:'Roboto',sans-serif;line-height:1.1;margin-bottom:14px}
+.cs-hours{display:grid;grid-template-columns:auto 1fr;column-gap:14px;row-gap:4px;margin-bottom:14px;color:#8B94A3;font-size:12px;line-height:1.45}
+.cs-hours strong{color:#8B94A3;font-weight:900;white-space:nowrap}
+.cs-shortcuts{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.cs-shortcut{display:inline-flex;align-items:center;gap:6px;color:#6B7280;font-size:12px;font-weight:900;text-decoration:none}
+.cs-shortcut i{width:16px;height:16px;border-radius:50%;background:#1f2530;color:#fff;display:grid;place-items:center;font-size:8px}
+.cs-btns{display:flex;gap:8px;margin-top:14px}
+.cs-btn{flex:1;padding:9px;border-radius:5px;border:1.5px solid var(--border);background:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .1s}
+.cs-btn:hover{background:var(--bg)}
+.info-card .office-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 14px;background:transparent}
+.info-card .office-card{min-height:48px;padding:0;border:0}
+.info-card .office-status{width:42px;height:42px;font-size:11px}
+.info-card .office-country{font-size:12px;margin-bottom:1px}
+.info-card .office-time{font-size:12px}
+
+/* ? ═ 앱 다운로드 ? ═ */
+.app-dl{background:#fff;border-top:1px solid var(--border);padding:16px 0}
+.app-dl-inner{max-width:1440px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:flex-end;gap:10px}
+.app-dl-btn{display:flex;align-items:center;gap:7px;background:var(--tp);color:#fff;border:none;padding:10px 18px;border-radius:5px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .15s}
+.app-dl-btn:hover{opacity:.85}
+
+/* ?먥븧 ?명꽣 ?먥븧 */
+footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
+.ft-inner{max-width:1440px;margin:0 auto;padding:0 24px}
+.ft-top{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.1)}
+.ft-logo{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}
+.ft-desc{font-size:12px;line-height:1.8;max-width:340px}
+.ft-links{display:flex;flex-direction:column;gap:8px}
+.ft-links-title{font-size:12px;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:4px}
+.ft-links a{font-size:12px;color:rgba(255,255,255,.5)}
+.ft-links a:hover{color:rgba(255,255,255,.9)}
+.ft-bottom{font-size:11px;line-height:1.8}
+
+/* ?먥븧 ?뚯썝 ?쒕∼?ㅼ슫 ?먥븧 */
+.user-dd{
+  position:absolute;top:calc(100% + 8px);right:0;width:280px;
+  background:#fff;border:1px solid var(--border);border-radius:16px;
+  box-shadow:0 16px 40px rgba(0,0,0,.14);z-index:400;overflow:hidden;display:none;
+}
+.user-dd.open{display:block}
+.dd-hd{background:linear-gradient(160deg,#FFF8F5,#FFF3EE);padding:18px 16px 14px;border-bottom:1px solid #F0EBE8}
+.dd-user-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.dd-crown{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#FFE8D6,#FFD0B0);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 2px 8px rgba(232,56,90,.15)}
+.dd-name{font-size:16px;font-weight:700;color:var(--tp)}
+.dd-grade-txt{font-size:11px;font-weight:700;color:var(--rose);margin-top:2px;letter-spacing:.3px}
+.dd-milbox{display:grid;grid-template-columns:1fr 1px 1fr;background:#fff;border:1px solid var(--border);border-radius:10px;margin-bottom:12px}
+.dd-mil{text-align:center;padding:10px 8px}
+.dd-mil-div{background:var(--border)}
+.dd-mil-label{font-size:10px;color:var(--tm);margin-bottom:3px}
+.dd-mil-val{font-size:15px;font-weight:700;color:var(--tp);font-family:'Roboto',sans-serif}
+.dd-mil-val span{font-size:11px;font-weight:400;font-family:Pretendard,'Noto Sans KR',sans-serif}
+.dd-prog-lbl{display:flex;justify-content:space-between;font-size:10px;color:var(--ts);margin-bottom:5px}
+.dd-prog-lbl b{color:var(--rose)}
+.dd-prog-bg{background:#F0EBE8;border-radius:3px;height:5px}
+.dd-prog-fill{background:linear-gradient(90deg,var(--rose),var(--amber));height:5px;border-radius:3px;width:62%}
+.dd-status{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.dd-st{text-align:center;padding:12px 4px;cursor:pointer;transition:background .1s}
+.dd-st:hover{background:#FFF5F7}
+.dd-st+.dd-st{border-left:1px solid var(--border)}
+.dd-st-num{font-size:22px;font-weight:700;color:var(--tp);font-family:'Roboto',sans-serif;line-height:1}
+.dd-st-num.red{color:var(--rose)}
+.dd-st-lbl{font-size:9px;color:var(--tm);margin-top:4px;line-height:1.3}
+.dd-menu{padding:6px 0}
+.dd-item{display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;font-size:13px;color:var(--tp);font-weight:500;transition:background .1s}
+.dd-item:hover{background:#FFF5F7}
+.dd-emoji{font-size:17px;width:24px;text-align:center;flex-shrink:0}
+.dd-lbl{flex:1}
+.dd-dot{width:8px;height:8px;border-radius:50%;background:var(--rose);flex-shrink:0}
+.dd-div{height:1px;background:var(--border);margin:4px 8px}
+.dd-logout{color:var(--tm) !important;font-weight:400 !important}
+.dd-logout:hover{color:var(--rose) !important}
+
+.drawer-ov{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:500;pointer-events:none;transition:background .3s}
+.drawer-ov.open{background:rgba(0,0,0,.45);pointer-events:all}
+.drawer{
+  position:fixed;top:0;left:-100%;bottom:0;
+  width:88%;max-width:340px;
+  background:#fff;z-index:501;overflow-y:auto;scrollbar-width:none;
+  transition:left .3s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;
+  box-shadow:4px 0 20px rgba(0,0,0,.12);
+  border-top-right-radius:16px;border-bottom-right-radius:16px;
+}
+.drawer::-webkit-scrollbar{display:none}
+.drawer.open{left:0}
+.dr-head{display:flex;align-items:center;justify-content:space-between;padding:18px 16px 16px;border-bottom:1px solid #D8D8DE}
+.dr-login-link{display:inline-flex;align-items:center;gap:10px;padding:0;border:none;background:none;color:var(--tp);font-size:17px;font-weight:800;font-family:inherit;cursor:pointer}
+.dr-login-link i{font-size:16px;color:var(--rose)}
+.dr-close{width:32px;height:32px;border:none;background:none;color:var(--tp);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.dr-user-mini{display:flex;align-items:center;gap:10px}
+.u-av{border-radius:50%;background:#FFE7EF;color:var(--rose);display:grid;place-items:center;font-size:18px;font-weight:800}
+.dr-user-mini .u-av{width:38px;height:38px}
+.dr-user-mini-name{font-size:15px;font-weight:700;color:var(--tp)}
+.dr-user-mini-grade{font-size:11px;color:var(--ts);margin-top:2px}
+.dr-guest-card{padding:14px 16px 16px;background:#FFF8F5;border-bottom:1px solid #E5E7EB}
+.dr-guest-title{font-size:16px;font-weight:800;color:#111827;margin-bottom:4px}
+.dr-guest-copy{font-size:12px;color:#6B7280;line-height:1.45;margin-bottom:12px}
+.dr-login-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dr-action-btn{height:36px;border-radius:5px;border:1px solid var(--rose);background:var(--rose);color:#fff;font-size:12px;font-weight:800;font-family:inherit;cursor:pointer}
+.dr-action-btn.secondary{background:#fff;color:#4B5563;border-color:#D9E0E9}
+.dr-user-assets{display:grid;grid-template-columns:1fr 1px 1fr;margin:12px 16px 0;border:1px solid #E5E7EB;border-radius:10px;overflow:hidden;background:#fff}
+.dr-user-asset{text-align:center;padding:9px 6px}
+.dr-user-asset span{display:block;font-size:10px;color:#8B95A5;margin-bottom:2px}
+.dr-user-asset strong{display:block;font-size:13px;color:#1F2530;font-family:'Roboto',sans-serif}
+.dr-user-asset-div{background:#E5E7EB}
+.dr-member-panel{display:none}
+.dr-mypage-list{display:grid;gap:6px;padding:0 16px 6px}
+.dr-mypage-item{min-height:40px;display:flex;align-items:center;gap:12px;color:#202633;font-size:14px;font-weight:700;text-decoration:none}
+.dr-mypage-item i{width:20px;color:#111827;text-align:center;font-size:15px}
+.dr-mypage-item .dr-cat-arrow{margin-left:auto}
+.dr-mypage-sub{display:grid;gap:2px;margin:-2px 0 8px 32px;padding:4px 0 6px 12px;border-left:1px solid #EEF0F3}
+.dr-mypage-sub a{min-height:30px;display:flex;align-items:center;color:#4B5563;font-size:12px;font-weight:500;text-decoration:none}
+.dr-mypage-sub a.active{color:var(--rose);font-weight:800}
+.dr-sec{padding:14px 0 10px;border-bottom:1px solid #D8D8DE}
+.dr-sec:last-child{border-bottom:none}
+.dr-sec-title{padding:0 16px 14px;color:var(--tp);font-size:13px;font-weight:800}
+.dr-quick{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:0 8px}
+.dr-quick-item{display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px 4px 14px;cursor:pointer}
+.dr-quick-icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;color:var(--rose)}
+.dr-quick-label{font-size:13px;color:var(--ts);word-break:keep-all;text-align:center}
+.dr-cat-list{padding:0 0 2px}
+.dr-cat-item{display:flex;align-items:center;gap:12px;padding:15px 16px;border-top:1px solid #D8D8DE;font-size:15px;color:var(--tp);cursor:pointer}
+.dr-cat-item:first-child{border-top:none}
+.dr-cat-flag{width:30px;flex-shrink:0;color:var(--tp);font-size:14px;font-weight:700}
+.dr-cat-label{flex:1}
+.dr-cat-arrow{font-size:12px;color:var(--tm)}
+.dr-link-grid{display:grid;grid-template-columns:repeat(2,1fr);row-gap:14px;column-gap:24px;padding:0 16px 14px}
+.dr-link-grid a{font-size:14px;color:var(--ts);text-decoration:none}
+
+.drawer-cs-card {
+  margin: 22px 26px 34px;
+  padding: 18px 14px;
+  background: #fcfcfd;
+  text-align: center;
+}
+.drawer-cs-tel {
+  color: var(--navy);
+  font-family: Roboto, sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+}
+.drawer-cs-time {
+  margin: 8px 0 16px;
+  color: #7b8494;
+  font-size: 11px;
+}
+.drawer-cs-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.drawer-cs-actions button {
+  height: 34px;
+  border: 1px solid #d9e0e9;
+  border-radius: 8px;
+  background: #fff;
+  color: #1f2530;
+  font-size: 12px;
+  font-weight: 900;
+  font-family: inherit;
+}
+.drawer-cs-actions button:first-child {
+  border-color: var(--rose);
+  background: var(--rose);
+  color: #fff;
+}
+.user-drawer-ov{
+  position:fixed;inset:0;background:rgba(0,0,0,0);
+  z-index:502;pointer-events:none;transition:background .3s;
+}
+.user-drawer-ov.open{background:rgba(0,0,0,.45);pointer-events:all}
+.user-drawer{
+  position:fixed;
+  top:0;right:-105%;bottom:0;
+  width:84%;max-width:300px;
+  background:#fff;z-index:503;
+  overflow-y:auto;scrollbar-width:none;
+  transition:right .28s cubic-bezier(.4,0,.2,1);
+}
+.user-drawer::-webkit-scrollbar{display:none}
+.user-drawer.open{right:0}
+.user-drawer-head{padding:18px 14px 12px;background:#fff8f5;border-bottom:1px solid #efe6e2;}
+.user-member-row{display:flex;align-items:center;gap:12px;}
+.user-crown{
+  width:48px;height:48px;
+  display:grid;place-items:center;
+  border-radius:50%;background:#ffe6ef;
+  font-size:26px;flex:0 0 auto;
+}
+.user-name-strong{display:block;color:#111827;font-size:18px;font-weight:900;}
+.user-vip-chip{
+  display:inline-flex;margin-top:5px;
+  padding:2px 12px;border-radius:999px;
+  background:var(--rose);color:#fff;font-size:11px;font-weight:900;
+}
+.user-vip-copy{margin:13px 0 4px;color:var(--rose);font-size:11px;font-weight:900;}
+.user-vip-bar{height:5px;border-radius:999px;background:#eee2de;overflow:hidden;}
+.user-vip-bar span{display:block;width:100%;height:100%;background:var(--rose);}
+.user-asset-box{
+  display:grid;grid-template-columns:1fr 1fr;
+  margin-top:12px;border:1px solid #d9e0e9;
+  border-radius:8px;background:#fff;overflow:hidden;
+}
+.user-asset-box div{padding:8px 12px;}
+.user-asset-box div+div{border-left:1px solid #d9e0e9;}
+.user-asset-box span{display:block;color:#a4acb8;font-size:10px;font-weight:700;}
+.user-asset-box strong{display:block;color:#151b29;font-size:16px;font-weight:900;}
+.user-status-grid{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #e5e7eb;background:#fff;}
+.user-status-grid div{min-height:70px;display:grid;place-items:center;align-content:center;gap:4px;text-align:center;}
+.user-status-grid div+div{border-left:1px solid #e5e7eb;}
+.user-status-grid strong{color:#151b29;font-family:Roboto,sans-serif;font-size:26px;line-height:1;font-weight:900;}
+.user-status-grid div:nth-child(2) strong{color:var(--rose);}
+.user-status-grid span{color:#9aa3b2;font-size:10px;font-weight:700;}
+.user-menu-list{padding:0 0 12px;}
+.user-menu-item{
+  min-height:45px;padding:0 18px 0 14px;
+  display:flex;align-items:center;gap:12px;
+  color:#111827;font-size:14px;font-weight:900;border-bottom:0;
+}
+button.user-menu-item{
+  width:100%;border-top:0;border-right:0;border-left:0;
+  background:#fff;text-align:left;font-family:inherit;cursor:pointer;
+}
+.user-menu-item .emoji,
+.user-menu-item .user-menu-icon{width:22px;text-align:center;font-size:17px;flex:0 0 auto;}
+.user-menu-item .chev{margin-left:auto;color:#a8b0bd;font-weight:700;font-size:17px;line-height:1;}
+.user-menu-section{border-bottom:0;}
+.user-menu-panel{display:none;padding:0 0 8px 56px;}
+.user-menu-section.is-open .user-menu-panel{display:grid;gap:0;}
+.user-menu-link{min-height:33px;display:flex;align-items:center;color:#666b75;font-size:14px;font-weight:500;}
+.user-menu-link.danger{color:#8f949f;}
+.user-menu-item.logout{margin-top:6px;border-top:1px solid #e5e7eb;color:#9aa3b2;font-weight:700;}
+.user-menu-item.logout .emoji{font-size:15px;}
+
+@media(max-width:1023px){
+  .hero-inner{grid-template-columns:1fr}
+  .banner-wrap{margin:0}
+  .best-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.rv-grid{grid-template-columns:repeat(2,1fr)}
+  .info-grid{grid-template-columns:1fr}
+  .mb-tiers{flex-wrap:wrap}
+}
+@media(max-width:767px){
+  :root{--header-h:52px}
+  .hdr{padding:0 14px;gap:10px}
+  .logo{font-size:18px}
+  .logo sub{display:none}
+  .search{max-width:none}
+  .search-btn span{display:none}
+  .channel-bar{padding:10px 0}
+  .ch-icon-item{min-width:68px;padding:4px 8px; justify-content:center}
+  .ch-circle{width:46px;height:46px;}
+  .ch-circle-logo .flag{font-size:13px}
+  .ch-label{font-size:10px}
+  .hero-inner{padding:0 14px}
+  .banner-slider{height:200px}
+  .slide-inner{padding:0 20px}
+  .slide-title{font-size:20px}
+  .slide-sub,.slide-obj{display:none}
+  .slide-cta{padding:8px 14px;font-size:11px}
+  .section{padding:18px 14px}
+  .sec-title{font-size:15px}
+  .best-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rv-grid{grid-template-columns:repeat(1,1fr)}
+  .info-grid{grid-template-columns:1fr}
+  .btn-su{display:none}
+  .hbtn span{display:none}
+}
+
+
+</style>
+</head>
+<body>
+
+<!-- 공지+헤더 고정 래퍼 -->
+<div class="sticky-top">
+<div class="notice-bar">누적 거래 <b>2백만건</b>, 고객님과 함께 쌓아온 <b>25년</b>, 변함없는 믿음으로 이어갑니다</div>
+
+<!-- 헤더 -->
+<header>
+  <div class="hdr">
+    <button class="hb-btn" type="button" aria-label="메뉴 열기" aria-expanded="false" onclick="openDrawer()"><span></span><span></span><span></span></button>
+    <a href="web_main.html" class="logo"><img src="bidbuy logo.png" alt="Bidbuy World Auction Agency"></a>
+    <form class="search" id="mainSearchForm" role="search" action="web_totalsearch.html" method="get">
+      <input type="search" name="q" placeholder="키워드 또는 URL을 입력하세요" aria-label="검색어 입력">
+      <button class="search-btn" type="submit"><i class="fas fa-search"></i> <span>AI 검색</span></button>
+    </form>
+    <!-- 비로그인 -->
+    <div class="hdr-right" id="guestArea">
+         <button class="btn-su">회원가입</button>
+      <button class="btn-li" onclick="doLogin()">로그인</button>
+    </div>
+    <!-- 로그??-->
+    <div class="hdr-right" id="userArea" style="display:none">
+      <button class="hbtn" style="position:relative"><i class="far fa-bell"></i><span class="h-badge">3</span><span>알림</span></button>
+      <button class="hbtn"><i class="fas fa-shopping-cart"></i><span>장바구니</span></button>
+      <div style="position:relative">
+        <button class="user-trig" id="userTrig" onclick="openUserDrawer()">
+          <div class="u-av">홍</div>
+          <div><div class="u-nm">홍길동님</div><span class="u-gr">PREMIUM</span></div>
+        </button>
+        <!-- ?쒕∼?ㅼ슫 -->
+        <div class="user-dd" id="userDD">
+          <div class="dd-hd">
+            <div class="dd-user-row">
+              <div class="dd-crown"><i class="fas fa-crown"></i></div>
+              <div><div class="dd-name">홍길동 회원님</div><div class="dd-grade-txt">PREMIUM</div></div>
+            </div>
+            <div class="dd-milbox">
+              <div class="dd-mil"><div class="dd-mil-label">마일리지</div><div class="dd-mil-val">4,500<span>원</span></div></div>
+              <div class="dd-mil-div"></div>
+              <div class="dd-mil"><div class="dd-mil-label">예치금</div><div class="dd-mil-val">29,870<span>원</span></div></div>
+            </div>
+            <div class="dd-prog-lbl"><span>VIP까지 <b>3,000원</b> 또는 <b>2건</b></span></div>
+            <div class="dd-prog-bg"><div class="dd-prog-fill"></div></div>
+          </div>
+          <div class="dd-status">
+            <div class="dd-st"><div class="dd-st-num">3</div><div class="dd-st-lbl">입찰 진행 중</div></div>
+            <div class="dd-st"><div class="dd-st-num red">1</div><div class="dd-st-lbl">1차 결제 대기</div></div>
+            <div class="dd-st"><div class="dd-st-num">0</div><div class="dd-st-lbl">2차 결제 대기</div></div>
+          </div>
+          <div class="dd-menu">
+            <div class="dd-item"><span class="dd-emoji"><i class="fas fa-gavel"></i></span><span class="dd-lbl">나의 경매</span><span class="dd-dot"></span></div>
+            <div class="dd-item"><span class="dd-emoji"><i class="fas fa-bag-shopping"></i></span><span class="dd-lbl">구매대행 내역</span></div>
+            <div class="dd-item"><span class="dd-emoji"><i class="fas fa-box-open"></i></span><span class="dd-lbl">묶음 배송 관리</span></div>
+            <div class="dd-div"></div>
+            <div class="dd-item"><span class="dd-emoji"><i class="fas fa-heart"></i></span><span class="dd-lbl">관심 물품</span></div>
+            <div class="dd-item" onclick="location.href='web_mypage.html'" style="cursor:pointer"><span class="dd-emoji"><i class="fas fa-user-circle"></i></span><span class="dd-lbl">마이페이지</span></div>
+            <div class="dd-item"><span class="dd-emoji"><i class="fas fa-gear"></i></span><span class="dd-lbl">회원 정보 설정</span></div>
+            <div class="dd-div"></div>
+            <div class="dd-item dd-logout" onclick="doLogout()"><span class="dd-emoji"><i class="fas fa-right-from-bracket"></i></span><span class="dd-lbl">로그아웃</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+</div><!-- /sticky-top -->
+
+<!-- ????? 안: ? 형 채널 ? 이 ? ?-->
+<div class="channel-bar">
+  <div class="channel-inner">
+    <div class="channel-icons">
+      <!-- ?시 로고: ?형 배경 + ?모지+?스??조합 -->
+      <div class="ch-icon-item" onclick="location.href='web_sub_main.html'" style="cursor:pointer">
+        <div class="ch-circle">
+          <div class="ch-circle-logo"><span class="flag">JP</span><span class="brand" style="color:#E60026;font-size:9px;font-weight:900">YAHOO!</span></div>
+        </div>
+        <span class="ch-label">야후 옥션</span>
+      </div>
+      <div class="ch-icon-item" onclick="location.href='web_sub_main.html'" style="cursor:pointer">
+        <div class="ch-circle">
+          <div class="ch-circle-logo"><span class="flag" style="font-size:18px;color:#19ce60;font-weight:900">M</span></div>
+        </div>
+        <span class="ch-label">메루카리</span>
+      </div>
+      <div class="ch-icon-item" onclick="location.href='web_sub_main.html'" style="cursor:pointer">
+        <div class="ch-circle">
+          <div class="ch-circle-logo"><span class="flag" style="font-size:14px;color:#BF0000;font-weight:900">楽天</span></div>
+        </div>
+        <span class="ch-label">일본 라쿠텐</span>
+      </div>
+      <div class="ch-icon-item" onclick="location.href='web_sub_main.html'" style="cursor:pointer">
+        <div class="ch-circle">
+          <div class="ch-circle-logo"><span class="flag" style="font-size:12px;color:#BF0000;font-weight:700">Rakuten</span></div>
+        </div>
+        <span class="ch-label">일본 라쿠마</span>
+      </div>
+      <div class="ch-icon-item" onclick="location.href='web_sub_main.html'" style="cursor:pointer">
+        <div class="ch-circle">
+          <div class="ch-circle-logo"><span class="flag" style="font-size:12px;color:#FF9900;font-weight:900">amazon</span></div>
+        </div>
+        <span class="ch-label">야후 쇼핑</span>
+      </div>
+      <div class="ch-icon-item" onclick="location.href='web_sub_main.html'" style="cursor:pointer">
+        <div class="ch-circle">
+          <div class="ch-circle-logo"><span class="flag" style="font-size:12px;color:#FF9900;font-weight:900">amazon</span></div>
+        </div>
+        <span class="ch-label">일본 아마존</span>
+      </div>
+      <div class="ch-icon-item" onclick="location.href='web_sub_main.html'" style="cursor:pointer">
+        <div class="ch-circle">
+          <div class="ch-circle-logo"><span class="flag">US</span><span class="brand" style="font-size:9px;font-weight:700;color:#E53238">eBay</span></div>
+        </div>
+        <span class="ch-label">미국 이베이</span>
+      </div>
+      <div class="ch-icon-item" onclick="location.href='web_sub_main.html'" style="cursor:pointer">
+        <div class="ch-circle">
+          <div class="ch-circle-logo"><span class="flag">UK</span><span class="brand" style="font-size:9px;font-weight:700;color:#E53238">eBay</span></div>
+        </div>
+        <span class="ch-label">영국 이베이</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ????? 안: 배너( ? + ? 원? 널(?? 2컬럼 -->
+<div class="main-hero" style="background:#fff;border-bottom:1px solid var(--border)">
+  <div class="hero-inner">
+    <!-- 배너 ? 라? 더 -->
+    <div class="banner-wrap">
+      <div class="banner-slider" id="slider">
+        <div class="slide sl-1 active">
+          <div class="slide-inner">
+            <div class="slide-text">
+              <span class="slide-tag">야후 옥션 특집</span>
+              <h2 class="slide-title">야후 일본 경매<br>초보 추천 Top10 공개!</h2>
+              <p class="slide-sub">지금 바로 확인하고 원하는 상품을 합리적인 가격에 낙찰받아보세요.</p>
+              <button class="slide-cta">지금 바로가기 <i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div class="slide-obj"><i class="fas fa-gavel"></i></div>
+          </div>
+        </div>
+        <div class="slide sl-2">
+          <div class="slide-inner">
+            <div class="slide-text">
+              <span class="slide-tag">리뉴얼 오픈</span>
+              <h2 class="slide-title">새로워진 비드바이<br>해외쇼핑 핵심 혜택</h2>
+              <p class="slide-sub">Renewal Open EVENT와 함께 달라진 주요 혜택을 한눈에 확인해보세요.</p>
+              <button class="slide-cta">혜택 확인하기 <i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div class="slide-obj"><i class="fas fa-gift"></i></div>
+          </div>
+        </div>
+        <div class="slide sl-3">
+          <div class="slide-inner">
+            <div class="slide-text">
+              <span class="slide-tag">안심 케어 패키지</span>
+              <h2 class="slide-title">최대 50,000원<br>보상 서비스</h2>
+              <p class="slide-sub">업계 최고 수준의 케어 서비스로 최대 5만엔 상당 보상을 지원합니다.</p>
+              <button class="slide-cta">상세보기 <i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div class="slide-obj"><i class="fas fa-shield-heart"></i></div>
+          </div>
+        </div>
+        <div class="banner-nav">
+          <button class="bnav-btn" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+          <button class="bnav-btn" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="banner-dots">
+          <div class="dot active" onclick="goSlide(0)"></div>
+          <div class="dot" onclick="goSlide(1)"></div>
+          <div class="dot" onclick="goSlide(2)"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ?????쒖븞: ?곗륫 ?뚯썝 ?뺣낫 ?⑤꼸 -->
+    <div class="hero-panel" id="heroPanel">
+      <!-- 비로그인 -->
+      <div class="panel-guest" id="panelGuest">
+        <div style="font-size:36px;margin-bottom:12px"><i class="fas fa-user-plus"></i></div>
+        <div class="panel-guest-msg">비드바이 멤버로 시작하세요</div>
+        <div class="panel-guest-sub">해외쇼핑 경험이 달라지는 혜택<br>지금 바로 시작해보세요</div>
+        <button class="panel-login-btn" onclick="doLogin()">로그인</button>
+        <button class="panel-signup-btn">회원가입</button>
+      </div>
+      <!-- 로그??-->
+      <div class="panel-user" id="panelUser">
+        <div class="panel-user-top">
+          <div class="panel-user-row">
+            <div class="pu-crown"><i class="fas fa-crown"></i></div>
+            <div><div class="pu-name">홍길동님</div><span class="pu-grade">마일리지 0원 · 예치금 339,119원</span></div>
+          </div>
+          <div class="pu-manage-card">
+            <div class="pu-manage-row"><span><i class="fas fa-star"></i> Premium</span><span class="pu-grade-remaining" data-remaining="80">일반회원까지 <strong style="color: #E8385A;">80%</strong> 남음</span></div>
+            <div class="pu-grade-progress" aria-hidden="true"><span id="puGradeProgressFill"></span></div>
+            <a class="pu-manage-sub" href="web_grade.html">등급 혜택 자세히보기</a>
+          </div>
+        </div>
+        <div class="pu-status">
+          <div class="pu-st"><div class="pu-st-label">입찰 진행 중</div><div class="pu-st-num">3건</div></div>
+          <div class="pu-st"><div class="pu-st-label">1차 결제 대기</div><div class="pu-st-num red">1건</div></div>
+          <div class="pu-st"><div class="pu-st-label">2차 결제 대기</div><div class="pu-st-num">0건</div></div>
+        </div>
+        <div class="pu-btns">
+          <button class="pu-btn" type="button" onclick="openbidbuycsPopup()">고객센터</button>
+          <button class="pu-btn" type="button" onclick="openaccountPopup()">나의 계좌관리</button>
+          <button class="pu-btn" type="button" onclick="openbidbuynoticePopup()">공지사항<sup class="new-n" aria-label="새 소식">N</sup></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 전환 배너: 멤버십 등급 ??공지사항 -->
+<div class="hero-banner" id="heroBanner">
+  <div class="hb-slide mb-slide active">
+    <div class="member-bar">
+      <div class="member-inner">
+        <span class="mb-lbl">등급별 마일리지 제도 오픈!</span>
+        <span class="mb-sub">모든 거래에 자동 적립, 등급이 올라갈수록 혜택도 커집니다</span>
+        <div class="mb-tiers">
+          <div class="mb-tier"><div class="mb-tier-name">Standard</div><div class="mb-tier-desc">마일리지 2% 적립<br>무료보관 30일</div></div>
+          <div class="mb-tier"><div class="mb-tier-name" style="color:var(--amber)">Premium</div><div class="mb-tier-desc">마일리지 5% 적립<br>월간 마일리지 1만원</div></div>
+          <div class="mb-tier"><div class="mb-tier-name" style="color:var(--rose)">VIP</div><div class="mb-tier-desc">마일리지 5% 적립<br>월간 마일리지 2만원</div></div>
+        </div>
+        <a class="mb-detail-btn" href="web_grade_page.html">상세보기</a>
+      </div>
+    </div>
+  </div>
+  <div class="hb-slide notice-slide">
+    <div class="notice-banner-inner">
+      <a href="#" class="nb-more" onclick="openbidbuynoticePopup();return false;">더보기</a>
+      <div class="nb-viewport" id="nbViewport">
+        <div class="nb-track" id="nbTrack">
+          <div class="ntk-row"><span class="ntk-dot ntk-jp"></span><span class="ntk-tag">일본</span><span class="notice-txt">● 일본-8월 출하 및 공휴일 안내 ●</span></div>
+          <div class="ntk-row"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">[한국] 관세청 개인통관고유부호 검증 강화 시행 일정 변경 안내 (수정)</span></div>
+          <div class="ntk-row"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">[미국/영국] 관련 특송 공통사항입니다.</span></div>
+          <div class="ntk-row"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">[수입식품안전관리특별법] 사전 수입신고 안내</span></div>
+          <div class="ntk-row"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">[한국] 2026년 8월 카드사별 무이자 및 부분무이자 안내</span></div>
+          <div class="ntk-row"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">개인정보 처리방침 변경 안내 공지입니다.</span></div>
+          <div class="ntk-row"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">[한국] 본인인증 완료 이벤트 쿠폰 미지급 관련 공지</span></div>
+          <div class="ntk-row"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">[한국] 일시적인 사이트 접속 장애 및 정상화 안내</span></div>
+          <div class="ntk-row"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">[한국] 중국 태풍 짱마로 인한 인천세관 작업지연 관련 안내</span></div>
+          <div class="ntk-row"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">[한국] NICE 개인통관고유부호 유효성 검증 서비스 도입 안내</span></div>
+          <div class="ntk-row" aria-hidden="true"><span class="ntk-dot ntk-jp"></span><span class="ntk-tag">일본</span><span class="notice-txt">● 일본-8월 출하 및 공휴일 안내 ●</span></div>
+          <div class="ntk-row" aria-hidden="true"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">[한국] 관세청 개인통관고유부호 검증 강화 시행 일정 변경 안내 (수정)</span></div>
+          <div class="ntk-row" aria-hidden="true"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">[미국/영국] 관련 특송 공통사항입니다.</span></div>
+          <div class="ntk-row" aria-hidden="true"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">[수입식품안전관리특별법] 사전 수입신고 안내</span></div>
+          <div class="ntk-row" aria-hidden="true"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">[한국] 2026년 8월 카드사별 무이자 및 부분무이자 안내</span></div>
+          <div class="ntk-row" aria-hidden="true"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">개인정보 처리방침 변경 안내 공지입니다.</span></div>
+          <div class="ntk-row" aria-hidden="true"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">[한국] 본인인증 완료 이벤트 쿠폰 미지급 관련 공지</span></div>
+          <div class="ntk-row" aria-hidden="true"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">[한국] 일시적인 사이트 접속 장애 및 정상화 안내</span></div>
+          <div class="ntk-row" aria-hidden="true"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">[한국] 중국 태풍 짱마로 인한 인천세관 작업지연 관련 안내</span></div>
+          <div class="ntk-row" aria-hidden="true"><span class="ntk-dot ntk-kr"></span><span class="ntk-tag">한국</span><span class="notice-txt">[한국] NICE 개인통관고유부호 유효성 검증 서비스 도입 안내</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hb-dots">
+    <button class="hb-dot active" type="button" onclick="hbGoTo(0)" aria-label="멤버십 배너 보기"></button>
+    <button class="hb-dot" type="button" onclick="hbGoTo(1)" aria-label="공지사항 배너 보기"></button>
+  </div>
+</div>
+
+<!-- 바로가 ?-->
+<div class="sc-bar">
+  <div class="sc-inner">
+    <div class="sc-item" role="button" tabindex="0" onclick="openCustomsTaxPopup()" onkeydown="handleShortcutKey(event, openCustomsTaxPopup)"><div class="sc-icon si1"><i class="fas fa-table-cells-large"></i></div><span class="sc-lbl">예상 세금계산기</span></div>
+    <div class="sc-item" role="button" tabindex="0" onclick="openWishlistPopup()" onkeydown="handleShortcutKey(event, openWishlistPopup)"><div class="sc-icon si2"><i class="fas fa-heart"></i></div><span class="sc-lbl">관심상품</span></div>
+    <div class="sc-item" onclick="location.href='web_auction_bid_list.html'" style="cursor:pointer"><div class="sc-icon si3"><i class="fas fa-gavel"></i></div><span class="sc-lbl">나의 경매</span></div>
+    <div class="sc-item" onclick="location.href='web_bundle_shipping_management.html'" style="cursor:pointer"><div class="sc-icon si4"><i class="fas fa-box-open"></i></div><span class="sc-lbl">배송 신청 관리</span></div>
+    <div class="sc-item" role="button" tabindex="0" onclick="openMarketInfoPopup()" onkeydown="handleShortcutKey(event, openMarketInfoPopup)"><div class="sc-icon si5"><i class="fas fa-thumbs-up"></i></div><span class="sc-lbl">국가별 운영정보</span></div>
+    <div class="sc-item" role="button" tabindex="0" onclick="openConvenienceToolsPopup()" onkeydown="handleShortcutKey(event, openConvenienceToolsPopup)"><div class="sc-icon si6"><i class="fas fa-toolbox"></i></div><span class="sc-lbl">편의도구</span></div>
+    <div class="sc-item" onclick="location.href='web_mileage.html'" style="cursor:pointer"><div class="sc-icon si7"><i class="fas fa-ticket"></i></div><span class="sc-lbl">마일리지/쿠폰</span></div>
+    <div class="sc-item" role="button" tabindex="0" onclick="openbidbuycsPopup()" onkeydown="handleShortcutKey(event, openbidbuycsPopup)"><div class="sc-icon si8"><i class="fas fa-clipboard-list"></i></div><span class="sc-lbl">자주하는질문</span></div>
+    <div class="sc-item" onclick="location.href='web_mainlist.html?status=international-shipping'" style="cursor:pointer"><div class="sc-icon si9"><i class="fas fa-plane-departure"></i></div><span class="sc-lbl">배송조회</span></div>
+    <a class="sc-item" href="https://blog.naver.com/bidbuykr"><div class="sc-icon si10"><i class="fas fa-users"></i></div><span class="sc-lbl">커뮤니티</span></a>
+  </div>
+</div>
+
+<!-- 인기 브랜드-->
+<div class="section">
+  <div class="sec-hd"><h2 class="sec-title">인기 브랜드 빠른 검색</h2></div>
+  <div class="brand-grid">
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('NIKE')"><div class="br-img"><img src="favorite logo/3.png" alt="NIKE" onerror="this.parentElement.textContent='NIKE'"></div><span class="br-name">NIKE</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('CHANEL')"><div class="br-img"><img src="favorite logo/2.png" alt="CHANEL" onerror="this.parentElement.textContent='CHANEL'"></div><span class="br-name">CHANEL</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('HERMES')"><div class="br-img"><img src="favorite logo/1.png" alt="HERMES" onerror="this.parentElement.textContent='HERMES'"></div><span class="br-name">HERMES</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('POLO RALPH LAUREN')"><div class="br-img"><img src="favorite logo/4.png" alt="POLO" onerror="this.parentElement.textContent='POLO'"></div><span class="br-name">POLO</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('LEVI\'S')"><div class="br-img"><img src="favorite logo/8.png" alt="LEVI'S" onerror="this.parentElement.textContent='LEVI\'S'"></div><span class="br-name">LEVI'S</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('BANDAI')"><div class="br-img"><img src="favorite logo/10.png" alt="BANDAI" onerror="this.parentElement.textContent='BANDAI'"></div><span class="br-name">BANDAI</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('COMME des GARÇONS')"><div class="br-img"><img src="favorite logo/7.png" alt="COMME des" onerror="this.parentElement.textContent='COMME des'"></div><span class="br-name">COMME des</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('SHIMANO')"><div class="br-img"><img src="favorite logo/5.png" alt="SHIMANO" onerror="this.parentElement.textContent='SHIMANO'"></div><span class="br-name">SHIMANO</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('COACH')"><div class="br-img"><img src="favorite logo/6.png" alt="COACH" onerror="this.parentElement.textContent='COACH'"></div><span class="br-name">COACH</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('GUCCI')"><div class="br-img"><img src="favorite logo/9.png" alt="GUCCI" onerror="this.parentElement.textContent='GUCCI'"></div><span class="br-name">GUCCI</span></div>
+  </div>
+</div>
+
+<!-- 실시간 베스트 -->
+<div class="live-best-section">
+  <div class="section" style="padding:0">
+    <div class="sec-hd"><h2 class="sec-title">실시간 베스트</h2><span class="sec-meta">2026-04-30 20:00 업데이트</span></div>
+    <div class="live-best-grid">
+      <div class="live-card"><div class="live-thumb"><img src="https://picsum.photos/seed/watch-best-1/360" alt=""><div class="live-fav"><i class="far fa-heart"></i></div></div><div class="live-info"><div class="live-source">야후 경매</div><div class="live-name">シチズン クォーツ 腕時計 メンズ 文字盤</div><div class="live-price">3,030엔</div><div class="live-meta"><span>2026-04-30 19:38:26</span><span>10 Bids</span></div></div></div>
+      <div class="live-card"><div class="live-thumb"><img src="https://picsum.photos/seed/watch-best-2/360" alt=""><div class="live-fav"><i class="far fa-heart"></i></div></div><div class="live-info"><div class="live-source">야후 경매</div><div class="live-name">TISSOT ティソ PR100 P350/450 クォーツ</div><div class="live-price">1,100엔</div><div class="live-meta"><span>2026-04-30 18:27:54</span><span>2 Bids</span></div></div></div>
+      <div class="live-card"><div class="live-thumb"><img src="https://picsum.photos/seed/watch-best-3/360" alt=""><div class="live-fav"><i class="far fa-heart"></i></div></div><div class="live-info"><div class="live-source">야후 경매</div><div class="live-name">CITIZEN 腕時計 メンズ デジアナ アラーム</div><div class="live-price">5,000엔</div><div class="live-meta"><span>2026-04-30 19:09:09</span><span>0 Bids</span></div></div></div>
+      <div class="live-card"><div class="live-thumb"><img src="https://picsum.photos/seed/watch-best-4/360" alt=""><div class="live-fav"><i class="far fa-heart"></i></div></div><div class="live-info"><div class="live-source">야후 경매</div><div class="live-name">CITIZEN CLUB LA MER 自動巻き</div><div class="live-price">21엔</div><div class="live-meta"><span>2026-04-30 20:05:22</span><span>3 Bids</span></div></div></div>
+      <div class="live-card"><div class="live-thumb"><img src="https://picsum.photos/seed/watch-best-5/360" alt=""><div class="live-fav"><i class="far fa-heart"></i></div></div><div class="live-info"><div class="live-source">야후 경매</div><div class="live-name">SEIKO QUARTZ 腕時計 ゴールド 稼働品</div><div class="live-price">2,222엔</div><div class="live-meta"><span>2026-05-01 21:50:44</span><span>1 Bid</span></div></div></div>
+      <div class="live-card"><div class="live-thumb"><img src="https://picsum.photos/seed/watch-best-6/360" alt=""><div class="live-fav"><i class="far fa-heart"></i></div></div><div class="live-info"><div class="live-source">야후 경매</div><div class="live-name">CITIZEN 腕時計 2730-274822 セット</div><div class="live-price">19,800엔</div><div class="live-meta"><span>2026-04-30 21:49:58</span><span>0 Bids</span></div></div></div>
+      <div class="live-card"><div class="live-thumb"><img src="https://picsum.photos/seed/watch-best-7/360" alt=""><div class="live-fav"><i class="far fa-heart"></i></div></div><div class="live-info"><div class="live-source">야후 경매</div><div class="live-name">美品 シチズン 腕時計 エコドライブ</div><div class="live-price">10,450엔</div><div class="live-meta"><span>2026-04-30 23:58:13</span><span>2 Bids</span></div></div></div>
+      <div class="live-card"><div class="live-thumb"><img src="https://picsum.photos/seed/watch-best-8/360" alt=""><div class="live-fav"><i class="far fa-heart"></i></div></div><div class="live-info"><div class="live-source">야후 경매</div><div class="live-name">EL2001 CITIZEN ランキング クォーツ</div><div class="live-price">2,610엔</div><div class="live-meta"><span>2026-05-01 21:18:01</span><span>0 Bids</span></div></div></div>
+      <div class="live-card"><div class="live-thumb"><img src="https://picsum.photos/seed/watch-best-9/360" alt=""><div class="live-fav"><i class="far fa-heart"></i></div></div><div class="live-info"><div class="live-source">야후 경매</div><div class="live-name">腕時計 CITIZEN XC エコドライブ</div><div class="live-price">520엔</div><div class="live-meta"><span>2026-04-30 19:34:24</span><span>3 Bids</span></div></div></div>
+      <div class="live-card"><div class="live-thumb"><img src="https://picsum.photos/seed/watch-best-10/360" alt=""><div class="live-fav"><i class="far fa-heart"></i></div></div><div class="live-info"><div class="live-source">야후 경매</div><div class="live-name">CITIZEN 7連 ベルト ブレスレット</div><div class="live-price">3,750엔</div><div class="live-meta"><span>2026-05-04 20:20:21</span><span>4 Bids</span></div></div></div>
+      <div class="live-card"><div class="live-thumb"><img src="https://picsum.photos/seed/watch-best-11/360" alt=""><div class="live-fav"><i class="far fa-heart"></i></div></div><div class="live-info"><div class="live-source">야후 경매</div><div class="live-name">シチズン A15803 シャルマン 手巻き</div><div class="live-price">4,000엔</div><div class="live-meta"><span>2026-05-03 21:06:23</span><span>1 Bid</span></div></div></div>
+      <div class="live-card"><div class="live-thumb"><img src="https://picsum.photos/seed/watch-best-12/360" alt=""><div class="live-fav"><i class="far fa-heart"></i></div></div><div class="live-info"><div class="live-source">야후 경매</div><div class="live-name">CITIZEN シチズン 自動巻き 腕時計</div><div class="live-price">4,310엔</div><div class="live-meta"><span>2026-04-30 18:50:05</span><span>33 Bids</span></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 고객? 기 -->
+<div class="section">
+  <div class="sec-hd"><h2 class="sec-title">비드바이 고객후기</h2><a href="#" class="sec-more">더보기 <i class="fas fa-chevron-right"></i></a></div>
+  <div class="rv-grid">
+    <div class="rv-card"><div class="rv-top"><span class="rv-badge">미국 이베이</span><span class="rv-time">24시간 전</span></div><div class="rv-thumb"><img src="https://picsum.photos/seed/rv1/240" alt=""></div><div class="rv-stars">★★★★★</div><div class="rv-title">일본 H&M 구매 체험, 빠르고 편했어요</div><div class="rv-text">처음 이용했는데 과정이 간단해서 원하는 상품을 편하게 구매했어요.</div><div class="rv-item">낙찰가 USD 23.70 · Nike Air Max 90</div></div>
+    <div class="rv-card"><div class="rv-top"><span class="rv-badge">야후 옥션</span><span class="rv-time">14시간 전</span></div><div class="rv-thumb"><img src="https://picsum.photos/seed/rv2/240" alt=""></div><div class="rv-stars">★★★★★</div><div class="rv-title">간단하게 좋은 상품 구매했어요</div><div class="rv-text">담당자님이 꼼꼼하게 처리해 주셔서 정말 만족했습니다.</div><div class="rv-item">낙찰가 45,000엔 · LV 18 네버풀</div></div>
+    <div class="rv-card"><div class="rv-top"><span class="rv-badge mc">메루카리</span><span class="rv-time">2시간 전</span></div><div class="rv-thumb"><img src="https://picsum.photos/seed/rv3/240" alt=""></div><div class="rv-stars">★★★★★</div><div class="rv-title">주문한 상품이 안전하게 도착했어요</div><div class="rv-text">배송 계산 비용도 예상과 거의 맞아서 안심하고 받을 수 있었어요.</div><div class="rv-item">3,200엔 · Supreme 박스로고 티셔츠</div></div>
+    <div class="rv-card"><div class="rv-top"><span class="rv-badge">영국 이베이</span><span class="rv-time">4시간 전</span></div><div class="rv-thumb"><img src="https://picsum.photos/seed/rv4/240" alt=""></div><div class="rv-stars">★★★★★</div><div class="rv-title">배송 매니징까지 만족했습니다</div><div class="rv-text">영국 이베이는 처음이었는데 CS 응대가 빠르고 친절해서 좋았어요.</div><div class="rv-item">£185 · Seiko Prospex 시계</div></div>
+  </div>
+</div>
+
+<!-- 공지+CS -->
+<div class="section" style="padding-top:0">
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="rate-title">고시환율</div>
+      <p class="rate-desc">관세청에서 관/부가세 계산시 적용되는 환율로 주 단위로 고시되며,<br>매주 금요일에 다음 주 (월~토) 적용 환율을 고시합니다.</p>
+      <div class="rate-period">고시시간 2026-07-14 12:30:00</div>
+      <div class="rate-list" aria-label="고시환율 목록">
+        <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_usa.png" alt="">USD</span><span class="rate-value">1,522.44 </span></div>
+        <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_jp.png" alt="">JPY</span><span class="rate-value">9.39 </span></div>
+        <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_uk.png" alt="">GBP</span><span class="rate-value">2,037.08 </span></div>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3 class="info-title">고객센터</h3>
+      <div class="cs-num">1544 - 5224</div>
+      <div class="cs-hours">
+        <strong>운영시간</strong>
+        <span>평일 10시~17시</span>
+        <strong>점심시간</strong>
+        <span>PM 12:30 - PM 13:30</span>
+        <strong>휴일</strong>
+        <span>주말/공휴일</span>
+      </div>
+      <div class="cs-shortcuts">
+        <a class="cs-shortcut" href="https://www.bidbuy.co.kr/cs">전화문의전 클릭 <i class="fas fa-chevron-right" aria-hidden="true"></i></a>
+        <a class="cs-shortcut" href="web_qna_form.html">1:1문의 바로가기 <i class="fas fa-chevron-right" aria-hidden="true"></i></a>
+      </div>
+    </div>
+    <div class="info-card" id="marketInfoSection">
+      <h3 class="info-title">국가별 운영정보</h3>
+      <div class="office-grid" aria-label="나라별 근무시간">
+        <div class="office-card" data-office-timezone="Asia/Seoul">
+          <div class="office-status">업무중</div>
+          <div class="office-info">
+            <div class="office-country"><span class="flag"><img src="../images/icon/country_kor.png" alt="Korea"></span>서울</div>
+            <div class="office-time">-</div>
+          </div>
+        </div>
+        <div class="office-card" data-office-timezone="Asia/Tokyo">
+          <div class="office-status">업무중</div>
+          <div class="office-info">
+            <div class="office-country"><span class="flag"><img src="../images/icon/country_jp.png" alt="Japan"></span>오사카</div>
+            <div class="office-time">-</div>
+          </div>
+        </div>
+        <div class="office-card" data-office-timezone="America/Los_Angeles">
+          <div class="office-status">업무중</div>
+          <div class="office-info">
+            <div class="office-country"><span class="flag"><img src="../images/icon/country_usa.png" alt="USA"></span>캘리포니아</div>
+            <div class="office-time">-</div>
+          </div>
+        </div>
+        <div class="office-card" data-office-timezone="Europe/London">
+          <div class="office-status">업무중</div>
+          <div class="office-info">
+            <div class="office-country"><span class="flag"><img src="../images/icon/country_uk.png" alt="UK"></span>런던</div>
+            <div class="office-time">-</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 앱 다운로드 -->
+<div class="app-dl">
+  <div class="app-dl-inner">
+    <span style="font-size:13px;font-weight:700;color:var(--ts)">앱 다운로드</span>
+    <button class="app-dl-btn"><i class="fab fa-google-play"></i> 구글 플레이</button>
+    <button class="app-dl-btn"><i class="fab fa-apple"></i> 앱스토어</button>
+  </div>
+</div>
+
+<!-- ?명꽣 -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div><div class="ft-logo">Bidbuy KOREA</div><div class="ft-desc">(주)비드바이코리아 사업자등록번호 107-87-03406<br>통신판매업신고 제015-서울영등포-0315호<br>무역업고유번호 30636624 / 구매대행업 등록번호: B-1-22-00009<br>주소: 서울특별시 영등포구 경인로 775 에이스하이테크시티 1동 1506호<br>대표자: 임창수 | Email: korea@bidbuy.co.kr<br>Copyright© 2000~현재 BIDBUY KOREA ALL RIGHTS RESERVED.</div></div>
+      <div class="ft-links"><div class="ft-links-title">서비스</div><a href="#">야후옥션 경매대행</a><a href="#">메루카리 구매대행</a><a href="#">미국 구매대행</a><a href="#">배송 조회</a></div>
+      <div class="ft-links"><div class="ft-links-title">안내</div><a href="#">직구 가이드</a><a href="#">관부가세 안내</a><a href="#">자주 묻는 질문</a><a href="#">블로그</a></div>
+      <div class="ft-links"><div class="ft-links-title">고객지원</div><a href="#">공지사항</a><a href="#">커뮤니티</a><a href="web_qna_form.html">1:1 문의</a><a href="#">이용약관</a></div>
+    </div>
+    <div class="ft-bottom">비드바이는 해외경매 및 해외구매 상품의 입찰과 구매를 중개하고, 관련 배송 서비스를 제공합니다.</div>
+  </div>
+</footer>
+
+<!-- ?쒕줈???ㅻ쾭?덉씠 -->
+<div class="drawer-ov" id="drawerOv" onclick="closeDrawer()"></div>
+
+<!-- ? 버 ?? 로??-->
+    <div class="drawer" id="drawer">
+      <div id="drGuestHd" class="dr-head">
+      </div>
+
+      <div id="drUserHd" class="dr-head" style="display:none">
+        <div class="dr-user-mini">
+          <div class="u-av"><i class="fas fa-crown" aria-hidden="true"></i></div>
+          <div>
+            <div class="dr-user-mini-name">홍길동님</div>
+            <div class="dr-user-mini-grade">PREMIUM 회원</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="drGuestPanel" class="dr-guest-card">
+        <div class="dr-guest-title">비드바이 로그인</div>
+        <div class="dr-guest-copy">로그인하고 입찰 현황, 마일리지, 관심 상품을 빠르게 확인하세요.</div>
+        <div class="dr-login-actions">
+          <button class="dr-action-btn" type="button" onclick="toggleLogin();closeDrawer()">로그인</button>
+          <button class="dr-action-btn secondary" type="button">회원가입</button>
+        </div>
+      </div>
+      <div class="dr-sec">
+        <div class="dr-quick">
+          <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-truck-fast"></i></div><div class="dr-quick-label">배송관리</div></div>
+          <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-won-sign"></i></div><div class="dr-quick-label">MY혜택</div></div>
+          <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-file-invoice"></i></div><div class="dr-quick-label">관심항목</div></div>
+          <div class="dr-quick-item" onclick="location.href='web_mypage.html'" style="cursor:pointer"><div class="dr-quick-icon"><i class="fas fa-calendar-check"></i></div><div class="dr-quick-label">마이페이지</div></div>
+        </div>
+      </div>
+
+      <div class="dr-sec">
+        <div class="dr-sec-title">카테고리</div>
+        <div class="dr-cat-list">
+          <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본야후경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
+          <div class="dr-cat-item"><span class="dr-cat-flag">US</span><span class="dr-cat-label">미국이베이경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
+          <div class="dr-cat-item"><span class="dr-cat-flag">GB</span><span class="dr-cat-label">영국이베이경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
+          <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본메루카리</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
+          <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본구매대행</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
+        </div>
+      </div>
+      <div class="dr-sec">
+        <div class="dr-sec-title">이용가이드</div>
+        <div class="dr-link-grid">
+          <a href="#">초보자가이드</a>
+          <a href="#">수수료안내</a>
+          <a href="#">배송비안내</a>
+          <a href="#">관부가세안내</a>
+        </div>
+      </div>
+
+      <div class="dr-sec" style="border-bottom:none">
+        <div class="dr-sec-title">고객센터</div>
+        <div class="dr-link-grid">
+          <a href="#">공지사항</a>
+          <a href="#">자주하는질문</a>
+          <a href="web_qna_form.html">1:1문의</a>
+          <a href="#">커뮤니티</a>
+        </div>
+      </div>
+            <div class="drawer-cs-card">
+        <div class="drawer-cs-tel">1544-5224</div>
+        <p class="drawer-cs-time">평일 AM 10:00 - PM 17:00 (점심 PM 12:30 - 13:30)</p>
+        <div class="drawer-cs-actions">
+          <button type="button" onclick="location.href='web_qna_form.html'">1:1 문의</button>
+          <button type="button">FAQ</button>
+          <button type="button">공지사항</button>
+        </div>
+        
+      </div>
+      <div style="height:24px"></div>
+    </div>
+
+<div class="user-drawer-ov" id="userDrawerOv" onclick="closeUserDrawer()"></div>
+
+<div class="user-drawer" id="userDrawer">
+  <div class="user-drawer-head">
+    <div class="user-member-row">
+      <div class="user-crown"><i class="fas fa-crown" aria-hidden="true"></i></div>
+      <div>
+        <strong class="user-name-strong">홍길동 회원님</strong>
+        <span class="user-vip-chip">VIP</span>
+      </div>
+    </div>
+    <p class="user-vip-copy">VIP 등급 달성! 최고 혜택을 누리세요 🎉</p>
+    <div class="user-vip-bar"><span></span></div>
+    <div class="user-asset-box">
+      <div><span>마일리지</span><strong>4,500원</strong></div>
+      <div><span>예치금</span><strong>29,870원</strong></div>
+    </div>
+  </div>
+
+  <div class="user-status-grid">
+    <div><strong>3</strong><span>입찰 진행 중</span></div>
+    <div><strong>1</strong><span>1차 결제 대기</span></div>
+    <div><strong>0</strong><span>2차 결제 대기</span></div>
+  </div>
+
+  <nav class="user-menu-list">
+    <div class="user-menu-section">
+      <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="mm-menu-trade">
+        <span class="user-menu-icon"><i class="fas fa-gavel" aria-hidden="true"></i></span><span>나의 거래 현황</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+      </button>
+      <div class="user-menu-panel" id="mm-menu-trade">
+        <a class="user-menu-link" href="web_mainlist.html">거래 전체 목록</a>
+        <a class="user-menu-link" href="web_mypage.html">경매 입찰/유찰</a>
+        <a class="user-menu-link" href="web_mypage.html">구매 신청 목록</a>
+      </div>
+    </div>
+    <div class="user-menu-section">
+      <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="mm-menu-delivery">
+        <span class="user-menu-icon"><i class="fas fa-truck-fast" aria-hidden="true"></i></span><span>배송관리</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+      </button>
+      <div class="user-menu-panel" id="mm-menu-delivery">
+        <a class="user-menu-link" href="#">배송신청/변경</a>
+        <a class="user-menu-link" href="#">배송지 관리</a>
+      </div>
+    </div>
+    <div class="user-menu-section">
+      <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="mm-menu-favorites">
+        <span class="user-menu-icon"><i class="fas fa-heart" aria-hidden="true"></i></span><span>관심 항목 관리</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+      </button>
+      <div class="user-menu-panel" id="mm-menu-favorites">
+        <a class="user-menu-link" href="web_favorites.html?tab=seller">관심 출품자</a>
+        <a class="user-menu-link" href="web_favorites.html?tab=auction">경매 관심물품</a>
+        <a class="user-menu-link" href="web_favorites.html?tab=purchase">구매 관심물품</a>
+        <a class="user-menu-link" href="web_favorites.html?tab=keyword">관심 키워드</a>
+        <a class="user-menu-link" href="web_favorites.html?tab=shortcut">바로가기</a>
+      </div>
+    </div>
+    <div class="user-menu-section">
+      <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="mm-menu-benefit">
+        <span class="user-menu-icon"><i class="fas fa-gift" aria-hidden="true"></i></span><span>MY 혜택</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+      </button>
+      <div class="user-menu-panel" id="mm-menu-benefit">
+        <a class="user-menu-link" href="web_mileage.html">마일리지 / 쿠폰</a>
+        <a class="user-menu-link" href="#">MY 등급</a>
+      </div>
+    </div>
+    <div class="user-menu-section">
+      <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="mm-menu-info">
+        <span class="user-menu-icon"><i class="fas fa-user" aria-hidden="true"></i></span><span>나의 정보관리</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+      </button>
+      <div class="user-menu-panel" id="mm-menu-info">
+        <a class="user-menu-link" href="#">예치금 관리</a>
+        <a class="user-menu-link" href="#">보증금 관리</a>
+        <a class="user-menu-link" href="#">회원정보 수정</a>
+        <a class="user-menu-link" href="#">비밀번호 변경</a>
+        <a class="user-menu-link danger" href="#">회원 탈퇴</a>
+      </div>
+    </div>
+    <button class="user-menu-item logout" type="button" onclick="toggleLogin();closeUserDrawer()">
+      <span class="emoji">🔒</span><span>로그아웃</span>
+    </button>
+  </nav>
+</div>
+
+<div class="convenience-overlay" id="convenienceToolsPopup" aria-hidden="true" onclick="closeConvenienceToolsPopup(event)">
+  <div class="convenience-popup" role="dialog" aria-modal="true" aria-label="편의도구">
+    <div class="convenience-head">
+      <div class="convenience-title">편의도구</div>
+    </div>
+    <button class="convenience-close" type="button" aria-label="닫기" onclick="closeConvenienceToolsPopup()"><i class="fas fa-times" aria-hidden="true"></i></button>
+    <div class="convenience-tabs" role="tablist" aria-label="편의도구 탭">
+      <button class="convenience-tab" type="button" onclick="goPersonalCustomsCode()">개인통관고유부호</button>
+      <button class="convenience-tab active" type="button" role="tab" aria-selected="true" aria-controls="conveniencePanelUnit" onclick="switchConvenienceTab(this,'conveniencePanelUnit')">단위변환</button>
+      <button class="convenience-tab" type="button" role="tab" aria-selected="false" aria-controls="conveniencePanelSize" onclick="switchConvenienceTab(this,'conveniencePanelSize')">해외 사이즈표</button>
+      <button class="convenience-tab" type="button" role="tab" aria-selected="false" aria-controls="conveniencePanelEms" onclick="switchConvenienceTab(this,'conveniencePanelEms')">EMS 발송 제한 품목</button>
+    </div>
+    <div class="convenience-body">
+      <div class="convenience-panel active" id="conveniencePanelUnit" role="tabpanel">
+        <div class="convenience-panel-title">단위변환</div>
+        <p class="convenience-panel-desc">무게, 길이, 부피 등 해외 상품 정보 확인에 필요한 단위 변환 도구 영역입니다.</p>
+      </div>
+      <div class="convenience-panel" id="conveniencePanelSize" role="tabpanel">
+        <div class="convenience-panel-title">해외 사이즈표</div>
+        <p class="convenience-panel-desc">국가별 의류, 신발 사이즈 비교표를 확인하는 영역입니다.</p>
+      </div>
+      <div class="convenience-panel" id="conveniencePanelEms" role="tabpanel">
+        <div class="convenience-panel-title">EMS 발송 제한 품목</div>
+        <p class="convenience-panel-desc">국제 배송 시 발송이 제한되거나 금지되는 품목 안내 영역입니다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+// ? ?  배너
+let cur=0;
+const slides=document.querySelectorAll('.slide');
+const dots=document.querySelectorAll('.dot');
+const bannerData=[
+  {tag:'야후 옥션 특집',title:'야후 일본 경매<br>초보 추천 Top10 공개!',sub:'지금 바로 확인하고 원하는 상품을 합리적인 가격에 낙찰받아보세요.',cta:'지금 바로가기',obj:'gavel'},
+  {tag:'리뉴얼 오픈',title:'새로워진 비드바이<br>해외쇼핑 핵심 혜택',sub:'Renewal Open EVENT와 함께 달라진 주요 혜택을 한눈에 확인해보세요.',cta:'혜택 확인하기',obj:'gift'},
+  {tag:'안심 케어 패키지',title:'최대 50,000원<br>보상 서비스',sub:'업계 최고 수준의 케어 서비스로 최대 5만엔 상당 보상을 지원합니다.',cta:'상세 더보기',obj:'shield-heart'},
+];
+function goSlide(n){slides[cur].classList.remove('active');dots[cur].classList.remove('active');cur=(n+slides.length)%slides.length;slides[cur].classList.add('active');dots[cur].classList.add('active');}
+function changeSlide(d){goSlide(cur+d);}
+setInterval(()=>changeSlide(1),4000);
+
+// 로그인 상태: bb-common.js(localStorage)가 단일 소스. bb:login 이벤트로 동기화
+let loggedIn = localStorage.getItem('bb_logged_in') === '1';
+function updateGradeProgress(){
+  const textEl = document.querySelector('.pu-grade-remaining');
+  const fillEl = document.getElementById('puGradeProgressFill');
+  if(!textEl || !fillEl) return;
+  const fromData = Number(textEl.dataset.remaining);
+  const match = textEl.textContent.match(/(\d+(?:\.\d+)?)\s*%/);
+  const remaining = Number.isFinite(fromData) ? fromData : Number(match?.[1] || 0);
+  const progress = Math.max(0, Math.min(100, 100 - remaining));
+  fillEl.style.width = progress + '%';
+  fillEl.setAttribute('aria-label', '등급 진행률 ' + progress + '%');
+}
+function applyState(){
+  const setDisplay = (id, display) => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = display;
+  };
+  setDisplay('guestArea', loggedIn ? 'none' : 'flex');
+  setDisplay('userArea', loggedIn ? 'flex' : 'none');
+  setDisplay('alertBar', loggedIn ? 'block' : 'none');
+  setDisplay('panelGuest', loggedIn ? 'none' : 'flex');
+  setDisplay('panelUser', loggedIn ? 'flex' : 'none');
+  setDisplay('drGuestHd', loggedIn ? 'none' : 'flex');
+  setDisplay('drUserHd', loggedIn ? 'flex' : 'none');
+  setDisplay('drGuestPanel', loggedIn ? 'none' : 'block');
+  setDisplay('drUserAssets', loggedIn ? 'grid' : 'none');
+  setDisplay('drMemberPanel', loggedIn ? 'block' : 'none');
+  updateGradeProgress();
+}
+function closeDD(){ const dd=document.getElementById('userDD'); const trig=document.getElementById('userTrig'); if(dd)dd.classList.remove('open'); if(trig)trig.classList.remove('open'); }
+// doLogin/doLogout/toggleLogin은 bb-common.js가 제공. 상태 변경 시 페이지 UI만 갱신
+document.addEventListener('bb:login', e => { loggedIn = e.detail.loggedIn; applyState(); closeDD(); });
+applyState();
+
+// ?? ?쒕∼?ㅼ슫
+function toggleDD(){
+  document.getElementById('userDD').classList.toggle('open');
+  document.getElementById('userTrig').classList.toggle('open');
+}
+document.addEventListener('click',e=>{
+  const t=document.getElementById('userTrig');
+  const dd=document.getElementById('userDD');
+  if(t&&!t.contains(e.target)&&dd&&!dd.contains(e.target)){dd.classList.remove('open');t.classList.remove('open');}
+});
+
+// drawer
+function openDrawer(){
+  closeUserDrawer();
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawerOv').classList.add('open');
+  document.querySelector('.hb-btn')?.setAttribute('aria-expanded','true');
+  document.body.style.overflow='hidden';
+}
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerOv').classList.remove('open');
+  document.querySelector('.hb-btn')?.setAttribute('aria-expanded','false');
+  document.body.style.overflow='';
+}
+function openUserDrawer(){
+  if(!loggedIn) return;
+  closeDrawer();
+  document.getElementById('userDrawer')?.classList.add('open');
+  document.getElementById('userDrawerOv')?.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeUserDrawer(){
+  document.getElementById('userDrawer')?.classList.remove('open');
+  document.getElementById('userDrawerOv')?.classList.remove('open');
+  document.body.style.overflow='';
+}
+function openCustomsTaxPopup(){
+  const url = 'https://www.customs.go.kr/kcs/ad/tax/BuyTaxCalculation.do';
+  window.open(url, 'customsTaxCalculation', 'width=1100,height=820,top=80,left=120,scrollbars=yes,resizable=yes');
+}
+function openbidbuycsPopup(){
+  const url = 'https://www.bidbuy.co.kr/cs';
+  window.open(url, 'bidbuycs', 'width=1100,height=820,top=80,left=120,scrollbars=yes,resizable=yes');
+}
+function openbidbuynoticePopup(){
+  const url = 'https://www.bidbuy.co.kr/cs/notice';
+  window.open(url, 'bidbuynotice', 'width=1100,height=820,top=80,left=120,scrollbars=yes,resizable=yes');
+}
+
+/* 전환 배너: 멤버십 등급 / 공지사항 자동 전환 */
+(function(){
+  const banner = document.getElementById('heroBanner');
+  if(!banner) return;
+  const slides = banner.querySelectorAll('.hb-slide');
+  const dots = banner.querySelectorAll('.hb-dot');
+  if(!slides.length) return;
+  let current = 0;
+  let timer = null;
+  const delay = 5500;
+  function goTo(i){
+    current = (i + slides.length) % slides.length;
+    slides.forEach((s,n)=>s.classList.toggle('active', n===current));
+    dots.forEach((d,n)=>d.classList.toggle('active', n===current));
+  }
+  function stop(){
+    clearInterval(timer);
+    timer = null;
+  }
+  function play(){
+    stop();
+    timer = setInterval(()=>goTo(current + 1), delay);
+  }
+  window.hbGoTo = function(i){
+    goTo(i);
+    play();
+  };
+  banner.addEventListener('mouseenter', stop);
+  banner.addEventListener('mouseleave', play);
+  banner.addEventListener('focusin', stop);
+  banner.addEventListener('focusout', play);
+  play();
+})();
+
+/* 공지사항 리스트: 자동 롤링 + 수동 스크롤(드래그/휠 시 일시정지 후 재개) */
+(function(){
+  const vp = document.getElementById('nbViewport');
+  const track = document.getElementById('nbTrack');
+  if(!vp || !track) return;
+  let paused = false, resumeTimer = null;
+  function pause(){
+    paused = true;
+    clearTimeout(resumeTimer);
+  }
+  function scheduleResume(){
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(()=>{ paused = false; }, 2500);
+  }
+  ['wheel','touchstart','mousedown'].forEach(evt=>vp.addEventListener(evt, pause, {passive:true}));
+  ['wheel','touchend','mouseup','touchmove'].forEach(evt=>vp.addEventListener(evt, scheduleResume, {passive:true}));
+  vp.addEventListener('mouseenter', pause);
+  vp.addEventListener('mouseleave', scheduleResume);
+
+  setInterval(function(){
+    if(paused) return;
+    const half = track.scrollHeight / 2;
+    vp.scrollTop += 1;
+    if(vp.scrollTop >= half) vp.scrollTop -= half;
+  }, 77);
+})();
+function openaccountPopup(){
+  const url = 'https://www.bidbuy.co.kr/mypage/account';
+  window.open(url, 'account', 'width=1100,height=820,top=80,left=120,scrollbars=yes,resizable=yes');
+}
+function openWishlistPopup(){
+  const url = 'https://www.bidbuy.co.kr/mypage/order/wishlist';
+  window.open(url, 'wishlist', 'width=1100,height=820,top=80,left=120,scrollbars=yes,resizable=yes');
+}
+function openMarketInfoPopup(){
+  const section = document.getElementById('marketInfoSection');
+  updateMarketInfo();
+  if (section) section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+function closeMarketInfoPopup(event){
+  const popup = document.getElementById('marketInfoPopup');
+  if (!popup) return;
+  if (event && event.target !== popup) return;
+  popup.classList.remove('open');
+  popup.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+function openConvenienceToolsPopup(){
+  const popup = document.getElementById('convenienceToolsPopup');
+  if (!popup) return;
+  popup.classList.add('open');
+  popup.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+function closeConvenienceToolsPopup(event){
+  const popup = document.getElementById('convenienceToolsPopup');
+  if (!popup) return;
+  if (event && event.target !== popup) return;
+  popup.classList.remove('open');
+  popup.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+function switchConvenienceTab(tab, panelId){
+  document.querySelectorAll('.convenience-tab[role="tab"]').forEach(btn => {
+    btn.classList.remove('active');
+    btn.setAttribute('aria-selected', 'false');
+  });
+  document.querySelectorAll('.convenience-panel').forEach(panel => panel.classList.remove('active'));
+  tab.classList.add('active');
+  tab.setAttribute('aria-selected', 'true');
+  document.getElementById(panelId)?.classList.add('active');
+}
+function goPersonalCustomsCode(){
+  window.location.href = 'https://unipass.customs.go.kr/per/persIndex.do';
+}
+function handleShortcutKey(event, callback){
+  if(event.key !== 'Enter' && event.key !== ' ') return;
+  event.preventDefault();
+  callback();
+}
+function getZonedParts(date, timeZone){
+  return Object.fromEntries(new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    year:'2-digit',
+    month:'2-digit',
+    day:'2-digit',
+    weekday:'short',
+    hour:'2-digit',
+    minute:'2-digit',
+    second:'2-digit',
+    hour12:true,
+  }).formatToParts(date).map(part => [part.type, part.value]));
+}
+function formatOfficeTime(date, timeZone){
+  const parts = getZonedParts(date, timeZone);
+  return `${parts.year}.${parts.month}.${parts.day} ${parts.dayPeriod.toLowerCase()} ${parts.hour}:${parts.minute}`;
+}
+function isOfficeOpen(date, timeZone){
+  const parts = getZonedParts(date, timeZone);
+  const weekday = parts.weekday;
+  let hour = Number(parts.hour);
+  if (parts.dayPeriod === 'PM' && hour !== 12) hour += 12;
+  if (parts.dayPeriod === 'AM' && hour === 12) hour = 0;
+  const isWeekday = !['Sat','Sun'].includes(weekday);
+  return isWeekday && hour >= 9 && hour < 18;
+}
+function updateMarketInfo(){
+  const now = new Date();
+  document.querySelectorAll('.office-card[data-office-timezone]').forEach(card => {
+    const timeZone = card.dataset.officeTimezone;
+    const open = isOfficeOpen(now, timeZone);
+    const status = card.querySelector('.office-status');
+    const time = card.querySelector('.office-time');
+    if (status) {
+      status.textContent = open ? '업무중' : '종료';
+      status.classList.toggle('is-open', open);
+    }
+    if (time) time.textContent = formatOfficeTime(now, timeZone);
+  });
+}
+setInterval(updateMarketInfo, 1000);
+updateMarketInfo();
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && document.getElementById('convenienceToolsPopup')?.classList.contains('open')) {
+    closeConvenienceToolsPopup();
+  }
+  if (event.key === 'Escape' && document.getElementById('marketInfoPopup')?.classList.contains('open')) {
+    closeMarketInfoPopup();
+  }
+});
+function bindUserMenu(){
+  document.querySelectorAll('.user-menu-trigger').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const section=btn.closest('.user-menu-section');
+      const isOpen=section?.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded',String(Boolean(isOpen)));
+    });
+  });
+}
+bindUserMenu();
+
+const mainSearchForm = document.getElementById('mainSearchForm');
+mainSearchForm?.addEventListener('submit', event => {
+  const input = mainSearchForm.querySelector('input[name="q"]');
+  const query = (input?.value || '').trim().replace(/\s+/g, ' ');
+  if (!query) {
+    event.preventDefault();
+    return;
+  }
+
+  // 기본 form submit(action)으로도 이동되지만,
+  // 경로 해석 이슈가 있는 환경을 대비해 JS에서 한 번 더 명시적으로 이동 처리
+  event.preventDefault();
+  const targetUrl = new URL('web_totalsearch.html', window.location.href);
+  targetUrl.searchParams.set('q', query);
+  window.location.assign(targetUrl.toString());
+});
+
+const liveAuctionCloseOffsets = [30, 120, 480, 780, 1440, 2880];
+
+function formatLiveYenText(value) {
+  const numeric = String(value).replace(/[^\d]/g, "");
+  return (Number(numeric) || 0).toLocaleString("ko-KR") + "엔";
+}
+
+function formatLiveRemainingTime(offsetMinutes) {
+  if (offsetMinutes >= 1440) return Math.floor(offsetMinutes / 1440) + "일";
+  if (offsetMinutes >= 60) return Math.floor(offsetMinutes / 60) + "시간";
+  return Math.max(1, Math.round(offsetMinutes)) + "분";
+}
+
+function formatLiveAuctionCloseTime(offsetMinutes) {
+  const d = new Date(Date.now() + offsetMinutes * 60000);
+  const pad = n => String(n).padStart(2, "0");
+  const dateStr = d.getFullYear() + "." + pad(d.getMonth() + 1) + "." + pad(d.getDate());
+  const timeStr = pad(d.getHours()) + ":" + pad(d.getMinutes());
+  return dateStr + " " + timeStr + " (" + formatLiveRemainingTime(offsetMinutes) + ")";
+}
+
+document.querySelectorAll(".live-card").forEach((card, index) => {
+  const price = card.querySelector(".live-price");
+  const basePrice = price ? Number(price.textContent.replace(/[^\d]/g, "")) || 1650 : 1650;
+  if (price) price.textContent = formatLiveYenText(basePrice);
+
+  if (price && !card.querySelector(".live-price-line")) {
+    const priceLine = document.createElement("div");
+    priceLine.className = "live-price-line";
+    price.parentNode.insertBefore(priceLine, price);
+    priceLine.append(price);
+  }
+  const priceLine = card.querySelector(".live-price-line");
+  const showBuyNow = Math.random() < 0.45;
+  if (priceLine && showBuyNow && !priceLine.querySelector(".live-buy-now")) {
+    const buyNow = document.createElement("div");
+    buyNow.className = "live-buy-now";
+    const buyNowPrice = basePrice + 500 + ((index * 370) % 4200);
+    buyNow.innerHTML = '(즉시낙찰 <strong>' + formatLiveYenText(buyNowPrice) + '</strong>)';
+    priceLine.append(buyNow);
+  }
+
+  const meta = card.querySelector(".live-meta");
+  if (meta) {
+    meta.innerHTML = '<span>' + formatLiveAuctionCloseTime(liveAuctionCloseOffsets[index % liveAuctionCloseOffsets.length]) + '</span><span>(' + (((index * 13) % 99) + 1) + 'bids)</span>';
+  }
+
+  const thumb = card.querySelector(".live-thumb");
+  const oldFav = card.querySelector(".live-fav");
+  if (thumb && !thumb.querySelector(".live-actions")) {
+    oldFav?.remove();
+    const actions = document.createElement("div");
+    actions.className = "live-actions";
+    actions.innerHTML =
+      '<button class="live-action" type="button" aria-label="상품 간편 보기" title="상품 간편 보기"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>' +
+      '<button class="live-action" type="button" aria-label="새창으로 보기" title="새창으로 보기"><i class="fa-regular fa-window-restore" aria-hidden="true"></i></button>' +
+      '<button class="live-action" type="button" aria-label="원문페이지보기" title="원문페이지보기"><i class="fa-solid fa-globe" aria-hidden="true"></i></button>' +
+      '<button class="live-fav" type="button" aria-label="관심상품" title="관심상품" aria-pressed="false"><i class="far fa-heart" aria-hidden="true"></i></button>';
+    thumb.append(actions);
+
+    actions.querySelectorAll(".live-action").forEach((button, actionIndex) => {
+      button.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (actionIndex === 0) window.location.href = "web_auction.html";
+        if (actionIndex === 1) window.open("web_auction.html", "_blank");
+        if (actionIndex === 2) window.open("https://auctions.yahoo.co.jp/", "_blank");
+      });
+    });
+
+    const fav = actions.querySelector(".live-fav");
+    fav?.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      fav.classList.toggle("active");
+      fav.setAttribute("aria-pressed", String(fav.classList.contains("active")));
+    });
+  }
+
+  card.addEventListener("click", event => {
+    if (event.target.closest("button, a")) return;
+    window.location.href = "web_auction.html";
+  });
+});
+</script>
+<script src="bb-common.js"></script>
+<script src="bb-search-modal.js"></script>
+</body>
+</html>

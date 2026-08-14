@@ -1,0 +1,3397 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bidbuy 마일리지</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --rose: #E8385A;
+      --rose-h: #C42F4C;
+      --tp: #1a1a2e;
+      --ts: #666680;
+      --tm: #999baa;
+      --border: #e0e4eb;
+      --navy: #1A3C6E;
+      --green: #2e8b57;
+      --ink: #20242b;
+      --text: #33363d;
+      --muted: #777985;
+      --faint: #9ba0ae;
+      --line: #e5dbd7;
+      --line-soft: #eee6e2;
+      --warm: #fbf7f5;
+      --warm-2: #f7f3f0;
+      --yellow: #f5a623;
+      --stage-left: max(16px, calc((100vw - 1180px) / 2));
+      --sidebar-w: 231px;
+      --main-w: 925px;
+      --gap: 24px;
+      --asset-w: 710px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: #fff;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--text);
+      background: #fff;
+      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .top-notice-spacer {
+      height: 34px;
+    }
+
+    .page {
+      min-height: 100vh;
+      background: #fff;
+    }
+
+    .topbar {
+      height: 67px;
+      width: min(calc(100vw - 32px), 1056px);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 221px minmax(0, 714px) 221px;
+      align-items: center;
+      gap: 16px;
+      padding: 0;
+      background: #fff;
+    }
+
+    .brand-area {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      min-width: 0;
+    }
+
+    .menu-button {
+      width: 40px;
+      height: 40px;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      padding: 0;
+      display: grid;
+      place-items: center;
+    }
+
+    .menu-lines {
+      width: 23px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .menu-lines span {
+      height: 2.5px;
+      border-radius: 999px;
+      background: #1f2530;
+    }
+
+    .logo-link {
+      display: inline-flex;
+      align-items: center;
+      width: 122px;
+      line-height: 0;
+    }
+
+    .logo-link img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .search {
+      height: 43px;
+      display: flex;
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      overflow: hidden;
+      background: var(--warm-2);
+    }
+
+    .search input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      padding: 0 18px;
+      background: transparent;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .search input::placeholder {
+      color: #8c8985;
+    }
+
+    .search button {
+      width: 111px;
+      border: 0;
+      background: var(--brand-hot);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .search button i {
+      font-size: 15px;
+    }
+
+    .user-tools {
+      justify-self: end;
+      display: grid;
+      grid-template-columns: 28px 28px auto;
+      align-items: center;
+      gap: 10px;
+      color: #1d2430;
+    }
+
+    .icon-btn {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      color: #687385;
+      padding: 0;
+    }
+
+    .icon-btn i {
+      font-size: 23px;
+    }
+
+    .user-name {
+      display: grid;
+      justify-items: center;
+      gap: 3px;
+      color: #111827;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .premium-chip {
+      min-width: 70px;
+      min-height: 18px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: #fff0c9;
+      color: #f4a200;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .stage {
+      position: relative;
+      display: grid;
+      grid-template-columns: var(--sidebar-w) var(--main-w);
+      gap: var(--gap);
+      width: calc(var(--sidebar-w) + var(--gap) + var(--main-w));
+      margin-left: var(--stage-left);
+      margin-top: 11px;
+      overflow: visible;
+    }
+
+    .asset-strip {
+      position: absolute;
+      top: 0;
+      left: var(--sidebar-w);
+      width: var(--asset-w);
+      height: 40px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: center;
+      background: var(--warm);
+      border-bottom: 1px solid #f2e9e5;
+      z-index: 1;
+    }
+
+    .asset-item {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      color: #111;
+      white-space: nowrap;
+    }
+
+    .asset-item span {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .asset-item strong {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .sidebar {
+      min-width: 0;
+    }
+
+    .profile-card {
+      height: 172px;
+      padding: 19px 22px 12px;
+      background: var(--warm);
+    }
+
+    .profile-main {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      background: #ffe7ef;
+      color: var(--rose);
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .profile-name {
+      display: block;
+      margin-bottom: 3px;
+      color: #262a31;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .profile-tier {
+      color: var(--rose);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .vip-copy {
+      margin: 18px 0 6px;
+      color: #5c6270;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .vip-copy b {
+      color: #454b58;
+      font-weight: 800;
+    }
+
+    .vip-row {
+      display: grid;
+      grid-template-columns: 1fr 16px;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .vip-progress {
+      height: 8px;
+      border-radius: 999px;
+      background: #eee2de;
+      overflow: hidden;
+    }
+
+    .vip-progress span {
+      display: block;
+      width: 84%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #ff8499 0%, var(--rose) 100%);
+    }
+
+    .help-dot {
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid #9ea1aa;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      color: #838793;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .tooltip-dot {
+      position: relative;
+      flex: 0 0 auto;
+      background: #fff;
+    }
+
+    .tooltip-dot::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      right: -8px;
+      bottom: calc(100% + 9px);
+      width: max-content;
+      max-width: 220px;
+      padding: 8px 10px;
+      border-radius: 7px;
+      background: #2f343d;
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(32, 36, 43, 0.16);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.35;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(4px);
+      transition: opacity 0.16s ease, transform 0.16s ease;
+      z-index: 5;
+    }
+
+    .tooltip-dot::before {
+      content: "";
+      position: absolute;
+      right: 2px;
+      bottom: calc(100% + 3px);
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid #2f343d;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(4px);
+      transition: opacity 0.16s ease, transform 0.16s ease;
+      z-index: 6;
+    }
+
+    .tooltip-dot:hover::after,
+    .tooltip-dot:hover::before,
+    .tooltip-dot:focus-visible::after,
+    .tooltip-dot:focus-visible::before {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .profile-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 11px;
+    }
+
+    .soft-btn {
+      height: 26px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: #5c606b;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .side-nav {
+      padding-top: 33px;
+    }
+
+    .side-title {
+      margin: 0 0 18px;
+      padding: 0 15px 17px;
+      border-bottom: 1px solid #dcd9d6;
+      color: #111;
+      font-size: 16px;
+      font-weight: 900;
+    }
+    .side-title a, .side-title a:visited { color: inherit; text-decoration: none; }
+
+    .nav-section {
+      padding: 0 20px;
+      margin-bottom: 14px;
+    }
+
+    .nav-section strong {
+      display: block;
+      margin-bottom: 11px;
+      color: #292d35;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .nav-list {
+      display: grid;
+      gap: 13px;
+    }
+
+    .nav-list a {
+      color: #666b75;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .nav-list a:hover,
+    .nav-list a.active {
+      color: var(--rose);
+      font-weight: 700;
+    }
+
+    .drawer-section {
+      padding: 18px 20px 24px;
+      border-bottom: 1px solid #e5e7eb;
+      background: #fff;
+    }
+
+    .drawer-section-title {
+      margin: 0 0 18px;
+      color: #111827;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .user-menu-list {
+      padding: 0;
+      display: grid;
+      gap: 0;
+    }
+
+    .user-menu-item {
+      min-height: 45px;
+      padding: 0 18px 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      color: #111827;
+      font-size: 14px;
+      font-weight: 900;
+      text-decoration: none;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .user-menu-item:hover,
+    .user-menu-link:hover {
+      color: var(--rose);
+    }
+
+    .user-menu-item .user-menu-icon,
+    .user-menu-item .emoji {
+      width: 22px;
+      text-align: center;
+      font-size: 17px;
+      flex: 0 0 auto;
+    }
+
+    .user-menu-item .chev {
+      margin-left: auto;
+      color: #a8b0bd;
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .user-menu-section {
+      border-bottom: 1px solid #f0f0f3;
+    }
+
+    .user-menu-panel {
+      display: none;
+      padding: 0 0 8px 56px;
+    }
+
+    .user-menu-section.is-open .user-menu-panel {
+      display: grid;
+      gap: 0;
+    }
+
+    .user-menu-link {
+      min-height: 34px;
+      display: flex;
+      align-items: center;
+      color: #666b75;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .user-menu-link.danger {
+      color: #8f949f;
+    }
+
+    .user-name {
+      cursor: pointer;
+    }
+
+    .drawer-ov {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 800;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .drawer-ov.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: -360px;
+      bottom: 0;
+      width: min(340px, 100vw);
+      background: #fff;
+      z-index: 801;
+      box-shadow: -8px 0 24px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      transition: right 0.3s ease;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .drawer.open {
+      right: 0;
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      border-bottom: 1px solid #f0f0f3;
+      background: #fff;
+    }
+
+    .dr-close {
+      border: 0;
+      background: transparent;
+      font-size: 24px;
+      line-height: 1;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      color: #5c606b;
+    }
+
+    .drawer .drawer-section-title {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .drawer .user-menu-list {
+      padding: 0 0 24px;
+    }
+
+    .drawer .user-menu-panel {
+      padding: 0 0 8px 56px;
+    }
+
+    .drawer .user-menu-link {
+      min-height: 34px;
+    }
+
+    .drawer .user-menu-item.logout {
+      margin-top: 6px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .user-menu-item.logout {
+      margin-top: 6px;
+      border-top: 1px solid #e5e7eb;
+      color: #9aa3b2;
+      font-weight: 700;
+    }
+
+    .menu-drawer-ov {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0);
+      z-index: 1000;
+      pointer-events: none;
+      transition: background 0.3s;
+    }
+
+    .menu-drawer-ov.open {
+      background: rgba(0, 0, 0, 0.45);
+      pointer-events: all;
+    }
+
+    .menu-drawer {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      bottom: 0;
+      width: 88%;
+      max-width: 340px;
+      background: #fff;
+      z-index: 1001;
+      overflow-y: auto;
+      scrollbar-width: none;
+      transition: left 0.3s cubic-bezier(.4,0,.2,1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 4px 0 20px rgba(0,0,0,.12);
+      border-top-right-radius: 16px;
+      border-bottom-right-radius: 16px;
+    }
+
+    .menu-drawer::-webkit-scrollbar {
+      display: none;
+    }
+
+    .menu-drawer.open {
+      left: 0;
+    }
+
+    .menu-drawer .dr-head {display:flex;align-items:center;justify-content:space-between;padding:18px 16px 16px;border-bottom:1px solid #D8D8DE}
+    .menu-drawer .dr-login-link{display:inline-flex;align-items:center;gap:10px;padding:0;border:none;background:none;color:var(--tp);font-size:17px;font-weight:800;font-family:inherit;cursor:pointer}
+    .menu-drawer .dr-login-link i{font-size:16px;color:var(--rose)}
+    .menu-drawer .dr-close{width:32px;height:32px;border:none;background:none;color:var(--tp);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .menu-drawer .dr-user-mini{display:flex;align-items:center;gap:10px}
+    .menu-drawer .u-av{width:38px;height:38px;border-radius:50%;background:#FFE7EF;color:var(--rose);display:grid;place-items:center;font-size:18px;font-weight:800}
+    .menu-drawer .dr-user-mini-name{font-size:15px;font-weight:700;color:var(--tp)}
+    .menu-drawer .dr-user-mini-grade{font-size:11px;color:var(--ts);margin-top:2px}
+    .menu-drawer .dr-guest-card{padding:14px 16px 16px;background:#FFF8F5;border-bottom:1px solid #E5E7EB}
+    .menu-drawer .dr-guest-title{font-size:16px;font-weight:800;color:#111827;margin-bottom:4px}
+    .menu-drawer .dr-guest-copy{font-size:12px;color:#6B7280;line-height:1.45;margin-bottom:12px}
+    .menu-drawer .dr-login-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .menu-drawer .dr-action-btn{height:36px;border-radius:5px;border:1px solid var(--rose);background:var(--rose);color:#fff;font-size:12px;font-weight:800;font-family:inherit;cursor:pointer}
+    .menu-drawer .dr-action-btn.secondary{background:#fff;color:#4B5563;border-color:#D9E0E9}
+    .menu-drawer .dr-user-assets{display:grid;grid-template-columns:1fr 1px 1fr;margin:12px 16px 0;border:1px solid #E5E7EB;border-radius:10px;overflow:hidden;background:#fff}
+    .menu-drawer .dr-user-asset{text-align:center;padding:9px 6px}
+    .menu-drawer .dr-user-asset span{display:block;font-size:10px;color:#8B95A5;margin-bottom:2px}
+    .menu-drawer .dr-user-asset strong{display:block;font-size:13px;color:#1F2530;font-family:'Roboto',sans-serif}
+    .menu-drawer .dr-user-asset-div{background:#E5E7EB}
+    .menu-drawer .dr-member-panel{display:none}
+    .menu-drawer .dr-mypage-list{display:grid;gap:6px;padding:0 16px 6px}
+    .menu-drawer .dr-mypage-item{min-height:40px;display:flex;align-items:center;gap:12px;color:#202633;font-size:14px;font-weight:700;text-decoration:none}
+    .menu-drawer .dr-mypage-item i{width:20px;color:#111827;text-align:center;font-size:15px}
+    .menu-drawer .dr-mypage-item .dr-cat-arrow{margin-left:auto}
+    .menu-drawer .dr-mypage-sub{display:grid;gap:2px;margin:-2px 0 8px 32px;padding:4px 0 6px 12px;border-left:1px solid #EEF0F3}
+    .menu-drawer .dr-mypage-sub a{min-height:30px;display:flex;align-items:center;color:#4B5563;font-size:12px;font-weight:500;text-decoration:none}
+    .menu-drawer .dr-mypage-sub a.active{color:var(--rose);font-weight:800}
+    .menu-drawer .dr-sec{padding:14px 0 10px;border-bottom:1px solid #D8D8DE}
+    .menu-drawer .dr-sec:last-child{border-bottom:none}
+    .menu-drawer .dr-sec-title{padding:0 16px 14px;color:var(--tp);font-size:13px;font-weight:800}
+    .menu-drawer .dr-quick{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:0 8px}
+    .menu-drawer .dr-quick-item{display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px 4px 14px;cursor:pointer}
+    .menu-drawer .dr-quick-icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;color:var(--rose)}
+    .menu-drawer .dr-quick-label{font-size:13px;color:var(--ts);word-break:keep-all;text-align:center}
+    .menu-drawer .dr-cat-list{padding:0 0 2px}
+    .menu-drawer .dr-cat-item{display:flex;align-items:center;gap:12px;padding:15px 16px;border-top:1px solid #D8D8DE;font-size:15px;color:var(--tp);cursor:pointer}
+    .menu-drawer .dr-cat-item:first-child{border-top:none}
+    .menu-drawer .dr-cat-flag{width:30px;flex-shrink:0;color:var(--tp);font-size:14px;font-weight:700}
+    .menu-drawer .dr-cat-label{flex:1}
+    .menu-drawer .dr-cat-arrow{font-size:12px;color:var(--tm)}
+    .menu-drawer .dr-link-grid{display:grid;grid-template-columns:repeat(2,1fr);row-gap:14px;column-gap:24px;padding:0 16px 14px}
+    .menu-drawer .dr-link-grid a{font-size:14px;color:var(--ts);text-decoration:none}
+
+    .main {
+      min-width: 0;
+      padding-top: 0;
+      padding-bottom: 160px;
+    }
+
+    .page-title {
+      margin-bottom: 17px;
+    }
+
+    .page-title h1 {
+      margin: 0 0 6px;
+      color: #2b2f37;
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .page-title p {
+      margin: 0;
+      color: #9da2af;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .summary-grid {
+      display: block;
+    }
+
+    .summary-grid,
+    .mileage-summary-panel,
+    .mileage-balance-grid,
+    .balance-box {
+      overflow: visible;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .mileage-summary-panel {
+      min-height: 0;
+      padding: 0px 0px 0px;
+      border: 0px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .panel-title {
+      margin: 0 0 12px;
+      color: #2d3139;
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .mileage-balance-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .balance-box {
+      position: relative;
+      min-height: 89px;
+      padding: 15px 16px 13px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    .balance-box span {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 8px;
+      color: #9aa0ae;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .balance-box strong {
+      color: #111;
+      font-size: 25px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .balance-box strong.earn {
+      color: var(--green);
+    }
+
+    .balance-box strong.use {
+      color: var(--rose);
+    }
+
+    .balance-box strong.expire {
+      color: #f29a19;
+    }
+
+    .balance-box strong.muted {
+      color: #9aa0ae;
+    }
+
+    .balance-box small {
+      margin-left: 1px;
+      color: #31343b;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .balance-box strong.earn small {
+      color: var(--green);
+    }
+
+    .balance-box strong.use small {
+      color: var(--rose);
+    }
+
+    .balance-box strong.expire small {
+      color: #f29a19;
+    }
+
+    .balance-box strong.muted small {
+      color: #9aa0ae;
+    }
+
+    .balance-box .help-dot {
+      width: 13px;
+      height: 13px;
+      border-width: 1px;
+      color: #9a9a9a;
+      background: transparent;
+      font-size: 9px;
+      line-height: 1;
+    }
+
+    .summary-tooltip {
+      position: relative;
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid #9da2ad;
+      border-radius: 50%;
+      background: #fff;
+      color: #8a909d;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      padding: 0;
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+      z-index: 30;
+    }
+
+    .summary-tooltip::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: 50%;
+      width: max-content;
+      max-width: 300px;
+      padding: 7px 9px;
+      border: 1px solid #d9e0ea;
+      border-radius: 7px;
+      background: #fff;
+      color: #667080;
+      box-shadow: 0 4px 12px rgba(37, 46, 62, .14);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.25;
+      text-align: left;
+      white-space: pre-line;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .16s ease, transform .16s ease;
+      z-index: 40;
+    }
+
+    .summary-tooltip::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .16s ease, transform .16s ease;
+      z-index: 41;
+    }
+
+    .summary-tooltip-left::after {
+      right: calc(100% + 10px);
+      transform: translate(4px, -50%);
+    }
+
+    .summary-tooltip-left::before {
+      right: calc(100% + 4px);
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 6px solid #fff;
+      transform: translate(4px, -50%);
+    }
+
+    .summary-tooltip-right::after {
+      left: calc(100% + 10px);
+      transform: translate(-4px, -50%);
+    }
+
+    .summary-tooltip-right::before {
+      left: calc(100% + 4px);
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-right: 6px solid #fff;
+      transform: translate(-4px, -50%);
+    }
+
+    .summary-tooltip:hover::after,
+    .summary-tooltip:hover::before,
+    .summary-tooltip:focus-visible::after,
+    .summary-tooltip:focus-visible::before {
+      opacity: 1;
+      transform: translate(0, -50%);
+    }
+
+    .balance-box[data-summary-tooltip] {
+      cursor: pointer;
+    }
+
+    .balance-box[data-summary-tooltip]:focus-visible {
+      outline: 2px solid rgba(232, 56, 90, .36);
+      outline-offset: 2px;
+    }
+
+    .balance-box[data-summary-tooltip]::after {
+      content: attr(data-summary-tooltip);
+      position: absolute;
+      right: 0;
+      width: max-content;
+      max-width: min(330px, calc(100vw - 36px));
+      padding: 9px 12px;
+      border: 1px solid #d9e0ea;
+      border-radius: 7px;
+      background: #fff;
+      color: #667080;
+      box-shadow: 0 6px 16px rgba(37, 46, 62, .18);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.45;
+      text-align: left;
+      white-space: pre-line;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .16s ease, transform .16s ease;
+      z-index: 42;
+    }
+
+    .balance-box[data-summary-tooltip]::before {
+      content: "";
+      position: absolute;
+      right: 18px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .16s ease, transform .16s ease;
+      z-index: 43;
+    }
+
+    .balance-box[data-tooltip-position="top"]::after {
+      bottom: calc(100% + 10px);
+      transform: translateY(4px);
+    }
+
+    .balance-box[data-tooltip-position="top"]::before {
+      bottom: calc(100% + 4px);
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid #fff;
+      transform: translateY(4px);
+    }
+
+    .balance-box[data-tooltip-position="bottom"]::after {
+      top: calc(100% + 10px);
+      transform: translateY(-4px);
+    }
+
+    .balance-box[data-tooltip-position="bottom"]::before {
+      top: calc(100% + 4px);
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 6px solid #fff;
+      transform: translateY(-4px);
+    }
+
+    .balance-box[data-summary-tooltip].is-tooltip-open::after,
+    .balance-box[data-summary-tooltip].is-tooltip-open::before {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .balance-note {
+      margin-top: 7px;
+      color: #9aa0ae;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .balance-note.expire {
+      color: #f29a19;
+    }
+
+    .expire-date {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 14px;
+      color: #4b515d;
+      font-size: 11px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .expire-date::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #f0a32a;
+      flex: 0 0 auto;
+    }
+
+    .stamp-panel {
+      margin-top: 16px;
+      padding: 20px;
+      min-height: 267px;
+    }
+
+    .stamp-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stamp-head h2 {
+      margin: 0 0 4px;
+      color: #33363d;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .stamp-head p {
+      margin: 0;
+      color: #4b515d;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .stamp-badge {
+      min-width: 77px;
+      height: 23px;
+      border-radius: 999px;
+      background: #fde5eb;
+      color: var(--rose);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .stamp-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      row-gap: 20px;
+      column-gap: 28px;
+      padding: 11px 31px 15px;
+      text-align: center;
+    }
+
+    .stamp-scroll {
+      overflow: hidden;
+    }
+
+    .stamp-panel.expanded .stamp-scroll {
+      max-height: 326px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .stamp {
+      display: grid;
+      place-items: center;
+    }
+
+    .stamp:nth-child(n+11) {
+      display: none;
+    }
+
+    .stamp-panel.expanded .stamp:nth-child(n+11) {
+      display: grid;
+    }
+
+    .roulette-button {
+      width: 58px;
+      height: 58px;
+      border: 1px solid #d9d2c7;
+      border-radius: 50%;
+      background: #fffdf0;
+      color: #aaa18f;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      position: relative;
+      box-shadow: inset 0 0 0 2px #fff8dc;
+    }
+
+    .roulette-button::before {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border: 1px dashed #aaa18f;
+      border-radius: 50%;
+    }
+
+    .roulette-button strong {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      justify-items: center;
+      gap: 1px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .roulette-button strong::before {
+      content: "✓";
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .roulette-button.is-spinning {
+      animation: roulette-spin 0.65s ease;
+    }
+
+    @keyframes roulette-spin {
+      0% { transform: rotate(0deg) scale(1); }
+      60% { transform: rotate(300deg) scale(1.06); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    .roulette-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(30, 24, 12, 0.55);
+    }
+
+    .roulette-modal-overlay[hidden] {
+      display: none;
+    }
+
+    .roulette-modal {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      padding: 26px 20px 28px;
+      border-radius: 18px;
+      background: #fffdf5;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .roulette-modal-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      width: 28px;
+      height: 28px;
+      border: 0;
+      background: transparent;
+      color: #aaa18f;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .roulette-modal h3 {
+      margin: 0 0 4px;
+      font-size: 17px;
+      font-weight: 700;
+      color: #3a3226;
+    }
+
+    .roulette-modal-desc {
+      margin: 0 0 18px;
+      font-size: 12px;
+      color: #9f8b4c;
+    }
+
+    .roulette-wheel-wrap {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      margin: 0 auto 20px;
+    }
+
+    .roulette-pointer {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      z-index: 2;
+      width: 0;
+      height: 0;
+      transform: translateX(-50%);
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 18px solid #d94f4f;
+    }
+
+    .roulette-wheel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25), inset 0 0 0 2px #d9c98d;
+      background: conic-gradient(#ef6f6c 0deg 72deg, #ffd166 72deg 144deg, #4d96ff 144deg 216deg, #06d6a0 216deg 288deg, #c77dff 288deg 360deg);
+      transition: transform 4s cubic-bezier(0.15, 0.65, 0.15, 1);
+    }
+
+    .roulette-wheel-labels {
+      position: absolute;
+      inset: 0;
+    }
+
+    .roulette-wheel-labels span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 58px;
+      margin-left: -29px;
+      transform-origin: 29px 0;
+      transform: rotate(calc(72deg * var(--i) + 36deg)) translate(0, -74px);
+    }
+
+    .roulette-wheel-labels span b {
+      display: block;
+      font-size: 9.5px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #3a3226;
+      text-align: center;
+      white-space: normal;
+      transform: rotate(calc(-72deg * var(--i) - 36deg));
+    }
+
+    .roulette-wheel-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 2;
+      width: 26px;
+      height: 26px;
+      margin: -13px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 0 2px #d9c98d;
+    }
+
+    .roulette-start-btn {
+      width: 100%;
+      height: 46px;
+      border: 0;
+      border-radius: 10px;
+      background: #3a3226;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .roulette-start-btn:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    .roulette-result {
+      margin: 14px 0 0;
+      font-size: 14px;
+      font-weight: 700;
+      color: #d94f4f;
+    }
+
+    .roulette-result[hidden] {
+      display: none;
+    }
+
+    .roulette-note {
+      margin: 6px 0 0;
+      font-size: 11px;
+      font-weight: 600;
+      color: #9f8b4c;
+    }
+
+    .roulette-note[hidden] {
+      display: none;
+    }
+
+    /* ===== 혜택 스탬프 v2 ===== */
+    .stamp { position: relative; }
+
+    .stamp-circle {
+      position: relative;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      display: grid; place-items: center; align-content: center;
+      gap: 1px;
+      background: #f6f2f2;
+      border: 1.5px solid #ece2e2;
+      color: #b6bac4;
+      font-size: 14px; font-weight: 700;
+      transition: background .18s, border-color .18s, color .18s, box-shadow .18s;
+    }
+
+    /* 1차 결제 완료 */
+    .stamp.paid .stamp-circle {
+      background: #8f95a3;
+      border-color: #8f95a3;
+      color: #fff;
+    }
+    .stamp-date {
+      font-family: Roboto, "Noto Sans KR", sans-serif;
+      font-size: 13px; font-weight: 500; letter-spacing: -.4px; line-height: 1;
+    }
+
+    /* 보상 칸 */
+    .stamp.has-reward .stamp-circle {
+      width: 58px; height: 58px;
+      border-width: 2px;
+      border-style: dashed;
+    }
+    .rw-amt {
+      font-family: Roboto, "Noto Sans KR", sans-serif;
+      font-size: 13px; font-weight: 500; line-height: 1; letter-spacing: -.6px;
+    }
+    .rw-amt small { font-size: 9px; font-weight: 500; margin-left: 1px; letter-spacing: 0; }
+    .rw-kind { font-size: 9px; font-weight: 500; line-height: 1; margin-top: 2px; letter-spacing: -.2px; }
+    .rw-ico { font-size: 10px; line-height: 1; margin-bottom: 2px; opacity: .9; }
+    .rw-action,
+    .rw-claimed-text,
+    .rw-roulette-text {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -.2px;
+      text-align: center;
+    }
+
+    /* 보상 - 미달성 */
+    .stamp.rw-locked.reward-coupon .stamp-circle { border-color: #f0d3da; color: #d7a6b3; background: #fffafb; }
+    .stamp.rw-locked.reward-roulette .stamp-circle { border-color: #f0e0c2; color: #ceb582; background: #fffdf7; }
+
+    /* 보상 - 수령 가능 */
+    .stamp.rw-ready .stamp-circle { border-style: solid; color: #fff; cursor: pointer; }
+    .stamp.rw-ready.reward-coupon .stamp-circle {
+      background: var(--rose); border-color: var(--rose);
+      box-shadow: 0 0 0 4px rgba(232,56,90,.16);
+    }
+    .stamp.rw-ready.reward-roulette .stamp-circle {
+      background: var(--yellow); border-color: var(--yellow);
+      box-shadow: 0 0 0 4px rgba(245,166,35,.20);
+    }
+    .stamp.rw-ready .stamp-circle::after {
+      content: "";
+      position: absolute; inset: -2px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      opacity: .5;
+      animation: reward-pulse 1.6s ease-out infinite;
+      pointer-events: none;
+    }
+    @keyframes reward-pulse {
+      0%   { transform: scale(1); opacity: .55; }
+      70%  { transform: scale(1.28); opacity: 0; }
+      100% { transform: scale(1.28); opacity: 0; }
+    }
+
+    /* 보상 - 수령 완료 */
+    .stamp.rw-claimed .stamp-circle {
+      border-style: solid;
+      background: var(--green); border-color: var(--green); color: #fff;
+    }
+    /* 보상 - 소멸 */
+    .stamp.rw-expired .stamp-circle {
+      border-style: solid; background: #eceaea; border-color: #ddd8d8; color: #aaa5a5;
+    }
+    .stamp.rw-expired .rw-amt { text-decoration: line-through; }
+
+    /* 하단 라벨 */
+    .reward-label {
+      margin-top: 6px;
+      font-size: 9.5px; font-weight: 700; line-height: 1.1;
+      letter-spacing: -.3px; white-space: nowrap;
+      color: var(--faint);
+    }
+    .reward-label.type-coupon { color: var(--rose); }
+    .reward-label.type-roulette { color: #c9840d; }
+    .reward-label.is-claimed { color: var(--green); }
+    .reward-label.is-empty { visibility: hidden; }
+    .stamp:not(.has-reward) .reward-label { visibility: hidden; }
+
+    .stamp-grid { row-gap: 16px; }
+
+    /* 헤더 요약 */
+    .stamp-summary-hi { color: #c9840d; }
+    .stamp-summary-sep { color: var(--faint); margin: 0 4px; }
+
+    /* ===== 보상 모달 공통 ===== */
+    .reward-modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px; background: rgba(25, 20, 18, .55);
+    }
+    .reward-modal-overlay[hidden] { display: none; }
+    .reward-modal {
+      position: relative; width: 100%; max-width: 330px;
+      padding: 26px 22px 22px; border-radius: 18px;
+      background: #fff; text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,.3);
+      animation: reward-pop .22s ease-out;
+    }
+    @keyframes reward-pop {
+      from { transform: translateY(10px) scale(.96); opacity: 0; }
+      to   { transform: none; opacity: 1; }
+    }
+    .reward-modal-close {
+      position: absolute; top: 10px; right: 12px;
+      width: 28px; height: 28px; border: 0; background: none;
+      color: #a8a29c; font-size: 22px; line-height: 1; cursor: pointer;
+    }
+    .reward-modal h3 {
+      margin: 0 0 4px; font-size: 17px; font-weight: 700; color: var(--text);
+    }
+    .reward-modal-desc {
+      margin: 0 0 18px; font-size: 12px; font-weight: 700; color: var(--muted);
+    }
+
+    /* 쿠폰 카드 */
+    .coupon-card {
+      position: relative;
+      margin: 0 auto 16px; padding: 20px 16px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #fff2f5 0%, #ffe7ee 100%);
+      border: 1.5px dashed var(--rose);
+    }
+    .coupon-card .cc-kind {
+      display: inline-block; margin-bottom: 8px; padding: 3px 10px;
+      border-radius: 999px; background: var(--rose); color: #fff;
+      font-size: 10.5px; font-weight: 700;
+    }
+    .coupon-card .cc-amount {
+      font-family: Roboto, "Noto Sans KR", sans-serif;
+      font-size: 34px; font-weight: 700; color: var(--rose); line-height: 1;
+    }
+    .coupon-card .cc-amount small { font-size: 16px; font-weight: 700; margin-left: 2px; }
+    .coupon-card .cc-cond {
+      margin-top: 8px; font-size: 11px; font-weight: 700; color: #8a6672;
+    }
+    .coupon-card::before, .coupon-card::after {
+      content: ""; position: absolute; top: 50%; width: 14px; height: 14px;
+      margin-top: -7px; border-radius: 50%; background: #fff;
+    }
+    .coupon-card::before { left: -8px; }
+    .coupon-card::after { right: -8px; }
+
+    .reward-meta {
+      margin: 0 0 18px; font-size: 11.5px; font-weight: 700; color: var(--muted); line-height: 1.6;
+    }
+    .reward-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .reward-btn {
+      height: 44px; border-radius: 10px; font-size: 13px; font-weight: 700;
+      font-family: inherit; cursor: pointer; border: 1px solid var(--line);
+    }
+    .reward-btn.ghost { background: #fff; color: var(--muted); }
+    .reward-btn.primary { background: var(--rose); border-color: var(--rose); color: #fff; }
+    .reward-btn.primary:hover { background: var(--rose-h); border-color: var(--rose-h); }
+
+    @media (max-width: 767px) {
+      .stamp-grid { column-gap: 10px; padding: 11px 6px 15px; }
+      .reward-label { font-size: 8.5px; }
+    }
+
+    .fold-bar {
+      height: 36px;
+      border: 1px dashed var(--line);
+      border-radius: 5px;
+      width: 100%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      color: #9ba0ae;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .fold-bar::before {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 10px solid #9ba0ae;
+    }
+
+    .stamp-panel.expanded .fold-bar::before {
+      transform: rotate(180deg);
+    }
+
+    .history-panel {
+      margin-top: 16px;
+      overflow: hidden;
+    }
+
+    .history-head {
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 0 20px;
+      background: #fff;
+    }
+
+    .history-title-wrap {
+      display: block;
+      min-width: 0;
+    }
+
+    .history-head h2 {
+      margin: 0;
+      color: #2d3139;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .history-tabs {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .history-tab {
+      position: relative;
+      height: 34px;
+      padding: 0 0 6px;
+      border: 0;
+      background: transparent;
+      color: #9da2af;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .history-tab::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: transparent;
+    }
+
+    .history-tab.active {
+      color: var(--rose);
+    }
+
+    .history-tab.active::after {
+      background: var(--rose);
+    }
+
+    .history-table {
+      border-top: 0;
+    }
+
+    .history-table-head,
+    .history-row {
+      display: grid;
+      grid-template-columns: 130px 150px minmax(0, 1fr) 130px;
+      align-items: center;
+      column-gap: 0;
+    }
+
+    .history-table-head {
+      height: 36px;
+      padding: 0 16px;
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+      background: var(--warm);
+      color: #9da2af;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .history-table-head div:first-child,
+    .history-table-head div:nth-child(3) {
+      text-align: center;
+    }
+
+    .history-row {
+      min-height: 64px;
+      margin: 0;
+      padding: 0 16px;
+      border-top: 0;
+    }
+
+    .history-row:first-of-type {
+      border-top: 0;
+    }
+
+    .history-date {
+      color: #9da2af;
+      font-size: 12px;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .history-type {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .history-desc {
+      display: grid;
+      gap: 4px;
+      justify-items: start;
+      min-width: 0;
+    }
+
+    .type-chip {
+      height: auto;
+      min-width: 0;
+      padding: 0;
+      border-radius: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .type-chip.earn {
+      color: var(--green);
+    }
+
+    .type-chip.use {
+      color: var(--rose);
+    }
+
+    .type-chip.expire {
+      color: #777;
+    }
+
+    .history-kind {
+      display: block;
+      color: #1f232b;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .history-meta {
+      display: block;
+      margin-top: 4px;
+      color: #9da2af;
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    .history-amount {
+      text-align: center;
+      color: var(--green);
+      font-size: 15px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .history-amount.minus {
+      color: var(--rose);
+    }
+
+    .history-amount.expire {
+      color: #777;
+    }
+
+    .history-row.is-hidden {
+      display: none;
+    }
+
+    .history-row[data-detail] {
+      cursor: pointer;
+    }
+
+    .history-row[data-detail]:hover {
+      background: #fffafb;
+    }
+
+    .history-row[data-detail]:focus-visible {
+      outline: 2px solid rgba(232, 56, 90, .38);
+      outline-offset: -2px;
+    }
+
+    .coupon-table .history-row {
+      cursor: pointer;
+    }
+    .coupon-table .history-row:hover {
+      background: #fffafb;
+    }
+    .coupon-table .history-row:focus-visible {
+      outline: 2px solid rgba(232, 56, 90, .38);
+      outline-offset: -2px;
+    }
+
+    .coupon-table .history-type {
+      color: #111;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .coupon-table .history-table-head,
+    .coupon-table .history-row {
+      grid-template-columns: 130px 160px minmax(0, 1fr) 130px;
+    }
+
+    .coupon-table .coupon-discount,
+    .coupon-table .coupon-period {
+      text-align: center;
+    }
+
+    .coupon-discount {
+      color: #111;
+      font-size: 15px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .coupon-period {
+      color: #4b5260;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    #coupon-history {
+      scroll-margin-top: 80px;
+    }
+
+    body.mileage-popup-open {
+      overflow: hidden;
+    }
+
+    .mileage-popup-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 160;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(20, 25, 34, .38);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+    }
+
+    .mileage-popup-overlay[hidden] {
+      display: none;
+    }
+
+    .mileage-popup-overlay.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mileage-popup {
+      width: min(300px, calc(100vw - 44px));
+      padding: 20px 22px 18px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 10px 24px rgba(26, 60, 110, .10);
+      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
+      transform: translateY(8px);
+      transition: transform .18s ease;
+    }
+
+    .mileage-popup-overlay.is-open .mileage-popup {
+      transform: translateY(0);
+    }
+
+    .mileage-popup h3 {
+      margin: 0 0 18px;
+      color: var(--tp);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .mileage-popup-content {
+      display: grid;
+      gap: 14px;
+      color: var(--ts);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.55;
+    }
+
+    .mileage-popup-group {
+      display: grid;
+      gap: 3px;
+    }
+
+    .mileage-popup-line {
+      min-width: 0;
+      white-space: pre-line;
+      word-break: keep-all;
+    }
+
+    .mileage-popup-label {
+      color: var(--ts);
+      font-weight: 600;
+    }
+
+    .mileage-popup-ok {
+      min-width: 58px;
+      height: 34px;
+      margin: 18px auto 0;
+      padding: 0 18px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      color: var(--navy);
+      box-shadow: none;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .mileage-popup.is-list-detail {
+      width: min(360px, calc(100vw - 44px));
+      max-height: min(640px, calc(100vh - 48px));
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .mileage-popup.is-list-detail h3 {
+      margin: 0;
+      padding: 26px 24px 7px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: var(--tp);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.28;
+    }
+
+    .mileage-popup-title-text {
+      min-width: 0;
+      word-break: keep-all;
+    }
+
+    .mileage-popup-badge {
+      min-height: 22px;
+      padding: 4px 12px 3px;
+      border-radius: 999px;
+      background: #FFF3E0;
+      color: var(--yellow);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .mileage-popup-subtitle {
+      margin: 0;
+      padding: 0 24px 17px;
+      color: var(--ts);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.45;
+    }
+
+    .mileage-popup.is-list-detail .mileage-popup-content {
+      min-height: 0;
+      padding: 0 24px;
+      display: block;
+      overflow-y: auto;
+      color: var(--tp);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.45;
+    }
+
+    .mileage-popup-summary {
+      padding: 15px 14px;
+      display: grid;
+      gap: 13px;
+      border-radius: 8px;
+      background: #F5F7FA;
+    }
+
+    .mileage-popup-summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .mileage-popup-summary-label {
+      color: var(--ts);
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .mileage-popup-summary-value {
+      color: var(--tp);
+      font-size: 14px;
+      font-weight: 700;
+      text-align: right;
+      word-break: keep-all;
+    }
+
+    .mileage-popup-summary-amount {
+      color: var(--rose);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .mileage-popup-coin {
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      background: var(--yellow);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.55);
+    }
+
+    .mileage-popup-divider {
+      height: 1px;
+      margin: 17px 0 15px;
+      background: var(--border);
+    }
+
+    .mileage-popup-list {
+      display: grid;
+      gap: 14px;
+      padding-bottom: 4px;
+    }
+
+    .mileage-popup-list-row {
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 10px;
+    }
+
+    .mileage-popup-list-date {
+      color: var(--tp);
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .mileage-popup-list-name {
+      min-width: 0;
+      color: var(--tp);
+      white-space: normal;
+    }
+
+    .mileage-popup-list-note {
+      display: block;
+      margin-top: 4px;
+      color: var(--ts);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .mileage-popup-list-amount {
+      color: var(--rose);
+      font-weight: 700;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .mileage-popup.is-list-detail .mileage-popup-ok {
+      width: calc(100% - 48px);
+      height: 44px;
+      margin: 18px 24px 24px;
+      border: 0;
+      border-radius: 5px;
+      background: var(--rose);
+      color: #fff;
+      box-shadow: none;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    
+
+    
+
+    
+  
+    .member-tier-icon { background:#eef5ff !important; color:#1A3C6E !important; }
+    .member-tier-icon i { line-height:1; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="top-notice-spacer" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <div class="brand-area">
+        <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" onclick="openMenuDrawer()">
+          <span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <a class="logo-link" href="web_main.html" aria-label="Bidbuy 홈">
+          <img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency">
+        </a>
+      </div>
+
+      <form class="search">
+        <input type="text" placeholder="키워드 또는 URL을 입력하세요.">
+        <button type="submit">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          검색
+        </button>
+      </form>
+
+      <div class="user-tools" aria-label="회원 메뉴">
+        <button class="icon-btn" type="button" aria-label="알림">
+          <i class="far fa-bell" aria-hidden="true"></i>
+        </button>
+        <button class="icon-btn" type="button" aria-label="장바구니">
+          <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+        </button>
+        <div class="user-name">
+          홍길동 님
+          <span class="premium-chip">PREMIUM</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="stage">
+      <aside class="sidebar">
+        <section class="profile-card" aria-label="회원 정보">
+          <div class="profile-main">
+            <div class="avatar tier-premium member-tier-icon" aria-label="Premium 등급"><i class="fa-solid fa-gem" aria-hidden="true"></i></div>
+            <div>
+              <strong class="profile-name">홍길동님</strong>
+              <span class="profile-tier">Premium</span>
+            </div>
+          </div>
+          <p class="vip-copy">프리미엄까지 <b>₩215,000</b> 또는 <b>3건</b></p>
+          <div class="vip-row">
+            <div class="vip-progress"><span></span></div>
+            <span class="help-dot">?</span>
+          </div>
+          <div class="profile-actions">
+            <button class="soft-btn" type="button">1:1 문의내역</button>
+            <button class="soft-btn" type="button">로그아웃</button>
+          </div>
+        </section>
+
+        <section class="side-nav" aria-label="마이페이지 메뉴">
+        <h2 class="side-title"><a href="web_mypage.html">마이페이지</a></h2>
+        <div class="nav-section">
+          <strong>나의 거래 현황</strong>
+          <div class="nav-list">
+            <a href="web_mainlist.html">거래 전체 목록</a>
+            <a href="web_auction_bid_list.html">경매 입찰/유찰</a>
+            <a href="#">구매 신청 목록</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>배송관리</strong>
+          <div class="nav-list">
+            <a href="web_bundle_shipping_management.html">배송신청/변경</a>
+            <a href="#">배송지 관리</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>관심 항목 관리</strong>
+          <div class="nav-list">
+            <a href="web_favorites.html?tab=seller">관심 출품자</a>
+            <a href="web_favorites.html?tab=auction">경매 관심물품</a>
+            <a href="web_favorites.html?tab=purchase">구매 관심물품</a>
+            <a href="web_favorites.html?tab=keyword">관심 키워드</a>
+            <a href="web_favorites.html?tab=shortcut">바로가기</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>MY 혜택</strong>
+          <div class="nav-list">
+            <a class="active" href="web_mileage.html">마일리지 / 쿠폰</a>
+            <a href="web_grade_page.html">MY 등급</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>나의 정보관리</strong>
+          <div class="nav-list">
+            <a href="#">예치금 관리</a>
+            <a href="#">보증금 관리</a>
+            <a href="#">회원정보 수정</a>
+            <a href="#">비밀번호 변경</a>
+            <a href="#">회원 탈퇴</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>고객상담</strong>
+          <div class="nav-list">
+            <a href="web_user_memo.html">사용자메모</a>
+            <a href="web_qna.html">1:1 문의내역</a>
+            <a href="web_qna_form.html">1:1 문의하기</a>
+          </div>
+        </div>
+
+        <div class="nav-section biz-convert-section" hidden>
+          <a href="web_biz.html" class="biz-convert-link">
+            <span class="biz-convert-inner">
+              <span class="biz-convert-icon"><i class="fas fa-building"></i></span>
+              <span class="biz-convert-text">
+                <strong>사업자 회원 전환</strong>
+                <span>사업자 전용 혜택을 확인해보세요</span>
+              </span>
+              <i class="fas fa-chevron-right biz-chev"></i>
+            </span>
+          </a>
+        </div>
+      </section>
+      </aside>
+
+      <main class="main">
+        <div class="page-title">
+          <h1>마일리지 / 쿠폰</h1>
+          <p>적립, 사용, 등급 달성 현황을 한 곳에서 확인하세요.</p>
+        </div>
+
+        <section class="summary-grid" aria-label="마일리지 요약">
+          <div class="panel mileage-summary-panel">
+            <div class="mileage-balance-grid">
+              <div class="balance-box">
+                <span>사용 가능 마일리지</span>
+                <strong class="use">4,500<small>원</small></strong>
+              </div>
+              <div class="balance-box" role="button" tabindex="0" data-tooltip-position="top" data-summary-tooltip="결제 시 확정된 적립 예정 마일리지는&#10;주문 목록이 ‘현지도착’ 상태로 변경된 후&#10;실제 마일리지로 적립됩니다." aria-label="적립 예정 마일리지 안내 보기">
+                <span>
+                  적립 예정 마일리지
+                </span>
+                <strong>25,594<small>원</small></strong>
+              </div>
+              <div class="balance-box" role="button" tabindex="0" data-scroll-target="#coupon-history" aria-label="쿠폰 내역으로 이동">
+                <span>보유중인 쿠폰</span>
+                <strong>10<small>장</small></strong>
+              </div>
+              <div class="balance-box" role="button" tabindex="0" data-tooltip-position="bottom" data-summary-tooltip="• 적립 마일리지는 적립일로부터 3개월 후 소멸됩니다.&#10;• 유효기간이 빠른 마일리지부터 사용됩니다.&#10;• 월간 마일리지는 지급월 말일 23:59:59에 소멸됩니다." aria-label="다음달 소멸 예정 마일리지 안내 보기">
+                <span>
+                  다음달 소멸 예정 마일리지
+                </span>
+                <strong class="muted">9,800<small>원</small></strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel stamp-panel" aria-label="포인트 스탬프">
+          <div class="stamp-head">
+            <div>
+              <h2>혜택 스탬프</h2>
+              <p id="stampSummary">이번 달 구매 0건</p>
+            </div>
+            <span class="stamp-badge">PREMIUM</span>
+          </div>
+          <div class="stamp-scroll">
+            <div class="stamp-grid" id="stampGrid"></div>
+          </div>
+          <button class="fold-bar stamp-toggle" type="button" aria-expanded="false">펼쳐보기</button>
+        </section>
+
+        <section class="panel history-panel" aria-labelledby="history-title">
+          <div class="history-head">
+            <div class="history-title-wrap">
+              <h2 id="history-title">마일리지 내역</h2>
+            </div>
+            <div class="history-tabs" role="tablist" aria-label="마일리지 내역 필터">
+              <button class="history-tab active" type="button" role="tab" aria-selected="true" data-filter="all">전체</button>
+              <button class="history-tab" type="button" role="tab" aria-selected="false" data-filter="earn">적립</button>
+              <button class="history-tab" type="button" role="tab" aria-selected="false" data-filter="use">사용</button>
+              <button class="history-tab" type="button" role="tab" aria-selected="false" data-filter="expire">소멸</button>
+            </div>
+          </div>
+
+          <div class="history-table mileage-table" role="table" aria-label="마일리지 내역">
+            <div class="history-table-head" role="row">
+              <div role="columnheader">일시</div>
+              <div role="columnheader">구분</div>
+              <div role="columnheader">내역</div>
+              <div role="columnheader">금액</div>
+            </div>
+
+            <div class="history-row" role="row" data-type="earn" data-detail="earn-purchase" tabindex="0" aria-label="마일리지 적립 상세 보기">
+              <div class="history-date" role="cell">2024-04-01</div>
+              <div class="history-type" role="cell"><span class="type-chip earn">적립</span></div>
+              <div class="history-desc" role="cell">
+                <strong class="history-kind">4월 적립 마일리지</strong>
+              </div>
+              <div class="history-amount" role="cell">+14,425원</div>
+            </div>
+
+            <div class="history-row" role="row" data-type="use" data-detail="use-purchase" tabindex="0" aria-label="마일리지 사용 상세 보기">
+              <div class="history-date" role="cell">2024-02-28</div>
+              <div class="history-type" role="cell"><span class="type-chip use">사용</span></div>
+              <div class="history-desc" role="cell">
+                <strong class="history-kind">주문번호 JP123456789 차감</strong>
+              </div>
+              <div class="history-amount minus" role="cell">-12,000원</div>
+            </div>
+
+            <div class="history-row" role="row" data-type="expire" data-detail="expire" tabindex="0" aria-label="마일리지 유효기간 만료 상세 보기">
+              <div class="history-date" role="cell">2024-05-01</div>
+              <div class="history-type" role="cell"><span class="type-chip expire">소멸</span></div>
+              <div class="history-desc" role="cell">
+                <strong class="history-kind">유효기간 만료</strong>
+              </div>
+              <div class="history-amount expire" role="cell">-250원</div>
+            </div>
+
+            <div class="history-row" role="row" data-type="earn" data-detail="earn-monthly" tabindex="0" aria-label="월간 마일리지 적립 상세 보기">
+              <div class="history-date" role="cell">2024-04-01</div>
+              <div class="history-type" role="cell"><span class="type-chip earn">적립</span></div>
+              <div class="history-desc" role="cell">
+                <strong class="history-kind">월간 마일리지</strong>
+              </div>
+              <div class="history-amount" role="cell">+9,800원</div>
+            </div>
+
+            <div class="history-row" role="row" data-type="earn" data-detail="earn-event" tabindex="0" aria-label="이벤트 마일리지 적립 상세 보기">
+              <div class="history-date" role="cell">2024-03-28</div>
+              <div class="history-type" role="cell"><span class="type-chip earn">적립</span></div>
+              <div class="history-desc" role="cell">
+                <strong class="history-kind">리뉴얼 오픈 이벤트</strong>
+              </div>
+              <div class="history-amount" role="cell">+500원</div>
+            </div>
+
+            <div class="history-row" role="row" data-type="expire" data-detail="expire" tabindex="0" aria-label="마일리지 유효기간 만료 상세 보기">
+              <div class="history-date" role="cell">2024-03-20</div>
+              <div class="history-type" role="cell"><span class="type-chip expire">소멸</span></div>
+              <div class="history-desc" role="cell">
+                <strong class="history-kind">유효기간 만료</strong>
+              </div>
+              <div class="history-amount expire" role="cell">-20,000원</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel history-panel" id="coupon-history" aria-labelledby="coupon-history-title">
+          <div class="history-head">
+            <div class="history-title-wrap">
+              <h2 id="coupon-history-title">쿠폰 내역</h2>
+            </div>
+          </div>
+
+          <div class="history-table coupon-table" role="table" aria-label="쿠폰 내역">
+            <div class="history-table-head" role="row">
+              <div role="columnheader">일시</div>
+              <div role="columnheader">사용범위</div>
+              <div role="columnheader">쿠폰명</div>
+              <div role="columnheader">할인금액</div>
+            </div>
+
+            <div class="history-row" role="row" tabindex="0" data-coupon-end="2026-08-31" aria-label="쿠폰 상세 보기">
+              <div class="history-date" role="cell">2026-08-07</div>
+              <div class="history-type" role="cell">비바항공</div>
+              <div class="history-desc" role="cell"><strong class="history-kind">8월 여름의 달 비바항공 국제 운송료 할인 쿠폰</strong></div>
+              <div class="coupon-discount" role="cell">1,000원</div>
+            </div>
+
+            <div class="history-row" role="row" tabindex="0" data-coupon-end="2026-09-30" aria-label="쿠폰 상세 보기">
+              <div class="history-date" role="cell">2026-08-06</div>
+              <div class="history-type" role="cell">비바항공, 선편 특송</div>
+              <div class="history-desc" role="cell"><strong class="history-kind">월말 배송비 지원 쿠폰</strong></div>
+              <div class="coupon-discount" role="cell">3,000원</div>
+            </div>
+
+            <div class="history-row" role="row" tabindex="0" data-coupon-end="2026-09-30" aria-label="쿠폰 상세 보기">
+              <div class="history-date" role="cell">2026-08-05</div>
+              <div class="history-type" role="cell">비바항공</div>
+              <div class="history-desc" role="cell"><strong class="history-kind">프리미엄 회원 감사 쿠폰</strong></div>
+              <div class="coupon-discount" role="cell">10,000원</div>
+            </div>
+
+            <div class="history-row" role="row" tabindex="0" data-coupon-end="2026-08-31" aria-label="쿠폰 상세 보기">
+              <div class="history-date" role="cell">2026-08-04</div>
+              <div class="history-type" role="cell">비바항공, 선편 특송</div>
+              <div class="history-desc" role="cell"><strong class="history-kind">복귀유저 감사  쿠폰</strong></div>
+              <div class="coupon-discount" role="cell">5,000원</div>
+            </div>
+
+            <div class="history-row" role="row" tabindex="0" data-coupon-end="2026-09-30" aria-label="쿠폰 상세 보기">
+              <div class="history-date" role="cell">2026-08-03</div>
+              <div class="history-type" role="cell">비바항공</div>
+              <div class="history-desc" role="cell"><strong class="history-kind">항공운송 프로모션 쿠폰</strong></div>
+              <div class="coupon-discount" role="cell">3,000원</div>
+            </div>
+
+            <div class="history-row" role="row" tabindex="0" data-coupon-end="2026-09-30" aria-label="쿠폰 상세 보기">
+              <div class="history-date" role="cell">2026-08-02</div>
+              <div class="history-type" role="cell">비바항공, 선편 특송</div>
+              <div class="history-desc" role="cell"><strong class="history-kind">해외배송 정기 혜택 쿠폰</strong></div>
+              <div class="coupon-discount" role="cell">1,000원</div>
+            </div>
+
+            <div class="history-row" role="row" tabindex="0" data-coupon-end="2026-08-31" aria-label="쿠폰 상세 보기">
+              <div class="history-date" role="cell">2026-08-01</div>
+              <div class="history-type" role="cell">비바항공</div>
+              <div class="history-desc" role="cell"><strong class="history-kind">8월 웰컴 쿠폰</strong></div>
+              <div class="coupon-discount" role="cell">5,000원</div>
+            </div>
+
+            <div class="history-row" role="row" tabindex="0" data-coupon-end="2026-09-30" aria-label="쿠폰 상세 보기">
+              <div class="history-date" role="cell">2026-07-31</div>
+              <div class="history-type" role="cell">비바항공, 선편 특송</div>
+              <div class="history-desc" role="cell"><strong class="history-kind">광복절 스페셜 쿠폰</strong></div>
+              <div class="coupon-discount" role="cell">10,000원</div>
+            </div>
+
+            <div class="history-row" role="row" tabindex="0" data-coupon-end="2026-08-31" aria-label="쿠폰 상세 보기">
+              <div class="history-date" role="cell">2026-07-28</div>
+              <div class="history-type" role="cell">비바항공</div>
+              <div class="history-desc" role="cell"><strong class="history-kind">여름 배송비 할인 쿠폰</strong></div>
+              <div class="coupon-discount" role="cell">5,000원</div>
+            </div>
+
+            <div class="history-row" role="row" tabindex="0" data-coupon-end="2026-09-30" aria-label="쿠폰 상세 보기">
+              <div class="history-date" role="cell">2026-07-25</div>
+              <div class="history-type" role="cell">비바항공, 선편 특송</div>
+              <div class="history-desc" role="cell"><strong class="history-kind">야후옥션 첫 입찰 쿠폰</strong></div>
+              <div class="coupon-discount" role="cell">3,000원</div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="menu-drawer-ov" id="menuDrawerOv" onclick="closeMenuDrawer()"></div>
+    <div class="menu-drawer" id="menuDrawer">
+      <div id="menuDrGuestHd" class="dr-head" style="display:none">
+        <button class="dr-login-link" onclick="toggleMenuDrawerLogin();closeMenuDrawer()"><span>로그인하기</span><i class="fas fa-chevron-right"></i></button>
+        <button class="dr-close" onclick="closeMenuDrawer()"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="menuDrUserHd" class="dr-head">
+        <div class="dr-user-mini">
+          <div class="u-av tier-premium member-tier-icon" aria-label="Premium 등급"><i class="fa-solid fa-gem" aria-hidden="true"></i></div>
+          <div>
+            <div class="dr-user-mini-name">홍길동 님</div>
+            <div class="dr-user-mini-grade">PREMIUM 회원</div>
+          </div>
+        </div>
+        <button class="dr-close" onclick="closeMenuDrawer()"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="menuDrGuestPanel" class="dr-guest-card" style="display:none">
+        <div class="dr-guest-title">비드바이 로그인</div>
+        <div class="dr-guest-copy">로그인하고 입찰 현황, 마일리지, 관심 상품을 빠르게 확인하세요.</div>
+        <div class="dr-login-actions">
+          <button class="dr-action-btn" type="button" onclick="toggleMenuDrawerLogin();closeMenuDrawer()">로그인</button>
+          <button class="dr-action-btn secondary" type="button">회원가입</button>
+        </div>
+      </div>
+      <div id="menuDrUserAssets" class="dr-user-assets">
+        <div class="dr-user-asset"><span>마일리지</span><strong>4,500원</strong></div>
+        <div class="dr-user-asset-div"></div>
+        <div class="dr-user-asset"><span>예치금</span><strong>29,870원</strong></div>
+      </div>
+      <div class="dr-sec">
+        <div class="dr-sec-title">바로가기</div>
+        <div class="dr-quick">
+          <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-truck-fast"></i></div><div class="dr-quick-label">배송현황</div></div>
+          <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-won-sign"></i></div><div class="dr-quick-label">비용계산기</div></div>
+          <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-file-invoice"></i></div><div class="dr-quick-label">관세안내</div></div>
+          <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-calendar-check"></i></div><div class="dr-quick-label">출석부</div></div>
+        </div>
+      </div>
+      <div class="dr-sec">
+        <div class="dr-sec-title">카테고리</div>
+        <div class="dr-cat-list">
+          <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본야후경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
+          <div class="dr-cat-item"><span class="dr-cat-flag">US</span><span class="dr-cat-label">미국이베이경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
+          <div class="dr-cat-item"><span class="dr-cat-flag">GB</span><span class="dr-cat-label">영국이베이경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
+          <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본메루카리</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
+          <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본구매대행</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
+        </div>
+      </div>
+      <div id="menuDrMemberPanel" class="dr-member-panel" style="display:block">
+        <div class="dr-sec">
+          <div class="dr-sec-title">마이페이지</div>
+          <div class="dr-mypage-list">
+            <a class="dr-mypage-item" href="#"><i class="far fa-user"></i><span>마이쇼핑</span><i class="fas fa-chevron-down dr-cat-arrow"></i></a>
+            <div class="dr-mypage-sub">
+              <a href="#">거래 목록</a>
+              <a href="#">경매 입찰/유찰</a>
+              <a href="#">구매 신청 목록</a>
+              <a href="#">관심 항목 관리</a>
+            </div>
+            <a class="dr-mypage-item" href="#"><i class="fas fa-truck"></i><span>배송관리</span><i class="fas fa-chevron-right dr-cat-arrow"></i></a>
+            <a class="dr-mypage-item" href="#"><i class="fas fa-gift"></i><span>MY 혜택</span><i class="fas fa-chevron-right dr-cat-arrow"></i></a>
+            <a class="dr-mypage-item" href="#"><i class="fas fa-gear"></i><span>나의정보관리</span><i class="fas fa-chevron-right dr-cat-arrow"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="dr-sec">
+        <div class="dr-sec-title">이용가이드</div>
+        <div class="dr-link-grid">
+          <a href="#">초보자가이드</a>
+          <a href="#">수수료안내</a>
+          <a href="#">배송비안내</a>
+          <a href="#">관부가세안내</a>
+        </div>
+      </div>
+      <div class="dr-sec" style="border-bottom:none">
+        <div class="dr-sec-title">고객센터</div>
+        <div class="dr-link-grid">
+          <a href="#">공지사항</a>
+          <a href="#">자주하는질문</a>
+          <a href="#">1:1 문의하기</a>
+          <a href="#">커뮤니티</a>
+        </div>
+      </div>
+      <div style="height:24px"></div>
+    </div>
+
+    <div class="drawer-ov" id="drawerOv" hidden></div>
+    <aside class="drawer" id="userDrawer" hidden aria-labelledby="drawerTitle" aria-hidden="true">
+      <div class="drawer-header">
+        <h2 id="drawerTitle" class="drawer-section-title">마이페이지</h2>
+        <button class="dr-close" type="button" aria-label="닫기" id="drawerCloseBtn"><i class="fas fa-times" aria-hidden="true"></i></button>
+      </div>
+      <nav class="user-menu-list" aria-label="회원 메뉴">
+        <div class="user-menu-section">
+          <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="drawer-menu-trade">
+            <span class="user-menu-icon"><i class="fas fa-shopping-cart" aria-hidden="true"></i></span><span>나의 거래 현황</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+          </button>
+          <div class="user-menu-panel" id="drawer-menu-trade">
+            <a class="user-menu-link active" href="web_mainlist.html">거래 전체 목록</a>
+            <a class="user-menu-link" href="#">경매 입찰/유찰</a>
+            <a class="user-menu-link" href="#">구매 신청 목록</a>
+          </div>
+        </div>
+
+        <div class="user-menu-section">
+          <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="drawer-menu-delivery">
+            <span class="user-menu-icon"><i class="fas fa-truck-fast" aria-hidden="true"></i></span><span>배송관리</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+          </button>
+          <div class="user-menu-panel" id="drawer-menu-delivery">
+            <a class="user-menu-link" href="#">배송신청/변경</a>
+            <a class="user-menu-link" href="#">배송지 관리</a>
+          </div>
+        </div>
+
+        <div class="user-menu-section">
+          <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="drawer-menu-favorites">
+            <span class="user-menu-icon"><i class="fas fa-heart" aria-hidden="true"></i></span><span>관심 항목 관리</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+          </button>
+          <div class="user-menu-panel" id="drawer-menu-favorites">
+            <a class="user-menu-link" href="web_favorites.html?tab=seller">관심 출품자</a>
+            <a class="user-menu-link" href="web_favorites.html?tab=auction">경매 관심물품</a>
+        <a class="user-menu-link" href="web_favorites.html?tab=purchase">구매 관심물품</a>
+            <a class="user-menu-link" href="web_favorites.html?tab=keyword">관심 키워드</a>
+            <a class="user-menu-link" href="web_favorites.html?tab=shortcut">바로가기</a>
+          </div>
+        </div>
+
+        <div class="user-menu-section">
+          <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="drawer-menu-benefit">
+            <span class="user-menu-icon"><i class="fas fa-gift" aria-hidden="true"></i></span><span>MY 혜택</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+          </button>
+          <div class="user-menu-panel" id="drawer-menu-benefit">
+            <a class="user-menu-link" href="web_mileage.html">마일리지 / 쿠폰</a>
+            <a class="user-menu-link" href="web_grade page.html">MY 등급</a>
+          </div>
+        </div>
+
+        <div class="user-menu-section">
+          <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="drawer-menu-info">
+            <span class="user-menu-icon"><i class="fas fa-user" aria-hidden="true"></i></span><span>나의 정보관리</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+          </button>
+          <div class="user-menu-panel" id="drawer-menu-info">
+            <a class="user-menu-link" href="#">예치금 관리</a>
+            <a class="user-menu-link" href="#">보증금 관리</a>
+            <a class="user-menu-link" href="#">회원정보 수정</a>
+            <a class="user-menu-link" href="#">비밀번호 변경</a>
+            <a class="user-menu-link danger" href="#">회원 탈퇴</a>
+          </div>
+        </div>
+
+        <button class="user-menu-item logout" type="button"><span class="emoji">🔒</span><span>로그아웃</span></button>
+      </nav>
+    </aside>
+
+    <div class="mileage-popup-overlay" hidden>
+      <div class="mileage-popup" role="dialog" aria-modal="true" aria-labelledby="mileage-popup-title">
+        <h3 id="mileage-popup-title">마일리지 적립 내역</h3>
+        <div class="mileage-popup-content"></div>
+        <button class="mileage-popup-ok" type="button">확인</button>
+      </div>
+    </div>
+
+    <div class="reward-modal-overlay" id="couponModal" hidden>
+      <div class="reward-modal" role="dialog" aria-modal="true" aria-labelledby="couponModalTitle">
+        <button class="reward-modal-close" type="button" data-coupon-close aria-label="닫기">&times;</button>
+        <h3 id="couponModalTitle">쿠폰이 지급되었습니다</h3>
+        <p class="reward-modal-desc" id="couponModalDesc">이번달 거래 3건 달성 보상</p>
+        <div class="coupon-card">
+          <span class="cc-kind">비바 항공 운송료 할인 쿠폰</span>
+          <div class="cc-amount" id="couponAmount">1,000<small>원</small></div>
+          <p class="cc-cond">등급별 국제 운송료 할인 혜택과 중복 사용 가능합니다.</p>
+        </div>
+        <p class="reward-meta">
+          유효기간 <b id="couponExpiry">2026.10.06</b>까지 (지급일로부터 60일)<br>
+          쿠폰함 &gt; 사용 가능 쿠폰에서 확인하실 수 있습니다.
+        </p>
+        <div class="reward-actions">
+          <button class="reward-btn ghost" type="button" data-coupon-close>닫기</button>
+          <button class="reward-btn primary" type="button" id="couponGoBtn">쿠폰 내역 보기</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="roulette-modal-overlay" hidden>
+      <div class="roulette-modal" role="dialog" aria-modal="true" aria-labelledby="roulette-modal-title">
+        <button class="roulette-modal-close" type="button" aria-label="닫기">×</button>
+        <h3 id="roulette-modal-title">보너스 룰렛</h3>
+        <p class="roulette-modal-desc">START 버튼을 누르면 룰렛이 돌아갑니다!</p>
+        <div class="roulette-wheel-wrap">
+          <div class="roulette-pointer"></div>
+          <div class="roulette-wheel">
+            <div class="roulette-wheel-labels">
+              <span style="--i:0"><b>항공운임<br>1,000원</b></span>
+              <span style="--i:1"><b>항공운임<br>2,000원</b></span>
+              <span style="--i:2"><b>항공운임<br>3,000원</b></span>
+              <span style="--i:3"><b>항공운임<br>4,000원</b></span>
+              <span style="--i:4"><b>항공운임<br>5,000원</b></span>
+            </div>
+            <div class="roulette-wheel-center"></div>
+          </div>
+        </div>
+        <button class="roulette-start-btn" type="button">START</button>
+        <p class="roulette-result" hidden></p>
+        <p class="roulette-note" hidden>쿠폰함에서 바로 사용하실 수 있습니다.</p>
+        <div class="reward-actions" id="rouletteActions" hidden style="margin-top:14px">
+          <button class="reward-btn ghost" type="button" id="rouletteCloseBtn">닫기</button>
+          <button class="reward-btn primary" type="button" id="rouletteGoBtn">쿠폰 내역 보기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const stampPanel = document.querySelector(".stamp-panel");
+    const stampToggle = document.querySelector(".stamp-toggle");
+
+    if (stampPanel && stampToggle) {
+      stampToggle.addEventListener("click", () => {
+        const isExpanded = stampPanel.classList.toggle("expanded");
+        stampToggle.setAttribute("aria-expanded", String(isExpanded));
+        stampToggle.textContent = isExpanded ? "접기" : "펼쳐보기";
+      });
+    }
+
+    /* ===== 혜택 스탬프 v2 ===== */
+    const STAMP_TOTAL = 20;
+    const REWARD_MAP = {
+      3:  { type: "coupon",   amount: 1000 },
+      5:  { type: "roulette" },
+      8:  { type: "coupon",   amount: 2000 },
+      10: { type: "roulette" },
+      13: { type: "coupon",   amount: 3000 },
+      15: { type: "roulette" },
+      18: { type: "coupon",   amount: 5000 },
+      20: { type: "roulette" }
+    };
+    const ROULETTE_PRIZES = [1000, 2000, 3000, 4000, 5000];
+
+    /* 데모 상태 — 실제 연동 시 서버 값으로 대체 */
+    const stampState = {
+      count: 12,
+      /* 각 스탬프의 1차 결제 완료일 (index 0 = 1번 스탬프) */
+      paidDates: ["2026-08-01","2026-08-01","2026-08-02","2026-08-03","2026-08-05","2026-08-06","2026-08-07","2026-08-08","2026-08-09","2026-08-10","2026-08-11","2026-08-12"],
+      claimed: { 3: 1000, 5: 3000 },           // { 3: 1000 } 수령 완료 금액
+      expired: {}            // { 3: true } 전월 미수령 소멸
+    };
+
+    const stampGrid = document.getElementById("stampGrid");
+    const stampSummary = document.getElementById("stampSummary");
+
+    const won = (n) => n.toLocaleString("ko-KR");
+    const fmtDate = (iso) => {
+      const d = new Date(iso);
+      return (d.getMonth() + 1) + "." + d.getDate();
+    };
+
+    function rewardStatus(step) {
+      if (stampState.expired[step]) return "expired";
+      if (stampState.claimed[step] !== undefined) return "claimed";
+      if (stampState.count >= step) return "ready";
+      return "locked";
+    }
+
+    function rewardCircleHTML(step, reward, st) {
+      if (st === "claimed") {
+        return '<span class="rw-claimed-text">수령<br>완료</span>';
+      }
+      if (reward.type === "coupon" && st !== "expired") {
+        return '<span class="rw-action">혜택<br>받기</span>';
+      }
+      if (reward.type === "roulette" && st !== "claimed" && st !== "expired") {
+        return '<span class="rw-roulette-text">룰렛</span>';
+      }
+      const amount = st === "claimed" || st === "expired"
+        ? stampState.claimed[step]
+        : (reward.type === "coupon" ? reward.amount : null);
+      const ico = reward.type === "coupon"
+        ? '<i class="fa-solid fa-ticket rw-ico"></i>'
+        : '<i class="fa-solid fa-dharmachakra rw-ico"></i>';
+      const amtText = amount != null
+        ? won(amount) + '<small>원</small>'
+        : '랜덤';
+      return ico + '<span class="rw-amt">' + amtText + '</span><span class="rw-kind">쿠폰</span>';
+    }
+
+    function renderStamps() {
+      if (!stampGrid) return;
+      stampGrid.innerHTML = "";
+      for (let n = 1; n <= STAMP_TOTAL; n++) {
+        const reward = REWARD_MAP[n];
+        const paid = stampState.count >= n;
+        const cell = document.createElement("div");
+        cell.className = "stamp";
+
+        const circle = document.createElement("div");
+        circle.className = "stamp-circle";
+
+        let label = "", labelCls = "reward-label";
+
+        if (reward) {
+          const st = rewardStatus(n);
+          cell.classList.add("has-reward",
+            reward.type === "coupon" ? "reward-coupon" : "reward-roulette",
+            "rw-" + st);
+          circle.innerHTML = rewardCircleHTML(n, reward, st);
+
+          if (st === "ready") {
+            circle.setAttribute("role", "button");
+            circle.setAttribute("tabindex", "0");
+            circle.dataset.step = n;
+            circle.setAttribute("aria-label",
+              n + "건 달성 " + (reward.type === "coupon" ? "쿠폰" : "룰렛") + " 보상 받기");
+            label = "";
+            labelCls += " type-" + reward.type;
+          } else if (st === "claimed") {
+            label = "";
+            labelCls += " is-claimed";
+          } else if (st === "expired") {
+            label = "기간 만료";
+          } else {
+            label = "";
+          }
+        } else if (paid) {
+          cell.classList.add("paid");
+          const iso = stampState.paidDates[n - 1];
+          circle.innerHTML = '<span class="stamp-date">' + (iso ? fmtDate(iso) : n) + '</span>';
+        } else {
+          circle.textContent = n;
+        }
+
+        const labelEl = document.createElement("div");
+        labelEl.className = labelCls;
+        if (!label) labelEl.classList.add("is-empty");
+        labelEl.textContent = label;
+
+        cell.appendChild(circle);
+        cell.appendChild(labelEl);
+        stampGrid.appendChild(cell);
+      }
+      renderSummary();
+    }
+
+    function renderSummary() {
+      if (!stampSummary) return;
+      let claimed = 0, next = null;
+      Object.keys(REWARD_MAP).map(Number).sort((a, b) => a - b).forEach((step) => {
+        const st = rewardStatus(step);
+        if (st === "claimed") claimed++;
+        if (st === "locked" && next === null) next = step;
+      });
+      let html = "이번 달 결제 <b>" + stampState.count + "건</b>";
+      if (claimed > 0) {
+        html += '<span class="stamp-summary-sep">·</span><span class="stamp-summary-hi">혜택 ' + claimed + "건 수령</span>";
+      } else if (next !== null) {
+        html += '<span class="stamp-summary-sep">·</span>다음 혜택까지 ' + (next - stampState.count) + "건";
+      } else {
+        html += '<span class="stamp-summary-sep">·</span>이번 달 혜택 전부 획득 🎉';
+      }
+      stampSummary.innerHTML = html;
+    }
+
+    /* ---- 배지 클릭 ---- */
+    function claimReward(step) {
+      const reward = REWARD_MAP[step];
+      if (!reward || rewardStatus(step) !== "ready") return;
+      if (reward.type === "coupon") openCouponModal(step, reward.amount);
+      else openRouletteModal(step);
+    }
+    stampGrid?.addEventListener("click", (e) => {
+      const c = e.target.closest(".stamp.rw-ready .stamp-circle");
+      if (c) claimReward(Number(c.dataset.step));
+    });
+    stampGrid?.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      const c = e.target.closest(".stamp.rw-ready .stamp-circle");
+      if (c) { e.preventDefault(); claimReward(Number(c.dataset.step)); }
+    });
+
+    /* ---- 확정 쿠폰 모달 ---- */
+    const couponModal = document.getElementById("couponModal");
+    const couponAmountEl = document.getElementById("couponAmount");
+    const couponDescEl = document.getElementById("couponModalDesc");
+    const couponExpiryEl = document.getElementById("couponExpiry");
+
+    function expiryText(days) {
+      const d = new Date();
+      d.setDate(d.getDate() + days);
+      return d.getFullYear() + "." + String(d.getMonth() + 1).padStart(2, "0") + "." + String(d.getDate()).padStart(2, "0");
+    }
+
+    function openCouponModal(step, amount) {
+      stampState.claimed[step] = amount;      // 확정 지급
+      couponAmountEl.innerHTML = won(amount) + "<small>원</small>";
+      couponDescEl.textContent = "스탬프 " + step + "개 달성 보상";
+      couponExpiryEl.textContent = expiryText(30);
+      couponModal.hidden = false;
+      renderStamps();
+    }
+    function closeCouponModal() { couponModal.hidden = true; }
+    couponModal?.addEventListener("click", (e) => {
+      if (e.target === couponModal || e.target.closest("[data-coupon-close]")) closeCouponModal();
+    });
+    document.getElementById("couponGoBtn")?.addEventListener("click", () => {
+      closeCouponModal();
+      goCouponHistory();
+    });
+
+    function goCouponHistory() {
+      const target = document.getElementById("coupon-history");
+      if (target) { target.scrollIntoView({ behavior: "smooth", block: "start" }); }
+    }
+
+    /* ---- 룰렛 모달 ---- */
+    const rouletteModalOverlay = document.querySelector(".roulette-modal-overlay");
+    const rouletteModalClose = document.querySelector(".roulette-modal-close");
+    const rouletteWheel = document.querySelector(".roulette-wheel");
+    const rouletteStartBtn = document.querySelector(".roulette-start-btn");
+    const rouletteResult = document.querySelector(".roulette-result");
+    const rouletteNote = document.querySelector(".roulette-note");
+    const rouletteActions = document.getElementById("rouletteActions");
+    const rouletteDesc = document.querySelector(".roulette-modal-desc");
+    let rouletteRotation = 0;
+    let rouletteSpinning = false;
+    let rouletteStep = null;
+
+    function openRouletteModal(step) {
+      if (!rouletteModalOverlay) return;
+      rouletteStep = step;
+      if (rouletteDesc) rouletteDesc.textContent = "스탬프 " + step + "개 달성! START를 눌러 쿠폰을 확인하세요";
+      rouletteResult.hidden = true;
+      rouletteResult.textContent = "";
+      rouletteNote.hidden = true;
+      rouletteActions.hidden = true;
+      rouletteStartBtn.hidden = false;
+      rouletteStartBtn.disabled = false;
+      rouletteStartBtn.textContent = "START";
+      rouletteModalOverlay.hidden = false;
+    }
+    function closeRouletteModal() {
+      if (rouletteModalOverlay) rouletteModalOverlay.hidden = true;
+    }
+    rouletteModalClose?.addEventListener("click", closeRouletteModal);
+    rouletteModalOverlay?.addEventListener("click", (event) => {
+      if (event.target === rouletteModalOverlay) closeRouletteModal();
+    });
+    document.getElementById("rouletteCloseBtn")?.addEventListener("click", closeRouletteModal);
+    document.getElementById("rouletteGoBtn")?.addEventListener("click", () => {
+      closeRouletteModal();
+      goCouponHistory();
+    });
+
+    rouletteStartBtn?.addEventListener("click", () => {
+      if (rouletteSpinning || !rouletteWheel) return;
+      rouletteSpinning = true;
+      rouletteStartBtn.disabled = true;
+      rouletteResult.hidden = true;
+      rouletteNote.hidden = true;
+
+      const prizeIndex = Math.floor(Math.random() * ROULETTE_PRIZES.length);
+      const sliceAngle = 360 / ROULETTE_PRIZES.length;
+      const targetCenter = prizeIndex * sliceAngle + sliceAngle / 2;
+      const currentMod = ((rouletteRotation % 360) + 360) % 360;
+      const delta = ((360 - targetCenter - currentMod) % 360 + 360) % 360;
+      rouletteRotation += 360 * 5 + delta;
+      rouletteWheel.style.transform = "rotate(" + rouletteRotation + "deg)";
+
+      setTimeout(() => {
+        rouletteSpinning = false;
+        const amount = ROULETTE_PRIZES[prizeIndex];
+        stampState.claimed[rouletteStep] = amount;   // 확정 지급
+        rouletteStartBtn.hidden = true;
+        rouletteResult.hidden = false;
+        rouletteResult.innerHTML = "🎉 항공 운임 쿠폰 <b>" + won(amount) + "원</b> 당첨!";
+        rouletteNote.hidden = false;
+        rouletteNote.textContent = "유효기간 " + expiryText(30) + "까지 · 쿠폰함에서 확인하세요";
+        rouletteActions.hidden = false;
+        renderStamps();
+      }, 4000);
+    });
+
+    renderStamps();
+
+    document.querySelectorAll(".user-menu-trigger").forEach((triggerButton) => {
+      triggerButton.addEventListener("click", () => {
+        const section = triggerButton.closest(".user-menu-section");
+        const isOpen = section?.classList.toggle("is-open");
+        triggerButton.setAttribute("aria-expanded", String(Boolean(isOpen)));
+      });
+    });
+
+    let menuDrawerLoggedIn = true;
+
+    function renderMenuDrawerState() {
+      document.getElementById("menuDrGuestHd").style.display = menuDrawerLoggedIn ? "none" : "flex";
+      document.getElementById("menuDrUserHd").style.display = menuDrawerLoggedIn ? "flex" : "none";
+      document.getElementById("menuDrGuestPanel").style.display = menuDrawerLoggedIn ? "none" : "block";
+      document.getElementById("menuDrUserAssets").style.display = menuDrawerLoggedIn ? "grid" : "none";
+      document.getElementById("menuDrMemberPanel").style.display = menuDrawerLoggedIn ? "block" : "none";
+    }
+
+    function toggleMenuDrawerLogin() {
+      menuDrawerLoggedIn = !menuDrawerLoggedIn;
+      closeMenuDrawer();
+      renderMenuDrawerState();
+    }
+
+    function openMenuDrawer() {
+      renderMenuDrawerState();
+      document.getElementById("menuDrawer")?.classList.add("open");
+      document.getElementById("menuDrawerOv")?.classList.add("open");
+      document.querySelectorAll(".menu-button").forEach((button) => {
+        button.setAttribute("aria-expanded", "true");
+      });
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeMenuDrawer() {
+      document.getElementById("menuDrawer")?.classList.remove("open");
+      document.getElementById("menuDrawerOv")?.classList.remove("open");
+      document.querySelectorAll(".menu-button").forEach((button) => {
+        button.setAttribute("aria-expanded", "false");
+      });
+      document.body.style.overflow = "";
+    }
+
+    renderMenuDrawerState();
+
+    const userNameButton = document.querySelector(".user-name");
+    const userDrawer = document.getElementById("userDrawer");
+    const drawerOv = document.getElementById("drawerOv");
+    const drawerCloseBtn = document.getElementById("drawerCloseBtn");
+
+    function openDrawer() {
+      if (userDrawer && drawerOv) {
+        userDrawer.hidden = false;
+        drawerOv.hidden = false;
+        requestAnimationFrame(() => {
+          userDrawer.classList.add("open");
+          drawerOv.classList.add("open");
+          userDrawer.setAttribute("aria-hidden", "false");
+        });
+      }
+    }
+
+    function closeDrawer() {
+      if (userDrawer && drawerOv) {
+        userDrawer.classList.remove("open");
+        drawerOv.classList.remove("open");
+        userDrawer.setAttribute("aria-hidden", "true");
+        document.querySelectorAll(".user-menu-section.is-open").forEach((section) => {
+          section.classList.remove("is-open");
+          section.querySelector(".user-menu-trigger")?.setAttribute("aria-expanded", "false");
+        });
+        setTimeout(() => {
+          if (!userDrawer.classList.contains("open")) {
+            userDrawer.hidden = true;
+            drawerOv.hidden = true;
+          }
+        }, 300);
+      }
+    }
+
+    userNameButton?.addEventListener("click", openDrawer);
+    drawerOv?.addEventListener("click", closeDrawer);
+    drawerCloseBtn?.addEventListener("click", closeDrawer);
+
+    const historyTabs = document.querySelectorAll(".history-tab");
+    const historyRows = document.querySelectorAll(".mileage-table .history-row");
+    const summaryTooltipCards = document.querySelectorAll(".balance-box[data-summary-tooltip]");
+    const summaryScrollCards = document.querySelectorAll(".balance-box[data-scroll-target]");
+
+    function closeSummaryTooltips(exceptCard) {
+      summaryTooltipCards.forEach((card) => {
+        if (card === exceptCard) return;
+        card.classList.remove("is-tooltip-open");
+        card.setAttribute("aria-expanded", "false");
+      });
+    }
+
+    summaryTooltipCards.forEach((card) => {
+      card.addEventListener("click", (event) => {
+        event.stopPropagation();
+
+        // 모달 팝업 열기
+        const label = card.querySelector("span")?.textContent?.trim();
+        let detail;
+
+        // 팝업 내용 구성 - 적립 예정 마일리지
+        if (label === "적립 예정 마일리지") {
+          detail = {
+            title: "적립예정 마일리지",
+            summary: {
+              label: "총 적립 예정",
+              amount: "25,594원",
+              periodLabel: "적립 예정일",
+              period: "2026.05.01"
+            },
+            list: [
+              { date: "04.01", name: "JP123456789", amount: "6,200원" },
+              { date: "04.17", name: "BJP123456789", amount: "5,800원" },
+              { date: "04.20", name: "US123456789", amount: "5,200원" },
+              { date: "04.27", name: "BUS123456789", amount: "8,394원" }
+            ]
+          };
+        } else {
+          // 소멸 예정 마일리지는 groups 형식
+          const tooltipText = card.getAttribute("data-summary-tooltip");
+          detail = {
+            title: label,
+            groups: [[{ text: tooltipText }]]
+          };
+        }
+
+        clearTimeout(mileagePopupCloseTimer);
+        lastMileagePopupTrigger = card;
+        renderMileagePopup(detail);
+        mileagePopupOverlay.hidden = false;
+        document.body.classList.add("mileage-popup-open");
+
+        requestAnimationFrame(() => {
+          mileagePopupOverlay.classList.add("is-open");
+          mileagePopupOk?.focus({ preventScroll: true });
+        });
+      });
+
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          card.click();
+        }
+
+        if (event.key === "Escape") {
+          if (!mileagePopupOverlay.hidden) {
+            closeMileagePopup();
+          }
+        }
+      });
+    });
+
+    summaryScrollCards.forEach((card) => {
+      function scrollToTarget() {
+        const target = document.querySelector(card.dataset.scrollTarget);
+        if (!target) return;
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      card.addEventListener("click", scrollToTarget);
+      card.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        scrollToTarget();
+      });
+    });
+
+    document.addEventListener("click", () => {
+      closeSummaryTooltips();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeSummaryTooltips();
+      }
+    });
+
+    historyTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const filter = tab.dataset.filter;
+
+        historyTabs.forEach((item) => {
+          const isActive = item === tab;
+          item.classList.toggle("active", isActive);
+          item.setAttribute("aria-selected", String(isActive));
+        });
+
+        historyRows.forEach((row) => {
+          const isVisible = filter === "all" || row.dataset.type === filter;
+          row.classList.toggle("is-hidden", !isVisible);
+        });
+      });
+    });
+
+    const mileagePopupData = {
+      "earn-purchase": {
+        title: "적립 마일리지",
+        badge: "Premium 5%",
+        summary: {
+          label: "마일리지",
+          amount: "+14,425원",
+          period: "2026.04.01~2026.06.30"
+        },
+        list: [
+          { date: "04.17", name: "JP123456789", amount: "225원" },
+          { date: "04.17", name: "BJP123456789", amount: "5,800원" },
+          { date: "04.20", name: "US123456789", amount: "2,500원" },
+          { date: "04.27", name: "BUS123456789", amount: "5,900원" }
+        ]
+      },
+      "use-purchase": {
+        title: "마일리지 사용 내역",
+        subtitle: "주문번호 : JP123456789",
+        summary: {
+          label: "사용 마일리지",
+          amount: "-12,000원",
+          periodLabel: "주문일자",
+          period: "2024.02.28"
+        },
+        list: [
+          { date: "02.28", name: "반지 링 여성용 실버 금속 알레르기 방지 액세서리 여름용 심플 메일편 무료배송", amount: "-12,000원" }
+        ]
+      },
+      expire: {
+        title: "마일리지 소멸 내역",
+        summary: {
+          label: "소멸 마일리지",
+          amount: "-20,000원"
+        },
+        list: [
+          { date: "04.01", name: "월간 마일리지", note: "2026.03.31 23:59 까지", amount: "-20,000원" },
+          { date: "04.01", name: "가족의달 이벤트 마일리지", note: "2026.03.31 23:59 까지", amount: "-5,000원" }
+
+        ]
+      },
+      "earn-monthly": {
+        title: "월간 마일리지 적립",
+        subtitle: "월간 등급 혜택 마일리지",
+        summary: {
+          label: "마일리지",
+          amount: "+10,000원",
+          period: "~2024.04.30 23:59 까지"
+        },
+        list: [
+          { date: "04.01", name: "월간 마일리지", amount: "10,000원" }
+        ]
+      },
+      "earn-event": {
+        title: "이벤트 마일리지 적립",
+        subtitle: "이벤트명 : 리뉴얼 오픈 이벤트",
+        summary: {
+          label: "마일리지",
+          amount: "+500원",
+          period: "~2026.09.30 23:59까지"
+        },
+        list: [
+          { date: "09.01", name: "리뉴얼 오픈 이벤트", amount: "500원" }
+        ]
+      }
+    };
+
+    const mileagePopupOverlay = document.querySelector(".mileage-popup-overlay");
+    const mileagePopup = document.querySelector(".mileage-popup");
+    const mileagePopupTitle = document.querySelector("#mileage-popup-title");
+    const mileagePopupContent = document.querySelector(".mileage-popup-content");
+    const mileagePopupOk = document.querySelector(".mileage-popup-ok");
+    let mileagePopupCloseTimer;
+    let lastMileagePopupTrigger;
+
+    function renderMileagePopup(detail) {
+      if (!mileagePopupTitle || !mileagePopupContent) return;
+
+      const isListDetail = Boolean(detail.summary && detail.list);
+      mileagePopup?.classList.toggle("is-list-detail", isListDetail);
+      mileagePopup?.querySelector(".mileage-popup-subtitle")?.remove();
+
+      mileagePopupTitle.textContent = "";
+      const titleText = document.createElement("span");
+      titleText.className = "mileage-popup-title-text";
+      titleText.textContent = detail.title;
+      mileagePopupTitle.appendChild(titleText);
+
+      if (detail.badge) {
+        const badgeEl = document.createElement("span");
+        badgeEl.className = "mileage-popup-badge";
+        badgeEl.textContent = detail.badge;
+        mileagePopupTitle.appendChild(badgeEl);
+      }
+
+      mileagePopupContent.textContent = "";
+
+      if (isListDetail) {
+        if (detail.subtitle) {
+          const subtitleEl = document.createElement("p");
+          subtitleEl.className = "mileage-popup-subtitle";
+          subtitleEl.textContent = detail.subtitle;
+          mileagePopupTitle.insertAdjacentElement("afterend", subtitleEl);
+        }
+
+        const summaryEl = document.createElement("div");
+        summaryEl.className = "mileage-popup-summary";
+
+        const amountRowEl = document.createElement("div");
+        amountRowEl.className = "mileage-popup-summary-row";
+
+        const amountLabelEl = document.createElement("span");
+        amountLabelEl.className = "mileage-popup-summary-label";
+        amountLabelEl.textContent = detail.summary.label;
+
+        const amountEl = document.createElement("strong");
+        amountEl.className = "mileage-popup-summary-amount";
+
+        const coinEl = document.createElement("span");
+        coinEl.className = "mileage-popup-coin";
+        coinEl.setAttribute("aria-hidden", "true");
+        coinEl.textContent = "M";
+
+        const amountTextEl = document.createElement("span");
+        amountTextEl.textContent = detail.summary.amount;
+
+        amountEl.append(coinEl, amountTextEl);
+        amountRowEl.append(amountLabelEl, amountEl);
+
+        summaryEl.appendChild(amountRowEl);
+
+        if (detail.summary.period) {
+          const periodRowEl = document.createElement("div");
+          periodRowEl.className = "mileage-popup-summary-row";
+
+          const periodLabelEl = document.createElement("span");
+          periodLabelEl.className = "mileage-popup-summary-label";
+          periodLabelEl.textContent = detail.summary.periodLabel || "유효기간";
+
+          const periodValueEl = document.createElement("span");
+          periodValueEl.className = "mileage-popup-summary-value";
+          periodValueEl.textContent = detail.summary.period;
+
+          periodRowEl.append(periodLabelEl, periodValueEl);
+          summaryEl.appendChild(periodRowEl);
+        }
+        mileagePopupContent.appendChild(summaryEl);
+
+        const dividerEl = document.createElement("div");
+        dividerEl.className = "mileage-popup-divider";
+        mileagePopupContent.appendChild(dividerEl);
+
+        const listEl = document.createElement("div");
+        listEl.className = "mileage-popup-list";
+
+        detail.list.forEach((item) => {
+          const rowEl = document.createElement("div");
+          rowEl.className = "mileage-popup-list-row";
+
+          const dateEl = document.createElement("span");
+          dateEl.className = "mileage-popup-list-date";
+          dateEl.textContent = item.date;
+
+          const nameEl = document.createElement("span");
+          nameEl.className = "mileage-popup-list-name";
+          nameEl.textContent = item.name;
+          if (item.note) {
+            const noteEl = document.createElement("span");
+            noteEl.className = "mileage-popup-list-note";
+            noteEl.textContent = item.note;
+            nameEl.appendChild(noteEl);
+          }
+
+          const amountItemEl = document.createElement("strong");
+          amountItemEl.className = "mileage-popup-list-amount";
+          amountItemEl.textContent = item.amount;
+
+          rowEl.append(dateEl, nameEl, amountItemEl);
+          listEl.appendChild(rowEl);
+        });
+
+        mileagePopupContent.appendChild(listEl);
+        return;
+      }
+
+      detail.groups.forEach((group) => {
+        const groupEl = document.createElement("div");
+        groupEl.className = "mileage-popup-group";
+
+        group.forEach((item) => {
+          const lineEl = document.createElement("div");
+          lineEl.className = "mileage-popup-line";
+
+          if (item.text) {
+            lineEl.textContent = item.text;
+          } else {
+            const labelEl = document.createElement("span");
+            labelEl.className = "mileage-popup-label";
+            labelEl.textContent = `${item.label} :`;
+            lineEl.appendChild(labelEl);
+            lineEl.appendChild(document.createTextNode(` ${item.value}`));
+          }
+
+          groupEl.appendChild(lineEl);
+        });
+
+        mileagePopupContent.appendChild(groupEl);
+      });
+    }
+
+    function openMileagePopup(detailKey, trigger) {
+      const detail = mileagePopupData[detailKey];
+      if (!detail || !mileagePopupOverlay) return;
+
+      clearTimeout(mileagePopupCloseTimer);
+      lastMileagePopupTrigger = trigger;
+      renderMileagePopup(detail);
+      mileagePopupOverlay.hidden = false;
+      document.body.classList.add("mileage-popup-open");
+
+      requestAnimationFrame(() => {
+        mileagePopupOverlay.classList.add("is-open");
+        mileagePopupOk?.focus({ preventScroll: true });
+      });
+    }
+
+    function closeMileagePopup() {
+      if (!mileagePopupOverlay || mileagePopupOverlay.hidden) return;
+
+      mileagePopupOverlay.classList.remove("is-open");
+      document.body.classList.remove("mileage-popup-open");
+      mileagePopupCloseTimer = setTimeout(() => {
+        mileagePopupOverlay.hidden = true;
+        lastMileagePopupTrigger?.focus({ preventScroll: true });
+      }, 180);
+    }
+
+    historyRows.forEach((row) => {
+      row.addEventListener("click", () => {
+        openMileagePopup(row.dataset.detail, row);
+      });
+
+      row.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        openMileagePopup(row.dataset.detail, row);
+      });
+    });
+
+    /* ---- 쿠폰 내역 상세 팝업 ---- */
+    const slash = (iso) => (iso || "").replace(/-/g, "/");
+
+    document.querySelectorAll(".coupon-table .history-row").forEach((row) => {
+      const open = () => {
+        const name = row.querySelector(".history-kind")?.textContent.trim() || "-";
+        const scope = row.querySelector(".history-type")?.textContent.trim() || "-";
+        const amount = row.querySelector(".coupon-discount")?.textContent.trim() || "-";
+        const start = row.querySelector(".history-date")?.textContent.trim() || "";
+        const end = row.dataset.couponEnd || "";
+
+        mileagePopupData.__coupon = {
+          title: "쿠폰 상세",
+          groups: [[
+            { label: "쿠폰명", value: name },
+            { label: "사용범위", value: scope },
+            { label: "할인금액", value: amount },
+            { label: "유효기간", value: slash(start) + " ~ " + slash(end) }
+          ]]
+        };
+        openMileagePopup("__coupon", row);
+      };
+
+      row.addEventListener("click", open);
+      row.addEventListener("keydown", (e) => {
+        if (e.key !== "Enter" && e.key !== " ") return;
+        e.preventDefault();
+        open();
+      });
+    });
+
+    mileagePopupOk?.addEventListener("click", closeMileagePopup);
+
+    mileagePopupOverlay?.addEventListener("click", (event) => {
+      if (event.target === mileagePopupOverlay) {
+        closeMileagePopup();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && mileagePopupOverlay?.classList.contains("is-open")) {
+        closeMileagePopup();
+      }
+    });
+  </script>
+<script src="bb-common.js"></script>
+</body>
+</html>

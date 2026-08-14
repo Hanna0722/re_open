@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bidbuy 통합검색 결과</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --rose: #E8385A;
+      --rose-h: #C42F4C;
+      --brand-light: #fceaed;
+      --accent: #8c6b7a;
+      --ink: #000;
+      --text: #333;
+      --secondary: #707070;
+      --muted: #9ba0ae;
+      --line: #e6ddda;
+      --line-strong: #d7cbc7;
+      --divider: #eee5e2;
+      --warm: #fcf8f6;
+      --soft: #f4eeea;
+      --thumb-bg: #f4eeea;
+      --premium-bg: #fff0c9;
+      --premium-text: #f4a200;
+      --focus-ring: rgba(232, 56, 90, .36);
+      --radius-card: 12px;
+      --radius-button: 10px;
+      --radius-input: 10px;
+      --radius-pill: 999px;
+      --page-w: 1280px;
+      --header-w: 1280px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-width: 320px;
+      zoom: 1;
+      background: #fff;
+      color: var(--ink);
+      font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;
+      font-size:14px;
+      line-height:1.5;
+      letter-spacing: 0;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
+
+    .page-canvas {
+      background: #fff;
+    }
+
+    .top-notice-spacer {
+      height: 34px;
+    }
+
+    .site-header {
+      background: #fff;
+    }
+
+    .header-main {
+      width: min(calc(100vw - 32px), var(--header-w));
+      min-height: 78px;
+      padding: 10px 0 8px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 221px minmax(0, 1fr) 221px;
+      align-items: start;
+      gap: 16px;
+    }
+
+    .brand-area {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      min-width: 0;
+      padding-top: 9px;
+    }
+
+    .header-search-area {
+      min-width: 0;
+      display: grid;
+      gap: 6px;
+      align-content: start;
+    }
+
+    .menu-button {
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      display: grid;
+      place-items: center;
+    }
+
+    .menu-lines,
+    .menu-lines::before,
+    .menu-lines::after {
+      content: "";
+      display: block;
+      width: 23px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--ink);
+    }
+
+    .menu-lines {
+      position: relative;
+    }
+
+    .menu-lines::before,
+    .menu-lines::after {
+      position: absolute;
+      left: 0;
+    }
+
+    .menu-lines::before {
+      top: -8px;
+    }
+
+    .menu-lines::after {
+      top: 8px;
+    }
+
+    .logo-link {
+      width: 118px;
+      display: block;
+      line-height: 0;
+    }
+
+    .logo-link img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .global-search {
+      height: 43px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 112px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--soft);
+    }
+
+    .global-search input {
+      min-width: 0;
+      padding: 0 14px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .global-search input::placeholder {
+      color: var(--secondary);
+    }
+
+    .global-search button {
+      border: 0;
+      background: var(--rose);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-weight: 700;
+    }
+
+    .global-search i,
+    .icon-btn i {
+      font-size: 18px;
+    }
+
+    .user-tools {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-top: 10px;
+    }
+
+    .icon-btn {
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      color: var(--secondary);
+      display: grid;
+      place-items: center;
+    }
+
+    .user-name {
+      display: grid;
+      gap: 2px;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 900;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .premium-chip {
+      padding: 2px 9px;
+      border-radius: 999px;
+      background: var(--premium-bg);
+      color: var(--premium-text);
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .store-strip {
+      padding: 14px 0;
+      background: #fff;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+
+    .store-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .store-list {
+      width: min(calc(100vw - 60px), 900px);
+      max-width: none;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 16px;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .store-chip {
+      color: #666680;
+      text-align: center;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 500;
+      min-width: 80px;
+      padding: 4px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      transition: opacity .15s;
+    }
+
+    .store-chip:hover {
+      opacity: .8;
+    }
+
+    .store-chip.active {
+      color: #666680;
+    }
+
+    .store-badge {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1px;
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.1;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+      transition: box-shadow .15s;
+    }
+    .store-badge .flag { font-size: 16px; line-height: 1; }
+    .store-badge .brand { font-size: 8px; font-weight: 700; color: #1a1a2e; white-space: nowrap; }
+
+    .store-chip.active .store-badge {
+      border-color: var(--line);
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+
+    .store-chip:hover .store-badge {
+      box-shadow: 0 4px 14px rgba(0,0,0,.13);
+    }
+
+    .store-chip.active .store-badge::after {
+      display: none;
+    }
+
+    .store-yahoo {
+      color: #e43e2e;
+      transform: rotate(-42deg);
+      font-size: 11px;
+    }
+
+    .store-mercari {
+      background: var(--rose);
+      color: #fff;
+      font-size: 28px;
+      clip-path: polygon(50% 0, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+    }
+
+    .store-rakuten {
+      color: var(--rose-h);
+      font-size: 34px;
+    }
+
+    .store-cart {
+      color: #ff8a38;
+      font-size: 26px;
+    }
+
+    .flag-us,
+    .flag-uk {
+      color: #fff;
+      font-size: 12px;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    }
+
+    .flag-us {
+      background:
+        linear-gradient(90deg, #253d83 0 44%, transparent 44%),
+        repeating-linear-gradient(#c9263b 0 6px, #fff 6px 12px);
+      color: #fff;
+    }
+
+    .flag-us::before {
+      content: "● ● ●\A ● ● ●\A ● ● ●";
+      position: absolute;
+      left: 6px;
+      top: 7px;
+      color: #fff;
+      font-size: 5px;
+      line-height: 1.6;
+      white-space: pre;
+    }
+
+    .flag-uk {
+      background:
+        linear-gradient(0deg, transparent 42%, #fff 42% 47%, #d51f35 47% 53%, #fff 53% 58%, transparent 58%),
+        linear-gradient(90deg, transparent 40%, #fff 40% 46%, #d51f35 46% 54%, #fff 54% 60%, transparent 60%),
+        linear-gradient(34deg, transparent 43%, #fff 43% 47%, #d51f35 47% 53%, #fff 53% 57%, transparent 57%),
+        linear-gradient(-34deg, #153f8f 0 43%, #fff 43% 47%, #d51f35 47% 53%, #fff 53% 57%, #153f8f 57%);
+    }
+
+    .search-page {
+      width: min(calc(100vw - 40px), var(--page-w));
+      margin: 0 auto;
+    }
+
+    .search-layout {
+      display: grid;
+      grid-template-columns: 290px minmax(0, 1fr);
+      align-items: start;
+      gap: 28px;
+      margin-top: 28px;
+    }
+
+    .chip-list {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .header-keyword-list {
+      min-height: 24px;
+      padding-left: 14px;
+    }
+
+    .search-chip {
+      height: 24px;
+      padding: 0 10px;
+      border: 0;
+      border-radius: 3px;
+      background: #f2f0ec;
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .search-chip button {
+      width: 14px;
+      height: 14px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      font-size: 13px;
+      line-height: 13px;
+    }
+
+    .result-copy-row {
+      width: min(calc(100vw - 40px), var(--page-w));
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .result-copy {
+      margin: 0;
+      color: var(--ink);
+      font-size: 20px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .result-copy .red {
+      color: var(--rose);
+      font-weight: 800;
+    }
+
+    .favorite-keyword-btn {
+      height: 32px;
+      padding: 0 12px;
+      border: 1px solid var(--rose);
+      border-radius: 5px;
+      background: #fff;
+      color: var(--rose);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background .16s, color .16s, border-color .16s;
+    }
+
+    .favorite-keyword-btn.is-active {
+      background: var(--rose);
+      color: #fff;
+    }
+
+    .favorite-keyword-btn:disabled {
+      border-color: var(--line);
+      color: var(--muted);
+      background: #f6f6f6;
+      cursor: default;
+    }
+
+    .category-grid {
+      padding: 24px;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 32px;
+    }
+
+    .category-group {
+      display: grid;
+      gap: 11px;
+      align-content: start;
+    }
+
+    .category-group a {
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .filter-panel {
+      padding: 20px;
+      border: 1px solid #e2e2e2;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .filter-title {
+      margin: 0 0 18px;
+      color: var(--ink);
+      font-size: 19px;
+      font-weight: 800;
+    }
+
+    .filter-block {
+      margin-bottom: 22px;
+    }
+
+    .filter-block:last-of-type {
+      margin-bottom: 18px;
+    }
+
+    .filter-block-title {
+      margin-bottom: 10px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .site-check-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .site-check {
+      position: relative;
+      height: 42px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      transition: border-color .15s, background-color .15s;
+    }
+
+    .site-check.active {
+      border-color: var(--rose);
+      background: #fdf1f3;
+    }
+
+    .site-check input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .site-check-label {
+      flex: 1;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .site-check-mark {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      border: 1.5px solid #d8d8d8;
+      border-radius: 4px;
+      display: grid;
+      place-items: center;
+      color: transparent;
+      font-size: 11px;
+    }
+
+    .site-check.active .site-check-mark {
+      border-color: var(--rose);
+      background: var(--rose);
+      color: #fff;
+    }
+
+    .site-dot {
+      width: 8px;
+      height: 8px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--rose);
+    }
+
+    .site-flag {
+      width: 20px;
+      height: 14px;
+      flex-shrink: 0;
+      position: relative;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .price-range-fields {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .range-sep {
+      color: var(--secondary);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .filter-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .filter-two-col + .filter-two-col {
+      margin-top: 8px;
+    }
+
+    .filter-text-input,
+    .filter-select {
+      width: 100%;
+      height: 38px;
+      padding: 0 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #fff;
+      color: var(--text);
+      font-size: 13px;
+      outline: 0;
+    }
+
+    .filter-text-input:focus,
+    .filter-select:focus {
+      border-color: var(--rose);
+    }
+
+    .filter-checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .filter-checkbox-row input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--rose);
+    }
+
+    .filter-submit {
+      width: 100%;
+      height: 46px;
+      margin-top: 4px;
+      border: 0;
+      border-radius: 5px;
+      background: var(--rose);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .global-search button:active {
+      background: var(--rose-h);
+    }
+
+    .sort-select {
+      width: 110px;
+      height: 30px;
+      padding: 0 28px 0 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-button);
+      background: #fff;
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .result-section {
+      padding-bottom: 72px;
+    }
+
+    .result-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 24px 0 16px;
+    }
+
+    .result-title {
+      margin: 0;
+      color: var(--ink);
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .result-title .red {
+      color: var(--rose);
+    }
+
+    .product-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px 16px;
+    }
+    .reveal-grid-wrap { position: relative; overflow: hidden; transition: max-height .28s ease; }
+    .reveal-grid-wrap.is-collapsed::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 150px; pointer-events: none; background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 76%); }
+
+    .product-card {
+      position: relative;
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .product-card:hover .product-name { text-decoration: underline; text-underline-offset: 2px; }
+
+    .product-thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #e8e8e8;
+      overflow: hidden;
+    }
+
+    .product-thumb::after {
+      content: "\f03e";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #969baa;
+      font-family: "Font Awesome 6 Free";
+      font-size: 34px;
+      font-weight: 400;
+    }
+
+    .product-thumb.has-photo::after {
+      display: none;
+    }
+
+    .product-thumb img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .thumb-actions { position: absolute; left: 12px; right: 12px; bottom: 10px; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .thumb-action,
+    .heart { width: 34px; height: 34px; padding: 0; border: 1px solid #e0e3e8; border-radius: 50%; background: rgba(255,255,255,.96); color: #9aa1ad; font-size: 15px; line-height: 1; display: flex; align-items: center; justify-content: center; box-shadow: none; transition: border-color .16s, background .16s, color .16s, transform .16s; }
+    .thumb-action:hover,
+    .heart:hover { border-color: #c9ced7; background: #fff; color: var(--rose); }
+    .heart.active { background: var(--rose); color: #fff; transform: scale(1.04); }
+
+    .site-badge {
+      width: calc(100% - 24px);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 12px 0;
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      color: #333;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .site-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rose); flex: 0 0 auto; }
+
+    .site-flag-us {
+      width: 16px; height: 12px; border-radius: 2px; flex: 0 0 auto;
+      background: linear-gradient(#c9263b 0 12%, #fff 12% 24%, #c9263b 24% 36%, #fff 36% 48%, #c9263b 48% 60%, #fff 60% 72%, #c9263b 72% 84%, #fff 84%);
+    }
+
+    .site-flag-uk {
+      width: 16px; height: 12px; border-radius: 2px; flex: 0 0 auto;
+      background: linear-gradient(45deg, #153f8f 0 38%, #fff 38% 44%, #d6223b 44% 56%, #fff 56% 62%, #153f8f 62%);
+    }
+
+    .product-name {
+      margin: 10px 14px 0;
+      color: #1a1a1a;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 41px;
+    }
+
+    .price-row {
+      display: block;
+      margin: 12px 14px 16px;
+    }
+
+    .price-line { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; min-width: 0; }
+
+    .price {
+      color: #111;
+      font-size: 17px;
+      font-weight: 800;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .buy-now-price { flex: 0 0 auto; margin: 0 0 2px; color: #111; font-size: 12px; font-weight: 600; white-space: nowrap; }
+    .buy-now-price strong { font-family: 'Roboto', sans-serif; font-weight: 600; }
+    .auction-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 14px; color: #7c8490; font-size: 12px; font-weight: 600; }
+    .auction-meta > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bids { color: var(--muted); font-size: 12px; font-weight: 600; white-space: nowrap; }
+
+    .more-footer {
+      position: relative;
+      z-index: 2;
+      margin-top: -18px;
+      padding: 0 0 32px;
+      background: #fff;
+    }
+
+    .more-row {
+      max-width: var(--page-w);
+      margin: 0 auto;
+      width: 100%;
+      height: 36px;
+      padding: 0;
+      border: 1px dashed var(--line);
+      border-radius: 5px;
+      background: rgba(255,255,255,.94);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .search-layout .result-section {
+      padding-bottom: 72px;
+    }
+
+    .search-layout .result-header {
+      margin: 0 0 14px;
+    }
+
+    .search-layout .result-title {
+      font-size: 16px;
+    }
+
+    .search-layout .product-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px 16px;
+    }
+
+    .search-layout .product-card {
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .search-layout .product-thumb {
+      height: auto;
+      border-radius: 0;
+      background: #d7e3ee;
+    }
+
+    @media (max-width: 1024px) {
+      .search-page {
+        width: 100%;
+      }
+
+      .search-layout {
+        display: block;
+        margin-top: 0;
+      }
+
+      .search-layout .filter-panel {
+        display: none;
+      }
+
+      .search-layout .result-section {
+        padding-bottom: 40px;
+      }
+
+      .search-layout .result-header {
+        padding: 14px 16px 6px;
+      }
+
+      .search-layout .product-grid,
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        padding: 12px 16px 8px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .search-page {
+        width: 100%;
+      }
+
+      .search-layout {
+        display: block;
+        margin-top: 0;
+      }
+
+      .search-layout .filter-panel {
+        display: none;
+      }
+
+      .search-layout .result-section {
+        padding-bottom: 40px;
+      }
+
+      .search-layout .result-header {
+        padding: 14px 16px 6px;
+      }
+
+      .search-layout .product-grid,
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        padding: 12px 16px 8px;
+      }
+
+      .product-card,
+      .search-layout .product-card {
+        border-radius: 8px;
+      }
+
+      .product-thumb::after {
+        font-size: 26px;
+      }
+
+      .heart {
+        right: 8px;
+        bottom: 8px;
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+      }
+
+      .product-name {
+        margin: 8px 11px 0;
+        font-size: 12px;
+        line-height: 1.45;
+        min-height: 34px;
+      }
+
+      .price-row {
+        margin: 8px 11px 12px;
+      }
+
+      .price {
+        font-size: 14px;
+      }
+    }
+
+    .more-row::before {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 10px solid var(--muted);
+    }
+
+    
+
+    
+  </style>
+</head>
+<body>
+  <div class="page-canvas">
+    <div class="top-notice-spacer" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="header-main">
+        <div class="brand-area">
+          <button class="menu-button" type="button" aria-label="메뉴 열기"><span class="menu-lines"></span></button>
+          <a class="logo-link" href="web_main.html" aria-label="Bidbuy 홈">
+            <img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency">
+          </a>
+        </div>
+
+        <div class="header-search-area">
+          <form class="global-search" data-global-search>
+            <input type="search" placeholder="키워드 또는 URL을 입력하세요.">
+            <button type="submit">
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+              검색
+            </button>
+          </form>
+          <div class="chip-list header-keyword-list" data-keyword-list>
+            <span class="search-chip">나이키 <button type="button" aria-label="나이키 삭제" data-keyword-index="0"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></span>
+            <span class="search-chip">박스 <button type="button" aria-label="박스 삭제" data-keyword-index="1"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></span>
+          </div>
+        </div>
+
+        <div class="user-tools" aria-label="회원 메뉴">
+          <button class="icon-btn" type="button" aria-label="알림">
+            <i class="fa-regular fa-bell" aria-hidden="true"></i>
+          </button>
+          <button class="icon-btn" type="button" aria-label="장바구니">
+            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+          </button>
+          <div class="user-name">홍길동님<span class="premium-chip">PREMIUM</span></div>
+        </div>
+      </div>
+    </header>
+    <div class="store-strip">
+      <nav class="store-list" aria-label="스토어 바로가기">
+        <a class="store-chip active" href="#" data-store-name="야후 옥션" data-best-title="야후옥션 베스트" aria-current="page">
+          <div class="store-badge"><span class="flag">JP</span><span class="brand" style="color:#E60026;font-size:9px;font-weight:900">YAHOO!</span></div><strong>야후 옥션</strong>
+        </a>
+        <a class="store-chip" href="#" data-store-name="메루카리" data-best-title="메루카리 베스트">
+          <div class="store-badge"><span class="flag" style="font-size:18px;color:#19ce60;font-weight:900">M</span></div><strong>메루카리</strong>
+        </a>
+        <a class="store-chip" href="#" data-store-name="라쿠텐" data-best-title="라쿠텐 베스트">
+          <div class="store-badge"><span class="flag" style="font-size:14px;color:#BF0000;font-weight:900">楽天</span></div><strong>라쿠텐</strong>
+        </a>
+        <a class="store-chip" href="#" data-store-name="라쿠마" data-best-title="라쿠마 베스트">
+          <div class="store-badge"><span class="flag" style="font-size:12px;color:#BF0000;font-weight:700">Rakuten</span></div><strong>라쿠마</strong>
+        </a>
+        <a class="store-chip" href="#" data-store-name="야후 쇼핑" data-best-title="야후 쇼핑 베스트">
+          <div class="store-badge"><span class="flag" style="font-size:12px;color:#FF9900;font-weight:900">amazon</span></div><strong>야후 쇼핑</strong>
+        </a>
+        <a class="store-chip" href="#" data-store-name="일본 아마존" data-best-title="일본 아마존 베스트">
+          <div class="store-badge"><span class="flag" style="font-size:12px;color:#FF9900;font-weight:900">amazon</span></div><strong>일본 아마존</strong>
+        </a>
+        <a class="store-chip" href="#" data-store-name="미국 이베이" data-best-title="미국 이베이 베스트">
+          <div class="store-badge"><span class="flag">US</span><span class="brand" style="font-size:9px;font-weight:700;color:#E53238">eBay</span></div><strong>미국 이베이</strong>
+        </a>
+        <a class="store-chip" href="#" data-store-name="영국 이베이" data-best-title="영국 이베이 베스트">
+          <div class="store-badge"><span class="flag">UK</span><span class="brand" style="font-size:9px;font-weight:700;color:#E53238">eBay</span></div><strong>영국 이베이</strong>
+        </a>
+      </nav>
+    </div>
+<div class="result-copy-row">
+  <p class="result-copy" data-result-copy><span class="red">'나이키 박스'</span>에 대한 검색결과 입니다.</p>
+  <button class="favorite-keyword-btn" type="button" data-favorite-keyword aria-pressed="false">
+    <i class="fa-regular fa-star" aria-hidden="true"></i>
+    <span>관심키워드 등록</span>
+  </button>
+</div>
+
+    <main class="search-page">
+      <div class="search-layout">
+      <section class="filter-panel" aria-label="검색 필터">
+        <h2 class="filter-title">검색 필터</h2>
+
+        <div class="filter-block">
+          <div class="filter-block-title">키워드</div>
+          <input type="text" class="filter-text-input" placeholder="검색어를 입력하세요" aria-label="키워드 검색">
+        </div>
+
+        <div class="filter-block">
+          <div class="filter-block-title">사이트</div>
+          <div class="site-check-list" data-site-list>
+            <label class="site-check active" data-site-all>
+              <input type="checkbox" checked>
+              <span class="site-check-label">전체</span>
+              <span class="site-check-mark"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+            </label>
+            <label class="site-check active" data-site="야후옥션">
+              <input type="checkbox" checked>
+              <span class="site-dot" aria-hidden="true"></span>
+              <span class="site-check-label">야후옥션</span>
+              <span class="site-check-mark"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+            </label>
+            <label class="site-check active" data-site="메루카리">
+              <input type="checkbox" checked>
+              <span class="site-dot" aria-hidden="true"></span>
+              <span class="site-check-label">메루카리</span>
+              <span class="site-check-mark"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+            </label>
+            <label class="site-check active" data-site="라쿠텐">
+              <input type="checkbox" checked>
+              <span class="site-dot" aria-hidden="true"></span>
+              <span class="site-check-label">라쿠텐</span>
+              <span class="site-check-mark"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+            </label>
+            <label class="site-check active" data-site="야후쇼핑">
+              <input type="checkbox" checked>
+              <span class="site-dot" aria-hidden="true"></span>
+              <span class="site-check-label">야후쇼핑</span>
+              <span class="site-check-mark"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+            </label>
+            <label class="site-check active" data-site="라쿠마">
+              <input type="checkbox" checked>
+              <span class="site-dot" aria-hidden="true"></span>
+              <span class="site-check-label">라쿠마</span>
+              <span class="site-check-mark"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+            </label>
+            <label class="site-check active" data-site="이베이 USA">
+              <input type="checkbox" checked>
+              <span class="site-flag flag-us" aria-hidden="true"></span>
+              <span class="site-check-label">이베이 USA</span>
+              <span class="site-check-mark"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+            </label>
+            <label class="site-check active" data-site="이베이 UK">
+              <input type="checkbox" checked>
+              <span class="site-flag flag-uk" aria-hidden="true"></span>
+              <span class="site-check-label">이베이 UK</span>
+              <span class="site-check-mark"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="filter-block">
+          <div class="filter-block-title">가격</div>
+          <div class="price-range-fields">
+            <input type="text" class="filter-text-input" placeholder="최소" aria-label="최소 가격">
+            <span class="range-sep" aria-hidden="true">~</span>
+            <input type="text" class="filter-text-input" placeholder="최대" aria-label="최대 가격">
+          </div>
+        </div>
+
+        <div class="filter-block">
+          <div class="filter-block-title">상품상태</div>
+          <select class="filter-select" aria-label="상품상태">
+            <option>전체</option>
+            <option>신품</option>
+            <option>중고</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <div class="filter-block-title">배송/판매</div>
+          <label class="filter-checkbox-row"><input type="checkbox"><span>무료배송</span></label>
+          <select class="filter-select" aria-label="거래방식">
+            <option>거래방식 전체</option>
+            <option>경매</option>
+            <option>즉시구매</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <div class="filter-block-title">판매자/브랜드</div>
+          <div class="filter-two-col">
+            <input type="text" class="filter-text-input" placeholder="판매자" aria-label="판매자">
+            <input type="text" class="filter-text-input" placeholder="브랜드" aria-label="브랜드">
+          </div>
+        </div>
+
+        <div class="filter-block">
+          <div class="filter-block-title">기타</div>
+          <div class="filter-two-col">
+            <input type="text" class="filter-text-input" placeholder="지역/국가" aria-label="지역/국가">
+            <input type="text" class="filter-text-input" placeholder="색상" aria-label="색상">
+          </div>
+          <div class="filter-two-col">
+            <input type="text" class="filter-text-input" placeholder="사이즈" aria-label="사이즈">
+            <select class="filter-select" aria-label="세일여부">
+              <option>세일여부 전체</option>
+              <option>세일상품만</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="filter-submit" type="button">적용</button>
+      </section>
+
+      <section class="result-section" aria-label="검색 결과">
+        <div class="result-header">
+          <h1 class="result-title">전체 <span class="red">2,859</span>건</h1>
+          <select class="sort-select" aria-label="정렬">
+            <option>인기상품순</option>
+            <option>마감임박순</option>
+            <option>낮은가격순</option>
+            <option>높은가격순</option>
+            <option>입찰수높은순</option>
+            <option>입찰수낮은순</option>
+            <option>신상품순</option>
+          </select>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+      </section>
+      </div>
+    </main>
+  </div>
+
+  <footer class="more-footer" id="moreFooter">
+    <button class="more-row" type="button" id="moreBtn">펼쳐보기</button>
+  </footer>
+
+  <script>
+    const storeChips = document.querySelectorAll(".store-chip");
+    const globalSearch = document.querySelector("[data-global-search]");
+    const keywordList = document.querySelector("[data-keyword-list]");
+    const resultCopy = document.querySelector("[data-result-copy]");
+    const favoriteKeywordBtn = document.querySelector("[data-favorite-keyword]");
+    const searchParams = new URLSearchParams(window.location.search);
+    const initialQuery = searchParams.get("q") || "";
+    let keywords = initialQuery.trim()
+      ? initialQuery.trim().split(/\s+/).filter(Boolean)
+      : ["나이키", "박스"];
+    const FAVORITE_KEYWORDS_KEY = "bidbuy.favoriteKeywords";
+
+    function getCurrentKeywordText() {
+      return keywords.join(" ").trim().replace(/\s+/g, " ");
+    }
+
+    function readFavoriteKeywords() {
+      try {
+        return JSON.parse(localStorage.getItem(FAVORITE_KEYWORDS_KEY) || "[]");
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function writeFavoriteKeywords(items) {
+      localStorage.setItem(FAVORITE_KEYWORDS_KEY, JSON.stringify(items));
+    }
+
+    function updateFavoriteKeywordButton() {
+      if (!favoriteKeywordBtn) return;
+      const currentKeyword = getCurrentKeywordText();
+      const favorites = readFavoriteKeywords();
+      const isActive = currentKeyword && favorites.includes(currentKeyword);
+      favoriteKeywordBtn.disabled = !currentKeyword;
+      favoriteKeywordBtn.classList.toggle("is-active", Boolean(isActive));
+      favoriteKeywordBtn.setAttribute("aria-pressed", String(Boolean(isActive)));
+      favoriteKeywordBtn.querySelector("i").className = isActive ? "fa-solid fa-star" : "fa-regular fa-star";
+      favoriteKeywordBtn.querySelector("span").textContent = isActive ? "관심키워드 등록됨" : "관심키워드 등록";
+    }
+
+    const productPhotoUrls = [
+      "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=520&q=80",
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=520&q=80",
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=520&q=80",
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=520&q=80",
+      "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=520&q=80",
+      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=520&q=80",
+      "https://images.unsplash.com/photo-1514228742587-6b1558fcf93a?auto=format&fit=crop&w=520&q=80",
+      "https://images.unsplash.com/photo-1461360228754-6e81c478b882?auto=format&fit=crop&w=520&q=80",
+      "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=520&q=80",
+      "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?auto=format&fit=crop&w=520&q=80"
+    ];
+    const shuffledProductPhotos = [...productPhotoUrls].sort(() => Math.random() - 0.5);
+
+    // 상품 카드 렌더링: 4열 x 3줄(12개) 기본 노출, "펼쳐보기" 클릭 후 무한스크롤로 최대 36개까지 로드
+    const PAGE_SIZE = 12;
+    const MAX_ITEMS = 36;
+    const productGrid = document.getElementById("productGrid");
+    const moreFooter = document.getElementById("moreFooter");
+    const moreBtn = document.getElementById("moreBtn");
+    let renderedCount = 0;
+    let infiniteScrollActive = false;
+
+    const SITE_ROTATION = [
+      { name: "라쿠마", flag: "jp" },
+      { name: "야후 프리마", flag: "jp" },
+      { name: "야후 프리마", flag: "jp" },
+      { name: "이베이", flag: "us" }
+    ];
+
+    const PRODUCT_CARD_STORES = [
+      { name: "야후경매", flag: "jp", price: "2,500엔", auction: true },
+      { name: "라쿠마", flag: "jp", price: "1,800엔", auction: false },
+      { name: "야후 쇼핑", flag: "jp", price: "2,499엔", auction: false },
+      { name: "이베이", flag: "us", price: "$ 21.79", auction: true }
+    ];
+    const AUCTION_TIME_OFFSETS = [30, 120, 480, 780, 1440, 2880];
+
+    function formatYenText(value) {
+      const numeric = String(value).replace(/[^\d]/g, "");
+      return (Number(numeric) || 0).toLocaleString("ko-KR") + "엔";
+    }
+
+    function formatRemainingTime(offsetMinutes) {
+      if (offsetMinutes >= 1440) return Math.floor(offsetMinutes / 1440) + "일";
+      if (offsetMinutes >= 60) return Math.floor(offsetMinutes / 60) + "시간";
+      return Math.max(1, Math.round(offsetMinutes)) + "분";
+    }
+
+    function formatAuctionCloseTime(offsetMinutes) {
+      const d = new Date(Date.now() + offsetMinutes * 60000);
+      const pad = n => String(n).padStart(2, "0");
+      const dateStr = d.getFullYear() + "." + pad(d.getMonth() + 1) + "." + pad(d.getDate());
+      const timeStr = pad(d.getHours()) + ":" + pad(d.getMinutes());
+      return dateStr + " " + timeStr + " (" + formatRemainingTime(offsetMinutes) + ")";
+    }
+
+    function createProductCard(index) {
+      const article = document.createElement("article");
+      article.className = "product-card";
+
+      const thumb = document.createElement("div");
+      thumb.className = "product-thumb";
+
+      const img = document.createElement("img");
+      img.src = shuffledProductPhotos[index % shuffledProductPhotos.length];
+      img.alt = "Product image";
+      img.loading = "lazy";
+      thumb.append(img);
+      thumb.classList.add("has-photo");
+
+      const heart = document.createElement("button");
+      heart.className = "heart";
+      heart.type = "button";
+      heart.setAttribute("aria-label", "관심상품");
+      heart.setAttribute("aria-pressed", "false");
+      heart.innerHTML = '<i class="fa-regular fa-heart" aria-hidden="true"></i>';
+      heart.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const active = heart.classList.toggle("active");
+        heart.setAttribute("aria-pressed", String(active));
+        heart.innerHTML = '<i class="' + (active ? "fa-solid" : "fa-regular") + ' fa-heart" aria-hidden="true"></i>';
+      });
+      const actions = document.createElement("div");
+      actions.className = "thumb-actions";
+      const quickView = document.createElement("button");
+      quickView.className = "thumb-action";
+      quickView.type = "button";
+      quickView.setAttribute("aria-label", "상품 간편 보기");
+      quickView.title = "상품 간편 보기";
+      quickView.innerHTML = '<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>';
+      const newWindow = document.createElement("button");
+      newWindow.className = "thumb-action";
+      newWindow.type = "button";
+      newWindow.setAttribute("aria-label", "새창으로 보기");
+      newWindow.title = "새창으로 보기";
+      newWindow.innerHTML = '<i class="fa-regular fa-window-restore" aria-hidden="true"></i>';
+      const originalPage = document.createElement("button");
+      originalPage.className = "thumb-action";
+      originalPage.type = "button";
+      originalPage.setAttribute("aria-label", "원문페이지보기");
+      originalPage.title = "원문페이지보기";
+      originalPage.innerHTML = '<i class="fa-solid fa-globe" aria-hidden="true"></i>';
+      quickView.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        window.openQuickView(window.collectQuickViewDataFromCard(article));
+      });
+      newWindow.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        window.open("web_auction.html", "_blank");
+      });
+      originalPage.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        window.open("https://auctions.yahoo.co.jp/", "_blank");
+      });
+      actions.append(quickView, newWindow, originalPage, heart);
+      thumb.append(actions);
+
+      const site = PRODUCT_CARD_STORES[index % PRODUCT_CARD_STORES.length];
+      const badge = document.createElement("div");
+      badge.className = "site-badge";
+      const flagEl = document.createElement("span");
+      flagEl.className = site.flag === "us" ? "site-flag-us" : "site-dot";
+      flagEl.setAttribute("aria-hidden", "true");
+      badge.append(flagEl, document.createTextNode(site.name));
+
+      const name = document.createElement("p");
+      name.className = "product-name";
+      name.textContent = "니콘 수동 필름 카메라 바디";
+
+      const priceRow = document.createElement("div");
+      priceRow.className = "price-row";
+      const priceLine = document.createElement("div");
+      priceLine.className = "price-line";
+      const price = document.createElement("strong");
+      price.className = "price";
+      price.textContent = site.price;
+      priceLine.append(price);
+      if (site.flag !== "us" && Math.random() < 0.45) {
+        const buyNow = document.createElement("div");
+        buyNow.className = "buy-now-price";
+        const basePrice = Number(site.price.replace(/[^\d]/g, "")) || 1650;
+        const buyNowPrice = basePrice + 500 + ((index * 370) % 4200);
+        buyNow.innerHTML = '(즉시낙찰 <strong>' + formatYenText(buyNowPrice) + '</strong>)';
+        priceLine.append(buyNow);
+      }
+      priceRow.append(priceLine);
+      const meta = document.createElement("div");
+      meta.className = "auction-meta";
+      if (site.auction) {
+        const time = document.createElement("span");
+        time.textContent = formatAuctionCloseTime(AUCTION_TIME_OFFSETS[index % AUCTION_TIME_OFFSETS.length]);
+        const bids = document.createElement("span");
+        bids.className = "bids";
+        bids.textContent = "(" + (((index * 13) % 99) + 1) + "bids)";
+        meta.append(time, bids);
+      } else {
+        meta.append(document.createElement("span"), document.createElement("span"));
+      }
+      priceRow.append(meta);
+
+      article.append(thumb, badge, name, priceRow);
+
+      article.addEventListener("click", (event) => {
+        if (event.target.closest("button, a")) return;
+        window.location.href = "web_bill_1st.html";
+      });
+
+      return article;
+    }
+
+    function appendCards(count) {
+      const toAdd = Math.min(count, MAX_ITEMS - renderedCount);
+      for (let i = 0; i < toAdd; i++) {
+        productGrid.append(createProductCard(renderedCount));
+        renderedCount++;
+      }
+
+      if (renderedCount >= MAX_ITEMS) {
+        stopInfiniteScroll();
+      }
+    }
+
+    function setupRevealGrid(grid, trigger, footer, options = {}) {
+      if (!grid || !trigger || grid.dataset.revealReady) return;
+      grid.dataset.revealReady = "true";
+
+      const wrap = document.createElement("div");
+      wrap.className = "reveal-grid-wrap";
+      grid.parentNode.insertBefore(wrap, grid);
+      wrap.append(grid);
+
+      const rowsPerStep = options.rowsPerStep || 2;
+      let visibleRows = options.initialRows || 2;
+
+      function getColumnCount() {
+        const columns = getComputedStyle(grid).gridTemplateColumns.split(" ").filter(Boolean);
+        return Math.max(1, columns.length);
+      }
+
+      function applyHeight() {
+        const cards = Array.from(grid.querySelectorAll(".product-card"));
+        const columns = getColumnCount();
+        const totalRows = Math.ceil(cards.length / columns);
+        const first = cards[0];
+        if (!first) return;
+        const rowGap = parseFloat(getComputedStyle(grid).rowGap) || 0;
+        const rowHeight = first.getBoundingClientRect().height;
+        const fullHeight = (rowHeight * visibleRows) + (rowGap * Math.max(0, visibleRows - 1));
+        const hasMore = visibleRows < totalRows;
+        wrap.style.maxHeight = hasMore ? (fullHeight + Math.min(92, rowHeight * .45)) + "px" : "none";
+        wrap.classList.toggle("is-collapsed", hasMore);
+        if (footer) footer.hidden = !hasMore;
+      }
+
+      trigger.addEventListener("click", () => {
+        visibleRows += rowsPerStep;
+        applyHeight();
+      });
+
+      window.addEventListener("resize", applyHeight);
+      requestAnimationFrame(applyHeight);
+    }
+
+    function checkInfiniteScroll() {
+      if (!infiniteScrollActive) return;
+      const rect = moreFooter.getBoundingClientRect();
+      if (rect.top <= window.innerHeight + 200) appendCards(PAGE_SIZE);
+    }
+
+    function startInfiniteScroll() {
+      if (infiniteScrollActive) return;
+      infiniteScrollActive = true;
+      window.addEventListener("scroll", checkInfiniteScroll, { passive: true });
+      window.addEventListener("resize", checkInfiniteScroll);
+      checkInfiniteScroll();
+    }
+
+    function stopInfiniteScroll() {
+      infiniteScrollActive = false;
+      window.removeEventListener("scroll", checkInfiniteScroll);
+      window.removeEventListener("resize", checkInfiniteScroll);
+    }
+
+    appendCards(MAX_ITEMS);
+    setupRevealGrid(productGrid, moreBtn, moreFooter);
+
+    // 스토어 바로가기 클릭 이벤트 (멀티 선택 토글)
+    storeChips.forEach(chip => {
+      chip.addEventListener("click", (e) => {
+        e.preventDefault();
+        chip.classList.toggle("active");
+      });
+    });
+
+    // 사이트 필터 체크박스 (전체 선택 + 개별 토글 동기화)
+    const siteList = document.querySelector("[data-site-list]");
+    if (siteList) {
+      const siteChecks = Array.from(siteList.querySelectorAll(".site-check"));
+      const siteAll = siteList.querySelector("[data-site-all]");
+      const siteItems = siteChecks.filter(item => item !== siteAll);
+
+      function setSiteCheck(item, checked) {
+        item.classList.toggle("active", checked);
+        item.querySelector("input").checked = checked;
+      }
+
+      function syncSiteAll() {
+        setSiteCheck(siteAll, siteItems.every(item => item.classList.contains("active")));
+      }
+
+      siteAll.addEventListener("click", (e) => {
+        e.preventDefault();
+        const checked = !siteAll.classList.contains("active");
+        setSiteCheck(siteAll, checked);
+        siteItems.forEach(item => setSiteCheck(item, checked));
+      });
+
+      siteItems.forEach(item => {
+        item.addEventListener("click", (e) => {
+          e.preventDefault();
+          setSiteCheck(item, !item.classList.contains("active"));
+          syncSiteAll();
+        });
+      });
+    }
+
+    function updateResultCopy() {
+      resultCopy.replaceChildren();
+
+      if (!keywords.length) {
+        resultCopy.textContent = "검색어를 입력해 주세요.";
+        return;
+      }
+
+      const highlighted = document.createElement("span");
+      highlighted.className = "red";
+      highlighted.textContent = `'${keywords.join(" ")}'`;
+      resultCopy.append(highlighted, "에 대한 검색결과 입니다.");
+    }
+
+    function renderKeywords() {
+      keywordList.replaceChildren();
+
+      keywords.forEach((keyword, index) => {
+        const chip = document.createElement("span");
+        chip.className = "search-chip";
+        chip.append(document.createTextNode(`${keyword} `));
+
+        const removeButton = document.createElement("button");
+        removeButton.type = "button";
+        removeButton.setAttribute("aria-label", `${keyword} 삭제`);
+        removeButton.dataset.keywordIndex = String(index);
+        removeButton.innerHTML = '<i class="fa-solid fa-xmark" aria-hidden="true"></i>';
+        chip.append(removeButton);
+        keywordList.append(chip);
+      });
+
+      updateResultCopy();
+      updateFavoriteKeywordButton();
+    }
+
+    keywordList.addEventListener("click", (event) => {
+      const removeButton = event.target.closest("[data-keyword-index]");
+      if (!removeButton) return;
+
+      keywords.splice(Number(removeButton.dataset.keywordIndex), 1);
+      const nextQuery = keywords.join(" ");
+      const nextUrl = nextQuery
+        ? `${window.location.pathname}?q=${encodeURIComponent(nextQuery)}`
+        : window.location.pathname;
+      window.history.replaceState(null, "", nextUrl);
+      renderKeywords();
+    });
+
+    globalSearch.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const input = globalSearch.querySelector("input");
+      const nextKeywords = input.value.trim().split(/\s+/).filter(Boolean);
+      if (!nextKeywords.length) return;
+
+      keywords = [...keywords, ...nextKeywords];
+      const nextQuery = keywords.join(" ");
+      const nextUrl = `${window.location.pathname}?q=${encodeURIComponent(nextQuery)}`;
+      window.history.replaceState(null, "", nextUrl);
+      renderKeywords();
+      input.value = "";
+    });
+
+    favoriteKeywordBtn?.addEventListener("click", () => {
+      const currentKeyword = getCurrentKeywordText();
+      if (!currentKeyword) return;
+
+      const favorites = readFavoriteKeywords();
+      const nextFavorites = favorites.includes(currentKeyword)
+        ? favorites.filter(item => item !== currentKeyword)
+        : [...favorites, currentKeyword];
+
+      writeFavoriteKeywords(nextFavorites);
+      updateFavoriteKeywordButton();
+    });
+
+    renderKeywords();
+  </script>
+<script src="bb-common.js"></script>
+<script src="bb-quickview.js"></script>
+<script src="bb-search-modal.js"></script>
+</body>
+</html>

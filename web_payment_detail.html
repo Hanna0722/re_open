@@ -1,0 +1,1632 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>결제상세내역 - BidBuy Korea</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --rose: #E8385A;
+      --rose-h: #C42F4C;
+      --tp: #1a1a2e;
+      --ts: #666680;
+      --tm: #999baa;
+      --border: #e0e4eb;
+      --navy: #1A3C6E;
+      --text: #333;
+      --line: #dedede;
+      --ink: #20242b;
+      --muted: #777985;
+      --faint: #a1a5b3;
+      --line-soft: #eee6e2;
+      --paper: #fff;
+      --warm: #fbf7f5;
+      --warm-2: #f7f3f0;
+      --yellow: #f4b400;
+      --stage-left: max(16px, calc((100vw - 1180px) / 2));
+      --sidebar-w: 231px;
+      --main-w: 925px;
+      --gap: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { background: #fff; }
+    body {
+      margin: 0; min-width: 320px; color: var(--text); background: #fff;
+      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px; line-height: 1.5;
+    }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+    a { text-decoration: none; color: inherit; }
+
+    .top-notice-spacer { height: 34px; }
+    .page { min-height: 100vh; background: #fff; }
+
+    /* ── 헤더 (web_mypage 동일) ── */
+    .topbar {
+      height: 67px;
+      width: min(calc(100vw - 32px), 1057px);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 221px minmax(0, 714px) 221px;
+      align-items: center;
+      gap: 16px;
+      padding: 0;
+      background: #fff;
+    }
+    .brand-area { display: flex; align-items: center; gap: 22px; min-width: 0; }
+    .menu-button { width: 25px; height: 25px; border: 0; border-radius: 5px; background: transparent; padding: 0; display: grid; place-items: center; }
+    .menu-lines { width: 23px; display: grid; gap: 6px; }
+    .menu-lines span { height: 2.5px; border-radius: 999px; background: #1f2530; }
+    .logo-link { display: inline-flex; align-items: center; width: 122px; line-height: 0; }
+    .logo-link img { width: 100%; height: auto; display: block; }
+    .search { height: 43px; display: flex; min-width: 0; border: 1px solid #e5dbd7; border-radius: 13px; overflow: hidden; background: #f7f3f0; }
+    .search input { flex: 1; min-width: 0; border: 0; outline: 0; padding: 0 18px; background: transparent; color: var(--text); font-size: 13px; }
+    .search input::placeholder { color: #8c8985; }
+    .search button { width: 111px; border: 0; background: var(--rose); color: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 700; }
+    .search button i { font-size: 15px; }
+    .user-tools { justify-self: end; display: grid; grid-template-columns: 28px 28px auto; align-items: center; gap: 10px; color: #1d2430; }
+    .icon-btn { width: 28px; height: 28px; display: grid; place-items: center; border: 0; border-radius: 5px; background: transparent; color: #687385; padding: 0; }
+    .icon-btn i { font-size: 23px; }
+    .user-name { display: grid; justify-items: center; gap: 3px; color: #111827; font-size: 13px; font-weight: 800; white-space: nowrap; cursor: pointer; }
+    .premium-chip { min-width: 70px; min-height: 18px; padding: 2px 10px; border-radius: 999px; background: #fff0c9; color: #f4a200; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; }
+
+    /* ── 드로어 ── */
+    .drawer-ov { position:fixed;inset:0;background:rgba(0,0,0,0);z-index:1000;pointer-events:none;transition:background .3s; }
+    .drawer-ov.open { background:rgba(0,0,0,.45);pointer-events:all; }
+    .drawer { position:fixed;top:0;left:-100%;bottom:0;width:88%;max-width:340px;background:#fff;z-index:1001;overflow-y:auto;scrollbar-width:none;transition:left .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:4px 0 20px rgba(0,0,0,.12);border-top-right-radius:16px;border-bottom-right-radius:16px; }
+    .drawer::-webkit-scrollbar { display:none; }
+    .drawer.open { left:0; }
+    .dr-head { display:flex;align-items:center;justify-content:space-between;padding:18px 16px 16px;border-bottom:1px solid #D8D8DE; }
+    .dr-close { width:32px;height:32px;border:none;background:none;color:var(--tp);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center; }
+    .dr-user-mini { display:flex;align-items:center;gap:10px; }
+    .u-av { border-radius:50%;background:#FFE7EF;color:var(--rose);display:grid;place-items:center;font-size:18px;font-weight:800; }
+    .dr-user-mini .u-av { width:38px;height:38px; }
+    .dr-user-mini-name { font-size:15px;font-weight:700;color:var(--tp); }
+    .dr-user-mini-grade { font-size:11px;color:var(--ts);margin-top:2px; }
+    .dr-user-assets { display:grid;grid-template-columns:1fr 1px 1fr;margin:12px 16px 0;border:1px solid #E5E7EB;border-radius:10px;overflow:hidden;background:#fff; }
+    .dr-user-asset { text-align:center;padding:9px 6px; }
+    .dr-user-asset span { display:block;font-size:10px;color:#8B95A5;margin-bottom:2px; }
+    .dr-user-asset strong { display:block;font-size:13px;color:#1F2530; }
+    .dr-user-asset-div { background:#E5E7EB; }
+    .dr-mypage-list { display:grid;gap:6px;padding:14px 16px 6px; }
+    .dr-mypage-item { min-height:40px;display:flex;align-items:center;gap:12px;color:#202633;font-size:14px;font-weight:700;text-decoration:none; }
+    .dr-mypage-item i { width:20px;color:#111827;text-align:center;font-size:15px; }
+    .dr-sec { padding:14px 0 10px;border-bottom:1px solid #D8D8DE; }
+    .dr-sec:last-child { border-bottom:none; }
+    .dr-sec-title { padding:0 16px 10px;color:var(--tp);font-size:13px;font-weight:800; }
+    .dr-link-grid { display:grid;grid-template-columns:repeat(2,1fr);row-gap:14px;column-gap:24px;padding:0 16px 14px; }
+    .dr-link-grid a { font-size:14px;color:var(--ts);text-decoration:none; }
+
+    /* ── 스테이지 레이아웃 ── */
+    .stage {
+      position: relative;
+      display: grid;
+      grid-template-columns: var(--sidebar-w) var(--main-w);
+      gap: var(--gap);
+      width: calc(var(--sidebar-w) + var(--gap) + var(--main-w));
+      margin-left: var(--stage-left);
+    }
+
+    /* ── 사이드바 (web_mypage 동일) ── */
+    .sidebar { min-width: 0; }
+    .profile-card { height: 172px; padding: 19px 22px 12px; background: #fbf7f5; }
+    .profile-main { display: flex; align-items: center; gap: 13px; }
+    .avatar { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; flex: 0 0 auto; background: #ffe7ef; color: var(--rose); font-size: 22px; font-weight: 800; }
+    .profile-name { display: block; margin-bottom: 3px; color: #262a31; font-size: 16px; font-weight: 800; line-height: 1.25; }
+    .profile-tier { color: var(--rose); font-size: 12px; font-weight: 800; }
+    .vip-copy { margin: 18px 0 6px; color: #5c6270; font-size: 12px; font-weight: 600; }
+    .vip-copy b { color: #454b58; font-weight: 800; }
+    .vip-row { display: grid; grid-template-columns: 1fr 16px; align-items: center; gap: 8px; }
+    .vip-progress { height: 8px; border-radius: 999px; background: #eee2de; overflow: hidden; }
+    .vip-progress span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #ff8499 0%, var(--rose) 100%); }
+    .help-dot { width: 16px; height: 16px; border: 1.5px solid #9ea1aa; border-radius: 50%; display: inline-grid; place-items: center; color: #838793; font-size: 11px; font-weight: 900; }
+    .profile-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 11px; }
+    .soft-btn { height: 26px; border: 1px solid #e5dbd7; border-radius: 5px; background: #fff; color: #5c606b; font-size: 12px; font-weight: 700; }
+    .side-nav { padding-top: 33px; }
+    .side-title { margin: 0 0 18px; padding: 0 15px 17px; border-bottom: 1px solid #dcd9d6; color: #111; font-size: 16px; font-weight: 900; }
+    .side-title a, .side-title a:visited { color: inherit; text-decoration: none; }
+    .nav-section { padding: 0 20px; margin-bottom: 14px; }
+    .nav-section strong { display: block; margin-bottom: 11px; color: #292d35; font-size: 14px; font-weight: 900; }
+    .nav-list { display: grid; gap: 13px; }
+    .nav-list a { color: #666b75; text-decoration: none; font-size: 12px; font-weight: 500; }
+    .nav-list a:hover, .nav-list a.active { color: var(--rose); font-weight: 800; }
+    .biz-convert-section { padding: 0 12px 20px; }
+    .biz-convert-link { display:block;text-decoration:none;border-radius:10px;background:linear-gradient(135deg,#eef3fb,#e6edf8);border:1px solid #c8d8ef;overflow:hidden; }
+    .biz-convert-inner { display:flex;align-items:center;gap:10px;padding:12px 12px 12px 14px; }
+    .biz-convert-icon { width:32px;height:32px;border-radius:8px;background:#1a3c6e;display:grid;place-items:center;flex-shrink:0;color:#fff;font-size:14px; }
+    .biz-convert-text { flex:1;min-width:0; }
+    .biz-convert-text strong { display:block;font-size:12px;font-weight:800;color:#1a3c6e;margin-bottom:2px; }
+    .biz-convert-text span { display:block;font-size:11px;color:#4f6b9a;line-height:1.35; }
+    .biz-chev { font-size:11px;color:#4f6b9a;flex-shrink:0; }
+
+    /* ══════════════════════════════════════
+       메인 콘텐츠 — 레퍼런스 디자인 기반
+    ══════════════════════════════════════ */
+    .main {
+      min-width: 0;
+      padding-top: 0;
+      padding-bottom: 60px;
+    }
+
+    /* 페이지 헤더 */
+    .order-page-head {
+      display: grid;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .order-page-head__sub {
+      margin: 0;
+      font-size: 15px; font-weight: 900; color: #000;
+      line-height: 1.35;
+    }
+    .order-page-head__title {
+      margin-top: 20px;
+      font-size: 24px; font-weight: 900; color: #000;
+      line-height: 1.35;
+      text-align: center;
+    }
+    .order-page-head__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .order-page-head__link {
+      text-align: right;
+      font-size: 14px; color: #666;
+      text-decoration: none;
+      background: none; border: 0; cursor: pointer; padding: 0;
+    }
+    .order-page-head__link:hover { color: var(--navy); }
+
+    .bid-history-modal-card { width: min(560px, calc(100vw - 32px)); }
+    .bid-history-modal-card .confirm-modal-body { max-height: 70vh; overflow: auto; }
+    .bid-history-modal-card .confirm-modal-body { padding-top: 0; }
+    .confirm-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 24, 39, .45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 500;
+    }
+    .confirm-modal.open { display: flex; }
+    .confirm-modal-card {
+      width: min(420px, calc(100vw - 32px));
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .18);
+      overflow: hidden;
+    }
+    .confirm-modal-head {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .confirm-modal-head strong { font-size: 15px; color: var(--tp); }
+    .confirm-modal-close {
+      border: none;
+      background: none;
+      font-size: 18px;
+      color: var(--tm);
+      cursor: pointer;
+    }
+    .confirm-modal-body { padding: 20px; }
+    .bid-hist-table-wrap { position: relative; }
+    .bid-history-table-close {
+      position: absolute;
+      top: 7px;
+      right: 6px;
+      width: 24px;
+      height: 24px;
+      border: none;
+      background: transparent;
+      color: var(--tm);
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 1;
+    }
+    .bid-history-table-close:hover { color: var(--navy); }
+    .bid-hist-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .bid-hist-table th {
+      padding: 8px 6px;
+      text-align: left;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ts);
+      border-bottom: 2px solid var(--border);
+      background: #FAFBFC;
+    }
+    .bid-hist-table th:last-child { padding-right: 34px; }
+    .bid-hist-table td {
+      padding: 10px 6px;
+      border-bottom: 1px solid #F0F2F5;
+      vertical-align: top;
+    }
+    .bid-hist-table tr:last-child td { border-bottom: none; }
+    .bid-history-modal-card .bid-hist-table { border: 0; background: transparent; }
+    .bid-history-modal-card .bid-hist-table th { background: transparent; border-bottom: 1px solid #eef0f3; }
+    .bid-history-modal-card .bid-hist-table td { border-bottom: 1px solid #f6f7f9; }
+    .bid-history-modal-card .bid-hist-table tr:last-child td { border-bottom: 0; }
+    .bid-status-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .bid-status-reserve { background: transparent; color: #5B7AE0; padding: 0; border-radius: 0; }
+
+    /* 플랫폼 도트 */
+    .platform-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--rose);
+      flex-shrink: 0;
+    }
+
+    /* 상품 카드 (레퍼런스: .order-item) */
+    .order-item {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr) 360px;
+      grid-template-areas:
+        "platform platform platform"
+        "name name name"
+        "media details status";
+      gap: 18px 26px;
+      align-items: start;
+      padding: 30px;
+      border: 1px solid var(--line); border-radius: 10px;
+      background: #fff;
+      margin-bottom: 42px;
+    }
+    .order-item__media {
+      grid-area: media;
+      width: 220px;
+      align-self: start;
+    }
+    .order-item__image {
+      width: 220px; height: 220px; flex-shrink: 0;
+      border-radius: 6px; overflow: hidden;
+      border: 1px solid #eee; background: #f5f5f5;
+      display: grid; place-items: center; color: #ccc; font-size: 42px;
+    }
+    .order-item__image i { opacity: .45; }
+    .order-item__image img { width: 100%; height: 100%; object-fit: cover; }
+    .order-item__details { grid-area: details; min-width: 0; padding-top: 12px; }
+    .order-item__content {
+      display: contents;
+    }
+    .order-item__platform {
+      grid-area: platform;
+      display: inline-flex; align-items: center; gap: 8px;
+      justify-self: start;
+      min-height: 41px;
+      width: auto;
+      min-width: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      font-size: 14px;
+      margin-bottom: 0;
+      overflow: hidden;
+    }
+    .order-item__platform b {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 32px;
+      padding: 0 13px;
+      border: 1px solid #ff4d5f;
+      border-radius: 4px;
+      color: #ff334c;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .order-item__platform span:last-child {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #a1a8b5;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .order-item__platform .flag {
+      display: inline-block;
+      width: 16px;
+      height: 11px;
+      border-radius: 2px;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08);
+      background: #fff center / cover no-repeat;
+    }
+    .order-item__platform .flag.jp { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'%3E%3Crect width='30' height='20' fill='%23ffffff'/%3E%3Ccircle cx='15' cy='10' r='6' fill='%23bc002d'/%3E%3C/svg%3E"); }
+    .order-item__platform .market-sep { color: #c1c7d0; font-weight: 700; }
+    .platform__flag { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; margin: 0; }
+    .platform__flag img { width: 18px; height: 18px; border-radius: 50%; object-fit: cover; }
+    .order-item__name {
+      grid-area: name;
+      display: grid;
+      gap: 6px;
+      color: #000;
+      line-height: 1.55;
+      margin-bottom: 0;
+    }
+    .order-item__name-ko { font-size: 15px; font-weight: 900; color: #101827; letter-spacing: 0; line-height: 1.45; }
+    .order-item__name-origin { font-size: 12px; font-weight: 500; color: #9ca3af; }
+    .order-item__meta-list { display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 16px 18px; margin: 0; }
+    .order-item__meta-list dt { position: relative; font-size: 13px; font-weight: 700; color: #6d7481; }
+    .order-item__meta-list dt::before { content: ""; margin: 0; }
+    .order-item__meta-list dd { margin: 0; font-size: 13px; color: #263142; }
+    .order-item__meta-list a { display: block; width: fit-content; color: #2584ff; font-size: 13px; font-weight: 700; text-decoration: none; margin: 2px 0 0; }
+    .order-status-card {
+      grid-area: status;
+      position: relative;
+      min-height: 0;
+      padding: 12px 0 0;
+      border: 0;
+      border-radius: 0;
+      overflow: hidden;
+      background: transparent;
+    }
+    .order-status-card::after { content: none; }
+    .order-status-card__head {
+      display: none;
+    }
+    .order-status-card__list {
+      display: grid;
+      grid-template-columns: 100px minmax(0, 1fr);
+      gap: 16px 18px;
+      margin: 0;
+      font-size: 14px;
+      color: #263142;
+    }
+    .order-status-card__list dt { font-weight: 700; color: #6d7481; }
+    .order-status-card__list dt::before { content: ""; margin: 0; }
+    .order-status-card__list dd { margin: 0; font-family: 'Roboto', sans-serif; font-weight: 500; color: #263142; }
+    .order-status-card__list dd strong { font-weight: 900; }
+    .order-item__badge {
+      display: none;
+    }
+    .order-item__badge.done { border-color: #b2dfce; background: #eaf8f0; color: #278a46; }
+
+    /* 2컬럼 컨테이너 */
+    .order__container {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 42px 56px; align-items: flex-start;
+    }
+    .order__left-container {
+      flex: 1; min-width: 0;
+      display: flex; flex-direction: column; gap: 30px;
+    }
+    .order__right-container {
+      width: auto; flex-shrink: 0;
+      display: flex; flex-direction: column; gap: 30px;
+    }
+
+    /* 섹션 타이틀 (레퍼런스: .order-title) */
+    .order-title {
+      display: flex; align-items: center; justify-content: space-between;
+      margin: 0 0 16px; font-size: 15px; font-weight: 900; color: #000;
+      line-height: 1.4;
+    }
+    .order-title b { font-weight: 900; }
+    .order-title__left { display: flex; align-items: center; gap: 12px; }
+    .order-title__sub {
+      font-size: 12px; font-weight: 600; color: #666;
+      border: 0; background: none; padding: 0; cursor: pointer;
+      text-decoration: none;
+    }
+    .order-title__sub:hover { color: var(--navy); }
+
+    /* 섹션 카드 (레퍼런스: .order-list-box) */
+    .order-list-box {
+      padding: 5px;
+      border: 1px solid var(--line); border-radius: 10px;
+      background: #fff;
+    }
+    .order-list-box.order-list-box--flush { padding: 0; border: none; background: transparent; }
+
+    /* 주문배송정보 좌우 분할 */
+    .order-info-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    .order-info-table col.lbl-col { width: 160px; }
+    .order-info-table col.val-col { width: auto; }
+    .order-info-table th, .order-info-table td { padding: 7px 12px 7px 16px; border-bottom: 0.5px solid var(--line); font-size: 13px; text-align: left; vertical-align: middle; background: #fff; }
+    .order-info-table th { font-weight: 600; color: var(--ts); white-space: nowrap; }
+    .order-info-table td { padding-left: 0; color: #000; line-height: 1.55; }
+    .order-info-table td.mono, .order-info-table th.mono { font-family: 'Roboto', monospace; }
+    .order-info-table th.rgroup { border-left: 0.5px solid var(--line); padding-left: 16px; }
+    .order-info-table tr:last-child th, .order-info-table tr:last-child td { border-bottom: none; }
+    .order-info-action-btn { font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif; }
+    .track-btn { height: 22px; margin-left: 8px; padding: 0 8px; border: 0; border-radius: 5px; background: var(--navy); color: #fff; font-size: 11px; font-weight: 700; cursor: pointer; }
+
+    /* 정보 행 (레퍼런스: .order-list__line) */
+    .order-list__details { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+    .order-list__line { display: flex; align-items: flex-start; gap: 5px; padding: 7px 0; border-bottom: 0.5px solid var(--line); }
+    .order-list__line:last-child { border-bottom: none; }
+    .order-list__label { flex-shrink: 0; width: 200px; font-size: 13px; font-weight: 600; color: var(--ts); }
+    .order-list__details .order-list__label::before { content: ""; }
+    .order-list__value { flex: 1; font-size: 13px; color: #000; line-height: 1.55; }
+    .order-list__value.mono { font-family: 'Roboto', monospace; }
+
+    /* 결제 테이블 (레퍼런스: .payment__summary) */
+    .payment__summary__header {
+      display: flex; align-items: center;
+      height: 50px; background: #f5f5f5;
+      border-radius: 8px 8px 0 0;
+      margin-bottom: 0;
+    }
+    .payment__summary__header p {
+      font-size: 14px; font-weight: 700; color: #000;
+      padding: 0 16px;
+    }
+    .payment__summary__header p:first-child { flex: 0 0 160px; }
+    .payment__summary__header p:nth-child(2) { flex: 1; border-left: 1px solid #e8e8e8; }
+    .payment__summary__header p:last-child { flex: 1; border-left: 1px solid #e8e8e8; }
+
+    .payment__summary__details {
+      padding: 20px 0;
+      border: 1px solid #f0f0f0; border-top: 0; border-radius: 0 0 8px 8px;
+    }
+    .payment-list__line {
+      display: flex; align-items: center;
+      padding: 7px 0; border-bottom: 1px solid #f8f8f8;
+    }
+    .payment-list__line:last-child { border-bottom: 0; }
+    .payment-list__line .order-list__label { flex: 0 0 160px; padding: 0 5px; font-size: 14px; }
+    .payment-list__line .order-list__value { flex: 1; padding: 0 5px; font-size: 14px; border-left: 1px solid #f0f0f0; }
+    .payment-list__line.is-subtotal { background: #fafafa; border-top: 1px solid #e8e8e8; margin-top: 3px; }
+    .payment-list__line.is-subtotal .order-list__label,
+    .payment-list__line.is-subtotal .order-list__value { font-weight: 700; }
+    .payment-list__line.is-total { background: #f0f4fb; border-top: 2px solid var(--navy); }
+    .payment-list__line.is-total .order-list__label { color: var(--navy); font-size: 14px; }
+    .payment-list__line.is-total .order-list__value { color: var(--rose); font-size: 15px; font-weight: 800; }
+
+    /* ── 결제정보 1차/2차 좌우 2열 (합계 바닥선 정렬) ── */
+    .order__stack { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 42px 56px; }
+    .order__stack > section:nth-of-type(1) { order: 3; grid-column: 1 / -1; }
+    .order__stack > section:nth-of-type(2) { order: 1; grid-column: 1 / -1; }
+    .order__stack > section:nth-of-type(3) { order: 2; grid-column: 1 / -1; }
+    .order__stack > section:nth-of-type(4) { order: 4; grid-column: 1 / -1; }
+    .order__stack > section:nth-of-type(5) { order: 5; grid-column: 1 / -1; }
+    .order__stack > .inquiry-wrap { order: 6; grid-column: 1 / -1; }
+    .order__stack > section:nth-of-type(2),
+    .order__stack > section:nth-of-type(3) {
+      display: flex;
+      flex-direction: column;
+    }
+    .order__stack > section:nth-of-type(2) .order-list-box,
+    .order__stack > section:nth-of-type(3) .order-list-box {
+      height: auto;
+      overflow: visible;
+    }
+    .order__stack > section:nth-of-type(2) .order-list__details {
+      gap: 5px;
+    }
+    .order__stack > section:nth-of-type(2) .order-list__line {
+      gap: 6px;
+    }
+
+    .pay-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: stretch; }
+    .pay-card {
+      display: flex; flex-direction: column;
+      border: 1px solid var(--line); border-radius: 12px;
+      background: #fff; padding: 20px;
+    }
+    .pay-secondary-stack { min-width: 0; }
+    .pay-secondary-stack .pay-card[hidden] { display: none; }
+    .pay-card__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+    .pay-badge { font-size: 16px; font-weight: 800; padding: 0; border-radius: 0; background: transparent; }
+    .pay-badge.first  { color: var(--navy); }
+    .pay-badge.second { color: var(--navy); }
+    .pay-card__date { font-size: 12px; color: #444444; font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, monospace; }
+    .pay-card__receipt { border: 0; background: none; padding: 0; color: #444444; font: inherit; font-size: 12px; cursor: pointer; }
+    .pay-card__receipt:hover { color: var(--navy); text-decoration: underline; }
+
+    .receipt-modal-card { width: min(506px, calc(100vw - 24px)); border-radius: 8px; }
+    .receipt-modal-body { max-height: 88vh; overflow: auto; padding: 28px 30px; background: #fafafa; color: #111; }
+    .receipt-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .receipt-head h2 { margin: 0; font-size: 28px; font-weight: 900; letter-spacing: 0; }
+    .receipt-actions { display: inline-flex; align-items: center; gap: 10px; }
+    .receipt-icon-btn { border: 0; background: none; color: #555; font-size: 24px; cursor: pointer; line-height: 1; }
+    .receipt-icon-btn:hover { color: var(--navy); }
+    .receipt-tools { display: grid; grid-template-columns: 176px 1fr 30px; gap: 12px; margin-bottom: 24px; }
+    .receipt-tools select,
+    .receipt-tools input { height: 32px; border: 1px solid #c8ccd3; border-radius: 4px; background: #fff; padding: 0 10px; font-size: 14px; }
+    .receipt-send { display: grid; place-items: center; width: 30px; height: 30px; border: 0; background: #333943; color: #fff; font-size: 14px; cursor: pointer; }
+    .receipt-paper { padding: 30px 26px; border-radius: 6px; background: #fff; box-shadow: 0 5px 18px rgba(0, 0, 0, .08); }
+    .receipt-list { display: grid; gap: 8px; margin: 0; }
+    .receipt-row { display: grid; grid-template-columns: 96px 1fr; gap: 14px; align-items: start; font-size: 15px; line-height: 1.35; }
+    .receipt-row dt { color: #111; font-weight: 500; }
+    .receipt-row dd { margin: 0; text-align: right; font-weight: 800; color: #111; word-break: keep-all; }
+    .receipt-row.receipt-total { margin: 14px 0; padding: 14px 0; border-top: 1px solid #d9d9d9; border-bottom: 1px solid #d9d9d9; color: #005bc4; }
+    .receipt-row.receipt-total dt,
+    .receipt-row.receipt-total dd { color: #005bc4; }
+    .receipt-company { margin-top: 14px; padding-top: 12px; border-top: 1px solid #d9d9d9; }
+    .receipt-note { margin: 16px 0 20px; color: #666; font-size: 12px; }
+    .receipt-nice { color: #a5a5a5; font-size: 20px; font-weight: 900; letter-spacing: 0; }
+    .receipt-footer { margin-top: 10px; color: #555; font-size: 11px; line-height: 1.7; }
+    .receipt-footer strong { display: block; margin-bottom: 6px; color: #333; font-size: 12px; }
+    @media (max-width: 560px) {
+      .receipt-modal-body { padding: 22px 18px; }
+      .receipt-tools { grid-template-columns: 1fr; }
+      .receipt-send { width: 100%; }
+      .receipt-paper { padding: 24px 18px; }
+      .receipt-row { grid-template-columns: 82px 1fr; font-size: 13px; }
+    }
+
+    .pay-rows { list-style: none; margin: 0; padding: 0; }
+    .pay-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid #f6f6f6; }
+    .pay-row--spacer { visibility: hidden; pointer-events: none; }
+    .pay-row .lbl { font-size: 14px; color: #555; }
+    .pay-row .val { font-size: 14px; color: #000; font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, monospace; }
+    .pay-row .val.muted { color: #000000; }
+    .pay-row .val.discount { color: var(--rose); }
+    .pay-row .val.fee { color: var(--navy); }
+
+    .tooltip-wrap { position: relative; display: inline-flex; align-items: center; margin-left: 4px; vertical-align: middle; }
+    .tooltip-icon { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border: 1px solid #2b8cff; border-radius: 2px; background: #fff; color: #2b8cff; font-size: 12px; font-weight: 700; line-height: 1; cursor: pointer; font-family: 'Roboto', sans-serif; }
+    .tooltip-box { position: absolute; left: 50%; bottom: calc(100% + 8px); z-index: 20; display: none; min-width: 138px; padding: 8px 10px; border: 1px solid #1d78ff; background: #fff; color: #111; font-size: 11px; font-weight: 400; line-height: 1.45; text-align: center; white-space: nowrap; transform: translateX(-50%); box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
+    .tooltip-box::after { content: ""; position: absolute; left: 50%; top: 100%; width: 8px; height: 8px; border-right: 1px solid #1d78ff; border-bottom: 1px solid #1d78ff; background: #fff; transform: translate(-50%, -4px) rotate(45deg); }
+    .tooltip-grid { display: grid; grid-template-columns: 64px 1fr; gap: 4px 12px; text-align: center; }
+    .tooltip-wrap:hover .tooltip-box, .tooltip-wrap:focus-within .tooltip-box { display: block; }
+
+    /* 기타 펼치기 */
+    .pay-row.is-toggle { padding: 0; border-bottom: 1px solid #f6f6f6; }
+    .pay-etc { width: 100%; }
+    .pay-etc > summary {
+      list-style: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 9px 0; font-size: 14px; color: #555;
+    }
+    .pay-etc > summary::-webkit-details-marker { display: none; }
+    .pay-etc > summary .chev { font-size: 11px; color: #aaa; transition: transform .2s; }
+    .pay-etc[open] > summary .chev { transform: rotate(180deg); }
+    .pay-etc__inner { padding: 2px 0 8px; }
+    .pay-etc__inner .pay-row { padding: 7px 12px; border-bottom: 0; background: #fff; border-radius: 6px; margin-top: 4px; }
+    .pay-etc__inner .pay-row .lbl { font-size: 14px; color: #777; }
+
+    /* 합계 영역: margin-top:auto 로 카드 바닥에 고정 → 좌우 같은 평행선 */
+    .pay-foot { margin-top: auto; padding-top: 10px; }
+    .pay-meta { font-size: 14px; color: #777; line-height: 1.6; margin-bottom: 10px; }
+    .pay-meta b { color: #666; font-weight: 700; }
+    .pay-total {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0 4px;
+    }
+    .pay-total .lbl { font-size: 16px; font-weight: 800; color: var(--navy); }
+    .pay-total .val { font-size: 16px; font-weight: 800; color: #000; font-family: 'Roboto', monospace; }
+    .pay-total .val-group { display: grid; justify-items: end; gap: 2px; }
+    .pay-total .calc-sm { font-size: 12px; font-weight: 600; color: rgba(28, 28, 28, .6); font-family: 'Roboto', monospace; }
+
+    .pay-grandtotal {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 11.75px 22px; margin-top: 16px; border-radius: 12px; background: var(--warm);
+    }
+    .pay-grandtotal__label { display: grid; gap: 3px; }
+    .pay-grandtotal .lbl { font-size: 16px; font-weight: 800; color: #000000; }
+    .pay-grandtotal .calc { font-size: 14px; font-weight: 600; color: rgba(28, 28, 28, 0.75); }
+    .pay-grandtotal .val-group { display: grid; justify-items: end; gap: 2px; }
+    .pay-grandtotal .val { font-size: 20px; font-weight: 800; color: #000; font-family: 'Roboto', monospace; }
+    .pay-grandtotal .val-sm { font-size: 13px; font-weight: 600; color: rgba(28, 28, 28, .6); font-family: 'Roboto', monospace; }
+    .payment-switch { display: inline-flex; align-items: center; gap: 8px; }
+    .payment-switch__label { min-width: 72px; text-align: center; color: #555; font-size: 14px; font-weight: 800; }
+    .payment-switch__btn {
+      width: 30px; height: 30px; border: 1px solid var(--line); border-radius: 50%;
+      background: #fff; color: var(--navy); font-size: 16px; font-weight: 900; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .payment-switch__btn:hover { border-color: var(--navy); background: #f7f9fc; }
+
+    /* 본문 풀폭 스택에서 우측 메모/묶음 카드 기본 패딩 보정 */
+    .order__stack .order-list-box { padding: 24px; }
+    @media (max-width: 600px) {
+      .order-page-head { gap: 18px; }
+      .order-page-head__row { align-items: flex-start; }
+      .order-page-head__sub { font-size: 15px; }
+      .order-item {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "platform"
+          "name"
+          "media"
+          "details"
+          "status";
+        gap: 20px;
+        padding: 20px;
+      }
+      .order-item__media { width: 100%; }
+      .order-item__image { width: 100%; height: 220px; }
+      .order-item__name-ko { font-size: 18px; }
+      .order-item__name-origin { font-size: 14px; }
+      .order-item__meta-list,
+      .order-status-card__list { grid-template-columns: 104px 1fr; gap: 14px 14px; }
+      .order-item__meta-list dt,
+      .order-item__meta-list dd,
+      .order-status-card__list dt,
+      .order-status-card__list dd { font-size: 16px; }
+      .order-status-card { min-height: 0; padding: 24px; }
+      .order__stack { grid-template-columns: 1fr; }
+      .order__stack > section { grid-column: 1 / -1; }
+      .pay-2col { grid-template-columns: 1fr; }
+      .pay-foot { margin-top: 14px; }
+    }
+
+    /* 묶음배송 구성 상품 테이블 - 5행 초과 시 스크롤 */
+    .bundle-table-wrap { max-height: 494px; overflow-y: auto; border: 1px solid #dde1e7; border-radius: 8px; }
+    .bundle-order-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .bundle-order-table thead th { position: sticky; top: 0; z-index: 1; background: #fbf7f5; border-bottom: 1px solid #dde1e7; padding: 10px 12px; text-align: center; font-weight: 500; color: #444; white-space: nowrap; }
+    .bundle-order-table tbody td { border-bottom: 1px solid #dde1e7; padding: 10px 12px; vertical-align: middle; color: #333; text-align: center; }
+    .bundle-order-table tbody tr:last-child td { border-bottom: none; }
+    .bundle-order-table .product-info { text-align: left; }
+    .bundle-order-table .item-tag { display: block; font-size: 12px; color: #666; margin-bottom: 4px; }
+    .bundle-order-table .item-name { font-size: 13px; color: #222; line-height: 1.5; }
+    .bundle-order-table .price-cell { font-family: 'Roboto', sans-serif; font-weight: 700; color: #333; font-size: 14px; white-space: nowrap; }
+    .bundle-order-table .date-cell { font-family: 'Roboto', sans-serif; font-size: 12px; color: #666; white-space: nowrap; }
+    .bundle-thumb { width: 60px; height: 60px; flex-shrink: 0; border-radius: 6px; overflow: hidden; border: 1px solid #eee; background: #f5f5f5; display: grid; place-items: center; color: #ccc; font-size: 20px; }
+    .bundle-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* 메모 */
+    .order-memo-box { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 16px; }
+    .basic-textarea { flex: 1; }
+    .basic-textarea textarea {
+      width: 100%; min-height: 72px; resize: vertical;
+      padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px;
+      font-size: 14px; color: #333; outline: 0; background: #fff;
+    }
+    .basic-textarea textarea:focus { border-color: var(--navy); }
+    .basic-button__gray {
+      height: 40px; padding: 0 20px; flex-shrink: 0;
+      background: #707070; color: #fff; border: 0; border-radius: 5px;
+      font-size: 14px; font-weight: 700;
+    }
+    .basic-button__gray:hover { background: #555; }
+
+    .order-memo-list { list-style: none; margin: 0; padding: 16px 0 0; border-top: 1px solid #f2f2f2; }
+    .order-memo-list .msg { padding: 16px; border-bottom: 1px solid var(--line-soft); }
+    .order-memo-list .msg.agent { background: var(--warm); }
+    .order-memo-list .msg-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+    .order-memo-list .msg-label { font-size: 12px; font-weight: 900; color: var(--faint); }
+    .order-memo-list .msg.agent .msg-label { color: var(--navy); }
+    .order-memo-list .msg-who { font-size: 13px; font-weight: 800; color: #151922; }
+    .order-memo-list .msg.agent .msg-who { color: var(--navy); }
+    .order-memo-list .msg-date { color: var(--faint); font-size: 11px; }
+    .order-memo-list .msg-bubble { font-size: 13px; color: #383b40; line-height: 1.7; }
+    .order-memo-list .msg.agent .msg-bubble { padding-left: 14px; border-left: 2px solid #dde4ee; }
+    .order-memo-list .msg-bubble p { margin: 0 0 8px; }
+    .order-memo-list .msg-bubble p:last-child { margin-bottom: 0; }
+    .memo-type-admin,
+    .memo-type-customer { border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 700; margin-right: 6px; }
+    .memo-type-admin { background: #f0f4fb; color: var(--navy); }
+    .memo-type-customer { background: #f5f5f5; color: #555; }
+    .memo-empty { font-size: 13px; color: #aaa; text-align: center; padding: 20px 0; }
+
+    /* 관리자 메모 */
+    .admin-memo-box { display: grid; gap: 20px; padding: 22px 24px; }
+    .admin-memo-day { display: grid; gap: 10px; padding-bottom: 18px; border-bottom: 1px solid #f1f2f4; }
+    .admin-memo-day:last-child { padding-bottom: 0; border-bottom: 0; }
+    .admin-memo-date {
+      display: inline-flex; align-items: center; width: fit-content;
+      min-height: 24px; padding: 0 10px; border-radius: 4px;
+      font-size: 13px; font-weight: 700; font-family: 'Roboto', sans-serif;
+    }
+    .admin-memo-entry {
+      padding: 2px 0 0 14px; border-left: 3px solid #f1f2f4;
+    }
+    .admin-memo-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin-bottom: 8px;
+      font-size: 13px; font-weight: 700; color: var(--navy);
+    }
+    .admin-memo-head time { color: #999; font-weight: 600; font-family: 'Roboto', sans-serif; }
+    .admin-memo-content { font-size: 13px; line-height: 1.85; color: #333; }
+    .admin-memo-content p { margin: 0 0 4px; }
+    .admin-memo-content .admin-memo-highlight { margin-top: 16px; font-weight: 700; color: #222; }
+
+    /* 문의 버튼 */
+    .inquiry-wrap { display: flex; justify-content: center; gap: 24px; margin-top: 6px; }
+    .inquiry-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      height: 46px; padding: 0 40px;
+      background: var(--navy); color: #fff; border: 0; border-radius: 5px;
+      font-size: 15px; font-weight: 700; font-family: inherit;
+    }
+    .inquiry-btn--print { background: #fff; color: var(--navy); border: 1px solid var(--line); }
+    .inquiry-btn:hover { background: #152f58; }
+    .inquiry-btn--print:hover { background: #fff; }
+
+  
+    .member-tier-icon { background:#eef5ff !important; color:#1A3C6E !important; }
+    .member-tier-icon i { line-height:1; }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="top-notice-spacer" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand-area">
+      <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" onclick="openDrawer()">
+        <span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+      <a class="logo-link" href="web_main.html" aria-label="Bidbuy 홈">
+        <img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency">
+      </a>
+    </div>
+    <form class="search">
+      <input type="text" placeholder="키워드 또는 URL을 입력하세요.">
+      <button type="submit">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        검색
+      </button>
+    </form>
+    <div class="user-tools" aria-label="회원 메뉴">
+      <button class="icon-btn" type="button" aria-label="알림">
+        <i class="far fa-bell" aria-hidden="true"></i>
+      </button>
+      <button class="icon-btn" type="button" aria-label="장바구니">
+        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+      </button>
+      <div class="user-name">
+        홍길동님
+        <span class="premium-chip">PREMIUM</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── 스테이지 ── -->
+  <div class="stage">
+
+    <!-- ── 사이드바 ── -->
+    <aside class="sidebar">
+      <section class="profile-card" aria-label="회원 정보">
+        <div class="profile-main">
+          <div class="avatar tier-premium member-tier-icon" aria-label="Premium 등급"><i class="fa-solid fa-gem" aria-hidden="true"></i></div>
+          <div>
+            <strong class="profile-name">홍길동님</strong>
+            <span class="profile-tier">Premium</span>
+          </div>
+        </div>
+        <p class="vip-copy">VIP까지 <b>₩215,000</b> 또는 <b>3건</b></p>
+        <div class="vip-row">
+          <div class="vip-progress"><span style="width:72%"></span></div>
+          <span class="help-dot">?</span>
+        </div>
+        <div class="profile-actions">
+          <button class="soft-btn" type="button">1:1 문의</button>
+          <button class="soft-btn" type="button">로그아웃</button>
+        </div>
+      </section>
+
+      <section class="side-nav" aria-label="마이페이지 메뉴">
+        <h2 class="side-title"><a href="web_mypage.html">마이페이지</a></h2>
+        <div class="nav-section">
+          <strong>나의 거래 현황</strong>
+          <div class="nav-list">
+            <a href="web_mainlist.html">거래 전체 목록</a>
+            <a href="web_auction_bid_list.html">경매 입찰/유찰</a>
+            <a href="#">구매 신청 목록</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>배송관리</strong>
+          <div class="nav-list">
+            <a href="web_bundle_shipping_management.html">배송신청/변경</a>
+            <a href="#">배송지 관리</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>관심 항목 관리</strong>
+          <div class="nav-list">
+            <a href="web_favorites.html?tab=seller">관심 출품자</a>
+            <a href="web_favorites.html?tab=auction">경매 관심물품</a>
+            <a href="web_favorites.html?tab=purchase">구매 관심물품</a>
+            <a href="web_favorites.html?tab=keyword">관심 키워드</a>
+            <a href="web_favorites.html?tab=shortcut">바로가기</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>MY 혜택</strong>
+          <div class="nav-list">
+            <a href="web_mileage.html">마일리지 / 쿠폰</a>
+            <a href="web_grade_page.html">MY 등급</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>나의 정보관리</strong>
+          <div class="nav-list">
+            <a href="#">예치금 관리</a>
+            <a href="#">보증금 관리</a>
+            <a href="#">회원정보 수정</a>
+            <a href="#">비밀번호 변경</a>
+            <a href="#">회원 탈퇴</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <strong>고객상담</strong>
+          <div class="nav-list">
+            <a href="web_user_memo.html">사용자메모</a>
+            <a href="web_qna.html">나의 문의내역</a>
+            <a href="web_qna_form.html">1:1 문의하기</a>
+          </div>
+        </div>
+        <div class="nav-section biz-convert-section"style="display: none;">
+          <a href="web_biz.html" class="biz-convert-link">
+            <span class="biz-convert-inner">
+              <span class="biz-convert-icon"><i class="fas fa-building"></i></span>
+              <span class="biz-convert-text">
+                <strong>사업자 회원 전환</strong>
+                <span>사업자 전용 혜택을 확인해보세요</span>
+              </span>
+              <i class="fas fa-chevron-right biz-chev"></i>
+            </span>
+          </a>
+        </div>
+      </section>
+    </aside>
+
+    <!-- ── 메인 콘텐츠 ── -->
+    <main class="main">
+
+      <!-- 페이지 헤더 -->
+      <div class="order-page-head">
+        <h2 class="order-page-head__title">주문상세정보</h2>
+        <div class="order-page-head__row">
+          <h3 class="order-page-head__sub">주문상품 정보</h3>
+          <button type="button" class="order-page-head__link" onclick="openBidHistoryModal()"><span style="font-size:14px">본 입찰내역 조회</span></button>
+        </div>
+      </div>
+
+      <!-- 경매주문상품정보 카드 -->
+      <article class="order-item">
+               <div class="order-item__platform">
+          <b><span class="platform-dot"></span>야후경매</b>
+          <span>물품아이디 : k12345678901</span>
+        </div>
+        <a href="#" class="order-item__name">
+          <span class="order-item__name-ko">아버지의 날 선물 스위츠 쿠키 피스타치오 샌드 10종 어소트 랑그드샤 초콜릿</span>
+          <span class="order-item__name-origin">父の日 ギフト スイーツ クッキー プレゼント 2024 ピスタチオ ピスタチオサンド 10 アソート ラングドシャ チョコレート</span>
+        </a>
+        <div class="order-item__media">
+          <div class="order-item__image">
+            <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=270&h=214&q=80" alt="과자 상품 이미지" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'far fa-image\'></i>'">
+          </div>
+        </div>
+        <div class="order-item__content">
+          <div class="order-item__details">
+            <dl class="order-item__meta-list">
+              <dt>주문번호</dt>
+              <dd><strong>a12345678901</strong></dd>
+              <dt>주문옵션</dt>
+              <dd>OOOOOOO</dd>
+              <dt>주문수량</dt>
+              <dd>1개</dd>
+              <dt>낙찰가</dt>
+              <dd>￥ 46,000</dd>
+              <dt>낙찰상품</dt>
+              <dd style="display:flex;flex-direction:column;align-items:flex-start;gap:5px">비공개<button type="button" style="height:24px;padding:0 10px;border:1px solid var(--line);border-radius:5px;background:#fff;color:#555;font-size:11px;font-weight:700;cursor:pointer">공개로 변경</button></dd>
+            </dl>
+          </div>
+          <aside class="order-status-card">
+            <div class="order-status-card__head">
+              <p>현재상태: 현지도착</p>
+              <p>주문번호: a12345678901</p>
+            </div>
+            <dl class="order-status-card__list">
+              <dt>현재상태</dt>
+              <dd><strong>현지도착</strong></dd>
+              <dt>낙찰가</dt>
+              <dd>￥ 46,000</dd>
+              <dt>입찰일자</dt>
+              <dd>2024-04-04 12:12:32</dd>
+              <dt>낙찰일자</dt>
+              <dd>2024-04-05 12:00:00</dd>
+              <dt>총 결제금액</dt>
+              <dd>₩42,000</dd>
+            </dl>
+          </aside>
+        </div>
+      </article>
+
+      <!-- 세로 풀폭 스택 -->
+      <div class="order__stack">
+
+        <!-- 주문결제정보 (1차/2차 좌우 2열) -->
+        <section>
+          <h3 class="order-title">
+            <span class="order-title__left">
+              <b>주문결제정보</b>
+              <span class="payment-switch" data-payment-switch>
+                <button class="payment-switch__btn" type="button" data-payment-switch-dir="-1" aria-label="이전 2차 결제 카드">&lt;</button>
+                <span class="payment-switch__label" data-payment-switch-label>현지배송</span>
+                <button class="payment-switch__btn" type="button" data-payment-switch-dir="1" aria-label="다음 2차 결제 카드">&gt;</button>
+              </span>
+            </span>
+            <span style="font-weight:500">¥ 환율 9.3원/엔</span>
+          </h3>
+          <div class="pay-2col">
+            <!-- 1차 결제 -->
+            <div class="pay-card" data-payment-card="primary">
+              <div class="pay-card__head">
+                <span class="pay-badge first">1차 결제비용</span>
+                <button class="pay-card__date pay-card__receipt" type="button" onclick="openPaymentReceipt(this)">2025-12-08 결제완료</button>
+              </div>
+              <ul class="pay-rows">
+                <li class="pay-row"><span class="lbl">물품가</span><span class="val" data-pay-kind="base">4,300엔</span></li>
+                <li class="pay-row"><span class="lbl">대행수수료</span><span class="val" data-pay-kind="base">860엔</span></li>
+                <li class="pay-row pay-row--spacer" aria-hidden="true"><span class="lbl">&nbsp;</span><span class="val">&nbsp;</span></li>
+                <li class="pay-row is-toggle">
+                  <details class="pay-etc" open>
+                    <summary>할인/쿠폰<i class="fas fa-chevron-down chev" aria-hidden="true"></i></summary>
+                    <div class="pay-etc__inner">
+                      <div class="pay-row"><span class="lbl">쿠폰 할인</span><span class="val discount" data-pay-kind="discount">- 1,000엔</span></div>
+                      <div class="pay-row"><span class="lbl">마일리지 할인</span><span class="val discount" data-pay-kind="discount">- 298엔</span></div>
+                    </div>
+                  </details>
+                </li>
+              </ul>
+              <div class="pay-foot">
+                <div class="pay-total"><span class="lbl">1차 합계</span><span class="val-group"><span class="val" data-pay-total>35,927원</span><span class="calc-sm" data-pay-total-calc>3,862엔</span></span></div>
+              </div>
+            </div>
+
+            <!-- 2차 결제 -->
+            <div class="pay-secondary-stack" data-payment-secondary-stack>
+              <div class="pay-card" data-payment-card="secondary" data-payment-variant="일본내배송">
+                <div class="pay-card__head">
+                  <span class="pay-badge second">2차 결제비용</span>
+                  <button class="pay-card__date pay-card__receipt" type="button" onclick="openPaymentReceipt(this)">2025-12-14 결제완료</button>
+                </div>
+                <ul class="pay-rows">
+                  <li class="pay-row"><span class="lbl">현지세금</span><span class="val muted" data-pay-kind="base">—</span></li>
+                  <li class="pay-row"><span class="lbl">현지운송료</span><span class="val" data-pay-kind="base">2,500엔</span></li>
+                  <li class="pay-row pay-row--spacer" aria-hidden="true"><span class="lbl">&nbsp;</span><span class="val">&nbsp;</span></li>
+                  <li class="pay-row is-toggle">
+                    <details class="pay-etc" open>
+                      <summary>추가 비용 <i class="fas fa-chevron-down chev" aria-hidden="true"></i></summary>
+                      <div class="pay-etc__inner">
+                        <div class="pay-row"><span class="lbl">튼튼 포장비</span><span class="val fee" data-pay-kind="extra">+ 1,500엔</span></div>
+                        <div class="pay-row"><span class="lbl">일본내배송 수수료</span><span class="val fee" data-pay-kind="extra">+ 3,000엔</span></div>
+                      </div>
+                    </details>
+                  </li>
+                </ul>
+                <div class="pay-foot">
+                  <div class="pay-total"><span class="lbl">2차 합계</span><span class="val-group"><span class="val" data-pay-total>63,221원</span><span class="calc-sm" data-pay-total-calc>6,798엔</span></span></div>
+                </div>
+              </div>
+
+              <div class="pay-card" data-payment-card="secondary" data-payment-variant="국제배송" hidden>
+              <div class="pay-card__head">
+                <span class="pay-badge second">2차 결제비용</span>
+                <button class="pay-card__date pay-card__receipt" type="button" onclick="openPaymentReceipt(this)">2025-12-14 결제완료</button>
+              </div>
+              <ul class="pay-rows">
+                <li class="pay-row"><span class="lbl">현지세금</span><span class="val muted" data-pay-kind="base">—</span></li>
+                <li class="pay-row"><span class="lbl">현지운송료</span><span class="val" data-pay-kind="base">무료</span></li>
+                <li class="pay-row"><span class="lbl">국제운송료<span class="tooltip-wrap" tabindex="0"><span class="tooltip-icon" aria-label="국제운송료 안내"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span><span class="tooltip-box"><span class="tooltip-grid"><span>무게</span><span>2.5kg</span><span>국제운임</span><span>2,600엔</span></span></span></span></span><span class="val" data-pay-kind="base">2,600엔</span></li>
+                <li class="pay-row is-toggle">
+                  <details class="pay-etc" open>
+                    <summary>추가 비용 <i class="fas fa-chevron-down chev" aria-hidden="true"></i></summary>
+                    <div class="pay-etc__inner">
+                      <div class="pay-row"><span class="lbl">안심케어플러스</span><span class="val fee" data-pay-kind="extra">+ 1,000엔</span></div>
+                      <div class="pay-row"><span class="lbl">튼튼 포장비</span><span class="val fee" data-pay-kind="extra">+ 3,000엔</span></div>
+                      <div class="pay-row"><span class="lbl">사진 촬영 서비스</span><span class="val fee" data-pay-kind="extra">+ 300엔</span></div>
+                    </div>
+                  </details>
+                </li>
+              </ul>
+              <div class="pay-foot">
+                <div class="pay-total"><span class="lbl">2차 합계</span><span class="val-group"><span class="val" data-pay-total>100,421원</span><span class="calc-sm" data-pay-total-calc>10,798엔</span></span></div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 풀폭 총 결제금액 -->
+          <div class="pay-grandtotal">
+            <span class="pay-grandtotal__label">
+              <span class="lbl">총 결제금액 (1차 + 2차)</span>
+            </span>
+            <span class="val-group">
+              <span class="val" data-pay-grand-total>99,138원</span>
+              <span class="val-sm" data-pay-grand-yen>10,660엔</span>
+            </span>
+          </div>
+        </section>
+
+        <!-- 주문배송정보 -->
+        <section>
+          <h3 class="order-title">
+            <b>주문배송정보</b>
+            <button type="button" class="order-title__sub"><span style="font-size:14px">인보이스 출력</span></button>
+          </h3>
+          <article class="order-list-box">
+            <table class="order-info-table">
+              <colgroup>
+                <col class="lbl-col"><col class="val-col"><col class="lbl-col"><col class="val-col">
+              </colgroup>
+              <tbody>
+                <tr>
+                  <th>수취인명</th><td>홍길동</td>
+                  <th class="rgroup">현지도착일</th><td class="mono">2025-12-09 10:15:00</td>
+                </tr>
+                <tr>
+                  <th>개인통관고유부호<br>(사업자번호)</th><td class="mono">P932150008388</td>
+                  <th class="rgroup">안심케어플러스</th><td><span data-care-plus-toggle data-care-active="true" style="display:flex;align-items:center;gap:8px"><strong data-care-plus-status style="color:red">신청</strong><button data-care-plus-button class="order-info-action-btn" type="button" style="height:24px;padding:0 10px;border:1px solid var(--line);border-radius:5px;background:#fff;color:#555;font-size:11px;font-weight:700;cursor:pointer">신청 해제</button></span></td>
+                </tr>
+                <tr>
+                  <th rowspan="3">배송지</th><td rowspan="3">06234<br>서울특별시 강남구 테헤란로 123<br>비드바이빌딩 401호</td>
+                  <th class="rgroup">묶음상태</th><td>묶음배송 <button class="order-info-action-btn" type="button" style="height:24px;padding:0 10px;border:1px solid var(--line);border-radius:5px;background:#fff;color:#555;font-size:11px;font-weight:700;cursor:pointer">묶음 해제</button></td>
+                </tr>
+                <tr>
+                  <th class="rgroup">발송방법</th><td>비바항공특송</td>
+                </tr>
+                <tr>
+                  <th class="rgroup">국제 배송일</th><td class="mono">2025-12-14</td>
+                </tr>
+                <tr>
+                  <th>연락처</th><td class="mono">010-1234-5678</td>
+                  <th class="rgroup">운송장번호</th><td class="mono">EJ123456789JP <button class="order-info-action-btn" type="button" style="height:24px;padding:0 10px;border:1px solid var(--line);border-radius:5px;background:rgb(201, 201, 201);color:#555;font-size:11px;font-weight:700;cursor:pointer">배송조회</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </section>
+
+        <!-- 관련 상품유형 정보 (묶음배송) -->
+        <section>
+          <h3 class="order-title">
+            <b>묶음배송 구성 상품 <span style="color:var(--rose);font-size:13px;font-weight:700">10건</span></b>
+            <a href="web_bundle_shipping_management_2.html" class="order-title__sub"><span style="font-size:14px">묶음배송관리</span></a>
+          </h3>
+          
+            <div class="bundle-table-wrap">
+              <table class="bundle-order-table">
+                <thead>
+                  <tr>
+                    <th>상태</th>
+                    <th>이미지</th>
+                    <th>상품정보</th>
+                    <th>상품가격</th>
+                    <th>결제비용</th>
+                    <th>구매일자</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>현지도착</td>
+                    <td><div class="bundle-thumb"><i class="far fa-image"></i></div></td>
+                    <td class="product-info"><span class="item-tag">[YAHOO] k19410009001</span><span class="item-name">ホンダ XR 100 モタード 純正</span></td>
+                    <td class="price-cell">3,100엔</td>
+                    <td class="price-cell">37,200원</td>
+                    <td class="date-cell">2026-06-29</td>
+                  </tr>
+                  <tr>
+                    <td>현지도착</td>
+                    <td><div class="bundle-thumb"><i class="far fa-image"></i></div></td>
+                    <td class="product-info"><span class="item-tag">[YAHOO] k19410009002</span><span class="item-name">ホンダ エイプ XR100 フロント</span></td>
+                    <td class="price-cell">1,200엔</td>
+                    <td class="price-cell">14,400원</td>
+                    <td class="date-cell">2026-06-28</td>
+                  </tr>
+                  <tr>
+                    <td>현지도착</td>
+                    <td><div class="bundle-thumb"><i class="far fa-image"></i></div></td>
+                    <td class="product-info"><span class="item-tag">[YAHOO] k19410009003</span><span class="item-name">ホンダ 純正 ウインカー 部品</span></td>
+                    <td class="price-cell">900엔</td>
+                    <td class="price-cell">10,800원</td>
+                    <td class="date-cell">2026-06-28</td>
+                  </tr>
+                  <tr>
+                    <td>현지도착</td>
+                    <td><div class="bundle-thumb"><i class="far fa-image"></i></div></td>
+                    <td class="product-info"><span class="item-tag">[YAHOO] k19410009004</span><span class="item-name">スズキ GSX-R 純正ミラー セット</span></td>
+                    <td class="price-cell">2,500엔</td>
+                    <td class="price-cell">30,000원</td>
+                    <td class="date-cell">2026-06-27</td>
+                  </tr>
+                  <tr>
+                    <td>1차 결제완료<br>(현지배송중)</td>
+                    <td><div class="bundle-thumb"><i class="far fa-image"></i></div></td>
+                    <td class="product-info"><span class="item-tag">[YAHOO] k19410009005</span><span class="item-name">カワサキ Z900 タンクパッド</span></td>
+                    <td class="price-cell">780엔</td>
+                    <td class="price-cell">9,360원</td>
+                    <td class="date-cell">2026-06-26</td>
+                  </tr>
+                  <tr>
+                    <td>1차 결제완료<br>(송금완료)</td>
+                    <td><div class="bundle-thumb"><i class="far fa-image"></i></div></td>
+                    <td class="product-info"><span class="item-tag">[YAHOO] k19410009006</span><span class="item-name">ヤマハ MT-07 レバーセット</span></td>
+                    <td class="price-cell">1,560엔</td>
+                    <td class="price-cell">18,720원</td>
+                    <td class="date-cell">2026-06-26</td>
+                  </tr>
+                  <tr>
+                    <td>1차 결제대기</td>
+                    <td><div class="bundle-thumb"><i class="far fa-image"></i></div></td>
+                    <td class="product-info"><span class="item-tag">[YAHOO] k19410009007</span><span class="item-name">ホンダ CBR600RR フェンダーレス</span></td>
+                    <td class="price-cell">4,200엔</td>
+                    <td class="price-cell">50,400원</td>
+                    <td class="date-cell">2026-06-25</td>
+                  </tr>
+                  <tr>
+                    <td>1차 결제대기</td>
+                    <td><div class="bundle-thumb"><i class="far fa-image"></i></div></td>
+                    <td class="product-info"><span class="item-tag">[YAHOO] k19410009008</span><span class="item-name">スズキ バンディット グリップ ペア</span></td>
+                    <td class="price-cell">650엔</td>
+                    <td class="price-cell">7,800원</td>
+                    <td class="date-cell">2026-06-25</td>
+                  </tr>
+                  <tr>
+                    <td>현지도착</td>
+                    <td><div class="bundle-thumb"><i class="far fa-image"></i></div></td>
+                    <td class="product-info"><span class="item-tag">[YAHOO] k19410009009</span><span class="item-name">カワサキ Ninja ZX-6R スクリーン</span></td>
+                    <td class="price-cell">3,300엔</td>
+                    <td class="price-cell">39,600원</td>
+                    <td class="date-cell">2026-06-24</td>
+                  </tr>
+                  <tr>
+                    <td>현지도착</td>
+                    <td><div class="bundle-thumb"><i class="far fa-image"></i></div></td>
+                    <td class="product-info"><span class="item-tag">[YAHOO] k19410009010</span><span class="item-name">ヤマハ YZF-R1 チェーンスライダー</span></td>
+                    <td class="price-cell">1,900엔</td>
+                    <td class="price-cell">22,800원</td>
+                    <td class="date-cell">2026-06-24</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+       
+        </section>
+
+        <!-- 관리자 메모 -->
+        <section id="admin-memo">
+          <h3 class="order-title"><b>관리자 메모</b></h3>
+          <article class="order-list-box admin-memo-box">
+            <div class="admin-memo-day">
+              <div class="admin-memo-date">2026-06-30</div>
+                            <div class="admin-memo-entry">
+                <div class="admin-memo-head">
+                  <time datetime="2026-06-30T21:22:23">21:22:23</time>
+                </div>
+                <div class="admin-memo-content">
+                  <p>안녕하세요.<br>
+                  낙찰받으신 후 24시간이 경과하였습니다.<br>
+                  출품자에게 일방적인 낙찰취소를 당할수 있는 가능성이 있어 알려드립니다.<br>
+                  만약 낙찰취소되시면 보증금 환수 및 등급포인트가 차감되시오니<br>
+                  빠른 결제처리를 부탁드립니다.<br>
+                  감사합니다.</p>
+                </div>
+              </div>
+              <div class="admin-memo-entry">
+                <div class="admin-memo-head">
+                  <time datetime="2026-06-30T10:22:23">10:22:23</time>
+                </div>
+                <div class="admin-memo-content">
+                  <p>안녕하세요.<br>
+                  낙찰받으신 후 12시간이 경과하였습니다.<br>
+                  출품자에게 일방적인 낙찰취소를 당할수 있는 가능성이 있어 알려드립니다.<br>
+                  만약 낙찰취소되시면 보증금 환수 및 등급포인트가 차감되시오니<br>
+                  빠른 결제처리를 부탁드립니다.<br>
+                  감사합니다.</p>
+                </div>
+              </div>
+            </div>
+            <div class="admin-memo-day">
+              <div class="admin-memo-date">2026-06-26</div>
+              <div class="admin-memo-entry">
+                <div class="admin-memo-head">
+                  <time datetime="2026-06-26T15:55:23">15:55:23</time>
+                </div>
+                <div class="admin-memo-content">
+                  <p>안녕하세요, 고객님.<br>
+                  구매신청 감사합니다.<br>
+                  가격변동 및 품절 등 있을 경우에는 관리자메모로 안내 드리도록 하겠습니다.<br>
+                  구매완료되면 "결제완료" 에서 "주문완료" 로 상태 변경 됩니다.</p>
+                  <p class="admin-memo-highlight">[청약 철회에 대한 안내]</p>
+                  <p>실제 주문완료 이후에는 구매대행계약의 청약철회를 할 수 없습니다.<br>
+                  다만, 판매자가 환불에 동의한 경우 고객님의 비용부담으로 반품, 환불 절차를 대행합니다. (메루카리/라쿠마/페이페이프리마 제외)<br>
+                  이 경우 대행 수수료는 환불 대상이 아닙니다.</p>
+                  <p>또한 부피, 무게 등의 차이로 인한 송료 차액은 2차 결제 시 실제 금액으로 정산 될 수 있는 점 참고 바랍니다.<br>
+                  감사합니다.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- 주문 메모 내역 -->
+        <section id="user-memo">
+          <h3 class="order-title"><b>사용자 메모 내역</b></h3>
+          <article class="order-list-box">
+            <div class="order-memo-box">
+              <div class="basic-textarea">
+                <textarea placeholder="메모 또는 문의 내용 입력 (최대 500자)" maxlength="500"></textarea>
+              </div>
+              <button type="button" class="basic-button__gray">등록</button>
+            </div>
+            <ul class="order-memo-list thread">
+              <li class="msg agent">
+                <div class="msg-head">
+                  <span class="msg-label">답변</span>
+                  <span class="msg-who">관리자</span>
+                  <span class="msg-date">2025-12-15 14:32</span>
+                </div>
+                <div class="msg-bubble">
+                  <p>상품이 정상적으로 국내 도착하였습니다. 배송 완료 확인 부탁드립니다.</p>
+                </div>
+              </li>
+              <li class="msg customer">
+                <div class="msg-head">
+                  <span class="msg-label">문의</span>
+                  <span class="msg-who">홍길동</span>
+                  <span class="msg-date">2025-12-15 15:08</span>
+                </div>
+                <div class="msg-bubble">
+                  <p>배송 일정 확인 부탁드립니다.</p>
+                </div>
+              </li>
+              <li class="msg agent">
+                <div class="msg-head">
+                  <span class="msg-label">답변</span>
+                  <span class="msg-who">비드바이 cs팀</span>
+                  <span class="msg-date">2025-12-15 15:24</span>
+                </div>
+                <div class="msg-bubble">
+                  <p>현재 국내 배송 준비 중이며 출고 완료 시 송장번호를 안내드리겠습니다.</p>
+                </div>
+              </li>
+              <li class="msg customer">
+                <div class="msg-head">
+                  <span class="msg-label">문의</span>
+                  <span class="msg-who">홍길동</span>
+                  <span class="msg-date">2025-12-16 09:12</span>
+                </div>
+                <div class="msg-bubble">
+                  <p>추가 배송비 결제는 어디에서 확인하면 되나요?</p>
+                </div>
+              </li>
+              <li class="msg agent">
+                <div class="msg-head">
+                  <span class="msg-label">답변</span>
+                  <span class="msg-who">비드바이 cs팀</span>
+                  <span class="msg-date">2025-12-16 09:30</span>
+                </div>
+                <div class="msg-bubble">
+                  <p>주문 상세의 2차 결제 비용 영역에서 확인 및 결제하실 수 있습니다.</p>
+                </div>
+              </li>
+              <li class="msg customer">
+                <div class="msg-head">
+                  <span class="msg-label">문의</span>
+                  <span class="msg-who">홍길동</span>
+                  <span class="msg-date">2025-12-16 13:05</span>
+                </div>
+                <div class="msg-bubble">
+                  <p>묶음배송으로 변경 가능한지 확인 부탁드립니다.</p>
+                </div>
+              </li>
+              <li class="msg agent">
+                <div class="msg-head">
+                  <span class="msg-label">답변</span>
+                  <span class="msg-who">비드바이 cs팀</span>
+                  <span class="msg-date">2025-12-16 13:26</span>
+                </div>
+                <div class="msg-bubble">
+                  <p>동일 배송지 주문 건 확인 후 묶음배송 가능 여부를 안내드리겠습니다.</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+        </section>
+
+        <!-- 문의하기 -->
+        <div class="inquiry-wrap">
+          <button class="inquiry-btn inquiry-btn--print" type="button">
+            <i class="fas fa-print"></i> 인쇄하기
+          </button>
+          <button class="inquiry-btn" type="button">
+            <i class="fas fa-list"></i> 주문 목록
+          </button>
+        </div>
+
+      </div><!-- /order__stack -->
+
+    </main>
+</div><!-- /stage -->
+</div><!-- /page -->
+
+<div class="confirm-modal" id="paymentReceiptModal" onclick="closePaymentReceipt(event)">
+  <div class="confirm-modal-card receipt-modal-card" onclick="event.stopPropagation()">
+    <div class="receipt-modal-body">
+      <div class="receipt-head">
+        <h2>거래확인서</h2>
+        <div class="receipt-actions">
+          <button class="receipt-icon-btn" type="button" onclick="window.print()" aria-label="거래확인서 인쇄"><i class="fa-solid fa-print" aria-hidden="true"></i></button>
+          <button class="receipt-icon-btn" type="button" onclick="closePaymentReceipt()" aria-label="닫기">&times;</button>
+        </div>
+      </div>
+      <div class="receipt-tools">
+        <select aria-label="거래확인서 상태">
+          <option>승인</option>
+        </select>
+        <input type="email" value="km****@paran.com" aria-label="이메일">
+        <button class="receipt-send" type="button" aria-label="이메일 발송"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i></button>
+      </div>
+      <section class="receipt-paper" aria-label="결제영수증">
+        <dl class="receipt-list">
+          <div class="receipt-row"><dt>주문 번호</dt><dd id="receiptOrderNo">a12345678901</dd></div>
+          <div class="receipt-row"><dt>구매자</dt><dd>홍*동</dd></div>
+          <div class="receipt-row"><dt>구매 상품</dt><dd id="receiptProductName">아버지의 날 선물 스위츠 쿠키 피스타치오 샌드 10종 어소트 랑그드샤 초콜릿</dd></div>
+          <div class="receipt-row receipt-total"><dt>합계(원)</dt><dd><span id="receiptTotalWon">35,927</span> 원 <i class="fa-solid fa-circle-check" aria-hidden="true"></i></dd></div>
+          <div class="receipt-row"><dt>결제수단</dt><dd>신용카드</dd></div>
+          <div class="receipt-row"><dt>결제수단번호</dt><dd>123456******7890</dd></div>
+          <div class="receipt-row"><dt>거래일시</dt><dd id="receiptPaidAt">2026.06.30 | 10:22:01</dd></div>
+        </dl>
+        <dl class="receipt-list receipt-company">
+          <div class="receipt-row"><dt>상호</dt><dd>비드바이코리아</dd></div>
+          <div class="receipt-row"><dt>대표자명</dt><dd>예창민</dd></div>
+          <div class="receipt-row"><dt>사업자등록 번호</dt><dd>107-87-03406</dd></div>
+          <div class="receipt-row"><dt>전화번호</dt><dd>1544-5224</dd></div>
+          <div class="receipt-row"><dt>사업장주소</dt><dd>서울특별시 영등포구 경인로 775<br>1동 1506호 (문래동3가, 에이스하이테크시티)</dd></div>
+          <div class="receipt-row"><dt>URL주소</dt><dd>www.bidbuy.co.kr</dd></div>
+        </dl>
+      </section>
+      <p class="receipt-note">· 본 거래확인서는 세금계산서 대용으로 사용할 수 없습니다.</p>
+      <div class="receipt-nice">NICEPAY</div>
+      <div class="receipt-footer">
+        <strong>결제대행사</strong>
+        나이스정보통신(주) | 대표자: 김승현 | 사업자번호: 220-81-15770 | 전화: 1661-0808 |<br>
+        주소: 서울특별시 영등포구 은행로 17 (나이스그룹 1사옥) 나이스정보통신(주) |<br>
+        https://www.nicepay.co.kr
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="confirm-modal" id="bidHistoryModal" onclick="closeBidHistoryModal(event)">
+  <div class="confirm-modal-card bid-history-modal-card" onclick="event.stopPropagation()">
+    <div class="confirm-modal-body">
+      <div class="bid-hist-table-wrap">
+        <button class="bid-history-table-close" type="button" onclick="closeBidHistoryModal()" aria-label="닫기">&times;</button>
+        <table class="bid-hist-table">
+          <thead>
+            <tr><th>입찰일시</th><th>입찰가</th><th>상태</th></tr>
+          </thead>
+          <tbody id="bidHistoryBody">
+            <tr>
+              <td class="roboto" style="color:var(--ts);font-size:11px">2024.05.10<br>17:13:48</td>
+              <td><span style="font-size:11px;color:var(--ts)">옵션명옵션선명<br>1개 | </span><span class="roboto" style="font-weight:700">300엔</span></td>
+              <td><span class="bid-status-badge bid-status-reserve">예약입찰</span></td>
+            </tr>
+            <tr>
+              <td class="roboto" style="color:var(--ts);font-size:11px">2024.05.10<br>17:13:48</td>
+              <td><span style="font-size:11px;color:var(--ts)">옵션명<br>1개 | </span><span class="roboto" style="font-weight:700">300엔</span></td>
+              <td><span class="bid-status-badge bid-status-reserve">예약입찰</span></td>
+            </tr>
+            <tr>
+              <td class="roboto" style="color:var(--ts);font-size:11px">2024.05.10<br>17:13:48</td>
+              <td><span style="font-size:11px;color:var(--ts)">옵션명<br>1개 | </span><span class="roboto" style="font-weight:700">300엔</span></td>
+              <td><span class="bid-status-badge bid-status-reserve">예약입찰</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 드로어 ── -->
+<div class="drawer-ov" id="drawerOv" onclick="closeDrawer()"></div>
+<nav class="drawer" id="drawer" aria-label="사이트 메뉴" aria-hidden="true">
+  <div class="dr-head">
+    <div class="dr-user-mini">
+      <div class="u-av tier-premium member-tier-icon" aria-label="Premium 등급"><i class="fa-solid fa-gem" aria-hidden="true"></i></div>
+      <div>
+        <div class="dr-user-mini-name">홍길동님</div>
+        <div class="dr-user-mini-grade">Premium 회원</div>
+      </div>
+    </div>
+    <button class="dr-close" type="button" aria-label="메뉴 닫기" onclick="closeDrawer()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="dr-user-assets">
+    <div class="dr-user-asset"><span>마일리지</span><strong>485점</strong></div>
+    <div class="dr-user-asset-div"></div>
+    <div class="dr-user-asset"><span>쿠폰</span><strong>7장</strong></div>
+  </div>
+  <div class="dr-sec">
+    <div class="dr-sec-title">마이페이지</div>
+    <div class="dr-mypage-list">
+      <a class="dr-mypage-item" href="web_mypage.html"><i class="fas fa-list-check"></i> 거래 전체 목록</a>
+      <a class="dr-mypage-item" href="#"><i class="fas fa-receipt"></i> 결제상세내역</a>
+      <a class="dr-mypage-item" href="#"><i class="fas fa-gavel"></i> 경매 입찰/유찰</a>
+      <a class="dr-mypage-item" href="#"><i class="fas fa-truck"></i> 배송신청/변경</a>
+      <a class="dr-mypage-item" href="#"><i class="fas fa-coins"></i> 마일리지 / 쿠폰</a>
+    </div>
+  </div>
+  <div class="dr-sec">
+    <div class="dr-sec-title">바로가기</div>
+    <div class="dr-link-grid">
+      <a href="web_main.html">홈</a>
+      <a href="#">통합검색</a>
+      <a href="#">고객센터</a>
+      <a href="#">도움말</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+function openDrawer() {
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawerOv').classList.add('open');
+  document.getElementById('drawer').setAttribute('aria-hidden', 'false');
+}
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerOv').classList.remove('open');
+  document.getElementById('drawer').setAttribute('aria-hidden', 'true');
+}
+
+function openBidHistoryModal() {
+  document.getElementById('bidHistoryModal')?.classList.add('open');
+}
+
+function closeBidHistoryModal(event) {
+  if (event && event.target !== event.currentTarget) return;
+  document.getElementById('bidHistoryModal')?.classList.remove('open');
+}
+
+function parsePaymentYenText(text) {
+  const normalized = String(text || '').replace(/,/g, '');
+  const yen = normalized.match(/(\d+(?:\.\d+)?)\s*엔/);
+  if (yen) return Math.abs(Number(yen[1]));
+  const won = normalized.match(/(\d+(?:\.\d+)?)\s*원/);
+  if (won) return Math.abs(Number(won[1]) / 9.3);
+  return 0;
+}
+
+function formatPaymentYen(value) {
+  return `${Math.round(value).toLocaleString('ko-KR')}엔`;
+}
+
+function formatPaymentWon(value) {
+  return `${Math.round(value * 9.3).toLocaleString('ko-KR')}원`;
+}
+
+function updatePaymentTotals() {
+  let primaryTotal = 0;
+  let secondaryTotal = 0;
+
+  document.querySelectorAll('[data-payment-card]').forEach(card => {
+    if (card.hidden) return;
+    const sum = kind => Array.from(card.querySelectorAll(`[data-pay-kind="${kind}"]`))
+      .reduce((total, el) => total + parsePaymentYenText(el.textContent), 0);
+    const base = sum('base');
+    const discount = sum('discount');
+    const extra = sum('extra');
+    const cardTotal = card.dataset.paymentCard === 'primary' ? base - discount : base + extra;
+    const totalEl = card.querySelector('[data-pay-total]');
+    const totalCalcEl = card.querySelector('[data-pay-total-calc]');
+
+    if (card.dataset.paymentCard === 'primary') primaryTotal = cardTotal;
+    if (card.dataset.paymentCard === 'secondary') secondaryTotal = cardTotal;
+    if (totalEl) {
+      if (totalCalcEl) {
+        totalEl.textContent = formatPaymentWon(cardTotal);
+        totalCalcEl.textContent = formatPaymentYen(cardTotal);
+      } else {
+        totalEl.textContent = totalEl.dataset.payCurrency === 'krw'
+          ? formatPaymentWon(cardTotal)
+          : formatPaymentYen(cardTotal);
+      }
+    }
+  });
+
+  const grandTotal = primaryTotal + secondaryTotal;
+  document.querySelectorAll('[data-pay-grand-yen]').forEach(el => {
+    el.textContent = formatPaymentYen(grandTotal);
+  });
+  document.querySelectorAll('[data-pay-grand-total]').forEach(el => {
+    el.textContent = formatPaymentWon(grandTotal);
+  });
+}
+
+function setupPaymentSwitch() {
+  const switchEl = document.querySelector('[data-payment-switch]');
+  const cards = Array.from(document.querySelectorAll('[data-payment-card="secondary"]'));
+  if (!switchEl || cards.length < 2) return;
+
+  const label = switchEl.querySelector('[data-payment-switch-label]');
+  let activeIndex = cards.findIndex(card => !card.hidden);
+  if (activeIndex < 0) activeIndex = 0;
+
+  const render = () => {
+    cards.forEach((card, index) => {
+      card.hidden = index !== activeIndex;
+    });
+    if (label) label.textContent = cards[activeIndex].dataset.paymentVariant || '';
+    updatePaymentTotals();
+  };
+
+  switchEl.querySelectorAll('[data-payment-switch-dir]').forEach(button => {
+    button.addEventListener('click', () => {
+      const dir = Number(button.dataset.paymentSwitchDir) || 1;
+      activeIndex = (activeIndex + dir + cards.length) % cards.length;
+      render();
+    });
+  });
+
+  render();
+}
+
+function setupCarePlusToggle() {
+  document.querySelectorAll('[data-care-plus-toggle]').forEach(row => {
+    const status = row.querySelector('[data-care-plus-status]');
+    const button = row.querySelector('[data-care-plus-button]');
+    if (!status || !button) return;
+
+    const render = () => {
+      const isActive = row.dataset.careActive === 'true';
+      status.textContent = isActive ? '신청' : '미신청';
+      status.style.color = isActive ? 'red' : '#999';
+      button.textContent = isActive ? '신청 해제' : '신청';
+    };
+
+    button.addEventListener('click', () => {
+      row.dataset.careActive = row.dataset.careActive === 'true' ? 'false' : 'true';
+      render();
+    });
+
+    render();
+  });
+}
+
+function closePaymentReceipt(event) {
+  if (event && event.target !== event.currentTarget) return;
+  const modal = document.getElementById('paymentReceiptModal');
+  if (modal) modal.classList.remove('open');
+}
+
+function openPaymentReceipt(trigger) {
+  updatePaymentTotals();
+  const card = trigger.closest('[data-payment-card]');
+  const modal = document.getElementById('paymentReceiptModal');
+  if (!card || !modal) return;
+
+  const orderMatch = document.body.textContent.match(/BJP\d+/);
+  const orderNo = orderMatch ? orderMatch[0] : 'a12345678901';
+  const productName = document.querySelector('.order-item__name-ko')?.textContent.trim() || '주문 상품';
+  const totalWon = card.querySelector('[data-pay-total]')?.textContent.replace('원', '').trim() || '0';
+  const paidDate = trigger.textContent.match(/\d{4}-\d{2}-\d{2}/)?.[0] || '2025-12-08';
+  const paidTime = card.dataset.paymentCard === 'primary' ? '10:22:01' : '15:55:23';
+
+  const orderEl = document.getElementById('receiptOrderNo');
+  const productEl = document.getElementById('receiptProductName');
+  const totalEl = document.getElementById('receiptTotalWon');
+  const paidAtEl = document.getElementById('receiptPaidAt');
+  if (orderEl) orderEl.textContent = orderNo;
+  if (productEl) productEl.textContent = productName;
+  if (totalEl) totalEl.textContent = totalWon;
+  if (paidAtEl) paidAtEl.textContent = `${paidDate.replaceAll('-', '.')} | ${paidTime}`;
+
+  modal.classList.add('open');
+}
+
+updatePaymentTotals();
+setupPaymentSwitch();
+setupCarePlusToggle();
+</script>
+<script src="bb-common.js"></script>
+</body>
+</html>

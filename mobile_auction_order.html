@@ -1,0 +1,419 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bidbuy 실시간 입찰하기</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Roboto:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --rose: #E8385A;
+      --rose-h: #C42F4C;
+      --navy: #1A3C6E;
+      --amber: #F5A623;
+      --green: #3AAD4E;
+      --bg: #F5F7FA;
+      --white: #fff;
+      --border: #E0E4EB;
+      --border-soft: #F0EDE9;
+      --bg-warm: #FBF7F5;
+      --bg-warm2: #F7F3F0;
+      --tp: #1A1A2E;
+      --ts: #666680;
+      --tm: #999BAA;
+      --ink: #20242b;
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--bg); }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      max-width: 480px;
+      margin: 0 auto;
+      color: var(--tp);
+      background: var(--bg);
+      font-family: Pretendard, 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── 헤더 (mobile_auction 이식) ── */
+    .m-header{
+      background:var(--white); border-bottom:1px solid var(--border);
+      position:sticky; top:0; z-index:100;
+    }
+    .m-header-top{
+      display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:12px;
+      padding:1px;min-height:56px;}
+    .m-brand-area{display:flex; align-items:center; gap:10px; min-width:0}
+    .hb{width:34px;height:34px;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0;background:none;border:none;cursor:pointer;flex-shrink:0}
+    .hb span{display:block;width:18px;height:2px;background:var(--tp);border-radius:999px}
+    .m-logo{display:inline-flex; align-items:center;width:76px;line-height:0;}
+.m-logo img{width:100%;height:auto;display:block;}
+    .m-header-right{display:flex; gap:4px; align-items:center; justify-self:end}
+    .m-icon-btn{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:none;background:none;color:var(--tp);font-size:16px;border-radius:5px;cursor:pointer;position:relative}
+    .m-icon-btn .badge{position:absolute;top:3px;right:2px;background:var(--rose);color:#fff;font-size:7px;font-weight:700;min-width:13px;height:13px;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:0 2px}
+    .m-login-btn{min-width:62px;height:30px;background:var(--rose);color:#fff;border:none;padding:0 14px;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit}
+    .m-user-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--amber));display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;cursor:pointer;border:none;font-family:inherit;flex-shrink:0}
+
+    /* ── 콘텐츠 ── */
+    .stage {
+      padding: 18px 16px 80px;
+      background: var(--white);
+      min-height: 100vh;
+    }
+
+    .page-head { display: flex; align-items: center; gap: 8px; margin: 0 0 18px; }
+    .page-back { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; border: 1px solid #d7dee8; background: #fff; color: var(--navy); font-size: 14px; border-radius: 50%; }
+    .page-head h2 { margin: 0; color: var(--tp); font-size: 20px; font-weight:700; }
+
+    /* ── 단계 표시 ── */
+    .steps { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; overflow-x: auto; scrollbar-width: none; }
+    .steps::-webkit-scrollbar { display: none; }
+    .step { display: flex; align-items: center; gap: 8px; }
+    .step-num {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--tm);
+      font-family: Roboto, sans-serif;
+      font-size: 12px; font-weight:700;
+    }
+    .step-label { color: var(--tm); font-size: 12px; font-weight: 700; }
+    .step.active .step-num { border-color: var(--rose); background: var(--rose); color: #fff; }
+    .step.active .step-label { color: var(--tp); font-weight:700; }
+    .step.done .step-num { border-color: var(--navy); background: var(--navy); color: #fff; }
+    .step.done .step-label { color: var(--navy); }
+    .step-arrow { color: #d4cdc8; font-size: 11px; }
+    .progress-divider { height: 1px; background: var(--border); margin: 0 0 24px; }
+
+    /* ── 물품 요약 ── */
+    .item-summary {
+      border-bottom: 2px solid var(--ink);
+      padding: 14px 0;
+      margin-bottom: 24px;
+    }
+    .item-summary-row { display: grid; grid-template-columns: 104px minmax(0,1fr); gap: 4px 10px; padding: 4px 0; font-size: 13px; }
+    .item-summary-row b { color: var(--ts); font-size: 12px; font-weight:700; padding-top: 1px; }
+    .item-summary-row .val { color: var(--tp); }
+    .item-summary-row .val strong { color: var(--rose); font-weight:700; }
+    .item-summary-row .val .krw { color: var(--ts); font-weight: 500; font-size: 12px; }
+    .seller-eval { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 12px; color: var(--tp); flex-wrap: wrap; }
+    .seller-eval__item { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+    .seller-eval__item i { font-size: 13px; line-height: 1; }
+    .seller-eval__item.good i { color: #19bfb4; }
+    .seller-eval__item.bad i { color: #f26a21; }
+    .seller-eval__count.good { color: #0070c9; }
+    .seller-eval__count.bad { color: #e8382f; }
+    .seller-eval__divider { width: 1px; height: 14px; background: #d8d8d8; }
+
+    /* ── 섹션 공통 ── */
+    .sec { margin-bottom: 28px; }
+    .sec-title {
+      display: flex; align-items: center; gap: 8px;
+      margin: 0 0 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      color: var(--tp); font-size: 15px; font-weight:700;
+    }
+    .sec-title .sec-no { color: var(--rose); font-family: Roboto, sans-serif; font-size: 13px; font-weight:700; }
+
+    /* 입찰 확인 */
+    .confirm-box { border-bottom: 1px solid var(--border); }
+    .confirm-row {
+      display: grid;
+      grid-template-columns: 104px minmax(0,1fr);
+      gap: 14px;
+      padding: 12px 4px;
+      border-bottom: 1px solid var(--border-soft);
+      font-size: 13px;
+    }
+    .confirm-row:last-child { border-bottom: 0; }
+    .confirm-row b { color: var(--ts); font-size: 12px; font-weight:700; }
+    .confirm-row .val { color: var(--tp); font-weight: 700; }
+    .confirm-row .val.amount { color: var(--rose); font-size: 16px; font-weight:700; }
+    .confirm-row .val .sub { color: var(--ts); font-size: 12px; font-weight: 500; }
+
+    .confirm-warn {
+      margin: 14px 0 0;
+      text-align: center;
+      color: #41454f;
+      font-size: 12px;
+    }
+    .confirm-warn b { color: var(--rose); font-weight:700; }
+    .confirm-warn .small { color: var(--tm); font-size: 11px; }
+
+    /* 규정 */
+    .rules {
+      margin: 0;
+      padding: 14px 16px;
+      background: var(--bg-warm);
+      color: #6b7280;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+    .rules p { margin: 0 0 8px; }
+    .rules p:last-child { margin: 0; }
+    .rules .danger { color: var(--rose); font-weight: 700; }
+
+    .agree-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border-soft);
+      font-size: 13px; font-weight: 700; color: var(--tp);
+      cursor: pointer;
+    }
+    .agree-row input { width: 16px; height: 16px; accent-color: var(--rose); margin: 0; cursor: pointer; }
+
+    /* 액션 */
+    .actions { display: flex; justify-content: center; gap: 10px; margin-top: 30px; }
+    .big-btn {
+      height: 46px;
+      min-width: 0;
+      flex: 1;
+      padding: 0 20px;
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-size: 14px;
+      font-weight:700;
+      white-space: nowrap;
+    }
+    .big-btn.line { border: 1px solid var(--border); background: var(--white); color: var(--ts); }
+    .big-btn.line:hover { border-color: #b9b2ad; color: var(--tp); }
+    .big-btn.primary { border: 1px solid var(--rose); background: var(--rose); color: #fff; }
+    .big-btn.primary:hover { background: var(--rose-h); }
+    .big-btn.primary:disabled { border-color: #e8c9d1; background: #e8c9d1; cursor: not-allowed; }
+
+    .confirm-modal { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; background: rgba(17, 24, 39, .45); padding: 20px; }
+    .confirm-modal.open { display: flex; }
+    .confirm-modal-card { width: min(400px, 100%); background: var(--white); border-radius: 14px; box-shadow: 0 20px 60px rgba(0,0,0,.18); overflow: hidden; }
+    .confirm-modal-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; border-bottom: 1px solid var(--border); }
+    .confirm-modal-head strong { color: var(--tp); font-size: 15px; font-weight:700; }
+    .confirm-modal-close { border: 0; background: none; color: var(--tm); font-size: 20px; line-height: 1; }
+    .confirm-modal-body { padding: 20px; }
+    .confirm-amount-box { background: var(--bg-warm); border: 1px solid var(--border-soft); border-radius: 10px; padding: 14px 16px; margin-bottom: 14px; }
+    .confirm-modal .confirm-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--border-soft); }
+    .confirm-modal .confirm-row:first-child { padding-top: 0; }
+    .confirm-modal .confirm-row:last-child { padding-bottom: 0; border-bottom: 0; }
+    .confirm-modal .confirm-row span { color: var(--ts); font-size: 12px; font-weight: 700; }
+    .confirm-modal .confirm-row strong { color: var(--tp); font-family: Roboto, sans-serif; font-size: 15px; font-weight:700; }
+    .confirm-modal .confirm-row strong.amount { color: var(--rose); font-size: 18px; }
+    .confirm-note { margin: 0 0 18px; color: var(--rose); font-size: 12px; font-weight:700; line-height: 1.7; }
+    .confirm-actions { display: flex; justify-content: flex-end; gap: 8px; }
+    .confirm-btn { height: 40px; padding: 0 18px; border-radius: 5px; font-size: 13px; font-weight:700; }
+    .confirm-btn.line { border: 1px solid var(--border); background: var(--white); color: var(--ts); }
+    .confirm-btn.primary { border: 1px solid var(--rose); background: var(--rose); color: #fff; }
+  </style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<header class="m-header">
+  <div class="m-header-top">
+    <div class="m-brand-area">
+      <button class="hb" type="button" aria-label="메뉴 열기" aria-expanded="false" onclick="openDrawer()"><span></span><span></span><span></span></button>
+      <a class="m-logo" href="mobile_main.html" aria-label="BidBuy 홈">
+        <img src="Bidbuy logo.png" alt="BidBuy Korea">
+      </a>
+    </div>
+    <div class="m-header-right" id="m-guest-area">
+      <button class="m-login-btn" onclick="doMLogin()">로그인</button>
+    </div>
+    <div class="m-header-right" id="m-user-area" style="display:none">
+      <button class="m-icon-btn" aria-label="알림">
+        <i class="fa-regular fa-bell"></i><span class="badge">3</span>
+      </button>
+      <button class="m-icon-btn" aria-label="장바구니">
+        <i class="fa-solid fa-cart-shopping"></i><span class="badge">2</span>
+      </button>
+      <button class="m-user-avatar" onclick="alert('마이페이지')" aria-label="회원 메뉴">한</button>
+    </div>
+  </div>
+</header>
+
+<div class="stage">
+  <div class="page-head">
+    <button class="page-back" type="button" onclick="history.back()" aria-label="뒤로가기"><i class="fa-solid fa-arrow-left"></i></button>
+    <h2>실시간 입찰하기</h2>
+  </div>
+
+  <!-- 단계 표시 -->
+  <div class="steps" aria-label="입찰 진행 단계">
+    <div class="step active" id="step1"><span class="step-num">1</span><span class="step-label">입찰내용 확인</span></div>
+    <i class="fas fa-chevron-right step-arrow"></i>
+    <div class="step" id="step2"><span class="step-num">2</span><span class="step-label">입찰 완료</span></div>
+  </div>
+  <div class="progress-divider" aria-hidden="true"></div>
+
+  <!-- 물품 요약 -->
+  <div class="item-summary">
+    <div class="item-summary-row"><b>물품아이디 (옵션)</b><span class="val">v1135509199 (옵션명)</span></div>
+    <div class="item-summary-row"><b>출품자</b><span class="val">bookoff2014
+      <div class="seller-eval"><span class="seller-eval__item good"><i class="fa-solid fa-thumbs-up" aria-hidden="true"></i><span>좋은평가</span> <span class="seller-eval__count good">1,071</span></span><span class="seller-eval__divider" aria-hidden="true"></span><span class="seller-eval__item bad"><i class="fa-solid fa-thumbs-down" aria-hidden="true"></i><span>나쁜평가</span> <span class="seller-eval__count bad">6</span></span></div>
+    </span></div>
+    <div class="item-summary-row"><b>현재 입찰가</b><span class="val"><strong id="curBidVal">1,200 엔 (천이백 엔)</strong></span></div>
+    <div class="item-summary-row"><b>종료시간</b><span class="val">2026-06-14 12:12:12</span></div>
+  </div>
+
+  <!-- 01. 입찰내용 확인 -->
+  <section class="sec" aria-labelledby="sec1-title">
+    <h3 class="sec-title" id="sec1-title"><span class="sec-no">01</span> 입찰내용 확인</h3>
+    <div class="confirm-box">
+      <div class="confirm-row"><b>입찰금액</b><span class="val amount" id="cfAmount">1,300 엔 (천삼백 엔)</span></div>
+      <div class="confirm-row"><b>입찰 수량</b><span class="val" id="cfQty">1개</span></div>
+      <div class="confirm-row"><b>포장옵션</b><span class="val" id="cfPacking">선택 안함</span></div>
+    </div>
+    <p class="confirm-warn">
+      최고 입찰자로 낙찰된 후에는 <b>낙찰 취소가 불가능</b>합니다.<br>
+      <span class="small">(취소 시 보증금이 환수됩니다.)</span>
+    </p>
+  </section>
+
+  <!-- 02. 입찰 승인 안내 및 규정 -->
+  <section class="sec" aria-labelledby="sec2-title">
+    <h3 class="sec-title" id="sec2-title"><span class="sec-no">02</span> 입찰 승인 안내 및 규정</h3>
+    <div class="rules">
+      <p>1. <span class="danger">경매 입찰이 반영되면 입찰취소가 불가능합니다.</span>
+      입찰 전 금액과 수량을 반드시 확인해 주세요.</p>
+      <p>2. 경매 낙찰 이후에는 경매대행계약의 청약철회 등을 할 수 없습니다.
+      그럼에도 불구하고, 부득이한 사유로 낙찰취소를 할 경우 경매 보증금이 환수됩니다.
+      <span class="danger"><br>(세번의 낙찰취소를 하시면 비드바이 사이트 이용이 영구적으로 정지됩니다.)</span>
+      <br>물품을 결제하신 이후에 청약철회를 원하실 경우에도 원칙적으로 청약철회 등을 할 수 없습니다.</p>
+      <p>3. 상품제목 및 설명 란에 <span class="danger">정크(JUNK)</span>로 표기되어 있는 경우 <span class="danger">파손보상에서 제외됩니다.</span>
+      <br><span class="danger">제품 상태 및 진가품 여부</span>에 대해 비드바이는 절대 책임지지 않습니다.</p>
+      <p>4. 음향기기(턴테이블, 앰프, 스피커, 카세트테이프 등) 및 계측기 등 기계류의 작동 불량은  <span class="danger">클레임 대상에서 제외됩니다.</span></p>
+    </div>
+    <label class="agree-row">
+      <input type="checkbox" id="agreeChk" onchange="updateState()">
+      위 규정에 동의하며 입찰을 신청합니다.
+    </label>
+  </section>
+
+  <div class="actions">
+    <button class="big-btn line" type="button" onclick="history.back()">취소</button>
+    <button class="big-btn primary" type="button" id="submitBtn" disabled onclick="submitBid()"><i class="fas fa-gavel"></i> 입찰하기</button>
+  </div>
+</div>
+
+<div class="confirm-modal" id="finalBidModal" onclick="closeFinalBidModal(event)">
+  <div class="confirm-modal-card" onclick="event.stopPropagation()">
+    <div class="confirm-modal-head">
+      <strong>입찰 내용 최종 확인</strong>
+      <button class="confirm-modal-close" type="button" onclick="closeFinalBidModal()">&times;</button>
+    </div>
+    <div class="confirm-modal-body">
+      <div class="confirm-amount-box">
+        <div class="confirm-row">
+          <span>입찰 금액</span>
+          <strong class="amount" id="modalBidAmount">1,300 엔 (천삼백 엔)</strong>
+        </div>
+        <div class="confirm-row">
+          <span>수량</span>
+          <strong id="modalBidQty">1개</strong>
+        </div>
+        <div class="confirm-row">
+          <span>포장옵션</span>
+          <strong id="modalBidPacking">선택 안함</strong>
+        </div>
+      </div>
+      <p class="confirm-note">입찰이 반영된 이후에는 입찰취소가 불가능합니다.
+        <br>금액과 수량을 다시 확인하신 후 진행해 주세요.</p>
+      <div class="confirm-actions">
+        <button class="confirm-btn line" type="button" onclick="closeFinalBidModal()">취소</button>
+        <button class="confirm-btn primary" type="button" onclick="confirmFinalBid()">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function doMLogin(){
+  document.getElementById('m-guest-area').style.display = 'none';
+  document.getElementById('m-user-area').style.display = '';
+}
+const ORDER_PARAMS = new URLSearchParams(location.search);
+const CONFIRMED_BID = Number(ORDER_PARAMS.get('bid') || 1300);
+const CONFIRMED_QTY = Number(ORDER_PARAMS.get('qty') || 1);
+const CONFIRMED_PACKING = ORDER_PARAMS.get('packing') || '선택 안함';
+
+function formatBidYen(value) {
+  const amount = Number(value) || 0;
+  return amount.toLocaleString('ko-KR') + ' 엔 (' + numberToKorean(amount) + ' 엔)';
+}
+
+function numberToKorean(value) {
+  const amount = Number(value) || 0;
+  if (amount === 0) return '영';
+  const digitNames = ['', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
+  const smallUnits = ['', '십', '백', '천'];
+  const bigUnits = ['', '만', '억'];
+  const readGroup = group => {
+    let text = '';
+    const digits = String(group).padStart(4, '0').split('').map(Number);
+    digits.forEach((digit, index) => {
+      if (!digit) return;
+      const unitIndex = 3 - index;
+      text += (digit === 1 && unitIndex > 0 ? '' : digitNames[digit]) + smallUnits[unitIndex];
+    });
+    return text;
+  };
+  const groups = [];
+  let rest = amount;
+  while (rest > 0) {
+    groups.push(rest % 10000);
+    rest = Math.floor(rest / 10000);
+  }
+  return groups.map((group, index) => group ? readGroup(group) + bigUnits[index] : '').reverse().join('');
+}
+
+function updateConfirmedValues() {
+  const cfAmount = document.getElementById('cfAmount');
+  const cfQty = document.getElementById('cfQty');
+  const cfPacking = document.getElementById('cfPacking');
+  if (cfAmount) cfAmount.textContent = formatBidYen(CONFIRMED_BID);
+  if (cfQty) cfQty.textContent = CONFIRMED_QTY.toLocaleString('ko-KR') + '개';
+  if (cfPacking) cfPacking.textContent = CONFIRMED_PACKING;
+}
+
+function updateState() {
+  const agreed = document.getElementById('agreeChk').checked;
+  document.getElementById('submitBtn').disabled = !agreed;
+}
+
+function submitBid() {
+  document.getElementById('modalBidAmount').textContent = formatBidYen(CONFIRMED_BID);
+  document.getElementById('modalBidQty').textContent = CONFIRMED_QTY.toLocaleString('ko-KR') + '개';
+  document.getElementById('modalBidPacking').textContent = CONFIRMED_PACKING;
+  document.getElementById('finalBidModal').classList.add('open');
+}
+
+function closeFinalBidModal(event) {
+  if (event && event.target !== event.currentTarget) return;
+  document.getElementById('finalBidModal').classList.remove('open');
+}
+
+function confirmFinalBid() {
+  location.href = 'mobile_auction_complete.html?bid=' + CONFIRMED_BID + '&qty=' + CONFIRMED_QTY + '&packing=' + encodeURIComponent(CONFIRMED_PACKING);
+}
+
+updateConfirmedValues();
+updateState();
+</script>
+<script src="bb-common-mobile.js"></script>
+</body>
+</html>

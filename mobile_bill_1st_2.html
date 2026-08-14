@@ -1,0 +1,1195 @@
+﻿﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>결제 확인 - BidBuy</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:#1A3C6E; --red:#E8385A; --amber:#F5A623; --green:#3AAD4E;
+    --bg:#F5F6F8; --card:#FFFFFF; --border:#EEEEEE;
+    --text-main:#111; --text-sub:#666; --text-hint:#999;
+  }
+  html, body { width:100%; max-width:390px; margin:0 auto; background:var(--bg); overflow-x:hidden; }
+  body { font-family:Pretendard,'Noto Sans KR',sans-serif; font-size:14px; color:var(--text-main); padding-top:81px; padding-bottom:80px; }
+
+  /* ? 바 */
+  .app-header { position:fixed; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:390px; background:#fff; border-bottom:1px solid #D9E0E9; box-shadow:0 1px 0 rgba(32,36,43,.04); z-index:200; }
+  .app-header .phone-status-bar { border-bottom:0; }
+  .app-header-top { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:12px; padding:1px; min-height:56px; }
+  .app-brand-area { display:flex; align-items:center; gap:10px; min-width:0; }
+  .hb { width:34px; height:34px; border-radius:5px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:0; background:none; border:none; cursor:pointer; }
+  .hb span { display:block; width:18px; height:2px; background:#242836; border-radius:999px; }
+  .app-logo { display:inline-flex; align-items:center; width:76px;line-height:0;}
+  .app-logo img { display:block; width:100%; height:auto; }
+  .app-header-right { margin-left:0; display:flex; gap:4px; align-items:center; justify-self:end; }
+  .login-btn-sm { min-width:66px; height:32px; background:var(--red); color:#fff; border:none; padding:0 14px; border-radius:5px; font-size:11px; font-weight:700; cursor:pointer; font-family:inherit; }
+  .icon-btn { width:34px; height:34px; border-radius:5px; background:none; border:none; cursor:pointer; color:#333; display:flex; align-items:center; justify-content:center; position:relative; padding:0; }
+  .icon-btn i { font-size:19px; line-height:19px; }
+  .i-badge { position:absolute; top:3px; right:2px; background:var(--red); color:#fff; font-size:7px; font-weight:700; min-width:13px; height:13px; border-radius:7px; display:flex; align-items:center; justify-content:center; padding:0 2px; }
+  .user-avatar-sm { width:30px; height:30px; border-radius:50%; background:linear-gradient(135deg,var(--red),var(--amber)); display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:700; cursor:pointer; border:0; font-family:inherit; }
+
+  /* 페이지 헤더 */
+  .page-header { display:flex; align-items:center; gap:10px; background:#fff; padding:14px 16px; border-bottom:1px solid var(--border); margin-bottom:8px; }
+  .page-back-link { width:28px; height:28px; border:1px solid #D8DCE3; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; color:var(--navy); font-size:13px; text-decoration:none; flex-shrink:0; }
+  .page-header h1 { font-size:16px; font-weight:700; color:#111; }
+
+  /* 카드 */
+  .card { background:var(--card); margin-bottom:8px; padding:16px; }
+  .card-title { font-size:14px; font-weight:700; color:var(--navy); margin-bottom:14px; }
+
+  /* 1 ?결제 비용 */
+  .fee-summary { background:var(--card); margin-bottom:8px; }
+  .fee-summary-title { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:14px; font-weight:700; color:var(--navy); padding:16px 16px 12px; border-bottom:1px solid var(--border); }
+  .fee-rate { margin-left:auto; text-align:right; font-size:12px; font-weight:500; color:var(--text-sub); }
+  .fee-row { display:flex; align-items:center; justify-content:space-between; padding:11px 16px; border-bottom:1px solid var(--border); }
+  .fee-row:last-child { border-bottom:none; }
+  .fee-row-label { font-size:13px; color:var(--text-sub); }
+  .fee-row-label-control { display:inline-flex; align-items:center; gap:7px; }
+  .fee-row-val { display:inline-flex; align-items:center; gap:8px; font-family:'Roboto',sans-serif; font-size:13px; font-weight:500; color:var(--text-main); }
+  .fee-row-val.undecided { color:var(--text-hint); font-size:12px; }
+  .fee-row-toggle { cursor:pointer; user-select:none; }
+  .fee-row-action { display:inline-flex; align-items:center; gap:6px; }
+  .fee-toggle-arrow { font-size:11px; color:#aaa; transition:transform .18s ease; }
+  .fee-toggle-arrow.open { transform:rotate(180deg); }
+  .fee-detail-panel { display:none; background:#fbfcfe; border-bottom:1px solid var(--border); padding:8px 16px 10px 20px; }
+  .fee-detail-panel.open { display:block; }
+  .fee-detail-item { display:flex; justify-content:space-between; align-items:center; gap:10px; font-size:12px; color:#666; padding:4px 0; }
+  .fee-detail-item strong { font-family:'Roboto',sans-serif; color:var(--text-main); font-weight:600; white-space:nowrap; }
+  .fee-section-title { padding:13px 16px 8px; border-top:1px solid var(--navy); border-bottom:1px solid var(--border); background:#fff; color:var(--navy); font-size:13px; font-weight:700; }
+  .tax-toggle { display:inline-flex; border:1px solid var(--border); border-radius:4px; overflow:hidden; }
+  .tax-toggle-btn { border:none; background:#fff; color:#888; font-size:11px; font-weight:600; padding:3px 7px; cursor:pointer; font-family:Pretendard,'Noto Sans KR',sans-serif; }
+  .tax-toggle-btn + .tax-toggle-btn { border-left:1px solid var(--border); }
+  .tax-toggle-btn.is-active { background:var(--navy); color:#fff; }
+  .fee-action-btn { padding:5px 9px; border:1px solid var(--navy); border-radius:5px; background:#fff; color:var(--navy); font-family:Pretendard,'Noto Sans KR',sans-serif; font-size:11px; font-weight:500; line-height:1.2; cursor:pointer; white-space:nowrap; }
+  .fee-action-btn.active { background:#d0d0d0; border-color:#aaa; color:#666; }
+  .fee-help { position:relative; display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border:1px solid #B8C1CF; border-radius:50%; color:#8B95A1; font-family:'Roboto',sans-serif; font-size:10px; font-weight:700; line-height:1; }
+  .fee-help::after { content:attr(data-tooltip); position:absolute; left:50%; bottom:calc(100% + 8px); transform:translateX(-50%); display:none; width:210px; padding:8px 10px; border-radius:6px; background:#1F2937; color:#fff; font-family:Pretendard,'Noto Sans KR',sans-serif; font-size:11px; font-weight:500; line-height:1.5; white-space:normal; box-shadow:0 4px 12px rgba(0,0,0,.18); z-index:10; }
+  .fee-help:hover::after,
+  .fee-help:focus::after { display:block; }
+  .fee-discount-result { display:inline-flex; align-items:center; gap:6px; font-family:'Roboto',sans-serif; color:#006BFF; text-align:right; }
+  .mileage-amount-line { display:inline-flex; align-items:center; gap:6px; }
+  .mileage-hold-row { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; }
+  .mileage-hold-label { font-size:13px; color:#111; }
+  .mileage-hold-value { font-family:'Roboto',sans-serif; font-size:14px; font-weight:700; color:#111; }
+  .op {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    color:#fff;
+    font-family:'Roboto',sans-serif;
+    font-size:12px;
+    font-weight:700;
+    line-height:1;
+    flex:0 0 18px;
+  }
+  .op-plus,
+  .op-equal { background:#5b8fff; }
+  .op-times { background:#888; }
+  .fee-row.disc-row { background:#FFF8F0; }
+  .fee-row.disc-row .fee-row-label { color:#854F0B; }
+  .disc-detail { display:flex; flex-direction:column; gap:4px; align-items:flex-end; }
+  .disc-item { display:flex; align-items:center; gap:6px; }
+  .disc-val { font-family:'Roboto',sans-serif; font-size:13px; font-weight:700; color:var(--red); }
+  .disc-badge { font-size:10px; font-weight:500; padding:1px 6px; border-radius:3px; }
+  .badge-c { background:#FCEBEB; color:#A32D2D; }
+  .badge-m { background:#E6F1FB; color:#185FA5; }
+  .disc-total { font-family:'Roboto',sans-serif; font-size:13px; font-weight:700; color:var(--red); padding-top:4px; border-top:1px solid #f5c88a; text-align:right; }
+  .fee-row.total-row { background:#F0F4FB; border-top:2px solid var(--navy); border-bottom:2px solid var(--navy); padding:14px 16px; }
+  .fee-row.total-row .fee-row-label { font-size:14px; font-weight:700; color:var(--navy); }
+  .fee-row.total-row .fee-row-val { font-size:18px; font-weight:700; color:var(--red); }
+  .fee-summary-box { margin:0; padding:14px 16px 16px; border:0; border-radius:0; background:#f8fafd; }
+  .fee-summary-box .fee-summary-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:5px 0; font-size:13px; color:#333; font-weight:600; }
+  .fee-summary-box .fee-summary-row.is-discount .fee-summary-val { color:var(--red); }
+  .fee-summary-divider { border-top:1px dashed #bfc9d8; margin:8px 0; }
+  .fee-summary-total { display:flex; align-items:center; justify-content:space-between; gap:10px; padding-top:2px; color:var(--navy); font-size:15px; font-weight:700; }
+  .fee-summary-total .fee-summary-val { font-family:'Roboto',Pretendard,sans-serif; color:var(--red); font-size:20px; font-weight:700; white-space:nowrap; }
+
+  /* ? 료 ? 션 */
+  .option-item { border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+  .option-item + .option-item { margin-top:10px; }
+  .option-common-note { margin:12px 0 0; padding:10px 12px; border:1px solid rgba(232,56,90,.18); border-radius:6px; background:#FFF8FA; color:var(--red); font-size:12px; font-weight:700; line-height:1.55; }
+  /* 선택형 옵션(체크박스) */
+  .option-header-choice { display:block; }
+  .packing-choice-list { display:grid; grid-template-columns:1fr; gap:8px; }
+  .packing-choice { display:flex; align-items:center; gap:8px; min-height:36px; padding:0 10px; border:1px solid #d6dee9; border-radius:5px; background:#fff; color:#28344d; font-size:12px; font-weight:700; cursor:pointer; }
+  .packing-choice input { width:14px; height:14px; margin:0; accent-color:var(--navy); flex:0 0 auto; }
+  .packing-choice:has(input:checked) { border-color:var(--navy); background:#f7faff; }
+  .care-option-col { display:flex; flex-direction:column; gap:4px; }
+  .care-grade-badge { display:flex; align-items:center; gap:6px; margin-top:0; }
+  .care-grade-badge-text { display:none; align-items:center; gap:5px; color:#1a9e5c; font-size:11px; font-weight:700; white-space:nowrap; }
+  .care-grade-badge-text i { color:#1a9e5c; font-size:10px; }
+  .care-grade-badge:not(.is-blank) .care-grade-badge-text { display:inline-flex; }
+  .care-scenario-btn { width:22px; height:22px; padding:0; border:1px solid #d9d2c7; border-radius:4px; background:#fff; color:#8a5a00; display:inline-flex; align-items:center; justify-content:center; font-size:10px; cursor:pointer; flex:0 0 auto; }
+  .option-notice-toggle { display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%; padding:0; border:0; background:none; color:#444; font-family:Pretendard,'Noto Sans KR',sans-serif; font-size:12px; line-height:1.8; text-align:left; cursor:pointer; }
+  .option-notice-arrow { flex:0 0 auto; color:#8B95A1; font-size:11px; transition:transform .18s ease; }
+  .option-notice-toggle[aria-expanded="true"] .option-notice-arrow { transform:rotate(180deg); }
+  .option-notice-detail { margin-top:8px; }
+  .option-notice-detail.is-collapsed { display:none; }
+  .care-desc.is-hidden { display:none; }
+  .option-detail-btns { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+  .paid-option-detail.care-guide-detail { border-color:var(--red); color:var(--red); }
+  .option-header { display:flex; align-items:center; justify-content:space-between; padding:14px; background:#F8F9FA; border-bottom:1px solid var(--border); }
+  .option-header-left { flex:1; }
+  .option-name { font-size:14px; font-weight:600; color:#222; margin-bottom:3px; }
+  .option-price { font-size:12px; color:var(--red); }
+  .option-body { padding:14px; font-size:12px; line-height:1.8; color:#444; }
+  .option-body.is-collapsed { display:none; }
+  .option-body p { margin-top:8px; }
+  .option-body p:first-child { margin-top:0; }
+  .option-body p + ul { margin-top:6px; }
+  .option-body ul { margin:0; padding-left:18px; }
+  .option-body li { margin-bottom:3px; }
+  .option-caution { background:#FFF8F0; border:1px solid #F5C88A; border-radius:6px; padding:10px 12px; margin-top:8px; font-size:11px; color:#664400; line-height:1.7; }
+  .option-caution-title { font-weight:700; color:#A06000; margin-bottom:4px; }
+  .paid-option-detail { height:30px; padding:0 12px; border:1px solid var(--navy); border-radius:4px; background:#fff; color:var(--navy); font-family:Pretendard,'Noto Sans KR',sans-serif; font-size:12px; font-weight:700; cursor:pointer; }
+  .photo-option-select { min-width:104px; height:34px; padding:0 10px; border:1px solid #ccd3dc; border-radius:6px; background:#fff; color:#333; font-family:Pretendard,'Noto Sans KR',sans-serif; font-size:13px; font-weight:700; cursor:pointer; }
+  .photo-option-select:focus { outline:none; border-color:var(--navy); box-shadow:0 0 0 3px rgba(26,60,110,.12); }
+
+  /* ?  ? */
+  .toggle-wrap { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+  .toggle-track { width:44px; height:24px; background:#ccc; border-radius:12px; position:relative; transition:background .2s; cursor:pointer; }
+  .toggle-track.on { background:var(--green); }
+  .toggle-thumb { position:absolute; top:3px; left:3px; width:18px; height:18px; background:#fff; border-radius:50%; transition:left .2s; box-shadow:0 1px 3px rgba(0,0,0,.2); }
+  .toggle-track.on .toggle-thumb { left:23px; }
+  .toggle-text { font-size:12px; font-weight:500; color:#888; min-width:32px; }
+  .toggle-text.on { color:var(--green); }
+
+  /* 마일리 ? */
+  .mileage-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+  .mileage-avail { font-size:12px; color:var(--text-sub); }
+  .mileage-avail strong { font-family:'Roboto',monospace; color:#222; font-weight:500; }
+  .mileage-input-row { display:flex; gap:8px; align-items:center; }
+  .mileage-box { flex:1; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #dde1e7; padding:8px 0; cursor:text; }
+  .mileage-placeholder { font-size:13px; color:#bbb; }
+  .mileage-right { display:flex; align-items:center; gap:4px; }
+  .mileage-inp { border:none; outline:none; font-family:'Roboto',monospace; font-size:14px; font-weight:500; color:#222; width:80px; text-align:right; background:transparent; }
+  .mileage-unit { font-size:13px; color:#555; margin-left:-1px; }
+  .amount-clear {
+    display:none;
+    align-items:center;
+    justify-content:center;
+    width:18px;
+    height:18px;
+    border:0;
+    border-radius:50%;
+    background:#E5E7EB;
+    color:#666;
+    font-family:'Roboto',sans-serif;
+    font-size:13px;
+    font-weight:700;
+    line-height:1;
+    cursor:pointer;
+  }
+  .amount-clear.show { display:inline-flex; }
+  .btn-mileage-all { padding:8px 12px; font-size:12px; font-weight:500; border:1px solid var(--navy); border-radius:6px; background:#fff; color:var(--navy); cursor:pointer; font-family:Pretendard,'Noto Sans KR',sans-serif; white-space:nowrap; transition:background .15s,color .15s; }
+  .btn-mileage-all.active { background:#d0d0d0; border-color:#aaa; color:#666; }
+  .mileage-used-summary { display:none; font-size:12px; color:var(--navy); margin-top:4px; }
+  .mileage-used-summary strong { font-family:'Roboto',monospace; color:var(--red); }
+  .mileage-limit-note { font-size:11px; color:var(--navy); margin-top:6px; }
+  .mileage-warn { display:none; font-size:11px; color:var(--red); margin-top:4px; }
+  .mileage-warn.show { display:block; }
+
+  /* 결제? 보 ? 인 */
+  .pay-section { background:var(--card); margin-bottom:8px; }
+  .pay-section-title { font-size:14px; font-weight:700; color:var(--navy); padding:16px 16px 0; display:flex; align-items:center; gap:4px; }
+  .pay-section-title .req { color:var(--red); font-size:13px; }
+  /* 구매 혜택: 마일리지 적립 예정 (web_bill 기준) */
+  .panel-earn { border-top:1px solid #dde1e7; background:#fff; }
+  .panel-earn-head { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:11px 16px; cursor:pointer; }
+  .panel-earn-label { font-size:12px; font-weight:700; color:#555; }
+  .panel-earn-action { display:inline-flex; align-items:center; justify-content:flex-end; gap:6px; margin-left:auto; min-width:112px; }
+  .panel-earn-max { font-size:12px; font-weight:700; color:var(--navy); }
+  .panel-earn-max em { font-style:normal; color:var(--red); }
+  .panel-earn-toggle { display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; border:0; background:transparent; color:#7b8490; padding:0; cursor:pointer; }
+  .panel-earn-toggle i { font-size:12px; transition:transform .18s ease; }
+  .panel-earn.is-open .panel-earn-toggle i { transform:rotate(180deg); }
+  .panel-earn-body { display:none; padding:8px 16px 12px; border-top:1px solid #eef0f4; }
+  .panel-earn.is-open .panel-earn-body { display:block; }
+  .benefit-row { display:flex; align-items:center; justify-content:space-between; padding:5px 0 6px; font-size:12px; font-weight:700; }
+  .benefit-row-lbl { color:#333; font-weight:600; display:flex; align-items:center; gap:5px; }
+  .benefit-row-val { color:#333; font-weight:600; white-space:nowrap; }
+  .benefit-sub { position:relative; display:flex; align-items:center; justify-content:space-between; padding:5px 0 5px 20px; margin-left:6px; border-left:2px solid #e4e9f1; font-size:12px; }
+  .benefit-sub::before { content:""; position:absolute; left:-5px; top:50%; width:8px; height:8px; border-radius:50%; background:#fff; border:2px solid #b8c6d8; transform:translateY(-50%); }
+  .benefit-sub + .benefit-sub { margin-top:1px; }
+  .benefit-sub-lbl { color:#666; display:flex; align-items:center; gap:5px; }
+  .benefit-sub-val { color:#444; }
+  .benefit-note { font-size:11px; color:#888; margin-top:6px; line-height:1.65; }
+  /* 적립률 뱃지 */
+  .earn-rate-total { font-size:10px; font-weight:700; color:var(--navy); background:#e8eef8; padding:1px 6px; border-radius:3px; margin-left:4px; }
+  .earn-badge { display:inline-flex; align-items:center; height:16px; padding:0 5px; border-radius:3px; font-size:10px; font-weight:700; }
+  .earn-badge-base { background:#e8eef8; color:var(--navy); }
+  .earn-badge-vip  { background:#E7F5EA; color:#3AAD4E; }
+
+    /* 카드 */
+  .card { background:var(--card); margin-bottom:8px; padding:16px; }
+  .card-title { font-size:14px; font-weight:700; color:var(--navy); margin-bottom:14px; display:flex; align-items:center; gap:6px; }
+  .card-title .req { color:var(--red); font-size:12px; }
+
+    /* 정액권 */
+  .pass-row { display:flex; align-items:center; justify-content:space-between; }
+  .pass-check-label { display:inline-flex; align-items:center; gap:6px; font-size:13px; cursor:pointer; }
+  .pass-check-label input { accent-color:var(--navy); width:16px; height:16px; }
+  .btn-pass-more { padding:7px 12px; font-size:12px; border:1px solid #ccc; border-radius:6px; background:#f5f5f5; color:#555; cursor:pointer; font-family:Pretendard,'Noto Sans KR',sans-serif; }
+
+  /* 배너 */
+  .banner-tax { background:#FFF8EC; border-left:3px solid var(--amber); padding:12px 14px; margin-bottom:8px; font-size:12px; line-height:1.7; color:#664400; }
+  .banner-tax strong { color:#7A5500; }
+  .banner-tax a { color:#C47D00; text-decoration:underline; font-size:11px; }
+  .banner-tax-title { display:block; font-size:12px; font-weight:700; margin-bottom:2px; }
+  .banner-tax-divider { border:0; border-top:1px dashed rgba(122,85,0,.28); margin:10px 0; }
+  .banner-receipt-title { font-size:12px; font-weight:700; color:#7A5500; margin-bottom:4px; }
+  .banner-receipt-notice { font-size:11px; line-height:1.6; color:#664400; margin-bottom:6px; }
+  .banner-receipt-radio-group { display:flex; gap:18px; }
+  .banner-receipt-radio { display:inline-flex; align-items:center; gap:5px; font-size:12px; color:#664400; cursor:pointer; }
+  .banner-receipt-radio input { accent-color:var(--navy); width:14px; height:14px; }
+  /* ? 치 ?*/
+  .deposit-wrap { padding:14px 16px; border-bottom:1px solid var(--border); }
+  .deposit-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .deposit-label { font-size:13px; color:#333; font-weight:500; }
+  .deposit-avail { font-size:12px; color:var(--text-sub); }
+  .deposit-avail strong { font-family:'Roboto',monospace; color:#222; font-weight:500; }
+  .deposit-input-row { display:flex; gap:8px; align-items:center; }
+  .deposit-box { flex:1; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #dde1e7; padding:8px 0; cursor:text; }
+  .deposit-placeholder { font-size:13px; color:#bbb; }
+  .deposit-right { display:flex; align-items:center; gap:4px; }
+  .deposit-inp { border:none; outline:none; font-family:'Roboto',monospace; font-size:14px; font-weight:500; color:#222; width:80px; text-align:right; background:transparent; }
+  .deposit-inp.error { color:var(--red); }
+  .deposit-unit { font-size:13px; color:#555; }
+  .btn-dep-all { padding:8px 12px; font-size:12px; font-weight:500; border:1px solid var(--navy); border-radius:6px; background:#fff; color:var(--navy); cursor:pointer; font-family:Pretendard,'Noto Sans KR',sans-serif; white-space:nowrap; transition:background .15s,color .15s; }
+  .btn-dep-all.active { background:#d0d0d0; border-color:#aaa; color:#666; }
+  .deposit-warn { display:none; font-size:11px; color:var(--red); margin-top:5px; }
+  .deposit-warn.show { display:block; }
+
+  /* 결제하실 금액 한 줄 */
+  .pay-due-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 16px; border-bottom:1px solid var(--border); }
+  .pay-due-label { font-size:13px; font-weight:600; color:#333; white-space:nowrap; }
+  .pay-due-formula { font-size:12px; color:var(--text-hint); text-align:right; }
+  .pay-due-formula strong { font-family:'Roboto',sans-serif; font-size:15px; font-weight:700; color:var(--red); display:inline; }
+
+  /* 결제방법 버튼??*/
+  .pay-method-wrap { padding:14px 16px; border-bottom:1px solid var(--border); }
+  .pay-method-label { font-size:13px; font-weight:500; color:#333; margin-bottom:10px; }
+  .pay-method-label .req { color:var(--red); }
+  .pay-method-btn-group { display:flex; gap:8px; }
+  .pay-method-btn { flex:1; padding:12px 0; font-size:13px; font-weight:500; font-family:Pretendard,'Noto Sans KR',sans-serif; border:1px solid #ccc; border-radius:5px; background:#fff; color:#444; cursor:pointer; text-align:center; transition:background .15s,border-color .15s,color .15s; }
+  .pay-method-btn.active { background:var(--navy); border-color:var(--navy); color:#fff; font-weight:700; }
+  .pay-method-wrap.is-required {
+    background:#FFF8F0;
+    box-shadow: inset 0 0 0 2px rgba(232,56,90,.18);
+  }
+  .pay-method-wrap.is-required .pay-method-label {
+    color:var(--red);
+  }
+  .pay-method-wrap.is-required .pay-method-btn {
+    border-color:#E8385A;
+    box-shadow:0 0 0 2px rgba(232,56,90,.12);
+  }
+  .pay-receipt-wrap { padding:14px 16px; border-bottom:1px solid var(--border); }
+  .pay-receipt-title { font-size:13px; font-weight:500; color:#333; margin-bottom:6px; }
+  .pay-receipt-notice { font-size:12px; line-height:1.6; color:var(--text-sub); margin-bottom:8px; }
+  .pay-receipt-radio-group { display:flex; gap:18px; }
+  .pay-receipt-radio { display:inline-flex; align-items:center; gap:5px; font-size:13px; color:#444; cursor:pointer; }
+  .pay-receipt-radio input { accent-color:var(--navy); width:14px; height:14px; }
+
+  /* ? 인 ??*/
+  .disc-pay-row { background:#FFF8F0; border-top:1px solid #f5c88a; border-bottom:1px solid #f5c88a; padding:12px 16px; }
+  .disc-pay-label { font-size:12px; color:#854F0B; font-weight:500; margin-bottom:6px; }
+  .disc-pay-items { display:flex; flex-direction:column; gap:5px; }
+  .disc-pay-item { display:flex; align-items:center; gap:6px; }
+  .disc-pay-note { font-size:11px; color:var(--text-hint); margin-top:6px; }
+
+  .fee-mileage-row { display:block; padding:14px 16px 0; background:#fff; overflow:hidden;}
+  .mob-mile-wrap { display:flex; flex-direction:column; gap:10px; width:100%; }
+  .mob-mile-state { width:max-content; height:20px; display:inline-flex; align-items:center; padding:0 10px; border-radius:999px; background:#eaf2ff; color:#006bff; font-size:10px; font-weight:700; }
+  .mob-mile-top { display:grid; grid-template-columns:48px minmax(0,1fr) 18px 64px; align-items:center; gap:6px; }
+  .mob-mile-label { font-size:13px; color:#222; font-weight:700; display:inline-flex; align-items:center; white-space:nowrap; }
+  .mob-mile-input-row { position:relative; justify-self:end; width:150px; min-width:86px; height:32px; display:flex; align-items:center; gap:7px; padding:0 25px 0 9px; border:1px solid #d8dce2; border-radius:5px; background:#fff; }
+  .mob-mile-input-lbl { flex:0 0 auto; color:#7b8494; font-size:13px; font-weight:700; }
+  .mob-mile-inp { width:100%; min-width:0; border:0; outline:0; background:transparent; color:#222; font-family:'Roboto',monospace; font-size:13px; font-weight:700; text-align:right; }
+  .mob-mile-inp.is-empty { text-align:center; }
+  .mob-mile-inp::placeholder { color:#9aa3b2; font-family:Pretendard,'Noto Sans KR',sans-serif; font-size:13px; font-weight:500; }
+  .mob-mile-inp.over { color:var(--red); }
+  .mob-mile-inp-unit { color:#555; font-size:13px; white-space:nowrap; }
+  .mob-mile-max-btn { width:64px; height:28px; padding:0 5px; border:1px solid #d8dbe1; border-radius:5px; background:#fff; color:#555; font-family:Pretendard,'Noto Sans KR',sans-serif; font-size:11px; font-weight:800; cursor:pointer; white-space:nowrap; transition:background .15s,border-color .15s,color .15s; }
+  .mob-mile-max-btn.is-active { background:#d6d9df; border-color:#b6bac2; color:#666; }
+  .mob-mile-clear-btn { position:absolute; right:7px; top:50%; transform:translateY(-50%); display:none; align-items:center; justify-content:center; width:14px; height:14px; border:0; border-radius:50%; background:#E5E7EB; color:#666; font-family:'Roboto',sans-serif; font-size:10px; font-weight:700; line-height:1; cursor:pointer; }
+  .mob-mile-clear-btn.show { display:inline-flex; }
+  .mob-mile-summary { display:flex; align-items:center; justify-content:flex-end; gap:8px; color:#8a9099; font-size:13px; line-height:1.4; text-align:right; }
+  .mob-mile-summary strong { font-family:'Roboto',sans-serif; font-size:13px; font-weight:800; color:#111; }
+  .mob-mile-summary-divider { color:#c3c8d0; font-weight:700; }
+  .mob-mile-note { margin:0; color:#888; font-size:14px; line-height:1.5; text-align:right; }
+  .mob-mile-subtotal { display:flex; align-items:center; justify-content:space-between; margin:4px -8px 0; padding:14px 12px 13px; border-top:1px solid #e9eef5; border-bottom:1.5px solid #1A3C6E; background:#fff; }
+  .mob-mile-subtotal span { color:#111; font-size:13px; font-weight:700; }
+  .mob-mile-subtotal strong { color:#111; font-family:'Roboto',sans-serif; font-size:16px; font-weight:700; }
+
+  /* ? 단 CTA */
+  .modal-overlay { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; padding:20px 14px; background:rgba(0,0,0,.45); opacity:0; visibility:hidden; transition:opacity .2s ease,visibility .2s ease; z-index:1000; }
+  .modal-overlay.is-open { opacity:1; visibility:visible; }
+  .modal { width:min(100%,360px); background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.18); }
+  .modal-header { display:flex; align-items:center; justify-content:space-between; padding:18px 20px; border-bottom:1px solid #eee; background:#fbfbfb; }
+  .modal-title { margin:0; font-size:17px; font-weight:700; color:var(--navy); }
+  .modal-close { border:none; background:transparent; color:#555; font-size:20px; line-height:1; cursor:pointer; padding:0; }
+  .modal-body { max-height:70vh; overflow-y:auto; padding:20px; font-size:13px; line-height:1.8; color:#333; background:#fff; }
+  .modal-body strong { font-weight:700; }
+  .modal-body ul { margin:12px 0 0; padding-left:20px; list-style:disc outside; }
+  .modal-body li { margin-bottom:10px; }
+  .packing-modal .modal-body { padding:16px; }
+  .packing-modal-meta { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; }
+  .packing-unit { margin:0; font-size:12px; font-weight:700; color:#333; }
+  .packing-detail-link { color:var(--navy); font-size:12px; font-weight:700; text-decoration:underline; text-underline-offset:2px; white-space:nowrap; }
+  .packing-table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .packing-cost-table { width:100%; min-width:720px; border-collapse:collapse; border:2px solid #9a9a9a; color:#5f6770; font-size:11px; text-align:center; }
+  .packing-cost-table + .packing-cost-table { margin-top:18px; }
+  .packing-cost-table th,
+  .packing-cost-table td { border:1px solid #e7e7e7; padding:6px 7px; line-height:1.35; vertical-align:middle; white-space:nowrap; }
+  .packing-cost-table thead th { background:#f4f4f4; font-weight:700; }
+  .packing-cost-table .thick-right { border-right:2px solid #9a9a9a; }
+  .packing-cost-table .thick-bottom { border-bottom:2px solid #9a9a9a; }
+  .packing-cost-table .muted-cell { color:#777; font-weight:700; line-height:1.7; }
+  .packing-cost-table .tier-note { display:block; color:#888; font-size:10px; font-weight:400; margin-top:2px; }
+  .packing-note { margin:10px 0 0; color:#888; font-size:11px; line-height:1.6; }
+
+  .bottom-cta { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:390px; display:flex; gap:8px; padding:10px 16px 16px; background:#fff; border-top:1px solid var(--border); box-shadow:0 -2px 10px rgba(0,0,0,.08); z-index:100; }
+  .cta-btn { flex:1; padding:15px 0; font-size:15px; font-weight:700; font-family:Pretendard,'Noto Sans KR',sans-serif; border:none; border-radius:5px; cursor:pointer; }
+  .cta-cancel { background:#eee; color:#666; flex:0.6; }
+  .cta-approve { background:var(--navy); color:#fff; }
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <!-- 모바일 상태바(시간/네트워크/배터리) : 항상 최상단 -->
+  <div class="phone-status-bar" aria-hidden="true">
+    <span class="psb-time">9:41</span>
+    <div class="psb-icons">
+      <i class="fas fa-signal"></i>
+      <i class="fas fa-wifi"></i>
+      <span class="psb-battery"><span class="psb-battery-body"><span class="psb-battery-fill"></span></span></span>
+    </div>
+  </div>
+  <div class="app-header-top">
+    <div class="app-brand-area">
+      <button class="hb" type="button" aria-label="메뉴 열기" aria-expanded="false" onclick="openDrawer()"><span></span><span></span><span></span></button>
+      <a class="app-logo" href="mobile_main.html" aria-label="Bidbuy 홈"><img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency"></a>
+    </div>
+    <div class="app-header-right" id="guestArea">
+      <button class="login-btn-sm" type="button">로그인</button>
+    </div>
+    <div class="app-header-right" id="userArea" style="display:none">
+      <button class="icon-btn" type="button" aria-label="알림"><i class="fa-regular fa-bell" aria-hidden="true"></i><span class="i-badge">3</span></button>
+      <button class="icon-btn" type="button" aria-label="장바구니"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></button>
+      <button class="user-avatar-sm" type="button" aria-label="회원 메뉴">BB</button>
+    </div>
+  </div>
+</div>
+
+<div class="page-header">
+  <a class="page-back-link" href="mobile_bill_1st.html" aria-label="1차 결제 이전 화면으로 이동"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a>
+  <h1>1차 결제</h1>
+</div>
+
+<!-- 유료 옵션 선택 -->
+<div class="card">
+  <div class="card-title">선택 옵션</div>
+  <div class="option-item">
+    <div class="option-header option-header-choice">
+      <div class="packing-choice-list" aria-label="안심 케어 옵션 선택">
+        <label class="packing-choice"><input type="checkbox" name="careOption" value="carePlus" data-paid-option-yen="1000"><span>안심 케어 플러스(1,000엔)</span></label>
+        <div class="care-option-col">
+          <label class="packing-choice"><input type="checkbox" name="careOption" value="care" data-paid-option-yen="200" checked><span>안심 케어(200엔)</span></label>
+          <div class="care-grade-badge" data-scenario="2">
+            <button type="button" class="care-scenario-btn" data-dir="-1" aria-label="이전 예시 보기"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+            <span class="care-grade-badge-text"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i><b></b></span>
+            <button type="button" class="care-scenario-btn" data-dir="1" aria-label="다음 예시 보기"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="option-body" id="careOptionBody">
+      <button class="option-notice-toggle" type="button" id="careNoticeToggle" aria-expanded="false" aria-controls="careNoticeDetail">
+        <span><strong><i class="fa-solid fa-circle-info" aria-hidden="true"></i> 국제배송중 파손에 대비한 선택 옵션입니다.</strong></span>
+        <i class="fa-solid fa-chevron-down option-notice-arrow" aria-hidden="true"></i>
+      </button>
+      <div class="option-notice-detail is-collapsed" id="careNoticeDetail">
+        <!-- 안심 케어 플러스 설명 (기본) -->
+        <div class="care-desc" data-care-desc="carePlus">
+          <ul>
+            <li>신청 건에 한하여 파손시 <strong>최대 50만 원 한도 내 지원</strong>해드리며, <strong>파손 방지를 위한 튼튼포장이 포함</strong>됩니다.</li>
+            <li>지원 범위에는 <strong>물품가 + 국제 운송료 + 수입신고 시 발생한 세금</strong>이 포함됩니다.</li>
+            <li>해당 서비스 신청 건은 <strong>개별배송으로만 진행</strong>되며, 서비스 비용은 <strong>2차 결제시 청구</strong>됩니다.</li>
+          </ul>
+          <div class="option-caution">
+            <div class="option-caution-title"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> 주의사항</div>
+            <ul>
+              <li><strong style="color:var(--red);">파손 지원 불가 품목</strong>은 안심케어플러스 신청 여부와 관계없이 <strong style="color:var(--red);">지원 대상에서 제외</strong>됩니다.</li>
+              <li><strong style="color:var(--red);">신청 전 신청 가능 품목을 반드시 확인해 주세요.</strong></li>
+              <li>현지 입고 후 불가 품목으로 확인될 경우, <strong style="color:var(--red);">별도 안내 후 서비스가 취소될 수 있습니다.</strong></li>
+              <li>튼튼 포장비가 500엔을 초과하는 경우, 초과 금액은 <strong style="color:var(--red);">2차 결제 시 별도 청구됩니다.</strong></li>
+            </ul>
+          </div>
+        </div>
+        <!-- 안심 케어 설명 -->
+        <div class="care-desc is-hidden" data-care-desc="care">
+          <ul>
+            <li>신청 송장 건에 한하여 파손시 <strong>최대 20만 원 한도 내 지원</strong>해드립니다.</li>
+            <li>선택한 송장 건의 <strong>물품 총액을 기준</strong>으로 지원됩니다.</li>
+            <li>서비스 비용은 <strong>2차 결제시 청구</strong>됩니다.</li>
+          </ul>
+          <div class="option-caution">
+            <div class="option-caution-title"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> 주의사항</div>
+            <ul>
+              <li><strong style="color:var(--red);">파손 지원 불가 품목</strong>은 안심 케어를 신청하더라도 <strong style="color:var(--red);">지원이 불가</strong>하므로, 신청 전 반드시 확인해 주세요.</li>
+              <li>전체 물품중 파손 지원 불가 품목이 포함된 경우, <strong style="color:var(--red);">해당 품목을 제외하고 지원이 적용됩니다.</strong></li>
+              <li>미신청시 파손 물품에 대해 <strong style="color:var(--red);">지원이 일체 불가</strong>합니다.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="option-detail-btns">
+        <button class="paid-option-detail damage-detail" type="button">파손지원 불가 품목 보기</button>
+        <button class="paid-option-detail care-guide-detail" type="button" onclick="location.href='mobile_cs_damage.html#care'">안심케어 서비스 안내</button>
+      </div>
+    </div>
+  </div>
+  <div class="option-item">
+    <div class="option-header">
+      <div class="option-header-left">
+        <div class="option-name">사진 촬영서비스(3장)</div>
+        <div class="option-price">기본 300엔/3달러/3파운드<br> ※추가 1장당 100엔</div>
+      </div>
+      <select class="photo-option-select" id="photoOptionSelect" aria-label="사진 촬영서비스 신청 수량">
+        <option value="0">신청안함</option>
+        <option value="3">3장</option>
+        <option value="5">5장</option>
+        <option value="7">7장</option>
+      </select>
+    </div>
+    <div class="option-body is-collapsed" id="photoOptionBody">
+      <p><strong><i class="fa-solid fa-circle-info" aria-hidden="true"></i> 상품 입고 후 상품의 사진을 촬영해 안내드리는 옵션입니다.</strong></p>
+      <ul>
+        <li>해당 서비스 신청 시 <strong style="color:var(--red);">미신청 건보다 진행 시간이 더 소요될 수 있습니다.</strong></li>
+        <li>상품 상태, 수량, 촬영 범위에 따라 담당자 안내 또는 추가 청구가 필요할 수 있습니다.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="option-common-note">선택한 유료 옵션 금액은 즉시 결제되지 않으며, 2차 결제 시 청구됩니다.</div>
+</div>
+
+<div class="pay-section">
+
+  <!-- 예치금 -->
+  <div class="deposit-wrap">
+    <div class="deposit-header">
+      <span class="deposit-label">예치금</span>
+      <span class="deposit-avail">사용가능 <strong>3,961</strong> 원</span>
+    </div>
+    <div class="deposit-input-row">
+      <div class="deposit-box" onclick="document.getElementById('depInp').focus()">
+        <span class="deposit-placeholder">사용</span>
+        <div class="deposit-right">
+          <input type="text" class="deposit-inp" id="depInp" value="0" oninput="onDepInput(this)" onblur="onDepBlur(this)">
+          <span class="deposit-unit">원</span>
+          <button class="amount-clear" id="depClear" type="button" aria-label="예치금 사용 취소" onclick="clearDepFull()"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <button class="btn-dep-all" id="btnDepAll" onclick="setDepFull()" type="button">전액사용</button>
+    </div>
+    <div class="deposit-warn" id="depWarn">사용가능 예치금을 초과했습니다</div>
+  </div>
+
+  <!-- 결제하실 금액 -->
+  <div class="pay-due-row">
+    <span class="pay-due-label">결제하실 금액</span>
+    <span class="pay-due-formula" id="mobFormula">2,300 엔 × 9.6 원 = <strong id="mobPayWon">22,080원</strong></span>
+  </div>
+</div>  
+<!-- 1차 결제 비용 -->
+<div class="fee-summary">
+  <div class="fee-summary-title"><span>1차 결제 비용</span><span class="fee-rate">적용 환율 9.6원</span></div>
+  <div class="fee-row fee-row-toggle" onclick="toggleLocalCostDetail()">
+    <span class="fee-row-label">상품 및 현지비용</span>
+    <span class="fee-row-action">
+      <span class="fee-row-val" id="mobLocalTotal">1,320 엔</span>
+      <i class="fa-solid fa-chevron-down fee-toggle-arrow" id="localCostArrow"></i>
+    </span>
+  </div>
+  <div class="fee-detail-panel" id="localCostDetailPanel">
+    <div class="fee-detail-item"><span>상품가</span><strong>1,200 엔</strong></div>
+    <div class="fee-detail-item">
+      <span>소비세</span>
+      <strong style="display:inline-flex; align-items:center; gap:6px;">
+        <span class="tax-toggle" id="mobTaxToggle" role="group" aria-label="소비세 기준 전환" onclick="event.stopPropagation()">
+          <button type="button" class="tax-toggle-btn is-active" data-tax-mode="taxed">상품가 10%</button>
+          <button type="button" class="tax-toggle-btn" data-tax-mode="exempt">0엔</button>
+        </span>
+        <span id="mobTaxVal">120 엔</span>
+      </strong>
+    </div>
+  </div>
+  <div class="fee-row">
+    <span class="fee-row-label">구매수수료</span>
+    <span class="fee-row-val">800 엔</span>
+  </div>
+  <div class="fee-section-title">할인/혜택</div>
+  <div class="fee-row fee-mileage-row">
+    <div class="mob-mile-wrap">
+      <div class="mob-mile-top">
+        <span class="mob-mile-label">마일리지</span>
+        <div class="mob-mile-input-row">
+          <input type="text" class="mob-mile-inp" id="mileageInput" value="" placeholder="사용 금액 입력" inputmode="numeric" autocomplete="off">
+          <button class="mob-mile-clear-btn" id="mileageClearBtn" type="button" aria-label="마일리지 초기화" onclick="clearAllMileage()">×</button>
+        </div>
+        <span class="mob-mile-inp-unit">원</span>
+        <button class="mob-mile-max-btn" id="mileageMaxBtn" type="button" onclick="applyMaxMileage()">최대사용</button>
+      </div>
+      <div class="mob-mile-summary">
+        <span>사용 한도 <strong id="usableMileage">3,840</strong>원</span>
+        <span class="mob-mile-summary-divider">/</span>
+        <span>보유 <strong id="availableMileage">58,961</strong>원</span>
+      </div>
+      <p class="mob-mile-note">마일리지는 구매수수료의 50%까지 사용 가능합니다.</p>
+    </div>
+  </div>
+  <div class="fee-row" id="feeDepositRow" style="display:none;">
+    <span class="fee-row-label" style="color:var(--red);">예치금 사용</span>
+    <span class="fee-row-val" style="color:var(--red); font-weight:700;">− <span id="feeDepositWon">0</span>원</span>
+  </div>
+  <!-- 구매 혜택: 마일리지 적립 예정 -->
+  <div class="panel-earn">
+  <div class="panel-earn-head" onclick="toggleEarnPanel(this)">
+    <span class="panel-earn-label">마일리지 적립 예정</span>
+      <span class="panel-earn-action">
+        <span class="panel-earn-max">최대 <em><span id="mobEarnGrandTotal">768</span>원</em></span>
+        <button class="panel-earn-toggle" type="button" aria-expanded="false" aria-label="마일리지 적립 예정 펼치기"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+      </span>
+  </div>
+    <div class="panel-earn-body">
+      <div class="benefit-row">
+        <span class="benefit-row-lbl">구매수수료 적립 <span class="earn-rate-total">10%</span></span>
+        <span class="benefit-row-val">총 <span id="mobEarnFeeTotal">768</span>원</span>
+      </div>
+      <div class="benefit-sub">
+        <span class="benefit-sub-lbl">기본 적립 <span class="earn-badge earn-badge-base">2%</span></span>
+        <span class="benefit-sub-val"><span id="mobEarnFeeWon">154</span>원</span>
+      </div>
+      <div class="benefit-sub">
+        <span class="benefit-sub-lbl">VIP 추가 적립 <span class="earn-badge earn-badge-vip">+8%</span></span>
+        <span class="benefit-sub-val"><span id="mobEarnEventWon">614</span>원</span>
+      </div>
+      <p class="benefit-note">※ 적립 마일리지는 물품 현지 도착일 기준 익월 1일 지급됩니다.</p>
+    </div>
+  </div>
+
+  <div class="fee-summary-box">
+    <div class="fee-summary-row">
+      <span>전체 금액</span>
+      <span class="fee-summary-val" id="mobWholeAmount">2,120 엔</span>
+    </div>
+    <div class="fee-summary-row is-discount">
+      <span>할인/혜택</span>
+      <span class="fee-summary-val" id="mobMileageDiscount">-0 엔</span>
+    </div>
+    <div class="fee-summary-divider"></div>
+    <div class="fee-summary-total">
+      <span>총 결제 금액</span>
+      <span class="fee-summary-val" id="mobCellTotal">16,608원</span>
+    </div>
+  </div>
+</div>
+
+<!-- 결제정보 확인 -->
+<div class="pay-section">
+  <div class="pay-section-title" style="padding-bottom:14px;">결제정보 확인 <span class="req">*</span></div>
+
+  <!-- 결제방법 버튼 -->
+  <div class="pay-method-wrap">
+    <div class="pay-method-btn-group">
+      <button type="button" class="pay-method-btn" id="btnCard" onclick="selectPayMethod('card')">카드결제</button>
+      <button type="button" class="pay-method-btn" id="btnBank" onclick="selectPayMethod('bank')">무통장입금(가상계좌)</button>
+    </div>
+  </div>
+
+  <!-- 현금영수증 발급 -->
+  <div class="pay-receipt-wrap">
+  <div class="pay-receipt-title">현금영수증 발급</div>
+  <div class="pay-receipt-notice">현금영수증 소득공제 혜택을 위해 본 거래 정보를 국세청에 통보합니다. 현금영수증을 발급 받으시겠습니까?</div>
+  <div class="pay-receipt-radio-group">
+    <label class="pay-receipt-radio"><input type="radio" name="receipt" value="yes"> 예</label>
+    <label class="pay-receipt-radio"><input type="radio" name="receipt" value="no" checked> 아니오</label>
+  </div>
+</div>
+
+  <!-- 관부가세 배너 -->
+<div class="banner-tax">
+  <span class="banner-tax-title"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> <strong>관·부가세 안내</strong></span>
+            [과세 기준] 물품가액이 $150 초과 시, 과세가격을 기준으로 관세 및 부가세가 부과됩니다.
+            <br>※ 과세가격 = 물품가 + 현지세금 + 현지배송비 + 국제운임 + 보험료 + 포장비 (CIF)
+<br>※ 물품가액 = 물품가 + 현지세금 + 현지배송비 (국제운임·보험료 제외)
+<br>※ 사업자 통관 = 사업자 판매 목적 수입은 물품가와 무관하게 일반통관이 적용
+  <br><a href="#">이용가이드 자세히 보기 ›</a>
+</div>
+
+<!-- 정액권 --숨김상태>
+<div class="card" style="display:none;">
+  <div class="card-title">구매수수료 1개월 정액권</div>
+  <div class="pass-row">
+    <label class="pass-check-label"><input type="checkbox"> 정액권 사용</label>
+    <button class="btn-pass-more">+ 더보기</button>
+  </div>
+</div>
+
+<!-- 하단 CTA -->
+<div class="bottom-cta">
+  <button class="cta-btn cta-cancel" onclick="history.back()">결제 취소</button>
+  <button class="cta-btn cta-approve" id="btnApprove">결제 승인</button>
+</div>
+
+<div class="modal-overlay" id="damageModal" role="dialog" aria-modal="true" aria-labelledby="damageModalTitle" hidden>
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="damageModalTitle">보상불가 품목 안내</h2>
+      <button class="modal-close" type="button" id="damageModalClose" aria-label="팝업 닫기"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <div class="modal-body">
+      <ul>
+        <li>주류포함 유리병 파손은 보상 가능하나, 코르크 손상 또는 누액은 보상 불가합니다.</li>
+        <li>턴테이블 및 턴테이블 부품(톤암, 카트리지, 더스트 커버 등)</li>
+        <li>열변형된 LP</li>
+        <li>전용 하드케이스에 포장되지 않은 악기류</li>
+        <li>도자기, 사기, 유리, 크리스탈 등으로 만들었거나 주재료인 물품<br>(브라운관 모니터, 조명, 진공관, 램프, 차량 유리 등)</li>
+        <li>정크 품위로 등록된 상품</li>
+        <li>앤틱, 빈티지, 골동품으로 표기된 상품</li>
+        <li>균열이 있거나 파손된 상태로 등록된 상품(추가파손 및 다른부위 파손도 보상불가)</li>
+        <li>미술 및 상업용으로 제작된 조각상, 프라모델 및 피규어</li>
+        <li>접착제가 사용된 부위가 떨어져 나왔을 때</li>
+        <li>본품 외부에서 충격이 확인되지 않는 내부 부품 등의 파손</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="packingCostModal" role="dialog" aria-modal="true" aria-labelledby="packingCostModalTitle" hidden>
+  <div class="modal packing-modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="packingCostModalTitle">튼튼 포장 비용 안내</h2>
+      <button class="modal-close" type="button" id="packingCostModalClose" aria-label="팝업 닫기"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="packing-modal-meta">
+        <p class="packing-unit">단위 : 엔(円)</p>
+      </div>
+      <div class="packing-table-wrap">
+        <table class="packing-cost-table">
+          <thead>
+            <tr>
+              <th class="thick-right thick-bottom">주요 상품<br>(1개 기준)</th>
+              <th class="thick-bottom">턴테이블</th>
+              <th class="thick-bottom">앰프, CD플레이어</th>
+              <th class="thick-bottom">휠 또는<br>휠 붙은 타이어</th>
+              <th class="thick-bottom">낚시대</th>
+              <th class="thick-bottom">악기 기타</th>
+              <th class="thick-bottom">중형 스피커 1쌍</th>
+              <th class="thick-bottom">대형 스피커 1쌍</th>
+              <th class="thick-bottom">범퍼</th>
+              <th class="thick-bottom">술</th>
+              <th class="thick-bottom">도자기</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="thick-right">포장비</th>
+              <td>1,000</td>
+              <td>500</td>
+              <td>1,000</td>
+              <td>1,000</td>
+              <td>500</td>
+              <td>1,000</td>
+              <td>2,000</td>
+              <td>1,500</td>
+              <td>500</td>
+              <td>500</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="packing-cost-table">
+          <thead>
+            <tr>
+              <th class="thick-right thick-bottom">묶음 배송시</th>
+              <th class="thick-bottom">술</th>
+              <th class="thick-bottom">낚시대</th>
+              <th class="thick-bottom">골프채</th>
+              <th class="thick-bottom">휠</th>
+              <th class="thick-bottom">도자기</th>
+              <th class="thick-bottom" rowspan="2">세변의 합이 200CM 초과<br>조립 장난감 / 포장 커스텀 요청</th>
+            </tr>
+            <tr>
+              <th class="thick-right thick-bottom">수량</th>
+              <th class="thick-bottom">2~5병 / 6~10병</th>
+              <th class="thick-bottom">2~10개</th>
+              <th class="thick-bottom">1~3개/4~6개/7~10개</th>
+              <th class="thick-bottom">2개 초과당</th>
+              <th class="thick-bottom">2개 이상</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="thick-right">총<br>포장비용</th>
+              <td>1,000/1,500</td>
+              <td>1,500</td>
+              <td>500/1,000/1,500</td>
+              <td>1,000엔씩 추가</td>
+              <td>1,000<span class="tier-note">(박스 추가시 +500)</span></td>
+              <td>2,000~3,000</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="packing-note">※ 술·골프채·휠은 표시된 수량 구간 순서대로 총 포장비용입니다. (예: 술 3병 = 1,000엔, 골프채 6개 = 1,000엔, 휠 2개 = 1,000엔, 휠 4개 = 2,000엔)<br>※ 도자기는 2개 이상 묶음시 1,000엔이며, 박스가 추가로 필요한 경우 박스 1개당 500엔이 추가됩니다.<br>※ 팔레트 포장 비용은 1장당 5,000엔이며 팔레트 무게 약 11kg이 국제운송료에 포함되어 청구됩니다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function activateMobileHeaderUser() {
+  const guestArea = document.getElementById('guestArea');
+  const userArea = document.getElementById('userArea');
+  if (guestArea) guestArea.style.display = 'none';
+  if (userArea) userArea.style.display = 'flex';
+}
+
+document.querySelectorAll('.login-btn-sm').forEach(button => {
+  button.addEventListener('click', activateMobileHeaderUser);
+});
+
+const fmt = n => Number(n).toLocaleString('ko-KR');
+const storedRate = Number(sessionStorage.getItem('bb_rate'));
+const storedAgencyBase = Number(sessionStorage.getItem('bb_agency_base'));
+const RATE = Number.isFinite(storedRate) && storedRate > 0 ? storedRate : 9.6;
+const AGENCY_BASE = Number.isFinite(storedAgencyBase) && storedAgencyBase > 0 ? storedAgencyBase : 800;
+const BASE_YEN   = 1500; /* ? 품가+? 금? 수 ???*/
+const DEP_AVAIL  = 3961;
+const MILE_AVAIL = 58961;
+const PRODUCT_YEN = 1200;
+
+let mileageDiscYen= 0;
+let selectedPayMethod = '';
+let mileageMaxSelected = false;
+let taxMode = 'taxed'; // 'taxed'(상품가 10%) | 'exempt'(0엔)
+const taxYen = () => taxMode === 'taxed' ? Math.round(PRODUCT_YEN * 0.1) : 0;
+
+document.querySelectorAll('#mobTaxToggle .tax-toggle-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    taxMode = btn.dataset.taxMode;
+    document.querySelectorAll('#mobTaxToggle .tax-toggle-btn').forEach(b => b.classList.toggle('is-active', b === btn));
+    render();
+  });
+});
+function toggleLocalCostDetail() {
+  const panel = document.getElementById('localCostDetailPanel');
+  const arrow = document.getElementById('localCostArrow');
+  if (!panel) return;
+  const isOpen = panel.classList.toggle('open');
+  if (arrow) arrow.classList.toggle('open', isOpen);
+}
+function toggleEarnPanel(head) {
+  const panel = head.closest('.panel-earn');
+  if (!panel) return;
+  const isOpen = panel.classList.toggle('is-open');
+  const btn = head.querySelector('.panel-earn-toggle');
+  if (btn) btn.setAttribute('aria-expanded', String(isOpen));
+}
+
+/* ? ?  마일리 ? ? 도 계산 ? ?  */
+function getMileageLimit() {
+  const halfAgency = Math.floor(AGENCY_BASE * 0.5); /* ??*/
+  return Math.min(Math.floor(halfAgency * RATE), MILE_AVAIL); /* ? 으 ?변??*/
+}
+
+function getMileageFeeCap() {
+  return Math.floor(AGENCY_BASE * 0.5 * RATE);
+}
+
+function updateMileageSummary(appliedWon) {
+  const availableMileage = document.getElementById('availableMileage');
+  const usableMileage = document.getElementById('usableMileage');
+  if (availableMileage) availableMileage.textContent = fmt(Math.max(MILE_AVAIL - appliedWon, 0));
+  if (usableMileage) usableMileage.textContent = fmt(getMileageFeeCap());
+}
+
+function syncMileageInputAlign(input) {
+  input?.classList.toggle('is-empty', !String(input.value || '').trim());
+}
+
+/* ? ?  ? 약 ? 더 ? ?  */
+function render() {
+  const totalDisc = mileageDiscYen;
+  const totalYen  = BASE_YEN + AGENCY_BASE + taxYen() - totalDisc;
+  const totalWon  = Math.round(totalYen * RATE);
+  const mobTaxVal = document.getElementById('mobTaxVal');
+  if (mobTaxVal) mobTaxVal.textContent = fmt(taxYen()) + ' 엔';
+  const mobLocalTotal = document.getElementById('mobLocalTotal');
+  const wholeYen = PRODUCT_YEN + AGENCY_BASE + taxYen();
+  if (mobLocalTotal) mobLocalTotal.textContent = fmt(PRODUCT_YEN + taxYen()) + ' 엔';
+  const mobWholeAmount = document.getElementById('mobWholeAmount');
+  if (mobWholeAmount) mobWholeAmount.textContent = fmt(wholeYen) + ' 엔';
+  const mobMileageDiscount = document.getElementById('mobMileageDiscount');
+  if (mobMileageDiscount) mobMileageDiscount.textContent = '-' + fmt(mileageDiscYen) + ' 엔';
+  const depWon    = Number(String(document.getElementById('depInp').value).replace(/[^\d]/g,'')) || 0;
+  const payWon    = Math.max(totalWon - depWon, 0);
+  const discountedAgencyYen = Math.max(AGENCY_BASE - mileageDiscYen, 0);
+  const mileageRewardWon = Math.round(discountedAgencyYen * 0.1 * RATE);
+
+  /* 1) 1 ?결제 비용 ? 약 */
+  const mobTotalYen = document.getElementById('mobTotalYen');
+  if (mobTotalYen) mobTotalYen.textContent = fmt(totalYen) + ' 엔';
+  document.getElementById('mobCellTotal').textContent = fmt(totalWon) + '원';
+  const mileageLimitWon = getMileageLimit();
+  const currentMileageWon = Math.round(mileageDiscYen * RATE);
+  const isMaxMileage = currentMileageWon === mileageLimitWon && mileageLimitWon > 0;
+  document.getElementById('mileageMaxBtn')?.classList.toggle('is-active', mileageMaxSelected && isMaxMileage);
+  document.getElementById('mileageClearBtn')?.classList.toggle('show', currentMileageWon > 0);
+  updateMileageSummary(currentMileageWon);
+
+  const feeDiscRow = document.getElementById('feeDiscRow');
+  const feeDiscDetail = document.getElementById('feeDiscDetail');
+  if (feeDiscRow && feeDiscDetail && totalDisc > 0) {
+    let h = '';
+    if (mileageDiscYen > 0) h += `<div class="disc-item"><span class="disc-val">-${fmt(mileageDiscYen)} 엔</span><span class="disc-badge badge-m">마일리지</span></div>`;
+    h += `<div class="disc-total">-${fmt(totalDisc)} 엔<span class="op op-equal">=</span></div>`;
+    feeDiscDetail.innerHTML = h;
+    feeDiscRow.style.display = 'flex';
+  } else if (feeDiscRow) {
+    feeDiscRow.style.display = 'none';
+  }
+
+  /* 2) 결제? 보 ? 인 */
+  const mobTotalWon = document.getElementById('mobTotalWon');
+  if (mobTotalWon) mobTotalWon.textContent = fmt(totalWon) + ' 원';
+  // 구매 혜택 — 마일리지 적립 예정 업데이트
+  // 총 적립률 10%(VIP), 기본 2%, VIP 추가 = 10% - 2% = 8%
+  const feeTotal  = Math.round(AGENCY_BASE * 0.10 * RATE); // 총 적립 (10%)
+  const baseEarn  = Math.round(AGENCY_BASE * 0.02 * RATE); // 기본 적립 (2%)
+  const vipEarn   = feeTotal - baseEarn;                   // VIP 추가 적립 (8%)
+  const elM = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+  elM('mobEarnFeeWon',    fmt(baseEarn));   // 기본 2%
+  elM('mobEarnEventWon',  fmt(vipEarn));    // VIP +8%
+  elM('mobEarnFeeTotal',  fmt(feeTotal));   // 합계 10%
+  elM('mobEarnGrandTotal',fmt(feeTotal));
+  updateMileageSummary(Math.round(mileageDiscYen * RATE));
+
+  // 1차 결제 비용 패널 예치금 행
+  const feeDepositRow = document.getElementById('feeDepositRow');
+  const feeDepositWon = document.getElementById('feeDepositWon');
+  if (feeDepositRow) feeDepositRow.style.display = depWon > 0 ? 'flex' : 'none';
+  if (feeDepositWon) feeDepositWon.textContent = fmt(depWon);
+
+  const formula = document.getElementById('mobFormula');
+  const payWonEl = document.getElementById('mobPayWon');
+  if (depWon > 0) {
+    formula.innerHTML = `${fmt(totalWon)} 원 - 예치금 ${fmt(depWon)} 원 = <strong id="mobPayWon">${fmt(payWon)} 원</strong>`;
+  } else {
+    formula.innerHTML = `${fmt(totalYen)} 엔 × ${RATE} 원 = <strong id="mobPayWon">${fmt(totalWon)} 원</strong>`;
+  }
+
+  /* 마일리 ? ? 도 ? 시 */
+  const limitYen = Math.floor(AGENCY_BASE * 0.5);
+  const mileageLimitDisplay = document.getElementById('mileageLimitDisplay');
+  if (mileageLimitDisplay) mileageLimitDisplay.textContent = fmt(limitYen);
+}
+
+/* ? ?  초기 ? 더 (sessionStorage  ?반영) ? ?  */
+(function init() {
+  const storedMileageWon = Number(sessionStorage.getItem('bb_mileage_won') || 0);
+  const limitWon = getMileageLimit();
+  const appliedWon = Math.min(storedMileageWon, limitWon, MILE_AVAIL);
+  mileageDiscYen = Math.floor(appliedWon / RATE);
+  const mileageInput = document.getElementById('mileageInput');
+  if (mileageInput && appliedWon > 0) {
+    mileageInput.value = fmt(appliedWon);
+    const isFull = appliedWon === limitWon && limitWon > 0;
+    document.getElementById('mileageMaxBtn')?.classList.toggle('is-active', mileageMaxSelected && isFull);
+  }
+
+  render();
+})();
+
+/* ? ?  마일리 ? ? 력 ? ?  */
+const mileageInputEl = document.getElementById('mileageInput');
+if (mileageInputEl) {
+  syncMileageInputAlign(mileageInputEl);
+  mileageInputEl.addEventListener('input', function() {
+    mileageMaxSelected = false;
+    document.getElementById('mileageMaxBtn')?.classList.remove('is-active');
+    syncMileageInputAlign(this);
+    const raw = Number(this.value.replace(/[^\d]/g,'')) || 0;
+    const limit = getMileageLimit();
+    const warn = document.getElementById('mileageWarn');
+    this.classList.toggle('over', raw > limit);
+    if (raw > limit) {
+      warn?.classList.add('show');
+      setTimeout(() => {
+        this.value = fmt(limit);
+        syncMileageInputAlign(this);
+        this.classList.remove('over');
+        warn?.classList.remove('show');
+        applyMileage(limit);
+      }, 700);
+    } else {
+      warn?.classList.remove('show');
+      applyMileage(raw);
+    }
+  });
+}
+
+function getCurrentMileageWon() {
+  const mileageInput = document.getElementById('mileageInput');
+  if (mileageInput) {
+    return Number(String(mileageInput.value).replace(/[^\d]/g,'')) || 0;
+  }
+  return Math.round(mileageDiscYen * RATE);
+}
+
+function applyMileage(won) {
+  const appliedWon = Math.min(Math.max(Number(won) || 0, 0), getMileageLimit(), MILE_AVAIL);
+  mileageDiscYen = Math.floor(appliedWon / RATE);
+  const mileageInput    = document.getElementById('mileageInput');
+  // 입력 필드 동기화 (포커스 중 제외)
+  if (mileageInput && document.activeElement !== mileageInput)
+    mileageInput.value = appliedWon > 0 ? fmt(appliedWon) : '';
+  syncMileageInputAlign(mileageInput);
+  updateMileageSummary(appliedWon);
+  const limit = getMileageLimit();
+  const isFull = appliedWon === limit && limit > 0;
+  document.getElementById('mileageMaxBtn')?.classList.toggle('is-active', mileageMaxSelected && isFull);
+  document.getElementById('mileageClearBtn')?.classList.toggle('show', appliedWon > 0);
+  sessionStorage.setItem('bb_mileage_won', appliedWon);
+  sessionStorage.setItem('bb_mileage_discount', mileageDiscYen);
+  render();
+}
+
+function applyMaxMileage() {
+  mileageMaxSelected = true;
+  const limit = getMileageLimit();
+  const mileageInput = document.getElementById('mileageInput');
+  if (mileageInput) mileageInput.value = fmt(limit);
+  syncMileageInputAlign(mileageInput);
+  applyMileage(limit);
+}
+
+function clearAllMileage() {
+  mileageMaxSelected = false;
+  const mileageInput = document.getElementById('mileageInput');
+  if (mileageInput) mileageInput.value = '';
+  syncMileageInputAlign(mileageInput);
+  applyMileage(0);
+}
+
+/* mileageMaxRadio onclick?  HTML? 서 직접 처리 */
+
+/* ? ?  ? 심케???  ? ? ?  */
+/* 안심 케어 안내 접기/펼치기 */
+(() => {
+  const toggle = document.getElementById('careNoticeToggle');
+  const detail = document.getElementById('careNoticeDetail');
+  if (!toggle || !detail) return;
+  toggle.addEventListener('click', () => {
+    const isOpen = detail.classList.toggle('is-collapsed') === false;
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+})();
+
+/* 안심 케어 옵션 — 하나만 선택 + 선택에 따른 설명 전환 */
+function syncCareDesc() {
+  const selected = document.querySelector('input[name="careOption"]:checked');
+  /* 미선택 시에는 안심 케어 플러스 설명을 기본 노출 */
+  const target = selected?.value === 'care' ? 'care' : 'carePlus';
+  document.querySelectorAll('.care-desc').forEach((desc) => {
+    desc.classList.toggle('is-hidden', desc.dataset.careDesc !== target);
+  });
+}
+
+document.querySelectorAll('input[name="careOption"]').forEach((input) => {
+  input.addEventListener('change', () => {
+    if (input.checked) {
+      document.querySelectorAll('input[name="careOption"]').forEach((other) => {
+        if (other !== input) other.checked = false;
+      });
+    }
+    syncCareDesc();
+    render();
+  });
+});
+syncCareDesc();
+
+(() => {
+  const badge = document.querySelector('.care-grade-badge');
+  if (!badge) return;
+  const labels = ['VIP등급은 무료 적용🎉', 'Prestige등급은 무료 적용🎉', ''];
+  const textEl = badge.querySelector('.care-grade-badge-text b');
+  const renderBadge = () => {
+    const i = Number(badge.dataset.scenario || 0);
+    textEl.textContent = labels[i];
+    badge.classList.toggle('is-blank', labels[i] === '');
+  };
+  badge.querySelectorAll('.care-scenario-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const dir = Number(btn.dataset.dir);
+      const i = ((Number(badge.dataset.scenario || 0) + dir) % labels.length + labels.length) % labels.length;
+      badge.dataset.scenario = i;
+      renderBadge();
+    });
+  });
+  renderBadge();
+})();
+
+document.getElementById('photoOptionSelect')?.addEventListener('change', (event) => {
+  const isSelected = event.currentTarget.value !== '0';
+  document.getElementById('photoOptionBody')?.classList.toggle('is-collapsed', !isSelected);
+  render();
+});
+
+/* ? ?  ? 치 ?? ?  */
+let depFull = false;
+function onDepInput(el) {
+  depFull = false;
+  document.getElementById('btnDepAll').classList.remove('active');
+  document.getElementById('depClear').classList.remove('show');
+  const raw = Number(el.value.replace(/[^\d]/g,'')) || 0;
+  const warn = document.getElementById('depWarn');
+  if (raw > DEP_AVAIL) {
+    el.classList.add('error');
+    warn.classList.add('show');
+  } else {
+    el.classList.remove('error');
+    warn.classList.remove('show');
+    if (raw === DEP_AVAIL) setDepFull();
+    render();
+  }
+}
+function onDepBlur(el) {
+  const raw = Number(el.value.replace(/[^\d]/g,'')) || 0;
+  const warn = document.getElementById('depWarn');
+  if (raw > DEP_AVAIL) {
+    /* 초과 시 즉시 최대값으로 보정 + 하이라이트 제거 */
+    el.classList.remove('error');
+    warn.classList.remove('show');
+    setDepFull();
+  } else {
+    el.classList.remove('error');
+    warn.classList.remove('show');
+    if (raw > 0) el.value = fmt(raw);
+    render();
+  }
+}
+function setDepFull() {
+  depFull = true;
+  document.getElementById('depInp').value = fmt(DEP_AVAIL);
+  document.getElementById('btnDepAll').classList.add('active');
+  document.getElementById('depClear').classList.add('show');
+  render();
+}
+
+function clearDepFull() {
+  depFull = false;
+  document.getElementById('depInp').value = '0';
+  document.getElementById('btnDepAll').classList.remove('active');
+  document.getElementById('depClear').classList.remove('show');
+  render();
+}
+
+/* ? ?  결제방법 ? ?  */
+function selectPayMethod(method) {
+  selectedPayMethod = method;
+  document.querySelector('.pay-method-wrap')?.classList.remove('is-required');
+  document.getElementById('btnCard').classList.toggle('active', method === 'card');
+  document.getElementById('btnBank').classList.toggle('active', method === 'bank');
+}
+
+/* ? ?  결제? 인 ? ?  */
+(() => {
+  const detailButton = document.querySelector('.damage-detail');
+  const modal = document.getElementById('damageModal');
+  const modalClose = document.getElementById('damageModalClose');
+  if (!detailButton || !modal || !modalClose) return;
+
+  const showModal = () => {
+    modal.hidden = false;
+    modal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const hideModal = () => {
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+    requestAnimationFrame(() => {
+      if (!modal.classList.contains('is-open')) modal.hidden = true;
+    });
+  };
+
+  detailButton.addEventListener('click', showModal);
+  modalClose.addEventListener('click', hideModal);
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) hideModal();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+      hideModal();
+    }
+  });
+})();
+
+(() => {
+  const detailButton = document.querySelector('.packing-cost-detail');
+  const modal = document.getElementById('packingCostModal');
+  const modalClose = document.getElementById('packingCostModalClose');
+  if (!detailButton || !modal || !modalClose) return;
+
+  const showModal = () => {
+    modal.hidden = false;
+    modal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const hideModal = () => {
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+    requestAnimationFrame(() => {
+      if (!modal.classList.contains('is-open')) modal.hidden = true;
+    });
+  };
+
+  detailButton.addEventListener('click', showModal);
+  modalClose.addEventListener('click', hideModal);
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) hideModal();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+      hideModal();
+    }
+  });
+})();
+
+document.getElementById('btnApprove')?.addEventListener('click', (e) => {
+  const payMethodWrap = document.querySelector('.pay-method-wrap');
+  if (!selectedPayMethod) {
+    e.preventDefault();
+    e.stopPropagation();
+    payMethodWrap?.classList.add('is-required');
+    return;
+  }
+  payMethodWrap?.classList.remove('is-required');
+  window.location.href = 'mobile_bill_2nd.html';
+});
+</script>
+<script src="bb-common-mobile.js"></script>
+</body>
+</html>

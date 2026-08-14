@@ -1,0 +1,337 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bidbuy 입찰 완료</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --brand: #f03b63;
+      --brand-hot: #ff4969;
+      --navy: #163a69;
+      --ink: #20242b;
+      --text: #33363d;
+      --muted: #777985;
+      --faint: #a1a5b3;
+      --line: #e5dbd7;
+      --line-soft: #eee6e2;
+      --warm: #fbf7f5;
+      --warm-2: #f7f3f0;
+      --main-w: 800px;
+    }
+
+    * { box-sizing: border-box; }
+    html { background: #fff; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--text);
+      background: #fff;
+      font-family:'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    a { text-decoration: none; color: inherit; }
+
+    .stage {
+      width: min(calc(100vw - 32px), var(--main-w));
+      margin: 0 auto;
+      padding: 28px 0 80px;
+    }
+
+    .page-head { margin: 0 0 18px; }
+    .page-head h2 { margin: 0; color: #111; font-size: 20px; font-weight: 900; }
+
+    .steps { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+    .step { display: flex; align-items: center; gap: 8px; }
+    .step-num {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--faint);
+      font-family: Roboto, sans-serif;
+      font-size: 12px; font-weight: 900;
+    }
+    .step-label { color: var(--faint); font-size: 12px; font-weight: 700; }
+    .step.active .step-num { border-color: var(--brand); background: var(--brand); color: #fff; }
+    .step.active .step-label { color: #151922; font-weight: 800; }
+    .step.done .step-num { border-color: var(--navy); background: var(--navy); color: #fff; }
+    .step.done .step-label { color: var(--navy); }
+    .step-arrow { color: #d4cdc8; font-size: 11px; }
+    .progress-divider {
+      height: 1px;
+      background: var(--line);
+      margin: 0 0 28px;
+    }
+
+    /* ── 완료 헤드 ── */
+    .done-head { text-align: center; margin-bottom: 26px; }
+    .done-icon {
+      width: 56px; height: 56px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      background: #fff0f3;
+      color: var(--brand);
+      display: grid; place-items: center;
+      font-size: 24px;
+    }
+    .done-title { margin: 0 0 6px; color: #111; font-size: 20px; font-weight: 900; }
+    .done-title b { color: var(--brand); }
+    .done-time { margin: 0; color: var(--faint); font-size: 12px; }
+
+    /* ── 입찰 결과 ── */
+    .result-box {
+      border-top: 2px solid var(--ink);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 14px;
+    }
+    .result-row {
+      display: grid;
+      grid-template-columns: 120px minmax(0,1fr);
+      gap: 14px;
+      padding: 12px 4px;
+      border-bottom: 1px solid var(--line-soft);
+      font-size: 13px;
+    }
+    .result-row:last-child { border-bottom: 0; }
+    .result-row.qty-result-row { padding-bottom: 24px; }
+    .result-row b { color: #5a5e66; font-size: 12px; font-weight: 800; }
+    .result-row .val { color: #151922; font-weight: 700; }
+    .result-row .val.amount { color: var(--brand); font-size: 16px; font-weight: 900; }
+    .result-row .val .sub { color: var(--muted); font-size: 12px; font-weight: 500; }
+
+    .pay-notice {
+      margin: 0 0 28px;
+      padding: 13px 16px;
+      background: var(--warm);
+      color: #41454f;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+    .pay-notice b { color: var(--brand); font-weight: 800; }
+
+    /* ── 물품 카드 ── */
+    .sec-title {
+      margin: 0;
+      color: #111; font-size: 15px; font-weight: 900;
+    }
+    .section-head {
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    .item-card {
+      display: grid;
+      grid-template-columns: 92px minmax(0,1fr) auto;
+      align-items: start;
+      gap: 16px;
+      padding: 16px 4px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 28px;
+    }
+    .item-thumb {
+      width: 92px; height: 92px;
+      background: var(--warm-2);
+      display: grid; place-items: center;
+      color: #cfc8c2;
+      font-size: 26px;
+    }
+    .item-info { min-width: 0; }
+    .item-name { color: #151922; font-size: 14px; font-weight: 800; margin: 0 0 8px; }
+    .item-meta { display: grid; gap: 3px; color: var(--muted); font-size: 12px; }
+    .item-meta b { color: #5a5e66; font-weight: 800; margin-right: 6px; }
+    .item-meta .seller-good { color: var(--navy); font-weight: 700; }
+
+    /* ── 액션 ── */
+    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 34px; }
+    .big-btn {
+      height: 46px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-size: 14px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .big-btn.primary { border: 1px solid var(--brand); background: var(--brand); color: #fff; }
+    .big-btn.primary:hover { background: #d62f54; }
+    .big-btn.navy { border: 1px solid var(--navy); background: var(--navy); color: #fff; }
+    .big-btn.navy:hover { background: #102c50; }
+    .big-btn.line { border: 1px solid var(--line); background: #fff; color: #626672; }
+    .big-btn.line:hover { border-color: #b9b2ad; color: #41454f; }
+    .item-actions {
+      display: grid;
+      gap: 8px;
+      align-self: center;
+      justify-items: stretch;
+      min-width: 112px;
+    }
+    .item-action-btn {
+      height: 34px;
+      padding: 0 12px;
+      border-radius: 4px;
+      border: 1px solid #d8dce3;
+      background: #fff;
+      color: #41454f;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .item-action-btn:hover { border-color: #b9b2ad; color: #151922; }
+    .item-action-btn i { font-size: 12px; color: #626672; }
+    .item-action-btn.primary {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: #fff;
+    }
+    .item-action-btn.primary:hover { background: #102c50; color: #fff; }
+    .item-action-btn.primary i { color: #fff; }
+
+    @media (max-width: 520px) {
+      .item-card { grid-template-columns: 92px minmax(0,1fr); }
+      .item-actions {
+        grid-column: 2;
+        justify-self: stretch;
+        margin-top: 4px;
+      }
+    }
+
+    /* ── 안내 ── */
+    .notes {
+      margin: 0;
+      padding: 14px 18px;
+      list-style: none;
+      display: grid;
+      gap: 6px;
+      background: var(--warm);
+      color: #6b7280;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .notes li { display: flex; gap: 6px; }
+    .notes li::before { content: '·'; color: var(--brand); font-weight: 900; }
+  </style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="page-head">
+    <h2>바로 입찰하기</h2>
+  </div>
+
+  <!-- 단계 표시 -->
+  <div class="steps" aria-label="입찰 진행 단계">
+    <div class="step done"><span class="step-num">1</span><span class="step-label">입찰내용 확인</span></div>
+    <i class="fas fa-chevron-right step-arrow"></i>
+    <div class="step active"><span class="step-num">2</span><span class="step-label">입찰 완료</span></div>
+  </div>
+  <div class="progress-divider" aria-hidden="true"></div>
+
+  <!-- 완료 메시지 -->
+  <div class="done-head">
+    <div class="done-icon"><i class="fas fa-gavel"></i></div>
+    <h2 class="done-title">축하합니다. 경매물품에 <b>입찰이 완료</b>되었습니다.</h2>
+    <p class="done-time" id="doneTime">2026-06-12 21:22:10</p>
+  </div>
+
+  <!-- 입찰 결과 -->
+  <div class="result-box">
+    <div class="result-row"><b>입찰금액</b><span class="val amount" id="rsAmount">¥ 92,000 <span class="sub">(약 ₩837,200)</span></span></div>
+    <div class="result-row qty-result-row"><b>입찰 수량</b><span class="val" id="rsQty">1개</span></div>
+    <div class="result-row"><b>경매낙찰정보</b><span class="val" id="rsOpen">공개</span></div>
+    <div class="result-row"><b>입찰 시각</b><span class="val" id="rsBidTime">2026-06-12 21:22:10</span></div>
+    <div class="result-row"><b>종료시간</b><span class="val">2026-06-14 12:12:12</span></div>
+  </div>
+  <p class="pay-notice">낙찰 시 <b>24시간 내 낙찰금액의 1차 결제</b>를 진행해 주세요. 기한 내 미결제 시 낙찰이 취소되고 경매 보증금이 환수될 수 있습니다.</p>
+
+  <!-- 입찰 물품 -->
+  <div class="section-head">
+    <h3 class="sec-title">입찰 물품</h3>
+  </div>
+  <div class="item-card">
+    <div class="item-thumb"><i class="far fa-image"></i></div>
+    <div class="item-info">
+      <p class="item-name">소니 렌즈 신품미사용! FE PZ 16-35mm F4 G SELP1635G</p>
+      <div class="item-meta">
+        <span><b>물품아이디</b>v1135509199 (옵션명)</span>
+        <span><b>출품자</b>bookoff2014 <span class="seller-good">(평가 1,372,983 · 좋은 평가 98%)</span></span>
+        <span><b>입찰일시</b><span id="bidTime">2026-06-12 21:22:10</span></span>
+      </div>
+    </div>
+    <div class="item-actions" aria-label="입찰 물품 작업">
+      <button class="item-action-btn primary" type="button" onclick="location.href='web_auction order.html'">재입찰하기 <i class="fas fa-rotate-right"></i></button>
+      <button class="item-action-btn" type="button" onclick="location.href='web_auction.html'">상세보기 <i class="fas fa-magnifying-glass"></i></button>
+      <button class="item-action-btn" type="button" onclick="shareBidItem()">공유하기 <i class="fas fa-share-nodes"></i></button>
+    </div>
+  </div>
+
+  <!-- 액션 -->
+  <div class="actions">
+    <button class="big-btn primary" type="button" onclick="location.href='web_mypage.html'"><i class="fas fa-list-check"></i> 나의 입찰목록</button>
+    <button class="big-btn line" type="button" onclick="location.href='web_main.html'"><i class="fas fa-house"></i> 메인으로</button>
+  </div>
+
+  <!-- 안내 -->
+  <ul class="notes">
+    <li>입찰 현황과 낙찰 결과는 마이페이지 &gt; 나의 거래 현황에서 실시간으로 확인하실 수 있습니다.</li>
+    <li>낙찰 후 1차 결제가 완료되면 현지 센터 입고 → 검수 → 국제배송 순으로 진행됩니다.</li>
+    <li>국제배송은 출고 후 항공 기준 통상 3~5일 내 국내 도착하며, 지역·배송 방법에 따라 달라질 수 있습니다.</li>
+    <li>입찰 취소는 출품자 승인이 필요하며, 거절될 경우 취소가 불가합니다.</li>
+  </ul>
+
+</div>
+
+<script>
+/* 입찰 페이지에서 전달된 값 반영 */
+(function () {
+  const p = new URLSearchParams(location.search);
+  const bid = parseInt(p.get('bid') || '', 10);
+  const qty = p.get('qty');
+  const open = p.get('open');
+  const KRW_RATE = 9.1;
+
+  if (bid > 0) {
+    document.getElementById('rsAmount').innerHTML =
+      '¥ ' + bid.toLocaleString('ko-KR') + ' <span class="sub">(약 ₩' + Math.round(bid * KRW_RATE).toLocaleString('ko-KR') + ')</span>';
+  }
+  if (qty) document.getElementById('rsQty').textContent = qty + '개';
+  if (open) document.getElementById('rsOpen').textContent = open;
+
+  const now = new Date();
+  const pad = n => String(n).padStart(2, '0');
+  const stamp = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate())
+    + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+  document.getElementById('doneTime').textContent = stamp;
+  document.getElementById('rsBidTime').textContent = stamp;
+  document.getElementById('bidTime').textContent = stamp;
+})();
+
+function shareBidItem() {
+  const shareData = {
+    title: 'Bidbuy 입찰 물품',
+    text: '소니 렌즈 신품미사용! FE PZ 16-35mm F4 G SELP1635G',
+    url: location.href
+  };
+  if (navigator.share) {
+    navigator.share(shareData);
+    return;
+  }
+  navigator.clipboard?.writeText(location.href);
+}
+</script>
+<script src="bb-common.js"></script>
+</body>
+</html>

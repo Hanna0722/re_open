@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>야후옥션 베스트 — BidBuy</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root {
+  --brand:   #E8385A;
+  --navy:    #1A3C6E;
+  --amber:   #F5A623;
+  --green:   #3AAD4E;
+  --text:    #1a1a2e;
+  --muted:   #666680;
+  --faint:   #999baa;
+  --line:    #e0e4eb;
+  --bg:      #f5f6f8;
+  --white:   #fff;
+  --mobile-w: 390px;
+  --bar-h:   48px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: #e8eaed; }
+body {
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+}
+button, input, select { font: inherit; }
+button, select { cursor: pointer; }
+button, input { border: none; background: none; }
+a { text-decoration: none; color: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid rgba(232, 56, 90, .36);
+  outline-offset: 2px;
+}
+
+/* ── 모바일 프레임 ── */
+.page {
+  width: var(--mobile-w);
+  min-height: 100vh;
+  background: var(--white);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ══════════════════════════════
+   헤더
+══════════════════════════════ */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--white);
+  border-bottom: 1px solid #d9e0e9;
+  box-shadow: 0 1px 0 rgba(32, 36, 43, .04);
+}
+.header-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px 12px;
+  min-height: 56px;
+}
+.brand-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.menu-button {
+  width: 34px; height: 34px;
+  border-radius: 9px; border: 0; background: transparent; padding: 0;
+  display: grid; place-items: center; flex-shrink: 0;
+}
+.menu-lines { width: 18px; display: grid; gap: 4px; }
+.menu-lines span { height: 2px; border-radius: 999px; background: #1f2530; }
+.logo-link {
+  display: inline-flex; align-items: center;
+  width: 76px; line-height: 0;
+}
+.logo-link img { width: 100%; height: auto; display: block; }
+.header-actions {
+  display: flex; align-items: center;
+  justify-content: flex-end; gap: 4px;
+}
+.icon-btn {
+  width: 34px; height: 34px; border-radius: 9px;
+  background: none; border: 0; color: #333;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; padding: 0;
+}
+.icon-btn i { font-size: 19px; line-height: 19px; }
+.i-badge {
+  position: absolute; top: 3px; right: 2px;
+  min-width: 13px; height: 13px; padding: 0 2px;
+  border-radius: 7px; background: var(--brand); color: #fff;
+  font-size: 7px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.user-avatar-sm {
+  width: 30px; height: 30px; border: 0; border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand), var(--amber));
+  color: #fff; font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  font-family: inherit;
+}
+
+/* 검색바 */
+.search-bar {
+  display: flex; align-items: center;
+  min-width: 0; height: 40px;
+  margin: 0 14px 10px;
+  border: 1px solid #e6ddda; border-radius: 10px;
+  overflow: hidden; background: #f4eeea; color: var(--muted);
+}
+.search-bar input {
+  flex: 1; min-width: 0; height: 100%;
+  padding: 0 12px; border: 0; outline: 0;
+  background: transparent; color: var(--text); font-size: 14px;
+}
+.search-bar input::placeholder { color: #8c8985; }
+.search-submit {
+  width: 42px; height: 100%; border: 0;
+  background: var(--brand); color: var(--white);
+  display: grid; place-items: center; font-size: 0;
+}
+.search-submit i { font-size: 16px; line-height: 16px; }
+
+/* ══════════════════════════════
+   스토어 탭 (채널 탭)
+══════════════════════════════ */
+.channel-tabs {
+  display: flex;
+  overflow-x: auto;
+  padding: 0 16px;
+  gap: 0;
+  border-bottom: 1px solid var(--line);
+  scrollbar-width: none;
+}
+.channel-tabs::-webkit-scrollbar { display: none; }
+.ch-tab {
+  flex-shrink: 0;
+  padding: 0 14px;
+  height: 38px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+.ch-tab.active {
+  color: var(--brand);
+  border-bottom-color: var(--brand);
+  font-weight: 700;
+}
+
+/* ══════════════════════════════
+   스토어 히어로 배너
+══════════════════════════════ */
+.store-hero {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 16px 14px;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+.store-logo {
+  width: 52px; height: 52px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ff6b35, #f7c59f);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.store-logo img { width: 100%; height: 100%; object-fit: cover; }
+.store-logo-text {
+  font-size: 18px; font-weight: 900; color: #fff;
+}
+.store-info { flex: 1; min-width: 0; }
+.store-name {
+  font-size: 16px; font-weight: 800; color: var(--text);
+  margin-bottom: 3px;
+  display: flex; align-items: center; gap: 6px;
+}
+.store-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 18px; padding: 0 7px;
+  border-radius: 3px; background: #ff6b35; color: #fff;
+  font-size: 10px; font-weight: 700;
+}
+.store-desc {
+  font-size: 12px; color: var(--muted); line-height: 1.5;
+}
+.store-stats {
+  display: flex; gap: 14px; margin-top: 6px;
+}
+.store-stat {
+  display: flex; flex-direction: column; align-items: center; gap: 1px;
+}
+.store-stat-val {
+  font-size: 13px; font-weight: 700; color: var(--text);
+}
+.store-stat-lbl {
+  font-size: 10px; color: var(--muted);
+}
+.store-actions {
+  display: flex; flex-direction: column; gap: 6px; flex-shrink: 0;
+}
+.btn-store-follow {
+  height: 30px; padding: 0 14px;
+  border: 1px solid var(--navy); border-radius: 999px;
+  background: var(--white); color: var(--navy);
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; gap: 5px;
+}
+.btn-store-follow.following {
+  background: var(--navy); color: #fff;
+}
+.btn-store-follow i { font-size: 12px; }
+
+/* ══════════════════════════════
+   스토어 내비 탭
+══════════════════════════════ */
+.store-nav {
+  display: flex;
+  overflow-x: auto;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  scrollbar-width: none;
+}
+.store-nav::-webkit-scrollbar { display: none; }
+.store-nav-tab {
+  flex-shrink: 0;
+  padding: 0 16px;
+  height: 42px;
+  font-size: 13px; font-weight: 500; color: var(--muted);
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+.store-nav-tab.active {
+  color: var(--brand);
+  border-bottom-color: var(--brand);
+  font-weight: 700;
+}
+
+/* ══════════════════════════════
+   베스트 헤더
+══════════════════════════════ */
+.best-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 16px 10px;
+  background: var(--white);
+}
+.best-title {
+  font-size: 16px; font-weight: 800; color: var(--text);
+  display: flex; align-items: center; gap: 6px;
+}
+.best-title i { font-size: 15px; color: var(--amber); }
+.best-updated {
+  font-size: 11px; color: var(--faint);
+}
+
+/* ══════════════════════════════
+   필터 칩 (mobile_submain 동일)
+══════════════════════════════ */
+.cat-section {
+  padding: 10px;
+  background: var(--white);
+  border-top: 1px solid var(--line);
+}
+.cat-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0 4px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.cat-controls::-webkit-scrollbar { display: none; }
+.cat-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  height: 36px;
+  min-width: 76px;
+  padding: 0 15px;
+  border: 1px solid #d8dce2;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+.cat-chip.active { border-color: var(--brand); color: var(--brand); font-weight: 700; }
+.cat-chip.has-dot::after {
+  content: "";
+  width: 7px; height: 7px;
+  border: 3px solid #d8dce2;
+  border-radius: 50%;
+  background: #eef1f5;
+}
+.cat-chip.has-arrow::after {
+  content: "";
+  width: 8px; height: 8px;
+  margin-top: -3px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  opacity: .72;
+}
+.cat-chip.has-filter {
+  background: #fff0f3;
+  border-color: var(--brand);
+  color: var(--brand);
+  font-weight: 700;
+}
+/* 카테고리 결과 헤더 */
+.cat-result-header {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 14px;
+  background: #fff8f9; border-bottom: 1px solid #ffd6de;
+}
+.cat-result-tags { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
+.cat-result-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px;
+  background: var(--white); border: 1px solid var(--brand);
+  border-radius: 999px; font-size: 11px; color: var(--brand); font-weight: 600;
+}
+.cat-result-tag button { display: flex; align-items: center; color: var(--brand); opacity: .7; padding: 0; font-size: 13px; line-height: 1; }
+.cat-result-clear { flex-shrink: 0; font-size: 11px; color: var(--muted); text-decoration: underline; padding: 0; background: none; border: none; cursor: pointer; }
+
+/* ══════════════════════════════
+   정렬·필터 바
+══════════════════════════════ */
+.filter-bar {
+  position: sticky;
+  top: 106px;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  height: var(--bar-h);
+}
+.sort-controls {
+  flex: 1;
+  display: flex; align-items: center; gap: 5px;
+  min-width: 0; padding: 0 10px;
+}
+.sort-select {
+  width: 118px; height: 30px;
+  padding: 0 18px 0 12px;
+  border: 1px solid var(--line); border-radius: 8px;
+  background: var(--white); color: var(--text);
+  font-size: 12px; font-weight: 700;
+}
+.btn-filter {
+  flex-shrink: 0;
+  display: flex; align-items: center; gap: 5px;
+  padding: 0 14px; height: 100%;
+  font-size: 12px; font-weight: 700; color: var(--text);
+}
+.btn-filter.has-filter { color: var(--brand); }
+
+/* ══════════════════════════════
+   상품 그리드
+══════════════════════════════ */
+.product-section { padding: 10px 12px 80px; background: var(--bg); }
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.product-card {
+  border: 1px solid var(--line);
+  border-radius: 8px; overflow: hidden;
+  background: var(--white); cursor: pointer;
+}
+.card-thumb {
+  aspect-ratio: 1;
+  position: relative;
+  background: linear-gradient(135deg, #e8e8e8, #d0d0d0);
+}
+.thumb-label {
+  position: absolute; bottom: 6px; left: 6px;
+  padding: 2px 6px; border-radius: 3px;
+  font-size: 10px; font-weight: 700; color: #fff;
+}
+.thumb-label.auction { background: var(--navy); }
+.thumb-label.buyout  { background: var(--green); }
+.btn-wish {
+  position: absolute; top: 6px; right: 6px;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(255,255,255,.85);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.card-info { padding: 8px 9px 10px; }
+.card-name {
+  font-size: 12px; color: var(--text); line-height: 1.45;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden; height: calc(12px * 1.45 * 2);
+  margin-bottom: 6px;
+}
+.card-price-label { font-size: 10px; color: var(--muted); height: 15px; line-height: 15px; }
+.card-price {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px; font-weight: 700; color: var(--text);
+  height: 20px; line-height: 20px;
+}
+.card-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 4px; height: 14px;
+}
+.card-timer { font-size: 10px; color: var(--amber); font-weight: 700; min-width: 0; }
+.card-timer:empty::before { content: '\00a0'; }
+.card-bids  { font-size: 10px; color: var(--muted); }
+
+/* 섹션 타이틀 */
+.section-label {
+  font-size: 14px; font-weight: 800; color: var(--text);
+  padding: 14px 0 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-label i { font-size: 13px; color: var(--brand); }
+
+/* ══════════════════════════════
+   필터 바텀시트
+══════════════════════════════ */
+.sheet-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.45); z-index: 300;
+  opacity: 0; transition: opacity .25s;
+}
+.sheet-overlay.open { display: block; opacity: 1; }
+
+.filter-sheet {
+  position: fixed; bottom: 0;
+  left: 50%; transform: translateX(-50%) translateY(100%);
+  width: var(--mobile-w); height: 60vh; max-height: 60vh;
+  background: var(--white); border-radius: 16px 16px 0 0;
+  z-index: 400;
+  display: flex; flex-direction: column;
+  transition: transform .3s cubic-bezier(.32,0,.07,1);
+  overflow: hidden;
+}
+.filter-sheet.open { transform: translateX(-50%) translateY(0); }
+.sheet-handle {
+  width: 38px; height: 5px; margin: 10px auto 2px;
+  border-radius: 999px; background: #d5d9df; flex-shrink: 0;
+}
+.sheet-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px 12px; flex-shrink: 0;
+}
+.sheet-title { font-size: 15px; font-weight: 700; }
+.btn-sheet-close {
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); font-size: 20px;
+}
+.sheet-body { overflow-y: auto; flex: 1; min-height: 0; padding: 0 16px 8px; }
+.sheet-section { padding: 14px 0 12px; border-bottom: 1px solid var(--line); }
+.sheet-section:last-child { border-bottom: none; }
+.sheet-section-label {
+  font-size: 11px; font-weight: 700; color: var(--muted);
+  text-transform: uppercase; letter-spacing: .05em; margin-bottom: 10px;
+}
+.sheet-btn-group { display: flex; flex-wrap: wrap; gap: 6px; }
+.sheet-opt {
+  padding: 6px 16px; border: 1px solid var(--line);
+  border-radius: 20px; font-size: 13px;
+  color: var(--muted); background: var(--white);
+  transition: all .12s;
+}
+.sheet-opt.active {
+  background: var(--navy); color: var(--white);
+  border-color: var(--navy); font-weight: 700;
+}
+/* 필터 탭 */
+.filter-tabs {
+  display: flex; gap: 22px; padding: 0 16px;
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto; scrollbar-width: none; flex-shrink: 0;
+}
+.filter-tabs::-webkit-scrollbar { display: none; }
+.filter-tab {
+  position: relative; flex: 0 0 auto;
+  height: 43px; color: var(--muted);
+  font-size: 13px; font-weight: 600; white-space: nowrap;
+}
+.filter-tab.active { color: var(--brand); font-weight: 800; }
+.filter-tab.active::after {
+  content: ""; position: absolute; right: 0; bottom: 0; left: 0;
+  height: 2px; background: var(--brand);
+}
+.filter-panel { display: none; padding: 12px 0 8px; }
+.filter-panel.active { display: block; }
+.filter-check-list { display: grid; gap: 14px; }
+.filter-check {
+  display: flex; align-items: center; gap: 10px;
+  min-height: 22px; color: #3c4148;
+  font-size: 13px; text-align: left;
+}
+.filter-check::before {
+  content: "✓"; display: grid; place-items: center;
+  width: 18px; height: 18px;
+  border: 1px solid var(--line); border-radius: 50%;
+  color: #c3c8d0; font-size: 10px; flex: 0 0 auto;
+}
+.filter-check.active::before { border-color: var(--brand); background: var(--brand); color: var(--white); }
+.filter-check.has-children { justify-content: space-between; }
+.filter-check.has-children .cat-arrow { color: #b7bbc4; flex-shrink: 0; margin-left: auto; padding: 4px; }
+/* 브레드크럼 */
+.cat-breadcrumb {
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 0 12px; border-bottom: 1px solid var(--line); margin-bottom: 14px;
+}
+.cat-back-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px;
+  border: 1px solid var(--line); border-radius: 50%;
+  background: var(--white); flex-shrink: 0;
+}
+.cat-breadcrumb-path { font-size: 12px; color: var(--muted); font-weight: 500; }
+/* 가격 슬라이더 */
+.price-radios { display: flex; gap: 16px; margin-bottom: 14px; }
+.price-radio-label { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text); }
+.price-radio-label input[type="radio"] { accent-color: var(--navy); width: 15px; height: 15px; }
+.slider-wrap { position: relative; height: 24px; margin-bottom: 10px; }
+.track-bg { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; height: 4px; background: var(--line); border-radius: 2px; }
+.track-fill-bar { position: absolute; top: 50%; transform: translateY(-50%); height: 4px; background: var(--navy); border-radius: 2px; pointer-events: none; }
+.slider-wrap input[type="range"] { position: absolute; width: 100%; height: 4px; top: 50%; transform: translateY(-50%); appearance: none; background: transparent; pointer-events: none; outline: none; }
+.slider-wrap input[type="range"]::-webkit-slider-thumb { appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--white); border: 2px solid var(--navy); pointer-events: all; box-shadow: 0 1px 5px rgba(0,0,0,.18); }
+.amt-row { display: flex; align-items: center; gap: 8px; }
+.amt-field { flex: 1; padding: 4px 5px; border: 1px solid var(--line); border-radius: 6px; font-size: 12px; font-family: 'Roboto', sans-serif; text-align: right; outline: none; color: var(--text); height: 28px; }
+.amt-field:focus { border-color: var(--navy); }
+.amt-sep { color: var(--faint); font-size: 13px; flex-shrink: 0; }
+.sheet-actions {
+  display: flex; gap: 8px;
+  padding: 12px 16px 20px;
+  border-top: 1px solid var(--line);
+  flex-shrink: 0; background: var(--white);
+}
+.btn-sheet-reset {
+  padding: 13px 20px; border: 1px solid var(--line);
+  border-radius: 8px; font-size: 14px;
+  color: var(--muted); background: var(--white);
+}
+.btn-sheet-apply {
+  flex: 1; padding: 13px; background: var(--brand);
+  border-radius: 8px; font-size: 14px;
+  font-weight: 700; color: var(--white);
+}
+
+/* ══════════════════════════════
+   하단 탭바
+══════════════════════════════ */
+.bottom-nav {
+  position: fixed; bottom: 0;
+  left: 50%; transform: translateX(-50%);
+  width: var(--mobile-w); height: 56px;
+  background: var(--white); border-top: 1px solid var(--line);
+  display: flex; z-index: 200;
+}
+.nav-item {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 3px; font-size: 10px; color: var(--faint);
+}
+.nav-item.active { color: var(--brand); }
+.nav-item i { font-size: 20px; line-height: 20px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 헤더 -->
+  <header class="header">
+    <div class="header-top">
+      <div class="brand-area">
+        <button class="menu-button" type="button" aria-label="메뉴 열기">
+          <span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <a class="logo-link" href="mobile_main.html" aria-label="Bidbuy 홈">
+          <img src="Bidbuy logo.png" alt="Bidbuy">
+        </a>
+      </div>
+      <div class="header-actions">
+        <button class="icon-btn" type="button" aria-label="알림">
+          <i class="fa-regular fa-bell" aria-hidden="true"></i>
+          <span class="i-badge">3</span>
+        </button>
+        <button class="icon-btn" type="button" aria-label="장바구니">
+          <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+        </button>
+        <button class="user-avatar-sm" type="button" aria-label="회원 메뉴">한</button>
+      </div>
+    </div>
+    <form class="search-bar" role="search">
+      <input type="search" aria-label="검색어 입력" placeholder="야후옥션에서 검색">
+      <button class="search-submit" type="submit" aria-label="검색">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      </button>
+    </form>
+
+    <!-- 스토어 탭 (mobile_main의 ch-tab 동일 구조) -->
+    <nav class="channel-tabs" aria-label="경매 채널">
+      <button class="ch-tab active" type="button" onclick="selectTab(this)">야후옥션</button>
+      <button class="ch-tab" type="button" onclick="selectTab(this)">메루카리</button>
+      <button class="ch-tab" type="button" onclick="selectTab(this)">라쿠텐</button>
+      <button class="ch-tab" type="button" onclick="selectTab(this)">라쿠마</button>
+      <button class="ch-tab" type="button" onclick="selectTab(this)">미국이베이</button>
+      <button class="ch-tab" type="button" onclick="selectTab(this)">영국이베이</button>
+    </nav>
+  </header>
+
+  <!-- 베스트 헤더 -->
+  <div class="best-header">
+    <span class="best-title">
+      <i class="fa-solid fa-fire-flame-curved" aria-hidden="true"></i>
+      <span id="storeBestTitle">야후옥션</span> 베스트
+    </span>
+  </div>
+
+  <!-- 필터 칩 (mobile_submain 동일) -->
+  <div class="cat-section">
+    <div class="cat-controls" aria-label="필터 탭 선택">
+      <button class="cat-chip has-dot" id="marketFilterButton" type="button" onclick="openFilterSheetFromCat('store')">전체 검색</button>
+      <button class="cat-chip has-arrow" id="categoryChip" data-filter-chip="category" type="button" onclick="openFilterSheetFromCat('category')">카테고리</button>
+      <button class="cat-chip has-arrow" data-filter-chip="price" type="button" onclick="openFilterSheetFromCat('price')">가격</button>
+      <button class="cat-chip has-arrow" data-filter-chip="brand" type="button" onclick="openFilterSheetFromCat('brand')">브랜드</button>
+      <button class="cat-chip has-arrow" data-filter-chip="type" type="button" onclick="openFilterSheetFromCat('type')">유형</button>
+      <button class="cat-chip has-arrow" data-filter-chip="benefit" type="button" onclick="openFilterSheetFromCat('benefit')">혜택</button>
+      <button class="cat-chip has-arrow" data-filter-chip="packing" type="button" onclick="openFilterSheetFromCat('packing')">포장타입</button>
+      <button class="cat-chip has-arrow" data-filter-chip="delivery" type="button" onclick="openFilterSheetFromCat('delivery')">배송</button>
+    </div>
+  </div>
+  <!-- 카테고리 필터 결과 헤더 (선택 시 노출) -->
+  <div class="cat-result-header" id="catResultHeader" style="display:none;">
+    <div class="cat-result-tags" id="catResultTags"></div>
+    <button class="cat-result-clear" type="button" onclick="clearCatFilter()">전체해제</button>
+  </div>
+
+  <!-- 정렬·필터 바 -->
+  <div class="filter-bar">
+    <div class="sort-controls">
+      <select class="sort-select" aria-label="정렬">
+        <option>인기상품순</option>
+        <option>낮은가격순</option>
+        <option>높은가격순</option>
+        <option>입찰많은순</option>
+        <option>마감임박순</option>
+      </select>
+    </div>
+    <button class="btn-filter" id="btnFilter" type="button" onclick="openSheet()">
+      <i class="fa-solid fa-filter" aria-hidden="true"></i>
+      필터
+    </button>
+  </div>
+
+  <!-- 상품 목록 -->
+  <div class="product-section">
+    <div class="product-grid" id="productGrid">
+      <div class="product-card" onclick="goItem()">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#d8e0ea,#c4cfdc)">
+          <button class="btn-wish" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button>
+        </div>
+        <div class="card-info">
+          <p class="card-name">빈티지 필름 카메라 세트 니콘 FM2 바디</p>
+          <div class="card-price-label">현재가</div>
+          <div class="card-price">8,100엔</div>
+          <div class="card-meta">
+            <span class="card-timer">2시간 34분</span>
+            <span class="card-bids">입찰 3</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" onclick="goItem()">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#e0d8e0,#d0c4d0)">
+          <span class="thumb-label buyout">즉시낙찰</span>
+          <button class="btn-wish" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button>
+        </div>
+        <div class="card-info">
+          <p class="card-name">조던 1 레트로 하이 OG 시카고 박스포함</p>
+          <div class="card-price-label">즉시낙찰가</div>
+          <div class="card-price">62,000엔</div>
+          <div class="card-meta">
+            <span class="card-timer"></span>
+            <span class="card-bids">무료배송</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" onclick="goItem()">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#dce8d8,#c8d8c4)">
+          <button class="btn-wish" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button>
+        </div>
+        <div class="card-info">
+          <p class="card-name">닌텐도 스위치 OLED 화이트 풀구성</p>
+          <div class="card-price-label">현재가</div>
+          <div class="card-price">34,500엔</div>
+          <div class="card-meta">
+            <span class="card-timer">5시간 8분</span>
+            <span class="card-bids">입찰 12</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" onclick="goItem()">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#e8e0d8,#d8ccbc)">
+          <button class="btn-wish" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button>
+        </div>
+        <div class="card-info">
+          <p class="card-name">레어 미니카 토미카 에디션 한정판</p>
+          <div class="card-price-label">현재가</div>
+          <div class="card-price">15,100엔</div>
+          <div class="card-meta">
+            <span class="card-timer">1시간 5분</span>
+            <span class="card-bids">입찰 24</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" onclick="goItem()">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#d8dce8,#c4c8d8)">
+          <span class="thumb-label auction">경매</span>
+          <button class="btn-wish" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button>
+        </div>
+        <div class="card-info">
+          <p class="card-name">애플워치 울트라2 티타늄 49mm GPS+LTE</p>
+          <div class="card-price-label">현재가</div>
+          <div class="card-price">72,800엔</div>
+          <div class="card-meta">
+            <span class="card-timer">8시간 11분</span>
+            <span class="card-bids">입찰 7</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" onclick="goItem()">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#e8d8e4,#d8c4d0)">
+          <span class="thumb-label buyout">즉시낙찰</span>
+          <button class="btn-wish" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button>
+        </div>
+        <div class="card-info">
+          <p class="card-name">헌터 웰링턴 부츠 UK7 블랙 미착용</p>
+          <div class="card-price-label">즉시낙찰가</div>
+          <div class="card-price">13,900엔</div>
+          <div class="card-meta">
+            <span class="card-timer"></span>
+            <span class="card-bids">무료배송</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" onclick="goItem()">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#e0e8d8,#ccd8c0)">
+          <button class="btn-wish" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button>
+        </div>
+        <div class="card-info">
+          <p class="card-name">가마쿠라 도자기 찻잔 세트 화도 빈티지</p>
+          <div class="card-price-label">현재가</div>
+          <div class="card-price">4,200엔</div>
+          <div class="card-meta">
+            <span class="card-timer">14시간 50분</span>
+            <span class="card-bids">입찰 2</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" onclick="goItem()">
+        <div class="card-thumb" style="background:linear-gradient(135deg,#e8dcd0,#d8ccc0)">
+          <span class="thumb-label auction">경매</span>
+          <button class="btn-wish" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button>
+        </div>
+        <div class="card-info">
+          <p class="card-name">팬더 그래블 키보드 리얼포스 R3 30g</p>
+          <div class="card-price-label">현재가</div>
+          <div class="card-price">38,000엔</div>
+          <div class="card-meta">
+            <span class="card-timer">19시간 3분</span>
+            <span class="card-bids">입찰 5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<!-- 필터 바텀시트 (mobile_submain 동일 구조) -->
+<div class="sheet-overlay" id="overlay" onclick="closeAllSheets()"></div>
+<div class="filter-sheet" id="filterSheet" aria-hidden="true">
+  <div class="sheet-handle" aria-hidden="true"></div>
+  <div class="sheet-header">
+    <span class="sheet-title">필터</span>
+    <button class="btn-sheet-close" type="button" onclick="closeSheet()" aria-label="닫기">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="filter-tabs" role="tablist" aria-label="필터 탭">
+    <button class="filter-tab active" type="button" role="tab" data-filter-tab="category" onclick="switchFilterTab('category')">카테고리</button>
+    <button class="filter-tab" type="button" role="tab" data-filter-tab="price" onclick="switchFilterTab('price')">가격</button>
+    <button class="filter-tab" type="button" role="tab" data-filter-tab="brand" onclick="switchFilterTab('brand')">브랜드</button>
+    <button class="filter-tab" type="button" role="tab" data-filter-tab="type" onclick="switchFilterTab('type')">유형</button>
+    <button class="filter-tab" type="button" role="tab" data-filter-tab="benefit" onclick="switchFilterTab('benefit')">혜택</button>
+    <button class="filter-tab" type="button" role="tab" data-filter-tab="packing" onclick="switchFilterTab('packing')">포장타입</button>
+    <button class="filter-tab" type="button" role="tab" data-filter-tab="delivery" onclick="switchFilterTab('delivery')">배송</button>
+    <button class="filter-tab" type="button" role="tab" data-filter-tab="store" onclick="switchFilterTab('store')">스토어</button>
+  </div>
+
+  <div class="sheet-body">
+    <div class="filter-panel active" data-filter-panel="category">
+      <div class="cat-breadcrumb" id="catBreadcrumb" style="display:none;">
+        <button class="cat-back-btn" type="button" onclick="catGoBack()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <span class="cat-breadcrumb-path" id="catBreadcrumbPath"></span>
+      </div>
+      <div class="filter-check-list" id="catList"></div>
+    </div>
+
+    <div class="filter-panel" data-filter-panel="price">
+      <div class="sheet-section">
+        <div class="sheet-section-label">금액</div>
+        <div class="price-radios">
+          <label class="price-radio-label"><input type="radio" name="price-type" checked> 현재가</label>
+          <label class="price-radio-label"><input type="radio" name="price-type"> 즉시낙찰가</label>
+        </div>
+        <div class="slider-wrap">
+          <div class="track-bg"></div>
+          <div class="track-fill-bar" id="mTrackFill"></div>
+          <input type="range" id="mRangeMin" min="0" max="1000000" value="0" step="1000">
+          <input type="range" id="mRangeMax" min="0" max="1000000" value="1000000" step="1000">
+        </div>
+        <div class="amt-row">
+          <input class="amt-field" id="mInputMin" type="text" value="0">
+          <span class="amt-sep">~</span>
+          <input class="amt-field" id="mInputMax" type="text" value="1,000,000">
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-panel" data-filter-panel="brand">
+      <div class="filter-check-list">
+        <button class="filter-check" type="button" onclick="toggleCheck(this)">Nike</button>
+        <button class="filter-check" type="button" onclick="toggleCheck(this)">Apple</button>
+        <button class="filter-check" type="button" onclick="toggleCheck(this)">Sony</button>
+        <button class="filter-check" type="button" onclick="toggleCheck(this)">Canon</button>
+        <button class="filter-check" type="button" onclick="toggleCheck(this)">Louis Vuitton</button>
+        <button class="filter-check" type="button" onclick="toggleCheck(this)">Rolex</button>
+      </div>
+    </div>
+
+    <div class="filter-panel" data-filter-panel="type">
+      <div class="sheet-btn-group" data-group="trade">
+        <button class="sheet-opt active" type="button" onclick="selectOpt(this)">전체</button>
+        <button class="sheet-opt" type="button" onclick="selectOpt(this)">경매</button>
+        <button class="sheet-opt" type="button" onclick="selectOpt(this)">즉시낙찰</button>
+      </div>
+    </div>
+
+    <div class="filter-panel" data-filter-panel="benefit">
+      <div class="sheet-btn-group" data-group="cond">
+        <button class="sheet-opt active" type="button" onclick="selectOpt(this)">전체</button>
+        <button class="sheet-opt" type="button" onclick="selectOpt(this)">신품</button>
+        <button class="sheet-opt" type="button" onclick="selectOpt(this)">중고</button>
+        <button class="sheet-opt" type="button" onclick="selectOpt(this)">쿠폰</button>
+        <button class="sheet-opt" type="button" onclick="selectOpt(this)">세일</button>
+      </div>
+    </div>
+
+    <div class="filter-panel" data-filter-panel="packing">
+      <div class="sheet-btn-group" data-group="packing">
+        <button class="sheet-opt active" type="button" onclick="selectOpt(this)">전체</button>
+        <button class="sheet-opt" type="button" onclick="selectOpt(this)">박스 포함</button>
+        <button class="sheet-opt" type="button" onclick="selectOpt(this)">미개봉</button>
+        <button class="sheet-opt" type="button" onclick="selectOpt(this)">구성품 포함</button>
+      </div>
+    </div>
+
+    <div class="filter-panel" data-filter-panel="delivery">
+      <div class="sheet-btn-group" data-group="ship">
+        <button class="sheet-opt active" type="button" onclick="selectOpt(this)">전체</button>
+        <button class="sheet-opt" type="button" onclick="selectOpt(this)">무료배송</button>
+        <button class="sheet-opt" type="button" onclick="selectOpt(this)">국내배송</button>
+        <button class="sheet-opt" type="button" onclick="selectOpt(this)">해외배송</button>
+      </div>
+    </div>
+
+    <div class="filter-panel" data-filter-panel="store">
+      <div class="sheet-btn-group" data-market-group>
+        <button class="sheet-opt" type="button" data-market-all onclick="selectAllMarkets()" aria-pressed="false">전체 스토어</button>
+        <button class="sheet-opt active" type="button" data-market="yahoo" onclick="selectMarketOpt(this)" aria-pressed="true">야후 옥션</button>
+        <button class="sheet-opt" type="button" data-market="mercari" onclick="selectMarketOpt(this)" aria-pressed="false">메루카리</button>
+        <button class="sheet-opt" type="button" data-market="rakuten" onclick="selectMarketOpt(this)" aria-pressed="false">일본 라쿠텐</button>
+        <button class="sheet-opt" type="button" data-market="rakuma" onclick="selectMarketOpt(this)" aria-pressed="false">일본 라쿠마</button>
+        <button class="sheet-opt" type="button" data-market="amazon-jp" onclick="selectMarketOpt(this)" aria-pressed="false">일본 아마존</button>
+        <button class="sheet-opt" type="button" data-market="ebay-us" onclick="selectMarketOpt(this)" aria-pressed="false">미국 이베이</button>
+        <button class="sheet-opt" type="button" data-market="ebay-uk" onclick="selectMarketOpt(this)" aria-pressed="false">영국 이베이</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet-actions">
+    <button class="btn-sheet-reset" type="button" onclick="resetSheet()">초기화</button>
+    <button class="btn-sheet-apply" type="button" onclick="applyFilter()">검색</button>
+  </div>
+</div>
+<script>
+/* ══════════════════════════════
+   스토어 데이터
+══════════════════════════════ */
+const STORES = {
+  '야후옥션': {
+    badge: 'JP', badgeColor: '#ff6b35', logo: 'Y!',
+    logoGrad: 'linear-gradient(135deg,#ff6b35,#f7c59f)',
+    desc: '일본 최대 경매 플랫폼 · Yahoo! JAPAN',
+    itemCount: '약 3,200만',
+  },
+  '메루카리': {
+    badge: 'JP', badgeColor: '#e84d7a', logo: 'M',
+    logoGrad: 'linear-gradient(135deg,#e84d7a,#f9b7cd)',
+    desc: '일본 No.1 중고 거래 앱 · Mercari',
+    itemCount: '약 1,800만',
+  },
+  '라쿠텐': {
+    badge: 'JP', badgeColor: '#bf0000', logo: 'R',
+    logoGrad: 'linear-gradient(135deg,#bf0000,#f7a0a0)',
+    desc: '일본 최대 쇼핑몰 · Rakuten Ichiba',
+    itemCount: '약 6,000만',
+  },
+  '라쿠마': {
+    badge: 'JP', badgeColor: '#4a90d9', logo: 'RM',
+    logoGrad: 'linear-gradient(135deg,#4a90d9,#a8d4f5)',
+    desc: '라쿠텐 중고 거래 플랫폼 · Rakuma',
+    itemCount: '약 500만',
+  },
+  '미국이베이': {
+    badge: 'US', badgeColor: '#0064d2', logo: 'e',
+    logoGrad: 'linear-gradient(135deg,#e53238,#f5af02,#86b817,#0064d2)',
+    desc: '세계 최대 경매·쇼핑 플랫폼 · eBay US',
+    itemCount: '약 1.2억',
+  },
+  '영국이베이': {
+    badge: 'UK', badgeColor: '#3665f3', logo: 'e',
+    logoGrad: 'linear-gradient(135deg,#3665f3,#86b0f7)',
+    desc: '영국 최대 경매·쇼핑 플랫폼 · eBay UK',
+    itemCount: '약 4,000만',
+  },
+};
+
+/* ── 스토어별 베스트 상품 ── */
+const STORE_PRODUCTS = {
+  '야후옥션': [
+    { grad: 'linear-gradient(135deg,#d8e0ea,#c4cfdc)', label: '', name: '빈티지 필름 카메라 세트 니콘 FM2 바디', priceLabel: '현재가', price: '8,100엔', timer: '2시간 34분', bids: '입찰 3' },
+    { grad: 'linear-gradient(135deg,#e0d8e0,#d0c4d0)', label: 'buyout', name: '조던 1 레트로 하이 OG 시카고 박스포함', priceLabel: '즉시낙찰가', price: '62,000엔', timer: '', bids: '무료배송' },
+    { grad: 'linear-gradient(135deg,#dce8d8,#c8d8c4)', label: '', name: '닌텐도 스위치 OLED 화이트 풀구성', priceLabel: '현재가', price: '34,500엔', timer: '5시간 8분', bids: '입찰 12' },
+    { grad: 'linear-gradient(135deg,#e8e0d8,#d8ccbc)', label: '', name: '레어 미니카 토미카 에디션 한정판', priceLabel: '현재가', price: '15,100엔', timer: '1시간 5분', bids: '입찰 24' },
+    { grad: 'linear-gradient(135deg,#d8dce8,#c4c8d8)', label: 'auction', name: '애플워치 울트라2 티타늄 49mm GPS+LTE', priceLabel: '현재가', price: '72,800엔', timer: '8시간 11분', bids: '입찰 7' },
+    { grad: 'linear-gradient(135deg,#e8d8e4,#d8c4d0)', label: 'buyout', name: '헌터 웰링턴 부츠 UK7 블랙 미착용', priceLabel: '즉시낙찰가', price: '13,900엔', timer: '', bids: '무료배송' },
+    { grad: 'linear-gradient(135deg,#e0e8d8,#ccd8c0)', label: '', name: '가마쿠라 도자기 찻잔 세트 화도 빈티지', priceLabel: '현재가', price: '4,200엔', timer: '14시간 50분', bids: '입찰 2' },
+    { grad: 'linear-gradient(135deg,#e8dcd0,#d8ccc0)', label: 'auction', name: '팬더 그래블 키보드 리얼포스 R3 30g', priceLabel: '현재가', price: '38,000엔', timer: '19시간 3분', bids: '입찰 5' },
+  ],
+  '메루카리': [
+    { grad: 'linear-gradient(135deg,#f5dce4,#ecc4d2)', label: 'buyout', name: '포켓몬카드 151 박스 미개봉 슈링크 포함', priceLabel: '판매가', price: '18,500엔', timer: '', bids: '무료배송' },
+    { grad: 'linear-gradient(135deg,#dce4f5,#c4d2ec)', label: '', name: '꼼데가르송 셔츠 M 사이즈 화이트', priceLabel: '판매가', price: '9,800엔', timer: '', bids: '상태 A' },
+    { grad: 'linear-gradient(135deg,#e4f5dc,#d2ecc4)', label: 'buyout', name: '산리오 쿠로미 인형 세트 5종', priceLabel: '판매가', price: '4,300엔', timer: '', bids: '무료배송' },
+    { grad: 'linear-gradient(135deg,#f5ecdc,#ecdcc4)', label: '', name: '무인양품 아로마 디퓨저 대형 신품급', priceLabel: '판매가', price: '5,900엔', timer: '', bids: '상태 S' },
+    { grad: 'linear-gradient(135deg,#dcf0f5,#c4e2ec)', label: '', name: '지브리 토토로 오르골 한정판', priceLabel: '판매가', price: '7,200엔', timer: '', bids: '상태 A' },
+    { grad: 'linear-gradient(135deg,#ece0f5,#dcccee)', label: 'buyout', name: '아이폰 14 프로 256GB 딥퍼플 잔상無', priceLabel: '판매가', price: '98,000엔', timer: '', bids: '무료배송' },
+    { grad: 'linear-gradient(135deg,#f5e4dc,#ecd0c4)', label: '', name: '유니클로 x JW앤더슨 다운 자켓 L', priceLabel: '판매가', price: '6,500엔', timer: '', bids: '상태 B' },
+    { grad: 'linear-gradient(135deg,#e0ecdc,#ccdec4)', label: '', name: '원피스 피규어 POP 루피 기어5', priceLabel: '판매가', price: '21,000엔', timer: '', bids: '상태 S' },
+  ],
+  '라쿠텐': [
+    { grad: 'linear-gradient(135deg,#f5dcdc,#ecc4c4)', label: 'buyout', name: '시세이도 안티에이징 세럼 50ml 정품', priceLabel: '판매가', price: '12,800엔', timer: '', bids: '무료배송' },
+    { grad: 'linear-gradient(135deg,#dce8f5,#c4d6ec)', label: '', name: '조지루시 보온 도시락통 스테인리스', priceLabel: '판매가', price: '4,980엔', timer: '', bids: '리뷰 2,341' },
+    { grad: 'linear-gradient(135deg,#e8f5dc,#d6ecc4)', label: 'buyout', name: '카오 메리즈 기저귀 L 54매 x 4팩', priceLabel: '판매가', price: '6,400엔', timer: '', bids: '무료배송' },
+    { grad: 'linear-gradient(135deg,#f5f0dc,#ece2c4)', label: '', name: '타이거 전기밥솥 5.5합 IH 압력', priceLabel: '판매가', price: '32,800엔', timer: '', bids: '리뷰 891' },
+    { grad: 'linear-gradient(135deg,#dcf5ec,#c4ecdc)', label: '', name: '닌텐도 스위치2 프로콘 신형', priceLabel: '판매가', price: '8,200엔', timer: '', bids: '리뷰 1,205' },
+    { grad: 'linear-gradient(135deg,#ecdcf5,#dac4ec)', label: 'buyout', name: '하다라보 고쿠쥰 로션 대용량 3개입', priceLabel: '판매가', price: '2,980엔', timer: '', bids: '무료배송' },
+    { grad: 'linear-gradient(135deg,#f5e6dc,#ecd2c4)', label: '', name: '르크루제 무쇠냄비 22cm 오렌지', priceLabel: '판매가', price: '24,500엔', timer: '', bids: '리뷰 456' },
+    { grad: 'linear-gradient(135deg,#e2f0dc,#d0e2c8)', label: '', name: '야마자키 수납 선반 타워 시리즈', priceLabel: '판매가', price: '3,850엔', timer: '', bids: '리뷰 3,012' },
+  ],
+  '라쿠마': [
+    { grad: 'linear-gradient(135deg,#dce6f5,#c8d4ec)', label: '', name: '코치 숄더백 시그니처 캔버스 정품', priceLabel: '판매가', price: '14,800엔', timer: '', bids: '상태 A' },
+    { grad: 'linear-gradient(135deg,#f5dce8,#ecc4d6)', label: 'buyout', name: '디즈니랜드 한정 덕키 파우치 신품', priceLabel: '판매가', price: '3,200엔', timer: '', bids: '무료배송' },
+    { grad: 'linear-gradient(135deg,#e6f5dc,#d4ecc8)', label: '', name: '캠핑 버너 SOTO 레귤레이터 스토브', priceLabel: '판매가', price: '5,600엔', timer: '', bids: '상태 A' },
+    { grad: 'linear-gradient(135deg,#f5eedc,#ecdec4)', label: '', name: '세이코 5 스포츠 오토매틱 SBSA', priceLabel: '판매가', price: '19,800엔', timer: '', bids: '상태 S' },
+    { grad: 'linear-gradient(135deg,#dcf2f5,#c4e6ec)', label: 'buyout', name: '레고 테크닉 포르쉐 911 미개봉', priceLabel: '판매가', price: '16,500엔', timer: '', bids: '무료배송' },
+    { grad: 'linear-gradient(135deg,#eedcf5,#dec4ec)', label: '', name: '플레이스테이션5 슬림 디스크 에디션', priceLabel: '판매가', price: '52,000엔', timer: '', bids: '상태 A' },
+    { grad: 'linear-gradient(135deg,#f5e0dc,#ecccc4)', label: '', name: '버버리 트렌치코트 빈티지 38', priceLabel: '판매가', price: '28,000엔', timer: '', bids: '상태 B' },
+    { grad: 'linear-gradient(135deg,#e4eedc,#d2dfc8)', label: '', name: '스타벅스 일본 한정 텀블러 세트', priceLabel: '판매가', price: '4,900엔', timer: '', bids: '상태 S' },
+  ],
+  '미국이베이': [
+    { grad: 'linear-gradient(135deg,#dce0f5,#c4caec)', label: 'auction', name: 'Rolex Datejust 36mm Steel Jubilee 1995', priceLabel: '현재가', price: '$4,250', timer: '1일 4시간', bids: '입찰 18' },
+    { grad: 'linear-gradient(135deg,#f5dcdc,#ecc8c4)', label: 'buyout', name: 'Air Jordan 4 Bred Reimagined US10 DS', priceLabel: '즉시구매가', price: '$285', timer: '', bids: '무료배송' },
+    { grad: 'linear-gradient(135deg,#e0f5dc,#ccecc4)', label: '', name: 'Vintage Gibson Les Paul Standard 1989', priceLabel: '현재가', price: '$2,899', timer: '6시간 22분', bids: '입찰 9' },
+    { grad: 'linear-gradient(135deg,#f5f0dc,#ece0c4)', label: 'auction', name: 'Pokemon Base Set Charizard PSA 8', priceLabel: '현재가', price: '$1,150', timer: '3시간 40분', bids: '입찰 31' },
+    { grad: 'linear-gradient(135deg,#dcf0f5,#c4e0ec)', label: 'buyout', name: 'Apple MacBook Pro 16 M3 Max 1TB', priceLabel: '즉시구매가', price: '$2,450', timer: '', bids: '무료배송' },
+    { grad: 'linear-gradient(135deg,#f0dcf5,#e0c4ec)', label: '', name: 'Levi\'s 501 Big E Selvedge 1960s W32', priceLabel: '현재가', price: '$640', timer: '12시간 5분', bids: '입찰 14' },
+    { grad: 'linear-gradient(135deg,#f5e4dc,#ecd2c4)', label: '', name: 'Omega Speedmaster Professional 3570', priceLabel: '현재가', price: '$3,380', timer: '22시간 18분', bids: '입찰 11' },
+    { grad: 'linear-gradient(135deg,#e2f0e0,#cee0cc)', label: 'buyout', name: 'Lego Star Wars UCS Millennium Falcon', priceLabel: '즉시구매가', price: '$720', timer: '', bids: '무료배송' },
+  ],
+  '영국이베이': [
+    { grad: 'linear-gradient(135deg,#dce4f5,#c4d0ec)', label: 'auction', name: 'Barbour Bedale Wax Jacket C42 Olive', priceLabel: '현재가', price: '£95', timer: '4시간 12분', bids: '입찰 7' },
+    { grad: 'linear-gradient(135deg,#f5dce4,#ecc4d2)', label: 'buyout', name: 'Burberry Vintage Check Scarf Cashmere', priceLabel: '즉시구매가', price: '£210', timer: '', bids: '무료배송' },
+    { grad: 'linear-gradient(135deg,#e4f5dc,#d0ecc4)', label: '', name: 'Wedgwood Jasperware Tea Set 1970s', priceLabel: '현재가', price: '£68', timer: '9시간 30분', bids: '입찰 4' },
+    { grad: 'linear-gradient(135deg,#f5eedc,#ecdcc4)', label: 'auction', name: 'Dr. Martens 1460 Made in England UK8', priceLabel: '현재가', price: '£82', timer: '2시간 55분', bids: '입찰 12' },
+    { grad: 'linear-gradient(135deg,#dcf2f5,#c4e4ec)', label: '', name: 'Royal Doulton Bunnykins Figurine Rare', priceLabel: '현재가', price: '£145', timer: '1일 2시간', bids: '입찰 9' },
+    { grad: 'linear-gradient(135deg,#ecdcf5,#dcc4ec)', label: 'buyout', name: 'Mulberry Bayswater Bag Oak Leather', priceLabel: '즉시구매가', price: '£380', timer: '', bids: '무료배송' },
+    { grad: 'linear-gradient(135deg,#f5e2dc,#ecd0c4)', label: '', name: 'Vintage Land Rover Series Parts Lot', priceLabel: '현재가', price: '£260', timer: '15시간 44분', bids: '입찰 6' },
+    { grad: 'linear-gradient(135deg,#e0eedc,#cee0c8)', label: '', name: 'The Beatles Abbey Road LP 1st Press', priceLabel: '현재가', price: '£520', timer: '7시간 19분', bids: '입찰 22' },
+  ],
+};
+
+const LABEL_TEXT = { buyout: '즉시낙찰', auction: '경매' };
+
+function renderProducts(name) {
+  const grid = document.getElementById('productGrid');
+  const items = STORE_PRODUCTS[name];
+  if (!grid || !items) return;
+  grid.innerHTML = items.map(p => `
+    <div class="product-card" onclick="goItem()">
+      <div class="card-thumb" style="background:${p.grad}">
+        ${p.label ? `<span class="thumb-label ${p.label}">${LABEL_TEXT[p.label]}</span>` : ''}
+        <button class="btn-wish" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button>
+      </div>
+      <div class="card-info">
+        <p class="card-name">${p.name}</p>
+        <div class="card-price-label">${p.priceLabel}</div>
+        <div class="card-price">${p.price}</div>
+        <div class="card-meta">
+          <span class="card-timer">${p.timer}</span>
+          <span class="card-bids">${p.bids}</span>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+/* ── 탭 선택 ── */
+function selectTab(btn) {
+  document.querySelectorAll('.ch-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+
+  const name = btn.textContent.trim();
+  const s = STORES[name];
+  if (!s) return;
+
+  // 히어로 업데이트 (히어로가 없는 레이아웃에서도 동작하도록 null 허용)
+  const storeNameEl = document.getElementById('storeNameEl');
+  if (storeNameEl) storeNameEl.innerHTML =
+    `${name} <span class="store-badge" style="background:${s.badgeColor}">${s.badge}</span>`;
+  const storeDescEl = document.getElementById('storeDescEl');
+  if (storeDescEl) storeDescEl.textContent = s.desc;
+  const storeItemCount = document.getElementById('storeItemCount');
+  if (storeItemCount) storeItemCount.textContent = s.itemCount;
+  document.getElementById('storeBestTitle').textContent = name;
+
+  const logo = document.querySelector('.store-logo');
+  if (logo) {
+    logo.style.background = s.logoGrad;
+    const logoText = logo.querySelector('.store-logo-text');
+    if (logoText) logoText.textContent = s.logo;
+  }
+
+  // 팔로우 버튼 초기화
+  const followBtn = document.getElementById('followBtn');
+  if (followBtn) {
+    followBtn.classList.remove('following');
+    followBtn.innerHTML = '<i class="fa-regular fa-bell"></i> 알림';
+  }
+
+  // 검색 placeholder
+  const input = document.querySelector('.search-bar input');
+  if (input) input.placeholder = `${name}에서 검색`;
+
+  // 스토어별 베스트 상품 재정렬
+  renderProducts(name);
+
+  // URL 파라미터 업데이트 (뒤로가기 유지)
+  const url = new URL(window.location);
+  url.searchParams.set('store', name);
+  window.history.replaceState({}, '', url);
+}
+
+/* ── 팔로우 토글 ── */
+function toggleFollow() {
+  const btn = document.getElementById('followBtn');
+  const following = btn.classList.toggle('following');
+  btn.innerHTML = following
+    ? '<i class="fa-solid fa-bell"></i> 알림중'
+    : '<i class="fa-regular fa-bell"></i> 알림';
+}
+
+/* ── 스토어 내비 탭 ── */
+function switchStoreTab(btn) {
+  document.querySelectorAll('.store-nav-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+/* ── 카테고리 칩 ── */
+function selectCat(btn) {
+  document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+/* ── 필터 시트 ── */
+function openSheet() {
+  switchFilterTab('category');
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('filterSheet').classList.add('open');
+  document.getElementById('filterSheet').setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+function closeSheet() {
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('filterSheet').classList.remove('open');
+  document.getElementById('filterSheet').setAttribute('aria-hidden', 'true');
+  document.getElementById('marketFilterButton')?.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+function closeAllSheets() {
+  closeSheet();
+}
+
+function switchFilterTab(tabName) {
+  document.querySelectorAll('[data-filter-tab]').forEach(tab => {
+    const isActive = tab.dataset.filterTab === tabName;
+    tab.classList.toggle('active', isActive);
+    tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+  });
+  document.querySelectorAll('[data-filter-panel]').forEach(panel => {
+    panel.classList.toggle('active', panel.dataset.filterPanel === tabName);
+  });
+  if (tabName === 'category') initCatPanel();
+}
+
+function openFilterSheetFromCat(tabName = 'category') {
+  switchFilterTab(tabName);
+  openSheet();
+  document.getElementById('marketFilterButton')?.setAttribute('aria-expanded', tabName === 'store' ? 'true' : 'false');
+}
+
+/* ── 스토어(마켓) 필터 ── */
+const MARKET_LABELS = {
+  yahoo: '야후경매',
+  mercari: '메루카리',
+  rakuten: '일본 라쿠텐',
+  rakuma: '일본 라쿠마',
+  'yahoo-shopping': '야후 쇼핑',
+  'amazon-jp': '일본 아마존',
+  'ebay-us': '미국 이베이',
+  'ebay-uk': '영국 이베이'
+};
+
+function getSelectedMarkets() {
+  return Array.from(document.querySelectorAll('[data-market-group] .sheet-opt.active[data-market]'))
+    .map(button => button.dataset.market)
+    .filter(Boolean);
+}
+
+function syncAllMarketState() {
+  const allButton = document.querySelector('[data-market-all]');
+  if (!allButton) return;
+  const isAllStore = getSelectedMarkets().length === 0;
+  allButton.classList.toggle('active', isAllStore);
+  allButton.setAttribute('aria-pressed', isAllStore ? 'true' : 'false');
+}
+
+function syncMarketButtonLabel() {
+  const button = document.getElementById('marketFilterButton');
+  const selected = getSelectedMarkets();
+  if (!button) return;
+  syncAllMarketState();
+  if (selected.length === 0) {
+    button.textContent = '전체 검색';
+    button.classList.remove('active', 'has-filter');
+    return;
+  }
+  button.textContent = selected.length === 1 ? MARKET_LABELS[selected[0]] : `스토어 ${selected.length}개`;
+  button.classList.add('active', 'has-filter');
+}
+
+function selectAllMarkets() {
+  document.querySelectorAll('[data-market-group] .sheet-opt[data-market]').forEach(button => {
+    button.classList.remove('active');
+    button.setAttribute('aria-pressed', 'false');
+  });
+  syncMarketButtonLabel();
+  updateBadge();
+}
+
+function selectMarketOpt(el) {
+  el.classList.toggle('active');
+  el.setAttribute('aria-pressed', el.classList.contains('active') ? 'true' : 'false');
+  syncMarketButtonLabel();
+  updateBadge();
+}
+
+/* ── 카테고리 드릴다운 ── */
+const categoryData = {
+  '가전, AV, 카메라': {
+    subs: ['TV, 영상기기', '카메라', '오디오기기', '생활가전', '스마트기기', '계절가전', '조명기기'],
+    children: {
+      'TV, 영상기기': ['TV', 'DVD/블루레이', '프로젝터', '모니터', '셋톱박스'],
+      '카메라': ['DSLR', '미러리스', '콤팩트', '필름카메라', '액션캠', '렌즈', '액세서리'],
+      '오디오기기': ['스피커', '헤드폰/이어폰', 'AV리시버', 'CD플레이어', '레코드플레이어'],
+      '생활가전': ['냉장고', '세탁기', '청소기', '전자레인지', '식기세척기'],
+    }
+  },
+  '뷰티, 건강 관리': {
+    subs: ['스킨케어', '메이크업', '헤어케어', '바디케어', '향수', '건강보조식품', '의료기기'],
+    children: {
+      '스킨케어': ['클렌징', '토너/로션', '에센스/세럼', '크림', '마스크팩', '선케어'],
+      '메이크업': ['파운데이션', '립메이크업', '아이메이크업', '블러셔', '네일아트'],
+    }
+  },
+  '영화, 동영상': {
+    subs: ['DVD/블루레이', 'VHS', '영화', 'TV방송', '애니메이션', '다큐멘터리'],
+    children: { 'DVD/블루레이': ['국내영화', '외국영화', '드라마', '애니메이션', '다큐', '음악DVD'] }
+  },
+  '취미, 문화': { subs: ['독서', '영화감상', '음악감상', '여행', '요리', '미술/공예', '사진'], children: {} },
+  '거주지, 인테리어': {
+    subs: ['가구', '조명', '커튼/블라인드', '침구류', '수납/정리', '인테리어소품', '주방용품'],
+    children: {
+      '가구': ['소파', '침대', '책상/책장', '식탁', '수납장', 'TV장'],
+      '조명': ['실링라이트', '스탠드', '벽조명', '야외조명', 'LED조명'],
+    }
+  },
+  '사무, 점포 용품': {
+    subs: ['문구류', '사무기기', '점포용품', '사무가구', 'POS/결제시스템', '진열/쇼케이스', '포장재'],
+    children: {
+      '문구류': ['볼펜/만년필', '연필/샤프', '노트/다이어리', '파일/바인더', '테이프/접착제', '수정용품'],
+      '사무기기': ['프린터', '복사기', '스캐너', '팩스', '문서세단기', '제본기'],
+    }
+  },
+  '음식, 음료': {
+    subs: ['과자/스낵', '음료수', '주류', '인스턴트식품', '건강식품', '조미료/소스', '냉동식품'],
+    children: { '주류': ['맥주', '와인', '소주/위스키', '사케', '막걸리', '양주'] }
+  },
+  '컴퓨터': {
+    subs: ['데스크탑', '노트북', '모니터', '주변기기', 'CPU/메모리', 'HDD/SSD', '네트워크'],
+    children: {
+      '노트북': ['게이밍노트북', '울트라북', '비즈니스노트북', '크롬북', '2in1노트북'],
+      '주변기기': ['키보드', '마우스', '웹캠', 'USB허브', '프린터', '스캐너'],
+    }
+  },
+  '골동품, 컬렉션': { subs: ['도자기', '그림/서예', '동전/화폐', '우표', '장난감/피규어', '포카드', '고서적'], children: {} },
+  '스포츠, 레저': {
+    subs: ['구기종목', '수상스포츠', '겨울스포츠', '캠핑/아웃도어', '자전거', '요가/피트니스', '낚시'],
+    children: {
+      '캠핑/아웃도어': ['텐트', '침낭', '코펠/버너', '랜턴', '배낭', '등산화'],
+      '자전거': ['로드바이크', '산악자전거', '폴딩바이크', '자전거 액세서리'],
+    }
+  },
+  '음악': {
+    subs: ['기타', '피아노/건반', '드럼/퍼커션', '관악기', '현악기', '악보/교재', '음향장비'],
+    children: { '기타': ['어쿠스틱기타', '일렉기타', '베이스기타', '클래식기타', '기타 액세서리'] }
+  },
+  '탤런트 상품': { subs: ['K-POP', 'J-POP', '연예인 굿즈', '포토카드', '응원용품', '공식 MD', '한정판'], children: {} },
+  '패션': {
+    subs: ['남성의류', '여성의류', '아동의류', '신발', '가방', '모자/소품', '언더웨어/양말'],
+    children: {
+      '남성의류': ['티셔츠/폴로', '셔츠', '바지', '아우터', '정장', '스포츠웨어'],
+      '여성의류': ['블라우스/셔츠', '원피스', '바지', '아우터', '정장', '스포츠웨어'],
+      '신발': ['스니커즈', '구두', '샌들/슬리퍼', '부츠', '운동화'],
+    }
+  },
+  '장난감, 게임': {
+    subs: ['피규어', '프라모델', 'RC카/드론', '보드게임', '비디오게임', '트레이딩카드', '퍼즐'],
+    children: {
+      '피규어': ['애니메이션 피규어', '히어로/캐릭터', '군사 피규어', '스태츄', '가샤폰'],
+      '비디오게임': ['플레이스테이션', '닌텐도', 'Xbox', 'PC게임', '레트로게임'],
+    }
+  },
+  '액세서리, 시계': {
+    subs: ['반지', '목걸이', '귀걸이', '팔찌', '시계', '브로치', '헤어액세서리'],
+    children: { '시계': ['남성시계', '여성시계', '스마트워치', '빈티지시계', '시계부품'] }
+  },
+  '책, 잡지': { subs: ['소설', '실용서', '만화', '잡지', '교재/참고서', '외국서적', '사전'], children: {} },
+  '브랜드 소품': {
+    subs: ['명품가방', '명품지갑', '명품시계', '명품의류', '명품신발', '명품액세서리'],
+    children: {
+      '명품가방': ['루이비통', '구찌', '샤넬', '에르메스', '프라다', '버버리'],
+      '명품시계': ['롤렉스', '오메가', '태그호이어', '까르띠에', 'IWC'],
+    }
+  },
+  '애완 동물, 생물': {
+    subs: ['강아지 용품', '고양이 용품', '조류 용품', '어류/수족관', '소동물', '사료'],
+    children: {
+      '강아지 용품': ['사료', '간식', '장난감', '의류', '이동장', '목욕용품'],
+      '고양이 용품': ['사료', '간식', '장난감', '캣타워', '이동장', '화장실'],
+    }
+  },
+  '만화, 애니메이션 상품': { subs: ['만화책', '애니메이션 DVD', '피규어/굿즈', '코스튬/코스프레', '포스터/아트', '원화'], children: {} },
+  '기타': { subs: ['기타 물품', '미분류'], children: {} },
+};
+
+let catStack = [];
+
+function catRenderLevel(items, depth) {
+  const list = document.getElementById('catList');
+  const crumb = document.getElementById('catBreadcrumb');
+  const crumbPath = document.getElementById('catBreadcrumbPath');
+  list.innerHTML = '';
+  if (catStack.length > 0) {
+    crumb.style.display = 'flex';
+    crumbPath.textContent = catStack.map(s => s.label).join(' > ');
+  } else {
+    crumb.style.display = 'none';
+  }
+  items.forEach(item => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-check';
+    btn.type = 'button';
+    const hasChildren = catHasChildren(item, depth);
+    if (hasChildren) {
+      btn.classList.add('has-children');
+      btn.innerHTML = `<span style="display:flex;align-items:center;gap:10px;"><span class="cat-check-icon"></span>${item}</span>
+      <svg class="cat-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>`;
+      btn.onclick = () => toggleCat(btn, item);
+      btn.querySelector('.cat-arrow').onclick = (event) => { event.stopPropagation(); catDrillDown(item, depth); };
+    } else {
+      btn.innerHTML = `<span style="display:flex;align-items:center;gap:10px;"><span class="cat-check-icon"></span>${item}</span>`;
+      btn.onclick = () => toggleCat(btn, item);
+    }
+    if (catIsSelected(item)) btn.classList.add('active');
+    list.appendChild(btn);
+  });
+}
+
+function catHasChildren(name, depth) {
+  if (depth === 0) { const d = categoryData[name]; return d && d.subs && d.subs.length > 0; }
+  if (depth === 1) { const parent = catStack[0].label; const d = categoryData[parent]; return d && d.children && d.children[name] && d.children[name].length > 0; }
+  return false;
+}
+
+function catDrillDown(name, depth) {
+  let nextItems = [];
+  if (depth === 0) {
+    nextItems = categoryData[name]?.subs || [];
+    catStack = [{ label: name, items: Object.keys(categoryData), depth: 0 }];
+  } else if (depth === 1) {
+    const parent = catStack[0].label;
+    nextItems = categoryData[parent]?.children?.[name] || [];
+    catStack = [catStack[0], { label: name, items: categoryData[parent]?.subs || [], depth: 1 }];
+  }
+  catRenderLevel(nextItems, depth + 1);
+}
+
+function catGoBack() {
+  catStack.pop();
+  if (catStack.length === 0) {
+    catRenderLevel(Object.keys(categoryData), 0);
+  } else {
+    if (catStack.length === 1) {
+      catRenderLevel(categoryData[catStack[0].label]?.subs || [], 1);
+    } else {
+      const prev = catStack[catStack.length - 1];
+      catRenderLevel(prev.items, prev.depth + 1);
+    }
+  }
+}
+
+const selectedCats = new Set();
+function catIsSelected(name) { return selectedCats.has(name); }
+function toggleCat(btn, name) {
+  if (selectedCats.has(name)) { selectedCats.delete(name); btn.classList.remove('active'); }
+  else { selectedCats.add(name); btn.classList.add('active'); }
+  updateBadge();
+}
+function initCatPanel() { catStack = []; catRenderLevel(Object.keys(categoryData), 0); }
+
+function toggleCheck(el) { el.classList.toggle('active'); updateBadge(); }
+
+function selectOpt(el) {
+  const group = el.closest('[data-group]');
+  group.querySelectorAll('.sheet-opt').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  updateBadge();
+}
+
+/* ── 필터 상태 배지 ── */
+function updateBadge() {
+  const activeState = { category: selectedCats.size > 0, brand: false, price: false, type: false, benefit: false, packing: false, delivery: false };
+  const groupToChip = { trade: 'type', cond: 'benefit', packing: 'packing', ship: 'delivery' };
+  document.querySelectorAll('[data-group]').forEach(g => {
+    const active = g.querySelector('.sheet-opt.active');
+    const chipName = groupToChip[g.dataset.group];
+    if (chipName) activeState[chipName] = Boolean(active && active.textContent.trim() !== '전체');
+  });
+  activeState.brand = document.querySelectorAll('[data-filter-panel="brand"] .filter-check.active').length > 0;
+  const mn = parseInt((document.getElementById('mInputMin')?.value || '0').replace(/,/g,'')) || 0;
+  const mx = parseInt((document.getElementById('mInputMax')?.value || '1000000').replace(/,/g,'')) || 1000000;
+  activeState.price = mn > 0 || mx < 1000000;
+  const hasMarketFilter = getSelectedMarkets().length > 0;
+  const hasFilter = Object.values(activeState).some(Boolean) || hasMarketFilter;
+  document.getElementById('btnFilter')?.classList.toggle('has-filter', hasFilter);
+  Object.entries(activeState).forEach(([name, isActive]) => {
+    document.querySelector(`[data-filter-chip="${name}"]`)?.classList.toggle('has-filter', isActive);
+  });
+}
+
+/* ── 초기화 ── */
+function resetSheet() {
+  document.querySelectorAll('[data-group]').forEach(g => {
+    g.querySelectorAll('.sheet-opt').forEach((b, i) => b.classList.toggle('active', i === 0));
+  });
+  document.querySelectorAll('.filter-check').forEach(b => b.classList.remove('active'));
+  selectedCats.clear();
+  catStack = [];
+  initCatPanel();
+  resetCatChip();
+  document.querySelectorAll('[data-market-group] .sheet-opt[data-market]').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-pressed', 'false');
+  });
+  const rMin = document.getElementById('mRangeMin');
+  const rMax = document.getElementById('mRangeMax');
+  const iMin = document.getElementById('mInputMin');
+  const iMax = document.getElementById('mInputMax');
+  if (rMin) rMin.value = 0;
+  if (rMax) rMax.value = 1000000;
+  if (iMin) iMin.value = '0';
+  if (iMax) iMax.value = '1,000,000';
+  syncMarketButtonLabel();
+  updateTrack();
+  updateBadge();
+}
+
+/* ── 적용 ── */
+function applyFilter() {
+  updateBadge();
+  closeSheet();
+  if (selectedCats.size > 0) {
+    renderCatResultHeader();
+    setTimeout(() => {
+      document.getElementById('productGrid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 150);
+  } else {
+    resetCatChip();
+  }
+}
+
+function renderCatResultHeader() {
+  const header = document.getElementById('catResultHeader');
+  const tags = document.getElementById('catResultTags');
+  if (!header || !tags) return;
+  tags.innerHTML = '';
+  selectedCats.forEach(name => {
+    const tag = document.createElement('span');
+    tag.className = 'cat-result-tag';
+    tag.innerHTML = `${name}<button type="button" onclick="removeCatFilter('${name}')" aria-label="${name} 해제">×</button>`;
+    tags.appendChild(tag);
+  });
+  header.style.display = 'flex';
+}
+
+function removeCatFilter(name) {
+  selectedCats.delete(name);
+  updateBadge();
+  if (selectedCats.size === 0) resetCatChip();
+  else renderCatResultHeader();
+}
+
+function clearCatFilter() {
+  selectedCats.clear();
+  updateBadge();
+  resetCatChip();
+  initCatPanel();
+}
+
+function resetCatChip() {
+  document.getElementById('categoryChip')?.classList.remove('cat-selected', 'has-filter');
+  const header = document.getElementById('catResultHeader');
+  if (header) header.style.display = 'none';
+}
+
+/* ── 가격 슬라이더 ── */
+const MAX_PRICE = 1000000;
+function updateTrack() {
+  const rMin = document.getElementById('mRangeMin');
+  const rMax = document.getElementById('mRangeMax');
+  const track = document.getElementById('mTrackFill');
+  if (!rMin || !rMax || !track) return;
+  const lo = +rMin.value / MAX_PRICE * 100;
+  const hi = +rMax.value / MAX_PRICE * 100;
+  track.style.left  = lo + '%';
+  track.style.width = (hi - lo) + '%';
+}
+function fmtPrice(n) { return Number(n).toLocaleString('ko-KR'); }
+function parsePrice(s) { return parseInt(String(s).replace(/,/g,''), 10) || 0; }
+
+(function initSlider() {
+  const rMin = document.getElementById('mRangeMin');
+  const rMax = document.getElementById('mRangeMax');
+  const iMin = document.getElementById('mInputMin');
+  const iMax = document.getElementById('mInputMax');
+  if (!rMin) return;
+  rMin.addEventListener('input', () => {
+    if (+rMin.value > +rMax.value) rMin.value = rMax.value;
+    iMin.value = fmtPrice(rMin.value); updateTrack(); updateBadge();
+  });
+  rMax.addEventListener('input', () => {
+    if (+rMax.value < +rMin.value) rMax.value = rMin.value;
+    iMax.value = fmtPrice(rMax.value); updateTrack(); updateBadge();
+  });
+  iMin.addEventListener('change', () => {
+    let v = Math.min(parsePrice(iMin.value), parsePrice(iMax.value));
+    v = Math.max(0, Math.min(v, MAX_PRICE));
+    rMin.value = v; iMin.value = fmtPrice(v); updateTrack(); updateBadge();
+  });
+  iMax.addEventListener('change', () => {
+    let v = Math.max(parsePrice(iMax.value), parsePrice(iMin.value));
+    v = Math.max(0, Math.min(v, MAX_PRICE));
+    rMax.value = v; iMax.value = fmtPrice(v); updateTrack(); updateBadge();
+  });
+  updateTrack();
+})();
+
+/* ── 상품 클릭 ── */
+function goItem() {
+  window.location.href = 'mobile_bill_1st.html';
+}
+
+/* ── 페이지 진입 시 스토어 초기화 (URL ?store=스토어명) ── */
+(function initFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const storeName = params.get('store');
+  if (!storeName || !STORES[storeName]) return;
+
+  // 탭 active 전환
+  document.querySelectorAll('.ch-tab').forEach(t => {
+    t.classList.toggle('active', t.textContent.trim() === storeName);
+  });
+
+  // 히어로 + 타이틀 업데이트
+  const s = STORES[storeName];
+  const storeNameEl = document.getElementById('storeNameEl');
+  const storeDescEl = document.getElementById('storeDescEl');
+  const storeItemCount = document.getElementById('storeItemCount');
+  if (storeNameEl) storeNameEl.innerHTML = `${storeName} <span class="store-badge" style="background:${s.badgeColor}">${s.badge}</span>`;
+  if (storeDescEl) storeDescEl.textContent = s.desc;
+  if (storeItemCount) storeItemCount.textContent = s.itemCount;
+  document.getElementById('storeBestTitle').textContent = storeName;
+  renderProducts(storeName);
+
+  const logo = document.querySelector('.store-logo');
+  if (logo) {
+    logo.style.background = s.logoGrad;
+    const txt = logo.querySelector('.store-logo-text');
+    if (txt) txt.textContent = s.logo;
+  }
+
+  // 검색바 placeholder
+  const input = document.querySelector('.search-bar input');
+  if (input) input.placeholder = `${storeName}에서 검색`;
+})();
+
+/* ── 공통 초기화 ── */
+updateBadge();
+</script>
+</body>
+</html>

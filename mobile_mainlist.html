@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>거래 전체 목록 | BidBuy Korea</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{
+  --rose:#E8385A;--rose-h:#C42F4C;--amber:#F5A623;
+  --brand:#E8385A;
+  --navy:#1A3C6E;--green:#3AAD4E;
+  --bg:#F5F7FA;--white:#fff;--border:#E0E4EB;--line:#e0e4eb;--line-soft:#eee6e2;
+  --tp:#1A1A2E;--ts:#666680;--tm:#999BAA;--muted:#666680;--faint:#999baa;
+  --warm:#fbf7f5;
+  --frame-w:480px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:Pretendard,'Noto Sans KR',sans-serif;background:#fff;color:var(--tp);font-size:14px;line-height:1.5;max-width:var(--frame-w);margin:0 auto}
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+button,select{cursor:pointer}
+.roboto{font-family:'Roboto',sans-serif}
+
+/* ══ 헤더 (mobile_totalsearch 이식) ══ */
+.header{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid #d9e0e9;box-shadow:0 1px 0 rgba(32,36,43,.04)}
+.header-top{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:1px;min-height:56px;}
+.brand-area{display:flex;align-items:center;gap:10px;min-width:0}
+.menu-button{width:34px;height:34px;border-radius:5px;border:0;background:transparent;padding:0;display:grid;place-items:center;flex-shrink:0}
+.menu-lines{width:18px;display:grid;gap:4px}
+.menu-lines span{height:2px;border-radius:999px;background:#1f2530}
+.logo-link{display:inline-flex;align-items:center;width:76px;line-height:0;}
+.logo-link img{width:100%;height:auto;display:block;}
+.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:4px}
+.btn-login{min-width:66px;height:32px;padding:0 14px;border:0;border-radius:5px;color:#fff;font-size:11px;font-weight:700;background:var(--brand);font-family:inherit}
+.icon-btn{width:34px;height:34px;border-radius:5px;background:none;border:0;color:#333;display:flex;align-items:center;justify-content:center;position:relative;padding:0}
+.icon-btn i{font-size:19px;line-height:19px}
+.i-badge{position:absolute;top:3px;right:2px;min-width:13px;height:13px;padding:0 2px;border-radius:7px;background:var(--brand);color:#fff;font-size:7px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.user-avatar-sm{width:30px;height:30px;border:0;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--amber));color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:inherit}
+.search-bar{display:flex;align-items:center;min-width:0;height:40px;margin:0 14px 10px;border:1px solid #e6ddda;border-radius:10px;overflow:hidden;background:#f4eeea;color:var(--muted)}
+.search-bar input{flex:1;min-width:0;height:100%;padding:0 12px;border:0;outline:0;background:transparent;color:var(--tp);font-size:14px}
+.search-bar input::placeholder{color:#8c8985}
+.search-submit{width:42px;height:100%;border:0;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:0}
+.search-submit i{font-size:16px;line-height:16px}
+
+/* ── 페이지 타이틀 ── */
+.page-title-bar{padding:16px 16px 12px;background:#fff;border-bottom:0}
+.page-title-bar h2{margin:0;font-size:18px;font-weight:700;color:var(--tp)}
+
+/* ── 나의 거래 현황 ── */
+.shopping-head{margin:24px 10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:42px;padding-bottom:7px;border-bottom:1.5px solid var(--brand)}
+.shopping-head h3{margin:0;color:var(--brand);font-size:15px;font-weight:700}
+.status-links{display:flex;align-items:center;gap:8px}
+.outline-pill{display:inline-flex;align-items:center;justify-content:center;height:32px;min-width:74px;padding:0 13px;border:1px solid #e5dcd8;border-radius:999px;background:#fff;color:#6d6470;font-size:12px;font-weight:700}
+
+.status-board{display:flex;flex-direction:column;gap:8px;margin:0 10px 18px}
+.status-stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.status-flow-row{display:grid;grid-template-columns:minmax(0,1fr) 10px minmax(0,1fr) 10px minmax(0,1fr);align-items:center;gap:4px}
+.flow-arr{display:block;width:7px;height:7px;border-top:1.5px solid #c7cdd6;border-right:1.5px solid #c7cdd6;transform:rotate(45deg);justify-self:center;flex-shrink:0}
+.status-card{
+  height:80px;min-height:80px;padding:12px 6px;border:1px solid #e5dcd8;border-radius:8px;background:#fff;
+  box-shadow:none;display:grid;place-items:center;text-align:center;
+}
+.status-card[data-status]{cursor:pointer;transition:border-color .16s,box-shadow .16s}
+.status-card[data-status]:hover{border-color:rgba(232,56,90,.55);box-shadow:0 0 0 2px rgba(232,56,90,.08);outline:0}
+.status-card.status-active{border-color:var(--brand);box-shadow:0 0 0 2px rgba(232,56,90,.12)}
+.status-card-primary{height:54px;min-height:54px;padding:7px 6px}
+.status-card-flow{height:116px;min-height:116px}
+.status-card em{display:block;margin-bottom:4px;color:#0f2a4a;font-style:normal;font-size:18px;font-weight:700;line-height:1}
+.status-card em.hot{color:var(--brand)}
+.status-card strong{display:block;color:#172238;font-size:12px;font-weight:700;line-height:1.35}
+.status-local-stack{display:grid;gap:8px}
+.status-card-local{height:54px;min-height:54px;padding:7px 6px}
+
+/* ── 거래 목록 필터 (web_mainlist 기준) ── */
+.trade-area{border-top:8px solid #f0f2f5;margin-top:4px}
+.trade-head{min-height:42px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 10px 10px}
+.trade-head .list-title{margin:0;color:#222831;font-size:18px;font-weight:900}
+.filter-row{display:flex;flex-wrap:wrap;gap:10px;padding:0 10px 12px;align-items:center}
+.filter-group{display:flex;gap:18px;flex:1 1 auto}
+.tab{position:relative;height:34px;padding:0 0 7px;border:0;background:transparent;color:#7f8794;font-size:13px;font-weight:700;white-space:nowrap}
+.tab.active{color:var(--rose)}
+.tab.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--rose);border-radius:999px}
+.utility-group{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:100%}
+.dd-select{
+  height:32px;padding:0 8px;border:1px solid #e5dbd7;border-radius:8px;background:#fff;
+  color:var(--navy);font-size:11px;font-weight:700;outline:none;
+  appearance:none;-webkit-appearance:none;text-align:center;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='6'%3E%3Cpath d='M0 0l4.5 6 4.5-6z' fill='%235d6470'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 6px center;
+}
+
+/* ── 거래 카드 (web_mainlist order-card 이식) ── */
+.trade-table{display:flex;flex-direction:column;gap:10px;padding:0 10px}
+.order-card{border:1px solid #e5dbd7;border-radius:7px;overflow:hidden;background:#fff}
+
+/* 카드 상단 헤더 바 */
+.tr-header{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:42px;padding:8px 14px;background:#FBF7F5;border-bottom:1px solid #DED8D4}
+.tr-chip{font-size:13px;font-weight:700;color:#3d4452;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.tr-chip::before{content:'';width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;flex-shrink:0}
+.tr-oid{font-size:11px;color:#999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* 상태별 chip 색상 (web 기준) */
+.order-card[data-status="first-payment-wait"] .tr-chip,
+.order-card[data-status="second-payment-wait"] .tr-chip{color:var(--rose)}
+.order-card[data-status="auction-bid"] .tr-chip{color:var(--navy)}
+.order-card[data-status="shipping-wait"] .tr-chip{color:#d97706}
+.order-card[data-status="local-arrived"] .tr-chip{color:#059669}
+.order-card[data-status="international-shipping"] .tr-chip{color:#2563eb}
+.order-card[data-status="second-payment-complete"] .tr-chip{color:#059669}
+.order-card[data-status="first-payment-complete"] .tr-chip{color:#3d4452}
+.order-card[data-status="failed-bid"] .tr-chip,
+.order-card[data-status="trade-cancel"] .tr-chip{color:#aaa}
+.order-card[data-status="purchase-request"] .tr-chip{color:#6b7280}
+.order-card[data-status="trade-complete"] .tr-chip{color:#059669}
+
+/* 거래행 — 웹 3컬럼을 모바일에서 세로 스택 */
+.trade-row{display:flex;flex-direction:column;border-bottom:1px solid #eee6e2}
+.trade-row:last-child{border-bottom:0}
+
+.tr-product{display:flex;align-items:flex-start;gap:12px;padding:14px;background:#fff;border-bottom:1px solid #eee6e2}
+.tr-product .thumb{width:68px;height:68px;background:#eae6e3;border-radius:8px;flex-shrink:0}
+.tr-prod-src{font-size:11px;color:#999;margin-bottom:4px}
+.tr-prod-info{min-width:0}
+.tr-prod-name{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:13px;font-weight:700;color:#222;line-height:1.42;margin-bottom:5px;text-decoration:none}
+.tr-prod-name:hover,.tr-prod-name:focus,.tr-prod-name:visited{color:#222;text-decoration:none}
+.tr-prod-origin{display:block;margin-top:-2px;color:#999;font-size:11px;font-weight:400;line-height:1.4}
+
+.tr-amount{display:grid;grid-template-columns:auto minmax(0,1fr) auto minmax(0,1fr);align-content:center;gap:7px 8px;padding:12px 14px;background:#fff}
+.trl{font-size:11px;font-weight:700;color:#9aa3b2;white-space:nowrap}
+.trv{font-size:11px;font-weight:700;color:#222;white-space:nowrap}
+.trv.accent{color:#222;font-weight:700}
+
+.tr-pay{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:10px 14px;background:#fff;border-top:1px solid #eee6e2}
+.tr-pay:empty{display:none}
+.btn-pay-row{display:inline-flex;align-items:center;justify-content:center;height:38px;min-width:96px;padding:0 16px;border:0;border-radius:5px;background:var(--rose);color:#fff;font-size:13px;font-weight:700;white-space:nowrap;text-decoration:none}
+.btn-pay-row.btn-outline{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
+.tr-pay-note{font-size:12px;color:#aaa;font-weight:700}
+
+/* 묶음배송 그룹 */
+.bundle-group-wrap{border:1px solid #e5dbd7;border-radius:8px;overflow:hidden;background:#fff}
+.order-card.bundle-group-start{border:0;border-radius:0;border-bottom:1px solid #eee6e2}
+.order-card.bundle-group-end{border:0;border-radius:0}
+.bundle-nav-header{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;min-height:42px;padding:8px 14px;background:#FBF7F5;border-bottom:1px solid #DED8D4}
+.bnh-chip{font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;color:var(--rose);white-space:nowrap}
+.bnh-chip::before{content:'';width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;flex-shrink:0}
+.bnh-sep{width:1px;height:14px;background:#ccc;flex-shrink:0}
+.bnh-meta{display:flex;align-items:center;gap:5px;white-space:nowrap}
+.bnh-ml{font-size:11px;color:#999}
+.bnh-mv{font-size:12px;font-weight:800;color:var(--navy)}
+.bundle-group-end .trade-row .tr-pay{display:none}
+.bundle-group-pay{display:flex;align-items:center;justify-content:flex-end;padding:10px 14px;background:#fff;border-top:1px solid #eee6e2}
+.btn-bundle-pay{height:38px;min-width:110px;padding:0 18px;border:1px solid #1675cf;border-radius:5px;background:#fff;color:#1675cf;font-size:13px;font-weight:700;white-space:nowrap}
+
+/* 필터 표시 제어 (web 동일) */
+.order-card.status-extra{display:none}
+.trade-table.status-filtered .order-card.status-extra{display:block}
+.order-card.is-hidden{display:none !important}
+.bundle-group-wrap.is-hidden{display:none !important}
+.trade-empty{display:none;min-height:84px;align-items:center;justify-content:center;border:1px solid #e5dbd7;border-radius:11px;color:#9da2af;font-size:13px;font-weight:800;background:#fff}
+.trade-empty.is-visible{display:flex}
+
+/* 페이저 */
+.pager{display:flex;justify-content:center;gap:5px;margin-top:16px}
+.pager button{width:31px;height:32px;border:1px solid #e5dbd7;border-radius:8px;background:#fff;color:#777b85;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;line-height:1}
+.pager button.current{border-color:var(--rose);background:var(--rose);color:#fff}
+
+.bottom-safe{height:28px}
+</style>
+</head>
+<body>
+
+<!-- ══ 헤더 ══ -->
+<header class="header">
+  <div class="header-top">
+    <div class="brand-area">
+      <button class="menu-button" type="button" aria-label="메뉴 열기" onclick="openDrawer()">
+        <span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+      <a class="logo-link" href="mobile_main.html" aria-label="Bidbuy 홈">
+        <img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency">
+      </a>
+    </div>
+    <div class="header-actions" id="userArea">
+      <button class="icon-btn" type="button" aria-label="알림"><i class="fa-regular fa-bell" aria-hidden="true"></i><span class="i-badge">3</span></button>
+      <button class="icon-btn" type="button" aria-label="장바구니"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></button>
+      <button class="user-avatar-sm" type="button" aria-label="회원 메뉴">한</button>
+    </div>
+  </div>
+  <form class="search-bar" role="search" onsubmit="event.preventDefault(); location.href='mobile_totalsearch.html'">
+    <input type="text" placeholder="키워드 또는 URL을 입력하세요." aria-label="검색어 입력">
+    <button class="search-submit" type="submit" aria-label="검색"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
+  </form>
+</header>
+
+<!-- ── 나의 거래 현황 ── -->
+<div class="shopping-head">
+  <h3>나의 거래 현황</h3>
+  <div class="status-links">
+    <a class="outline-pill" href="mobile_mainlist.html?status=completed">거래완료</a>
+    <a class="outline-pill" href="mobile_mainlist.html?status=canceled">취소/반품</a>
+  </div>
+</div>
+
+<div class="status-board">
+  <div class="status-stack">
+    <a class="status-card status-card-primary" href="mobile_auction_bid_list.html" data-status="auction-bid" data-label="경매입찰"><div><em>5</em><strong>경매입찰</strong></div></a>
+    <a class="status-card status-card-primary" href="mobile_mainlist.html?status=purchase-request" data-status="purchase-request" data-label="구매 신청"><div><em>5</em><strong>구매 신청</strong></div></a>
+  </div>
+  <div class="status-flow-row">
+    <a class="status-card status-card-flow" href="mobile_mainlist.html?status=first-payment-wait" data-status="first-payment-wait" data-label="1차 결제대기"><div><em class="hot">5</em><strong>1차<br>결제대기</strong></div></a>
+    <span class="flow-arr" aria-hidden="true"></span>
+    <a class="status-card status-card-flow" href="mobile_mainlist.html?status=first-payment-complete" data-status="first-payment-complete" data-label="1차 결제완료"><div><em>5</em><strong>1차<br>결제완료</strong></div></a>
+    <span class="flow-arr" aria-hidden="true"></span>
+    <div class="status-local-stack">
+      <a class="status-card status-card-local" href="mobile_mainlist.html?status=local-arrived" data-status="local-arrived" data-label="현지도착"><div><em>5</em><strong>현지도착</strong></div></a>
+      <a class="status-card status-card-local" href="mobile_mainlist.html?status=shipping-wait" data-status="shipping-wait" data-label="배송대기"><div><em>3</em><strong>배송대기</strong></div></a>
+    </div>
+  </div>
+  <div class="status-flow-row">
+    <a class="status-card status-card-flow" href="mobile_mainlist.html?status=second-payment-wait" data-status="second-payment-wait" data-label="2차 결제대기"><div><em class="hot">5</em><strong>2차<br>결제대기</strong></div></a>
+    <span class="flow-arr" aria-hidden="true"></span>
+    <a class="status-card status-card-flow" href="mobile_mainlist.html?status=second-payment-complete" data-status="second-payment-complete" data-label="2차 결제 완료"><div><em>5</em><strong>2차<br>결제 완료</strong></div></a>
+    <span class="flow-arr" aria-hidden="true"></span>
+    <a class="status-card status-card-flow" href="mobile_mainlist.html?status=international-shipping" data-status="international-shipping" data-label="국제배송"><div><em class="hot">5</em><strong>국제배송</strong></div></a>
+  </div>
+</div>
+
+<!-- ── 거래 목록 (web_mainlist 동일 내용) ── -->
+<div class="trade-area">
+  <div class="trade-head"><h3 class="list-title" id="trade-list-title">거래 전체 목록</h3></div>
+
+  <div class="filter-row">
+    <div class="filter-group" aria-label="거래 유형">
+      <button class="tab active" type="button" data-trade-type="">전체</button>
+      <button class="tab" type="button" data-trade-type="auction">경매</button>
+      <button class="tab" type="button" data-trade-type="purchase">구매</button>
+    </div>
+    <div class="utility-group">
+      <select class="dd-select" id="ddCountry" aria-label="거래 국가">
+        <option value="">전체 국가</option>
+        <option value="jp">일본</option>
+        <option value="us">미국</option>
+        <option value="uk">영국</option>
+      </select>
+      <select class="dd-select" id="ddPeriod" aria-label="조회 기간">
+        <option>1주일</option>
+        <option selected>최근 1개월</option>
+        <option>6개월</option>
+        <option>1년</option>
+      </select>
+      <select class="dd-select" id="ddStatus" aria-label="진행 단계">
+        <option value="">전체</option>
+        <option value="auction-bid">입찰중</option>
+        <option value="failed-bid">유찰</option>
+        <option value="trade-cancel">거래취소</option>
+        <option value="first-payment-wait">1차 결제대기</option>
+        <option value="first-payment-complete">1차 결제완료</option>
+        <option value="second-payment-wait">2차 결제대기</option>
+        <option value="second-payment-complete">2차 결제완료</option>
+        <option value="international-shipping">국제배송</option>
+        <option value="trade-complete">거래완료</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="trade-table" aria-label="거래 목록">
+
+    <!-- 입찰중 -->
+    <div class="order-card" data-trade-type="auction" data-country="jp" data-status="auction-bid">
+      <div class="tr-header">
+        <span class="tr-chip">입찰중 · 종료 2시간 14분 전</span>
+        <span class="tr-oid">야후경매 · a2024041701</span>
+      </div>
+      <div class="trade-row">
+        <div class="tr-product">
+          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+          <div class="tr-prod-info">
+            <a class="tr-prod-name" href="mobile_payment_detail.html">닌텐도 스위치 OLED 화이트 본체 풀박스 중고</a>
+            <span class="tr-prod-origin">Nintendo Switch 有機ELモデル ホワイト 本体 フルボックス 中古</span>
+          </div>
+        </div>
+        <div class="tr-amount">
+          <span class="trl">상품금액</span><span class="trv">1개 / 23,900 엔</span><span class="trl">총상품가격</span><span class="trv accent">23,900 엔</span>
+          <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">-</span>
+          <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+        </div>
+        <div class="tr-pay"><button class="btn-pay-row" type="button">재입찰</button></div>
+      </div>
+    </div>
+
+    <!-- 1차 결제대기 -->
+    <div class="order-card" data-trade-type="auction" data-country="jp" data-status="first-payment-wait">
+      <div class="tr-header">
+        <span class="tr-chip">1차 결제대기</span>
+        <span class="tr-oid">야후경매 · e2024041702</span>
+      </div>
+      <div class="trade-row">
+        <div class="tr-product">
+          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+          <div class="tr-prod-info">
+            <a class="tr-prod-name" href="mobile_payment_detail.html">소니 워크맨 빈티지 카세트 플레이어 한정 컬러</a>
+            <span class="tr-prod-origin">ソニー ウォークマン ヴィンテージ カセットプレーヤー 限定カラー</span>
+          </div>
+        </div>
+        <div class="tr-amount">
+          <span class="trl">상품금액</span><span class="trv">2개 / 28,500 엔</span><span class="trl">총상품가격</span><span class="trv accent">8,500 엔</span>
+          <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">82,450원</span>
+          <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+        </div>
+        <div class="tr-pay"><a class="btn-pay-row" href="mobile_bill_1st.html">결제하기</a></div>
+      </div>
+    </div>
+
+    <!-- 묶음배송 그룹 (BJP2024041703 + 04) -->
+    <div class="bundle-group-wrap">
+      <div class="order-card bundle-group-start" data-trade-type="purchase" data-country="jp" data-status="second-payment-wait">
+        <div class="bundle-nav-header">
+          <span class="bnh-chip">2차 결제대기</span>
+          <span class="bnh-sep"></span>
+          <span class="bnh-meta"><span class="bnh-ml">대표주문번호</span><span class="bnh-mv">BJP2024041703</span></span>
+          <span class="bnh-meta"><span class="bnh-ml">묶음상품</span><span class="bnh-mv">2건</span></span>
+          <span class="bnh-meta"><span class="bnh-ml">총상품가격</span><span class="bnh-mv">57,000 엔</span></span>
+        </div>
+        <div class="trade-row">
+          <div class="tr-product">
+            <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+            <div>
+              <div class="tr-prod-src">야후구매 · BJP2024041703</div>
+              <div class="tr-prod-info">
+                <a class="tr-prod-name" href="mobile_payment_detail.html">스타벅스 재팬 사쿠라 머그컵 텀블러 세트</a>
+                <span class="tr-prod-origin">スターバックス ジャパン 桜 マグカップ タンブラーセット</span>
+              </div>
+            </div>
+          </div>
+          <div class="tr-amount">
+            <span class="trl">상품금액</span><span class="trv">2개 / 28,500 엔</span><span class="trl">총상품가격</span><span class="trv accent">28,500 엔</span>
+            <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">-</span>
+            <span class="trl">현지도착일</span><span class="trv">2024.04.20</span><span class="trl">국제배송일</span><span class="trv">-</span>
+          </div>
+          <div class="tr-pay"></div>
+        </div>
+      </div>
+
+      <div class="order-card bundle-group-end" data-trade-type="purchase" data-country="jp" data-status="second-payment-wait">
+        <div class="trade-row">
+          <div class="tr-product">
+            <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+            <div>
+              <div class="tr-prod-src">야후구매 · BJP2024041704</div>
+              <div class="tr-prod-info">
+                <a class="tr-prod-name" href="mobile_payment_detail.html">무인양품 원목 수납박스 데스크 정리함 묶음</a>
+                <span class="tr-prod-origin">無印良品 木製収納ボックス デスク整理ケース まとめ</span>
+              </div>
+            </div>
+          </div>
+          <div class="tr-amount">
+            <span class="trl">상품금액</span><span class="trv">2개 / 28,500 엔</span><span class="trl">총상품가격</span><span class="trv accent">28,500 엔</span>
+            <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">-</span>
+            <span class="trl">현지도착일</span><span class="trv">2024.04.22</span><span class="trl">국제배송일</span><span class="trv">-</span>
+          </div>
+          <div class="tr-pay"></div>
+        </div>
+      </div>
+      <div class="bundle-group-pay">
+        <button class="btn-bundle-pay" type="button" onclick="location.href='mobile_bill_2nd.html'">통합결제</button>
+      </div>
+    </div>
+
+    <!-- 현지도착 711 (단독/개별) -->
+    <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="local-arrived">
+      <div class="tr-header">
+        <span class="tr-chip">현지도착 · 보관 D+3</span>
+        <span class="tr-oid">야후구매 · BJP2024041711</span>
+      </div>
+      <div class="trade-row">
+        <div class="tr-product">
+          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+          <div class="tr-prod-info">
+            <a class="tr-prod-name" href="mobile_payment_detail.html">스타벅스 재팬 사쿠라 플레이트 한정 컬렉션</a>
+            <span class="tr-prod-origin">スターバックス ジャパン 桜 プレート 限定コレクション</span>
+          </div>
+        </div>
+        <div class="tr-amount">
+          <span class="trl">상품금액</span><span class="trv">1개 / 9,800 엔</span><span class="trl">총상품가격</span><span class="trv accent">9,800 엔</span>
+          <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">-</span>
+          <span class="trl">현지도착일</span><span class="trv">2024.04.20</span><span class="trl">국제배송일</span><span class="trv">-</span>
+        </div>
+        <div class="tr-pay"><button class="btn-pay-row" type="button">결제하기</button></div>
+      </div>
+    </div>
+
+    <!-- 현지도착 개별배송 -->
+    <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="local-arrived">
+      <div class="tr-header">
+        <span class="tr-chip">현지도착 · 보관 D+1</span>
+        <span class="tr-oid">메루카리 · BJP2024041706</span>
+      </div>
+      <div class="trade-row">
+        <div class="tr-product">
+          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+          <div class="tr-prod-info">
+            <a class="tr-prod-name" href="mobile_payment_detail.html">스투시 재팬 로고 반팔 티셔츠 블랙</a>
+            <span class="tr-prod-origin">ステューシー ジャパン ロゴ 半袖Tシャツ ブラック</span>
+          </div>
+        </div>
+        <div class="tr-amount">
+          <span class="trl">상품금액</span><span class="trv">1개 / 7,900 엔</span><span class="trl">총상품가격</span><span class="trv accent">7,900 엔</span>
+          <span class="trl">주문일자</span><span class="trv">2024.04.18</span><span class="trl">결제금액</span><span class="trv">-</span>
+          <span class="trl">현지도착일</span><span class="trv">2024.04.21</span><span class="trl">국제배송일</span><span class="trv">-</span>
+        </div>
+        <div class="tr-pay"><button class="btn-pay-row" type="button">결제하기</button></div>
+      </div>
+    </div>
+
+    <!-- 국제배송 -->
+    <div class="order-card" data-trade-type="auction" data-country="us" data-status="international-shipping">
+      <div class="tr-header">
+        <span class="tr-chip">국제배송중</span>
+        <span class="tr-oid">미국이베이 · g2024041705</span>
+      </div>
+      <div class="trade-row">
+        <div class="tr-product">
+          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+          <div class="tr-prod-info">
+            <a class="tr-prod-name" href="mobile_payment_detail.html">애플 매직키보드 일본어 배열 실버 모델</a>
+          </div>
+        </div>
+        <div class="tr-amount">
+          <span class="trl">상품금액</span><span class="trv">1개 / 23,900 엔</span><span class="trl">총상품가격</span><span class="trv accent">23,900 엔</span>
+          <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">286,740원</span>
+          <span class="trl">현지도착일</span><span class="trv">2024.04.20</span><span class="trl">국제배송일</span><span class="trv">2024.04.24</span>
+        </div>
+        <div class="tr-pay"><button class="btn-pay-row" type="button">배송조회</button></div>
+      </div>
+    </div>
+
+    <!-- 구매신청 -->
+    <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="purchase-request">
+      <div class="tr-header">
+        <span class="tr-chip">구매신청 접수</span>
+        <span class="tr-oid">구매대행 · BJP2024041606</span>
+      </div>
+      <div class="trade-row">
+        <div class="tr-product">
+          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+          <div class="tr-prod-info">
+            <a class="tr-prod-name" href="mobile_payment_detail.html">산리오 쿠로미 한정 아크릴 키링 랜덤 박스</a>
+            <span class="tr-prod-origin">サンリオ クロミ 限定 アクリルキーホルダー ランダムボックス</span>
+          </div>
+        </div>
+        <div class="tr-amount">
+          <span class="trl">상품금액</span><span class="trv">1개 / 12,400 엔</span><span class="trl">총상품가격</span><span class="trv accent">12,400 엔</span>
+          <span class="trl">주문일자</span><span class="trv">2024.04.16</span><span class="trl">결제금액</span><span class="trv">-</span>
+          <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+        </div>
+        <div class="tr-pay"><span class="tr-pay-note">진행중</span></div>
+      </div>
+    </div>
+
+    <!-- 1차 결제완료 - 송금준비중 -->
+    <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="first-payment-complete">
+      <div class="tr-header">
+        <span class="tr-chip">배송신청 가능</span>
+        <span class="tr-oid">야후경매 · BJP2024041607</span>
+      </div>
+      <div class="trade-row">
+        <div class="tr-product">
+          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+          <div class="tr-prod-info">
+            <a class="tr-prod-name" href="mobile_payment_detail.html">요코하마 기념 한정 우표 앨범 컬렉션</a>
+            <span class="tr-prod-origin">横浜記念 限定切手アルバム コレクション</span>
+          </div>
+        </div>
+        <div class="tr-amount">
+          <span class="trl">상품금액</span><span class="trv">1개 / 18,900 엔</span><span class="trl">총상품가격</span><span class="trv accent">18,900 엔</span>
+          <span class="trl">주문일자</span><span class="trv">2024.04.16</span><span class="trl">결제금액</span><span class="trv">226,800원</span>
+          <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+        </div>
+        <div class="tr-pay"><a class="btn-pay-row btn-outline" href="mobile_bundle_shipping_management.html">배송신청/변경</a></div>
+      </div>
+    </div>
+
+    <!-- 1차 결제완료 - 송금완료 -->
+    <div class="order-card status-extra" data-trade-type="auction" data-country="jp" data-status="first-payment-complete">
+      <div class="tr-header">
+        <span class="tr-chip">1차 결제완료</span>
+        <span class="tr-oid">야후경매 · i2024041608</span>
+      </div>
+      <div class="trade-row">
+        <div class="tr-product">
+          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+          <div class="tr-prod-info">
+            <a class="tr-prod-name" href="mobile_payment_detail.html">원피스 월드콜렉터블 피규어 루피 스페셜</a>
+            <span class="tr-prod-origin">ワンピース ワールドコレクタブルフィギュア ルフィ スペシャル</span>
+          </div>
+        </div>
+        <div class="tr-amount">
+          <span class="trl">상품금액</span><span class="trv">1개 / 12,500 엔</span><span class="trl">총상품가격</span><span class="trv accent">12,500 엔</span>
+          <span class="trl">주문일자</span><span class="trv">2024.04.16</span><span class="trl">결제금액</span><span class="trv">150,000원</span>
+          <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+        </div>
+        <div class="tr-pay"></div>
+      </div>
+    </div>
+
+    <!-- 1차 결제완료 - 현지배송중 -->
+    <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="first-payment-complete">
+      <div class="tr-header">
+        <span class="tr-chip">1차 결제완료</span>
+        <span class="tr-oid">구매대행 · BJP2024041609</span>
+      </div>
+      <div class="trade-row">
+        <div class="tr-product">
+          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+          <div class="tr-prod-info">
+            <a class="tr-prod-name" href="mobile_payment_detail.html">파이오니어 빈티지 오디오 앰프 부품 세트</a>
+            <span class="tr-prod-origin">パイオニア ヴィンテージ オーディオアンプ 部品セット</span>
+          </div>
+        </div>
+        <div class="tr-amount">
+          <span class="trl">상품금액</span><span class="trv">1개 / 8,900 엔</span><span class="trl">총상품가격</span><span class="trv accent">8,900 엔</span>
+          <span class="trl">주문일자</span><span class="trv">2024.04.16</span><span class="trl">결제금액</span><span class="trv">106,800원</span>
+          <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+        </div>
+        <div class="tr-pay"></div>
+      </div>
+    </div>
+
+    <!-- 배송대기 1 -->
+    <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="shipping-wait">
+      <div class="tr-header">
+        <span class="tr-chip">배송신청 가능 · 보관 D+30</span>
+        <span class="tr-oid">메루카리 · BJP2024041510</span>
+      </div>
+      <div class="trade-row">
+        <div class="tr-product">
+          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+          <div class="tr-prod-info">
+            <a class="tr-prod-name" href="mobile_payment_detail.html">미개봉 포켓몬 카드 프로모 팩 10매 묶음</a>
+            <span class="tr-prod-origin">未開封 ポケモンカード プロモパック 10枚 まとめ</span>
+          </div>
+        </div>
+        <div class="tr-amount">
+          <span class="trl">상품금액</span><span class="trv">1개 / 8,700 엔</span><span class="trl">총상품가격</span><span class="trv accent">8,700 엔</span>
+          <span class="trl">주문일자</span><span class="trv">2024.04.15</span><span class="trl">결제금액</span><span class="trv">104,400원</span>
+          <span class="trl">현지도착일</span><span class="trv">2024.04.16</span><span class="trl">국제배송일</span><span class="trv">-</span>
+        </div>
+        <div class="tr-pay"><a class="btn-pay-row" href="mobile_bundle_shipping_order.html">배송신청</a></div>
+      </div>
+    </div>
+
+    <!-- 배송대기 2 -->
+    <div class="order-card status-extra" data-trade-type="auction" data-country="jp" data-status="shipping-wait">
+      <div class="tr-header">
+        <span class="tr-chip">배송신청 가능 · 보관 D+12</span>
+        <span class="tr-oid">야후경매 · j2024041511</span>
+      </div>
+      <div class="trade-row">
+        <div class="tr-product">
+          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+          <div class="tr-prod-info">
+            <a class="tr-prod-name" href="mobile_payment_detail.html">캐논 필름카메라 AE-1 렌즈 포함 세트</a>
+            <span class="tr-prod-origin">キヤノン フィルムカメラ AE-1 レンズ付きセット</span>
+          </div>
+        </div>
+        <div class="tr-amount">
+          <span class="trl">상품금액</span><span class="trv">1개 / 18,900 엔</span><span class="trl">총상품가격</span><span class="trv accent">18,900 엔</span>
+          <span class="trl">주문일자</span><span class="trv">2024.04.15</span><span class="trl">결제금액</span><span class="trv">226,800원</span>
+          <span class="trl">현지도착일</span><span class="trv">2024.04.16</span><span class="trl">국제배송일</span><span class="trv">-</span>
+        </div>
+        <div class="tr-pay"><a class="btn-pay-row" href="mobile_bundle_shipping_order.html">배송신청</a></div>
+      </div>
+    </div>
+
+    <!-- 배송대기 3 -->
+    <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="shipping-wait">
+      <div class="tr-header">
+        <span class="tr-chip">배송신청 가능 · 보관 D+7</span>
+        <span class="tr-oid">구매대행 · BJP2024041512</span>
+      </div>
+      <div class="trade-row">
+        <div class="tr-product">
+          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+          <div class="tr-prod-info">
+            <a class="tr-prod-name" href="mobile_payment_detail.html">건담 메탈빌드 한정판 피규어 미개봉</a>
+            <span class="tr-prod-origin">ガンダム メタルビルド 限定版フィギュア 未開封</span>
+          </div>
+        </div>
+        <div class="tr-amount">
+          <span class="trl">상품금액</span><span class="trv">2개 / 12,400 엔</span><span class="trl">총상품가격</span><span class="trv accent">12,400 엔</span>
+          <span class="trl">주문일자</span><span class="trv">2024.04.15</span><span class="trl">결제금액</span><span class="trv">148,800원</span>
+          <span class="trl">현지도착일</span><span class="trv">2024.04.17</span><span class="trl">국제배송일</span><span class="trv">-</span>
+        </div>
+        <div class="tr-pay"><a class="btn-pay-row" href="mobile_bundle_shipping_order.html">배송신청</a></div>
+      </div>
+    </div>
+
+    <!-- 2차 결제완료 -->
+    <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="second-payment-complete">
+      <div class="tr-header">
+        <span class="tr-chip">2차 결제완료</span>
+        <span class="tr-oid">야후경매 · BJP2024041413</span>
+      </div>
+      <div class="trade-row">
+        <div class="tr-product">
+          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+          <div class="tr-prod-info">
+            <a class="tr-prod-name" href="mobile_payment_detail.html">다이슨 슈퍼소닉 드라이어 니켈 코퍼</a>
+            <span class="tr-prod-origin">ダイソン スーパーソニック ドライヤー ニッケル/コッパー</span>
+          </div>
+        </div>
+        <div class="tr-amount">
+          <span class="trl">상품금액</span><span class="trv">2개 / 31,000 엔</span><span class="trl">총상품가격</span><span class="trv accent">31,000 엔</span>
+          <span class="trl">주문일자</span><span class="trv">2024.04.14</span><span class="trl">결제금액</span><span class="trv">372,000원</span>
+          <span class="trl">현지도착일</span><span class="trv">2024.04.17</span><span class="trl">국제배송일</span><span class="trv">2024.04.22</span>
+        </div>
+        <div class="tr-pay"><button class="btn-pay-row" type="button">배송조회</button></div>
+      </div>
+    </div>
+
+    <!-- 국제배송 2 -->
+    <div class="order-card status-extra" data-trade-type="auction" data-country="uk" data-status="international-shipping">
+      <div class="tr-header">
+        <span class="tr-chip">국제배송중</span>
+        <span class="tr-oid">일본라쿠텐 · o2024041314</span>
+      </div>
+      <div class="trade-row">
+        <div class="tr-product">
+          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+          <div class="tr-prod-info">
+            <a class="tr-prod-name" href="mobile_payment_detail.html">일본 한정 레고 미니피규어 시리즈 묶음</a>
+            <span class="tr-prod-origin">日本限定 レゴ ミニフィギュアシリーズ まとめ</span>
+          </div>
+        </div>
+        <div class="tr-amount">
+          <span class="trl">상품금액</span><span class="trv">3개 / 44,200 엔</span><span class="trl">총상품가격</span><span class="trv accent">44,200 엔</span>
+          <span class="trl">주문일자</span><span class="trv">2024.04.13</span><span class="trl">결제금액</span><span class="trv">530,400원</span>
+          <span class="trl">현지도착일</span><span class="trv">2024.04.16</span><span class="trl">국제배송일</span><span class="trv">2024.04.20</span>
+        </div>
+        <div class="tr-pay"><button class="btn-pay-row" type="button">배송조회</button></div>
+      </div>
+    </div>
+
+    <!-- 유찰 -->
+    <div class="order-card status-extra" data-trade-type="auction" data-country="jp" data-status="failed-bid">
+      <div class="tr-header">
+        <span class="tr-chip">유찰</span>
+        <span class="tr-oid">야후경매 · q2024041315</span>
+      </div>
+      <div class="trade-row">
+        <div class="tr-product">
+          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+          <div class="tr-prod-info">
+            <a class="tr-prod-name" href="mobile_payment_detail.html">슈퍼패미컴 본체 컨트롤러 게임팩 세트</a>
+            <span class="tr-prod-origin">スーパーファミコン 本体 コントローラー ゲームパックセット</span>
+          </div>
+        </div>
+        <div class="tr-amount">
+          <span class="trl">상품금액</span><span class="trv">1개 / 15,000 엔</span><span class="trl">총상품가격</span><span class="trv">-</span>
+          <span class="trl">주문일자</span><span class="trv">2024.04.13</span><span class="trl">결제금액</span><span class="trv">-</span>
+          <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+        </div>
+        <div class="tr-pay"></div>
+      </div>
+    </div>
+
+    <!-- 1차 결제대기 (구 낙찰) -->
+    <div class="order-card status-extra" data-trade-type="auction" data-country="jp" data-status="first-payment-wait">
+      <div class="tr-header">
+        <span class="tr-chip">1차 결제대기</span>
+        <span class="tr-oid">야후경매 · s2024041316</span>
+      </div>
+      <div class="trade-row">
+        <div class="tr-product">
+          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+          <div class="tr-prod-info">
+            <a class="tr-prod-name" href="mobile_payment_detail.html">마블 아이언맨 프리미엄 액션 피규어 미개봉</a>
+            <span class="tr-prod-origin">マーベル アイアンマン プレミアムアクションフィギュア 未開封</span>
+          </div>
+        </div>
+        <div class="tr-amount">
+          <span class="trl">상품금액</span><span class="trv">1개 / 21,400 엔</span><span class="trl">총상품가격</span><span class="trv accent">21,400 엔</span>
+          <span class="trl">주문일자</span><span class="trv">2024.04.13</span><span class="trl">결제금액</span><span class="trv">-</span>
+          <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+        </div>
+        <div class="tr-pay"><a class="btn-pay-row" href="mobile_bill_1st.html">결제하기</a></div>
+      </div>
+    </div>
+
+    <!-- 거래취소 -->
+    <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="trade-cancel">
+      <div class="tr-header">
+        <span class="tr-chip">거래취소</span>
+        <span class="tr-oid">구매대행 · BJP2024041217</span>
+      </div>
+      <div class="trade-row">
+        <div class="tr-product">
+          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
+          <div class="tr-prod-info">
+            <a class="tr-prod-name" href="mobile_payment_detail.html">아식스 젤카야노 한정 컬러 운동화</a>
+            <span class="tr-prod-origin">アシックス ゲルカヤノ 限定カラー スニーカー</span>
+          </div>
+        </div>
+        <div class="tr-amount">
+          <span class="trl">상품금액</span><span class="trv">1개 / 6,200 엔</span><span class="trl">총상품가격</span><span class="trv">-</span>
+          <span class="trl">주문일자</span><span class="trv">2024.04.12</span><span class="trl">결제금액</span><span class="trv">-</span>
+          <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
+        </div>
+        <div class="tr-pay"></div>
+      </div>
+    </div>
+
+    <div class="trade-empty" id="tradeEmpty">선택한 쇼핑 현황에 해당하는 거래가 없습니다.</div>
+  </div>
+
+  <div class="pager" aria-label="페이지 이동">
+    <button type="button">≪</button>
+    <button type="button">‹</button>
+    <button type="button">1</button>
+    <button class="current" type="button">2</button>
+    <button type="button">3</button>
+    <button type="button">4</button>
+    <button type="button">5</button>
+    <button type="button">›</button>
+    <button type="button">≫</button>
+  </div>
+</div>
+
+<div class="bottom-safe"></div>
+
+<script>
+const statusLabels = {
+  'auction-bid': '경매입찰',
+  'purchase-request': '구매 신청',
+  'first-payment-wait': '1차 결제대기',
+  'first-payment-complete': '1차 결제완료',
+  'local-arrived': '현지도착',
+  'shipping-wait': '배송대기',
+  'second-payment-wait': '2차 결제대기',
+  'second-payment-complete': '2차 결제 완료',
+  'international-shipping': '국제배송',
+  'failed-bid': '유찰',
+  'trade-cancel': '거래취소',
+  'trade-complete': '거래완료'
+};
+
+const tradeTable = document.querySelector('.trade-table');
+const orderCards = Array.from(document.querySelectorAll('.order-card[data-status]'));
+const tradeTitle = document.getElementById('trade-list-title');
+const tradeEmpty = document.getElementById('tradeEmpty');
+const ddCountry = document.getElementById('ddCountry');
+const ddStatus = document.getElementById('ddStatus');
+
+let activeStatus = '';
+let activeType = '';
+let activeCountry = '';
+
+function applyTradeFilters() {
+  const isFiltered = Boolean(activeStatus || activeType || activeCountry);
+  tradeTable.classList.toggle('status-filtered', isFiltered);
+
+  let visibleCount = 0;
+  orderCards.forEach((card) => {
+    const show = (!activeStatus || card.dataset.status === activeStatus)
+      && (!activeType || card.dataset.tradeType === activeType)
+      && (!activeCountry || card.dataset.country === activeCountry);
+    card.classList.toggle('is-hidden', !show);
+    if (show) visibleCount += 1;
+  });
+
+  // 묶음 그룹은 내부 카드가 모두 숨겨지면 래퍼째 숨김
+  document.querySelectorAll('.bundle-group-wrap').forEach((wrap) => {
+    const anyVisible = wrap.querySelector('.order-card:not(.is-hidden)');
+    wrap.classList.toggle('is-hidden', !anyVisible);
+  });
+
+  document.querySelectorAll('.status-card[data-status]').forEach((card) => {
+    card.classList.toggle('status-active', Boolean(activeStatus) && card.dataset.status === activeStatus);
+  });
+
+  tradeEmpty.classList.toggle('is-visible', visibleCount === 0);
+
+  const parts = [];
+  if (activeCountry) parts.push(ddCountry.selectedOptions[0].textContent);
+  if (activeType) parts.push(activeType === 'auction' ? '경매' : '구매');
+  if (activeStatus) parts.push(statusLabels[activeStatus] || ddStatus.selectedOptions[0].textContent);
+  tradeTitle.textContent = parts.length ? `${parts.join(' ')} 목록` : '거래 전체 목록';
+}
+
+document.querySelectorAll('.filter-group .tab').forEach((tab) => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.filter-group .tab').forEach((t) => t.classList.remove('active'));
+    tab.classList.add('active');
+    activeType = tab.dataset.tradeType || '';
+    applyTradeFilters();
+  });
+});
+
+ddCountry.addEventListener('change', () => { activeCountry = ddCountry.value; applyTradeFilters(); });
+ddStatus.addEventListener('change', () => { activeStatus = ddStatus.value; applyTradeFilters(); });
+
+activeStatus = new URLSearchParams(location.search).get('status') || '';
+if (activeStatus && [...ddStatus.options].some((o) => o.value === activeStatus)) {
+  ddStatus.value = activeStatus;
+}
+applyTradeFilters();
+</script>
+<script src="bb-common-mobile.js"></script>
+</body>
+</html>

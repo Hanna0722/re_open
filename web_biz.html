@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사업자 회원 전환 — Bidbuy</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --rose: #E8385A;
+      --rose-h: #C42F4C;
+      --navy: #1a3c6e;
+      --navy-light: #eef3fb;
+      --navy-mid: #4f6b9a;
+      --tp: #1a1a2e;
+      --ts: #666680;
+      --tm: #999baa;
+      --text: #33363d;
+      --line: #e5dbd7;
+      --line-soft: #eee6e2;
+      --warm: #fbf7f5;
+      --warm-2: #f7f3f0;
+      --border: #e0e4eb;
+      --green: #3aad4e;
+      --sidebar-w: 231px;
+      --main-w: 925px;
+      --gap: 24px;
+      --stage-left: max(16px, calc((100vw - 1180px) / 2));
+    }
+
+    * { box-sizing: border-box; }
+    html { background: #fff; min-width: 1200px; overflow-x: auto; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--text);
+      background: #fff;
+      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+
+    /* ───── 상단 ───── */
+    .top-notice-spacer { height: 34px; }
+    .page { min-height: 100vh; background: #fff; }
+
+    .topbar {
+      height: 67px;
+      width: min(calc(100vw - 32px), 1057px);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 221px minmax(0, 714px) 221px;
+      align-items: center;
+      gap: 16px;
+      background: #fff;
+    }
+
+    .brand-area { display: flex; align-items: center; gap: 22px; }
+
+    .menu-button {
+      width: 25px; height: 25px;
+      border: 0; border-radius: 5px; background: transparent; padding: 0;
+      display: grid; place-items: center;
+    }
+    .menu-lines { width: 23px; display: grid; gap: 6px; }
+    .menu-lines span { height: 2.5px; border-radius: 999px; background: #1f2530; }
+
+    .logo-link { display: inline-flex; align-items: center; width: 122px; line-height: 0; }
+    .logo-link img { width: 100%; height: auto; display: block; }
+
+    .search {
+      height: 43px; display: flex; min-width: 0;
+      border: 1px solid var(--line); border-radius: 13px;
+      overflow: hidden; background: var(--warm-2);
+    }
+    .search input {
+      flex: 1; min-width: 0; border: 0; outline: 0;
+      padding: 0 18px; background: transparent;
+      color: var(--text); font-size: 13px;
+    }
+    .search input::placeholder { color: #8c8985; }
+    .search button {
+      width: 111px; border: 0; background: var(--rose-h); color: #fff;
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px; font-size: 13px; font-weight: 700;
+    }
+    .search button i { font-size: 15px; line-height: 15px; }
+
+    .user-tools {
+      justify-self: end;
+      display: grid; grid-template-columns: 28px 28px auto;
+      align-items: center; gap: 10px; color: #1d2430;
+    }
+    .icon-btn {
+      width: 28px; height: 28px; display: grid; place-items: center;
+      border: 0; border-radius: 5px; background: transparent; color: #687385; padding: 0;
+    }
+    .icon-btn i { font-size: 23px; line-height: 23px; }
+    .user-name {
+      display: grid; justify-items: center; gap: 3px;
+      color: #111827; font-size: 13px; font-weight: 800; white-space: nowrap;
+    }
+    .premium-chip {
+      min-width: 70px; min-height: 18px; padding: 2px 10px;
+      border-radius: 999px; background: #fff0c9; color: #f4a200;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 800;
+    }
+
+    /* ───── 레이아웃 ───── */
+    .stage {
+      position: relative;
+      display: grid;
+      grid-template-columns: var(--sidebar-w) var(--main-w);
+      gap: var(--gap);
+      width: calc(var(--sidebar-w) + var(--gap) + var(--main-w));
+      margin-left: var(--stage-left);
+    }
+
+    /* ───── 사이드바 ───── */
+    .sidebar { min-width: 0; }
+
+    .profile-card {
+      padding: 19px 22px 14px;
+      background: var(--warm);
+    }
+    .profile-main { display: flex; align-items: center; gap: 13px; }
+    .avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: grid; place-items: center; flex: 0 0 auto;
+      background: #ffe7ef; color: var(--rose);
+      font-size: 22px; font-weight: 800;
+    }
+    .profile-name { display: block; margin-bottom: 3px; color: #262a31; font-size: 16px; font-weight: 800; }
+    .profile-tier { color: var(--rose); font-size: 12px; font-weight: 800; }
+
+    .vip-copy { margin: 18px 0 6px; color: #5c6270; font-size: 12px; font-weight: 600; }
+    .vip-copy b { color: #454b58; font-weight: 800; }
+    .vip-row { display: grid; grid-template-columns: 1fr 16px; align-items: center; gap: 8px; }
+    .vip-progress { height: 8px; border-radius: 999px; background: #eee2de; overflow: hidden; }
+    .vip-progress span {
+      display: block; width: 84%; height: 100%; border-radius: inherit;
+      background: linear-gradient(90deg, #ff8499 0%, var(--rose) 100%);
+    }
+    .help-dot {
+      width: 16px; height: 16px; border: 1.5px solid #9ea1aa; border-radius: 50%;
+      display: inline-grid; place-items: center; color: #838793; font-size: 11px; font-weight: 900;
+    }
+    .profile-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 11px; }
+    .soft-btn {
+      height: 26px; border: 1px solid var(--line); border-radius: 5px;
+      background: #fff; color: #5c606b; font-size: 12px; font-weight: 700;
+    }
+
+    .side-nav { padding-top: 33px; }
+    .side-title {
+      margin: 0 0 18px; padding: 0 15px 17px;
+      border-bottom: 1px solid #dcd9d6;
+      color: #111; font-size: 16px; font-weight: 900;
+    }
+    .nav-section { padding: 0 20px; margin-bottom: 14px; }
+    .nav-section strong { display: block; margin-bottom: 11px; color: #292d35; font-size: 14px; font-weight: 900; }
+    .nav-list { display: grid; gap: 13px; }
+    .nav-list a { color: #666b75; text-decoration: none; font-size: 12px; font-weight: 500; }
+    .nav-list a:hover, .nav-list a.active { color: var(--rose); font-weight: 800; }
+
+    /* 사업자 전환 배너 (사이드바) */
+    .biz-convert-section { margin-top: 6px; padding: 0 12px 20px; }
+    .biz-convert-link {
+      display: block; text-decoration: none; border-radius: 10px;
+      background: linear-gradient(135deg, #eef3fb 0%, #e6edf8 100%);
+      border: 2px solid #1a3c6e;
+      overflow: hidden; transition: box-shadow 0.16s;
+    }
+    .biz-convert-link:hover { box-shadow: 0 2px 10px rgba(26,60,110,0.18); }
+    .biz-convert-inner { display: flex; align-items: center; gap: 10px; padding: 12px 12px 12px 14px; }
+    .biz-convert-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: #1a3c6e; display: grid; place-items: center;
+      flex-shrink: 0; color: #fff; font-size: 14px;
+    }
+    .biz-convert-text { flex: 1; min-width: 0; }
+    .biz-convert-text strong { display: block; font-size: 12px; font-weight: 800; color: #1a3c6e; margin-bottom: 2px; }
+    .biz-convert-text span { display: block; font-size: 11px; color: #4f6b9a; line-height: 1.35; }
+    .biz-chev { font-size: 11px; color: #4f6b9a; flex-shrink: 0; }
+
+    /* ───── 메인 콘텐츠 ───── */
+    .main {
+      min-width: 0;
+      padding-top: 0;
+      padding-bottom: 60px;
+    }
+
+    /* 브레드크럼 */
+    .breadcrumb {
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 24px; color: var(--tm); font-size: 12px;
+    }
+    .breadcrumb a { color: var(--ts); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--rose); }
+    .breadcrumb .sep { font-size: 10px; }
+    .breadcrumb .current { color: var(--navy); font-weight: 700; }
+
+    /* 페이지 타이틀 */
+    .page-title-area {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 32px; padding-bottom: 20px;
+      border-bottom: 2px solid #eee;
+    }
+    .page-title-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--navy); display: grid; place-items: center;
+      color: #fff; font-size: 18px; flex-shrink: 0;
+    }
+    .page-title-area h1 { margin: 0 0 3px; font-size: 20px; font-weight: 900; color: #1a1a2e; }
+    .page-title-area p { margin: 0; font-size: 13px; color: var(--ts); }
+
+    /* ── 혜택 테이블 ── */
+    .benefit-table-wrap {
+      margin-bottom: 32px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .benefit-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .bt-category-head {
+      padding: 9px 16px;
+      background: #f5f7fa;
+      border-top: 1px solid var(--border);
+      text-align: left;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--ts);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .bt-category-head:first-of-type,
+    table thead:first-child .bt-category-head {
+      border-top: none;
+    }
+
+    .biz-only-head {
+      background: #eef3fb;
+      color: var(--navy);
+    }
+
+    .coming-badge {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #c8d8ef;
+      color: var(--navy);
+      font-size: 10px;
+      font-weight: 700;
+      vertical-align: middle;
+    }
+
+    .bt-label {
+      padding: 11px 16px;
+      color: var(--text);
+      font-weight: 500;
+      border-top: 1px solid #f0f0f4;
+      white-space: nowrap;
+    }
+
+    .bt-val {
+      padding: 11px 16px;
+      font-weight: 700;
+      border-top: 1px solid #f0f0f4;
+      color: var(--text);
+    }
+    .bt-val.navy { color: var(--navy); }
+
+    .bt-empty-row td {
+      background: #fafbfc;
+    }
+    .bt-muted {
+      color: #b8bfcc !important;
+      font-weight: 500 !important;
+      font-style: italic;
+    }
+
+    /* 구 benefit-grid 제거됨 */
+
+    /* 안내 배너 */
+    .info-banner {
+      background: #f0f5ff; border: 1px solid #c8d8ef;
+      border-radius: 10px; padding: 14px 18px;
+      display: flex; gap: 12px; align-items: flex-start;
+      margin-bottom: 32px;
+    }
+    .info-banner i { color: var(--navy); font-size: 16px; margin-top: 1px; flex-shrink: 0; }
+    .info-banner-text { font-size: 12px; color: #2e4a7a; line-height: 1.6; }
+    .info-banner-text strong { font-weight: 800; }
+
+    /* ───── 신청 폼 섹션 ───── */
+    .form-section {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 14px; padding: 28px;
+      margin-bottom: 20px;
+    }
+
+    .form-row { margin-bottom: 20px; }
+    .form-row:last-child { margin-bottom: 0; }
+
+    .form-label {
+      display: block; font-size: 13px; font-weight: 700;
+      color: #2b2f37; margin-bottom: 7px;
+    }
+    .form-label .req {
+      color: var(--rose); font-size: 12px; margin-left: 3px;
+    }
+    .form-hint {
+      display: block; font-size: 11px; color: var(--tm);
+      margin-top: 5px; line-height: 1.45;
+    }
+
+    .form-input {
+      width: 100%; height: 44px;
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 0 14px; font-size: 13px; color: var(--text);
+      background: #fff; outline: none;
+      transition: border-color 0.15s;
+    }
+    .form-input:focus { border-color: var(--navy); }
+    .form-input::placeholder { color: #b0b3bc; }
+
+    /* 사업자번호 전용 */
+    .biz-num-wrap { display: flex; gap: 8px; align-items: flex-start; }
+    .biz-num-wrap .form-input { flex: 1; }
+    .verify-btn {
+      height: 44px; padding: 0 16px;
+      border: 1px solid var(--navy); border-radius: 5px;
+      background: #fff; color: var(--navy);
+      font-size: 12px; font-weight: 700; white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.15s, color 0.15s;
+    }
+    .verify-btn:hover { background: var(--navy); color: #fff; }
+
+    /* 파일 업로드 */
+    .upload-zone {
+      border: 2px dashed #d0d8e8; border-radius: 10px;
+      background: var(--navy-light); padding: 28px 20px;
+      text-align: center; cursor: pointer;
+      transition: border-color 0.16s, background 0.16s;
+      position: relative;
+    }
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--navy); background: #e4ecf8;
+    }
+    .upload-zone input[type="file"] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer; z-index: 1;
+    }
+    .upload-icon { font-size: 28px; color: #7b9ccc; margin-bottom: 10px; }
+    .upload-title { font-size: 13px; font-weight: 700; color: #2e4a7a; margin-bottom: 4px; }
+    .upload-sub { font-size: 11px; color: #7b9ccc; }
+    .upload-formats {
+      display: flex; gap: 6px; justify-content: center; margin-top: 10px;
+    }
+    .fmt-chip {
+      padding: 2px 9px; border-radius: 4px;
+      background: #fff; border: 1px solid #c8d8ef;
+      font-size: 10px; font-weight: 700; color: var(--navy-mid);
+    }
+
+    /* 파일 미리보기 */
+    .file-preview {
+      display: none; align-items: center; gap: 10px;
+      padding: 10px 14px; border-radius: 8px;
+      background: #f0f5ff; border: 1px solid #c8d8ef;
+      margin-top: 10px;
+    }
+    .file-preview.show { display: flex; }
+    .file-preview i { color: var(--navy); font-size: 18px; }
+    .file-name { flex: 1; font-size: 12px; font-weight: 600; color: #2e4a7a; word-break: break-all; }
+    .file-remove {
+      background: none; border: none; color: #aaa; font-size: 16px; padding: 0;
+      line-height: 1; flex-shrink: 0;
+    }
+    .file-remove:hover { color: var(--rose); }
+
+    /* 동의 체크 */
+    .agree-box {
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px 18px; margin-top: 8px;
+    }
+    .agree-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 6px 0;
+    }
+    .agree-item + .agree-item { border-top: 1px solid #f0f0f4; }
+    .agree-item input[type="checkbox"] {
+      width: 16px; height: 16px; accent-color: var(--navy);
+      margin-top: 1px; flex-shrink: 0; cursor: pointer;
+    }
+    .agree-text { font-size: 12px; color: var(--ts); line-height: 1.5; }
+    .agree-text a { color: var(--navy); text-decoration: none; }
+
+    /* 제출 버튼 영역 */
+    .submit-area {
+      border: 1px solid var(--border); border-radius: 14px;
+      padding: 24px 28px; background: var(--warm);
+    }
+
+    /* 처리 기간 안내 */
+    .process-info {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 20px;
+      padding: 12px 16px; border-radius: 8px;
+      background: #fff3cd; border: 1px solid #ffe082;
+    }
+    .process-info i { color: #d4891a; font-size: 15px; flex-shrink: 0; }
+    .process-info span { font-size: 12px; color: #7a5a00; line-height: 1.5; }
+    .process-info strong { font-weight: 800; }
+
+    .submit-btn {
+      width: 100%; height: 52px;
+      background: var(--navy); color: #fff;
+      border: none; border-radius: 5px;
+      font-size: 15px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .submit-btn:hover { background: #142f58; }
+    .submit-btn:active { transform: scale(0.99); }
+    .submit-btn:disabled {
+      background: #c5cdd9; cursor: not-allowed; transform: none;
+    }
+
+    /* ───── 완료 화면 ───── */
+    .complete-screen {
+      display: none;
+      flex-direction: column; align-items: center;
+      text-align: center; padding: 60px 40px;
+      border: 1px solid var(--border); border-radius: 14px;
+    }
+    .complete-screen.show { display: flex; }
+    .complete-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: #e8f7ec; display: grid; place-items: center;
+      font-size: 32px; margin-bottom: 20px;
+    }
+    .complete-title { font-size: 20px; font-weight: 900; color: #1a1a2e; margin-bottom: 8px; }
+    .complete-desc { font-size: 13px; color: var(--ts); line-height: 1.7; margin-bottom: 28px; }
+    .complete-steps {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border); border-radius: 10px;
+      overflow: hidden; width: 100%; max-width: 480px; margin-bottom: 28px;
+    }
+    .step-item {
+      background: #fff; padding: 16px 12px; text-align: center;
+    }
+    .step-num {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--navy); color: #fff;
+      font-size: 11px; font-weight: 800;
+      display: inline-grid; place-items: center; margin-bottom: 8px;
+    }
+    .step-label { font-size: 11px; font-weight: 700; color: #2b2f37; margin-bottom: 2px; }
+    .step-sub { font-size: 10px; color: var(--tm); }
+    .back-btn {
+      height: 44px; padding: 0 28px;
+      border: 1.5px solid var(--navy); border-radius: 5px;
+      background: #fff; color: var(--navy);
+      font-size: 13px; font-weight: 700;
+      transition: background 0.15s, color 0.15s;
+    }
+    .back-btn:hover { background: var(--navy); color: #fff; }
+
+    /* ───── 드로어 (기존 동일) ───── */
+    .drawer-ov { position:fixed;inset:0;background:rgba(0,0,0,0);z-index:500;pointer-events:none;transition:background .3s }
+    .drawer-ov.open { background:rgba(0,0,0,.45);pointer-events:all }
+    .drawer {
+      position:fixed;top:0;left:-100%;bottom:0;
+      width:88%;max-width:340px;background:#fff;z-index:501;overflow-y:auto;scrollbar-width:none;
+      transition:left .3s cubic-bezier(.4,0,.2,1);
+      display:flex;flex-direction:column;
+      box-shadow:4px 0 20px rgba(0,0,0,.12);
+      border-top-right-radius:16px;border-bottom-right-radius:16px;
+    }
+    .drawer::-webkit-scrollbar { display:none; }
+    .drawer.open { left:0 }
+    .dr-head { display:flex;align-items:center;justify-content:space-between;padding:18px 16px 16px;border-bottom:1px solid #D8D8DE; }
+    .dr-close { width:32px;height:32px;border:none;background:none;color:var(--tp);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center; }
+    .dr-user-mini { display:flex;align-items:center;gap:10px }
+    .u-av { border-radius:50%;background:#FFE7EF;color:var(--rose);display:grid;place-items:center;font-size:18px;font-weight:800; }
+    .dr-user-mini .u-av { width:38px;height:38px }
+    .dr-user-mini-name { font-size:15px;font-weight:700;color:var(--tp) }
+    .dr-user-mini-grade { font-size:11px;color:var(--ts);margin-top:2px }
+
+    /* ───── 반응형 ───── */
+    
+
+    
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="top-notice-spacer" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand-area">
+      <button class="menu-button" type="button" aria-label="메뉴 열기" onclick="openDrawer()">
+        <span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+      <a class="logo-link" href="web_main.html" aria-label="Bidbuy 홈">
+        <img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency">
+      </a>
+    </div>
+
+    <form class="search">
+      <input type="text" placeholder="키워드 또는 URL을 입력하세요.">
+      <button type="submit">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        검색
+      </button>
+    </form>
+
+    <div class="user-tools" aria-label="회원 메뉴">
+      <button class="icon-btn" type="button" aria-label="알림">
+        <i class="far fa-bell" aria-hidden="true"></i>
+      </button>
+      <button class="icon-btn" type="button" aria-label="장바구니">
+        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+      </button>
+      <div class="user-name">홍길동님<span class="premium-chip">PREMIUM</span></div>
+    </div>
+  </header>
+
+  <div class="stage">
+    <!-- 사이드바 -->
+    <aside class="sidebar">
+      <section class="profile-card" aria-label="회원 정보">
+        <div class="profile-main">
+          <div class="avatar">홍</div>
+          <div>
+            <strong class="profile-name">홍길동님</strong>
+            <span class="profile-tier">Premium</span>
+          </div>
+        </div>
+        <p class="vip-copy">VIP까지 <b>₩215,000</b> 또는 <b>3건</b></p>
+        <div class="vip-row">
+          <div class="vip-progress"><span></span></div>
+          <span class="help-dot">?</span>
+        </div>
+        <div class="profile-actions">
+          <button class="soft-btn" type="button">1:1 문의내역</button>
+          <button class="soft-btn" type="button">로그아웃</button>
+        </div>
+      </section>
+
+      <section class="side-nav" aria-label="마이페이지 메뉴">
+        <h2 class="side-title">마이페이지</h2>
+
+        <div class="nav-section">
+          <strong>나의 거래 현황</strong>
+          <div class="nav-list">
+            <a href="web_mainlist.html">거래 전체 목록</a>
+            <a href="web_auction_bid_list.html">경매 입찰/유찰</a>
+            <a href="#">구매 신청 목록</a>
+          </div>
+        </div>
+
+        <div class="nav-section">
+          <strong>배송관리</strong>
+          <div class="nav-list">
+            <a href="#">배송신청/변경</a>
+            <a href="#">배송지 관리</a>
+          </div>
+        </div>
+
+        <div class="nav-section">
+          <strong>관심 항목 관리</strong>
+          <div class="nav-list">
+            <a href="web_favorites.html?tab=seller">관심 출품자</a>
+            <a href="web_favorites.html?tab=auction">경매 관심물품</a>
+            <a href="web_favorites.html?tab=purchase">구매 관심물품</a>
+            <a href="web_favorites.html?tab=keyword">관심 키워드</a>
+            <a href="web_favorites.html?tab=shortcut">바로가기</a>
+          </div>
+        </div>
+
+        <div class="nav-section">
+          <strong>MY 혜택</strong>
+          <div class="nav-list">
+            <a href="web_mileage.html">마일리지 / 쿠폰</a>
+            <a href="web_grade_page.html">MY 등급</a>
+          </div>
+        </div>
+
+        <div class="nav-section">
+          <strong>나의 정보관리</strong>
+          <div class="nav-list">
+            <a href="#">예치금 관리</a>
+            <a href="#">보증금 관리</a>
+            <a href="#">회원정보 수정</a>
+            <a href="#">비밀번호 변경</a>
+            <a href="#">회원 탈퇴</a>
+          </div>
+        </div>
+
+        <div class="biz-convert-section">
+          <a href="web_biz_convert.html" class="biz-convert-link active">
+            <span class="biz-convert-inner">
+              <span class="biz-convert-icon"><i class="fas fa-building"></i></span>
+              <span class="biz-convert-text">
+                <strong>사업자 회원 전환</strong>
+                <span>사업자 전용 혜택을<br>확인해보세요</span>
+              </span>
+              <i class="fas fa-chevron-right biz-chev"></i>
+            </span>
+          </a>
+        </div>
+      </section>
+    </aside>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main" id="mainContent">
+
+      <!-- 브레드크럼 -->
+      <nav class="breadcrumb" aria-label="현재 위치">
+        <a href="web_mypage.html">마이페이지</a>
+        <span class="sep">›</span>
+        <a href="#">나의 정보관리</a>
+        <span class="sep">›</span>
+        <span class="current">사업자 회원 전환</span>
+      </nav>
+
+      <!-- 페이지 타이틀 -->
+      <div class="page-title-area">
+        <div class="page-title-icon"><i class="fas fa-building"></i></div>
+        <div>
+          <h1>사업자 회원 전환</h1>
+          <p>사업자 전용 혜택을 받고 거래를 더 효율적으로 관리하세요.</p>
+        </div>
+      </div>
+
+      <!-- 신청 폼 / 완료 화면 토글 -->
+      <div id="formView">
+        <!-- VIP 동일 혜택 테이블 -->
+        <div class="benefit-table-wrap">
+          <table class="benefit-table">
+            <colgroup>
+              <col style="width:160px">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="2" class="bt-category-head">마일리지</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="bt-label">월간 지급</td>
+                <td class="bt-val navy">20,000원</td>
+              </tr>
+              <tr>
+                <td class="bt-label">거래 적립</td>
+                <td class="bt-val navy">10%</td>
+              </tr>
+            </tbody>
+            <thead>
+              <tr>
+                <th colspan="2" class="bt-category-head">배송</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="bt-label">무료 보관</td>
+                <td class="bt-val navy">45일</td>
+              </tr>
+              <tr>
+                <td class="bt-label">묶음 비용</td>
+                <td class="bt-val navy">무료 (최대 15건, 개인회원 대비 +5건)</td>
+              </tr>
+              <tr>
+                <td class="bt-label">EMS · 비바특송</td>
+                <td class="bt-val navy">10% 할인</td>
+              </tr>
+            </tbody>
+            <thead>
+              <tr>
+                <th colspan="2" class="bt-category-head">쿠폰 · CS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="bt-label">생일 쿠폰</td>
+                <td class="bt-val navy">15,000원</td>
+              </tr>
+              <tr>
+                <td class="bt-label">VIP 전담 CS</td>
+                <td class="bt-val navy">제공</td>
+              </tr>
+              <tr>
+                <td class="bt-label">안심 플랜</td>
+                <td class="bt-val navy">무료 적용</td>
+              </tr>
+            </tbody>
+            <!-- 추가 혜택 공란 섹션 -->
+            <thead>
+              <tr>
+                <th colspan="2" class="bt-category-head biz-only-head">
+                  사업자 전용 추가혜택
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bt-empty-row">
+                <td class="bt-label">전담 관세사 통관</td>
+                <td class="bt-val">사업자 통관 수수료 비용 절감</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 안내 배너 -->
+        <div class="info-banner">
+          <i class="fas fa-circle-info"></i>
+          <div class="info-banner-text">
+            <strong>전환 전 꼭 확인하세요.</strong><br>
+            사업자 전환 심사 기간(영업일 1–3일) 중에는 사업자 혜택이 적용되지 않으며, <strong>승인 이후부터</strong> 적용됩니다.
+          </div>
+        </div>
+
+        <!-- 자료 제출 폼 -->
+        <p class="section-label" style="margin-top:0">자료 제출</p>
+
+        <div class="form-section">
+
+          <!-- 사업자등록증 업로드 -->
+          <div class="form-row">
+            <label class="form-label">사업자등록증 <span class="req">*</span></label>
+            <div class="upload-zone" id="uploadZone">
+              <input type="file" accept=".jpg,.jpeg,.png,.pdf" id="fileInput" onchange="handleFile(this)">
+              <div class="upload-icon"><i class="fas fa-cloud-arrow-up"></i></div>
+              <div class="upload-title">파일을 끌어다 놓거나 클릭해서 업로드</div>
+              <div class="upload-sub">사업자등록증 원본 최신본 (재발급일 기준 3개월 이내)</div>
+              <div class="upload-formats">
+                <span class="fmt-chip">JPG</span>
+                <span class="fmt-chip">PNG</span>
+                <span class="fmt-chip">PDF</span>
+                <span class="fmt-chip">최대 10MB</span>
+              </div>
+            </div>
+            <div class="file-preview" id="filePreview">
+              <i class="fas fa-file-lines"></i>
+              <span class="file-name" id="fileName">파일명.pdf</span>
+              <button class="file-remove" onclick="removeFile()" type="button" aria-label="파일 제거"><i class="fas fa-times" aria-hidden="true"></i></button>
+            </div>
+            <span class="form-hint"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i> 타인 명의 또는 만료된 등록증 제출 시 반려 처리됩니다.</span>
+          </div>
+
+          <!-- 사업자명 -->
+          <div class="form-row">
+            <label class="form-label" for="bizName">사업자명 (법인명) <span class="req">*</span></label>
+            <input class="form-input" type="text" id="bizName" placeholder="사업자등록증의 상호명을 입력하세요" oninput="checkForm()">
+          </div>
+
+          <!-- 사업자번호 -->
+          <div class="form-row">
+            <label class="form-label" for="bizNum">사업자등록번호 <span class="req">*</span></label>
+            <div class="biz-num-wrap">
+              <input class="form-input" type="text" id="bizNum"
+                placeholder="000-00-00000"
+                maxlength="12"
+                oninput="formatBizNum(this); checkForm()">
+              <button class="verify-btn" type="button" id="verifyBtn" onclick="verifyBizNum()">번호 확인</button>
+            </div>
+            <span class="form-hint" id="bizNumHint">10자리 숫자를 입력하면 자동으로 하이픈이 추가됩니다.</span>
+          </div>
+
+          <!-- 담당자 연락처 -->
+          <div class="form-row">
+            <label class="form-label" for="contactPhone">담당자 연락처 <span class="req">*</span></label>
+            <input class="form-input" type="tel" id="contactPhone" placeholder="010-0000-0000" oninput="checkForm()">
+            <span class="form-hint">심사 결과 안내 및 추가 서류 요청 시 사용됩니다.</span>
+          </div>
+
+          <!-- 담당자 이메일 -->
+          <div class="form-row">
+            <label class="form-label" for="contactEmail">이메일 <span class="req">*</span></label>
+            <input class="form-input" type="email" id="contactEmail" placeholder="billing@company.com" oninput="checkForm()">
+          </div>
+
+          <!-- 동의 -->
+          <div class="form-row">
+            <label class="form-label">약관 동의 <span class="req">*</span></label>
+            <div class="agree-box">
+              <div class="agree-item">
+                <input type="checkbox" id="agreeAll" onchange="toggleAll(this)">
+                <span class="agree-text" style="font-weight:700;color:#2b2f37">전체 동의</span>
+              </div>
+              <div class="agree-item">
+                <input type="checkbox" id="agree1" class="agree-check" onchange="updateAll(); checkForm()">
+                <span class="agree-text">[필수] 사업자 회원 서비스 이용약관 동의<a href="#">보기</a></span>
+              </div>
+              <div class="agree-item">
+                <input type="checkbox" id="agree2" class="agree-check" onchange="updateAll(); checkForm()">
+                <span class="agree-text">[필수] 개인정보 수집·이용 동의<a href="#">보기</a></span>
+              </div>
+              <div class="agree-item">
+                <input type="checkbox" id="agree3" class="agree-check" onchange="updateAll(); checkForm()">
+                <span class="agree-text">[필수] 전환 후 개인 회원 복귀 불가 확인</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 제출 영역 -->
+        <div class="submit-area">
+          <div class="process-info">
+            <i class="fas fa-clock"></i>
+            <span><strong>심사 기간: 영업일 기준 1–3일</strong><br>
+            심사 완료 후 등록된 이메일 및 문자로 결과를 안내드립니다. 반려 시 사유와 함께 재제출 안내를 드립니다.</span>
+          </div>
+          <button class="submit-btn" type="button" id="submitBtn" disabled onclick="submitForm()">
+            <i class="fas fa-paper-plane"></i> 사업자 전환 신청하기
+          </button>
+        </div>
+
+      </div><!-- /formView -->
+
+      <!-- 완료 화면 -->
+      <div class="complete-screen" id="completeScreen">
+        <div class="complete-icon"><i class="fas fa-check" aria-hidden="true"></i></div>
+        <div class="complete-title">신청이 완료되었습니다</div>
+        <div class="complete-desc">
+          사업자 전환 신청이 정상적으로 접수되었습니다.<br>
+          영업일 기준 <strong style="color:#1a3c6e">1–3일 이내</strong> 심사 후 결과를 안내드립니다.<br>
+          심사 기간 중에는 기존 개인 회원으로 서비스가 유지됩니다.
+        </div>
+        <div class="complete-steps">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-label">서류 접수</div>
+            <div class="step-sub">완료</div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-label">관리자 심사</div>
+            <div class="step-sub">영업일 1–3일</div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-label">전환 완료</div>
+            <div class="step-sub">이메일·문자 안내</div>
+          </div>
+        </div>
+        <button class="back-btn" onclick="location.href='web_mypage_biz.html'">마이페이지로 돌아가기</button>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- 드로어 오버레이 -->
+<div class="drawer-ov" id="drawerOv" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="dr-head">
+    <div class="dr-user-mini">
+      <div class="u-av" style="width:38px;height:38px"><i class="fas fa-crown" aria-hidden="true"></i></div>
+      <div>
+        <div class="dr-user-mini-name">홍길동님</div>
+        <div class="dr-user-mini-grade">PREMIUM 회원</div>
+      </div>
+    </div>
+    <button class="dr-close" onclick="closeDrawer()"><i class="fas fa-times"></i></button>
+  </div>
+</div>
+
+<script>
+  // 드로어
+  function openDrawer() {
+    document.getElementById('drawer').classList.add('open');
+    document.getElementById('drawerOv').classList.add('open');
+  }
+  function closeDrawer() {
+    document.getElementById('drawer').classList.remove('open');
+    document.getElementById('drawerOv').classList.remove('open');
+  }
+
+  // 파일 업로드
+  function handleFile(input) {
+    if (!input.files.length) return;
+    const file = input.files[0];
+    document.getElementById('fileName').textContent = file.name;
+    document.getElementById('filePreview').classList.add('show');
+    checkForm();
+  }
+  function removeFile() {
+    document.getElementById('fileInput').value = '';
+    document.getElementById('filePreview').classList.remove('show');
+    checkForm();
+  }
+
+  // 드래그앤드롭
+  const zone = document.getElementById('uploadZone');
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault(); zone.classList.remove('dragover');
+    const dt = e.dataTransfer;
+    if (dt.files.length) {
+      document.getElementById('fileInput').files = dt.files;
+      handleFile(document.getElementById('fileInput'));
+    }
+  });
+
+  // 사업자번호 자동 포맷
+  function formatBizNum(input) {
+    let v = input.value.replace(/\D/g, '').slice(0, 10);
+    if (v.length > 5) v = v.slice(0,3) + '-' + v.slice(3,5) + '-' + v.slice(5);
+    else if (v.length > 3) v = v.slice(0,3) + '-' + v.slice(3);
+    input.value = v;
+  }
+
+  // 사업자번호 간단 검증 (10자리 숫자 체크)
+  function verifyBizNum() {
+    const raw = document.getElementById('bizNum').value.replace(/-/g, '');
+    const hint = document.getElementById('bizNumHint');
+    if (raw.length !== 10) {
+      hint.innerHTML = '<i class="fas fa-triangle-exclamation" aria-hidden="true"></i> 올바른 10자리 사업자등록번호를 입력해주세요.';
+      hint.style.color = '#e8385a';
+      return;
+    }
+    hint.textContent = '✓ 형식이 확인되었습니다. (실제 검증은 서버에서 진행됩니다)';
+    hint.style.color = '#3aad4e';
+    checkForm();
+  }
+
+  // 전체 동의
+  function toggleAll(checkbox) {
+    document.querySelectorAll('.agree-check').forEach(c => c.checked = checkbox.checked);
+    checkForm();
+  }
+  function updateAll() {
+    const checks = document.querySelectorAll('.agree-check');
+    document.getElementById('agreeAll').checked = [...checks].every(c => c.checked);
+  }
+
+  // 제출 버튼 활성화
+  function checkForm() {
+    const fileOk = document.getElementById('filePreview').classList.contains('show');
+    const nameOk = document.getElementById('bizName').value.trim().length > 0;
+    const numOk  = document.getElementById('bizNum').value.replace(/-/g,'').length === 10;
+    const phoneOk = document.getElementById('contactPhone').value.trim().length > 0;
+    const emailOk = document.getElementById('contactEmail').value.includes('@');
+    const agreeOk = [...document.querySelectorAll('.agree-check')].every(c => c.checked);
+    document.getElementById('submitBtn').disabled = !(fileOk && nameOk && numOk && phoneOk && emailOk && agreeOk);
+  }
+
+  // 제출
+  function submitForm() {
+    document.getElementById('formView').style.display = 'none';
+    document.getElementById('completeScreen').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+<script src="bb-common.js"></script>
+</body>
+</html>

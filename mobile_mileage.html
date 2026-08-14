@@ -1,0 +1,4394 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bidbuy 마일리지</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+    :root {
+      --brand: #E8385A;
+      --brand-hot: #ff4969;
+      --navy: #163a69;
+      --green: #2e8b57;
+      --ink: #20242b;
+      --text: #33363d;
+      --muted: #777985;
+      --faint: #9ba0ae;
+      --line: #e5dbd7;
+      --line-soft: #eee6e2;
+      --warm: #fbf7f5;
+      --warm-2: #f7f3f0;
+      --yellow: #f5a623;
+      --stage-left: max(16px, calc((100vw - 1044px) / 2));
+      --sidebar-w: 221px;
+      --main-w: 819px;
+      --gap: 16px;
+      --asset-w: 861px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: #fff;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--text);
+      background: #fff;
+      font-family: Pretendard, "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .page {
+      min-height: 100vh;
+      background: #fff;
+    }
+
+    .topbar {
+      min-height:56px;
+      width: min(calc(100vw - 32px), 1056px);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 221px minmax(0, 714px) 221px;
+      align-items: center;
+      gap:12px;
+      padding:1px;
+      background: #fff;
+    }
+
+    .brand-area {
+      display: flex;
+      align-items: center;
+      gap:10px;
+      min-width: 0;
+    }
+
+    .menu-button {
+      width: 25px;
+      height: 25px;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      padding: 0;
+      display: grid;
+      place-items: center;
+    }
+
+    .menu-lines {
+      width: 23px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .menu-lines span {
+      height: 2.5px;
+      border-radius: 999px;
+      background: #1f2530;
+    }
+
+    .logo-link {
+      display:inline-flex;
+      align-items:center;
+      width:76px;
+      line-height:0;
+    }
+
+    .logo-link img {
+      width:100%;
+      height:auto;
+      display:block;
+    }
+
+    .search {
+      height: 43px;
+      display: flex;
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      overflow: hidden;
+      background: var(--warm-2);
+    }
+
+    .search input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      padding: 0 18px;
+      background: transparent;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .search input::placeholder {
+      color: #8c8985;
+    }
+
+    .search button {
+      width: 111px;
+      border: 0;
+      background: var(--brand-hot);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .search button svg {
+      width: 15px;
+      height: 15px;
+      stroke-width: 3;
+    }
+
+    .user-tools {
+      justify-self: end;
+      display: grid;
+      grid-template-columns: 28px 28px auto;
+      align-items: center;
+      gap: 10px;
+      color: #1d2430;
+    }
+
+    .icon-btn {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      color: #687385;
+      padding: 0;
+    }
+
+    .icon-btn svg {
+      width: 23px;
+      height: 23px;
+      stroke-width: 1.8;
+    }
+
+    .user-name {
+      display: grid;
+      justify-items: center;
+      gap: 3px;
+      color: #111827;
+      font-size: 13px;
+      font-weight:700;
+      white-space: nowrap;
+    }
+
+    .premium-chip {
+      min-width: 70px;
+      min-height: 18px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: #fff0c9;
+      color: #f4a200;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight:700;
+    }
+
+    .stage {
+      position: relative;
+      display: grid;
+      grid-template-columns: var(--sidebar-w) var(--main-w);
+      gap: var(--gap);
+      width: calc(var(--sidebar-w) + var(--gap) + var(--main-w));
+      margin-left: var(--stage-left);
+      margin-top: 11px;
+      overflow: visible;
+    }
+
+    .asset-strip {
+      position: absolute;
+      top: 0;
+      left: var(--sidebar-w);
+      width: var(--asset-w);
+      height: 40px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: center;
+      background: var(--warm);
+      border-bottom: 1px solid #f2e9e5;
+      z-index: 1;
+    }
+
+    .asset-item {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      color: #111;
+      white-space: nowrap;
+    }
+
+    .asset-item span {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .asset-item strong {
+      font-size: 15px;
+      font-weight:700;
+    }
+
+    .sidebar {
+      min-width: 0;
+    }
+
+    .profile-card {
+      height: 172px;
+      padding: 19px 22px 12px;
+      background: var(--warm);
+    }
+
+    .profile-main {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      background: #ffe7ef;
+      color: var(--brand);
+      font-size: 22px;
+      font-weight:700;
+    }
+
+    .profile-name {
+      display: block;
+      margin-bottom: 3px;
+      color: #262a31;
+      font-size: 16px;
+      font-weight:700;
+      line-height: 1.25;
+    }
+
+    .profile-tier {
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .vip-copy {
+      margin: 18px 0 6px;
+      color: #5c6270;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .vip-copy b {
+      color: #454b58;
+      font-weight: 700;
+    }
+
+    .vip-row {
+      display: grid;
+      grid-template-columns: 1fr 16px;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .vip-progress {
+      height: 8px;
+      border-radius: 999px;
+      background: #eee2de;
+      overflow: hidden;
+    }
+
+    .vip-progress span {
+      display: block;
+      width: 84%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #ff8499 0%, var(--brand) 100%);
+    }
+
+    .help-dot {
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid #9ea1aa;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      color: #838793;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .tooltip-dot {
+      position: relative;
+      flex: 0 0 auto;
+      background: #fff;
+    }
+
+    .tooltip-dot::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      right: -8px;
+      bottom: calc(100% + 9px);
+      width: max-content;
+      max-width: 220px;
+      padding: 8px 10px;
+      border-radius: 7px;
+      background: #2f343d;
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(32, 36, 43, 0.16);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.35;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(4px);
+      transition: opacity 0.16s ease, transform 0.16s ease;
+      z-index: 5;
+    }
+
+    .tooltip-dot::before {
+      content: "";
+      position: absolute;
+      right: 2px;
+      bottom: calc(100% + 3px);
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid #2f343d;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(4px);
+      transition: opacity 0.16s ease, transform 0.16s ease;
+      z-index: 6;
+    }
+
+    .tooltip-dot:hover::after,
+    .tooltip-dot:hover::before,
+    .tooltip-dot:focus-visible::after,
+    .tooltip-dot:focus-visible::before {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .profile-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 11px;
+    }
+
+    .soft-btn {
+      height: 26px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: #5c606b;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .side-nav {
+      padding-top: 33px;
+    }
+
+    .side-title {
+      margin: 0 0 18px;
+      padding: 0 15px 17px;
+      border-bottom: 1px solid #dcd9d6;
+      color: #111;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .nav-section {
+      padding: 0 20px;
+      margin-bottom: 14px;
+    }
+
+    .nav-section strong {
+      display: block;
+      margin-bottom: 11px;
+      color: #292d35;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .nav-list {
+      display: grid;
+      gap: 13px;
+    }
+
+    .nav-list a {
+      color: #666b75;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .nav-list a:hover,
+    .nav-list a.active {
+      color: var(--brand);
+      font-weight: 700;
+    }
+
+    .main {
+      min-width: 0;
+      padding-top: 63px;
+      padding-bottom: 160px;
+    }
+
+    .page-title {
+      margin-bottom: 17px;
+    }
+
+    .page-title h1 {
+      margin: 0 0 6px;
+      color: #2b2f37;
+      font-size: 23px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .page-title p {
+      margin: 0;
+      color: #9da2af;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .summary-grid {
+      display: block;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .mileage-summary-panel {
+      min-height: 0;
+      padding: 16px 16px 20px;
+      border-radius: 0;
+      border: none;
+      background: transparent;
+    }
+
+    .panel-title {
+      margin: 0 0 12px;
+      color: #2d3139;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .mileage-balance-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .balance-box {
+      min-height: 89px;
+      padding: 15px 16px 13px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    .balance-box span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      color: #9aa0ae;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .balance-box strong {
+      color: #111;
+      font-size: 25px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .balance-box strong.earn {
+      color: var(--green);
+    }
+
+    .balance-box strong.use {
+      color: var(--brand);
+    }
+
+    .balance-box strong.expire {
+      color: #f29a19;
+    }
+
+    .balance-box small {
+      margin-left: 1px;
+      color: #31343b;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .balance-box strong.earn small {
+      color: var(--green);
+    }
+
+    .balance-box strong.use small {
+      color: #31343b;
+    }
+
+    .balance-box strong.expire small {
+      color: #f29a19;
+    }
+
+    .balance-note {
+      margin-top: 7px;
+      color: #9aa0ae;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .balance-note.expire {
+      color: #f29a19;
+    }
+
+    .pending-mileage {
+      height: 47px;
+      margin-top: 18px;
+      padding: 0 15px;
+      border: 1px solid #ffc466;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fffaf1;
+    }
+
+    .pending-mileage::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffaf1a;
+      flex: 0 0 auto;
+    }
+
+    .pending-mileage span {
+      color: #646872;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .pending-mileage strong {
+      margin-left: auto;
+      color: #ff9a00;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .benefit-panel {
+      min-height: 219px;
+      padding: 20px 21px 16px;
+    }
+
+    .benefit-title {
+      margin: 0 0 16px;
+      color: #2d3139;
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .pager {
+      margin-top: 26px;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: nowrap;
+    }
+    .pager button {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #e5dcd8;
+      border-radius: 7px;
+      background: #fff;
+      color: #333;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .pager button.current {
+      border-color: var(--brand);
+      background: var(--brand);
+      color: #fff;
+    }
+    .benefit-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      color: #3a3d44;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .benefit-total b {
+      color: #a2a7b5;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .benefit-period {
+      margin: 9px 0 6px;
+      color: #9ca1ae;
+      font-size: 11px;
+    }
+
+    .benefit-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .benefit-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: #3f434b;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .benefit-list b {
+      color: #a2a7b5;
+      font-weight: 500;
+    }
+
+    .stamp-panel {
+      margin-top: 16px;
+      padding: 20px;
+      min-height: 268px;
+    }
+
+    .stamp-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stamp-head h2 {
+      margin: 0 0 4px;
+      color: #33363d;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .stamp-head p {
+      margin: 0;
+      color: #636874;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .stamp-badge {
+      min-width: 77px;
+      height: 23px;
+      border-radius: 999px;
+      background: #E4E9EF;
+      color: #1f477d;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight:700;
+    }
+
+    .stamp-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      row-gap: 20px;
+      column-gap: 28px;
+      padding: 11px 31px 15px;
+      text-align: center;
+    }
+
+    .stamp-scroll {
+      overflow: hidden;
+    }
+
+    .stamp-panel.expanded .stamp-scroll {
+      max-height: 326px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .stamp {
+      display: grid;
+      place-items: center;
+    }
+
+    .stamp:nth-child(n+11) {
+      display: none;
+    }
+
+    .stamp-panel.expanded .stamp:nth-child(n+11) {
+      display: grid;
+    }
+
+    .roulette-button {
+      width: 58px;
+      height: 58px;
+      border: 1px solid #d9d2c7;
+      border-radius: 50%;
+      background: #fffdf0;
+      color: #aaa18f;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      position: relative;
+      box-shadow: inset 0 0 0 2px #fff8dc;
+    }
+
+    .roulette-button::before {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border: 1px dashed #aaa18f;
+      border-radius: 50%;
+    }
+
+    .roulette-button strong {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      justify-items: center;
+      gap: 1px;
+      font-size: 11px;
+      font-weight:700;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .roulette-button strong::before {
+      content: "✓";
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .roulette-button.is-spinning {
+      animation: roulette-spin 0.65s ease;
+    }
+
+    @keyframes roulette-spin {
+      0% { transform: rotate(0deg) scale(1); }
+      60% { transform: rotate(300deg) scale(1.06); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    .roulette-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(30, 24, 12, 0.55);
+    }
+
+    .roulette-modal-overlay[hidden] {
+      display: none;
+    }
+
+    .roulette-modal {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      padding: 26px 20px 28px;
+      border-radius: 18px;
+      background: #fffdf5;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .roulette-modal-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      width: 28px;
+      height: 28px;
+      border: 0;
+      background: transparent;
+      color: #aaa18f;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .roulette-modal h3 {
+      margin: 0 0 4px;
+      font-size: 17px;
+      font-weight:700;
+      color: #3a3226;
+    }
+
+    .roulette-modal-desc {
+      margin: 0 0 18px;
+      font-size: 12px;
+      color: #9f8b4c;
+    }
+
+    .roulette-wheel-wrap {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      margin: 0 auto 20px;
+    }
+
+    .roulette-pointer {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      z-index: 2;
+      width: 0;
+      height: 0;
+      transform: translateX(-50%);
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 18px solid #d94f4f;
+    }
+
+    .roulette-wheel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25), inset 0 0 0 2px #d9c98d;
+      background: conic-gradient(#ef6f6c 0deg 72deg, #ffd166 72deg 144deg, #4d96ff 144deg 216deg, #06d6a0 216deg 288deg, #c77dff 288deg 360deg);
+      transition: transform 4s cubic-bezier(0.15, 0.65, 0.15, 1);
+    }
+
+    .roulette-wheel-labels {
+      position: absolute;
+      inset: 0;
+    }
+
+    .roulette-wheel-labels span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 58px;
+      margin-left: -29px;
+      transform-origin: 29px 0;
+      transform: rotate(calc(72deg * var(--i) + 36deg)) translate(0, -74px);
+    }
+
+    .roulette-wheel-labels span b {
+      display: block;
+      font-size: 9.5px;
+      font-weight:700;
+      line-height: 1.2;
+      color: #3a3226;
+      text-align: center;
+      white-space: normal;
+      transform: rotate(calc(-72deg * var(--i) - 36deg));
+    }
+
+    .roulette-wheel-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 2;
+      width: 26px;
+      height: 26px;
+      margin: -13px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 0 2px #d9c98d;
+    }
+
+    .roulette-start-btn {
+      width: 100%;
+      height: 46px;
+      border: 0;
+      border-radius: 10px;
+      background: #3a3226;
+      color: #fff;
+      font-size: 14px;
+      font-weight:700;
+      cursor: pointer;
+    }
+
+    .roulette-start-btn:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    .roulette-result {
+      margin: 14px 0 0;
+      font-size: 14px;
+      font-weight:700;
+      color: #d94f4f;
+    }
+
+    .roulette-result[hidden] {
+      display: none;
+    }
+
+    .roulette-note {
+      margin: 6px 0 0;
+      font-size: 11px;
+      font-weight: 600;
+      color: #9f8b4c;
+    }
+
+    .roulette-note[hidden] {
+      display: none;
+    }
+
+    /* ===== 혜택 스탬프 v2 ===== */
+    .stamp { position: relative; }
+
+    .stamp-circle {
+      position: relative;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      display: grid; place-items: center; align-content: center;
+      gap: 1px;
+      background: #f6f2f2;
+      border: 1.5px solid #ece2e2;
+      color: #b6bac4;
+      font-size: 14px; font-weight: 700;
+      transition: background .18s, border-color .18s, color .18s, box-shadow .18s;
+    }
+
+    /* 1차 결제 완료 */
+    .stamp.paid .stamp-circle {
+      background: #8f95a3;
+      border-color: #8f95a3;
+      color: #fff;
+    }
+    .stamp-date {
+      font-family: Roboto, "Noto Sans KR", sans-serif;
+      font-size: 13px; font-weight: 500; letter-spacing: -.4px; line-height: 1;
+    }
+
+    /* 보상 칸 */
+    .stamp.has-reward .stamp-circle {
+      width: 58px; height: 58px;
+      border-width: 2px;
+      border-style: dashed;
+    }
+    .rw-amt {
+      font-family: Roboto, "Noto Sans KR", sans-serif;
+      font-size: 13px; font-weight: 500; line-height: 1; letter-spacing: -.6px;
+    }
+    .rw-amt small { font-size: 9px; font-weight: 500; margin-left: 1px; letter-spacing: 0; }
+    .rw-kind { font-size: 9px; font-weight: 500; line-height: 1; margin-top: 2px; letter-spacing: -.2px; }
+    .rw-ico { font-size: 10px; line-height: 1; margin-bottom: 2px; opacity: .9; }
+    .rw-action,
+    .rw-claimed-text,
+    .rw-roulette-text {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -.2px;
+      text-align: center;
+    }
+
+    /* 보상 - 미달성 */
+    .stamp.rw-locked.reward-coupon .stamp-circle { border-color: #f0d3da; color: #d7a6b3; background: #fffafb; }
+    .stamp.rw-locked.reward-roulette .stamp-circle { border-color: #f0e0c2; color: #ceb582; background: #fffdf7; }
+
+    /* 보상 - 수령 가능 */
+    .stamp.rw-ready .stamp-circle { border-style: solid; color: #fff; cursor: pointer; }
+    .stamp.rw-ready.reward-coupon .stamp-circle {
+      background: var(--brand); border-color: var(--brand);
+      box-shadow: 0 0 0 4px rgba(232,56,90,.16);
+    }
+    .stamp.rw-ready.reward-roulette .stamp-circle {
+      background: var(--yellow); border-color: var(--yellow);
+      box-shadow: 0 0 0 4px rgba(245,166,35,.20);
+    }
+    .stamp.rw-ready .stamp-circle::after {
+      content: "";
+      position: absolute; inset: -2px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      opacity: .5;
+      animation: reward-pulse 1.6s ease-out infinite;
+      pointer-events: none;
+    }
+    @keyframes reward-pulse {
+      0%   { transform: scale(1); opacity: .55; }
+      70%  { transform: scale(1.28); opacity: 0; }
+      100% { transform: scale(1.28); opacity: 0; }
+    }
+
+    /* 보상 - 수령 완료 */
+    .stamp.rw-claimed .stamp-circle {
+      border-style: solid;
+      background: var(--green); border-color: var(--green); color: #fff;
+    }
+    /* 보상 - 소멸 */
+    .stamp.rw-expired .stamp-circle {
+      border-style: solid; background: #eceaea; border-color: #ddd8d8; color: #aaa5a5;
+    }
+    .stamp.rw-expired .rw-amt { text-decoration: line-through; }
+
+    /* 하단 라벨 */
+    .reward-label {
+      margin-top: 6px;
+      font-size: 9.5px; font-weight: 700; line-height: 1.1;
+      letter-spacing: -.3px; white-space: nowrap;
+      color: var(--faint);
+    }
+    .reward-label.type-coupon { color: var(--brand); }
+    .reward-label.type-roulette { color: #c9840d; }
+    .reward-label.is-claimed { color: var(--green); }
+    .reward-label.is-empty { visibility: hidden; }
+    .stamp:not(.has-reward) .reward-label { visibility: hidden; }
+
+    .stamp-grid { row-gap: 16px; }
+
+    /* 헤더 요약 */
+    .stamp-summary-hi { color: #c9840d; }
+    .stamp-summary-sep { color: var(--faint); margin: 0 4px; }
+
+    /* ===== 보상 모달 공통 ===== */
+    .reward-modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px; background: rgba(25, 20, 18, .55);
+    }
+    .reward-modal-overlay[hidden] { display: none; }
+    .reward-modal {
+      position: relative; width: 100%; max-width: 330px;
+      padding: 26px 22px 22px; border-radius: 18px;
+      background: #fff; text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,.3);
+      animation: reward-pop .22s ease-out;
+    }
+    @keyframes reward-pop {
+      from { transform: translateY(10px) scale(.96); opacity: 0; }
+      to   { transform: none; opacity: 1; }
+    }
+    .reward-modal-close {
+      position: absolute; top: 10px; right: 12px;
+      width: 28px; height: 28px; border: 0; background: none;
+      color: #a8a29c; font-size: 22px; line-height: 1; cursor: pointer;
+    }
+    .reward-modal h3 {
+      margin: 0 0 4px; font-size: 17px; font-weight: 700; color: var(--text);
+    }
+    .reward-modal-desc {
+      margin: 0 0 18px; font-size: 12px; font-weight: 700; color: var(--muted);
+    }
+
+    /* 쿠폰 카드 */
+    .coupon-card {
+      position: relative;
+      margin: 0 auto 16px; padding: 20px 16px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #fff2f5 0%, #ffe7ee 100%);
+      border: 1.5px dashed var(--brand);
+    }
+    .coupon-card .cc-kind {
+      display: inline-block; margin-bottom: 8px; padding: 3px 10px;
+      border-radius: 999px; background: var(--brand); color: #fff;
+      font-size: 10.5px; font-weight: 700;
+    }
+    .coupon-card .cc-amount {
+      font-family: Roboto, "Noto Sans KR", sans-serif;
+      font-size: 34px; font-weight: 700; color: var(--brand); line-height: 1;
+    }
+    .coupon-card .cc-amount small { font-size: 16px; font-weight: 700; margin-left: 2px; }
+    .coupon-card .cc-cond {
+      margin-top: 8px; font-size: 11px; font-weight: 700; color: #8a6672;
+    }
+    .coupon-card::before, .coupon-card::after {
+      content: ""; position: absolute; top: 50%; width: 14px; height: 14px;
+      margin-top: -7px; border-radius: 50%; background: #fff;
+    }
+    .coupon-card::before { left: -8px; }
+    .coupon-card::after { right: -8px; }
+
+    .reward-meta {
+      margin: 0 0 18px; font-size: 11.5px; font-weight: 700; color: var(--muted); line-height: 1.6;
+    }
+    .reward-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .reward-btn {
+      height: 44px; border-radius: 10px; font-size: 13px; font-weight: 700;
+      font-family: inherit; cursor: pointer; border: 1px solid var(--line);
+    }
+    .reward-btn.ghost { background: #fff; color: var(--muted); }
+    .reward-btn.primary { background: var(--brand); border-color: var(--brand); color: #fff; }
+    .reward-btn.primary:hover { background: var(--brand-dark, var(--brand)); border-color: var(--brand-dark, var(--brand)); }
+
+    /* ===== 쿠폰 내역 (모바일) ===== */
+    .coupon-table .history-row {
+      cursor: pointer;
+    }
+    .coupon-table .history-row:hover {
+      background: #fffafb;
+    }
+    .coupon-table .history-type {
+      color: #111;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .coupon-discount {
+      color: #111;
+      font-size: 15px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .coupon-table .history-desc {
+      width: 100%;
+    }
+    .coupon-table .history-meta {
+      width: 100%;
+    }
+    .coupon-table .history-table-head,
+    .coupon-table .history-row {
+      grid-template-columns: 72px minmax(0, 1fr) 72px;
+    }
+    .coupon-table .history-table-head > div:nth-child(2),
+    .coupon-table .history-type {
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      .stamp-grid { column-gap: 10px; padding: 11px 6px 15px; }
+      .reward-label { font-size: 8.5px; }
+    }
+
+    .fold-bar {
+      height: 36px;
+      border: 1px dashed var(--line);
+      border-radius: 5px;
+      width: 100%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      color: #9ba0ae;
+      font-size: 12px;
+      font-weight:700;
+    }
+
+    .fold-bar::before {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 10px solid #9ba0ae;
+    }
+
+    .stamp-panel.expanded .fold-bar::before {
+      transform: rotate(180deg);
+    }
+
+    .history-panel {
+      margin-top: 0px;
+      overflow: hidden;
+      border: none;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .history-head {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 0 20px;
+      background: #fff;
+    }
+
+    .history-head h2 {
+      margin: 0;
+      color: #2d3139;
+      font-size: 17px;
+      font-weight:700;
+    }
+
+    .history-tabs {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .history-tab {
+      position: relative;
+      height: 36px;
+      padding: 0 0 6px;
+      border: 0;
+      background: transparent;
+      color: #9da2af;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight:700;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .history-tab::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: transparent;
+    }
+
+    .history-tab.active {
+      color: var(--brand);
+    }
+
+    .history-tab.active::after {
+      background: var(--brand);
+    }
+
+    .history-table {
+      border-top: 1px solid var(--line);
+    }
+
+    .history-table-head,
+    .history-row {
+      display: grid;
+      grid-template-columns: 132px 96px minmax(0, 1fr) 140px;
+      align-items: center;
+    }
+
+    .history-table-head {
+      height: 34px;
+      background: var(--warm);
+      color: #9aa0ad;
+      font-size: 11px;
+      font-weight:700;
+      text-align: center;
+    }
+
+    .history-row {
+      min-height: 88px;
+      margin: 0 60px;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .history-row:first-of-type {
+      border-top: 0;
+    }
+
+    .history-date {
+      color: #9aa0ad;
+      font-size: 12px;
+      font-weight: 500;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .history-desc {
+      display: grid;
+      gap: 4px;
+      justify-items: start;
+      min-width: 0;
+    }
+
+    .history-type {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+      white-space: nowrap;
+    }
+
+    .type-chip {
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      font-size: 0;
+      font-weight:700;
+      line-height: 0;
+    }
+
+    .type-chip.earn {
+      background: var(--green);
+      color: var(--green);
+    }
+
+    .type-chip.use {
+      background: var(--brand);
+      color: var(--brand);
+    }
+
+    .type-chip.expire {
+      background: #c98400;
+      color: #c98400;
+    }
+
+    .history-kind {
+      display: block;
+      color: #1f232b;
+      font-size: 13px;
+      font-weight:700;
+      line-height: 1.25;
+    }
+
+    .history-meta {
+      display: block;
+      overflow: hidden;
+      color: #9aa0ad;
+      font-size: 12px;
+      line-height: 1.25;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .history-amount {
+      text-align: right;
+      color: var(--green);
+      font-size: 16px;
+      font-weight:700;
+      white-space: nowrap;
+    }
+
+    .history-amount.minus {
+      color: var(--brand);
+    }
+
+    .history-amount.expire {
+      color: #c98400;
+    }
+
+    .history-row.is-hidden {
+      display: none;
+    }
+
+    .history-row[data-detail] {
+      cursor: pointer;
+    }
+
+    .history-row[data-detail]:hover {
+      background: #fffafb;
+    }
+
+    .history-row[data-detail]:focus-visible {
+      outline: 2px solid rgba(232, 56, 90, .38);
+      outline-offset: 3px;
+    }
+
+    body.mileage-popup-open {
+      overflow: hidden;
+    }
+
+    .mileage-popup-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 160;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(20, 25, 34, .38);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+    }
+
+    .mileage-popup-overlay[hidden] {
+      display: none;
+    }
+
+    .mileage-popup-overlay.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mileage-popup {
+      width: min(300px, calc(100vw - 44px));
+      padding: 20px 22px 18px;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 14px 30px rgba(32, 36, 43, .18), 0 2px 8px rgba(32, 36, 43, .12);
+      transform: translateY(8px);
+      transition: transform .18s ease;
+    }
+
+    .mileage-popup-overlay.is-open .mileage-popup {
+      transform: translateY(0);
+    }
+
+    .mileage-popup h3 {
+      margin: 0 0 18px;
+      color: #30343d;
+      font-size: 15px;
+      font-weight:700;
+      line-height: 1.35;
+    }
+
+    .mileage-popup-content {
+      display: grid;
+      gap: 14px;
+      color: #8b93a3;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .mileage-popup-group {
+      display: grid;
+      gap: 3px;
+    }
+
+    .mileage-popup-line {
+      min-width: 0;
+      white-space: pre-line;
+      word-break: keep-all;
+    }
+
+    .mileage-popup-label {
+      color: #7d8493;
+      font-weight:700;
+    }
+
+    .mileage-popup-ok {
+      min-width: 58px;
+      height: 34px;
+      margin: 18px auto 0;
+      padding: 0 18px;
+      border: 1px solid #e8e3df;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      color: #222832;
+      box-shadow: 0 5px 12px rgba(32, 36, 43, .12);
+      font-size: 12px;
+      font-weight:700;
+    }
+
+    .mileage-popup.is-list-detail {
+      width: min(360px, calc(100vw - 44px));
+      max-height: min(640px, calc(100vh - 48px));
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .mileage-popup.is-list-detail h3 {
+      margin: 0;
+      padding: 26px 24px 7px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: #202833;
+      font-size: 20px;
+      line-height: 1.28;
+    }
+
+    .mileage-popup-title-text {
+      min-width: 0;
+      word-break: keep-all;
+    }
+
+    .mileage-popup-badge {
+      min-height: 22px;
+      padding: 4px 12px 3px;
+      border-radius: 999px;
+      background: #ffd521;
+      color: #111827;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight:700;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .mileage-popup-subtitle {
+      margin: 0;
+      padding: 0 24px 17px;
+      color: #8993a0;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .mileage-popup.is-list-detail .mileage-popup-content {
+      min-height: 0;
+      padding: 0 24px;
+      display: block;
+      overflow-y: auto;
+      color: #222832;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .mileage-popup-summary {
+      padding: 15px 14px;
+      display: grid;
+      gap: 13px;
+      border-radius: 8px;
+      background: #f3f6f9;
+    }
+
+    .mileage-popup-summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .mileage-popup-summary-label {
+      color: #111827;
+      font-size: 14px;
+      font-weight:700;
+      white-space: nowrap;
+    }
+
+    .mileage-popup-summary-value {
+      color: #111827;
+      font-size: 14px;
+      font-weight:700;
+      text-align: right;
+      word-break: keep-all;
+    }
+
+    .mileage-popup-summary-amount {
+      color: #000000;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 20px;
+      font-weight:700;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .mileage-popup-coin {
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      background: #ffc21c;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight:700;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.55);
+    }
+
+    .mileage-popup-divider {
+      height: 1px;
+      margin: 17px 0 15px;
+      background: #edf0f3;
+    }
+
+    .mileage-popup-list {
+      display: grid;
+      gap: 14px;
+      padding-bottom: 4px;
+    }
+
+    .mileage-popup-list-row {
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 10px;
+    }
+
+    .mileage-popup-list-date {
+      color: #303743;
+      font-size: 14px;
+      font-weight:700;
+      white-space: nowrap;
+    }
+
+    .mileage-popup-list-name {
+      min-width: 0;
+      color: #303743;
+      white-space: normal;
+    }
+
+    .mileage-popup-list-note {
+      display: block;
+      margin-top: 4px;
+      color: #7b8493;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .mileage-popup-list-amount {
+      color: #202833;
+      font-weight:700;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .mileage-popup.is-list-detail .mileage-popup-ok {
+      width: calc(100% - 48px);
+      height: 50px;
+      margin: 18px 24px 24px;
+      border: 0;
+      border-radius: 5px;
+      background: #ffecf0;
+      color: #000000;
+      box-shadow: none;
+      font-size: 17px;
+      font-weight:700;
+    }
+
+    @media (max-width: 1180px) {
+      :root {
+        --stage-left: 16px;
+        --main-w: minmax(0, 1fr);
+      }
+
+      .topbar {
+        width: calc(100vw - 32px);
+        grid-template-columns: 221px minmax(280px, 1fr) 190px;
+        gap:12px;min-height:56px;padding:1px;}
+
+      .stage {
+        width: calc(100vw - 32px);
+        grid-template-columns: 221px minmax(0, 1fr);
+      }
+
+      .asset-strip {
+        width: calc(100vw - 32px - 221px);
+      }
+
+      .asset-item {
+        gap: 18px;
+      }
+
+      .history-row {
+        margin: 0 32px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .topbar {
+        width: auto;
+        height: auto;
+        grid-template-columns: 1fr;
+        margin: 0;
+        padding:1px;min-height:56px;gap:12px;}
+
+      .brand-area {
+        justify-content: space-between;gap:10px;}
+
+      .search {
+        width: 100%;
+      }
+
+      .user-tools {
+        justify-self: start;
+      }
+
+      .stage {
+        display: block;
+        width: calc(100vw - 32px);
+      }
+
+      .asset-strip {
+        position: static;
+        width: 100%;
+        height: auto;
+        grid-template-columns: repeat(2, 1fr);
+        margin-bottom: 16px;
+        border: 1px solid var(--line-soft);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .asset-item {
+        min-height: 42px;
+        justify-content: space-between;
+        padding: 0 14px;
+      }
+
+      .profile-card {
+        height: auto;
+        border-radius: 10px;
+      }
+
+      .side-nav {
+        padding-top: 16px;
+      }
+
+      .main {
+        padding-top: 22px;
+      }
+
+      .mileage-balance-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stamp-grid {
+        grid-template-columns: repeat(3, 1fr);
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .stamp-panel.expanded .stamp-scroll {
+        max-height: 552px;
+      }
+
+      .history-head {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 18px 20px 12px;
+      }
+
+      .history-table-head {
+        display: none;
+      }
+
+      .history-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        margin: 0 20px;
+        padding: 16px 0;
+      }
+
+      .history-date,
+      .history-amount {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .asset-strip,
+      .stamp-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stamp-panel.expanded .stamp-scroll {
+        max-height: 780px;
+      }
+
+      .history-tabs {
+        gap: 18px;
+      }
+    }
+    .drawer-scrim,
+    .drawer-head {
+      display: none;
+    }
+
+    :root {
+      --brand: #e8385a;
+      --brand-hot: #e8385a;
+      --brand-dark: #c92e4d;
+      --brand-light: #fceaed;
+      --navy: #1a3c6e;
+      --text: #333333;
+      --muted: #707070;
+      --faint: #999baa;
+      --line: #e6ddda;
+      --line-soft: #eee5e2;
+      --warm: #fcf8f6;
+      --warm-2: #f4eeea;
+    }
+
+    html,
+    body {
+      background: #000;
+    }
+
+    body {
+      min-width: 320px;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.5;
+      letter-spacing: 0;
+    }
+
+    body.drawer-open,
+    body.user-drawer-open {
+      overflow: hidden;
+    }
+
+    .page {
+      width: min(100%, 390px);
+      min-width: 0;
+      max-width: 390px;
+      min-height: 100vh;
+      margin: 0 auto;
+      overflow-x: hidden;
+      background: #fff;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      width: 100%;
+      height: auto;
+      margin: 0;
+      padding:1px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap:12px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);min-height:56px;}
+
+    .brand-area {
+      grid-column: 1;
+      grid-row: 1;
+      gap:10px;
+    }
+
+    .menu-button {
+      width: 34px;
+      height: 34px;
+      border-radius: 5px;
+    }
+
+    .menu-lines {
+      width: 18px;
+      gap: 4px;
+    }
+
+    .menu-lines span {
+      height: 2px;
+    }
+
+    .logo-link {
+      width:76px;display:inline-flex;align-items:center;line-height:0;}
+
+    .search {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--warm-2);
+    }
+
+    .search input {
+      padding: 0 12px;
+      font-size: 13px;
+    }
+
+    .search button {
+      width: 42px;
+      gap: 0;
+      font-size: 0;
+    }
+
+    .search button svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .mobile-channel-tabs {
+      grid-column: 1 / -1;
+      grid-row: 3;
+      display: flex;
+      margin: 0 -14px -12px;
+      padding: 0 14px;
+      overflow-x: auto;
+      border-top: 1px solid var(--line);
+      scrollbar-width: none;
+    }
+
+    .mobile-channel-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .mobile-channel-tabs span {
+      flex: 0 0 auto;
+      padding: 9px 12px 10px;
+      border-bottom: 2px solid transparent;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .mobile-channel-tabs .active {
+      border-bottom-color: var(--brand);
+      color: var(--brand);
+    }
+
+    .mobile-channel-tabs a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .user-tools {
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .icon-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 5px;
+      color: #333333;
+    }
+
+    .icon-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .user-name {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      overflow: hidden;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand), #f5a623);
+      color: transparent;
+      font-size: 0;
+    }
+
+    .user-name::before {
+      content: "\f521"; font-family: "Font Awesome 6 Free"; font-weight:700;
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 12px;
+      font-weight:700;
+    }
+
+    .premium-chip {
+      display: none;
+    }
+
+    .stage {
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 0 14px 24px;
+      overflow: visible;
+    }
+
+    .asset-strip {
+      position: static;
+      width: calc(100% + 28px);
+      height: auto;
+      margin: 0 -14px 14px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(90px, 1fr));
+      overflow-x: auto;
+      background: #fffaf8;
+      border-bottom: 1px solid var(--line);
+      scrollbar-width: none;
+    }
+
+    .asset-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .asset-item {
+      min-height: 52px;
+      padding: 8px 12px;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 2px;
+      border-right: 1px solid var(--line-soft);
+    }
+
+    .asset-item span {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .asset-item strong {
+      color: var(--brand);
+      font-size: 14px;
+      font-weight:700;
+    }
+
+    .drawer-scrim,
+    .user-drawer-scrim {
+      display: block;
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(0,0,0,.48);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease;
+    }
+    body.drawer-open .drawer-scrim,
+    body.user-drawer-open .user-drawer-scrim {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 2px;
+      bottom: 18px;
+      left: calc(50% - min(50vw, 195px) - 380px);
+      z-index: 100;
+      width: 88%;
+      max-width: 340px;
+      overflow-y: auto;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 18px 44px rgba(0,0,0,.35);
+      transition: left .24s cubic-bezier(.4,0,.2,1);
+      scrollbar-width: none;
+    }
+    .sidebar::-webkit-scrollbar { display: none; }
+    body.drawer-open .sidebar { left: calc(50% - min(50vw, 195px) + 12px); }
+
+    .sidebar .drawer-head.is-guest-only,
+    .sidebar .drawer-guest-panel.is-guest-only { display: none !important; }
+    .sidebar .drawer-head.is-member-only { display: flex !important; }
+    .sidebar .drawer-vip-copy.is-member-only { display: block !important; }
+    .sidebar .drawer-vip-row.is-member-only,
+    .sidebar .drawer-asset-strip.is-member-only { display: grid !important; }
+
+    .drawer-head {
+      min-height: 70px;
+      padding: 17px 20px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 0;
+    }
+    .drawer-user { display: flex; align-items: center; gap: 12px; }
+    .drawer-crown {
+      width: 44px; height: 44px;
+      display: grid; place-items: center;
+      border-radius: 50%; background: #ffe6ef; font-size: 24px;
+    }
+    .drawer-user-name {
+      display: inline-block;
+      color: #151b29; font-size: 19px; font-weight:700; line-height: 1.2;
+    }
+    .drawer-user-grade {
+      margin-left: 6px;
+      color: var(--brand); font-size: 12px; font-weight:700;
+    }
+    .drawer-close {
+      color: #9aa3b2; font-size: 20px;
+      border: 0; background: transparent; width: 25px; height: 25px;
+      display: grid; place-items: right;
+    }
+    .drawer-vip-copy {
+      margin: 0 26px 8px;
+      color: #596173; font-size: 12px; font-weight: 700;
+    }
+    .drawer-vip-copy b { color: #111827; font-weight:700; }
+    .drawer-vip-row {
+      margin: 0 26px;
+      display: grid; grid-template-columns: 1fr 17px; gap: 8px; align-items: center;
+    }
+    .drawer-vip-bar { height: 7px; border-radius: 999px; background: #eee2de; overflow: hidden; }
+    .drawer-vip-bar span { display: block; width: 84%; height: 100%; background: var(--brand); border-radius: inherit; }
+    .drawer-vip-help {
+      width: 17px; height: 17px;
+      border: 1px solid #a8afba; border-radius: 50%;
+      color: #8b93a0; display: grid; place-items: center;
+      font-size: 11px; font-weight:700;
+    }
+    .drawer-asset-strip {
+      margin: 24px 26px 24px;
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      border: 0; border-radius: 0; background: transparent;
+    }
+    .drawer-asset-strip div { padding: 0; text-align: left; border-left: 0; }
+    .drawer-asset-strip div + div { border-left: 0; }
+    .drawer-asset-strip span { display: block; margin-bottom: 2px; color: #8b95a5; font-size: 11px; font-weight: 700; }
+    .drawer-asset-strip strong { display: block; color: #182033; font-size: 13px; font-weight:700; }
+    .drawer-section { padding: 18px 26px 20px; border-bottom: 1px solid #e5e7eb; }
+    .drawer-section-title { margin: 0 0 18px; color: #111827; font-size: 17px; font-weight:700; letter-spacing: 0; }
+    .drawer-quick-grid {
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px; padding: 0;
+    }
+    .drawer-quick-item { display: flex; flex-direction: column; align-items: center; gap: 8px; color: #202633; text-align: center; text-decoration: none; }
+    .drawer-quick-icon {
+      width: 46px; height: 46px; margin: 0 auto;
+      border: 0; border-radius: 0; background: transparent; color: var(--brand);
+      display: grid; place-items: center;
+    }
+    .drawer-quick-icon svg { width: 36px; height: 36px; stroke-width: 1.6; }
+    .drawer-quick-item span:last-child { color: #202633; font-size: 13px; font-weight: 700; }
+    .drawer-category-list { display: grid; gap: 0; }
+    .drawer-category-item {
+      display: flex; align-items: center; gap: 20px;
+      min-height: 46px; padding: 4px 0; border-bottom: 0;
+      color: #202633; font-size: 15px; font-weight:700; text-decoration: none;
+    }
+    .drawer-country { width: 32px; background: transparent; color: #596173; font-size: 13px; font-weight:700; }
+    .drawer-chevron { margin-left: auto; color: #a8b0bd; font-size: 18px; }
+    .drawer-link-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 42px; }
+    .drawer-link-grid a { color: #596173; font-size: 15px; font-weight: 700; text-decoration: none; }
+    .drawer-mypage-section { display: none !important; }
+    .drawer-cs-card { margin: 22px 26px 34px; padding: 18px 14px; background: #fcfcfd; text-align: center; }
+    .drawer-cs-tel { color: var(--navy); font-family: Roboto, sans-serif; font-size: 26px; font-weight:700; }
+    .drawer-cs-time { margin: 8px 0 16px; color: #7b8494; font-size: 11px; }
+    .drawer-cs-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .drawer-cs-actions button {
+      height: 34px; border: 1px solid #d9e0e9; border-radius: 5px;
+      background: #fff; color: #1f2530; font-size: 12px; font-weight:700;
+    }
+    .pager { display: flex; justify-content: center; gap: 5px; margin-top: 18px; }
+    .pager button { width: 34px; height: 34px; border-radius: 8px; border: 1px solid #e2d4cf; background: #fffdfb; color: #6f7584; font-size: 13px; }
+    .pager button.current { border-color: var(--brand); background: var(--brand); color: #fff; }
+
+    .drawer-cs-actions button:first-child { border-color: var(--brand); background: var(--brand); color: #fff; }
+    .drawer-guest-panel { margin: 0 18px 18px; border-radius: 12px; }
+
+    .profile-card { display: none; }
+    .side-nav { display: none; }
+
+    /* 회원 드로어 (오른쪽) */
+    .user-drawer {
+      position: fixed;
+      top: 30px;
+      right: calc(50% - min(50vw, 195px) + 14px);
+      z-index: 110;
+      width: min(78vw, 280px);
+      max-height: calc(100vh - 60px);
+      overflow-y: auto;
+      border-radius: 15px;
+      background: #fff;
+      box-shadow: 0 18px 44px rgba(0,0,0,.35);
+      transform: translateX(120%);
+      transition: transform .24s cubic-bezier(.4,0,.2,1);
+      scrollbar-width: none;
+    }
+    .user-drawer::-webkit-scrollbar { display: none; }
+    body.user-drawer-open .user-drawer { transform: translateX(0); }
+    .user-drawer-head { padding: 18px 14px 12px; background: #fff8f5; border-bottom: 1px solid #efe6e2; }
+    .user-member-row { display: flex; align-items: center; gap: 12px; }
+    .user-crown { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; background: #ffe6ef; font-size: 26px; flex: 0 0 auto; }
+    .user-name-strong { display: block; color: #111827; font-size: 18px; font-weight:700; }
+    .user-vip-chip { display: inline-flex; margin-top: 5px; padding: 2px 12px; border-radius: 999px; background: var(--brand); color: #fff; font-size: 11px; font-weight:700; }
+    .user-vip-copy { margin: 13px 0 4px; color: var(--brand); font-size: 11px; font-weight:700; }
+    .user-vip-bar { height: 5px; border-radius: 999px; background: #eee2de; overflow: hidden; }
+    .user-vip-bar span { display: block; width: 100%; height: 100%; background: var(--brand); }
+    .user-asset-box { display: grid; grid-template-columns: 1fr 1fr; margin-top: 12px; border: 1px solid #d9e0e9; border-radius: 8px; background: #fff; overflow: hidden; }
+    .user-asset-box div { padding: 8px 12px; }
+    .user-asset-box div + div { border-left: 1px solid #d9e0e9; }
+    .user-asset-box span { display: block; color: #a4acb8; font-size: 10px; font-weight: 700; }
+    .user-asset-box strong { display: block; color: #151b29; font-size: 16px; font-weight:700; }
+    .user-status-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid #e5e7eb; background: #fff; }
+    .user-status-grid div { min-height: 70px; display: grid; place-items: center; align-content: center; gap: 4px; text-align: center; }
+    .user-status-grid div + div { border-left: 1px solid #e5e7eb; }
+    .user-status-grid strong { color: #151b29; font-family: Roboto, sans-serif; font-size: 26px; line-height: 1; font-weight:700; }
+    .user-status-grid div:nth-child(2) strong { color: var(--brand); }
+    .user-status-grid span { color: #9aa3b2; font-size: 10px; font-weight: 700; }
+    .user-menu-list { padding: 0 0 12px; }
+    .user-menu-title { margin: 0; padding: 22px 14px 17px; border-bottom: 1px solid #e5e7eb; color: #111; font-size: 17px; font-weight:700; }
+    .user-menu-item { min-height: 45px; padding: 0 18px 0 14px; display: flex; align-items: center; gap: 12px; color: #111827; font-size: 14px; font-weight:700; border-bottom: 0; text-decoration: none; }
+    button.user-menu-item { width: 100%; border-top: 0; border-right: 0; border-left: 0; background: #fff; text-align: left; font-family: inherit; }
+    .user-menu-item .emoji, .user-menu-item .user-menu-icon { width: 22px; text-align: center; font-size: 17px; flex: 0 0 auto; }
+    .user-menu-item .chev { margin-left: auto; color: #a8b0bd; font-weight: 700; font-size: 15px; line-height: 1; }
+    .user-menu-section { border-bottom: 0; }
+    .user-menu-panel { display: none; padding: 0 0 8px 56px; }
+    .user-menu-section.is-open .user-menu-panel { display: grid; gap: 0; }
+    .user-menu-link { min-height: 33px; display: flex; align-items: center; color: #666b75; font-size: 14px; font-weight: 500; text-decoration: none; }
+    .user-menu-link.danger { color: #8f949f; }
+    .user-menu-item.logout { margin-top: 6px; border-top: 1px solid #e5e7eb; color: #9aa3b2; font-weight: 700; }
+
+    .main {
+      padding: 0 0 24px;
+    }
+
+    .page-title {
+      margin: 18px 0 14px;
+    }
+
+    .page-title h1 {
+      margin-bottom: 4px;
+      font-size: 20px;
+      line-height: 1.35;
+    }
+
+    .page-title p {
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .summary-grid {
+      display: block;
+    }
+
+    .panel {
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .mileage-summary-panel {
+      min-height: 0;
+      padding: 0px 0px 0px;
+      border-radius: 0;
+      border: none;
+      background: transparent;
+    }
+
+    .panel-title {
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .mileage-balance-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .balance-box {
+      height: auto;
+      min-height: 92px;
+      padding: 14px;
+      border-radius: 10px;
+    }
+
+    .balance-box span {
+      margin-bottom: 10px;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .balance-box strong {
+      font-size: 22px;
+    }
+
+    .pending-mileage {
+      height: auto;
+      min-height: 46px;
+      padding: 10px 12px;
+      flex-wrap: wrap;
+    }
+
+    .benefit-total,
+    .benefit-list li {
+      gap: 12px;
+    }
+
+    .stamp-panel {
+      min-height: 0;
+      margin-top: 12px;
+      padding: 16px;
+    }
+
+    .stamp-head {
+      gap: 12px;
+      padding-bottom: 10px;
+    }
+
+    .stamp-head h2 {
+      font-size: 17px;
+    }
+
+    .stamp-scroll {
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .stamp-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .stamp-grid {
+      grid-template-columns: repeat(5, 58px);
+      row-gap: 14px;
+      column-gap: 10px;
+      width: max-content;
+      padding: 14px 0;
+    }
+
+    .stamp-panel.expanded .stamp-scroll {
+      max-height: none;
+      overflow-x: auto;
+      padding-right: 0;
+    }
+
+    .stamp-circle {
+      width: 44px;
+      height: 44px;
+    }
+
+    .roulette-button {
+      width: 50px;
+      height: 50px;
+    }
+
+    .fold-bar {
+      height: 40px;
+      border-radius: 5px;
+    }
+
+    .history-panel {
+      margin-top: 12px;
+      overflow: visible;
+      border: none;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .history-head {
+      min-height: 0;
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border-radius: 12px 12px 0 0;
+      background: #fff;
+    }
+
+    .history-head h2 {
+      font-size: 17px;
+    }
+
+    .history-tabs {
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .history-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .history-tab {
+      height: 36px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .history-tab::after {
+      display: none;
+    }
+
+    .history-tab.active {
+      border-color: var(--brand);
+      background: var(--brand-light);
+      color: var(--brand-dark);
+    }
+
+    .history-table {
+      display: grid;
+      gap: 10px;
+      border-top: 0;
+      background: transparent;
+    }
+
+    .history-table-head {
+      display: none;
+    }
+
+    .history-row {
+      min-height: 0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .history-card-top {
+      width: 100%;
+      min-height: 42px;
+      padding: 10px 14px 9px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-bottom: 1px solid var(--line-soft);
+      background: var(--warm);
+      line-height: 1.3;
+    }
+
+    .history-row[data-type="earn"] .history-card-top {
+      background: #f2fbf6;
+      border-bottom-color: #dff4e9;
+    }
+
+    .history-row[data-type="use"] .history-card-top {
+      background: #fff6f8;
+      border-bottom-color: #ffe6ec;
+    }
+
+    .history-row[data-type="expire"] .history-card-top {
+      background: #fffaf0;
+      border-bottom-color: #fff3dd;
+    }
+
+    .history-date {
+      min-width: 0;
+      flex: 1 1 0;
+      overflow: hidden;
+      text-align: right;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 12px;
+    }
+
+    .history-desc {
+      min-width: 0;
+      padding: 14px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .history-kind {
+      color: #333;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .history-meta {
+      color: #707070;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .type-chip {
+      height: 21px;
+      flex: 0 0 auto;
+    }
+
+    .history-amount {
+      padding: 10px 14px;
+      border-top: 1px solid var(--line-soft);
+      text-align: right;
+      font-size: 16px;
+    }
+
+    .topbar {
+      padding:1px;
+      gap:12px;
+      border-bottom: 0;min-height:56px;}
+
+    .brand-area {
+      align-items: center;
+      gap:10px;
+    }
+
+    .menu-button {
+      width: 20px;
+      height: 24px;
+      border-radius: 5px;
+    }
+
+    .menu-lines {
+      width: 18px;
+      gap: 5px;
+    }
+
+    .menu-lines span {
+      height: 2px;
+      background: #242836;
+    }
+
+    .logo-link {
+      width:76px;display:inline-flex;align-items:center;line-height:0;}
+
+    .user-tools {
+      gap: 0;
+    }
+
+    .login-pill {
+      min-width: 66px;
+      height: 32px;
+      border: 0;
+      border-radius: 5px;
+      background: var(--brand);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight:700;
+    }
+
+    .search {
+      position: relative;
+      height: 34px;
+      border: 1px solid #d1d8e3;
+      border-radius: 9px;
+      background: #f4f7fb;
+      box-shadow: inset 0 1px 2px rgba(32, 36, 43, 0.03);
+    }
+
+    .search::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      margin-left: 12px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238b95a5' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m16.5 16.5 4 4'/%3E%3C/svg%3E") center / contain no-repeat;
+      flex: 0 0 auto;
+    }
+
+    .search input {
+      padding: 0 10px 0 6px;
+      font-size: 13px;
+    }
+
+    .search input::placeholder {
+      color: #99a2b0;
+    }
+
+    .search button {
+      display: none;
+    }
+
+    .mobile-channel-tabs {
+      margin: 0 -14px;
+      padding: 0 8px;
+      border-top: 0;
+      border-bottom: 1px solid #d9e0e9;
+      background: #fff;
+    }
+
+    .mobile-channel-tabs span {
+      padding: 11px 8px 10px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .asset-strip {
+      width: calc(100% + 28px);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      justify-items: center;
+      overflow: visible;
+      margin-bottom: 26px;
+      border-top: 1px solid #d9e0e9;
+      border-bottom: 1px solid #d9e0e9;
+      background: #fff;
+    }
+
+    .asset-item {
+      min-height: 38px;
+      padding: 0 4px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      border-right: 0;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .asset-item span,
+    .asset-item strong {
+      color: #6f7584;
+      font-size: 11px;
+      font-weight:700;
+      line-height: 1;
+    }
+
+    .page-title {
+      margin-top: 0;
+    }
+
+    .history-head {
+      gap: 10px;
+      padding: 16px 16px 0;
+    }
+
+    .history-tabs {
+      gap: 22px;
+      padding-bottom: 2px;
+      overflow: visible;
+      border-bottom: 1px solid #d9e0e9;
+    }
+
+    .history-tab {
+      position: relative;
+      height: 34px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: #7b8494;
+      font-size: 15px;
+      font-weight:700;
+    }
+
+    .history-tab::after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -3px;
+      height: 2px;
+      border-radius: 999px;
+      background: transparent;
+    }
+
+    .history-tab.active {
+      border: 0;
+      background: transparent;
+      color: var(--brand);
+    }
+
+    .history-tab.active::after {
+      background: var(--brand);
+    }
+
+    @media (max-width: 430px) {
+      html,
+      body {
+        background: #f0f5fa;
+      }
+
+      .page {
+        width: 100%;
+        box-shadow: none;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .stage {
+        padding-right: 12px;
+        padding-left: 12px;
+      }
+
+      .asset-strip {
+        width: calc(100% + 24px);
+        margin-right: -12px;
+        margin-left: -12px;
+      }
+
+      .mileage-balance-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+    /* 공통 모바일 헤더 / 로그인 상태 */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 70;
+      width: 100%;
+      height: auto;
+      margin: 0;
+      padding:1px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap:12px;
+      background: #fff;
+      border-bottom: 1px solid #d9e0e9;
+      box-shadow: 0 1px 0 rgba(32, 36, 43, .04);min-height:56px;}
+    .brand-area { grid-column: 1; grid-row: 1; display: flex; align-items: center; gap:10px; min-width: 0; }
+    .menu-button {
+      width: 34px; height: 34px; border: 0; border-radius: 5px;
+      background: transparent; padding: 0; display: grid; place-items: center;
+    }
+    .menu-lines { width: 18px; display: grid; gap: 4px; }
+    .menu-lines span { height: 2px; border-radius: 999px; background: #242836; }
+    .logo-link { display:inline-flex; align-items:center; width:76px; line-height:0; }
+    .logo-link img { width:100%; height:auto; display:block; }
+    .user-tools {
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .guest-tools, .member-tools { display: flex; align-items: center; gap: 4px; }
+    body.is-logged-in .is-guest-only { display: none !important; }
+    body:not(.is-logged-in) .is-member-only { display: none !important; }
+    .login-pill {
+      min-width: 66px; height: 32px; border: 0; border-radius: 5px;
+      background: var(--brand); color: #fff; display: inline-flex;
+      align-items: center; justify-content: center; font-size: 11px; font-weight:700;
+    }
+    .member-tools .icon-btn {
+      width: 34px; height: 34px; border: 0; border-radius: 5px;
+      background: transparent; color: #333; display: grid !important;
+      place-items: center; padding: 0; position: relative;
+    }
+    .member-tools .icon-btn svg { width: 20px; height: 20px; stroke-width: 1.9; }
+    .i-badge {
+      position: absolute; top: 3px; right: 2px; min-width: 13px; height: 13px;
+      padding: 0 2px; border-radius: 999px; background: var(--brand);
+      color: #fff; font-size: 7px; font-weight:700; line-height: 13px; text-align: center;
+    }
+    .user-avatar-sm {
+      width: 30px; height: 30px; border: 0; border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand), var(--yellow));
+      color: #fff; display: grid; place-items: center; font-size: 12px; font-weight:700;
+    }
+    .search {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      height: 40px;
+      display: flex !important;
+      min-width: 0;
+      border: 1px solid #e6ddda;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #f4eeea;
+    }
+    .search input {
+      flex: 1; min-width: 0; height: 100%;
+      border: 0; outline: 0; background: transparent;
+      padding: 0 10px 0 12px; color: #333; font-size: 13px;
+    }
+    .search input::placeholder { color: #99a2b0; }
+    .search button {
+      width: 42px; height: 100%; border: 0; background: var(--brand);
+      color: #fff; display: grid !important; place-items: center; gap: 0; font-size: 0;
+    }
+    .search button svg { width: 16px; height: 16px; stroke-width: 3; }
+    .mobile-channel-tabs {
+      grid-column: 1 / -1;
+      grid-row: 3;
+      display: flex !important;
+      overflow-x: auto;
+      scrollbar-width: none;
+      margin: 0 -14px -12px;
+      padding: 0 14px;
+      border-top: 1px solid #e6ddda;
+      background: #fff;
+    }
+    .mobile-channel-tabs::-webkit-scrollbar { display: none; }
+    .mobile-channel-tabs button,
+    .mobile-channel-tabs span {
+      flex: 0 0 auto; padding: 9px 12px 10px; border: 0;
+      border-bottom: 2px solid transparent; background: transparent;
+      color: #707070; font-size: 11px; font-weight: 700; white-space: nowrap;
+      font-family: inherit;
+    }
+    .mobile-channel-tabs .active { color: var(--brand); border-bottom-color: var(--brand); }
+    .drawer-guest-panel {
+      display: none;
+    }
+    .drawer-head.is-guest-only {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      padding: 16px 18px;
+      background: transparent;
+      border-bottom: 0;
+      border-radius: 0;
+    }
+    .drawer-guest-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 13px;
+    }
+    .drawer-guest-title { margin: 0; color: #111827; font-size: 16px; font-weight:700; flex: 1; line-height: 1.35; }
+    .drawer-head.is-guest-only .drawer-close {
+      flex-shrink: 0;
+      font-size: 24px;
+      width: 28px;
+      height: 28px;
+      line-height: 1;
+      padding: 0;
+      margin: 0;
+    }
+    .drawer-login-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .drawer-action-btn {
+      height: 36px; border: 1px solid var(--brand); border-radius: 5px;
+      background: var(--brand); color: #fff; font-size: 12px; font-weight:700;
+    }
+    .drawer-action-btn.secondary { background: #fff; color: #4b5563; border-color: #d9e0e9; }
+    .drawer-asset-strip {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      margin: 12px 16px 0; border: 1px solid #e5e7eb; border-radius: 10px;
+      overflow: hidden; background: #fff;
+    }
+    .drawer-asset-strip div { padding: 9px 6px; text-align: center; }
+    .drawer-asset-strip div + div { border-left: 1px solid #e5e7eb; }
+    .drawer-asset-strip span { display: block; margin-bottom: 2px; color: #8b95a5; font-size: 10px; }
+    .drawer-asset-strip strong { display: block; color: #1f2530; font-size: 13px; font-weight:700; }
+    /* Mileage mobile screen refinement */
+    html,
+    body {
+      background: #f0f5fa;
+      overflow-x: hidden;
+    }
+
+    body {
+      min-width: 320px;
+    }
+
+    .page {
+      width: min(100%, 390px);
+      max-width: 390px;
+      margin: 6px auto 20px;
+      overflow-x: hidden;
+      background: #fff;
+      box-shadow: none;
+    }
+
+    .topbar {
+      border-bottom: 1px solid #d9e0e9;
+      box-shadow: 0 1px 0 rgba(32, 36, 43, .04);min-height:56px;padding:1px;gap:12px;}
+
+    .mobile-channel-tabs {
+      display: flex !important;
+      border-top: 1px solid #e6ddda;
+      border-bottom: 0;
+    }
+
+    .search {
+      height: 40px;
+      border-color: #e6ddda;
+      background: #f4eeea;
+    }
+    .search::before {
+      content: none !important;
+      display: none !important;
+    }
+
+    .search button {
+      display: grid !important;
+    }
+
+    .search input {
+      padding: 0 10px 0 12px;
+    }
+
+    .topbar {
+      padding-bottom: 10px;min-height:56px;padding:1px;gap:12px;}
+    .brand-area {
+      gap:10px;
+      justify-content: flex-start;
+    }
+
+    .stage {
+      padding: 0 14px 24px;
+      overflow: visible;
+    }
+
+    .main {
+      padding-bottom: 0;
+      overflow: visible;
+    }
+
+    .page-title {
+      margin: 20px 0 13px;
+    }
+
+    .page-title h1 {
+      margin: 0 0 3px;
+      color: #2b3039;
+      font-size: 21px;
+      font-weight:700;
+    }
+
+    .page-title p {
+      color: #8f98a8;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .summary-grid,
+    .mileage-summary-panel,
+    .mileage-balance-grid,
+    .balance-box {
+      overflow: visible;
+    }
+
+    .mileage-balance-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .balance-box {
+      position: relative;
+      min-height: 55px;
+      padding: 10px 14px 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .balance-box span {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin: 0 0 4px;
+      color: #8d96a7;
+      font-size: 11px;
+      font-weight:700;
+      line-height: 1.2;
+    }
+
+    .balance-box strong {
+      color: #151922;
+      font-size: 18px;
+      font-weight:700;
+      line-height: 1;
+    }
+
+    .balance-box strong.use {
+      color: var(--brand);
+    }
+
+    .balance-box strong.muted {
+      color: #9aa0ae;
+    }
+
+    .balance-box small {
+      margin-left: 2px;
+      color: #151922;
+      font-size: 12px;
+      font-weight:700;
+    }
+
+    .balance-box strong.use small {
+      color: var(--brand);
+    }
+
+    .balance-box strong.muted small {
+      color: #9aa0ae;
+    }
+
+    .balance-note {
+      display: none;
+    }
+
+    .summary-tooltip {
+      position: relative;
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid #9da2ad;
+      border-radius: 50%;
+      background: #fff;
+      color: #8a909d;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      padding: 0;
+      font-size: 10px;
+      font-weight:700;
+      line-height: 1;
+      z-index: 30;
+    }
+
+    .summary-tooltip::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: 50%;
+      width: max-content;
+      max-width: 240px;
+      padding: 7px 9px;
+      border: 1px solid #d9e0ea;
+      border-radius: 7px;
+      background: #fff;
+      color: #667080;
+      box-shadow: 0 4px 12px rgba(37, 46, 62, .14);
+      font-size: 11px;
+      font-weight:700;
+      line-height: 1.25;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .16s ease, transform .16s ease;
+      z-index: 40;
+    }
+
+    .summary-tooltip::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .16s ease, transform .16s ease;
+      z-index: 41;
+    }
+
+    .summary-tooltip-left::after {
+      right: calc(100% + 10px);
+      transform: translate(4px, -50%);
+    }
+
+    .summary-tooltip-left::before {
+      right: calc(100% + 4px);
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 6px solid #fff;
+      transform: translate(4px, -50%);
+    }
+
+    .summary-tooltip-right::after {
+      left: calc(100% + 10px);
+      transform: translate(-4px, -50%);
+    }
+
+    .summary-tooltip-right::before {
+      left: calc(100% + 4px);
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-right: 6px solid #fff;
+      transform: translate(-4px, -50%);
+    }
+
+    .summary-tooltip:hover::after,
+    .summary-tooltip:hover::before,
+    .summary-tooltip:focus-visible::after,
+    .summary-tooltip:focus-visible::before {
+      opacity: 1;
+      transform: translate(0, -50%);
+    }
+
+    .balance-box[data-summary-tooltip],
+    .balance-box[data-scroll-target] {
+      cursor: pointer;
+    }
+
+    .balance-box[data-summary-tooltip]:focus-visible,
+    .balance-box[data-scroll-target]:focus-visible {
+      outline: 2px solid rgba(232, 56, 90, .36);
+      outline-offset: 2px;
+    }
+
+    .balance-box[data-summary-tooltip]::after {
+      display: none;
+    }
+
+    .balance-box[data-summary-tooltip]::before {
+      display: none;
+    }
+
+    .balance-box[data-tooltip-position="top"]::after {
+      display: none;
+    }
+
+    .balance-box[data-tooltip-position="top"]::before {
+      display: none;
+    }
+
+    .balance-box[data-tooltip-position="bottom"]::after {
+      display: none;
+    }
+
+    .balance-box[data-tooltip-position="bottom"]::before {
+      display: none;
+    }
+
+    .balance-box[data-summary-tooltip].is-tooltip-open::after,
+    .balance-box[data-summary-tooltip].is-tooltip-open::before {
+      display: none;
+    }
+
+    .stamp-panel {
+      margin-top: 13px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    .stamp-head {
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stamp-head h2 {
+      font-size: 17px;
+      line-height: 1.2;
+    }
+
+    .stamp-head p {
+      color: #4a515d;
+      font-size: 12px;
+      font-weight:700;
+    }
+
+    .stamp-badge {
+      min-width: 78px;
+      height: 25px;
+      font-size: 12px;
+    }
+
+    .stamp-scroll {
+      overflow: hidden;
+    }
+
+    .stamp-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 18px 8px;
+      padding: 17px 8px 16px;
+    }
+
+    .stamp {
+      min-width: 0;
+    }
+
+    .stamp-circle {
+      width: 44px;
+      height: 44px;
+      font-size: 13px;
+    }
+
+    .stamp.has-reward .stamp-circle {
+      width: 44px;
+      height: 44px;
+    }
+
+    .stamp.active .stamp-circle {
+      font-size: 16px;
+    }
+
+    .roulette-button {
+      width: 44px;
+      height: 44px;
+      border: 1px dashed #d9c98d;
+      background: #fffdf0;
+      color: #9f8b4c;
+      box-shadow: inset 0 0 0 2px #fff8d7;
+    }
+
+    .roulette-button::before {
+      inset: 5px;
+      border-color: #d9c98d;
+    }
+
+    .roulette-button strong {
+      font-size: 8px;
+      line-height: 1;
+    }
+
+    .roulette-button strong::before {
+      font-size: 18px;
+    }
+
+    .fold-bar {
+      height: 40px;
+      border-radius: 5px;
+      font-size: 12px;
+    }
+
+    .history-panel {
+      margin-top: 28px;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+    }
+
+    .history-head {
+      display: grid;
+      gap: 13px;
+      padding: 0 16px;
+      background: transparent;
+    }
+
+    .history-head h2 {
+      margin: 0;
+      color: #2b3039;
+      font-size: 18px;
+      font-weight:700;
+    }
+
+    .history-tabs {
+      width: max-content;
+      gap: 22px;
+      padding-bottom: 1px;
+      border-bottom: 1px solid #d9e0e9;
+    }
+
+    .history-tab {
+      height: 34px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: #7b8494;
+      font-size: 15px;
+      font-weight:700;
+    }
+
+    .history-tab::after {
+      display: block;
+      bottom: -2px;
+    }
+
+    .history-tab.active {
+      background: transparent;
+      color: var(--brand);
+    }
+
+    .history-table {
+      display: grid;
+      gap: 10px;
+      margin-top: 6px;
+      border: 0;
+      background: transparent;
+    }
+
+    .history-table-head {
+      display: none;
+    }
+
+    .history-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: 72px 45px minmax(0, 1fr) 72px;
+      align-items: center;
+      column-gap: 8px;
+      min-height: 46px;
+      margin: 0;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .history-desc {
+      min-width: 0;
+      padding: 0;
+      display: block;
+    }
+
+    .history-date {
+      min-width: 0;
+      flex: none;
+      overflow: hidden;
+      color: #8f98a8;
+      font-size: 11px;
+      font-weight:700;
+      line-height: 1.2;
+      text-align: left;
+      text-overflow: clip;
+      white-space: nowrap;
+    }
+
+    .history-type {
+      min-width: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #333;
+      white-space: nowrap;
+    }
+
+    .type-chip {
+      width: 7px;
+      height: 7px;
+      padding: 0;
+      border-radius: 999px;
+      flex: 0 0 auto;
+      font-size: 0;
+      line-height: 0;
+    }
+
+    .history-kind {
+      display: block;
+      color: #333;
+      font-size: 12px;
+      font-weight:700;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .history-row[data-type="earn"] .history-kind {
+      color: var(--green);
+    }
+
+    .history-row[data-type="use"] .history-kind {
+      color: var(--brand);
+    }
+
+    .history-row[data-type="expire"] .history-kind {
+      color: #c98400;
+    }
+
+    .history-meta {
+      display: block;
+      overflow: hidden;
+      color: #707070;
+      font-size: 12px;
+      line-height: 1.2;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .history-amount {
+      position: static;
+      padding: 0;
+      border: 0;
+      font-size: 13px;
+      font-weight:700;
+      line-height: 1.2;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .pager {
+      margin: 228px 0 46px;
+    }
+
+    .sidebar,
+    .user-drawer {
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .sidebar {
+      left: calc(50% - min(50vw, 195px) + 12px) !important;
+      transform: translateX(-112%);
+      transition: transform .24s cubic-bezier(.4,0,.2,1), visibility 0s linear .24s;
+    }
+
+    body.drawer-open .sidebar {
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(0);
+      transition: transform .24s cubic-bezier(.4,0,.2,1);
+    }
+
+    .user-drawer {
+      opacity: 0;
+      transform: translateX(120%);
+      transition: transform .24s cubic-bezier(.4,0,.2,1), opacity .18s ease, visibility 0s linear .24s;
+    }
+
+    body.user-drawer-open .user-drawer {
+      visibility: visible;
+      pointer-events: auto;
+      opacity: 1;
+      transform: translateX(0);
+      transition: transform .24s cubic-bezier(.4,0,.2,1), opacity .18s ease;
+    }
+
+    body.is-logged-out .sidebar .is-member-only,
+    body.is-logged-in .sidebar .is-guest-only {
+      display: none !important;
+    }
+
+    body.is-logged-out .sidebar .drawer-head.is-guest-only {
+      display: flex !important;
+    }
+
+    body.is-logged-out .sidebar .drawer-guest-panel.is-guest-only {
+      display: block !important;
+    }
+
+    body.is-logged-in .sidebar .drawer-head.is-member-only {
+      display: flex !important;
+    }
+  
+    .member-tier-icon { background:#eef5ff !important; color:#1A3C6E !important; }
+    .member-tier-icon i { line-height:1; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="mobile-channel-tabs" aria-label="경매 채널">
+      <button class="active" type="button">야후옥션</button>
+      <button type="button">메루카리</button>
+      <button type="button">라쿠텐</button>
+      <button type="button">미국이베이</button>
+      <button type="button">영국이베이</button>
+    </div>
+
+    <div class="stage">
+      <main class="main">
+        <div class="page-title">
+          <h1>마일리지 / 쿠폰</h1>
+          <p>적립, 사용, 등급 달성 현황을 한 곳에서 확인하세요.</p>
+        </div>
+
+        <section class="summary-grid" aria-label="마일리지 요약">
+          <div class="panel mileage-summary-panel">
+            <div class="mileage-balance-grid">
+              <div class="balance-box">
+                <span>사용 가능 마일리지</span>
+                <strong class="use">4,500<small>원</small></strong>
+              </div>
+              <div class="balance-box" role="button" tabindex="0" data-tooltip-position="top" data-summary-tooltip="결제 시 확정된 적립 예정 마일리지는&#10;주문 목록이 ‘확정도착’ 상태로 변경된 후&#10;실제 마일리지로 적립됩니다." aria-label="적립 예정 마일리지 안내 보기">
+                <span>
+                  적립 예정 마일리지
+                </span>
+                <strong>25,594<small>원</small></strong>
+              </div>
+              <div class="balance-box" role="button" tabindex="0" data-scroll-target="#coupon-history" aria-label="쿠폰 내역으로 이동">
+                <span>보유중인 쿠폰</span>
+                <strong>10<small>장</small></strong>
+              </div>
+              <div class="balance-box" role="button" tabindex="0" data-tooltip-position="bottom" data-summary-tooltip="• 적립 마일리지는 적립일로부터 90일 후 소멸됩니다.&#10;• 유효기간이 빠른 마일리지부터 사용됩니다.&#10;• 월간 마일리지는 지급월 말일 23:59:59에 소멸됩니다." aria-label="소멸 예정 마일리지 안내 보기">
+                <span>
+                  소멸 예정 마일리지
+                </span>
+                <strong class="muted">9,800<small>원</small></strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel stamp-panel" aria-label="혜택 스탬프">
+          <div class="stamp-head">
+            <div>
+              <h2>혜택 스탬프</h2>
+              <p id="stampSummary">이번 달 구매 0건</p>
+            </div>
+            <span class="stamp-badge">PREMIUM</span>
+          </div>
+          <div class="stamp-scroll">
+            <div class="stamp-grid" id="stampGrid"></div>
+          </div>
+          <button class="fold-bar stamp-toggle" type="button" aria-expanded="false">펼쳐보기</button>
+        </section>
+
+        <section class="panel history-panel" aria-labelledby="history-title">
+          <div class="history-head">
+            <h2 id="history-title">마일리지 내역</h2>
+            <div class="history-tabs" role="tablist" aria-label="마일리지 내역 필터">
+              <button class="history-tab active" type="button" role="tab" aria-selected="true" data-filter="all">전체</button>
+              <button class="history-tab" type="button" role="tab" aria-selected="false" data-filter="earn">적립</button>
+              <button class="history-tab" type="button" role="tab" aria-selected="false" data-filter="use">사용</button>
+              <button class="history-tab" type="button" role="tab" aria-selected="false" data-filter="expire">소멸</button>
+            </div>
+          </div>
+
+          <div class="history-table" role="table" aria-label="마일리지 내역">
+            <div class="history-table-head" role="row">
+              <div role="columnheader">날짜</div>
+              <div role="columnheader">구분</div>
+              <div role="columnheader">내용</div>
+              <div role="columnheader">금액</div>
+            </div>
+
+            <div class="history-row" role="row" data-type="earn" data-detail="earn-purchase" tabindex="0" aria-label="마일리지 적립 상세 보기">
+              <div class="history-date" role="cell">2024-05-01</div>
+              <div class="history-type" role="cell">
+                <span class="history-kind">적립</span>
+              </div>
+              <div class="history-desc" role="cell">
+                <span class="history-meta">4월 구매 마일리지</span>
+              </div>
+              <div class="history-amount" role="cell">+14,425원</div>
+            </div>
+
+            <div class="history-row" role="row" data-type="use" data-detail="use-purchase" tabindex="0" aria-label="마일리지 사용 상세 보기">
+              <div class="history-date" role="cell">2024-04-15</div>
+              <div class="history-type" role="cell">
+                <span class="history-kind">사용</span>
+              </div>
+              <div class="history-desc" role="cell">
+                <span class="history-meta">주문번호 JP123456789</span>
+              </div>
+              <div class="history-amount minus" role="cell">-500원</div>
+            </div>
+
+            <div class="history-row" role="row" data-type="expire" data-detail="expire" tabindex="0" aria-label="마일리지 유효기간 만료 상세 보기">
+              <div class="history-date" role="cell">2024-04-01</div>
+              <div class="history-type" role="cell">
+                <span class="history-kind">소멸</span>
+              </div>
+              <div class="history-desc" role="cell">
+                <span class="history-meta">유효기간 만료</span>
+              </div>
+              <div class="history-amount expire" role="cell">-250원</div>
+            </div>
+          </div>
+
+        </section>
+
+        <section class="panel history-panel" id="coupon-history" aria-labelledby="coupon-history-title">
+          <div class="history-head">
+            <h2 id="coupon-history-title">쿠폰 내역</h2>
+          </div>
+
+          <div class="history-table coupon-table" role="table" aria-label="쿠폰 내역">
+            <div class="history-table-head" role="row">
+              <div role="columnheader">일시</div>
+              <div role="columnheader">사용범위</div>
+              <div role="columnheader">쿠폰명</div>
+              <div role="columnheader">할인금액</div>
+            </div>
+
+            <div class="history-row" role="row" tabindex="0" data-coupon-end="2026-08-31" aria-label="쿠폰 상세 보기">
+              <div class="history-date" role="cell">2026-08-07</div>
+              <div class="history-type" role="cell">비바항공</div>
+              <div class="history-desc" role="cell"><span class="history-meta">8월 여름의 달 비바항공 국제 운송료 할인 쿠폰</span></div>
+              <div class="coupon-discount" role="cell">1,000원</div>
+            </div>
+
+            <div class="history-row" role="row" tabindex="0" data-coupon-end="2026-09-30" aria-label="쿠폰 상세 보기">
+              <div class="history-date" role="cell">2026-08-06</div>
+              <div class="history-type" role="cell">비바항공, 선편 특송</div>
+              <div class="history-desc" role="cell"><span class="history-meta">월말 배송비 지원 쿠폰</span></div>
+              <div class="coupon-discount" role="cell">3,000원</div>
+            </div>
+
+            <div class="history-row" role="row" tabindex="0" data-coupon-end="2026-09-30" aria-label="쿠폰 상세 보기">
+              <div class="history-date" role="cell">2026-08-05</div>
+              <div class="history-type" role="cell">비바항공</div>
+              <div class="history-desc" role="cell"><span class="history-meta">프리미엄 회원 감사 쿠폰</span></div>
+              <div class="coupon-discount" role="cell">10,000원</div>
+            </div>
+
+            <div class="history-row" role="row" tabindex="0" data-coupon-end="2026-08-31" aria-label="쿠폰 상세 보기">
+              <div class="history-date" role="cell">2026-08-04</div>
+              <div class="history-type" role="cell">비바항공, 선편 특송</div>
+              <div class="history-desc" role="cell"><span class="history-meta">복귀유저 감사  쿠폰</span></div>
+              <div class="coupon-discount" role="cell">5,000원</div>
+            </div>
+
+            <div class="history-row" role="row" tabindex="0" data-coupon-end="2026-09-30" aria-label="쿠폰 상세 보기">
+              <div class="history-date" role="cell">2026-08-03</div>
+              <div class="history-type" role="cell">비바항공</div>
+              <div class="history-desc" role="cell"><span class="history-meta">항공운송 프로모션 쿠폰</span></div>
+              <div class="coupon-discount" role="cell">3,000원</div>
+            </div>
+          </div>
+        </section>
+              <div class="pager" aria-label="페이지 이동">
+          <button type="button">«</button><button type="button">‹</button>
+          <button type="button">1</button><button class="current" type="button">2</button>
+          <button type="button">3</button><button type="button">4</button><button type="button">5</button>
+          <button type="button">›</button><button type="button">»</button>
+        </div>
+      </main>
+    </div>
+
+    <div class="mileage-popup-overlay" hidden>
+      <div class="mileage-popup" role="dialog" aria-modal="true" aria-labelledby="mileage-popup-title">
+        <h3 id="mileage-popup-title">마일리지 적립 내역</h3>
+        <div class="mileage-popup-content"></div>
+        <button class="mileage-popup-ok" type="button">확인</button>
+      </div>
+    </div>
+
+    <div class="reward-modal-overlay" id="couponModal" hidden>
+      <div class="reward-modal" role="dialog" aria-modal="true" aria-labelledby="couponModalTitle">
+        <button class="reward-modal-close" type="button" data-coupon-close aria-label="닫기">&times;</button>
+        <h3 id="couponModalTitle">쿠폰이 지급되었습니다</h3>
+        <p class="reward-modal-desc" id="couponModalDesc">이번달 거래 3건 달성 보상</p>
+        <div class="coupon-card">
+          <span class="cc-kind">비바 항공 운송료 할인 쿠폰</span>
+          <div class="cc-amount" id="couponAmount">1,000<small>원</small></div>
+          <p class="cc-cond">등급별 국제 운송료 할인 혜택과 중복 사용 가능합니다.</p>
+        </div>
+        <p class="reward-meta">
+          유효기간 <b id="couponExpiry">2026.10.06</b>까지 (지급일로부터 60일)<br>
+          쿠폰함 &gt; 사용 가능 쿠폰에서 확인하실 수 있습니다.
+        </p>
+        <div class="reward-actions">
+          <button class="reward-btn ghost" type="button" data-coupon-close>닫기</button>
+          <button class="reward-btn primary" type="button" id="couponGoBtn">쿠폰 내역 보기</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="roulette-modal-overlay" hidden>
+      <div class="roulette-modal" role="dialog" aria-modal="true" aria-labelledby="roulette-modal-title">
+        <button class="roulette-modal-close" type="button" aria-label="닫기">×</button>
+        <h3 id="roulette-modal-title">보너스 룰렛</h3>
+        <p class="roulette-modal-desc">START 버튼을 누르면 룰렛이 돌아갑니다!</p>
+        <div class="roulette-wheel-wrap">
+          <div class="roulette-pointer"></div>
+          <div class="roulette-wheel">
+            <div class="roulette-wheel-labels">
+              <span style="--i:0"><b>항공운임<br>1,000원</b></span>
+              <span style="--i:1"><b>항공운임<br>2,000원</b></span>
+              <span style="--i:2"><b>항공운임<br>3,000원</b></span>
+              <span style="--i:3"><b>항공운임<br>4,000원</b></span>
+              <span style="--i:4"><b>항공운임<br>5,000원</b></span>
+            </div>
+            <div class="roulette-wheel-center"></div>
+          </div>
+        </div>
+        <button class="roulette-start-btn" type="button">START</button>
+        <p class="roulette-result" hidden></p>
+        <p class="roulette-note" hidden>쿠폰함에서 바로 사용하실 수 있습니다.</p>
+        <div class="reward-actions" id="rouletteActions" hidden style="margin-top:14px">
+          <button class="reward-btn ghost" type="button" id="rouletteCloseBtn">닫기</button>
+          <button class="reward-btn primary" type="button" id="rouletteGoBtn">쿠폰 내역 보기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="bb-common-mobile.js"></script>
+  <script>
+    document.querySelectorAll(".mobile-channel-tabs button").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".mobile-channel-tabs button").forEach(item => item.classList.remove("active"));
+        tab.classList.add("active");
+      });
+    });
+
+    const stampPanel = document.querySelector(".stamp-panel");
+    const stampToggle = document.querySelector(".stamp-toggle");
+
+    if (stampPanel && stampToggle) {
+      stampToggle.addEventListener("click", () => {
+        const isExpanded = stampPanel.classList.toggle("expanded");
+        stampToggle.setAttribute("aria-expanded", String(isExpanded));
+        stampToggle.textContent = isExpanded ? "접기" : "펼쳐보기";
+      });
+    }
+
+    /* ===== 혜택 스탬프 v2 ===== */
+    const STAMP_TOTAL = 20;
+    const REWARD_MAP = {
+      3:  { type: "coupon",   amount: 1000 },
+      5:  { type: "roulette" },
+      8:  { type: "coupon",   amount: 2000 },
+      10: { type: "roulette" },
+      13: { type: "coupon",   amount: 3000 },
+      15: { type: "roulette" },
+      18: { type: "coupon",   amount: 5000 },
+      20: { type: "roulette" }
+    };
+    const ROULETTE_PRIZES = [1000, 2000, 3000, 4000, 5000];
+
+    /* 데모 상태 — 실제 연동 시 서버 값으로 대체 */
+    const stampState = {
+      count: 12,
+      /* 각 스탬프의 1차 결제 완료일 (index 0 = 1번 스탬프) */
+      paidDates: ["2026-08-01","2026-08-01","2026-08-02","2026-08-03","2026-08-05","2026-08-06","2026-08-07","2026-08-08","2026-08-09","2026-08-10","2026-08-11","2026-08-12"],
+      claimed: { 3: 1000, 5: 3000 },           // { 3: 1000 } 수령 완료 금액
+      expired: {}            // { 3: true } 전월 미수령 소멸
+    };
+
+    const stampGrid = document.getElementById("stampGrid");
+    const stampSummary = document.getElementById("stampSummary");
+
+    const won = (n) => n.toLocaleString("ko-KR");
+    const fmtDate = (iso) => {
+      const d = new Date(iso);
+      return (d.getMonth() + 1) + "." + d.getDate();
+    };
+
+    function rewardStatus(step) {
+      if (stampState.expired[step]) return "expired";
+      if (stampState.claimed[step] !== undefined) return "claimed";
+      if (stampState.count >= step) return "ready";
+      return "locked";
+    }
+
+    function rewardCircleHTML(step, reward, st) {
+      if (st === "claimed") {
+        return '<span class="rw-claimed-text">수령<br>완료</span>';
+      }
+      if (reward.type === "coupon" && st !== "expired") {
+        return '<span class="rw-action">혜택<br>받기</span>';
+      }
+      if (reward.type === "roulette" && st !== "claimed" && st !== "expired") {
+        return '<span class="rw-roulette-text">룰렛</span>';
+      }
+      const amount = st === "claimed" || st === "expired"
+        ? stampState.claimed[step]
+        : (reward.type === "coupon" ? reward.amount : null);
+      const ico = reward.type === "coupon"
+        ? '<i class="fa-solid fa-ticket rw-ico"></i>'
+        : '<i class="fa-solid fa-dharmachakra rw-ico"></i>';
+      const amtText = amount != null
+        ? won(amount) + '<small>원</small>'
+        : '랜덤';
+      return ico + '<span class="rw-amt">' + amtText + '</span><span class="rw-kind">쿠폰</span>';
+    }
+
+    function renderStamps() {
+      if (!stampGrid) return;
+      stampGrid.innerHTML = "";
+      for (let n = 1; n <= STAMP_TOTAL; n++) {
+        const reward = REWARD_MAP[n];
+        const paid = stampState.count >= n;
+        const cell = document.createElement("div");
+        cell.className = "stamp";
+
+        const circle = document.createElement("div");
+        circle.className = "stamp-circle";
+
+        let label = "", labelCls = "reward-label";
+
+        if (reward) {
+          const st = rewardStatus(n);
+          cell.classList.add("has-reward",
+            reward.type === "coupon" ? "reward-coupon" : "reward-roulette",
+            "rw-" + st);
+          circle.innerHTML = rewardCircleHTML(n, reward, st);
+
+          if (st === "ready") {
+            circle.setAttribute("role", "button");
+            circle.setAttribute("tabindex", "0");
+            circle.dataset.step = n;
+            circle.setAttribute("aria-label",
+              n + "건 달성 " + (reward.type === "coupon" ? "쿠폰" : "룰렛") + " 보상 받기");
+            label = "";
+            labelCls += " type-" + reward.type;
+          } else if (st === "claimed") {
+            label = "";
+            labelCls += " is-claimed";
+          } else if (st === "expired") {
+            label = "기간 만료";
+          } else {
+            label = "";
+          }
+        } else if (paid) {
+          cell.classList.add("paid");
+          const iso = stampState.paidDates[n - 1];
+          circle.innerHTML = '<span class="stamp-date">' + (iso ? fmtDate(iso) : n) + '</span>';
+        } else {
+          circle.textContent = n;
+        }
+
+        const labelEl = document.createElement("div");
+        labelEl.className = labelCls;
+        if (!label) labelEl.classList.add("is-empty");
+        labelEl.textContent = label;
+
+        cell.appendChild(circle);
+        cell.appendChild(labelEl);
+        stampGrid.appendChild(cell);
+      }
+      renderSummary();
+    }
+
+    function renderSummary() {
+      if (!stampSummary) return;
+      let claimed = 0, next = null;
+      Object.keys(REWARD_MAP).map(Number).sort((a, b) => a - b).forEach((step) => {
+        const st = rewardStatus(step);
+        if (st === "claimed") claimed++;
+        if (st === "locked" && next === null) next = step;
+      });
+      let html = "이번 달 결제 <b>" + stampState.count + "건</b>";
+      if (claimed > 0) {
+        html += '<span class="stamp-summary-sep">·</span><span class="stamp-summary-hi">혜택 ' + claimed + "건 수령</span>";
+      } else if (next !== null) {
+        html += '<span class="stamp-summary-sep">·</span>다음 혜택까지 ' + (next - stampState.count) + "건";
+      } else {
+        html += '<span class="stamp-summary-sep">·</span>이번 달 혜택 전부 획득 🎉';
+      }
+      stampSummary.innerHTML = html;
+    }
+
+    /* ---- 배지 클릭 ---- */
+    function claimReward(step) {
+      const reward = REWARD_MAP[step];
+      if (!reward || rewardStatus(step) !== "ready") return;
+      if (reward.type === "coupon") openCouponModal(step, reward.amount);
+      else openRouletteModal(step);
+    }
+    stampGrid?.addEventListener("click", (e) => {
+      const c = e.target.closest(".stamp.rw-ready .stamp-circle");
+      if (c) claimReward(Number(c.dataset.step));
+    });
+    stampGrid?.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      const c = e.target.closest(".stamp.rw-ready .stamp-circle");
+      if (c) { e.preventDefault(); claimReward(Number(c.dataset.step)); }
+    });
+
+    /* ---- 확정 쿠폰 모달 ---- */
+    const couponModal = document.getElementById("couponModal");
+    const couponAmountEl = document.getElementById("couponAmount");
+    const couponDescEl = document.getElementById("couponModalDesc");
+    const couponExpiryEl = document.getElementById("couponExpiry");
+
+    function expiryText(days) {
+      const d = new Date();
+      d.setDate(d.getDate() + days);
+      return d.getFullYear() + "." + String(d.getMonth() + 1).padStart(2, "0") + "." + String(d.getDate()).padStart(2, "0");
+    }
+
+    function openCouponModal(step, amount) {
+      stampState.claimed[step] = amount;      // 확정 지급
+      couponAmountEl.innerHTML = won(amount) + "<small>원</small>";
+      couponDescEl.textContent = "스탬프 " + step + "개 달성 보상";
+      couponExpiryEl.textContent = expiryText(30);
+      couponModal.hidden = false;
+      renderStamps();
+    }
+    function closeCouponModal() { couponModal.hidden = true; }
+    couponModal?.addEventListener("click", (e) => {
+      if (e.target === couponModal || e.target.closest("[data-coupon-close]")) closeCouponModal();
+    });
+    document.getElementById("couponGoBtn")?.addEventListener("click", () => {
+      closeCouponModal();
+      goCouponHistory();
+    });
+
+    function goCouponHistory() {
+      const target = document.getElementById("coupon-history");
+      if (target) { target.scrollIntoView({ behavior: "smooth", block: "start" }); }
+    }
+
+    /* ---- 룰렛 모달 ---- */
+    const rouletteModalOverlay = document.querySelector(".roulette-modal-overlay");
+    const rouletteModalClose = document.querySelector(".roulette-modal-close");
+    const rouletteWheel = document.querySelector(".roulette-wheel");
+    const rouletteStartBtn = document.querySelector(".roulette-start-btn");
+    const rouletteResult = document.querySelector(".roulette-result");
+    const rouletteNote = document.querySelector(".roulette-note");
+    const rouletteActions = document.getElementById("rouletteActions");
+    const rouletteDesc = document.querySelector(".roulette-modal-desc");
+    let rouletteRotation = 0;
+    let rouletteSpinning = false;
+    let rouletteStep = null;
+
+    function openRouletteModal(step) {
+      if (!rouletteModalOverlay) return;
+      rouletteStep = step;
+      if (rouletteDesc) rouletteDesc.textContent = "스탬프 " + step + "개 달성! START를 눌러 쿠폰을 확인하세요";
+      rouletteResult.hidden = true;
+      rouletteResult.textContent = "";
+      rouletteNote.hidden = true;
+      rouletteActions.hidden = true;
+      rouletteStartBtn.hidden = false;
+      rouletteStartBtn.disabled = false;
+      rouletteStartBtn.textContent = "START";
+      rouletteModalOverlay.hidden = false;
+    }
+    function closeRouletteModal() {
+      if (rouletteModalOverlay) rouletteModalOverlay.hidden = true;
+    }
+    rouletteModalClose?.addEventListener("click", closeRouletteModal);
+    rouletteModalOverlay?.addEventListener("click", (event) => {
+      if (event.target === rouletteModalOverlay) closeRouletteModal();
+    });
+    document.getElementById("rouletteCloseBtn")?.addEventListener("click", closeRouletteModal);
+    document.getElementById("rouletteGoBtn")?.addEventListener("click", () => {
+      closeRouletteModal();
+      goCouponHistory();
+    });
+
+    rouletteStartBtn?.addEventListener("click", () => {
+      if (rouletteSpinning || !rouletteWheel) return;
+      rouletteSpinning = true;
+      rouletteStartBtn.disabled = true;
+      rouletteResult.hidden = true;
+      rouletteNote.hidden = true;
+
+      const prizeIndex = Math.floor(Math.random() * ROULETTE_PRIZES.length);
+      const sliceAngle = 360 / ROULETTE_PRIZES.length;
+      const targetCenter = prizeIndex * sliceAngle + sliceAngle / 2;
+      const currentMod = ((rouletteRotation % 360) + 360) % 360;
+      const delta = ((360 - targetCenter - currentMod) % 360 + 360) % 360;
+      rouletteRotation += 360 * 5 + delta;
+      rouletteWheel.style.transform = "rotate(" + rouletteRotation + "deg)";
+
+      setTimeout(() => {
+        rouletteSpinning = false;
+        const amount = ROULETTE_PRIZES[prizeIndex];
+        stampState.claimed[rouletteStep] = amount;   // 확정 지급
+        rouletteStartBtn.hidden = true;
+        rouletteResult.hidden = false;
+        rouletteResult.innerHTML = "🎉 항공 운임 쿠폰 <b>" + won(amount) + "원</b> 당첨!";
+        rouletteNote.hidden = false;
+        rouletteNote.textContent = "유효기간 " + expiryText(30) + "까지 · 쿠폰함에서 확인하세요";
+        rouletteActions.hidden = false;
+        renderStamps();
+      }, 4000);
+    });
+
+    renderStamps();
+
+    const historyTabs = document.querySelectorAll(".history-tab");
+    const historyRows = document.querySelectorAll(".history-table:not(.coupon-table) .history-row");
+    const summaryTooltipCards = document.querySelectorAll(".balance-box[data-summary-tooltip], .balance-box[data-summary-detail]");
+    const summaryScrollCards = document.querySelectorAll(".balance-box[data-scroll-target]");
+
+    function closeSummaryTooltips(exceptCard) {
+      summaryTooltipCards.forEach((card) => {
+        if (card === exceptCard) return;
+        card.classList.remove("is-tooltip-open");
+        card.setAttribute("aria-expanded", "false");
+      });
+    }
+
+    summaryTooltipCards.forEach((card) => {
+      card.addEventListener("click", (event) => {
+        event.stopPropagation();
+        
+        // 모달 팝업 열기
+        const label = card.querySelector("span")?.textContent?.trim();
+        let detail;
+        
+        // 팝업 내용 구성 - 적립 예정 마일리지
+        if (label === "적립 예정 마일리지") {
+          detail = {
+            title: "적립예정 마일리지",
+            summary: {
+              label: "총 적립 예정",
+              amount: "25,594원",
+              periodLabel: "적립 예정일",
+              period: "2026.05.01"
+            },
+            list: [
+              { date: "04.01", name: "JP123456789", amount: "6,200원" },
+              { date: "04.17", name: "BJP123456789", amount: "5,800원" },
+              { date: "04.20", name: "US123456789", amount: "5,200원" },
+              { date: "04.27", name: "BUS123456789", amount: "8,394원" }
+            ]
+          };
+        } else if (label === "이번달 사용 마일리지") {
+          detail = {
+            title: "마일리지 사용 내역",
+            subtitle: "4월 사용 마일리지 합산",
+            summary: {
+              label: "사용 마일리지",
+              amount: "-9,800원",
+              periodLabel: "사용 기간",
+              period: "2024.04.01~2024.04.30"
+            },
+            list: [
+              { date: "04.05", name: "JP123456789", amount: "-2,000원" },
+              { date: "04.12", name: "BJP123456789", amount: "-3,300원" },
+              { date: "04.18", name: "US123456789", amount: "-1,500원" },
+              { date: "04.25", name: "BUS123456789", amount: "-3,000원" }
+            ]
+          };
+        } else {
+          // 소멸 예정 마일리지는 groups 형식
+          const tooltipText = card.getAttribute("data-summary-tooltip");
+          detail = {
+            title: label,
+            groups: [[{ text: tooltipText }]]
+          };
+        }
+        
+        clearTimeout(mileagePopupCloseTimer);
+        lastMileagePopupTrigger = card;
+        renderMileagePopup(detail);
+        mileagePopupOverlay.hidden = false;
+        document.body.classList.add("mileage-popup-open");
+        
+        requestAnimationFrame(() => {
+          mileagePopupOverlay.classList.add("is-open");
+          mileagePopupOk?.focus({ preventScroll: true });
+        });
+      });
+
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          card.click();
+        }
+
+        if (event.key === "Escape") {
+          if (!mileagePopupOverlay.hidden) {
+            closeMileagePopup();
+          }
+        }
+      });
+    });
+
+    summaryScrollCards.forEach((card) => {
+      const scrollToTarget = () => {
+        const target = document.querySelector(card.dataset.scrollTarget);
+        if (!target) return;
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      };
+
+      card.addEventListener("click", scrollToTarget);
+      card.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        scrollToTarget();
+      });
+    });
+
+    document.addEventListener("click", () => {
+      closeSummaryTooltips();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeSummaryTooltips();
+      }
+    });
+
+    function applyHistoryFilter(activeTab) {
+      const filter = activeTab?.dataset.filter || "all";
+
+      historyTabs.forEach((item) => {
+        const isActive = item === activeTab;
+        item.classList.toggle("active", isActive);
+        item.setAttribute("aria-selected", String(isActive));
+      });
+
+      historyRows.forEach((row) => {
+        row.classList.toggle("is-hidden", filter !== "all" && row.dataset.type !== filter);
+      });
+    }
+
+    historyTabs.forEach((tab) => {
+      tab.addEventListener("click", () => applyHistoryFilter(tab));
+    });
+    applyHistoryFilter(document.querySelector(".history-tab.active"));
+
+    const mileagePopupData = {
+      "earn-purchase": {
+        title: "구매 마일리지 적립",
+        badge: "프리미엄 5%",
+        summary: {
+          label: "마일리지",
+          amount: "+14,425원",
+          period: "2026.06.01~2026.08.30"
+        },
+        list: [
+          { date: "04.01", name: "닌텐도2 스위치 컨트롤러 세트", amount: "225원" },
+          { date: "04.17", name: "닥터마틴 여름 특집", amount: "5,800원" },
+          { date: "04.20", name: "영국 브리티시 찻잔 세트", amount: "2,500원" },
+          { date: "04.27", name: "미국유나이티드 축구 유니폼", amount: "5,900원" }
+        ]
+      },
+      "use-purchase": {
+        title: "마일리지 사용 내역",
+        groups: [
+          [
+            { label: "주문날짜", value: "2027-02-28" },
+            { label: "주문번호", value: "JP123456789" }
+          ],
+          [
+            { label: "물품명", value: "닌텐도2 스위치 컨트롤러 세트" }
+          ],
+          [
+            { label: "물품가", value: "12,500엔" }
+          ],
+          [
+            { text: "사용 마일리지 총 12,000원" },
+            { label: "빨간 마일리지", value: "5,000원" },
+            { label: "적립 마일리지", value: "7,000원" }
+          ]
+        ]
+      },
+      expire: {
+        title: "마일리지 소멸 내역",
+        summary: {
+          label: "소멸 마일리지",
+          amount: "-20,000원"
+        },
+        list: [
+          { date: "04.01", name: "월간 마일리지 유효기간 만료", note: "2026.03.31 23:59 까지", amount: "-20,000원" },
+          { date: "04.01", name: "이벤트 마일리지 유효기간 만료", amount: "-5,000원" }
+        ]
+      },
+      "earn-monthly": {
+        title: "월간 마일리지 적립",
+        badge: "월간",
+        subtitle: "월간 등급 혜택 마일리지",
+        summary: {
+          label: "마일리지",
+          amount: "+9,800원",
+          period: "2024.03.28~2024.06.26"
+        },
+        list: [
+          { date: "03.28", name: "월간 등급 혜택 마일리지", amount: "9,800원" }
+        ]
+      },
+      "earn-event": {
+        title: "이벤트 마일리지 적립",
+        badge: "EVENT",
+        subtitle: "리뉴얼 오픈 이벤트",
+        summary: {
+          label: "마일리지",
+          amount: "+500원",
+          period: "2024.03.28~2024.06.26"
+        },
+        list: [
+          { date: "03.28", name: "리뉴얼 오픈 이벤트", amount: "500원" }
+        ]
+      }
+    };
+
+    const mileagePopupOverlay = document.querySelector(".mileage-popup-overlay");
+    const mileagePopup = document.querySelector(".mileage-popup");
+    const mileagePopupTitle = document.querySelector("#mileage-popup-title");
+    const mileagePopupContent = document.querySelector(".mileage-popup-content");
+    const mileagePopupOk = document.querySelector(".mileage-popup-ok");
+    let mileagePopupCloseTimer;
+    let lastMileagePopupTrigger;
+
+    function renderMileagePopup(detail) {
+      if (!mileagePopupTitle || !mileagePopupContent) return;
+
+      const isListDetail = Boolean(detail.summary && detail.list);
+      mileagePopup?.classList.toggle("is-list-detail", isListDetail);
+      mileagePopup?.querySelector(".mileage-popup-subtitle")?.remove();
+
+      mileagePopupTitle.textContent = "";
+      const titleText = document.createElement("span");
+      titleText.className = "mileage-popup-title-text";
+      titleText.textContent = detail.title;
+      mileagePopupTitle.appendChild(titleText);
+
+      if (detail.badge) {
+        const badgeEl = document.createElement("span");
+        badgeEl.className = "mileage-popup-badge";
+        badgeEl.textContent = detail.badge;
+        mileagePopupTitle.appendChild(badgeEl);
+      }
+
+      mileagePopupContent.textContent = "";
+
+      if (isListDetail) {
+        if (detail.subtitle) {
+          const subtitleEl = document.createElement("p");
+          subtitleEl.className = "mileage-popup-subtitle";
+          subtitleEl.textContent = detail.subtitle;
+          mileagePopupTitle.insertAdjacentElement("afterend", subtitleEl);
+        }
+
+        const summaryEl = document.createElement("div");
+        summaryEl.className = "mileage-popup-summary";
+
+        const amountRowEl = document.createElement("div");
+        amountRowEl.className = "mileage-popup-summary-row";
+
+        const amountLabelEl = document.createElement("span");
+        amountLabelEl.className = "mileage-popup-summary-label";
+        amountLabelEl.textContent = detail.summary.label;
+
+        const amountEl = document.createElement("strong");
+        amountEl.className = "mileage-popup-summary-amount";
+
+        const coinEl = document.createElement("span");
+        coinEl.className = "mileage-popup-coin";
+        coinEl.setAttribute("aria-hidden", "true");
+        coinEl.textContent = "M";
+
+        const amountTextEl = document.createElement("span");
+        amountTextEl.textContent = detail.summary.amount;
+
+        amountEl.append(coinEl, amountTextEl);
+        amountRowEl.append(amountLabelEl, amountEl);
+
+        summaryEl.appendChild(amountRowEl);
+
+        if (detail.summary.period) {
+          const periodRowEl = document.createElement("div");
+          periodRowEl.className = "mileage-popup-summary-row";
+
+          const periodLabelEl = document.createElement("span");
+          periodLabelEl.className = "mileage-popup-summary-label";
+          periodLabelEl.textContent = detail.summary.periodLabel || "유효기간";
+
+          const periodValueEl = document.createElement("span");
+          periodValueEl.className = "mileage-popup-summary-value";
+          periodValueEl.textContent = detail.summary.period;
+
+          periodRowEl.append(periodLabelEl, periodValueEl);
+          summaryEl.appendChild(periodRowEl);
+        }
+        mileagePopupContent.appendChild(summaryEl);
+
+        const dividerEl = document.createElement("div");
+        dividerEl.className = "mileage-popup-divider";
+        mileagePopupContent.appendChild(dividerEl);
+
+        const listEl = document.createElement("div");
+        listEl.className = "mileage-popup-list";
+
+        detail.list.forEach((item) => {
+          const rowEl = document.createElement("div");
+          rowEl.className = "mileage-popup-list-row";
+
+          const dateEl = document.createElement("span");
+          dateEl.className = "mileage-popup-list-date";
+          dateEl.textContent = item.date;
+
+          const nameEl = document.createElement("span");
+          nameEl.className = "mileage-popup-list-name";
+          nameEl.textContent = item.name;
+          if (item.note) {
+            const noteEl = document.createElement("span");
+            noteEl.className = "mileage-popup-list-note";
+            noteEl.textContent = item.note;
+            nameEl.appendChild(noteEl);
+          }
+
+          const amountItemEl = document.createElement("strong");
+          amountItemEl.className = "mileage-popup-list-amount";
+          amountItemEl.textContent = item.amount;
+
+          rowEl.append(dateEl, nameEl, amountItemEl);
+          listEl.appendChild(rowEl);
+        });
+
+        mileagePopupContent.appendChild(listEl);
+        return;
+      }
+
+      detail.groups.forEach((group) => {
+        const groupEl = document.createElement("div");
+        groupEl.className = "mileage-popup-group";
+
+        group.forEach((item) => {
+          const lineEl = document.createElement("div");
+          lineEl.className = "mileage-popup-line";
+
+          if (item.text) {
+            lineEl.textContent = item.text;
+          } else {
+            const labelEl = document.createElement("span");
+            labelEl.className = "mileage-popup-label";
+            labelEl.textContent = `${item.label} :`;
+            lineEl.appendChild(labelEl);
+            lineEl.appendChild(document.createTextNode(` ${item.value}`));
+          }
+
+          groupEl.appendChild(lineEl);
+        });
+
+        mileagePopupContent.appendChild(groupEl);
+      });
+    }
+
+    function openMileagePopup(detailKey, trigger) {
+      const detail = mileagePopupData[detailKey];
+      if (!detail || !mileagePopupOverlay) return;
+
+      clearTimeout(mileagePopupCloseTimer);
+      lastMileagePopupTrigger = trigger;
+      renderMileagePopup(detail);
+      mileagePopupOverlay.hidden = false;
+      document.body.classList.add("mileage-popup-open");
+
+      requestAnimationFrame(() => {
+        mileagePopupOverlay.classList.add("is-open");
+        mileagePopupOk?.focus({ preventScroll: true });
+      });
+    }
+
+    function closeMileagePopup() {
+      if (!mileagePopupOverlay || mileagePopupOverlay.hidden) return;
+
+      mileagePopupOverlay.classList.remove("is-open");
+      document.body.classList.remove("mileage-popup-open");
+      mileagePopupCloseTimer = setTimeout(() => {
+        mileagePopupOverlay.hidden = true;
+        lastMileagePopupTrigger?.focus({ preventScroll: true });
+      }, 180);
+    }
+
+    historyRows.forEach((row) => {
+      row.addEventListener("click", () => {
+        openMileagePopup(row.dataset.detail, row);
+      });
+
+      row.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        openMileagePopup(row.dataset.detail, row);
+      });
+    });
+
+    /* ---- 쿠폰 내역 상세 팝업 ---- */
+    const slash = (iso) => (iso || "").replace(/-/g, "/");
+
+    document.querySelectorAll(".coupon-table .history-row").forEach((row) => {
+      const open = () => {
+        const name = row.querySelector(".history-meta")?.textContent.trim() || "-";
+        const scope = row.querySelector(".history-type")?.textContent.trim() || "-";
+        const amount = row.querySelector(".coupon-discount")?.textContent.trim() || "-";
+        const start = row.querySelector(".history-date")?.textContent.trim() || "";
+        const end = row.dataset.couponEnd || "";
+
+        mileagePopupData.__coupon = {
+          title: "쿠폰 상세",
+          groups: [[
+            { label: "쿠폰명", value: name },
+            { label: "사용범위", value: scope },
+            { label: "할인금액", value: amount },
+            { label: "유효기간", value: slash(start) + " ~ " + slash(end) }
+          ]]
+        };
+        openMileagePopup("__coupon", row);
+      };
+
+      row.addEventListener("click", open);
+      row.addEventListener("keydown", (e) => {
+        if (e.key !== "Enter" && e.key !== " ") return;
+        e.preventDefault();
+        open();
+      });
+    });
+
+    mileagePopupOk?.addEventListener("click", closeMileagePopup);
+
+    mileagePopupOverlay?.addEventListener("click", (event) => {
+      if (event.target === mileagePopupOverlay) {
+        closeMileagePopup();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && mileagePopupOverlay?.classList.contains("is-open")) {
+        closeMileagePopup();
+      }
+    });
+  </script>
+</body>
+</html>

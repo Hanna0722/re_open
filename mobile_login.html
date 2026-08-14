@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>로그인 | BidBuy</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+  :root{
+    --rose:#E8385A; --rose-h:#C42F4C; --navy:#1A3C6E; --amber:#F5A623;
+    --bg:#F5F6F8; --card:#fff; --border:#E0E4EB; --line:#EEEEEE;
+    --tp:#1A1A2E; --ts:#666680; --tm:#999BAA;
+  }
+  html, body { width:100%; max-width:390px; margin:0 auto; background:#fff; overflow-x:hidden; }
+  body { font-family:Pretendard,'Noto Sans KR',sans-serif; font-size:14px; color:var(--tp); line-height:1.5; padding-bottom:40px; }
+  a { text-decoration:none; color:inherit; }
+  button, input, select { font:inherit; }
+  button { cursor:pointer; }
+
+  /* ── 헤더 ── */
+  .m-header{ background:#fff; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
+  .m-header-top{ display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:12px; padding:1px; min-height:56px; }
+  .m-brand-area{ display:flex; align-items:center; gap:10px; min-width:0; }
+  .hb{ width:34px; height:34px; border-radius:5px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:0; background:none; border:none; flex-shrink:0; }
+  .hb span{ display:block; width:18px; height:2px; background:var(--tp); border-radius:999px; }
+  .m-logo{ display:inline-flex; align-items:center; width:76px; line-height:0; }
+  .m-logo img{ width:100%; height:auto; display:block; }
+  .m-header-right{ display:flex; gap:4px; align-items:center; justify-self:end; }
+
+  /* ── 로그인 브랜드 ── */
+  .login-brand{ display:flex; flex-direction:column; align-items:center; gap:10px; margin:36px 0 26px; text-align:center; padding:0 20px; }
+  .login-brand-icon{ width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg,var(--rose),var(--rose-h)); display:grid; place-items:center; color:#fff; font-size:20px; box-shadow:0 8px 18px rgba(232,56,90,.25); }
+  .login-brand-title{ font-size:18px; font-weight:800; }
+  .login-brand-sub{ font-size:12px; color:var(--ts); font-weight:500; }
+
+  /* ── 폼 ── */
+  .login-form{ padding:0 20px; }
+  .login-field{ margin-bottom:12px; }
+  .login-field label{ display:block; margin-bottom:6px; font-size:12px; font-weight:700; }
+  .login-input-wrap{ position:relative; }
+  .login-input-wrap i{ position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--tm); font-size:13px; }
+  .login-input{ width:100%; height:46px; padding:0 14px 0 38px; border:1.5px solid var(--border); border-radius:8px; background:#fff; font-family:inherit; font-size:14px; color:var(--tp); outline:none; }
+  .login-input:focus{ border-color:var(--rose); }
+  .login-input::placeholder{ color:var(--tm); }
+
+  .login-row{ display:flex; align-items:center; justify-content:space-between; margin:12px 0 18px; }
+  .login-remember{ display:inline-flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ts); }
+  .login-remember input{ width:15px; height:15px; margin:0; accent-color:var(--rose); }
+  .login-links{ display:flex; align-items:center; gap:7px; font-size:11.5px; color:var(--ts); }
+  .login-links .divider{ color:var(--border); }
+
+  .login-error{ display:none; margin-bottom:12px; padding:10px 12px; border-radius:6px; background:#FDEEF0; color:var(--rose-h); font-size:12px; font-weight:600; }
+  .login-error.show{ display:block; }
+
+  .btn{ height:48px; width:100%; border:1px solid transparent; border-radius:8px; font-size:15px; font-weight:700; font-family:inherit; }
+  .btn-primary{ background:var(--rose); color:#fff; }
+
+  .login-divider{ display:flex; align-items:center; gap:8px; margin:22px 0; color:var(--tm); font-size:11px; font-weight:600; padding:0 20px; }
+  .login-divider::before, .login-divider::after{ content:""; flex:1; height:1px; background:var(--line); }
+
+  .sns-login-list{ display:flex; justify-content:center; gap:12px; margin:0 20px 26px; }
+  .sns-login-btn{ width:44px; height:44px; border-radius:50%; display:grid; place-items:center; font-size:14px; font-weight:800; color:#fff; border:1px solid var(--border); }
+  .sns-n{ background:#03C75A; border-color:#03C75A; }
+  .sns-k{ background:#FEE500; border-color:#FEE500; color:#3C1E1E; }
+  .sns-g{ background:#fff; color:#4285F4; }
+  .sns-a{ background:#111; border-color:#111; }
+
+  .login-signup{ margin:0 20px; text-align:center; padding-top:20px; border-top:1px solid var(--line); font-size:12.5px; color:var(--ts); }
+  .login-signup a{ color:var(--rose); font-weight:800; margin-left:4px; }
+
+  .login-benefit{ display:flex; align-items:center; gap:9px; margin:22px 20px 0; padding:13px 14px; border-radius:8px; background:var(--bg); font-size:11.5px; color:var(--ts); }
+  .login-benefit i{ color:var(--rose); font-size:15px; flex-shrink:0; }
+  .login-benefit strong{ color:var(--tp); font-weight:800; }
+</style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<header class="m-header">
+  <div class="m-header-top">
+    <div class="m-brand-area">
+      <button class="hb" type="button" aria-label="메뉴 열기" aria-expanded="false" onclick="openDrawer()"><span></span><span></span><span></span></button>
+      <a class="m-logo" href="mobile_main.html" aria-label="BidBuy 홈"><img src="Bidbuy logo.png" alt="BidBuy Korea"></a>
+    </div>
+    <div class="m-header-right"></div>
+  </div>
+</header>
+
+<!-- 로그인 브랜드 -->
+<div class="login-brand">
+  <div class="login-brand-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></div>
+  <h1 class="login-brand-title">비드바이코리아 로그인</h1>
+  <p class="login-brand-sub">해외경매 · 구매대행, 로그인하고 이용해보세요</p>
+</div>
+
+<p class="login-error" id="loginError" style="margin-left:20px;margin-right:20px;">아이디 또는 비밀번호를 입력해 주세요.</p>
+
+<form class="login-form" id="loginForm" onsubmit="return submitLogin(event)">
+  <div class="login-field">
+    <label for="loginId">아이디</label>
+    <div class="login-input-wrap">
+      <i class="fa-regular fa-user" aria-hidden="true"></i>
+      <input class="login-input" id="loginId" type="text" placeholder="아이디를 입력해주세요" autocomplete="username">
+    </div>
+  </div>
+  <div class="login-field">
+    <label for="loginPw">비밀번호</label>
+    <div class="login-input-wrap">
+      <i class="fa-solid fa-lock" aria-hidden="true"></i>
+      <input class="login-input" id="loginPw" type="password" placeholder="비밀번호를 입력해주세요" autocomplete="current-password">
+    </div>
+  </div>
+
+  <div class="login-row">
+    <label class="login-remember"><input type="checkbox" id="loginRemember"> 로그인 상태 유지</label>
+    <div class="login-links">
+      <a href="#">아이디 찾기</a>
+      <span class="divider">|</span>
+      <a href="#">비밀번호 찾기</a>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" type="submit">로그인</button>
+</form>
+
+<div class="login-divider">SNS 계정으로 간편 로그인</div>
+<div class="sns-login-list" aria-label="소셜 로그인">
+  <button class="sns-login-btn sns-n" type="button" aria-label="네이버 로그인">N</button>
+  <button class="sns-login-btn sns-k" type="button" aria-label="카카오 로그인">K</button>
+  <button class="sns-login-btn sns-g" type="button" aria-label="구글 로그인"><i class="fa-brands fa-google"></i></button>
+  <button class="sns-login-btn sns-a" type="button" aria-label="애플 로그인"><i class="fa-brands fa-apple"></i></button>
+</div>
+
+<div class="login-signup">
+  아직 비드바이 회원이 아니신가요?<a href="mobile_signup_1.html">회원가입</a>
+</div>
+
+<div class="login-benefit">
+  <i class="fa-solid fa-gift" aria-hidden="true"></i>
+  <span>지금 가입하면 <strong>마일리지 5천원 + 배송비 할인쿠폰</strong>을 바로 드려요.</span>
+</div>
+
+<script>
+function submitLogin(event) {
+  event.preventDefault();
+  var id = document.getElementById('loginId').value.trim();
+  var pw = document.getElementById('loginPw').value.trim();
+  var errorEl = document.getElementById('loginError');
+  if (!id || !pw) {
+    errorEl.classList.add('show');
+    return false;
+  }
+  errorEl.classList.remove('show');
+  var alreadyLoggedIn = typeof window.bbIsLoggedIn === 'function' && window.bbIsLoggedIn();
+  if (!alreadyLoggedIn) {
+    if (typeof window.toggleLogin === 'function') window.toggleLogin();
+    else localStorage.setItem('bb_logged_in', '1');
+  }
+  var params = new URLSearchParams(location.search);
+  location.href = params.get('redirect') || 'mobile_mypage.html';
+  return false;
+}
+</script>
+<script src="bb-common-mobile.js"></script>
+</body>
+</html>

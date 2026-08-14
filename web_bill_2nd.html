@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>주문/결제 - BidBuy Korea</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;
+    font-size:14px;
+    color: #222;
+    background: #fff;
+    padding-top: 64px;line-height:1.5;}
+
+  .bb-header{position:fixed;top:0;left:0;right:0;z-index:300;background:#fff;border-bottom:1px solid #E0E4EB;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+  .bb-hdr{max-width:1440px;height:64px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:16px}
+  .bb-hb{display:flex;flex-direction:column;gap:4.5px;padding:8px;margin-right:4px;border:0;border-radius:5px;background:none;cursor:pointer}.bb-hb:hover{background:#F5F7FA}.bb-hb span{display:block;width:17px;height:2px;border-radius:1px;background:#1A1A2E}
+  .bb-logo{display:flex;align-items:center;flex:0 0 160px}.bb-logo img{display:block;width:100px;height:auto}
+  .bb-search{flex:0 1 540px;max-width:540px;display:flex;border:1.5px solid #E0E4EB;border-radius:8px;overflow:hidden}.bb-search:focus-within{border-color:#E8385A}.bb-search input{flex:1;min-width:0;border:0;outline:0;background:#F5F7FA;padding:10px 14px;font-size:14px;font-family:inherit}.bb-search button{border:0;background:#E8385A;color:#fff;padding:0 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+  .bb-hdr-right{flex:1;display:flex;align-items:center;justify-content:flex-end;gap:4px}.bb-hbtn{min-width:52px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 9px;border:0;border-radius:5px;background:none;color:#666680;font-size:10px;cursor:pointer;position:relative;font-family:inherit}.bb-hbtn:hover,.bb-user:hover{background:#F5F7FA}.bb-hbtn i{font-size:18px;line-height:18px}.bb-badge{position:absolute;top:4px;right:7px;min-width:14px;height:14px;padding:0 2px;border-radius:7px;background:#E8385A;color:#fff;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700}
+  .bb-user{display:flex;align-items:center;gap:8px;padding:6px 10px;border:0;border-radius:5px;background:none;cursor:pointer;font-family:inherit}.bb-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#E8385A,#F5A623);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700}.bb-user-name{font-size:13px;font-weight:700;color:#1A1A2E;line-height:1.2;text-align:left}.bb-user-grade{display:inline-block;margin-top:2px;padding:1px 6px;border-radius:8px;background:#FFF8E6;color:#F5A623;font-size:9px;font-weight:700}
+  .bb-drawer-ov{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .2s ease}.bb-drawer-ov.open{opacity:1;pointer-events:auto}.bb-drawer{position:fixed;top:0;bottom:0;left:-360px;z-index:501;width:340px;max-width:88vw;background:#fff;box-shadow:4px 0 20px rgba(0,0,0,.12);transition:left .24s cubic-bezier(.4,0,.2,1);overflow-y:auto}.bb-drawer.open{left:0}.bb-drawer-head{display:flex;align-items:center;justify-content:space-between;padding:18px 16px 16px;border-bottom:1px solid #E0E4EB}.bb-drawer-title{font-size:17px;font-weight:800;color:#1A1A2E}.bb-drawer-close{width:32px;height:32px;border:0;background:none;font-size:24px;cursor:pointer}.bb-drawer-section{padding:16px;border-bottom:1px solid #F0F2F5}.bb-drawer-section strong{display:block;margin-bottom:12px;color:#1A3C6E;font-size:13px}.bb-drawer-links{display:grid;gap:10px}.bb-drawer-links a{color:#333;text-decoration:none;font-size:13px}
+  
+
+  /* ── 공통 컨테이너 ── */
+  .page-wrap {
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+  }
+
+  /* ── 페이지 타이틀 ── */
+  .page-title {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .page-title h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111;
+  }
+  .page-title p {
+    font-size: 13px;
+    color: #888;
+  }
+
+  /* ── 섹션 공통 ── */
+  .section { margin-bottom: 36px; }
+
+  .section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1A3C6E;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+  }
+
+  /* ── 테이블 공통 ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  thead th {
+    background: #f5f7fa;
+    border: 1px solid #dde1e7;
+    padding: 10px 12px;
+    text-align: center;
+    font-weight: 500;
+    color: #444;
+    white-space: nowrap;
+  }
+  tbody td {
+    border: 1px solid #dde1e7;
+    padding: 10px 12px;
+    text-align: center;
+    vertical-align: middle;
+    color: #333;
+  }
+
+  /* ── 주문 상품 테이블 ── */
+  .order-table tbody td.product-info {
+    width: 70%;
+    text-align: left;
+  }
+  .order-table .product-info-head {
+    width: 70%;
+  }
+  .order-table tbody td.product-info .item-id {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+  }
+  .order-table tbody td.product-info .item-name {
+    font-size: 13px;
+    color: #222;
+    line-height: 1.5;
+  }
+  .order-table .thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border: 1px solid #eee;
+    border-radius: 4px;
+  }
+  .thumb-cell { width: 80px; }
+  .price-cell {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #1A3C6E;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  .status-cell { color: #555; white-space: nowrap; }
+  .date-cell {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    color: #666;
+    white-space: nowrap;
+  }
+
+  /* ── 2차 결제 비용 테이블 ── */
+  .fee-table tbody td {
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+  }
+  .fee-table tbody td:not(.total-cell) { z-index: 2; }
+  .fee-table tbody td.total-cell { z-index: 1; }
+  .fee-table .op-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    z-index: 3;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    margin-left: 0;
+    transform: translateY(-50%);
+    vertical-align: middle;
+    cursor: default;
+    box-shadow: 0 0 0 2px #fff;
+  }
+  .op-plus  { background: #5b8fff; color: #fff; }
+  .op-equal { background: #5b8fff; color: #fff; }
+  .op-times { background: #888;    color: #fff; }
+  .op-result{ background: #5b8fff; color: #fff; }
+
+  .fee-table .total-cell {
+    background: #f0f5ff;
+    border: 2px solid #1A3C6E !important;
+    font-weight: 700;
+    color: #E8385A;
+    font-size: 15px;
+  }
+  .fee-table .intl-breakdown {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.6;
+  }
+  .fee-table .intl-main { font-weight: 600; color: #333; }
+  .fee-table .fee-added {
+    color: #E8385A;
+    font-weight: 700;
+  }
+
+  /* ── 주문자 / 수취인 정보 ── */
+  .info-table th {
+    background: #f5f7fa;
+    border: 1px solid #dde1e7;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 500;
+    color: #444;
+    width: 160px;
+    white-space: nowrap;
+    vertical-align: top;
+  }
+  .info-table td {
+    border: 1px solid #dde1e7;
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: middle;
+  }
+  .info-table input[type="text"] {
+    width: 100%;
+    max-width: 320px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-family: Pretendard, 'Noto Sans KR', sans-serif;
+    color: #333;
+    background: #f8f9fb;
+  }
+  .info-table .read-only-field {
+    width: 100%;
+    max-width: 320px;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    font-family: Pretendard, 'Noto Sans KR', sans-serif;
+    color: #333;
+    background: transparent;
+    line-height: 1.5;
+  }
+  .info-table input[type="text"]:focus {
+    outline: none;
+    border-color: #1A3C6E;
+    background: #fff;
+  }
+  .info-table .addr-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .info-table .addr-row input[type="text"] { max-width: 100%; }
+
+  /* ── 쿠폰 섹션 ── */
+  .care-table th,
+  .coupon-table th {
+    background: #f5f7fa;
+    border: 1px solid #dde1e7;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 500;
+    color: #444;
+    width: 160px;
+    white-space: nowrap;
+    vertical-align: middle;
+    font-size: 13px;
+  }
+  .care-table td,
+  .coupon-table td {
+    border: 1px solid #dde1e7;
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: middle;
+    font-size: 13px;
+  }
+  .coupon-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+  }
+  .bold-red { color: #E8385A; }
+  .coupon-count {
+    font-size: 12px;
+    color: #1A3C6E;
+    margin-top: 4px;
+  }
+  .selected-coupon-summary {
+    display: none;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #1A3C6E;
+  }
+  .selected-coupon-summary strong { color: #E8385A; }
+  .coupon-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.45);
+    padding: 24px;
+  }
+  .coupon-modal-overlay.is-open { display: flex; }
+  .coupon-modal {
+    width: min(400px, 100%);
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+  }
+  .coupon-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    border-bottom: 1px solid #dde1e7;
+  }
+  .coupon-modal-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111;
+  }
+  .coupon-modal-close {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #dde1e7;
+    border-radius: 5px;
+    background: #fff;
+    color: #333;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .coupon-modal-body { padding: 0 0 20px; }
+  /* 쿠폰 리스트 */
+  .coupon-list { list-style: none; margin: 0; padding: 0; }
+  .coupon-item { border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.15s; }
+  .coupon-item:hover { background: #f7fbff; }
+  .coupon-item.is-selected { background: #eef5ff; }
+  .coupon-item-label { display: flex; align-items: center; gap: 14px; padding: 15px 22px; cursor: pointer; }
+  .coupon-radio { width: 18px; height: 18px; accent-color: #1A3C6E; flex-shrink: 0; cursor: pointer; }
+  .coupon-item-info { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+  .coupon-item-name { font-size: 14px; font-weight: 500; color: #222; }
+  .coupon-item-period { font-size: 12px; color: #999; }
+  .coupon-item-discount { font-size: 14px; font-weight: 700; color: #E8385A; white-space: nowrap; }
+  .coupon-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin: 16px 22px 0;
+  }
+  .coupon-modal-btn {
+    min-width: 92px;
+    padding: 9px 16px;
+    border: none;
+    border-radius: 5px;
+    font-family: Pretendard, 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .coupon-modal-btn.cancel { background: #eee; color: #444; }
+  .coupon-modal-btn.apply { background: #1A3C6E; color: #fff; }
+
+  /* ── 결제 정보 확인 ── */
+  .payment-table th {
+    background: #f5f7fa;
+    border: 1px solid #dde1e7;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 500;
+    color: #444;
+    width: 160px;
+    white-space: nowrap;
+  }
+  .payment-table td {
+    border: 1px solid #dde1e7;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .payment-table .amount-display {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #E8385A;
+    font-size: 15px;
+  }
+  .payment-table .amount-neutral {
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    color: #333;
+  }
+  .payment-table .formula {
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    color: #555;
+    margin-right: 6px;
+  }
+  .deposit-ui {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+    max-width: 362px;
+    align-items: end;
+  }
+  .deposit-panel {
+    background: transparent;
+  }
+  .dep-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 7px;
+  }
+  .dep-title { font-size: 13px; color: #1A3C6E; }
+  .dep-available { font-family: 'Roboto', monospace; font-size: 13px; color: #1A3C6E; white-space: nowrap; }
+  .dep-input-row {
+    display: grid;
+    grid-template-columns: minmax(120px, 1fr) auto;
+    align-items: center;
+    column-gap: 6px;
+    min-height: 36px;
+    border: 1px solid #aaa;
+    border-radius: 0;
+    background: #fff;
+    padding: 0 10px;
+  }
+  .dep-use-label { display: none; }
+  .dep-input {
+    border: none;
+    padding: 0 4px;
+    font-size: 13px;
+    width: 100%;
+    height: 34px;
+    font-family: 'Roboto', monospace;
+    color: #111;
+    font-weight: 700;
+    text-align: right;
+    background: transparent;
+  }
+  .dep-input:focus { outline: none; }
+  .dep-input.error { color: #E8385A; }
+  .dep-unit-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+  }
+  .dep-unit { font-size: 13px; color: #555; font-weight: 700; }
+  .dep-reset {
+    width: 16px;
+    height: 16px;
+    border: none;
+    border-radius: 50%;
+    background: #8e939a;
+    color: #fff;
+    font-size: 13px;
+    line-height: 16px;
+    padding: 0;
+    cursor: pointer;
+  }
+  .dep-reset[hidden] { display: none; }
+  .dep-feedback { grid-column: 1 / -1; font-size: 12px; display: flex; align-items: center; gap: 6px; min-height: 0; }
+  .dep-remain { color: #1A3C6E; display: none; }
+  .dep-remain span { font-family: 'Roboto', monospace; font-weight: 500; }
+  .dep-warn { color: #E8385A; display: none; }
+  .dep-apply-btn {
+    width: 74px;
+    height: 36px;
+    border: 1px solid #d3d8df;
+    border-radius: 5px;
+    background: #f8f8f8;
+    color: #111;
+    font-family: Pretendard, 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .dep-apply-btn.is-active {
+    border: none;
+    color: #fff;
+    background: #cfd3d8;
+  }
+  .deposit-ui.is-applied .dep-input-row { background: #f3f4f6; }
+  .deposit-input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 13px;
+    width: 120px;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    text-align: right;
+  }
+  .deposit-input:focus { outline: none; border-color: #1A3C6E; }
+  .deposit-hint { font-size: 12px; color: #666; margin: 0 6px; }
+  .deposit-used-summary {
+    display: none;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #1A3C6E;
+  }
+  .deposit-used-summary strong {
+    font-family: 'Roboto', sans-serif;
+    color: #E8385A;
+  }
+  .check-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .method-group {
+    display: flex;
+    gap: 8px;
+  }
+  .method-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    min-height: 38px;
+    padding: 0 18px;
+    border: 1px solid #d3d8df;
+    border-radius: 4px;
+    background: #fff;
+    color: #333;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .method-label:hover {
+    border-color: #1A3C6E;
+    color: #1A3C6E;
+  }
+  .method-label input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .method-label.is-selected {
+    border-color: #1A3C6E;
+    background: #1A3C6E;
+    color: #fff;
+  }
+  .method-wrap-required { background:#FFF8F0; box-shadow:inset 0 0 0 2px rgba(232,56,90,.18); border-radius:4px; padding:10px; }
+  .method-wrap-required .method-label { border-color:#E8385A; box-shadow:0 0 0 2px rgba(232,56,90,.12); }
+  .radio-group {
+    display: flex;
+    gap: 16px;
+    margin-top: 4px;
+  }
+  .radio-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  /* ── CTA 버튼 영역 ── */
+  .btn-area {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .btn {
+    padding: 12px 40px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: Pretendard, 'Noto Sans KR', sans-serif;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-primary { background: #1A3C6E; color: #fff; }
+  .btn-primary:hover { background: #152f58; }
+  .btn-cancel { background: #aaa; color: #fff; }
+  .btn-cancel:hover { background: #888; }
+  .bill-panel .btn-area {
+    margin: 0;
+    padding: 14px 18px 18px;
+    border-top: 1px solid #dde1e7;
+    background: #fff;
+  }
+  .bill-panel .btn {
+    flex: 1;
+    padding: 11px 0;
+    font-size: 13px;
+  }
+
+  /* ── 툴팁 아이콘 ── */
+  .tooltip-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+  .tooltip-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #2b8cff;
+    border-radius: 2px;
+    background: #fff;
+    color: #2b8cff;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+  }
+  .tooltip-box {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    z-index: 20;
+    display: none;
+    min-width: 138px;
+    padding: 8px 10px;
+    border: 1px solid #1d78ff;
+    background: #fff;
+    color: #111;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.45;
+    text-align: center;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+  }
+  .tooltip-box::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 8px;
+    height: 8px;
+    border-right: 1px solid #1d78ff;
+    border-bottom: 1px solid #1d78ff;
+    background: #fff;
+    transform: translate(-50%, -4px) rotate(45deg);
+  }
+  .tooltip-grid {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 4px 12px;
+    text-align: center;
+  }
+  .tooltip-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+    text-align: center;
+  }
+  .order-table .tooltip-icon {
+    width: 20px;
+    height: 20px;
+    font-size: 11px;
+  }
+  .order-table .tooltip-box {
+    min-width: 228px;
+  }
+  .tooltip-wrap:hover .tooltip-box,
+  .tooltip-wrap:focus-within .tooltip-box {
+    display: block;
+  }
+
+  /* 이미지 placeholder */
+  .thumb-placeholder {
+    width: 60px; height: 60px;
+    background: #222;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 10px;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  /* ── 2:1 그리드 레이아웃 ── */
+  .bill-layout { display: grid; grid-template-columns: 7fr 3fr; gap: 28px; align-items: start; }
+  .bill-main { min-width: 0; }
+
+  /* ── 우측 결제 비용 패널 ── */
+  .bill-panel { position: sticky; top: 80px; background: #fff; border: 1px solid #dde1e7; border-radius: 8px; overflow: hidden; }
+  .bill-panel-head { background: #fff; padding: 14px 18px 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #eee; }
+  .bill-panel-title { color: #1A3C6E; font-size: 14px; line-height: 1.25; font-weight: 700; letter-spacing: 0; }
+  .bill-panel-sub { color: #666; font-size: 12px; font-weight: 500; white-space: nowrap; }
+  .bill-panel-body { padding: 12px 14px 16px; }
+  .fee-cost-card { border: 0; border-radius: 0; overflow: visible; background: #fff; }
+  .fee-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 46px; padding: 11px 14px; border-bottom: 1px solid #f0f2f5; background: #fff; }
+  .fee-row:last-child { border-bottom: none; }
+  .fee-row-left { display: flex; align-items: center; min-width: 0; }
+  .fee-row-label { font-size: 13px; color: #333; font-weight: 600; white-space: nowrap; }
+  .fee-row-val { font-family: 'Roboto', Pretendard, sans-serif; font-size: 13px; font-weight: 700; color: #222; text-align: right; white-space: nowrap; }
+  .fee-row-val.is-red { color: #E8385A; }
+  .fee-toggle-btn { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 20px; width: 20px; height: 20px; border: 0; background: transparent; color: #1A3C6E; cursor: pointer; padding: 0; }
+  .fee-toggle-btn i { font-size: 12px; transition: transform .18s ease; }
+  .fee-toggle-btn[aria-expanded="true"] i { transform: rotate(180deg); }
+  .fee-row-toggle { cursor: pointer; }
+  .fee-row-action { display: inline-flex; align-items: center; justify-content: flex-end; gap: 6px; }
+  .fee-detail { display: none; padding: 2px 14px 12px 14px; border-bottom: 1px solid #f0f2f5; background: #fbfcfe; }
+  .fee-detail.is-open { display: block; }
+  .fee-detail-list { border-left: 0; padding: 4px 0 0 8px; }
+  .fee-extra-item { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 28px; font-size: 12px; color: #666; border-bottom: 1px dashed #d6dce6; }
+  .fee-extra-item:last-child { border-bottom: none; }
+  .fee-extra-item strong { font-family: 'Roboto', Pretendard, sans-serif; font-size: 12px; color: #222; font-weight: 500; white-space: nowrap; }
+  .fee-extra-item strong.is-active { color: #222; }
+  .fee-extra-item strong.is-free { color: #3AAD4E; }
+  .fee-section-title { padding: 14px 0 8px; margin-top: 14px; border-top: 1px solid #1A3C6E; color: #1A3C6E; font-size: 13px; line-height: 1.2; font-weight: 700; background: #fff; }
+  .fee-row-benefit { min-height: 44px; padding: 10px 14px; border-bottom: 1px solid #f0f2f5; }
+  .fee-row-benefit .fee-row-label { font-size: 13px; font-weight: 600; }
+  .fee-row-benefit .fee-row-val { color: #E8385A; }
+  .fee-coupon-action { display: inline-flex; align-items: center; justify-content: flex-end; gap: 8px; }
+  .panel-earn { background: #fff; }
+  .panel-earn .fee-row { border-bottom: none; }
+  .panel-earn-body { display: none; padding: 0 14px 12px 26px; border-bottom: 1px solid #f0f2f5; background: #fbfcfe; }
+  .panel-earn-body.is-open { display: block; }
+  .benefit-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 3px 0; font-size: 12px; }
+  .benefit-row-lbl { display: flex; align-items: center; gap: 6px; color: #333; font-weight: 500; }
+  .benefit-row-val { font-family: 'Roboto', sans-serif; color: #9aa0aa; font-weight: 500; white-space: nowrap; text-decoration: line-through; }
+  .benefit-row-val.is-discount { color: #E8385A; font-weight: 700; text-decoration: none; }
+  .grade-badge-free { display: inline-flex; align-items: center; height: 16px; padding: 0 6px; border-radius: 3px; background: #eaf7ed; color: #3AAD4E; font-family: Pretendard, 'Noto Sans KR', sans-serif; font-size: 10px; font-weight: 700; }
+  .fee-badge-rate { display: inline-flex; align-items: center; height: 16px; margin-left: 6px; padding: 0 6px; border-radius: 3px; background: #FCEBEB; color: #E8385A; font-family: Pretendard, 'Noto Sans KR', sans-serif; font-size: 10px; font-weight: 700; vertical-align: middle; }
+  .benefit-note { display: none; }
+  .fee-summary-box { margin-top: 14px; padding: 14px 14px 16px; border: 1px solid #cfd8e6; border-radius: 6px; background: #f8fafd; }
+  .fee-summary-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 5px 0; font-size: 13px; color: #333; font-weight: 600; }
+  .fee-summary-row.is-discount .fee-summary-val { color: #E8385A; }
+  .fee-summary-divider { border-top: 1px dashed #bfc9d8; margin: 8px 0 8px; }
+  .fee-summary-total { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 2px; color: #1A3C6E; font-size: 15px; font-weight: 700; }
+  .fee-summary-total .fee-summary-val { font-family: 'Roboto', Pretendard, sans-serif; color: #E8385A; font-size: 20px; font-weight: 700; white-space: nowrap; }
+  .amount-won-sub { margin-left: 3px; color: #8b929c; font-size: 13px; font-weight: 600; vertical-align: baseline; }
+  .fee-disc-val { font-family: 'Roboto', sans-serif; font-size: 13px; font-weight: 700; color: #E8385A; }
+  .panel-coupon-btn { height: 28px; min-width: 86px; padding: 0 12px; border: 1px solid #1A3C6E; border-radius: 5px; background: #fff; color: #1A3C6E; font-family: Pretendard, 'Noto Sans KR', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+  .panel-coupon-btn:hover { background: #1A3C6E; color: #fff; }
+  .panel-coupon-btn.is-applied { background: #e9eaec; border-color: #bbb; color: #888; }
+  .panel-coupon-btn.is-applied:hover { background: #ddd; color: #555; }
+  .fee-disc-val { font-family: 'Roboto', sans-serif; font-size: 13px; font-weight: 700; color: #E8385A; }
+</style>
+</head>
+<body>
+<header class="bb-header">
+  <div class="bb-hdr">
+    <button class="bb-hb" type="button" aria-label="메뉴 열기" aria-expanded="false" onclick="bbOpenDrawer()"><span></span><span></span><span></span></button>
+    <a href="web_main.html" class="bb-logo" aria-label="Bidbuy 홈"><img src="bidbuy logo.png" alt="Bidbuy World Auction Agency"></a>
+    <form class="bb-search" role="search" onsubmit="bbSubmitSearch(event)">
+      <input type="search" name="q" placeholder="키워드 또는 URL을 입력하세요" aria-label="검색어 입력">
+      <button type="submit">AI 검색</button>
+    </form>
+    <div class="bb-hdr-right">
+      <button class="bb-hbtn" type="button" aria-label="알림"><i class="fa-regular fa-bell" aria-hidden="true"></i><span class="bb-badge">3</span><span>알림</span></button>
+      <button class="bb-hbtn" type="button" aria-label="장바구니"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><span>장바구니</span></button>
+      <button class="bb-user" type="button" aria-label="회원 메뉴"><span class="bb-avatar">홍</span><span class="bb-user-name-wrap"><span class="bb-user-name">홍길동님</span><br><span class="bb-user-grade">PREMIUM</span></span></button>
+    </div>
+  </div>
+</header>
+<div class="bb-drawer-ov" id="bbDrawerOv" onclick="bbCloseDrawer()"></div>
+<aside class="bb-drawer" id="bbDrawer" aria-label="사이트 메뉴" aria-hidden="true">
+  <div class="bb-drawer-head"><span class="bb-drawer-title">Bidbuy 메뉴</span><button class="bb-drawer-close" type="button" aria-label="메뉴 닫기" onclick="bbCloseDrawer()"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div>
+  <div class="bb-drawer-section"><strong>바로가기</strong><div class="bb-drawer-links"><a href="web_main.html">홈</a><a href="web_totalsearch.html">통합검색</a><a href="web_mypage.html">마이페이지</a><a href="web_mileage.html">마일리지 / 쿠폰</a></div></div>
+</aside>
+
+<div class="page-wrap">
+
+  <!-- ── 페이지 타이틀 ── -->
+  <div class="page-title">
+    <h1>주문/결제</h1>
+    <p>상품 결제를 위한 페이지입니다.</p>
+  </div>
+
+  <div class="bill-layout">
+  <div class="bill-main">
+
+  <!-- ── 주문 상품 ── -->
+  <div class="section">
+    <table class="order-table">
+      <thead>
+        <tr>
+          <th class="thumb-cell">이미지</th>
+          <th class="product-info-head">상품정보</th>
+          <th>물품가</th>
+          <th>소비세</th>
+          <th>현지배송료</th>
+          <th>창고보관료</th>
+          <th>기타 추가비용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="thumb-cell">
+            <div class="thumb-placeholder">스티어링<br>휠</div>
+          </td>
+          <td class="product-info">
+            <div class="item-id">[YAHOO] g1227816237</div>
+            <div class="item-name">D1SPEC DEEP70 35パイ レッドステッチ D1スペック ステアリング ディープ70</div>
+          </td>
+          <td class="price-cell">7,000 엔</td>
+          <td class="price-cell">700 엔</td>
+          <td class="price-cell">772 엔</td>
+          <td class="price-cell">
+            100 엔
+            <span class="tooltip-wrap" tabindex="0">
+              <span class="tooltip-icon" aria-label="창고보관료 안내"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span>
+              <span class="tooltip-box">
+                <span class="tooltip-grid">
+                  <span>보관일수</span><span>D-3</span>
+                  <span>상품분류</span><span>소형</span>
+                </span>
+              </span>
+            </span>
+          </td>
+          <td class="price-cell">
+            2,100 엔
+            <span class="tooltip-wrap" tabindex="0">
+              <span class="tooltip-icon" aria-label="기타 추가비용 안내"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span>
+              <span class="tooltip-box">
+                <span class="tooltip-list">
+                  <span>유료사진서비스 +700엔</span>
+                  <span>추가포장비 +800엔</span>
+                  <span>검수수수료 +600엔</span>
+                </span>
+              </span>
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="thumb-cell">
+            <div class="thumb-placeholder">머플러<br>팁</div>
+          </td>
+          <td class="product-info">
+            <div class="item-id">[YAHOO] h1184923051</div>
+            <div class="item-name">汎用 ステンレス マフラーカッター チタンカラー 90mm エキゾースト パーツ</div>
+          </td>
+          <td class="price-cell">5,800 엔</td>
+          <td class="price-cell">580 엔</td>
+          <td class="price-cell">650 엔</td>
+          <td class="price-cell">
+            100 엔
+            <span class="tooltip-wrap" tabindex="0">
+              <span class="tooltip-icon" aria-label="창고보관료 안내"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span>
+              <span class="tooltip-box">
+                <span class="tooltip-grid">
+                  <span>보관일수</span><span>D-3</span>
+                  <span>상품분류</span><span>소형</span>
+                </span>
+              </span>
+            </span>
+          </td>
+          <td class="price-cell">
+            1,400 엔
+            <span class="tooltip-wrap" tabindex="0">
+              <span class="tooltip-icon" aria-label="기타 추가비용 안내"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span>
+              <span class="tooltip-box">
+                <span class="tooltip-list">
+                  <span>추가포장비 +800엔</span>
+                  <span>분할포장비 +600엔</span>
+                </span>
+              </span>
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="thumb-cell">
+            <div class="thumb-placeholder">시프트<br>노브</div>
+          </td>
+          <td class="product-info">
+            <div class="item-id">[YAHOO] k1198307742</div>
+            <div class="item-name">TRD 5速 シフトノブ ブラック レザー調 M12 汎用 旧車 ドレスアップ</div>
+          </td>
+          <td class="price-cell">4,200 엔</td>
+          <td class="price-cell">420 엔</td>
+          <td class="price-cell">540 엔</td>
+          <td class="price-cell">
+            100 엔
+            <span class="tooltip-wrap" tabindex="0">
+              <span class="tooltip-icon" aria-label="창고보관료 안내"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span>
+              <span class="tooltip-box">
+                <span class="tooltip-grid">
+                  <span>보관일수</span><span>D-3</span>
+                  <span>상품분류</span><span>소형</span>
+                </span>
+              </span>
+            </span>
+          </td>
+          <td class="price-cell">
+            700 엔
+            <span class="tooltip-wrap" tabindex="0">
+              <span class="tooltip-icon" aria-label="기타 추가비용 안내"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span>
+              <span class="tooltip-box">
+                <span class="tooltip-list">
+                  <span>유료사진서비스 +700엔</span>
+                </span>
+              </span>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── 수취인 정보 ── -->
+  <div class="section">
+    <table class="info-table">
+      <tbody>
+
+        <tr>
+          <th rowspan="2">수취인 정보</th>
+          <td>
+            <div class="read-only-field">홍길동(010-1111-1111)</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="addr-row" style="border-top: none;">
+            <div class="addr-row">
+              <div class="read-only-field" style="max-width:100%;">서울특별시 강남구 행복로111길 11</div>
+              <div class="read-only-field" style="max-width:100%;">1009동 2504호</div>
+            </div>
+          </td>
+        </tr>
+
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- hidden coupon state holders (패널 쿠폰 버튼에서 사용) -->
+  <input type="checkbox" id="intlCouponUseCheck" data-coupon-group="intl" data-discount-won="10000" data-coupon-code="2015" data-coupon-name="국제운송료 프리미엄 쿠폰" checked style="display:none">
+  <span id="intlCouponSummary" style="display:none"><strong id="intlCouponText"></strong></span>
+
+  <!-- ── 결제 정보 확인 ── -->
+  <div class="section">
+    <div class="section-title">결제정보 확인</div>
+    <table class="payment-table">
+      <tbody>
+        <tr>
+          <th>전체 금액</th>
+          <td><span class="amount-neutral" id="txtTotalWon">100,915 원</span></td>
+        </tr>
+        <tr>
+          <th>예치금</th>
+          <td>
+            <div class="deposit-ui" id="depositUi">
+              <div class="deposit-panel">
+                <div class="dep-top">
+                  <span class="dep-title">예치금</span>
+                  <span class="dep-available" id="availableDeposit">25,840 원</span>
+                </div>
+                <div class="dep-input-row">
+                  <span class="dep-use-label">사용</span>
+                  <input type="text" class="dep-input" id="depositInput" value="0" placeholder="0">
+                  <span class="dep-unit-wrap"><span class="dep-unit">원</span><button class="dep-reset" type="button" id="depositReset" aria-label="예치금 사용 취소" hidden><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></span>
+                  <div class="dep-feedback">
+                    <span class="dep-remain" id="depRemain">차감 후 잔액 : <span>25,840</span> 원</span>
+                    <span class="dep-warn" id="depWarn">사용가능 예치금을 초과했습니다</span>
+                  </div>
+                </div>
+              </div>
+              <button class="dep-apply-btn" type="button" id="useAllDeposit">전액사용</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th>총 결제금액</th>
+          <td>
+            <span class="formula" id="txtFormula">10,512 엔 × 9.6 원 =</span>
+            <span class="amount-display" id="txtPayWon">100,915 원</span>
+          </td>
+        </tr>
+        
+        <tr>
+          <th>결제 방법 선택 <span style="color:#E8385A;">*</span></th>
+          <td>
+            <div class="method-group" id="methodWrap2">
+              <label class="method-label"><input type="radio" name="paymentMethod" value="card"> 카드결제</label>
+              <label class="method-label"><input type="radio" name="paymentMethod" value="bank"> 무통장입금(가상계좌)</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th>현금영수증 발급</th>
+          <td>
+            <div style="font-size:12px; color:#664400; margin-bottom:8px; line-height:1.6;">현금영수증 소득공제 혜택을 위해 본 거래 정보를 국세청에 통보합니다.
+              <br> 현금영수증을 발급 받으시겠습니까?</div>
+            <div style="display:flex; gap:18px;">
+              <label style="display:inline-flex; align-items:center; gap:5px; font-size:13px; cursor:pointer; color:#664400;"><input type="radio" name="receipt" value="yes" style="accent-color:#1A3C6E;"> 예</label>
+              <label style="display:inline-flex; align-items:center; gap:5px; font-size:13px; cursor:pointer; color:#664400;"><input type="radio" name="receipt" value="no" checked style="accent-color:#1A3C6E;"> 아니오</label>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── 관·부가세 안내 ── -->
+  <div style="background:#FFF8EC; border-left:3px solid #F5A623; border-radius:0 4px 4px 0; padding:14px 16px; margin-bottom:24px; font-size:13px; line-height:1.75; color:#664400;">
+    <div style="display:flex; align-items:flex-start; gap:8px;">
+      <span style="color:#D4891A; font-size:15px; flex-shrink:0; margin-top:1px;">&#9888;</span>
+      <div>
+        <strong style="color:#7A5500; display:block; margin-bottom:3px;">관·부가세 안내</strong>
+        [과세 기준] 물품가액이 $150 초과 시, 과세가격을 기준으로 관세 및 부가세가 부과됩니다.
+<br>※ 과세가격 = 물품가 + 현지세금 + 현지배송비 + 국제운임 + 보험료 + 포장비 (CIF)
+<br>※ 물품가액 = 물품가 + 현지세금 + 현지배송비 (국제운임·보험료 제외)
+<br>※ 사업자 통관 = 사업자 판매 목적 수입은 물품가와 무관하게 일반통관이 적용
+        <br><a href="#" style="font-size:12px; color:#C47D00; text-decoration:none; margin-top:2px; display:inline-block;">이용가이드 자세히 보기 ›</a>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- /bill-main -->
+
+  <!-- 우측 2차 결제 비용 패널 (sticky) -->
+  <div class="bill-panel">
+    <div class="bill-panel-head">
+      <span class="bill-panel-title">2차 결제 비용</span>
+      <span class="bill-panel-sub">적용 환율 <span id="panelRate">9.6</span>원</span>
+    </div>
+    <div class="bill-panel-body">
+      <div class="fee-cost-card">
+        <div class="fee-row fee-row-toggle" id="panelProductToggleRow" data-panel-toggle="panelProductDetail">
+          <span class="fee-row-left">
+            <span class="fee-row-label">상품 및 현지비용</span>
+          </span>
+          <span class="fee-row-action">
+            <span class="fee-row-val">3,662 엔</span>
+            <button class="fee-toggle-btn" type="button" aria-expanded="false" aria-controls="panelProductDetail">
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div>
+        <div class="fee-detail" id="panelProductDetail">
+          <div class="fee-detail-list">
+            <div class="fee-extra-item">
+              <span>소비세</span>
+              <strong>1,700 엔</strong>
+            </div>
+            <div class="fee-extra-item">
+              <span>현지배송료</span>
+              <strong>1,962 엔</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="fee-row" id="panelIntlRow">
+          <span class="fee-row-left">
+            <span class="fee-row-label">
+              국제 운송료
+              <span class="tooltip-wrap" tabindex="0">
+                <span class="tooltip-icon" aria-label="국제배송료 상세 안내"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span>
+                <span class="tooltip-box">비바항공 특송 / 2kg</span>
+              </span>
+            </span>
+          </span>
+          <span class="fee-row-action">
+            <span class="fee-row-val">2,350 엔</span>
+          </span>
+        </div>
+
+        <div class="fee-row fee-row-toggle" id="panelExtraToggleRow" data-panel-toggle="panelExtraDetail">
+          <span class="fee-row-left">
+            <span class="fee-row-label">추가비용</span>
+          </span>
+          <span class="fee-row-action">
+            <span class="fee-row-val is-red" id="panelExtraYen">+4,500 엔</span>
+            <button class="fee-toggle-btn" type="button" id="panelExtraToggleBtn" aria-expanded="false" aria-controls="panelExtraDetail">
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div>
+        <div class="fee-detail" id="panelExtraDetail">
+          <div class="fee-detail-list">
+            <div class="fee-extra-item">
+              <span>유료사진서비스</span>
+              <strong class="is-active">1,400 엔</strong>
+            </div>
+            <div class="fee-extra-item">
+              <span>추가포장비</span>
+              <strong class="is-active">2,200 엔</strong>
+            </div>
+            <div class="fee-extra-item">
+              <span>검수 수수료</span>
+              <strong class="is-active">600 엔</strong>
+            </div>
+            <div class="fee-extra-item">
+              <span>창고보관료</span>
+              <strong class="is-active">300 엔</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fee-section-title">할인/혜택</div>
+      <div class="fee-row fee-row-benefit">
+        <span class="fee-row-left">
+          <span class="fee-row-label">쿠폰</span>
+        </span>
+        <span class="fee-coupon-action">
+          <span class="fee-row-val" id="panelCouponDiscount">-1,041엔</span>
+          <button class="panel-coupon-btn is-applied" type="button" id="panelCouponBtn">변경</button>
+        </span>
+      </div>
+      <div class="panel-earn" id="panelBenefitToggleRow" data-panel-toggle="panelBenefitDetail">
+        <div class="fee-row fee-row-toggle">
+          <span class="fee-row-left">
+            <span class="fee-row-label">VIP 혜택 자동 적용중</span>
+          </span>
+          <button class="fee-toggle-btn" type="button" aria-expanded="false" aria-controls="panelBenefitDetail">
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="panel-earn-body" id="panelBenefitDetail">
+          <div class="benefit-row">
+            <span class="benefit-row-lbl">국제 운임 상시할인 <span class="fee-badge-rate">10%</span></span>
+            <span class="benefit-row-val is-discount" id="panelVipDiscount">-235엔</span>
+          </div>
+          <div class="benefit-row">
+            <span class="benefit-row-lbl">안심케어 <span class="grade-badge-free">무료</span></span>
+            <span class="benefit-row-val" id="gradeBenefitCare">200엔</span>
+          </div>
+          <div class="benefit-row">
+            <span class="benefit-row-lbl">묶음배송 10건 <span class="grade-badge-free">무료</span></span>
+            <span class="benefit-row-val" id="gradeBenefitBundle">500엔</span>
+          </div>
+          <span id="gradeBenefitTotal" hidden>700</span>
+        </div>
+      </div>
+
+      <div class="fee-summary-box">
+        <div class="fee-summary-row">
+          <span>전체 금액</span>
+          <span class="fee-summary-val" id="panelSubtotalWon">10,512엔</span>
+          <span id="panelSubtotal" hidden>10,512 엔</span>
+        </div>
+        <div class="fee-summary-row is-discount">
+          <span>할인/혜택</span>
+          <span class="fee-summary-val" id="panelDiscountTotal">-1,276엔</span>
+        </div>
+        <div class="fee-summary-divider"></div>
+        <div class="fee-summary-total">
+          <span>총 결제금액</span>
+          <span class="fee-summary-val" id="panelTotal">9,236엔<span class="amount-won-sub">(88,666원)</span></span>
+        </div>
+      </div>
+      <div class="btn-area">
+        <button class="btn btn-cancel" type="button" onclick="window.location.href='web_totalsearch.html'">결제 취소</button>
+        <button class="btn btn-primary">결제 승인</button>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- /bill-layout -->
+
+</div><!-- /page-wrap -->
+
+<div class="coupon-modal-overlay" id="couponModal" aria-hidden="true">
+  <div class="coupon-modal" role="dialog" aria-modal="true" aria-labelledby="couponModalTitle">
+    <div class="coupon-modal-header">
+      <div class="coupon-modal-title" id="couponModalTitle">할인 쿠폰 선택</div>
+      <button class="coupon-modal-close" type="button" id="couponModalClose" aria-label="닫기"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <div class="coupon-modal-body">
+      <ul class="coupon-list">
+        <li class="coupon-item" data-coupon-group="intl" data-coupon-code="2012" data-coupon-name="국제운송료 5월 감사쿠폰" data-coupon-won="1000">
+          <label class="coupon-item-label">
+            <input type="radio" name="couponSelect" class="coupon-radio" value="2012">
+            <span class="coupon-item-info">
+              <span class="coupon-item-name">국제운송료 5월 감사쿠폰</span>
+              <span class="coupon-item-period">2026.05.01 ~ 2026.05.31</span>
+            </span>
+            <span class="coupon-item-discount">-1,000원</span>
+          </label>
+        </li>
+        <li class="coupon-item" data-coupon-group="intl" data-coupon-code="2013" data-coupon-name="국제운송료 베스트 후기 쿠폰" data-coupon-won="3000">
+          <label class="coupon-item-label">
+            <input type="radio" name="couponSelect" class="coupon-radio" value="2013">
+            <span class="coupon-item-info">
+              <span class="coupon-item-name">국제운송료 베스트 후기 쿠폰</span>
+              <span class="coupon-item-period">2026.05.01 ~ 2026.05.31</span>
+            </span>
+            <span class="coupon-item-discount">-3,000원</span>
+          </label>
+        </li>
+        <li class="coupon-item" data-coupon-group="intl" data-coupon-code="2014" data-coupon-name="국제운송료 재구매 쿠폰" data-coupon-won="5000">
+          <label class="coupon-item-label">
+            <input type="radio" name="couponSelect" class="coupon-radio" value="2014">
+            <span class="coupon-item-info">
+              <span class="coupon-item-name">국제운송료 재구매 쿠폰</span>
+              <span class="coupon-item-period">2026.05.01 ~ 2026.05.31</span>
+            </span>
+            <span class="coupon-item-discount">-5,000원</span>
+          </label>
+        </li>
+        <li class="coupon-item" data-coupon-group="intl" data-coupon-code="2015" data-coupon-name="국제운송료 프리미엄 쿠폰" data-coupon-won="10000">
+          <label class="coupon-item-label">
+            <input type="radio" name="couponSelect" class="coupon-radio" value="2015">
+            <span class="coupon-item-info">
+              <span class="coupon-item-name">국제운송료 프리미엄 쿠폰</span>
+              <span class="coupon-item-period">2026.05.01 ~ 2026.05.31</span>
+            </span>
+            <span class="coupon-item-discount">-10,000원</span>
+          </label>
+        </li>
+        <li class="coupon-item" data-coupon-group="storage" data-coupon-code="3012" data-coupon-name="보관료 5월 감사쿠폰" data-coupon-won="1000">
+          <label class="coupon-item-label">
+            <input type="radio" name="couponSelect" class="coupon-radio" value="3012">
+            <span class="coupon-item-info">
+              <span class="coupon-item-name">보관료 5월 감사쿠폰</span>
+              <span class="coupon-item-period">2026.05.01 ~ 2026.05.31</span>
+            </span>
+            <span class="coupon-item-discount">-1,000원</span>
+          </label>
+        </li>
+        <li class="coupon-item" data-coupon-group="storage" data-coupon-code="3013" data-coupon-name="보관료 베스트 후기 쿠폰" data-coupon-won="3000">
+          <label class="coupon-item-label">
+            <input type="radio" name="couponSelect" class="coupon-radio" value="3013">
+            <span class="coupon-item-info">
+              <span class="coupon-item-name">보관료 베스트 후기 쿠폰</span>
+              <span class="coupon-item-period">2026.05.01 ~ 2026.05.31</span>
+            </span>
+            <span class="coupon-item-discount">-3,000원</span>
+          </label>
+        </li>
+        <li class="coupon-item" data-coupon-group="storage" data-coupon-code="3014" data-coupon-name="보관료 장기보관 쿠폰" data-coupon-won="5000">
+          <label class="coupon-item-label">
+            <input type="radio" name="couponSelect" class="coupon-radio" value="3014">
+            <span class="coupon-item-info">
+              <span class="coupon-item-name">보관료 장기보관 쿠폰</span>
+              <span class="coupon-item-period">2026.05.01 ~ 2026.05.31</span>
+            </span>
+            <span class="coupon-item-discount">-5,000원</span>
+          </label>
+        </li>
+        <li class="coupon-item" data-coupon-group="storage" data-coupon-code="3015" data-coupon-name="보관료 프리미엄 쿠폰" data-coupon-won="10000">
+          <label class="coupon-item-label">
+            <input type="radio" name="couponSelect" class="coupon-radio" value="3015">
+            <span class="coupon-item-info">
+              <span class="coupon-item-name">보관료 프리미엄 쿠폰</span>
+              <span class="coupon-item-period">2026.05.01 ~ 2026.05.31</span>
+            </span>
+            <span class="coupon-item-discount">-10,000원</span>
+          </label>
+        </li>
+      </ul>
+      <div class="coupon-modal-actions">
+        <button class="coupon-modal-btn cancel" type="button" id="couponClear">선택 해제</button>
+        <button class="coupon-modal-btn apply" type="button" id="couponApply">선택 완료</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function bbOpenDrawer() {
+    document.getElementById('bbDrawer')?.classList.add('open');
+    document.getElementById('bbDrawer')?.setAttribute('aria-hidden', 'false');
+    document.getElementById('bbDrawerOv')?.classList.add('open');
+    document.querySelector('.bb-hb')?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function bbCloseDrawer() {
+    document.getElementById('bbDrawer')?.classList.remove('open');
+    document.getElementById('bbDrawer')?.setAttribute('aria-hidden', 'true');
+    document.getElementById('bbDrawerOv')?.classList.remove('open');
+    document.querySelector('.bb-hb')?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  function bbSubmitSearch(event) {
+    event.preventDefault();
+    const query = event.currentTarget.querySelector('input[name="q"]')?.value.trim().replace(/\s+/g, ' ');
+    if (query) location.href = `web_totalsearch.html?q=${encodeURIComponent(query)}`;
+  }
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') bbCloseDrawer();
+  });
+
+  (() => {
+    const toggleRows = Array.from(document.querySelectorAll('[data-panel-toggle]'));
+    toggleRows.forEach((toggleRow) => {
+      const detail = document.getElementById(toggleRow.dataset.panelToggle);
+      const toggleBtn = toggleRow.querySelector('.fee-toggle-btn');
+      if (!detail || !toggleBtn) return;
+
+      const syncOpen = (isOpen) => {
+        toggleBtn.setAttribute('aria-expanded', String(isOpen));
+        detail.classList.toggle('is-open', isOpen);
+      };
+
+      const onToggle = () => {
+        const isOpen = toggleBtn.getAttribute('aria-expanded') === 'true';
+        syncOpen(!isOpen);
+      };
+
+      toggleBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        onToggle();
+      });
+      toggleRow.addEventListener('click', onToggle);
+      syncOpen(false);
+    });
+  })();
+
+  (() => {
+    const modal = document.getElementById('couponModal');
+    const title = document.getElementById('couponModalTitle');
+    const closeBtn = document.getElementById('couponModalClose');
+    const applyBtn = document.getElementById('couponApply');
+    const clearBtn = document.getElementById('couponClear');
+    const rows = Array.from(document.querySelectorAll('.coupon-list .coupon-item'));
+    const controls = {
+      intl: {
+        checkbox: document.getElementById('intlCouponUseCheck'),
+        summary: document.getElementById('intlCouponSummary'),
+        text: document.getElementById('intlCouponText'),
+        title: '국제운송료 할인 쿠폰 선택',
+      },
+      storage: {
+        checkbox: document.getElementById('storageCouponUseCheck'),
+        summary: document.getElementById('storageCouponSummary'),
+        text: document.getElementById('storageCouponText'),
+        title: '보관료 할인 쿠폰 선택',
+      },
+    };
+    if (!modal || !title || !closeBtn || !applyBtn || !clearBtn) return;
+
+    let activeGroup = null;
+    const formatWon = (value) => `${Number(value).toLocaleString('ko-KR')}원`;
+    const getControl = () => activeGroup ? controls[activeGroup] : null;
+
+    const syncRadios = () => {
+      rows.forEach(r => {
+        const radio = r.querySelector('.coupon-radio');
+        if (radio) radio.checked = r.classList.contains('is-selected');
+      });
+    };
+
+    const openModal = (group) => {
+      activeGroup = group;
+      title.textContent = controls[group].title;
+      rows.forEach((row) => {
+        const visible = row.dataset.couponGroup === group;
+        row.style.display = visible ? '' : 'none';
+        row.classList.toggle('is-selected', visible && controls[group].checkbox.dataset.couponCode === row.dataset.couponCode);
+      });
+      syncRadios();
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+    };
+
+    const closeModal = () => {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      Object.values(controls).forEach((control) => {
+        control.checkbox.checked = Boolean(control.checkbox.dataset.discountWon);
+      });
+    };
+
+    const clearCoupon = () => {
+      const control = getControl();
+      if (!control) return;
+      rows.forEach((row) => row.classList.remove('is-selected'));
+      syncRadios();
+      delete control.checkbox.dataset.discountWon;
+      delete control.checkbox.dataset.couponCode;
+      delete control.checkbox.dataset.couponName;
+      control.checkbox.checked = false;
+      control.summary.style.display = 'none';
+      control.text.textContent = '';
+    };
+
+    const selectCoupon = (row) => {
+      const control = getControl();
+      if (!control) return;
+      rows.forEach((item) => item.classList.toggle('is-selected', item === row));
+      syncRadios();
+      control.checkbox.dataset.discountWon = row.dataset.couponWon || '0';
+      control.checkbox.dataset.couponCode = row.dataset.couponCode || '';
+      control.checkbox.dataset.couponName = row.dataset.couponName || '';
+      control.checkbox.checked = true;
+      control.text.textContent = '';
+      control.summary.style.display = 'none';
+    };
+
+    Object.entries(controls).forEach(([group, control]) => {
+      control.checkbox?.addEventListener('click', (event) => {
+        event.preventDefault();
+        openModal(group);
+      });
+    });
+
+    // 우측 패널 쿠폰 버튼 → 국제운송료 쿠폰 모달 열기
+    const panelCouponBtn = document.getElementById('panelCouponBtn');
+    panelCouponBtn?.addEventListener('click', () => openModal('intl'));
+
+    // 쿠폰 적용/해제 시 패널 버튼 텍스트 업데이트
+    const syncPanelCouponBtn = () => {
+      const intlCb = controls.intl.checkbox;
+      const discWon = Number(intlCb?.dataset?.discountWon || 0);
+      const discYen = Math.floor(discWon / 9.6);
+      const panelCouponDiscount = document.getElementById('panelCouponDiscount');
+      if (panelCouponBtn) {
+        if (discWon > 0) {
+          panelCouponBtn.textContent = '변경';
+          panelCouponBtn.classList.add('is-applied');
+          if (panelCouponDiscount) {
+            panelCouponDiscount.hidden = false;
+            panelCouponDiscount.textContent = `-${Number(discYen).toLocaleString('ko-KR')}엔`;
+          }
+        } else {
+          panelCouponBtn.textContent = '쿠폰 선택';
+          panelCouponBtn.classList.remove('is-applied');
+          if (panelCouponDiscount) {
+            panelCouponDiscount.hidden = true;
+            panelCouponDiscount.textContent = '';
+          }
+        }
+      }
+      window.renderPaymentSummary?.();
+    };
+    // 모달 닫힐 때 패널 버튼도 동기화
+    applyBtn.addEventListener('click', syncPanelCouponBtn);
+    clearBtn.addEventListener('click', syncPanelCouponBtn);
+    rows.forEach((row) => {
+      row.addEventListener('click', () => selectCoupon(row));
+    });
+    closeBtn.addEventListener('click', closeModal);
+    applyBtn.addEventListener('click', closeModal);
+    clearBtn.addEventListener('click', () => {
+      clearCoupon();
+      syncPanelCouponBtn();
+      closeModal();
+    });
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+    syncPanelCouponBtn();
+  })();
+
+  (() => {
+    const renderPaymentSummary = () => {
+      const rate = 9.6;
+      const productTotalYen = 0;
+      const taxTotalYen = 1700;
+      const localShippingTotalYen = 1962;
+      const storageTotalYen = 300;
+      const internationalShippingYen = 2350;
+      const orderExtraTotalYen = 4200;
+      const totalYen = productTotalYen + taxTotalYen + localShippingTotalYen + storageTotalYen + internationalShippingYen + orderExtraTotalYen;
+      const vipDiscountYen = Math.floor(internationalShippingYen * 0.1);
+      const couponDiscountWon = Number(document.getElementById('intlCouponUseCheck')?.dataset?.discountWon || 0);
+      const couponDiscountYen = Math.floor(couponDiscountWon / rate);
+      const discountTotalYen = vipDiscountYen + couponDiscountYen;
+      const fmt = (n) => n.toLocaleString('ko-KR');
+      const totalWon = Math.round(totalYen * rate);
+      const finalYen = Math.max(totalYen - discountTotalYen, 0);
+      const finalWon = Math.round(finalYen * rate);
+      const depositWon = Math.min(Number(String(document.getElementById('depositInput')?.value || 0).replace(/[^\d]/g, '')) || 0, finalWon);
+      const payWon = Math.max(finalWon - depositWon, 0);
+
+      const elExtraShippingYen = document.getElementById('txtExtraShippingYen');
+      const elTotalYen = document.getElementById('txtTotalYen');
+      const elFeeTotalWon = document.getElementById('feeTotalWon');
+      const elTotalWon = document.getElementById('txtTotalWon');
+      const elFormula = document.getElementById('txtFormula');
+      const elPayWon = document.getElementById('txtPayWon');
+
+      if (elExtraShippingYen) {
+        elExtraShippingYen.textContent = `${fmt(orderExtraTotalYen)} 엔`;
+        elExtraShippingYen.classList.toggle('fee-added', orderExtraTotalYen > 0);
+      }
+      if (elTotalYen) {
+        elTotalYen.textContent = `${fmt(totalYen)} 엔`;
+        elTotalYen.classList.toggle('fee-added', orderExtraTotalYen > 0);
+      }
+      if (elFeeTotalWon) elFeeTotalWon.textContent = `${fmt(finalWon)}원`;
+      if (elTotalWon) elTotalWon.textContent = `${fmt(finalWon)} 원`;
+      if (elFormula) elFormula.textContent = depositWon > 0
+        ? `${fmt(finalWon)} 원 - 예치금 ${fmt(depositWon)} 원 =`
+        : `${fmt(totalYen)} 엔 × ${rate} 원 =`;
+      if (elPayWon) elPayWon.textContent = `${fmt(payWon)} 원`;
+
+      // 우측 패널 업데이트
+      const panelExtra = document.getElementById('panelExtraYen');
+      if (panelExtra) {
+        const panelExtraTotalYen = orderExtraTotalYen + storageTotalYen;
+        panelExtra.textContent = panelExtraTotalYen > 0 ? `+${fmt(panelExtraTotalYen)} 엔` : '0 엔';
+        panelExtra.style.color = panelExtraTotalYen > 0 ? '#E8385A' : '';
+        panelExtra.style.fontWeight = panelExtraTotalYen > 0 ? '700' : '';
+      }
+      const panelSubtotal = document.getElementById('panelSubtotal');
+      if (panelSubtotal) panelSubtotal.textContent = `${fmt(totalYen)} 엔`;
+      const panelSubtotalWon = document.getElementById('panelSubtotalWon');
+      if (panelSubtotalWon) panelSubtotalWon.textContent = `${fmt(totalYen)}엔`;
+      const panelVipDiscount = document.getElementById('panelVipDiscount');
+      if (panelVipDiscount) panelVipDiscount.textContent = `-${fmt(vipDiscountYen)}엔`;
+      const panelCouponDiscount = document.getElementById('panelCouponDiscount');
+      if (panelCouponDiscount) {
+        panelCouponDiscount.hidden = couponDiscountWon <= 0;
+        panelCouponDiscount.textContent = couponDiscountYen > 0 ? `-${fmt(couponDiscountYen)}엔` : '';
+      }
+      const panelDiscountTotal = document.getElementById('panelDiscountTotal');
+      if (panelDiscountTotal) panelDiscountTotal.textContent = `-${fmt(discountTotalYen)}엔`;
+      const panelTotal = document.getElementById('panelTotal');
+      if (panelTotal) panelTotal.innerHTML = `${fmt(finalYen)}엔<span class="amount-won-sub">(${fmt(finalWon)}원)</span>`;
+
+      // VIP 등급혜택 — 무료 제공 항목 합계
+      const gradeCareYen   = 200;
+      const gradeBundleYen = 500;
+      const el = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+      el('gradeBenefitCare',   `${fmt(gradeCareYen)}엔`);
+      el('gradeBenefitBundle', `${fmt(gradeBundleYen)}엔`);
+      el('gradeBenefitTotal',  fmt(gradeCareYen + gradeBundleYen));
+    };
+
+    renderPaymentSummary();
+    window.renderPaymentSummary = renderPaymentSummary;
+  })();
+
+  (() => {
+    const depositUi = document.getElementById('depositUi');
+    const depositInput = document.getElementById('depositInput');
+    const useAllDeposit = document.getElementById('useAllDeposit');
+    const availableDeposit = document.getElementById('availableDeposit');
+    const resetButton = document.getElementById('depositReset');
+    const remain = document.getElementById('depRemain');
+    const warn = document.getElementById('depWarn');
+    if (!depositUi || !depositInput || !useAllDeposit || !availableDeposit || !resetButton || !remain || !warn) return;
+
+    const parseWon = (value) => Number(String(value).replace(/[^\d]/g, '')) || 0;
+    const formatWon = (value) => value.toLocaleString('ko-KR');
+    const getAvailableDeposit = () => parseWon(availableDeposit.textContent);
+
+    const setState = (deposit) => {
+      const available = getAvailableDeposit();
+      const isApplied = deposit > 0;
+      const isAll = deposit === available && available > 0;
+      depositUi.classList.toggle('is-applied', isApplied);
+      useAllDeposit.classList.toggle('is-active', isAll);
+      useAllDeposit.textContent = '전액사용';
+      resetButton.hidden = !isApplied;
+      remain.style.display = isApplied && !isAll ? 'inline' : 'none';
+      remain.querySelector('span').textContent = formatWon(Math.max(available - deposit, 0));
+      window.renderPaymentSummary?.();
+    };
+
+    const updateDeposit = (value, clampExceeded = false) => {
+      const available = getAvailableDeposit();
+      const raw = parseWon(value);
+
+      if (raw > available) {
+        depositInput.classList.add('error');
+        remain.style.display = 'none';
+        warn.style.display = 'inline';
+        if (clampExceeded) {
+          depositInput.value = formatWon(available);
+          depositInput.classList.remove('error');
+          warn.style.display = 'none';
+          setState(available);
+        }
+        return;
+      }
+
+      depositInput.classList.remove('error');
+      warn.style.display = 'none';
+      depositInput.value = formatWon(raw);
+      setState(raw);
+    };
+
+    useAllDeposit.addEventListener('click', () => {
+      const available = getAvailableDeposit();
+      depositInput.value = formatWon(available);
+      warn.style.display = 'none';
+      depositInput.classList.remove('error');
+      setState(available);
+    });
+
+    resetButton.addEventListener('click', () => {
+      depositInput.value = '0';
+      warn.style.display = 'none';
+      depositInput.classList.remove('error');
+      setState(0);
+    });
+
+    depositInput.addEventListener('input', () => {
+      updateDeposit(depositInput.value);
+    });
+    depositInput.addEventListener('blur', () => {
+      updateDeposit(depositInput.value, true);
+    });
+
+    updateDeposit(depositInput.value);
+  })();
+
+  (() => {
+    const methodLabels = Array.from(document.querySelectorAll('.method-label'));
+    const methodWrap = document.getElementById('methodWrap2');
+    let selectedMethod = '';
+
+    const selectMethod = (value) => {
+      selectedMethod = value;
+      methodLabels.forEach(l => {
+        l.classList.toggle('is-selected', l.querySelector('input[name="paymentMethod"]')?.value === value);
+      });
+      methodWrap?.classList.remove('method-wrap-required');
+    };
+
+    methodLabels.forEach(l => {
+      l.addEventListener('click', () => {
+        const val = l.querySelector('input[name="paymentMethod"]')?.value;
+        if (val) selectMethod(val);
+      });
+    });
+
+    /* 신청하기 버튼 — 미선택 시 차단 + 하이라이트 */
+    document.querySelector('.btn-primary')?.addEventListener('click', (e) => {
+      if (!selectedMethod) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        methodWrap?.classList.add('method-wrap-required');
+        return;
+      }
+    });
+  })();
+</script>
+
+<script src="bb-common.js"></script>
+</body>
+</html>
