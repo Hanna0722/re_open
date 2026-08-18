@@ -518,73 +518,6 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
   background: var(--rose);
   color: #fff;
 }
-.user-drawer-ov{
-  position:fixed;inset:0;background:rgba(0,0,0,0);
-  z-index:502;pointer-events:none;transition:background .3s;
-}
-.user-drawer-ov.open{background:rgba(0,0,0,.45);pointer-events:all}
-.user-drawer{
-  position:fixed;
-  top:0;right:-105%;bottom:0;
-  width:84%;max-width:300px;
-  background:#fff;z-index:503;
-  overflow-y:auto;scrollbar-width:none;
-  transition:right .28s cubic-bezier(.4,0,.2,1);
-}
-.user-drawer::-webkit-scrollbar{display:none}
-.user-drawer.open{right:0}
-.user-drawer-head{padding:18px 14px 12px;background:#fff8f5;border-bottom:1px solid #efe6e2;}
-.user-member-row{display:flex;align-items:center;gap:12px;}
-.user-crown{
-  width:48px;height:48px;
-  display:grid;place-items:center;
-  border-radius:50%;background:#ffe6ef;
-  font-size:26px;flex:0 0 auto;
-}
-.user-name-strong{display:block;color:#111827;font-size:18px;font-weight:900;}
-.user-vip-chip{
-  display:inline-flex;margin-top:5px;
-  padding:2px 12px;border-radius:999px;
-  background:var(--rose);color:#fff;font-size:11px;font-weight:900;
-}
-.user-vip-copy{margin:13px 0 4px;color:var(--rose);font-size:11px;font-weight:900;}
-.user-vip-bar{height:5px;border-radius:999px;background:#eee2de;overflow:hidden;}
-.user-vip-bar span{display:block;width:100%;height:100%;background:var(--rose);}
-.user-asset-box{
-  display:grid;grid-template-columns:1fr 1fr;
-  margin-top:12px;border:1px solid #d9e0e9;
-  border-radius:8px;background:#fff;overflow:hidden;
-}
-.user-asset-box div{padding:8px 12px;}
-.user-asset-box div+div{border-left:1px solid #d9e0e9;}
-.user-asset-box span{display:block;color:#a4acb8;font-size:10px;font-weight:700;}
-.user-asset-box strong{display:block;color:#151b29;font-size:16px;font-weight:900;}
-.user-status-grid{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #e5e7eb;background:#fff;}
-.user-status-grid div{min-height:70px;display:grid;place-items:center;align-content:center;gap:4px;text-align:center;}
-.user-status-grid div+div{border-left:1px solid #e5e7eb;}
-.user-status-grid strong{color:#151b29;font-family:Roboto,sans-serif;font-size:26px;line-height:1;font-weight:900;}
-.user-status-grid div:nth-child(2) strong{color:var(--rose);}
-.user-status-grid span{color:#9aa3b2;font-size:10px;font-weight:700;}
-.user-menu-list{padding:0 0 12px;}
-.user-menu-item{
-  min-height:45px;padding:0 18px 0 14px;
-  display:flex;align-items:center;gap:12px;
-  color:#111827;font-size:14px;font-weight:900;border-bottom:0;
-}
-button.user-menu-item{
-  width:100%;border-top:0;border-right:0;border-left:0;
-  background:#fff;text-align:left;font-family:inherit;cursor:pointer;
-}
-.user-menu-item .emoji,
-.user-menu-item .user-menu-icon{width:22px;text-align:center;font-size:17px;flex:0 0 auto;}
-.user-menu-item .chev{margin-left:auto;color:#a8b0bd;font-weight:700;font-size:17px;line-height:1;}
-.user-menu-section{border-bottom:0;}
-.user-menu-panel{display:none;padding:0 0 8px 56px;}
-.user-menu-section.is-open .user-menu-panel{display:grid;gap:0;}
-.user-menu-link{min-height:33px;display:flex;align-items:center;color:#666b75;font-size:14px;font-weight:500;}
-.user-menu-link.danger{color:#8f949f;}
-.user-menu-item.logout{margin-top:6px;border-top:1px solid #e5e7eb;color:#9aa3b2;font-weight:700;}
-.user-menu-item.logout .emoji{font-size:15px;}
 
 @media(max-width:1023px){
   .hero-inner{grid-template-columns:1fr}
@@ -1116,90 +1049,6 @@ button.user-menu-item{
       <div style="height:24px"></div>
     </div>
 
-<div class="user-drawer-ov" id="userDrawerOv" onclick="closeUserDrawer()"></div>
-
-<div class="user-drawer" id="userDrawer">
-  <div class="user-drawer-head">
-    <div class="user-member-row">
-      <div class="user-crown"><i class="fas fa-crown" aria-hidden="true"></i></div>
-      <div>
-        <strong class="user-name-strong">홍길동 회원님</strong>
-        <span class="user-vip-chip">VIP</span>
-      </div>
-    </div>
-    <p class="user-vip-copy">VIP 등급 달성! 최고 혜택을 누리세요 🎉</p>
-    <div class="user-vip-bar"><span></span></div>
-    <div class="user-asset-box">
-      <div><span>마일리지</span><strong>4,500원</strong></div>
-      <div><span>예치금</span><strong>29,870원</strong></div>
-    </div>
-  </div>
-
-  <div class="user-status-grid">
-    <div><strong>3</strong><span>입찰 진행 중</span></div>
-    <div><strong>1</strong><span>1차 결제 대기</span></div>
-    <div><strong>0</strong><span>2차 결제 대기</span></div>
-  </div>
-
-  <nav class="user-menu-list">
-    <div class="user-menu-section">
-      <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="mm-menu-trade">
-        <span class="user-menu-icon"><i class="fas fa-gavel" aria-hidden="true"></i></span><span>나의 거래 현황</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
-      </button>
-      <div class="user-menu-panel" id="mm-menu-trade">
-        <a class="user-menu-link" href="web_mainlist.html">거래 전체 목록</a>
-        <a class="user-menu-link" href="web_mypage.html">경매 입찰/유찰</a>
-        <a class="user-menu-link" href="web_mypage.html">구매 신청 목록</a>
-      </div>
-    </div>
-    <div class="user-menu-section">
-      <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="mm-menu-delivery">
-        <span class="user-menu-icon"><i class="fas fa-truck-fast" aria-hidden="true"></i></span><span>배송관리</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
-      </button>
-      <div class="user-menu-panel" id="mm-menu-delivery">
-        <a class="user-menu-link" href="#">배송신청/변경</a>
-        <a class="user-menu-link" href="#">배송지 관리</a>
-      </div>
-    </div>
-    <div class="user-menu-section">
-      <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="mm-menu-favorites">
-        <span class="user-menu-icon"><i class="fas fa-heart" aria-hidden="true"></i></span><span>관심 항목 관리</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
-      </button>
-      <div class="user-menu-panel" id="mm-menu-favorites">
-        <a class="user-menu-link" href="web_favorites.html?tab=seller">관심 출품자</a>
-        <a class="user-menu-link" href="web_favorites.html?tab=auction">경매 관심물품</a>
-        <a class="user-menu-link" href="web_favorites.html?tab=purchase">구매 관심물품</a>
-        <a class="user-menu-link" href="web_favorites.html?tab=keyword">관심 키워드</a>
-        <a class="user-menu-link" href="web_favorites.html?tab=shortcut">바로가기</a>
-      </div>
-    </div>
-    <div class="user-menu-section">
-      <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="mm-menu-benefit">
-        <span class="user-menu-icon"><i class="fas fa-gift" aria-hidden="true"></i></span><span>MY 혜택</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
-      </button>
-      <div class="user-menu-panel" id="mm-menu-benefit">
-        <a class="user-menu-link" href="web_mileage.html">마일리지 / 쿠폰</a>
-        <a class="user-menu-link" href="#">MY 등급</a>
-      </div>
-    </div>
-    <div class="user-menu-section">
-      <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="mm-menu-info">
-        <span class="user-menu-icon"><i class="fas fa-user" aria-hidden="true"></i></span><span>나의 정보관리</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
-      </button>
-      <div class="user-menu-panel" id="mm-menu-info">
-        <a class="user-menu-link" href="#">예치금 관리</a>
-        <a class="user-menu-link" href="#">보증금 관리</a>
-        <a class="user-menu-link" href="#">회원정보 수정</a>
-        <a class="user-menu-link" href="#">비밀번호 변경</a>
-        <a class="user-menu-link danger" href="#">회원 탈퇴</a>
-      </div>
-    </div>
-    <button class="user-menu-item logout" type="button" onclick="toggleLogin();closeUserDrawer()">
-      <span class="emoji">🔒</span><span>로그아웃</span>
-    </button>
-  </nav>
-</div>
-
 <div class="convenience-overlay" id="convenienceToolsPopup" aria-hidden="true" onclick="closeConvenienceToolsPopup(event)">
   <div class="convenience-popup" role="dialog" aria-modal="true" aria-label="편의도구">
     <div class="convenience-head">
@@ -1300,18 +1149,6 @@ function closeDrawer(){
   document.getElementById('drawer').classList.remove('open');
   document.getElementById('drawerOv').classList.remove('open');
   document.querySelector('.hb-btn')?.setAttribute('aria-expanded','false');
-  document.body.style.overflow='';
-}
-function openUserDrawer(){
-  if(!loggedIn) return;
-  closeDrawer();
-  document.getElementById('userDrawer')?.classList.add('open');
-  document.getElementById('userDrawerOv')?.classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeUserDrawer(){
-  document.getElementById('userDrawer')?.classList.remove('open');
-  document.getElementById('userDrawerOv')?.classList.remove('open');
   document.body.style.overflow='';
 }
 function openCustomsTaxPopup(){
@@ -1491,17 +1328,6 @@ document.addEventListener('keydown', event => {
     closeMarketInfoPopup();
   }
 });
-function bindUserMenu(){
-  document.querySelectorAll('.user-menu-trigger').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const section=btn.closest('.user-menu-section');
-      const isOpen=section?.classList.toggle('is-open');
-      btn.setAttribute('aria-expanded',String(Boolean(isOpen)));
-    });
-  });
-}
-bindUserMenu();
-
 const mainSearchForm = document.getElementById('mainSearchForm');
 mainSearchForm?.addEventListener('submit', event => {
   const input = mainSearchForm.querySelector('input[name="q"]');
