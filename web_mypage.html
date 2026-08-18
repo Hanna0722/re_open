@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bidbuy 마일리지</title>
+  <title>Bidbuy 마이페이지</title>
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -745,1212 +745,273 @@
       font-weight: 500;
     }
 
-    .summary-grid {
-      display: block;
-    }
-
-    .summary-grid,
-    .mileage-summary-panel,
-    .mileage-balance-grid,
-    .balance-box {
-      overflow: visible;
-    }
-
-    .panel {
+    /* ===== 마이페이지 대시보드 (거래 현황 개요) ===== */
+    .member-card {
       border: 1px solid var(--line);
-      border-radius: 12px;
+      border-bottom: 0;
       background: #fff;
     }
-
-    .mileage-summary-panel {
-      min-height: 0;
-      padding: 0px 0px 0px;
-      border: 0px solid var(--line);
-      border-radius: 12px;
-      background: #fff;
-    }
-
-    .panel-title {
-      margin: 0 0 12px;
-      color: #2d3139;
-      font-size: 15px;
-      font-weight: 900;
-    }
-
-    .mileage-balance-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 13px;
-    }
-
-    .balance-box {
-      position: relative;
-      min-height: 89px;
-      padding: 15px 16px 13px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #ffffff;
-    }
-
-    .balance-box span {
+    .member-head {
+      min-height: 56px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 6px;
-      margin-bottom: 8px;
-      color: #9aa0ae;
-      font-size: 11px;
-      font-weight: 700;
+      gap: 20px;
+      padding: 0 28px;
+      color: #111827;
     }
-
-    .balance-box strong {
-      color: #111;
-      font-size: 25px;
-      font-weight: 900;
-      line-height: 1;
+    .member-head-info {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      min-width: 0;
+    }
+    .member-name {
+      display: flex;
+      align-items: baseline;
+      gap: 9px;
+      font-size: 21px;
       letter-spacing: 0;
     }
-
-    .balance-box strong.earn {
-      color: var(--green);
-    }
-
-    .balance-box strong.use {
-      color: var(--rose);
-    }
-
-    .balance-box strong.expire {
-      color: #f29a19;
-    }
-
-    .balance-box strong.muted {
-      color: #9aa0ae;
-    }
-
-    .balance-box small {
-      margin-left: 1px;
-      color: #31343b;
-      font-size: 13px;
+    .member-name strong {
+      font-size: 23px;
       font-weight: 700;
     }
-
-    .balance-box strong.earn small {
-      color: var(--green);
-    }
-
-    .balance-box strong.use small {
-      color: var(--rose);
-    }
-
-    .balance-box strong.expire small {
-      color: #f29a19;
-    }
-
-    .balance-box strong.muted small {
-      color: #9aa0ae;
-    }
-
-    .balance-box .help-dot {
-      width: 13px;
-      height: 13px;
-      border-width: 1px;
-      color: #9a9a9a;
+    .grade-link {
+      border: 0;
       background: transparent;
-      font-size: 9px;
-      line-height: 1;
-    }
-
-    .summary-tooltip {
-      position: relative;
-      width: 14px;
-      height: 14px;
-      border: 1.5px solid #9da2ad;
-      border-radius: 50%;
-      background: #fff;
-      color: #8a909d;
-      display: inline-grid;
-      place-items: center;
-      flex: 0 0 auto;
       padding: 0;
-      font-size: 10px;
-      font-weight: 900;
-      line-height: 1;
-      z-index: 30;
-    }
-
-    .summary-tooltip::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      top: 50%;
-      width: max-content;
-      max-width: 300px;
-      padding: 7px 9px;
-      border: 1px solid #d9e0ea;
-      border-radius: 7px;
-      background: #fff;
-      color: #667080;
-      box-shadow: 0 4px 12px rgba(37, 46, 62, .14);
-      font-size: 11px;
-      font-weight: 800;
-      line-height: 1.25;
-      text-align: left;
-      white-space: pre-line;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .16s ease, transform .16s ease;
-      z-index: 40;
-    }
-
-    .summary-tooltip::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .16s ease, transform .16s ease;
-      z-index: 41;
-    }
-
-    .summary-tooltip-left::after {
-      right: calc(100% + 10px);
-      transform: translate(4px, -50%);
-    }
-
-    .summary-tooltip-left::before {
-      right: calc(100% + 4px);
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-left: 6px solid #fff;
-      transform: translate(4px, -50%);
-    }
-
-    .summary-tooltip-right::after {
-      left: calc(100% + 10px);
-      transform: translate(-4px, -50%);
-    }
-
-    .summary-tooltip-right::before {
-      left: calc(100% + 4px);
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-right: 6px solid #fff;
-      transform: translate(-4px, -50%);
-    }
-
-    .summary-tooltip:hover::after,
-    .summary-tooltip:hover::before,
-    .summary-tooltip:focus-visible::after,
-    .summary-tooltip:focus-visible::before {
-      opacity: 1;
-      transform: translate(0, -50%);
-    }
-
-    .balance-box[data-summary-tooltip] {
-      cursor: pointer;
-    }
-
-    .balance-box[data-summary-tooltip]:focus-visible {
-      outline: 2px solid rgba(232, 56, 90, .36);
-      outline-offset: 2px;
-    }
-
-    .balance-box[data-summary-tooltip]::after {
-      content: attr(data-summary-tooltip);
-      position: absolute;
-      right: 0;
-      width: max-content;
-      max-width: min(330px, calc(100vw - 36px));
-      padding: 9px 12px;
-      border: 1px solid #d9e0ea;
-      border-radius: 7px;
-      background: #fff;
-      color: #667080;
-      box-shadow: 0 6px 16px rgba(37, 46, 62, .18);
-      font-size: 11px;
-      font-weight: 800;
-      line-height: 1.45;
-      text-align: left;
-      white-space: pre-line;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .16s ease, transform .16s ease;
-      z-index: 42;
-    }
-
-    .balance-box[data-summary-tooltip]::before {
-      content: "";
-      position: absolute;
-      right: 18px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .16s ease, transform .16s ease;
-      z-index: 43;
-    }
-
-    .balance-box[data-tooltip-position="top"]::after {
-      bottom: calc(100% + 10px);
-      transform: translateY(4px);
-    }
-
-    .balance-box[data-tooltip-position="top"]::before {
-      bottom: calc(100% + 4px);
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-top: 6px solid #fff;
-      transform: translateY(4px);
-    }
-
-    .balance-box[data-tooltip-position="bottom"]::after {
-      top: calc(100% + 10px);
-      transform: translateY(-4px);
-    }
-
-    .balance-box[data-tooltip-position="bottom"]::before {
-      top: calc(100% + 4px);
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-bottom: 6px solid #fff;
-      transform: translateY(-4px);
-    }
-
-    .balance-box[data-summary-tooltip].is-tooltip-open::after,
-    .balance-box[data-summary-tooltip].is-tooltip-open::before {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .balance-note {
-      margin-top: 7px;
-      color: #9aa0ae;
-      font-size: 11px;
+      color: #111827;
+      font-size: 12px;
       font-weight: 700;
       white-space: nowrap;
     }
-
-    .balance-note.expire {
-      color: #f29a19;
+    .grade-link i {
+      margin-left: 4px;
+      font-size: 10px;
     }
-
-    .expire-date {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      margin-top: 14px;
-      color: #4b515d;
-      font-size: 11px;
-      font-weight: 500;
-      white-space: nowrap;
-    }
-
-    .expire-date::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #f0a32a;
-      flex: 0 0 auto;
-    }
-
-    .stamp-panel {
-      margin-top: 16px;
-      padding: 20px;
-      min-height: 267px;
-    }
-
-    .stamp-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 20px;
-      padding-bottom: 8px;
+    .asset-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       border-bottom: 1px solid var(--line);
     }
-
-    .stamp-head h2 {
-      margin: 0 0 4px;
-      color: #33363d;
-      font-size: 17px;
-      font-weight: 900;
-    }
-
-    .stamp-head p {
-      margin: 0;
-      color: #4b515d;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .stamp-badge {
-      min-width: 77px;
-      height: 23px;
-      border-radius: 999px;
-      background: #fde5eb;
-      color: var(--rose);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .stamp-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      row-gap: 20px;
-      column-gap: 28px;
-      padding: 11px 31px 15px;
-      text-align: center;
-    }
-
-    .stamp-scroll {
-      overflow: hidden;
-    }
-
-    .stamp-panel.expanded .stamp-scroll {
-      max-height: 326px;
-      overflow-y: auto;
-      padding-right: 4px;
-    }
-
-    .stamp {
+    .asset-cell {
+      min-height: 77px;
       display: grid;
       place-items: center;
-    }
-
-    .stamp:nth-child(n+11) {
-      display: none;
-    }
-
-    .stamp-panel.expanded .stamp:nth-child(n+11) {
-      display: grid;
-    }
-
-    .stamp-circle {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      color: #9ba0ae;
-      background: #f4eeee;
-      border: 1px solid #efe4e1;
-      font-size: 13px;
-      font-weight: 900;
-    }
-
-    .stamp.active .stamp-circle {
-      background: var(--green);
-      border-color: var(--green);
-      color: #fff;
-      font-size: 16px;
-    }
-
-    .stamp.special .stamp-circle {
-      background: #fff;
-      border: 2px dashed var(--rose);
-      color: var(--rose);
-      font-size: 10px;
-      font-weight: 900;
-      line-height: 1.1;
-    }
-
-    .roulette-button {
-      width: 58px;
-      height: 58px;
-      border: 1px solid #d9d2c7;
-      border-radius: 50%;
-      background: #fffdf0;
-      color: #aaa18f;
-      display: grid;
-      place-items: center;
-      padding: 0;
-      position: relative;
-      box-shadow: inset 0 0 0 2px #fff8dc;
-    }
-
-    .roulette-button::before {
-      content: "";
-      position: absolute;
-      inset: 6px;
-      border: 1px dashed #aaa18f;
-      border-radius: 50%;
-    }
-
-    .roulette-button strong {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      justify-items: center;
-      gap: 1px;
-      font-size: 11px;
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: 0;
-    }
-
-    .roulette-button strong::before {
-      content: "✓";
-      font-size: 20px;
-      line-height: 1;
-    }
-
-    .roulette-button.is-spinning {
-      animation: roulette-spin 0.65s ease;
-    }
-
-    @keyframes roulette-spin {
-      0% { transform: rotate(0deg) scale(1); }
-      60% { transform: rotate(300deg) scale(1.06); }
-      100% { transform: rotate(360deg) scale(1); }
-    }
-
-    .roulette-modal-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: rgba(30, 24, 12, 0.55);
-    }
-
-    .roulette-modal-overlay[hidden] {
-      display: none;
-    }
-
-    .roulette-modal {
-      position: relative;
-      width: 100%;
-      max-width: 320px;
-      padding: 26px 20px 28px;
-      border-radius: 18px;
-      background: #fffdf5;
-      text-align: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-    }
-
-    .roulette-modal-close {
-      position: absolute;
-      top: 10px;
-      right: 12px;
-      width: 28px;
-      height: 28px;
-      border: 0;
-      background: transparent;
-      color: #aaa18f;
-      font-size: 20px;
-      line-height: 1;
-      cursor: pointer;
-    }
-
-    .roulette-modal h3 {
-      margin: 0 0 4px;
-      font-size: 17px;
-      font-weight: 900;
-      color: #3a3226;
-    }
-
-    .roulette-modal-desc {
-      margin: 0 0 18px;
-      font-size: 12px;
-      color: #9f8b4c;
-    }
-
-    .roulette-wheel-wrap {
-      position: relative;
-      width: 220px;
-      height: 220px;
-      margin: 0 auto 20px;
-    }
-
-    .roulette-pointer {
-      position: absolute;
-      top: -6px;
-      left: 50%;
-      z-index: 2;
-      width: 0;
-      height: 0;
-      transform: translateX(-50%);
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-top: 18px solid #d94f4f;
-    }
-
-    .roulette-wheel {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 6px solid #fff;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25), inset 0 0 0 2px #d9c98d;
-      background: conic-gradient(#ef6f6c 0deg 72deg, #ffd166 72deg 144deg, #4d96ff 144deg 216deg, #06d6a0 216deg 288deg, #c77dff 288deg 360deg);
-      transition: transform 4s cubic-bezier(0.15, 0.65, 0.15, 1);
-    }
-
-    .roulette-wheel-labels {
-      position: absolute;
-      inset: 0;
-    }
-
-    .roulette-wheel-labels span {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 58px;
-      margin-left: -29px;
-      transform-origin: 29px 0;
-      transform: rotate(calc(72deg * var(--i) + 36deg)) translate(0, -74px);
-    }
-
-    .roulette-wheel-labels span b {
-      display: block;
-      font-size: 9.5px;
-      font-weight: 800;
-      line-height: 1.2;
-      color: #3a3226;
-      text-align: center;
-      white-space: normal;
-      transform: rotate(calc(-72deg * var(--i) - 36deg));
-    }
-
-    .roulette-wheel-center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      z-index: 2;
-      width: 26px;
-      height: 26px;
-      margin: -13px;
-      border-radius: 50%;
-      background: #fff;
-      box-shadow: 0 0 0 2px #d9c98d;
-    }
-
-    .roulette-start-btn {
-      width: 100%;
-      height: 46px;
-      border: 0;
-      border-radius: 10px;
-      background: #3a3226;
-      color: #fff;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .roulette-start-btn:disabled {
-      opacity: 0.5;
-      cursor: default;
-    }
-
-    .roulette-result {
-      margin: 14px 0 0;
-      font-size: 14px;
-      font-weight: 900;
-      color: #d94f4f;
-    }
-
-    .roulette-result[hidden] {
-      display: none;
-    }
-
-    .roulette-note {
-      margin: 6px 0 0;
-      font-size: 11px;
-      font-weight: 600;
-      color: #9f8b4c;
-    }
-
-    .roulette-note[hidden] {
-      display: none;
-    }
-
-    .fold-bar {
-      height: 36px;
-      border: 1px dashed var(--line);
-      border-radius: 5px;
-      width: 100%;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      color: #9ba0ae;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .fold-bar::before {
-      content: "";
-      width: 0;
-      height: 0;
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-top: 10px solid #9ba0ae;
-    }
-
-    .stamp-panel.expanded .fold-bar::before {
-      transform: rotate(180deg);
-    }
-
-    .history-panel {
-      margin-top: 16px;
-      overflow: hidden;
-    }
-
-    .history-head {
-      min-height: 64px;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: end;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 0 20px;
-      background: #fff;
-    }
-
-    .history-title-wrap {
-      display: block;
-      min-width: 0;
-    }
-
-    .history-head h2 {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      margin: -1px;
-      padding: 0;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    .benefit-tabs {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      align-items: end;
-      width: min(100%, 420px);
-      height: 56px;
-      padding: 0;
-      border: 0;
-      border-bottom: 1px solid var(--line-soft);
-      background: #fff;
-    }
-
-    .benefit-tab {
-      position: relative;
-      height: 56px;
-      padding: 0 12px 12px;
-      border: 0;
-      border-radius: 0;
-      background: transparent;
-      color: #777985;
-      display: inline-flex;
-      align-items: flex-end;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 900;
-      white-space: nowrap;
-    }
-
-    .benefit-tab::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -1px;
-      height: 2px;
-      border-radius: 999px;
-      background: transparent;
-    }
-
-    .benefit-tab.active {
-      background: transparent;
-      color: var(--rose);
-      box-shadow: none;
-    }
-
-    .benefit-tab.active::after {
-      background: var(--rose);
-    }
-
-    .history-tabs {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-
-    .history-tab {
-      position: relative;
-      height: 34px;
-      padding: 0 0 6px;
-      border: 0;
-      background: transparent;
-      color: #9da2af;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 900;
-      line-height: 1;
-      white-space: nowrap;
-    }
-
-    .history-tab::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 2px;
-      border-radius: 999px;
-      background: transparent;
-    }
-
-    .history-tab.active {
-      color: var(--rose);
-    }
-
-    .history-tab.active::after {
-      background: var(--rose);
-    }
-
-    .history-table {
-      border-top: 0;
-    }
-
-    .history-table.is-hidden,
-    .history-tabs.is-hidden {
-      display: none;
-    }
-
-    .history-table-head,
-    .history-row {
-      display: grid;
-      grid-template-columns: 108px 72px minmax(0, 1fr) 132px;
-      align-items: center;
-      column-gap: 0;
-    }
-
-    .history-table-head {
-      height: 36px;
-      padding: 0 16px;
-      border-top: 1px solid var(--line-soft);
-      border-bottom: 1px solid var(--line-soft);
-      background: var(--warm);
-      color: #9da2af;
-      font-size: 12px;
-      font-weight: 500;
-      text-align: left;
-    }
-
-    .history-table-head div:last-child {
-      text-align: right;
-    }
-
-    .history-row {
-      min-height: 64px;
-      margin: 0;
-      padding: 0 16px;
-      border-top: 0;
-    }
-
-    .history-row:first-of-type {
-      border-top: 0;
-    }
-
-    .history-date {
-      color: #9da2af;
-      font-size: 12px;
-      font-weight: 500;
-      text-align: left;
-    }
-
-    .history-type {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      min-width: 0;
-    }
-
-    .history-desc {
-      display: grid;
-      gap: 4px;
-      justify-items: start;
-      min-width: 0;
-    }
-
-    .type-chip {
-      height: auto;
-      min-width: 0;
-      padding: 0;
-      border-radius: 0;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-      font-size: 13px;
-      font-weight: 800;
-      line-height: 1;
-    }
-
-    .type-chip.earn {
-      color: var(--green);
-    }
-
-    .type-chip.use {
-      color: var(--rose);
-    }
-
-    .type-chip.expire {
-      color: #777;
-    }
-
-    .history-kind {
-      display: block;
-      color: #1f232b;
-      font-size: 13px;
-      font-weight: 800;
-      line-height: 1.25;
-    }
-
-    .history-meta {
-      display: block;
-      margin-top: 4px;
-      color: #9da2af;
-      font-size: 12px;
-      line-height: 1.25;
-    }
-
-    .history-amount {
-      text-align: right;
-      color: var(--green);
-      font-size: 15px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .history-amount.minus {
-      color: var(--rose);
-    }
-
-    .history-amount.expire {
-      color: #777;
-    }
-
-    .history-row.is-hidden {
-      display: none;
-    }
-
-    .history-row[data-detail] {
-      cursor: pointer;
-    }
-
-    .history-row[data-detail]:hover {
-      background: #fffafb;
-    }
-
-    .history-row[data-detail]:focus-visible {
-      outline: 2px solid rgba(232, 56, 90, .38);
-      outline-offset: -2px;
-    }
-
-    .coupon-table .history-table-head,
-    .coupon-table .history-row {
-      grid-template-columns: 108px 190px minmax(0, 1fr) 120px 116px;
-    }
-
-    .coupon-table .history-table-head div:nth-child(4),
-    .coupon-table .history-table-head div:nth-child(5),
-    .coupon-table .coupon-discount,
-    .coupon-table .coupon-period {
-      text-align: right;
-    }
-
-    .coupon-discount {
-      color: var(--rose);
-      font-size: 15px;
-      font-weight: 900;
-      white-space: nowrap;
-    }
-
-    .coupon-period {
-      color: #4b5260;
-      font-size: 12px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    body.mileage-popup-open {
-      overflow: hidden;
-    }
-
-    .mileage-popup-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 160;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: rgba(20, 25, 34, .38);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .18s ease;
-    }
-
-    .mileage-popup-overlay[hidden] {
-      display: none;
-    }
-
-    .mileage-popup-overlay.is-open {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .mileage-popup {
-      width: min(300px, calc(100vw - 44px));
-      padding: 20px 22px 18px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: #fff;
-      box-shadow: 0 10px 24px rgba(26, 60, 110, .10);
-      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
-      transform: translateY(8px);
-      transition: transform .18s ease;
-    }
-
-    .mileage-popup-overlay.is-open .mileage-popup {
-      transform: translateY(0);
-    }
-
-    .mileage-popup h3 {
-      margin: 0 0 18px;
-      color: var(--tp);
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 1.35;
-    }
-
-    .mileage-popup-content {
-      display: grid;
-      gap: 14px;
-      color: var(--ts);
-      font-size: 12px;
-      font-weight: 400;
-      line-height: 1.55;
-    }
-
-    .mileage-popup-group {
-      display: grid;
-      gap: 3px;
-    }
-
-    .mileage-popup-line {
-      min-width: 0;
-      white-space: pre-line;
-      word-break: keep-all;
-    }
-
-    .mileage-popup-label {
-      color: var(--ts);
-      font-weight: 600;
-    }
-
-    .mileage-popup-ok {
-      min-width: 58px;
-      height: 34px;
-      margin: 18px auto 0;
-      padding: 0 18px;
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #fff;
-      color: var(--navy);
-      box-shadow: none;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .mileage-popup.is-list-detail {
-      width: min(360px, calc(100vw - 44px));
-      max-height: min(640px, calc(100vh - 48px));
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .mileage-popup.is-list-detail h3 {
-      margin: 0;
-      padding: 26px 24px 7px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      color: var(--tp);
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 1.28;
-    }
-
-    .mileage-popup-title-text {
-      min-width: 0;
-      word-break: keep-all;
-    }
-
-    .mileage-popup-badge {
-      min-height: 22px;
-      padding: 4px 12px 3px;
-      border-radius: 999px;
-      background: #FFF3E0;
-      color: var(--yellow);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 1;
-      white-space: nowrap;
-    }
-
-    .mileage-popup-subtitle {
-      margin: 0;
-      padding: 0 24px 17px;
-      color: var(--ts);
-      font-size: 13px;
-      font-weight: 400;
-      line-height: 1.45;
-    }
-
-    .mileage-popup.is-list-detail .mileage-popup-content {
-      min-height: 0;
-      padding: 0 24px;
-      display: block;
-      overflow-y: auto;
-      color: var(--tp);
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.45;
-    }
-
-    .mileage-popup-summary {
-      padding: 15px 14px;
-      display: grid;
-      gap: 13px;
-      border-radius: 8px;
-      background: #F5F7FA;
-    }
-
-    .mileage-popup-summary-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-    }
-
-    .mileage-popup-summary-label {
-      color: var(--ts);
-      font-size: 14px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    .mileage-popup-summary-value {
-      color: var(--tp);
-      font-size: 14px;
-      font-weight: 700;
-      text-align: right;
-      word-break: keep-all;
-    }
-
-    .mileage-popup-summary-amount {
-      color: var(--rose);
-      display: inline-flex;
-      align-items: center;
+      align-content: center;
       gap: 8px;
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 1;
-      white-space: nowrap;
+      border-right: 1px solid var(--line);
+      color: #222;
     }
+    .asset-cell:last-child { border-right: 0; }
+    .asset-label { font-size: 13px; font-weight: 700; }
+    .asset-value { color: #000; font-size: 17px; font-weight: 700; }
 
-    .mileage-popup-coin {
-      width: 19px;
-      height: 19px;
-      border-radius: 50%;
-      background: var(--yellow);
-      color: #fff;
+    .dash-section { margin-top: 44px; }
+    .dash-section-head {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 7px;
+      border-bottom: 1.5px solid var(--rose);
+    }
+    .dash-section-title {
+      margin: 0;
+      color: var(--rose);
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .dash-more {
+      min-width: 37px;
+      height: 17px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      border: 1px solid #c8cdd5;
+      background: #fff;
+      color: #8b9098;
+      font-size: 10px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .status-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 16px;
+      margin: 0;
+    }
+    .outline-pill {
+      height: 31px;
+      padding: 0 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: #8a7f7a;
       font-size: 12px;
       font-weight: 700;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.55);
+      text-decoration: none;
     }
 
-    .mileage-popup-divider {
-      height: 1px;
-      margin: 17px 0 15px;
-      background: var(--border);
-    }
-
-    .mileage-popup-list {
+    .status-board {
       display: grid;
-      gap: 14px;
-      padding-bottom: 4px;
+      grid-template-columns: 1.45fr repeat(6, minmax(0, 1fr));
+      align-items: stretch;
+      column-gap: 20px;
+      row-gap: 12px;
+      width: 100%;
+      margin-left: 0;
+      padding: 22px 0 0;
     }
-
-    .mileage-popup-list-row {
+    .status-step {
+      position: relative;
       display: grid;
-      grid-template-columns: 46px minmax(0, 1fr) auto;
-      align-items: start;
-      gap: 10px;
-    }
-
-    .mileage-popup-list-date {
-      color: var(--tp);
-      font-size: 14px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .mileage-popup-list-name {
       min-width: 0;
-      color: var(--tp);
-      white-space: normal;
     }
-
-    .mileage-popup-list-note {
+    .status-step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -13px;
+      width: 7px;
+      height: 7px;
+      border-top: 1.5px solid #b5bac2;
+      border-right: 1.5px solid #b5bac2;
+      transform: translateY(-50%) rotate(45deg);
+      pointer-events: none;
+    }
+    .status-card {
+      min-height: 151px;
+      display: grid;
+      place-items: center;
+      padding: 10px 8px;
+      border: 1px solid #ded8d5;
+      border-radius: 7px;
+      background: #fff;
+      color: #383b40;
+      text-align: center;
+      overflow: hidden;
+      transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+    }
+    .status-card > div { width: 100%; }
+    .status-card:hover,
+    .status-card:focus-visible {
+      border-color: var(--rose);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, .08);
+      transform: translateY(-1px);
+      outline: 0;
+    }
+    .status-stack { gap: 19px; }
+    .status-stack .status-card { min-height: 66px; }
+    .status-card em {
       display: block;
-      margin-top: 4px;
-      color: var(--ts);
-      font-size: 12px;
-      line-height: 1.4;
-    }
-
-    .mileage-popup-list-amount {
-      color: var(--rose);
+      margin-bottom: 5px;
+      color: #3c3f45;
+      font-style: normal;
+      font-size: 18px;
       font-weight: 700;
-      text-align: right;
-      white-space: nowrap;
+      line-height: 1;
+    }
+    .status-card em.hot { color: var(--rose); }
+    .status-card strong {
+      display: block;
+      color: #3e4249;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.45;
+      word-break: keep-all;
+      overflow-wrap: break-word;
     }
 
-    .mileage-popup.is-list-detail .mileage-popup-ok {
-      width: calc(100% - 48px);
-      height: 44px;
-      margin: 18px 24px 24px;
+    .table-wrap { border-bottom: 1px solid #c9ced7; overflow-x: auto; }
+    .order-table { width: 100%; min-width: 870px; border-collapse: collapse; table-layout: fixed; }
+    .order-table th,
+    .order-table td {
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+      vertical-align: middle;
+    }
+    .order-table th {
+      height: 36px;
+      background: #fafafa;
+      color: #5a5e66;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .order-table th:last-child,
+    .order-table td:last-child { border-right: 0; }
+    .order-table td { min-height: 95px; padding: 10px 12px; color: #444; font-size: 12px; }
+    .dash-flag {
+      width: 29px;
+      height: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #ddd;
+      background: #fff;
+    }
+    .dash-flag::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #d50024;
+    }
+    .product-img { width: 72px; height: 72px; object-fit: cover; display: block; margin: 0 auto; background: #e8eef2; }
+    .product-info { text-align: left; vertical-align: top; line-height: 1.55; word-break: break-all; }
+    .product-market { display: inline-flex; align-items: center; gap: 5px; margin-bottom: 4px; color: #59606d; font-size: 11px; font-weight: 700; }
+    .product-market .dash-flag { display: inline-block; width: 16px; height: 11px; border-radius: 2px; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08); vertical-align: -1px; margin-right: 0; background: #fff center / cover no-repeat; }
+    .product-market .dash-flag.jp { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'%3E%3Crect width='30' height='20' fill='%23ffffff'/%3E%3Ccircle cx='15' cy='10' r='6' fill='%23bc002d'/%3E%3C/svg%3E"); }
+    .product-market .market-sep { color: #c1c7d0; font-weight: 700; }
+    .product-info .name-ko { display: block; color: #222; font-size: 13px; font-weight: 700; }
+    .product-info .name-origin { display: block; margin-top: 3px; color: #999; font-size: 11px; font-weight: 400; }
+    .order-table td.product-info,
+    .order-table td.memo-product { text-align: left; vertical-align: top; }
+    .pay-btn { min-width: 70px; height: 30px; border: 0; border-radius: 5px; background: var(--rose); color: #fff; font-size: 13px; font-weight: 700; }
+    .pay-btn:hover { background: var(--rose-h); }
+    .memo-btn,
+    .memo-status {
+      min-width: 64px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       border: 0;
-      border-radius: 5px;
       background: var(--rose);
       color: #fff;
-      box-shadow: none;
-      font-size: 14px;
+      font-size: 11px;
       font-weight: 700;
+    }
+    .memo-status.wait { background: #f5a623; }
+    .memo-product { text-align: left; line-height: 1.55; word-break: break-all; }
+    .dash-empty {
+      min-height: 72px;
+      display: grid;
+      place-items: center;
+      border-bottom: 1px solid #c9ced7;
+      color: #555b66;
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px) {
+      .member-head { min-height: 56px; padding: 0 18px; align-items: center; }
+      .member-name { font-size: 17px; }
+      .member-name strong { font-size: 19px; }
+      .asset-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .asset-cell { min-height: 68px; }
+      .asset-cell:nth-child(2n) { border-right: 0; }
+      .asset-cell:last-child { grid-column: span 2; border-top: 1px solid var(--line); }
+      .status-board { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .status-step:not(:last-child)::after { display: none; }
+      .status-card,
+      .status-stack .status-card { min-height: 82px; }
     }
 
     
@@ -2050,7 +1111,7 @@
         <div class="nav-section">
           <strong>MY 혜택</strong>
           <div class="nav-list">
-            <a class="active" href="web_mileage.html">마일리지 / 쿠폰</a>
+            <a href="web_mileage.html">마일리지 / 쿠폰</a>
             <a href="web_grade_page.html">MY 등급</a>
           </div>
         </div>
@@ -2090,248 +1151,189 @@
 
       <main class="main">
         <div class="page-title">
-          <h1>마일리지 / 쿠폰</h1>
-          <p>적립, 사용, 등급 달성 현황을 한 곳에서 확인하세요.</p>
+          <h1>마이페이지</h1>
+          <p>나의 거래 현황과 혜택을 한 곳에서 확인하세요.</p>
         </div>
 
-        <section class="summary-grid" aria-label="마일리지 요약">
-          <div class="panel mileage-summary-panel">
-            <div class="mileage-balance-grid">
-              <div class="balance-box">
-                <span>사용 가능 마일리지</span>
-                <strong class="use">4,500<small>원</small></strong>
-              </div>
-              <div class="balance-box" role="button" tabindex="0" data-tooltip-position="top" data-summary-tooltip="결제 시 확정된 적립 예정 마일리지는&#10;주문 목록이 ‘현지도착’ 상태로 변경된 후&#10;실제 마일리지로 적립됩니다." aria-label="적립 예정 마일리지 안내 보기">
-                <span>
-                  적립 예정 마일리지
-                </span>
-                <strong>25,594<small>원</small></strong>
-              </div>
-              <div class="balance-box" role="button" tabindex="0" data-summary-detail="monthly-use" aria-label="이번달 사용 마일리지 상세 보기">
-                <span>이번달 사용 마일리지</span>
-                <strong>9,800<small>원</small></strong>
-              </div>
-              <div class="balance-box" role="button" tabindex="0" data-tooltip-position="bottom" data-summary-tooltip="• 적립 마일리지는 적립일로부터 3개월 후 소멸됩니다.&#10;• 유효기간이 빠른 마일리지부터 사용됩니다.&#10;• 월간 마일리지는 지급월 말일 23:59:59에 소멸됩니다." aria-label="다음달 소멸 예정 마일리지 안내 보기">
-                <span>
-                  다음달 소멸 예정 마일리지
-                </span>
-                <strong class="muted">9,800<small>원</small></strong>
-              </div>
+        <section class="member-card" aria-label="회원 카드">
+          <div class="member-head">
+            <div class="member-head-info">
+              <div class="member-name"><span>Bidbuy</span><strong>홍길동님</strong></div>
+            </div>
+            <button class="grade-link" type="button" onclick="location.href='web_grade_page.html'">MY 등급 보기<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+          </div>
+          <div class="asset-grid" aria-label="회원 혜택 요약">
+            <div class="asset-cell"><span class="asset-label">마일리지</span><strong class="asset-value">4,500 원</strong></div>
+            <div class="asset-cell"><span class="asset-label">쿠폰</span><strong class="asset-value">23 장</strong></div>
+            <div class="asset-cell"><span class="asset-label">예치금</span><strong class="asset-value">13,961 원</strong></div>
+            <div class="asset-cell"><span class="asset-label">야후 보증금</span><strong class="asset-value">30,000 원</strong></div>
+            <div class="asset-cell"><span class="asset-label">이베이 보증금</span><strong class="asset-value">0 원</strong></div>
+          </div>
+        </section>
+
+        <section class="dash-section" aria-labelledby="order-status-title">
+          <div class="dash-section-head">
+            <h2 class="dash-section-title" id="order-status-title">나의 거래 현황</h2>
+            <div class="status-links">
+              <a class="outline-pill" href="web_mainlist.html">거래완료</a>
+              <a class="outline-pill" href="web_mainlist.html">취소/반품</a>
+            </div>
+          </div>
+          <div class="status-board">
+            <div class="status-step status-stack">
+              <a class="status-card" href="web_auction_bid_list.html" data-status="auction-bid" data-label="경매입찰">
+                <div><em>5</em><strong>경매 입찰 상품</strong></div>
+              </a>
+              <a class="status-card" href="web_mainlist.html" data-status="purchase-request" data-label="구매 신청">
+                <div><em>5</em><strong>구매 신청 상품</strong></div>
+              </a>
+            </div>
+            <div class="status-step">
+              <a class="status-card" href="web_mainlist.html" data-status="first-payment-wait" data-label="1차 결제대기">
+                <div><em class="hot">5</em><strong>1차<br>결제대기</strong></div>
+              </a>
+            </div>
+            <div class="status-step">
+              <a class="status-card" href="web_mainlist.html" data-status="first-payment-complete" data-label="1차 결제완료">
+                <div><em>5</em><strong>1차<br>결제완료</strong></div>
+              </a>
+            </div>
+            <div class="status-step status-stack">
+              <a class="status-card" href="web_mainlist.html" data-status="local-arrived" data-label="현지도착">
+                <div><em>5</em><strong>현지도착</strong></div>
+              </a>
+              <a class="status-card" href="web_mainlist.html" data-status="shipping-wait" data-label="배송대기">
+                <div><em>3</em><strong>배송대기</strong></div>
+              </a>
+            </div>
+            <div class="status-step">
+              <a class="status-card" href="web_mainlist.html" data-status="second-payment-wait" data-label="2차 결제대기">
+                <div><em class="hot">5</em><strong>2차<br>결제대기</strong></div>
+              </a>
+            </div>
+            <div class="status-step">
+              <a class="status-card" href="web_mainlist.html" data-status="second-payment-complete" data-label="2차 결제 완료">
+                <div><em>5</em><strong>2차<br>결제 완료</strong></div>
+              </a>
+            </div>
+            <div class="status-step">
+              <a class="status-card" href="web_mainlist.html" data-status="international-shipping" data-label="국제배송">
+                <div><em class="hot">5</em><strong>국제배송</strong></div>
+              </a>
             </div>
           </div>
         </section>
 
-        <section class="panel stamp-panel" aria-label="포인트 스탬프">
-          <div class="stamp-head">
-            <div>
-              <h2>혜택 스탬프</h2>
-              <p>이번 달 구매 4건 · 보너스 룰렛 1회 획득</p>
-            </div>
-            <span class="stamp-badge">PREMIUM</span>
+        <section class="dash-section" aria-labelledby="payment-wait-title">
+          <div class="dash-section-head">
+            <h2 class="dash-section-title" id="payment-wait-title">결제 대기 물품 목록</h2>
+            <a class="dash-more" href="web_mainlist.html">+ 더보기</a>
           </div>
-          <div class="stamp-scroll">
-            <div class="stamp-grid">
-              <div class="stamp active"><div class="stamp-circle">1</div></div>
-              <div class="stamp active"><div class="stamp-circle">2</div></div>
-              <div class="stamp reward">
-                <button class="roulette-button" type="button" data-reward="3" aria-label="3건 달성 보너스"><strong>BONUS</strong></button>
-              </div>
-              <div class="stamp active"><div class="stamp-circle">4</div></div>
-              <div class="stamp"><div class="stamp-circle">5</div></div>
-              <div class="stamp"><div class="stamp-circle">6</div></div>
-              <div class="stamp"><div class="stamp-circle">7</div></div>
-              <div class="stamp reward">
-                <button class="roulette-button" type="button" data-reward="8" aria-label="8건 달성 보너스"><strong>BONUS</strong></button>
-              </div>
-              <div class="stamp"><div class="stamp-circle">9</div></div>
-              <div class="stamp"><div class="stamp-circle">10</div></div>
-              <div class="stamp"><div class="stamp-circle">11</div></div>
-              <div class="stamp"><div class="stamp-circle">12</div></div>
-              <div class="stamp"><div class="stamp-circle">13</div></div>
-              <div class="stamp"><div class="stamp-circle">14</div></div>
-              <div class="stamp reward">
-                <button class="roulette-button" type="button" data-reward="15" aria-label="15건 달성 보너스"><strong>BONUS</strong></button>
-              </div>
-              <div class="stamp"><div class="stamp-circle">16</div></div>
-              <div class="stamp"><div class="stamp-circle">17</div></div>
-              <div class="stamp"><div class="stamp-circle">18</div></div>
-              <div class="stamp"><div class="stamp-circle">19</div></div>
-              <div class="stamp reward">
-                <button class="roulette-button" type="button" data-reward="20" aria-label="20건 달성 보너스"><strong>BONUS</strong></button>
-              </div>
-            </div>
+          <div class="table-wrap">
+            <table class="order-table">
+              <colgroup>
+                <col style="width: 102px">
+                <col style="width: 96px">
+                <col>
+                <col style="width: 92px">
+                <col style="width: 90px">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>주문일자</th>
+                  <th>이미지</th>
+                  <th>상품정보</th>
+                  <th>결제금액</th>
+                  <th>결제</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2026.06.25<br>(1차결제대기)</td>
+                  <td><img class="product-img" src="../images/dummy/item_01.jpg" alt="반지 상품 이미지"></td>
+                  <td class="product-info"><div class="product-market"><span class="dash-flag jp" role="img" aria-label="일본"></span><span>라쿠텐</span><span>BJP0220006636</span></div><span class="name-ko">반지 링 여성용 실버 금속 알레르기 방지 액세서리 여름용 심플 메일편 무료배송</span><span class="name-origin">指輪 リング レディース・シルバー 金属アレルギー アクセサリー 夏 普段使い シンプル オシャレ メール便送料無料</span></td>
+                  <td>15,288원</td>
+                  <td><button class="pay-btn" type="button" onclick="location.href='web_bill_1st.html'">결제하기</button></td>
+                </tr>
+                <tr>
+                  <td>2026.06.24<br>(1차결제대기)</td>
+                  <td><img class="product-img" src="../images/dummy/item_02.jpg" alt="피규어 상품 이미지"></td>
+                  <td class="product-info"><div class="product-market"><span class="dash-flag jp" role="img" aria-label="일본"></span><span>야후경매</span><span>BJP0219872210</span></div><span class="name-ko">드래곤볼 피규어 이치방쿠지 세트 미개봉 레어</span><span class="name-origin">ドラゴンボール フィギュア 一番くじ セット 未開封 レア</span></td>
+                  <td>38,420원</td>
+                  <td><button class="pay-btn" type="button" onclick="location.href='web_bill_1st.html'">결제하기</button></td>
+                </tr>
+                <tr>
+                  <td>2026.06.20<br>(2차결제대기)</td>
+                  <td><img class="product-img" src="../images/dummy/item_03.jpg" alt="가방 상품 이미지"></td>
+                  <td class="product-info"><div class="product-market"><span class="dash-flag jp" role="img" aria-label="일본"></span><span>메루카리</span><span>BJP0218830042</span></div><span class="name-ko">코치 숄더백 가죽 빈티지 상태 좋음</span><span class="name-origin">コーチ ショルダーバッグ レザー ヴィンテージ 美品</span></td>
+                  <td>92,150원</td>
+                  <td><button class="pay-btn" type="button" onclick="location.href='web_bill_2nd.html'">결제하기</button></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <button class="fold-bar stamp-toggle" type="button" aria-expanded="false">펼쳐보기</button>
         </section>
 
-        <section class="panel history-panel" aria-labelledby="history-title">
-          <div class="history-head">
-            <div class="history-title-wrap">
-              <h2 id="history-title">마일리지 내역</h2>
-              <div class="benefit-tabs" role="tablist" aria-label="혜택 내역">
-                <button class="benefit-tab active" type="button" role="tab" aria-selected="true" data-benefit-tab="mileage">마일리지 내역</button>
-                <button class="benefit-tab" type="button" role="tab" aria-selected="false" data-benefit-tab="coupon">쿠폰내역</button>
-              </div>
-            </div>
-            <div class="history-tabs" role="tablist" aria-label="마일리지 내역 필터">
-              <button class="history-tab active" type="button" role="tab" aria-selected="true" data-filter="all">전체</button>
-              <button class="history-tab" type="button" role="tab" aria-selected="false" data-filter="earn">적립</button>
-              <button class="history-tab" type="button" role="tab" aria-selected="false" data-filter="use">사용</button>
-              <button class="history-tab" type="button" role="tab" aria-selected="false" data-filter="expire">소멸</button>
-            </div>
+        <section class="dash-section" aria-labelledby="ending-soon-title">
+          <div class="dash-section-head">
+            <h2 class="dash-section-title" id="ending-soon-title">종료 임박 물품 목록</h2>
+            <a class="dash-more" href="web_mainlist.html">+ 더보기</a>
           </div>
+          <div class="dash-empty">입찰 중인 상품이 없습니다.</div>
+        </section>
 
-          <div class="history-table mileage-table" role="table" aria-label="마일리지 내역" data-benefit-panel="mileage">
-            <div class="history-table-head" role="row">
-              <div role="columnheader">일시</div>
-              <div role="columnheader">구분</div>
-              <div role="columnheader">내역</div>
-              <div role="columnheader">금액</div>
-            </div>
-
-            <div class="history-row" role="row" data-type="earn" data-detail="earn-purchase" tabindex="0" aria-label="마일리지 적립 상세 보기">
-              <div class="history-date" role="cell">2024-04-01</div>
-              <div class="history-type" role="cell"><span class="type-chip earn">적립</span></div>
-              <div class="history-desc" role="cell">
-                <strong class="history-kind">4월 적립 마일리지</strong>
-              </div>
-              <div class="history-amount" role="cell">+14,425원</div>
-            </div>
-
-            <div class="history-row" role="row" data-type="use" data-detail="use-purchase" tabindex="0" aria-label="마일리지 사용 상세 보기">
-              <div class="history-date" role="cell">2024-02-28</div>
-              <div class="history-type" role="cell"><span class="type-chip use">사용</span></div>
-              <div class="history-desc" role="cell">
-                <strong class="history-kind">주문번호 JP123456789 차감</strong>
-              </div>
-              <div class="history-amount minus" role="cell">-12,000원</div>
-            </div>
-
-            <div class="history-row" role="row" data-type="expire" data-detail="expire" tabindex="0" aria-label="마일리지 유효기간 만료 상세 보기">
-              <div class="history-date" role="cell">2024-05-01</div>
-              <div class="history-type" role="cell"><span class="type-chip expire">소멸</span></div>
-              <div class="history-desc" role="cell">
-                <strong class="history-kind">유효기간 만료</strong>
-              </div>
-              <div class="history-amount expire" role="cell">-250원</div>
-            </div>
-
-            <div class="history-row" role="row" data-type="earn" data-detail="earn-monthly" tabindex="0" aria-label="월간 마일리지 적립 상세 보기">
-              <div class="history-date" role="cell">2024-04-01</div>
-              <div class="history-type" role="cell"><span class="type-chip earn">적립</span></div>
-              <div class="history-desc" role="cell">
-                <strong class="history-kind">월간 마일리지</strong>
-              </div>
-              <div class="history-amount" role="cell">+9,800원</div>
-            </div>
-
-            <div class="history-row" role="row" data-type="earn" data-detail="earn-event" tabindex="0" aria-label="이벤트 마일리지 적립 상세 보기">
-              <div class="history-date" role="cell">2024-03-28</div>
-              <div class="history-type" role="cell"><span class="type-chip earn">적립</span></div>
-              <div class="history-desc" role="cell">
-                <strong class="history-kind">리뉴얼 오픈 이벤트</strong>
-              </div>
-              <div class="history-amount" role="cell">+500원</div>
-            </div>
-
-            <div class="history-row" role="row" data-type="expire" data-detail="expire" tabindex="0" aria-label="마일리지 유효기간 만료 상세 보기">
-              <div class="history-date" role="cell">2024-03-20</div>
-              <div class="history-type" role="cell"><span class="type-chip expire">소멸</span></div>
-              <div class="history-desc" role="cell">
-                <strong class="history-kind">유효기간 만료</strong>
-              </div>
-              <div class="history-amount expire" role="cell">-20,000원</div>
-            </div>
+        <section class="dash-section" aria-labelledby="memo-service-title">
+          <div class="dash-section-head">
+            <h2 class="dash-section-title" id="memo-service-title">사용자 메모 알림 서비스</h2>
+            <a class="dash-more" href="web_user_memo.html">+ 더보기</a>
           </div>
-
-          <div class="history-table coupon-table is-hidden" role="table" aria-label="쿠폰내역" data-benefit-panel="coupon">
-            <div class="history-table-head" role="row">
-              <div role="columnheader">일시</div>
-              <div role="columnheader">구분</div>
-              <div role="columnheader">내역</div>
-              <div role="columnheader">할인금액(률)</div>
-              <div role="columnheader">사용기한</div>
-            </div>
-
-            <div class="history-row" role="row">
-              <div class="history-date" role="cell">2026-08-01</div>
-              <div class="history-type" role="cell"><span class="type-chip earn">경매 및 구매 대행수수료 할인</span></div>
-              <div class="history-desc" role="cell"><strong class="history-kind">8월 웰컴 쿠폰</strong></div>
-              <div class="coupon-discount" role="cell">5,000원</div>
-              <div class="coupon-period" role="cell">2026-08-31</div>
-            </div>
-
-            <div class="history-row" role="row">
-              <div class="history-date" role="cell">2026-08-03</div>
-              <div class="history-type" role="cell"><span class="type-chip use">국제운송료 할인 쿠폰</span></div>
-              <div class="history-desc" role="cell"><strong class="history-kind">항공운송 프로모션 쿠폰</strong></div>
-              <div class="coupon-discount" role="cell">3,000원</div>
-              <div class="coupon-period" role="cell">2026-09-30</div>
-            </div>
-
-            <div class="history-row" role="row">
-              <div class="history-date" role="cell">2026-08-05</div>
-              <div class="history-type" role="cell"><span class="type-chip earn">경매 및 구매 대행수수료 할인</span></div>
-              <div class="history-desc" role="cell"><strong class="history-kind">프리미엄 회원 감사 쿠폰</strong></div>
-              <div class="coupon-discount" role="cell">10,000원</div>
-              <div class="coupon-period" role="cell">2026-09-30</div>
-            </div>
-
-            <div class="history-row" role="row">
-              <div class="history-date" role="cell">2026-08-07</div>
-              <div class="history-type" role="cell"><span class="type-chip use">국제운송료 할인 쿠폰</span></div>
-              <div class="history-desc" role="cell"><strong class="history-kind">묶음배송 응원 쿠폰</strong></div>
-              <div class="coupon-discount" role="cell">1,000원</div>
-              <div class="coupon-period" role="cell">2026-08-31</div>
-            </div>
-
-            <div class="history-row" role="row">
-              <div class="history-date" role="cell">2026-07-25</div>
-              <div class="history-type" role="cell"><span class="type-chip earn">경매 및 구매 대행수수료 할인</span></div>
-              <div class="history-desc" role="cell"><strong class="history-kind">야후옥션 첫 입찰 쿠폰</strong></div>
-              <div class="coupon-discount" role="cell">3,000원</div>
-              <div class="coupon-period" role="cell">2026-09-30</div>
-            </div>
-
-            <div class="history-row" role="row">
-              <div class="history-date" role="cell">2026-07-28</div>
-              <div class="history-type" role="cell"><span class="type-chip use">국제운송료 할인 쿠폰</span></div>
-              <div class="history-desc" role="cell"><strong class="history-kind">여름 배송비 할인 쿠폰</strong></div>
-              <div class="coupon-discount" role="cell">5,000원</div>
-              <div class="coupon-period" role="cell">2026-08-31</div>
-            </div>
-
-            <div class="history-row" role="row">
-              <div class="history-date" role="cell">2026-07-31</div>
-              <div class="history-type" role="cell"><span class="type-chip earn">경매 및 구매 대행수수료 할인</span></div>
-              <div class="history-desc" role="cell"><strong class="history-kind">광복절 스페셜 쿠폰</strong></div>
-              <div class="coupon-discount" role="cell">10,000원</div>
-              <div class="coupon-period" role="cell">2026-09-30</div>
-            </div>
-
-            <div class="history-row" role="row">
-              <div class="history-date" role="cell">2026-08-02</div>
-              <div class="history-type" role="cell"><span class="type-chip use">국제운송료 할인 쿠폰</span></div>
-              <div class="history-desc" role="cell"><strong class="history-kind">해외배송 정기 혜택 쿠폰</strong></div>
-              <div class="coupon-discount" role="cell">1,000원</div>
-              <div class="coupon-period" role="cell">2026-09-30</div>
-            </div>
-
-            <div class="history-row" role="row">
-              <div class="history-date" role="cell">2026-08-04</div>
-              <div class="history-type" role="cell"><span class="type-chip earn">경매 및 구매 대행수수료 할인</span></div>
-              <div class="history-desc" role="cell"><strong class="history-kind">관심상품 재방문 쿠폰</strong></div>
-              <div class="coupon-discount" role="cell">5,000원</div>
-              <div class="coupon-period" role="cell">2026-08-31</div>
-            </div>
-
-            <div class="history-row" role="row">
-              <div class="history-date" role="cell">2026-08-06</div>
-              <div class="history-type" role="cell"><span class="type-chip use">국제운송료 할인 쿠폰</span></div>
-              <div class="history-desc" role="cell"><strong class="history-kind">월말 배송비 지원 쿠폰</strong></div>
-              <div class="coupon-discount" role="cell">3,000원</div>
-              <div class="coupon-period" role="cell">2026-09-30</div>
-            </div>
+          <div class="table-wrap">
+            <table class="order-table">
+              <colgroup>
+                <col style="width: 64px">
+                <col style="width: 114px">
+                <col style="width: 70px">
+                <col>
+                <col style="width: 85px">
+                <col style="width: 95px">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>국가</th>
+                  <th>주문번호</th>
+                  <th>스토어</th>
+                  <th>상품명</th>
+                  <th>작성일</th>
+                  <th>상태</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="dash-flag" aria-label="일본"></span></td>
+                  <td>BJP0220006636</td>
+                  <td>라쿠텐</td>
+                  <td class="memo-product">반지 링 여성용 니켈프리 금속 알레르기 액세서리...</td>
+                  <td>2026.06.26</td>
+                  <td><button class="memo-btn" type="button" onclick="location.href='web_payment_detail.html#user-memo'">메모 보기</button></td>
+                </tr>
+                <tr>
+                  <td><span class="dash-flag" aria-label="일본"></span></td>
+                  <td>BJP0219728972</td>
+                  <td>메루카리</td>
+                  <td class="memo-product">생물도감 어드밴스 모토이카부토카게</td>
+                  <td>2026.06.18</td>
+                  <td><button class="memo-btn" type="button" onclick="location.href='web_payment_detail.html#user-memo'">메모 보기</button></td>
+                </tr>
+                <tr>
+                  <td><span class="dash-flag" aria-label="일본"></span></td>
+                  <td>BJP0216069884</td>
+                  <td>야후쇼핑</td>
+                  <td class="memo-product">메달리스트 원데이 플러스 맥시박스 90매 2박스...</td>
+                  <td>2026.03.04</td>
+                  <td><button class="memo-btn" type="button" onclick="location.href='web_payment_detail.html#user-memo'">메모 보기</button></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
       </main>
@@ -2491,123 +1493,9 @@
       </nav>
     </aside>
 
-    <div class="mileage-popup-overlay" hidden>
-      <div class="mileage-popup" role="dialog" aria-modal="true" aria-labelledby="mileage-popup-title">
-        <h3 id="mileage-popup-title">마일리지 적립 내역</h3>
-        <div class="mileage-popup-content"></div>
-        <button class="mileage-popup-ok" type="button">확인</button>
-      </div>
-    </div>
-
-    <div class="roulette-modal-overlay" hidden>
-      <div class="roulette-modal" role="dialog" aria-modal="true" aria-labelledby="roulette-modal-title">
-        <button class="roulette-modal-close" type="button" aria-label="닫기">×</button>
-        <h3 id="roulette-modal-title">보너스 룰렛</h3>
-        <p class="roulette-modal-desc">START 버튼을 누르면 룰렛이 돌아갑니다!</p>
-        <div class="roulette-wheel-wrap">
-          <div class="roulette-pointer"></div>
-          <div class="roulette-wheel">
-            <div class="roulette-wheel-labels">
-              <span style="--i:0"><b>꽝</b></span>
-              <span style="--i:1"><b>항공운임쿠폰<br>2천원</b></span>
-              <span style="--i:2"><b>항공운임쿠폰<br>3천원</b></span>
-              <span style="--i:3"><b>마일리지<br>5천원</b></span>
-              <span style="--i:4"><b>메가<br>더블커피</b></span>
-            </div>
-            <div class="roulette-wheel-center"></div>
-          </div>
-        </div>
-        <button class="roulette-start-btn" type="button">START</button>
-        <p class="roulette-result" hidden></p>
-        <p class="roulette-note" hidden>익월 첫째 주에 순차 지급됩니다.</p>
-      </div>
-    </div>
   </div>
 
   <script>
-    const stampPanel = document.querySelector(".stamp-panel");
-    const stampToggle = document.querySelector(".stamp-toggle");
-    const rouletteButtons = document.querySelectorAll(".roulette-button");
-
-    if (stampPanel && stampToggle) {
-      stampToggle.addEventListener("click", () => {
-        const isExpanded = stampPanel.classList.toggle("expanded");
-        stampToggle.setAttribute("aria-expanded", String(isExpanded));
-        stampToggle.textContent = isExpanded ? "접기" : "펼쳐보기";
-      });
-    }
-
-    rouletteButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        button.classList.remove("is-spinning");
-        void button.offsetWidth;
-        button.classList.add("is-spinning");
-        openRouletteModal();
-      });
-    });
-
-    const rouletteModalOverlay = document.querySelector(".roulette-modal-overlay");
-    const rouletteModalClose = document.querySelector(".roulette-modal-close");
-    const rouletteWheel = document.querySelector(".roulette-wheel");
-    const rouletteStartBtn = document.querySelector(".roulette-start-btn");
-    const rouletteResult = document.querySelector(".roulette-result");
-    const rouletteNote = document.querySelector(".roulette-note");
-    const roulettePrizes = ["꽝", "항공운임쿠폰 2천원", "항공운임쿠폰 3천원", "마일리지 5천원", "메가 더블커피"];
-    let rouletteRotation = 0;
-    let rouletteSpinning = false;
-    let rouletteFinished = false;
-
-    function openRouletteModal() {
-      if (!rouletteModalOverlay) return;
-      rouletteFinished = false;
-      rouletteResult.hidden = true;
-      rouletteResult.textContent = "";
-      rouletteNote.hidden = true;
-      rouletteStartBtn.disabled = false;
-      rouletteStartBtn.textContent = "START";
-      rouletteModalOverlay.hidden = false;
-    }
-
-    function closeRouletteModal() {
-      if (!rouletteModalOverlay) return;
-      rouletteModalOverlay.hidden = true;
-    }
-
-    rouletteModalClose?.addEventListener("click", closeRouletteModal);
-    rouletteModalOverlay?.addEventListener("click", (event) => {
-      if (event.target === rouletteModalOverlay) closeRouletteModal();
-    });
-
-    rouletteStartBtn?.addEventListener("click", () => {
-      if (rouletteFinished) {
-        closeRouletteModal();
-        return;
-      }
-      if (rouletteSpinning || !rouletteWheel) return;
-      rouletteSpinning = true;
-      rouletteStartBtn.disabled = true;
-      rouletteResult.hidden = true;
-      rouletteNote.hidden = true;
-
-      const prizeIndex = Math.floor(Math.random() * roulettePrizes.length);
-      const sliceAngle = 360 / roulettePrizes.length;
-      const targetCenter = prizeIndex * sliceAngle + sliceAngle / 2;
-      const currentMod = ((rouletteRotation % 360) + 360) % 360;
-      const delta = ((360 - targetCenter - currentMod) % 360 + 360) % 360;
-      rouletteRotation += 360 * 5 + delta;
-      rouletteWheel.style.transform = `rotate(${rouletteRotation}deg)`;
-
-      setTimeout(() => {
-        rouletteSpinning = false;
-        rouletteFinished = true;
-        rouletteStartBtn.disabled = false;
-        rouletteStartBtn.textContent = "닫기";
-        rouletteResult.hidden = false;
-        rouletteResult.textContent = `🎉 ${roulettePrizes[prizeIndex]} 당첨!`;
-        rouletteNote.hidden = roulettePrizes[prizeIndex] !== "메가 더블커피";
-      }, 4000);
-    });
-
     document.querySelectorAll(".user-menu-trigger").forEach((triggerButton) => {
       triggerButton.addEventListener("click", () => {
         const section = triggerButton.closest(".user-menu-section");
@@ -2692,407 +1580,6 @@
     drawerOv?.addEventListener("click", closeDrawer);
     drawerCloseBtn?.addEventListener("click", closeDrawer);
 
-    const benefitTabs = document.querySelectorAll(".benefit-tab");
-    const benefitPanels = document.querySelectorAll("[data-benefit-panel]");
-    const historyTitle = document.getElementById("history-title");
-    const historyFilterTabs = document.querySelector(".history-tabs");
-    const historyTabs = document.querySelectorAll(".history-tab");
-    const historyRows = document.querySelectorAll(".mileage-table .history-row");
-    const summaryTooltipCards = document.querySelectorAll(".balance-box[data-summary-tooltip], .balance-box[data-summary-detail]");
-
-    function closeSummaryTooltips(exceptCard) {
-      summaryTooltipCards.forEach((card) => {
-        if (card === exceptCard) return;
-        card.classList.remove("is-tooltip-open");
-        card.setAttribute("aria-expanded", "false");
-      });
-    }
-
-    summaryTooltipCards.forEach((card) => {
-      card.addEventListener("click", (event) => {
-        event.stopPropagation();
-
-        // 모달 팝업 열기
-        const label = card.querySelector("span")?.textContent?.trim();
-        let detail;
-
-        // 팝업 내용 구성 - 적립 예정 마일리지
-        if (label === "적립 예정 마일리지") {
-          detail = {
-            title: "적립예정 마일리지",
-            summary: {
-              label: "총 적립 예정",
-              amount: "25,594원",
-              periodLabel: "적립 예정일",
-              period: "2026.05.01"
-            },
-            list: [
-              { date: "04.01", name: "JP123456789", amount: "6,200원" },
-              { date: "04.17", name: "BJP123456789", amount: "5,800원" },
-              { date: "04.20", name: "US123456789", amount: "5,200원" },
-              { date: "04.27", name: "BUS123456789", amount: "8,394원" }
-            ]
-          };
-        } else if (label === "이번달 사용 마일리지") {
-          detail = {
-            title: "마일리지 사용 내역",
-            subtitle: "4월 사용 마일리지 합산",
-            summary: {
-              label: "사용 마일리지",
-              amount: "-9,800원",
-              periodLabel: "사용 기간",
-              period: "2024.04.01~2024.04.30"
-            },
-            list: [
-              { date: "04.05", name: "JP123456789", amount: "-2,000원" },
-              { date: "04.12", name: "BJP123456789", amount: "-3,300원" },
-              { date: "04.18", name: "US123456789", amount: "-1,500원" },
-              { date: "04.25", name: "BUS123456789", amount: "-3,000원" }
-            ]
-          };
-        } else {
-          // 소멸 예정 마일리지는 groups 형식
-          const tooltipText = card.getAttribute("data-summary-tooltip");
-          detail = {
-            title: label,
-            groups: [[{ text: tooltipText }]]
-          };
-        }
-
-        clearTimeout(mileagePopupCloseTimer);
-        lastMileagePopupTrigger = card;
-        renderMileagePopup(detail);
-        mileagePopupOverlay.hidden = false;
-        document.body.classList.add("mileage-popup-open");
-
-        requestAnimationFrame(() => {
-          mileagePopupOverlay.classList.add("is-open");
-          mileagePopupOk?.focus({ preventScroll: true });
-        });
-      });
-
-      card.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          card.click();
-        }
-
-        if (event.key === "Escape") {
-          if (!mileagePopupOverlay.hidden) {
-            closeMileagePopup();
-          }
-        }
-      });
-    });
-
-    document.addEventListener("click", () => {
-      closeSummaryTooltips();
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        closeSummaryTooltips();
-      }
-    });
-
-    historyTabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        const filter = tab.dataset.filter;
-
-        historyTabs.forEach((item) => {
-          const isActive = item === tab;
-          item.classList.toggle("active", isActive);
-          item.setAttribute("aria-selected", String(isActive));
-        });
-
-        historyRows.forEach((row) => {
-          const isVisible = filter === "all" || row.dataset.type === filter;
-          row.classList.toggle("is-hidden", !isVisible);
-        });
-      });
-    });
-
-    benefitTabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        const target = tab.dataset.benefitTab;
-
-        benefitTabs.forEach((item) => {
-          const isActive = item === tab;
-          item.classList.toggle("active", isActive);
-          item.setAttribute("aria-selected", String(isActive));
-        });
-
-        benefitPanels.forEach((panel) => {
-          panel.classList.toggle("is-hidden", panel.dataset.benefitPanel !== target);
-        });
-
-        historyFilterTabs?.classList.toggle("is-hidden", target !== "mileage");
-        if (historyTitle) historyTitle.textContent = target === "coupon" ? "쿠폰내역" : "마일리지 내역";
-      });
-    });
-
-    const mileagePopupData = {
-      "earn-purchase": {
-        title: "적립 마일리지",
-        badge: "Premium 5%",
-        summary: {
-          label: "마일리지",
-          amount: "+14,425원",
-          period: "2026.04.01~2026.06.30"
-        },
-        list: [
-          { date: "04.17", name: "JP123456789", amount: "225원" },
-          { date: "04.17", name: "BJP123456789", amount: "5,800원" },
-          { date: "04.20", name: "US123456789", amount: "2,500원" },
-          { date: "04.27", name: "BUS123456789", amount: "5,900원" }
-        ]
-      },
-      "use-purchase": {
-        title: "마일리지 사용 내역",
-        subtitle: "주문번호 : JP123456789",
-        summary: {
-          label: "사용 마일리지",
-          amount: "-12,000원",
-          periodLabel: "주문일자",
-          period: "2024.02.28"
-        },
-        list: [
-          { date: "02.28", name: "반지 링 여성용 실버 금속 알레르기 방지 액세서리 여름용 심플 메일편 무료배송", amount: "-12,000원" }
-        ]
-      },
-      expire: {
-        title: "마일리지 소멸 내역",
-        summary: {
-          label: "소멸 마일리지",
-          amount: "-20,000원"
-        },
-        list: [
-          { date: "04.01", name: "월간 마일리지", note: "2026.03.31 23:59 까지", amount: "-20,000원" },
-          { date: "04.01", name: "가족의달 이벤트 마일리지", note: "2026.03.31 23:59 까지", amount: "-5,000원" }
-
-        ]
-      },
-      "earn-monthly": {
-        title: "월간 마일리지 적립",
-        subtitle: "월간 등급 혜택 마일리지",
-        summary: {
-          label: "마일리지",
-          amount: "+10,000원",
-          period: "~2024.04.30 23:59 까지"
-        },
-        list: [
-          { date: "04.01", name: "월간 마일리지", amount: "10,000원" }
-        ]
-      },
-      "earn-event": {
-        title: "이벤트 마일리지 적립",
-        subtitle: "이벤트명 : 리뉴얼 오픈 이벤트",
-        summary: {
-          label: "마일리지",
-          amount: "+500원",
-          period: "~2026.09.30 23:59까지"
-        },
-        list: [
-          { date: "09.01", name: "리뉴얼 오픈 이벤트", amount: "500원" }
-        ]
-      }
-    };
-
-    const mileagePopupOverlay = document.querySelector(".mileage-popup-overlay");
-    const mileagePopup = document.querySelector(".mileage-popup");
-    const mileagePopupTitle = document.querySelector("#mileage-popup-title");
-    const mileagePopupContent = document.querySelector(".mileage-popup-content");
-    const mileagePopupOk = document.querySelector(".mileage-popup-ok");
-    let mileagePopupCloseTimer;
-    let lastMileagePopupTrigger;
-
-    function renderMileagePopup(detail) {
-      if (!mileagePopupTitle || !mileagePopupContent) return;
-
-      const isListDetail = Boolean(detail.summary && detail.list);
-      mileagePopup?.classList.toggle("is-list-detail", isListDetail);
-      mileagePopup?.querySelector(".mileage-popup-subtitle")?.remove();
-
-      mileagePopupTitle.textContent = "";
-      const titleText = document.createElement("span");
-      titleText.className = "mileage-popup-title-text";
-      titleText.textContent = detail.title;
-      mileagePopupTitle.appendChild(titleText);
-
-      if (detail.badge) {
-        const badgeEl = document.createElement("span");
-        badgeEl.className = "mileage-popup-badge";
-        badgeEl.textContent = detail.badge;
-        mileagePopupTitle.appendChild(badgeEl);
-      }
-
-      mileagePopupContent.textContent = "";
-
-      if (isListDetail) {
-        if (detail.subtitle) {
-          const subtitleEl = document.createElement("p");
-          subtitleEl.className = "mileage-popup-subtitle";
-          subtitleEl.textContent = detail.subtitle;
-          mileagePopupTitle.insertAdjacentElement("afterend", subtitleEl);
-        }
-
-        const summaryEl = document.createElement("div");
-        summaryEl.className = "mileage-popup-summary";
-
-        const amountRowEl = document.createElement("div");
-        amountRowEl.className = "mileage-popup-summary-row";
-
-        const amountLabelEl = document.createElement("span");
-        amountLabelEl.className = "mileage-popup-summary-label";
-        amountLabelEl.textContent = detail.summary.label;
-
-        const amountEl = document.createElement("strong");
-        amountEl.className = "mileage-popup-summary-amount";
-
-        const coinEl = document.createElement("span");
-        coinEl.className = "mileage-popup-coin";
-        coinEl.setAttribute("aria-hidden", "true");
-        coinEl.textContent = "M";
-
-        const amountTextEl = document.createElement("span");
-        amountTextEl.textContent = detail.summary.amount;
-
-        amountEl.append(coinEl, amountTextEl);
-        amountRowEl.append(amountLabelEl, amountEl);
-
-        summaryEl.appendChild(amountRowEl);
-
-        if (detail.summary.period) {
-          const periodRowEl = document.createElement("div");
-          periodRowEl.className = "mileage-popup-summary-row";
-
-          const periodLabelEl = document.createElement("span");
-          periodLabelEl.className = "mileage-popup-summary-label";
-          periodLabelEl.textContent = detail.summary.periodLabel || "유효기간";
-
-          const periodValueEl = document.createElement("span");
-          periodValueEl.className = "mileage-popup-summary-value";
-          periodValueEl.textContent = detail.summary.period;
-
-          periodRowEl.append(periodLabelEl, periodValueEl);
-          summaryEl.appendChild(periodRowEl);
-        }
-        mileagePopupContent.appendChild(summaryEl);
-
-        const dividerEl = document.createElement("div");
-        dividerEl.className = "mileage-popup-divider";
-        mileagePopupContent.appendChild(dividerEl);
-
-        const listEl = document.createElement("div");
-        listEl.className = "mileage-popup-list";
-
-        detail.list.forEach((item) => {
-          const rowEl = document.createElement("div");
-          rowEl.className = "mileage-popup-list-row";
-
-          const dateEl = document.createElement("span");
-          dateEl.className = "mileage-popup-list-date";
-          dateEl.textContent = item.date;
-
-          const nameEl = document.createElement("span");
-          nameEl.className = "mileage-popup-list-name";
-          nameEl.textContent = item.name;
-          if (item.note) {
-            const noteEl = document.createElement("span");
-            noteEl.className = "mileage-popup-list-note";
-            noteEl.textContent = item.note;
-            nameEl.appendChild(noteEl);
-          }
-
-          const amountItemEl = document.createElement("strong");
-          amountItemEl.className = "mileage-popup-list-amount";
-          amountItemEl.textContent = item.amount;
-
-          rowEl.append(dateEl, nameEl, amountItemEl);
-          listEl.appendChild(rowEl);
-        });
-
-        mileagePopupContent.appendChild(listEl);
-        return;
-      }
-
-      detail.groups.forEach((group) => {
-        const groupEl = document.createElement("div");
-        groupEl.className = "mileage-popup-group";
-
-        group.forEach((item) => {
-          const lineEl = document.createElement("div");
-          lineEl.className = "mileage-popup-line";
-
-          if (item.text) {
-            lineEl.textContent = item.text;
-          } else {
-            const labelEl = document.createElement("span");
-            labelEl.className = "mileage-popup-label";
-            labelEl.textContent = `${item.label} :`;
-            lineEl.appendChild(labelEl);
-            lineEl.appendChild(document.createTextNode(` ${item.value}`));
-          }
-
-          groupEl.appendChild(lineEl);
-        });
-
-        mileagePopupContent.appendChild(groupEl);
-      });
-    }
-
-    function openMileagePopup(detailKey, trigger) {
-      const detail = mileagePopupData[detailKey];
-      if (!detail || !mileagePopupOverlay) return;
-
-      clearTimeout(mileagePopupCloseTimer);
-      lastMileagePopupTrigger = trigger;
-      renderMileagePopup(detail);
-      mileagePopupOverlay.hidden = false;
-      document.body.classList.add("mileage-popup-open");
-
-      requestAnimationFrame(() => {
-        mileagePopupOverlay.classList.add("is-open");
-        mileagePopupOk?.focus({ preventScroll: true });
-      });
-    }
-
-    function closeMileagePopup() {
-      if (!mileagePopupOverlay || mileagePopupOverlay.hidden) return;
-
-      mileagePopupOverlay.classList.remove("is-open");
-      document.body.classList.remove("mileage-popup-open");
-      mileagePopupCloseTimer = setTimeout(() => {
-        mileagePopupOverlay.hidden = true;
-        lastMileagePopupTrigger?.focus({ preventScroll: true });
-      }, 180);
-    }
-
-    historyRows.forEach((row) => {
-      row.addEventListener("click", () => {
-        openMileagePopup(row.dataset.detail, row);
-      });
-
-      row.addEventListener("keydown", (event) => {
-        if (event.key !== "Enter" && event.key !== " ") return;
-        event.preventDefault();
-        openMileagePopup(row.dataset.detail, row);
-      });
-    });
-
-    mileagePopupOk?.addEventListener("click", closeMileagePopup);
-
-    mileagePopupOverlay?.addEventListener("click", (event) => {
-      if (event.target === mileagePopupOverlay) {
-        closeMileagePopup();
-      }
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && mileagePopupOverlay?.classList.contains("is-open")) {
-        closeMileagePopup();
-      }
-    });
   </script>
 <script src="bb-common.js"></script>
 </body>

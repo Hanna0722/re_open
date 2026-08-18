@@ -44,9 +44,9 @@ BidBuy 리뉴얼 HTML 산출물 정리 문서입니다.
 | `web/web_grade_page.html` | MY 등급 |
 | `web/web_favorites.html` | 관심항목 관리 |
 | `web/web_user_memo.html` | 사용자메모 내역 |
-| `web/web_bundle_shipping_management.html` | 배송 신청 관리 |
-| `web/web_bundle_shipping_management_2.html` | 묶음배송 신청목록 |
-| `web/web_bundle_shipping_order.html` | 국제배송 및 배송형태 선택 |
+| `web/web_bundle_shipping_management.html` | 배송 신청 가능목록 |
+| `web/web_bundle_shipping_management_2.html` | 배송 신청 완료목록 |
+| `web/web_bundle_shipping_order.html` | 배송대기건 배송신청 - 묶음배송 |
 | `web/web_individual_shipping_order.html` | 배송대기건 배송신청 - 개별배송 |
 | `web/web_qna.html` | 1:1 문의내역 |
 | `web/web_qna_details.html` | 1:1 문의 상세 |
@@ -91,8 +91,8 @@ BidBuy 리뉴얼 HTML 산출물 정리 문서입니다.
 | `mobile/mobile_user_memo.html` | 사용자메모 내역 |
 | `mobile/mobile_bundle_shipping_management.html` | 배송 신청 가능 목록 |
 | `mobile/mobile_bundle_shipping_management_2.html` | 배송 신청 완료 목록 |
-| `mobile/mobile_bundle_shipping_order.html` | 국제배송 및 배송형태 선택 |
-| `mobile/mobile_individual_shipping_order.html` | 국제배송 및 배송형태 선택 |
+| `mobile/mobile_bundle_shipping_order.html` | 배송대기건 배송신청 - 묶음배송 |
+| `mobile/mobile_individual_shipping_order.html` | 배송대기건 배송신청 - 개별배송 |
 | `mobile/mobile_qna.html` | 1:1 문의내역 |
 | `mobile/mobile_qna_details.html` | 1:1 문의 상세 |
 | `mobile/mobile_qna_form.html` | 1:1 문의하기 |

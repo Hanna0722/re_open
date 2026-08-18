@@ -253,26 +253,40 @@ body{
 }
 .sc-item:hover{opacity:.75}
 .sc-circle{
-  width:54px;height:54px;border-radius:50%;
-  background:#fff;border:1px solid var(--border);
+  width:44px;height:44px;border-radius:12px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:1px;overflow:hidden;
-  box-shadow:0 2px 6px rgba(0,0,0,.07);
   font-size:20px;
 }
 .sc-circle i {
-  font-size:22px;
-  color:#e93b5f;
+  font-size:18px;
+  color:#fff;
 }
-.si-1{background:#FFF9F9}.si-2{background:#F5FFF6}.si-3{background:#F5F8FF}
-.si-4{background:#F8F5FF}.si-5{background:#FFF5F5}.si-6{background:#FFFDF0}
-.si-7{background:#F0FDFF}.si-8{background:#F5FFF7}.si-9{background:#FFFAF0}.si-10{background:#FFF5F8}
+.si-1{background:#6C63FF}.si-2{background:#EC4899}.si-3{background:#F59E0B}
+.si-4{background:#10B981}.si-5{background:#3B82F6}.si-6{background:#F97316}
+.si-7{background:#8B5CF6}.si-8{background:#06B6D4}.si-9{background:#14B8A6}.si-10{background:#64748B}
 .sc-label{font-size:10px;color:var(--ts);font-weight:500;white-space:nowrap;text-align:center}
 .market-info-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(17,24,39,.46);z-index:900}
 .market-info-overlay.open{display:flex}
 .market-info-popup{width:min(742px,calc(100vw - 28px));max-width:430px;background:#f5f7fa;border:1px solid #d9dee6;box-shadow:0 18px 48px rgba(15,23,42,.2);position:relative}
 .market-info-close{position:absolute;top:10px;right:10px;width:28px;height:28px;border:0;background:#fff;color:#697386;border-radius:4px;display:grid;place-items:center;z-index:2}
 .market-info-body{display:grid;grid-template-columns:1fr;gap:20px;padding:14px}
+.convenience-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(17,24,39,.46);z-index:910}
+.convenience-overlay.open{display:flex}
+.convenience-popup{width:min(742px,calc(100vw - 28px));max-width:430px;background:#fff;border:1px solid var(--border);box-shadow:0 18px 48px rgba(15,23,42,.2);position:relative}
+.convenience-head{height:50px;padding:0 46px 0 16px;border-bottom:1px solid var(--border);display:flex;align-items:center}
+.convenience-title{font-size:15px;font-weight:900;color:#111827}
+.convenience-close{position:absolute;top:10px;right:10px;width:28px;height:28px;border:0;background:#F5F7FA;color:#697386;border-radius:4px;display:grid;place-items:center;z-index:2}
+.convenience-tabs{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);background:#fbfcfd}
+.convenience-tab{min-height:44px;padding:8px;border:0;border-right:1px solid var(--border);border-bottom:1px solid var(--border);background:transparent;color:#5D6675;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer;word-break:keep-all;line-height:1.25}
+.convenience-tab:nth-child(2){border-right:0}
+.convenience-tab:hover,.convenience-tab.active{background:#fff;color:var(--rose)}
+.convenience-tab.active{box-shadow:inset 0 -3px 0 var(--rose)}
+.convenience-body{padding:16px;min-height:150px;background:#fff}
+.convenience-panel{display:none}
+.convenience-panel.active{display:block}
+.convenience-panel-title{font-size:14px;font-weight:900;color:#111827;margin-bottom:6px}
+.convenience-panel-desc{font-size:12px;color:#6B7280;line-height:1.6}
 .office-grid{display:grid;grid-template-columns:1fr;background:#fff;border:0}
 .office-card{min-height:92px;padding:10px 12px 8px 10px;border:0;display:flex;align-items:center;gap:8px}
 .office-card+.office-card{border-top:1px solid #f0f2f5}
@@ -736,15 +750,15 @@ button.user-menu-item{
     <div class="shortcut-wrap">
       <div class="shortcut-grid">
         <div class="sc-item" role="button" tabindex="0" onclick="openCustomsTaxPopup()" onkeydown="handleShortcutKey(event, openCustomsTaxPopup)"><div class="sc-circle si-1"><i class="fas fa-table-cells-large"></i></div><span class="sc-label">예상 세금계산기</span></div>
-        <div class="sc-item"><div class="sc-circle si-2"><i class="fas fa-heart"></i></div><span class="sc-label">관심상품</span></div>
-        <a class="sc-item" href="mobile_mypage.html"><div class="sc-circle si-3"><i class="fas fa-gavel"></i></div><span class="sc-label">나의 경매</span></a>
-        <a class="sc-item" href="mobile_bundle_shipping_management.html"><div class="sc-circle si-4"><i class="fas fa-boxes-stacked"></i></div><span class="sc-label">배송 신청 관리</span></a>
+        <div class="sc-item" role="button" tabindex="0" onclick="openWishlistPopup()" onkeydown="handleShortcutKey(event, openWishlistPopup)"><div class="sc-circle si-2"><i class="fas fa-heart"></i></div><span class="sc-label">관심상품</span></div>
+        <a class="sc-item" href="mobile_auction_bid_list.html"><div class="sc-circle si-3"><i class="fas fa-gavel"></i></div><span class="sc-label">나의 경매</span></a>
+        <a class="sc-item" href="mobile_bundle_shipping_management.html"><div class="sc-circle si-4"><i class="fas fa-box-open"></i></div><span class="sc-label">배송 신청 관리</span></a>
         <div class="sc-item" role="button" tabindex="0" onclick="openMarketInfoPopup()" onkeydown="handleShortcutKey(event, openMarketInfoPopup)"><div class="sc-circle si-5"><i class="fas fa-thumbs-up"></i></div><span class="sc-label">국가별 운영정보</span></div>
-        <a class="sc-item" href="mobile_grade_page.html"><div class="sc-circle si-6"><i class="fas fa-gift"></i></div><span class="sc-label">등급 혜택</span></a>
+        <div class="sc-item" role="button" tabindex="0" onclick="openConvenienceToolsPopup()" onkeydown="handleShortcutKey(event, openConvenienceToolsPopup)"><div class="sc-circle si-6"><i class="fas fa-toolbox"></i></div><span class="sc-label">편의도구</span></div>
         <a class="sc-item" href="mobile_mileage.html"><div class="sc-circle si-7"><i class="fas fa-ticket"></i></div><span class="sc-label">마일리지/쿠폰</span></a>
-        <div class="sc-item"><div class="sc-circle si-8"><i class="fas fa-clipboard-list"></i></div><span class="sc-label">이용가이드</span></div>
-        <div class="sc-item" onclick="location.href='mobile_mypage.html?status=international-shipping'"><div class="sc-circle si-9"><i class="fas fa-truck-fast"></i></div><span class="sc-label">배송조회</span></div>
-        <a class="sc-item" href="https://m.blog.naver.com/bidbuykr?tab=1"><div class="sc-circle si-10"><i class="fas fa-comments"></i></div><span class="sc-label">커뮤니티</span></a>
+        <div class="sc-item" role="button" tabindex="0" onclick="openbidbuycsPopup()" onkeydown="handleShortcutKey(event, openbidbuycsPopup)"><div class="sc-circle si-8"><i class="fas fa-clipboard-list"></i></div><span class="sc-label">자주하는질문</span></div>
+        <div class="sc-item" onclick="location.href='mobile_mainlist.html?status=international-shipping'"><div class="sc-circle si-9"><i class="fas fa-plane-departure"></i></div><span class="sc-label">배송조회</span></div>
+        <a class="sc-item" href="https://m.blog.naver.com/bidbuykr?tab=1"><div class="sc-circle si-10"><i class="fas fa-users"></i></div><span class="sc-label">커뮤니티</span></a>
       </div>
     </div>
 
@@ -1032,6 +1046,35 @@ button.user-menu-item{
   </div>
 </div>
 
+<div class="convenience-overlay" id="convenienceToolsPopup" aria-hidden="true" onclick="closeConvenienceToolsPopup(event)">
+  <div class="convenience-popup" role="dialog" aria-modal="true" aria-label="편의도구">
+    <div class="convenience-head">
+      <div class="convenience-title">편의도구</div>
+    </div>
+    <button class="convenience-close" type="button" aria-label="닫기" onclick="closeConvenienceToolsPopup()"><i class="fas fa-times" aria-hidden="true"></i></button>
+    <div class="convenience-tabs" role="tablist" aria-label="편의도구 탭">
+      <button class="convenience-tab" type="button" onclick="goPersonalCustomsCode()">개인통관고유부호</button>
+      <button class="convenience-tab active" type="button" role="tab" aria-selected="true" aria-controls="conveniencePanelUnit" onclick="switchConvenienceTab(this,'conveniencePanelUnit')">단위변환</button>
+      <button class="convenience-tab" type="button" role="tab" aria-selected="false" aria-controls="conveniencePanelSize" onclick="switchConvenienceTab(this,'conveniencePanelSize')">해외 사이즈표</button>
+      <button class="convenience-tab" type="button" role="tab" aria-selected="false" aria-controls="conveniencePanelEms" onclick="switchConvenienceTab(this,'conveniencePanelEms')">EMS 발송 제한 품목</button>
+    </div>
+    <div class="convenience-body">
+      <div class="convenience-panel active" id="conveniencePanelUnit" role="tabpanel">
+        <div class="convenience-panel-title">단위변환</div>
+        <p class="convenience-panel-desc">무게, 길이, 부피 등 해외 상품 정보 확인에 필요한 단위 변환 도구 영역입니다.</p>
+      </div>
+      <div class="convenience-panel" id="conveniencePanelSize" role="tabpanel">
+        <div class="convenience-panel-title">해외 사이즈표</div>
+        <p class="convenience-panel-desc">국가별 의류, 신발 사이즈 비교표를 확인하는 영역입니다.</p>
+      </div>
+      <div class="convenience-panel" id="conveniencePanelEms" role="tabpanel">
+        <div class="convenience-panel-title">EMS 발송 제한 품목</div>
+        <p class="convenience-panel-desc">국제 배송 시 발송이 제한되거나 금지되는 품목 안내 영역입니다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="bb-common-mobile.js"></script>
 <script>
 // openDrawer/closeDrawer/openUserDrawer/closeUserDrawer/toggleLogin now
@@ -1117,6 +1160,57 @@ function handleShortcutKey(event, callback) {
   event.preventDefault();
   callback();
 }
+
+function openWishlistPopup() {
+  const url = 'https://www.bidbuy.co.kr/mypage/order/wishlist';
+  window.open(url, 'wishlist', 'width=1100,height=820,top=80,left=120,scrollbars=yes,resizable=yes');
+}
+
+function openbidbuycsPopup() {
+  const url = 'https://www.bidbuy.co.kr/cs';
+  window.open(url, 'bidbuycs', 'width=1100,height=820,top=80,left=120,scrollbars=yes,resizable=yes');
+}
+
+function openConvenienceToolsPopup() {
+  const popup = document.getElementById('convenienceToolsPopup');
+  if (!popup) return;
+  popup.classList.add('open');
+  popup.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeConvenienceToolsPopup(event) {
+  const popup = document.getElementById('convenienceToolsPopup');
+  if (!popup) return;
+  if (event && event.target !== popup) return;
+  popup.classList.remove('open');
+  popup.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+function switchConvenienceTab(tab, panelId) {
+  document.querySelectorAll('.convenience-tab[role="tab"]').forEach(btn => {
+    btn.classList.remove('active');
+    btn.setAttribute('aria-selected', 'false');
+  });
+  document.querySelectorAll('.convenience-panel').forEach(panel => panel.classList.remove('active'));
+  tab.classList.add('active');
+  tab.setAttribute('aria-selected', 'true');
+  document.getElementById(panelId)?.classList.add('active');
+}
+
+function goPersonalCustomsCode() {
+  window.location.href = 'https://unipass.customs.go.kr/per/persIndex.do';
+}
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && document.getElementById('convenienceToolsPopup')?.classList.contains('open')) {
+    closeConvenienceToolsPopup();
+  }
+  if (event.key === 'Escape' && document.getElementById('marketInfoPopup')?.classList.contains('open')) {
+    closeMarketInfoPopup();
+  }
+});
 
 function getZonedParts(date, timeZone) {
   return Object.fromEntries(new Intl.DateTimeFormat('en-US', {
