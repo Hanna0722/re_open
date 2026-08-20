@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이용후기 | BidBuy Korea</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Inter:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{
+  --rose:#E8385A;--rose-h:#C42F4C;--amber:#F5A623;
+  --navy:#1A3C6E;--green:#3AAD4E;
+  --bg:#F5F7FA;--white:#fff;--border:#E0E4EB;
+  --tp:#1A1A2E;--ts:#666680;--tm:#999BAA;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;background:var(--bg);color:var(--tp);font-size:14px;line-height:1.5}
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+button,select{cursor:pointer}
+/* 숫자·날짜·시간은 Roboto (브랜드 타이포 규칙) */
+.roboto,.num{font-family:'Roboto',sans-serif}
+.bs-meta span:first-of-type,.rv-meta span:first-child,.pager button{font-family:'Roboto',sans-serif}
+
+.rvp{max-width:1180px;margin:0 auto;padding:28px 24px 64px}
+
+/* ── 페이지 타이틀 ── */
+.rvp-head{margin-bottom:20px}
+.rvp-head h1{font-size:24px;font-weight:800;letter-spacing:-.3px}
+.rvp-head p{margin-top:6px;font-size:13px;color:var(--ts)}
+
+/* ══ BEST 후기 캐러셀 ══ */
+.best-sec{position:relative;background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:36px}
+.best-bar{display:flex;align-items:center;gap:10px;padding:14px 20px;border-bottom:1px solid var(--border);background:linear-gradient(90deg,#FFF7F9,#fff)}
+.best-bar .bb-crown{width:26px;height:26px;border-radius:50%;background:var(--amber);color:#fff;display:grid;place-items:center;font-size:12px;flex-shrink:0}
+.best-bar h2{font-size:16px;font-weight:800}
+.best-bar .bb-sub{font-size:13px;color:var(--tm)}
+/* 좌우 스크롤 + 양옆 후기가 살짝 보이며 가장자리로 페이드아웃 */
+.best-viewport{
+  overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;-ms-overflow-style:none;
+  padding:20px 0 6px;background:#FAFBFC;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%);
+}
+.best-viewport::-webkit-scrollbar{display:none}
+.best-track{display:flex;gap:16px;padding:0}
+.best-slide{
+  flex:0 0 62%;min-width:0;
+  scroll-snap-align:center;
+  display:grid;grid-template-columns:76px minmax(0,1fr) 140px;align-items:center;gap:18px;
+  padding:20px 22px;
+  border:1px solid var(--border);border-radius:12px;background:#fff;
+  box-shadow:0 1px 4px rgba(0,0,0,.04);
+  opacity:.45;transition:opacity .3s ease;
+}
+.best-slide.is-active{opacity:1}
+.bs-rank{display:grid;justify-items:center;gap:6px}
+.bs-medal{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#FFD874,#F5A623);color:#fff;display:grid;place-items:center;font-size:22px;box-shadow:0 6px 16px rgba(245,166,35,.28)}
+.bs-rank-label{display:inline-flex;align-items:center;height:24px;padding:0 8px;border-radius:5px;background:#FFF7E6;color:var(--amber);font-size:13px;font-weight:600;letter-spacing:0}
+.bs-body{min-width:0}
+.bs-meta-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.country-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border:1px solid var(--border);border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.06);overflow:hidden;flex:0 0 auto}
+.country-badge img{width:100%;height:100%;object-fit:cover;display:block}
+.rv-badge{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;padding:3px 11px;border-radius:5px;background:#EAF1FB;color:var(--navy)}
+.rv-badge.buy{background:#FFF5F7;color:var(--rose)}
+.bs-title{font-size:15px;font-weight:700;line-height:1.4;margin-bottom:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bs-text{font-size:13px;color:var(--ts);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bs-meta{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:13px;color:var(--tm)}
+.bs-meta .dot{width:3px;height:3px;border-radius:50%;background:#D5D9E0}
+.bs-grade{color:var(--navy);font-weight:700}
+.bs-thumb{width:140px;height:108px;border-radius:10px;overflow:hidden;background:var(--bg)}
+.bs-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+.best-arrow{position:absolute;top:calc(50% + 20px);transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.96);color:var(--ts);display:grid;place-items:center;font-size:12px;box-shadow:0 2px 10px rgba(0,0,0,.08);transition:all .15s;z-index:2;padding:0}
+.best-arrow:hover{border-color:var(--rose);color:var(--rose)}
+.best-arrow.prev{left:12px}
+.best-arrow.next{right:12px}
+.best-dots{display:flex;align-items:center;justify-content:center;gap:7px;padding:14px 0 18px}
+.best-dot{width:7px;height:7px;border-radius:50%;border:0;background:#DDE1E8;padding:0;transition:all .18s}
+.best-dot.active{width:20px;border-radius:4px;background:var(--rose)}
+
+/* ══ 통합 후기 목록 ══ */
+.list-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding-bottom:12px;border-bottom:2px solid var(--tp);flex-wrap:wrap}
+.list-head h2{font-size:18px;font-weight:800}
+.list-head .lh-left{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.list-head .lh-total{font-size:13px;color:var(--ts)}
+.list-head .lh-total b{font-family:'Roboto',sans-serif;color:var(--tp)}
+
+.rv-list{background:#fff;border:1px solid var(--border);border-top:0;border-radius:0 0 12px 12px}
+/* 1열 사진 · 2열 상품명+후기내용 · 3열 아이디/평점/작성일 */
+.rv-row{display:grid;grid-template-columns:132px minmax(0,1fr) 172px;align-items:flex-start;gap:24px;padding:22px 24px;border-bottom:1px solid #F0F2F5;cursor:pointer;transition:background .15s}
+.rv-row:last-child{border-bottom:0}
+.rv-row:hover{background:#FCFCFD}
+.rv-row:focus-visible{outline:2px solid rgba(232,56,90,.35);outline-offset:-2px}
+.rv-body{min-width:0}
+.rv-side{display:flex;flex-direction:column;align-items:flex-end;gap:7px;padding-top:2px;text-align:right}
+.rv-side-id{font-family:'Roboto',sans-serif;font-size:13px;font-weight:700;color:var(--tp)}
+.rv-stars{color:#F59E0B;font-size:14px;letter-spacing:1px;line-height:1}
+.rv-side-date{font-family:'Roboto',sans-serif;font-size:13px;color:var(--tm)}
+.rv-top{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.tag-new{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:5px;background:var(--rose);color:#fff;font-size:13px;font-weight:600;letter-spacing:0}
+.rv-title{font-size:14px;font-weight:700;line-height:1.45;margin-bottom:5px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+/* 후기 본문은 2~5줄로 작성되며 3줄을 넘으면 생략 */
+.rv-text{font-size:13px;color:var(--ts);line-height:1.6;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+.rv-thumb{grid-column:1;grid-row:1;width:132px;height:132px;border-radius:8px;overflow:hidden;background:var(--bg)}
+/* 사진 없는 텍스트 후기: 사진 칸을 없애고 본문이 당겨진다 */
+.rv-row.no-photo{grid-template-columns:minmax(0,1fr) 172px}
+.rv-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.rv-row.is-open{background:#fff}
+.rv-row.is-open .rv-title,.rv-row.is-open .rv-text{display:block;overflow:visible;-webkit-line-clamp:unset;-webkit-box-orient:initial}
+.rv-row.is-open .rv-thumb{width:132px;height:auto;aspect-ratio:1}
+
+/* 페이지네이션 */
+.pager{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:28px}
+.pager button{min-width:34px;height:34px;padding:0 10px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--ts);font-size:13px;font-weight:600}
+.pager button.active{background:var(--rose);border-color:var(--rose);color:#fff;font-weight:700}
+.pager button:disabled{color:#D5D9E0}
+
+@media (max-width:900px){
+  .best-slide{flex:0 0 84%;grid-template-columns:60px minmax(0,1fr);padding:16px 18px;gap:14px}
+  .bs-thumb{display:none}
+  .bs-medal{width:46px;height:46px;font-size:19px}
+  .rv-row{grid-template-columns:96px minmax(0,1fr) 128px;gap:14px;padding:16px}
+  .rv-row.no-photo{grid-template-columns:minmax(0,1fr) 128px}
+  .rv-thumb{width:96px;height:96px}
+  .rv-row.is-open .rv-thumb{width:96px}
+}
+</style>
+</head>
+<body>
+
+<header id="bbCommonHeader" class="bbh-header"></header>
+
+<div class="rvp">
+
+  <div class="rvp-head">
+    <h1>비드바이 이용후기</h1>
+  </div>
+
+  <!-- ══ BEST 후기 캐러셀 ══ -->
+  <section class="best-sec" id="bestSec" aria-label="베스트 후기">
+    <div class="best-bar">
+      <span class="bb-crown"><i class="fas fa-crown" aria-hidden="true"></i></span>
+      <h2>BEST 후기</h2>
+      <span class="bb-sub">비드바이가 선정한 추천 후기</span>
+    </div>
+
+    <div class="best-viewport">
+      <div class="best-track" id="bestTrack">
+
+        <article class="best-slide">
+          <div class="bs-rank"><span class="bs-medal"><i class="fas fa-crown" aria-hidden="true"></i></span><span class="bs-rank-label">BEST</span></div>
+          <div class="bs-body">
+            <div class="bs-meta-top">
+              <span class="country-badge"><img src="../images/icon/country_jp.png" alt="일본"></span><span class="rv-badge">경매</span>
+            </div>
+            <h3 class="bs-title">우량품 브로바 96 B241 순정 팽이 4 팽이 실비 20융 맨즈 손목시계용 KRH 2000000 NSK</h3>
+            <p class="bs-text">국내에서 구할 수가 없어 찾아보던 중 같은 시계 여분 코를 구해서 행복합니다. 사이즈까지 딱 맞아서 더 만족스러웠어요.</p>
+            <div class="bs-meta"><span>2026.07.18</span><i class="dot"></i><span class="rv-id">gkd***</span><i class="dot"></i><span class="bs-grade">신규회원</span></div>
+          </div>
+          <div class="bs-thumb"><img src="https://picsum.photos/seed/best1/360/280" alt=""></div>
+        </article>
+
+        <article class="best-slide">
+          <div class="bs-rank"><span class="bs-medal"><i class="fas fa-crown" aria-hidden="true"></i></span><span class="bs-rank-label">BEST</span></div>
+          <div class="bs-body">
+            <div class="bs-meta-top">
+              <span class="country-badge"><img src="../images/icon/country_jp.png" alt="일본"></span><span class="rv-badge">경매</span>
+            </div>
+            <h3 class="bs-title">미품 KUSHITANI 쿠시타니 K-5574 GP-ZEST GP제스토윈타그로브 L사이즈 블랙계흑계 32776-60</h3>
+            <p class="bs-text">빠른 배송 감사합니다. 사진보다 상태가 훨씬 좋았고 포장도 꼼꼼해서 파손 걱정 없이 잘 받았습니다.</p>
+            <div class="bs-meta"><span>2026.07.18</span><i class="dot"></i><span class="rv-id">sta***</span><i class="dot"></i><span class="bs-grade">우수회원</span></div>
+          </div>
+          <div class="bs-thumb"><img src="https://picsum.photos/seed/best2/360/280" alt=""></div>
+        </article>
+
+        <article class="best-slide">
+          <div class="bs-rank"><span class="bs-medal"><i class="fas fa-crown" aria-hidden="true"></i></span><span class="bs-rank-label">BEST</span></div>
+          <div class="bs-body">
+            <div class="bs-meta-top">
+              <span class="country-badge"><img src="../images/icon/country_jp.png" alt="일본"></span><span class="rv-badge buy">구매</span>
+            </div>
+            <h3 class="bs-title">Orobianco 매쉬 벨트(손목시계) 실비 [공구 불필요]</h3>
+            <p class="bs-text">국내에서 구입하기 힘든 제품을 비드바이를 통해서 구입할 수 있어 좋습니다. 다음에도 이용할 예정이에요.</p>
+            <div class="bs-meta"><span>2026.07.17</span><i class="dot"></i><span class="rv-id">fox***</span><i class="dot"></i><span class="bs-grade">프리미엄</span></div>
+          </div>
+          <div class="bs-thumb"><img src="https://picsum.photos/seed/best3/360/280" alt=""></div>
+        </article>
+
+        <article class="best-slide">
+          <div class="bs-rank"><span class="bs-medal"><i class="fas fa-crown" aria-hidden="true"></i></span><span class="bs-rank-label">BEST</span></div>
+          <div class="bs-body">
+            <div class="bs-meta-top">
+              <span class="country-badge"><img src="../images/icon/country_usa.png" alt="미국"></span><span class="rv-badge">경매</span>
+            </div>
+            <h3 class="bs-title">Leica 3.5cm f3.5 Elmar Chr L39 SM Wide Angle Lens w/Caps f/Leica IIIg/IIIF Minty</h3>
+            <p class="bs-text">좀 오래됐지만 안전하게 잘 도착했습니다. 렌즈 상태도 좋고 라이카 올드렌즈 답게 글로우와 플레어 선예도 잘 나옵니다.</p>
+            <div class="bs-meta"><span>2026.07.17</span><i class="dot"></i><span class="rv-id">hid***</span><i class="dot"></i><span class="bs-grade">신규회원</span></div>
+          </div>
+          <div class="bs-thumb"><img src="https://picsum.photos/seed/best4/360/280" alt=""></div>
+        </article>
+
+        <article class="best-slide">
+          <div class="bs-rank"><span class="bs-medal"><i class="fas fa-crown" aria-hidden="true"></i></span><span class="bs-rank-label">BEST</span></div>
+          <div class="bs-body">
+            <div class="bs-meta-top">
+              <span class="country-badge"><img src="../images/icon/country_uk.svg" alt="영국"></span><span class="rv-badge buy">구매</span>
+            </div>
+            <h3 class="bs-title">Seiko Prospex SBDC101 Diver Scuba 다이버 시계 정품 박스 풀세트</h3>
+            <p class="bs-text">영국 이베이는 처음이었는데 CS 응대가 빠르고 친절해서 좋았어요. 배송 매니징까지 만족스러웠습니다.</p>
+            <div class="bs-meta"><span>2026.07.16</span><i class="dot"></i><span class="rv-id">jun***</span><i class="dot"></i><span class="bs-grade">VIP Club</span></div>
+          </div>
+          <div class="bs-thumb"><img src="https://picsum.photos/seed/best5/360/280" alt=""></div>
+        </article>
+
+      </div>
+    </div>
+
+    <button class="best-arrow prev" type="button" id="bestPrev" aria-label="이전 후기"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+    <button class="best-arrow next" type="button" id="bestNext" aria-label="다음 후기"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+
+    <div class="best-dots" id="bestDots" role="tablist" aria-label="베스트 후기 선택"></div>
+  </section>
+
+  <!-- ══ 통합 후기 목록 (시간순) ══ -->
+  <div class="list-head">
+    <div class="lh-left">
+      <h2>전체 후기</h2>
+    </div>
+    <span class="lh-total">전체 <b>55,151</b>건</span>
+  </div>
+
+  <div class="rv-list" id="rvList">
+
+    <article class="rv-row" data-today="1">
+      <div class="rv-thumb"><img src="https://picsum.photos/seed/rvw1/240/200" alt=""></div>
+      <div class="rv-body">
+        <div class="rv-top"><span class="country-badge"><img src="../images/icon/country_jp.png" alt="일본"></span><span class="rv-badge">경매</span><span class="tag-new">NEW</span></div>
+        <h3 class="rv-title">미품 KUSHITANI 쿠시타니 K-5574 GP-ZEST GP제스토윈타그로브 L사이즈 블랙계흑계 32776-60</h3>
+        <p class="rv-text">빠른 배송 감사합니다. 사진보다 상태가 훨씬 좋았습니다.<br>포장도 꼼꼼해서 파손 걱정 없이 잘 받았어요.</p>
+      </div>
+      <div class="rv-side"><div class="rv-side-id">sta***</div><div class="rv-stars" aria-label="5점 만점">★★★★★</div><div class="rv-side-date">2026.07.18</div></div>
+    </article>
+
+    <article class="rv-row no-photo" data-today="1">
+      <div class="rv-body">
+        <div class="rv-top"><span class="country-badge"><img src="../images/icon/country_jp.png" alt="일본"></span><span class="rv-badge">경매</span><span class="tag-new">NEW</span></div>
+        <h3 class="rv-title">TRUST 트러스트 GReddy 라지에타캐프 (N타입) 크레 스튜디오 GX100/JZX100/JZX101/JZX105</h3>
+        <p class="rv-text">박스구성이 탄탄하고 안전하게 잘 받았습니다.<br>국내에서는 구하기 어려운 부품이라 반신반의했는데 현지 확인 사진까지 보내주셔서 믿고 기다릴 수 있었습니다.<br>다음에도 같은 제품이 나오면 또 신청할 예정입니다.</p>
+      </div>
+      <div class="rv-side"><div class="rv-side-id">zkv***</div><div class="rv-stars" aria-label="5점 만점">★★★★★</div><div class="rv-side-date">2026.07.18</div></div>
+    </article>
+
+    <article class="rv-row no-photo" data-today="1">
+      <div class="rv-body">
+        <div class="rv-top"><span class="country-badge"><img src="../images/icon/country_jp.png" alt="일본"></span><span class="rv-badge buy">구매</span><span class="tag-new">NEW</span></div>
+        <h3 class="rv-title">Orobianco 매쉬 벨트(손목시계) 실비 [공구 불필요]</h3>
+        <p class="rv-text">국내에서 구입하기 힘든 제품을 비드바이를 통해서 구입할 수 있어 좋습니다.<br>신청부터 결제까지 과정이 간단했고 담당자분 응대도 친절했습니다.</p>
+      </div>
+      <div class="rv-side"><div class="rv-side-id">fox***</div><div class="rv-stars" aria-label="5점 만점">★★★★★</div><div class="rv-side-date">2026.07.18</div></div>
+    </article>
+
+    <article class="rv-row" data-today="1">
+      <div class="rv-thumb"><img src="https://picsum.photos/seed/rvw4/240/200" alt=""></div>
+      <div class="rv-body">
+        <div class="rv-top"><span class="country-badge"><img src="../images/icon/country_jp.png" alt="일본"></span><span class="rv-badge">경매</span><span class="tag-new">NEW</span></div>
+        <h3 class="rv-title">[결정] 20mm 은빛 STELUX 스테락스 손목시계 벨트 손목시계 반도비테지 보관품</h3>
+        <p class="rv-text">국내에서 판매하지 않는 제품이라 미국 경매 출품 건을 비드바이 통해 구매했습니다.<br>현지 운반과 현지 도착 사진까지 단계별로 안내해 주셔서 진행 상황을 계속 확인할 수 있었어요.<br>배송도 예상보다 빨라서 만족스럽습니다.<br>다음 구매에도 이용하겠습니다.</p>
+      </div>
+      <div class="rv-side"><div class="rv-side-id">fox***</div><div class="rv-stars" aria-label="5점 만점">★★★★★</div><div class="rv-side-date">2026.07.18</div></div>
+    </article>
+
+    <article class="rv-row" data-today="1">
+      <div class="rv-thumb"><img src="https://picsum.photos/seed/rvw5/240/200" alt=""></div>
+      <div class="rv-body">
+        <div class="rv-top"><span class="country-badge"><img src="../images/icon/country_usa.png" alt="미국"></span><span class="rv-badge">경매</span><span class="tag-new">NEW</span></div>
+        <h3 class="rv-title">Leica 3.5cm f3.5 Elmar Chr L39 SM Wide Angle Lens w/Caps f/Leica IIIg/IIIF Minty</h3>
+        <p class="rv-text">좀 오래된 물건이지만 안전하게 잘 도착했습니다.<br>렌즈 상태도 좋고 올드렌즈 특유의 글로우와 플레어, 선예도 모두 기대한 그대로였습니다.</p>
+      </div>
+      <div class="rv-side"><div class="rv-side-id">hid***</div><div class="rv-stars" aria-label="5점 만점">★★★★★</div><div class="rv-side-date">2026.07.18</div></div>
+    </article>
+
+    <article class="rv-row no-photo" data-today="1">
+      <div class="rv-body">
+        <div class="rv-top"><span class="country-badge"><img src="../images/icon/country_jp.png" alt="일본"></span><span class="rv-badge">경매</span><span class="tag-new">NEW</span></div>
+        <h3 class="rv-title">DENON 데논 CD플레이어 DCD-755 RE 픽업 신품 810016072607</h3>
+        <p class="rv-text">도착했는데 충격을 받았는지 작동이 되지 않네요.<br>확인 부탁드립니다.</p>
+      </div>
+      <div class="rv-side"><div class="rv-side-id">jaz***</div><div class="rv-stars" aria-label="5점 만점">★★★★★</div><div class="rv-side-date">2026.07.18</div></div>
+    </article>
+
+    <article class="rv-row" data-today="1">
+      <div class="rv-thumb"><img src="https://picsum.photos/seed/rvw7/240/200" alt=""></div>
+      <div class="rv-body">
+        <div class="rv-top"><span class="country-badge"><img src="../images/icon/country_jp.png" alt="일본"></span><span class="rv-badge">경매</span><span class="tag-new">NEW</span></div>
+        <h3 class="rv-title">[치] 조선 미술 통제 매화꽃 조신선☆폭 24.2cm 무게 1769g 궁정 요리기 이조 이왕가화과 신선로 냄비 TQ222</h3>
+        <p class="rv-text">잘 받았습니다. 꼼꼼한 포장 감사합니다.<br>요청드린 대로 완충재를 넉넉히 넣어주셔서 흠집 하나 없이 도착했습니다.</p>
+      </div>
+      <div class="rv-side"><div class="rv-side-id">ryx***</div><div class="rv-stars" aria-label="5점 만점">★★★★★</div><div class="rv-side-date">2026.07.18</div></div>
+    </article>
+
+    <article class="rv-row" data-today="1">
+      <div class="rv-thumb"><img src="https://picsum.photos/seed/rvfill7/240/240" alt=""></div>
+      <div class="rv-body">
+        <div class="rv-top"><span class="country-badge"><img src="../images/icon/country_jp.png" alt="일본"></span><span class="rv-badge">경매</span><span class="tag-new">NEW</span></div>
+        <h3 class="rv-title">운도명가 위탁품 지순탁 한국인간문화재 고려 이도다완 재명공상 고미술품(조선 미술 차도구) Y9359 LTghuy</h3>
+        <p class="rv-text">잘 받았습니다. 나무박스 안에 완충재가 조금 부족해서 작품이 흔들렸네요.<br>다음번엔 조금 더 꼼꼼한 포장 부탁드립니다.<br>그 외에는 응대도 배송도 만족스러웠습니다.</p>
+      </div>
+      <div class="rv-side"><div class="rv-side-id">ryx***</div><div class="rv-stars" aria-label="5점 만점">★★★★★</div><div class="rv-side-date">2026.07.18</div></div>
+    </article>
+
+    <article class="rv-row no-photo" data-today="1">
+      <div class="rv-body">
+        <div class="rv-top"><span class="country-badge"><img src="../images/icon/country_usa.png" alt="미국"></span><span class="rv-badge buy">구매</span><span class="tag-new">NEW</span></div>
+        <h3 class="rv-title">Buzz Lightyear Signature Collection Talking Figure 미개봉 정품</h3>
+        <p class="rv-text">배송비와 관세까지 미리 안내해 주셔서 예상 밖 지출이 없었습니다.<br>금액 계산이 정확해서 믿고 맡길 수 있었어요.<br>다음에도 이용할 생각입니다.</p>
+      </div>
+      <div class="rv-side"><div class="rv-side-id">kmj***</div><div class="rv-stars" aria-label="5점 만점">★★★★★</div><div class="rv-side-date">2026.07.18</div></div>
+    </article>
+
+    <article class="rv-row no-photo">
+      <div class="rv-body">
+        <div class="rv-top"><span class="country-badge"><img src="../images/icon/country_jp.png" alt="일본"></span><span class="rv-badge">경매</span></div>
+        <h3 class="rv-title">진재 작품 유근□작 청자 방공기 모두 사시나무해강 높이 6cm 구경 12.5cm 인간문화재 34260577-3</h3>
+        <p class="rv-text">배송비 계산도 예상과 거의 맞아서 안심하고 받을 수 있었어요.<br>제품 상태 문의에 사진까지 보내주셔서 좋았습니다.</p>
+      </div>
+      <div class="rv-side"><div class="rv-side-id">ryx***</div><div class="rv-stars" aria-label="5점 만점">★★★★★</div><div class="rv-side-date">2026.07.17</div></div>
+    </article>
+
+    <article class="rv-row">
+      <div class="rv-thumb"><img src="https://picsum.photos/seed/rvw11/240/200" alt=""></div>
+      <div class="rv-body">
+        <div class="rv-top"><span class="country-badge"><img src="../images/icon/country_jp.png" alt="일본"></span><span class="rv-badge buy">구매</span></div>
+        <h3 class="rv-title">메루카리 Supreme 박스로고 티셔츠 L 사이즈 정품</h3>
+        <p class="rv-text">첫 해외경매였는데 입찰부터 낙찰까지 상담원분이 친절하게 안내해 주셨습니다.<br>혼자였으면 못 했을 것 같아요.<br>덕분에 원하던 물건을 좋은 가격에 얻었습니다.</p>
+      </div>
+      <div class="rv-side"><div class="rv-side-id">shn***</div><div class="rv-stars" aria-label="5점 만점">★★★★★</div><div class="rv-side-date">2026.07.17</div></div>
+    </article>
+
+    <article class="rv-row">
+      <div class="rv-thumb"><img src="https://picsum.photos/seed/rvfill11/240/240" alt=""></div>
+      <div class="rv-body">
+        <div class="rv-top"><span class="country-badge"><img src="../images/icon/country_uk.svg" alt="영국"></span><span class="rv-badge">경매</span></div>
+        <h3 class="rv-title">[치] 한인 사이 문화재 '지순탁' 작 고려자파학문화☆모두상자 높이 24.2cm 호화입 진재보 OS145</h3>
+        <p class="rv-text">영국 이베이는 처음이었는데 CS 응대가 빠르고 친절했습니다.<br>배송 관리까지 만족스러웠어요.</p>
+      </div>
+      <div class="rv-side"><div class="rv-side-id">ryx***</div><div class="rv-stars" aria-label="5점 만점">★★★★★</div><div class="rv-side-date">2026.07.16</div></div>
+    </article>
+
+  </div>
+
+  <div class="pager">
+    <button type="button" disabled aria-label="이전"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+    <button type="button" class="active">1</button>
+    <button type="button">2</button>
+    <button type="button">3</button>
+    <button type="button">4</button>
+    <button type="button">5</button>
+    <button type="button" aria-label="다음"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+  </div>
+
+</div>
+
+<script>
+/* ── BEST 후기 캐러셀 ──
+   가로 스크롤(스냅) + 자동 순환. 양옆 후기가 살짝 보이고 가장자리에서 페이드아웃.
+   원본을 앞뒤로 한 벌씩 복제해 3세트를 만들어, 끝에서 처음으로 되감기지 않고
+   좌우 어느 방향으로도 카드가 끊기지 않고 계속 이어진다. */
+(function () {
+  var track = document.getElementById('bestTrack');
+  var viewport = track.parentNode;
+  var dotsWrap = document.getElementById('bestDots');
+
+  var originals = Array.prototype.slice.call(track.children);
+  var N = originals.length;
+  if (!N) return;
+
+  // 뒤쪽 복제 → 오른쪽 끝이 비지 않는다
+  originals.forEach(function (el) {
+    var c = el.cloneNode(true);
+    c.setAttribute('aria-hidden', 'true');
+    track.appendChild(c);
+  });
+  // 앞쪽 복제 → 왼쪽 끝이 비지 않는다
+  originals.slice().reverse().forEach(function (el) {
+    var c = el.cloneNode(true);
+    c.setAttribute('aria-hidden', 'true');
+    track.insertBefore(c, track.firstChild);
+  });
+
+  var slides = track.children;          // [복제 N][원본 N][복제 N]
+  var pos = N;                          // 가운데 세트의 첫 장에서 시작
+  var timer = null, scrollRaf = null, settleTimer = null;
+  var paused = false, isJumping = false;
+  var DELAY = 5000;
+
+  for (var i = 0; i < N; i++) {
+    var dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'best-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', (i + 1) + '번째 후기 보기');
+    dot.dataset.index = i;
+    dot.addEventListener('click', function () { go(N + (+this.dataset.index)); });
+    dotsWrap.appendChild(dot);
+  }
+  var dots = dotsWrap.children;
+
+  function paint() {
+    var logical = ((pos % N) + N) % N;
+    for (var n = 0; n < N; n++) dots[n].classList.toggle('active', n === logical);
+    for (var m = 0; m < slides.length; m++) slides[m].classList.toggle('is-active', m === pos);
+  }
+
+  function scrollToPos(p, smooth) {
+    var sl = slides[p];
+    if (!sl) return;
+    var left = sl.offsetLeft - (viewport.clientWidth - sl.offsetWidth) / 2;
+    if (viewport.scrollTo) {
+      viewport.scrollTo({ left: left, behavior: smooth === false ? 'auto' : 'smooth' });
+    } else {
+      viewport.scrollLeft = left;
+    }
+  }
+
+  /* 복제 구간까지 흘러가면 같은 그림의 가운데 세트로 티 안 나게 옮겨 놓는다 */
+  function normalize() {
+    var p = pos;
+    if (p >= 2 * N) p -= N;
+    else if (p < N) p += N;
+    if (p === pos) return;
+    pos = p;
+    isJumping = true;
+    scrollToPos(pos, false);
+    requestAnimationFrame(function () { isJumping = false; paint(); });
+  }
+
+  function nearestPos() {
+    var center = viewport.scrollLeft + viewport.clientWidth / 2;
+    var nearest = pos, best = Infinity;
+    for (var n = 0; n < slides.length; n++) {
+      var d = Math.abs((slides[n].offsetLeft + slides[n].offsetWidth / 2) - center);
+      if (d < best) { best = d; nearest = n; }
+    }
+    return nearest;
+  }
+
+  /* 같은 카드의 가운데 세트 위치로 즉시(애니메이션 없이) 되돌린다 */
+  function recenter() {
+    var mid = N + (((pos % N) + N) % N);
+    if (mid === pos) return;
+    pos = mid;
+    isJumping = true;
+    scrollToPos(pos, false);
+    requestAnimationFrame(function () { isJumping = false; });
+  }
+
+  /* 한 칸 이동. 화살표를 연타해 복제 구간 끝까지 가더라도
+     배열 밖으로 나가기 전에 가운데 세트로 옮겨 계속 이어지게 한다. */
+  function step(delta) {
+    if (pos + delta < 1 || pos + delta > slides.length - 2) recenter();
+    pos += delta;
+    scrollToPos(pos);
+    paint();
+  }
+
+  function go(p) { pos = p; scrollToPos(pos); paint(); restart(); }
+  function tick() { step(1); }
+  function start() { if (!paused) timer = setInterval(tick, DELAY); }
+  function stop() { clearInterval(timer); timer = null; }
+  function restart() { stop(); start(); }
+
+  viewport.addEventListener('scroll', function () {
+    if (isJumping) return;
+    if (scrollRaf) cancelAnimationFrame(scrollRaf);
+    scrollRaf = requestAnimationFrame(function () {
+      var p = nearestPos();
+      if (p !== pos) { pos = p; paint(); }
+    });
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(normalize, 160);   // 스크롤이 멎은 뒤 자리 이동
+  }, { passive: true });
+
+  var sec = document.getElementById('bestSec');
+  sec.addEventListener('mouseenter', function () { paused = true; stop(); });
+  sec.addEventListener('mouseleave', function () { paused = false; restart(); });
+  viewport.addEventListener('touchstart', function () { paused = true; stop(); }, { passive: true });
+  viewport.addEventListener('touchend', function () { paused = false; restart(); }, { passive: true });
+
+  document.getElementById('bestPrev').addEventListener('click', function () { step(-1); restart(); });
+  document.getElementById('bestNext').addEventListener('click', function () { step(1); restart(); });
+
+  paint();
+  scrollToPos(pos, false);
+  start();
+})();
+
+/* 전체 후기: 클릭 시 본문 전체 펼치기 */
+(function () {
+  var rows = document.querySelectorAll('#rvList .rv-row');
+  rows.forEach(function (row) {
+    row.setAttribute('tabindex', '0');
+    row.setAttribute('role', 'button');
+    row.setAttribute('aria-expanded', 'false');
+  });
+
+  function toggleRow(row) {
+    var isOpen = row.classList.toggle('is-open');
+    row.setAttribute('aria-expanded', String(isOpen));
+  }
+
+  document.getElementById('rvList').addEventListener('click', function (event) {
+    var row = event.target.closest('.rv-row');
+    if (row) toggleRow(row);
+  });
+
+  document.getElementById('rvList').addEventListener('keydown', function (event) {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    var row = event.target.closest('.rv-row');
+    if (!row) return;
+    event.preventDefault();
+    toggleRow(row);
+  });
+})();
+</script>
+<script src="bb-common.js"></script>
+</body>
+</html>
