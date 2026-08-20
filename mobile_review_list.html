@@ -101,8 +101,8 @@ button,select{cursor:pointer}
 /* 후기 본문은 2~5줄로 작성되며 3줄을 넘으면 생략 */
 .rv-text{font-size:13px;color:var(--ts);line-height:1.55;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
 .rv-thumb{grid-area:thumb;width:84px;height:84px;border-radius:8px;overflow:hidden;background:var(--bg)}
-/* 사진 없는 텍스트 후기: 사진 칸을 없애고 본문이 당겨진다 */
-.rv-row.no-photo{grid-template-columns:minmax(0,1fr);grid-template-areas:"body" "side"}
+/* 사진 없는 텍스트 후기: 같은 1열에 텍스트 리뷰 placeholder를 둔다 */
+.rv-row.no-photo::before{content:"일반후기";grid-area:thumb;width:84px;height:84px;border-radius:8px;border:1px solid #E7ECF3;background:#F7F9FC;color:#9AA6B5;display:flex;align-items:center;justify-content:center;font-family:'Roboto',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;box-sizing:border-box}
 .rv-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .rv-row.is-open{background:#FCFCFD}
 .rv-row.is-open .rv-title,.rv-row.is-open .rv-text{display:block;overflow:visible;-webkit-line-clamp:unset;-webkit-box-orient:initial}
