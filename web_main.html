@@ -64,7 +64,7 @@ header{background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 4p
 .hb-btn:hover{background:var(--bg)}
 .hb-btn span{display:block;width:17px;height:2px;background:var(--tp);border-radius:1px}
 /* ???형 채널 ?이?그리??*/
-.channel-icons{display:flex;gap:16px;width:min(calc(100vw - 60px),640px);margin:0 auto;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity;touch-action:pan-x;padding:0 8px 2px}
+.channel-icons{display:flex;gap:16px;width:fit-content;max-width:min(calc(100vw - 60px),820px);margin:0 auto;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity;touch-action:pan-x;padding:0 8px 2px}
 .channel-icons::-webkit-scrollbar{display:none}
 .ch-icon-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:4px 14px;cursor:pointer;min-width:80px;flex:0 0 auto;scroll-snap-align:start;transition:opacity .15s}
 .ch-icon-item:hover{opacity:.8}
@@ -79,6 +79,7 @@ header{background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 4p
 }
 .ch-icon-item:hover .ch-circle{box-shadow:0 4px 14px rgba(0,0,0,.13)}
 .ch-circle img{width:38px;height:38px;object-fit:contain}
+.ch-circle img.ch-logo{width:100%;height:100%;object-fit:cover;border-radius:50%}
 /* ? 시 로고 (? 스??? 모지 조합) */
 .ch-circle-logo{width:38px;height:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
 .ch-circle-logo .flag{font-size:16px;line-height:1}
@@ -625,58 +626,7 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
 <!-- ????? 안: ? 형 채널 ? 이 ? ?-->
 <div class="channel-bar">
   <div class="channel-inner">
-    <div class="channel-icons">
-      <!-- ?시 로고: ?형 배경 + ?모지+?스??조합 -->
-      <div class="ch-icon-item" onclick="location.href='web_sub_main.html'" style="cursor:pointer">
-        <div class="ch-circle">
-          <div class="ch-circle-logo"><span class="flag">JP</span><span class="brand" style="color:#E60026;font-size:9px;font-weight:900">YAHOO!</span></div>
-        </div>
-        <span class="ch-label">야후 옥션</span>
-      </div>
-      <div class="ch-icon-item" onclick="location.href='web_sub_main.html'" style="cursor:pointer">
-        <div class="ch-circle">
-          <div class="ch-circle-logo"><span class="flag" style="font-size:18px;color:#19ce60;font-weight:900">M</span></div>
-        </div>
-        <span class="ch-label">메루카리</span>
-      </div>
-      <div class="ch-icon-item" onclick="location.href='web_sub_main.html'" style="cursor:pointer">
-        <div class="ch-circle">
-          <div class="ch-circle-logo"><span class="flag" style="font-size:14px;color:#BF0000;font-weight:900">楽天</span></div>
-        </div>
-        <span class="ch-label">일본 라쿠텐</span>
-      </div>
-      <div class="ch-icon-item" onclick="location.href='web_sub_main.html'" style="cursor:pointer">
-        <div class="ch-circle">
-          <div class="ch-circle-logo"><span class="flag" style="font-size:12px;color:#BF0000;font-weight:700">Rakuten</span></div>
-        </div>
-        <span class="ch-label">일본 라쿠마</span>
-      </div>
-      <div class="ch-icon-item" onclick="location.href='web_sub_main.html'" style="cursor:pointer">
-        <div class="ch-circle">
-          <div class="ch-circle-logo"><span class="flag" style="font-size:12px;color:#FF9900;font-weight:900">amazon</span></div>
-        </div>
-        <span class="ch-label">야후 쇼핑</span>
-      </div>
-      <div class="ch-icon-item" onclick="location.href='web_sub_main.html'" style="cursor:pointer">
-        <div class="ch-circle">
-          <div class="ch-circle-logo"><span class="flag" style="font-size:12px;color:#FF9900;font-weight:900">amazon</span></div>
-        </div>
-        <span class="ch-label">일본 아마존</span>
-      </div>
-      <div class="ch-icon-item" onclick="location.href='web_sub_main.html'" style="cursor:pointer">
-        <div class="ch-circle">
-          <div class="ch-circle-logo"><span class="flag">US</span><span class="brand" style="font-size:9px;font-weight:700;color:#E53238">eBay</span></div>
-        </div>
-        <span class="ch-label">미국 이베이</span>
-      </div>
-      <div class="ch-icon-item" onclick="location.href='web_sub_main.html'" style="cursor:pointer">
-        <div class="ch-circle">
-          <div class="ch-circle-logo"><span class="flag">UK</span><span class="brand" style="font-size:9px;font-weight:700;color:#E53238">eBay</span></div>
-        </div>
-        <span class="ch-label">영국 이베이</span>
-      </div>
-    </div>
-  </div>
+    <div class="channel-icons"><!-- bb-common.js STORES 목록에서 렌더링 --></div>
 </div>
 
 <!-- ????? 안: 배너( ? + ? 원? 널(?? 2컬럼 -->

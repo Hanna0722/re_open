@@ -75,7 +75,8 @@
     '.bbd-quick-text,.bbd-guide-text{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}',
     '.bbd-quick-label,.bbd-guide-label{font-size:15px;color:#111827;font-weight:700;line-height:1.2}',
     '.bbd-quick-desc,.bbd-guide-desc{font-size:11px;color:#8B94A3;font-weight:500;line-height:1.25}',
-    '.bbd-cat-flag{width:20px;flex-shrink:0;color:#000;font-size:12px;font-weight:700;text-align:left}',
+    '.bbd-cat-flag{width:38px;height:38px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid #E6EAF0;border-radius:50%;background:#fff;color:#000;font-size:12px;font-weight:700;text-align:center;box-shadow:0 2px 8px rgba(17,24,39,.05)}',
+    '.bbd-cat-flag img{width:24px;height:24px;border-radius:50%;object-fit:contain;display:block}',
     '.bbd-cat-label{flex:1;color:#111827;font-size:15px;font-weight:700}',
     '.bbd-cat-arrow{font-size:12px;color:#999BAA}',
     '.bbd-cat-group{border-bottom:1px solid #F0F2F5}',
@@ -85,7 +86,7 @@
     '.bbd-cat-group.is-open>.bbd-cat-item{background:#FFF8F5;color:#E8385A}',
     '.bbd-cat-group.is-open .bbd-cat-label{color:#E8385A}',
     '.bbd-cat-group.is-open .bbd-cat-arrow{transform:rotate(90deg);color:#E8385A}',
-    '.bbd-store-cats{display:none;flex-direction:column;padding:2px 16px 14px 58px;background:#FFFDFB}',
+    '.bbd-store-cats{display:none;flex-direction:column;padding:2px 16px 14px 72px;background:#FFFDFB}',
     '.bbd-cat-group.is-open .bbd-store-cats{display:flex}',
     '.bbd-store-cat{min-height:32px;display:flex;align-items:center;color:#555E6D;font-size:13px;font-weight:600;text-decoration:none;line-height:1.3}',
     '.bbd-store-cat:hover{color:#E8385A;text-decoration:underline}',
@@ -286,6 +287,14 @@
       { title: '스포츠/레저', subs: ['골프', '캠핑', '자전거', '낚시'] },
       { title: '유아/반려동물', subs: ['유아용품', '완구', '강아지용품', '고양이용품'] }
     ],
+    '야후프리마': [
+      { title: '여성 패션', subs: ['원피스', '아우터', '가방', '신발'] },
+      { title: '남성 패션', subs: ['상의', '팬츠', '스니커즈', '시계'] },
+      { title: '취미/컬렉션', subs: ['피규어', '트레이딩카드', '굿즈', '게임'] },
+      { title: '디지털/가전', subs: ['스마트폰', '이어폰', '카메라', '게임기'] },
+      { title: '뷰티/생활', subs: ['화장품', '향수', '인테리어소품', '주방용품'] },
+      { title: '키즈/베이비', subs: ['아동복', '장난감', '유모차', '육아용품'] }
+    ],
     '라쿠마': [
       { title: '여성패션', subs: ['원피스', '아우터', '스커트', '가방'] },
       { title: '남성패션', subs: ['상의', '하의', '아우터', '신발'] },
@@ -312,9 +321,29 @@
     ]
   };
 
+  /* -- 스토어 단일 목록 --------------------------------------------
+     로고 교체: images/icon/store/_src/ 안의 파일만 바꾸면
+     좌측 드로어에 그대로 반영된다.
+     스토어 추가/삭제/순서변경도 이 배열만 수정한다.                */
+  var STORE_LOGO_DIR = '../images/icon/store/_src/';
+  var STORES = [
+    { label: '야후옥션',   logo: 'store_yahoo_auction.png',  href: 'mobile_sub_main.html' },
+    { label: '메루카리',   logo: 'store_mercari.png',        href: 'mobile_purchase_merukari.html' },
+    { label: '라쿠텐',     logo: 'store_rakuten.png',        href: 'mobile_purchase_store.html' },
+    { label: '라쿠마',     logo: 'store_rakuma.png',         href: 'mobile_purchase_store.html' },
+    { label: '야후쇼핑',   logo: 'store_yahoo_shopping.png', href: 'mobile_purchase_url.html' },
+    { label: '야후프리마', logo: 'store_yahoo_furima.png',   href: 'mobile_purchase_store.html' },
+    { label: '미국이베이', logo: 'store_ebay_us.png',        href: 'mobile_sub_main.html' },
+    { label: '영국이베이', logo: 'store_ebay_uk.png',        href: 'mobile_sub_main.html' }
+  ];
+  window.BB_STORES = STORES;
+  window.BB_STORE_LOGO_DIR = STORE_LOGO_DIR;
+
   var CATEGORY_MAIN_PAGE = 'mobile_category_main.html';
 
-  function storeCategoryHTML(flag, label, href, open) {
+  function storeCategoryHTML(store, open) {
+    var label = store.label;
+    var href = store.href;
     var groups = STORE_CATEGORIES[label] || [];
     var flatCats = [];
     groups.forEach(function (g) {
@@ -327,7 +356,7 @@
     }).join('');
     return (
       '<div class="bbd-cat-group' + (open ? ' is-open' : '') + '">' +
-        '<button class="bbd-cat-item" type="button" aria-expanded="' + (open ? 'true' : 'false') + '" onclick="toggleDrawerStoreCategory(this)"><span class="bbd-cat-flag">' + flag + '</span><span class="bbd-cat-label">' + label + '</span><i class="fas fa-chevron-right bbd-cat-arrow"></i></button>' +
+        '<button class="bbd-cat-item" type="button" aria-expanded="' + (open ? 'true' : 'false') + '" onclick="toggleDrawerStoreCategory(this)"><span class="bbd-cat-flag"><img src="' + STORE_LOGO_DIR + store.logo + '" alt=""></span><span class="bbd-cat-label">' + label + '</span><i class="fas fa-chevron-right bbd-cat-arrow"></i></button>' +
         '<div class="bbd-store-cats">' +
           '<a class="bbd-store-cat" href="' + href + '">전체보기</a>' +
           linksHtml +
@@ -349,13 +378,7 @@
         '<a class="bbd-quick-item" href="mobile_bundle_shipping_management_2.html"><span class="bbd-quick-icon"><i class="fas fa-truck-fast"></i></span><span class="bbd-quick-text"><span class="bbd-quick-label">출고 배송중</span><span class="bbd-quick-desc">센터별 출고 일정 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
       '</div></div>' +
       '<div class="bbd-sec"><div class="bbd-sec-title">카테고리</div><div class="bbd-cat-list">' +
-        storeCategoryHTML('JP', '야후옥션', 'mobile_sub_main.html') +
-        storeCategoryHTML('M', '메루카리', 'mobile_purchase_merukari.html') +
-        storeCategoryHTML('RA', '라쿠텐', 'mobile_purchase_store.html') +
-        storeCategoryHTML('JP', '야후쇼핑', 'mobile_purchase_url.html') +
-        storeCategoryHTML('MA', '라쿠마', 'mobile_purchase_store.html') +
-        storeCategoryHTML('US', '미국이베이', 'mobile_sub_main.html') +
-        storeCategoryHTML('UK', '영국이베이', 'mobile_sub_main.html') +
+        STORES.map(function (st) { return storeCategoryHTML(st); }).join('') +
       '</div></div>' +
       '<div class="bbd-sec"><div class="bbd-sec-title">이용가이드</div><div class="bbd-guide-list">' +
         '<a class="bbd-guide-item" href="mobile_fakenotice.html"><span class="bbd-guide-icon"><i class="fas fa-book-open"></i></span><span class="bbd-guide-text"><span class="bbd-guide-label">경매대행 이용안내</span><span class="bbd-guide-desc">서비스 이용 절차 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
