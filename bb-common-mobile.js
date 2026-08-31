@@ -30,6 +30,91 @@
     });
   }
 
+  var PRODUCT_IMAGES = [
+    'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1516981879613-9f5da904015f?auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1592840496694-26d035b52b48?auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1514228742587-6b1558fcf93a?auto=format&fit=crop&q=80'
+  ];
+  var productPool = PRODUCT_IMAGES.slice().sort(function () { return Math.random() - 0.5; });
+
+  function productImage(index, width, height) {
+    var base = productPool[Math.abs(index || 0) % productPool.length];
+    return base + '&w=' + (width || 520) + '&h=' + (height || width || 520);
+  }
+
+  function fallbackImage(index, width, height) {
+    var label = ['SHOES', 'BAG', 'GOODS', 'GAME'][Math.abs(index || 0) % 4];
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + (width || 520) + '" height="' + (height || width || 520) + '" viewBox="0 0 520 520"><rect width="520" height="520" fill="#f5f7fa"/><rect x="54" y="54" width="412" height="412" rx="24" fill="#fff" stroke="#e0e4eb" stroke-width="2"/><text x="260" y="252" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#1a1a2e">' + label + '</text><text x="260" y="298" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#999baa">BidBuy product image</text></svg>';
+    return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+  }
+
+  function isRandomImageSrc(src) {
+    return /picsum\.photos|loremflickr\.com/i.test(src || '');
+  }
+
+  var PRODUCT_IMAGE_CONTEXT = '.best-card,.live-card,.rv-card,.product-thumb,.related-thumb,.m-rel-thumb,.m-si-thumb,.m-assoc-thumb,.m-gallery-placeholder,.m-thumb,.card-thumb,.item-thumb,.order-thumb,.so-thumb';
+
+  function bindProductFallback(img, index) {
+    if (!img || img.dataset.bbProductFallback) return;
+    img.dataset.bbProductFallback = '1';
+    img.addEventListener('error', function () {
+      var count = Number(img.dataset.bbFallbackCount || 0) + 1;
+      img.dataset.bbFallbackCount = String(count);
+      img.src = count < productPool.length ? productImage(index + count, 520, 520) : fallbackImage(index, 520, 520);
+    });
+  }
+
+  function fillProductThumb(container, index) {
+    if (!container || container.querySelector('img')) return;
+    var img = document.createElement('img');
+    img.src = productImage(index, 520, 520);
+    img.alt = '상품 이미지';
+    img.loading = 'lazy';
+    img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block';
+    if (getComputedStyle(container).position === 'static') container.style.position = 'relative';
+    container.innerHTML = '';
+    container.appendChild(img);
+    bindProductFallback(img, index);
+  }
+
+  function hydrateProductImages() {
+    document.querySelectorAll('img').forEach(function (img, index) {
+      if (isRandomImageSrc(img.getAttribute('src'))) {
+        img.src = productImage(index, 520, 520);
+        bindProductFallback(img, index);
+      } else if (img.matches('#galleryMainImg,.gallery-main-img') || img.closest(PRODUCT_IMAGE_CONTEXT)) {
+        bindProductFallback(img, index);
+      }
+    });
+    document.querySelectorAll('.product-thumb,.related-thumb,.m-rel-thumb,.m-si-thumb,.m-assoc-thumb,.m-gallery-placeholder,.m-thumb,.card-thumb,.item-thumb,.order-thumb,.so-thumb').forEach(fillProductThumb);
+    document.querySelectorAll('#galleryMainImg').forEach(function (img) { img.src = productImage(0, 1200, 1200); });
+    document.querySelectorAll('.thumb-item img,.m-thumb img').forEach(function (img, index) { img.src = productImage(index, 240, 240); });
+    if (Array.isArray(window.galleryImgs)) window.galleryImgs = window.galleryImgs.map(function (_, index) { return productImage(index, 1200, 1200); });
+    if (Array.isArray(window._galleryImgs)) window._galleryImgs = window._galleryImgs.map(function (_, index) { return productImage(index, 1200, 1200); });
+    if (typeof window.setMainImg === 'function' && !window.setMainImg.__bbProductPatched) {
+      var originalSetMainImg = window.setMainImg;
+      window.setMainImg = function (target, src) {
+        var thumbs = Array.prototype.slice.call(document.querySelectorAll('.thumb-item,.m-thumb'));
+        var index = typeof target === 'number' ? target : Math.max(0, thumbs.indexOf(target));
+        var nextSrc = isRandomImageSrc(src) ? productImage(index, 1200, 1200) : src;
+        var result = originalSetMainImg.apply(this, [target, nextSrc]);
+        var main = document.getElementById('galleryMainImg') || document.querySelector('.m-gallery-placeholder img');
+        if (main && (typeof target === 'number' || isRandomImageSrc(main.src))) main.src = productImage(index, 1200, 1200);
+        return result;
+      };
+      window.setMainImg.__bbProductPatched = true;
+    }
+  }
+
   // 좌/우 드로어 공통 CSS. 각 페이지가 .drawer/.user-drawer 등을 직접
   // 정의하지 않아도 <script src="bb-common-mobile.js">만 포함하면 동작하도록
   // mobile_main.html의 드로어 스타일을 그대로 주입한다. (색상 변수는
@@ -75,8 +160,8 @@
     '.bbd-quick-text,.bbd-guide-text{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}',
     '.bbd-quick-label,.bbd-guide-label{font-size:15px;color:#111827;font-weight:700;line-height:1.2}',
     '.bbd-quick-desc,.bbd-guide-desc{font-size:11px;color:#8B94A3;font-weight:500;line-height:1.25}',
-    '.bbd-cat-flag{width:38px;height:38px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid #E6EAF0;border-radius:50%;background:#fff;color:#000;font-size:12px;font-weight:700;text-align:center;box-shadow:0 2px 8px rgba(17,24,39,.05)}',
-    '.bbd-cat-flag img{width:24px;height:24px;border-radius:50%;object-fit:contain;display:block}',
+    '.bbd-cat-flag{width:38px;height:38px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:0;background:transparent;box-shadow:none;color:#000;font-size:12px;font-weight:700;text-align:center}',
+    '.bbd-cat-flag img{width:38px;height:38px;border-radius:0;object-fit:contain;display:block}',
     '.bbd-cat-label{flex:1;color:#111827;font-size:15px;font-weight:700}',
     '.bbd-cat-arrow{font-size:12px;color:#999BAA}',
     '.bbd-cat-group{border-bottom:1px solid #F0F2F5}',
@@ -322,10 +407,10 @@
   };
 
   /* -- 스토어 단일 목록 --------------------------------------------
-     로고 교체: images/icon/store/_src/ 안의 파일만 바꾸면
+     로고 교체: storeicon/ 안의 파일만 바꾸면
      좌측 드로어에 그대로 반영된다.
      스토어 추가/삭제/순서변경도 이 배열만 수정한다.                */
-  var STORE_LOGO_DIR = '../images/icon/store/_src/';
+  var STORE_LOGO_DIR = '../storeicon/';
   var STORES = [
     { label: '야후옥션',   logo: 'store_yahoo_auction.png',  href: 'mobile_sub_main.html' },
     { label: '메루카리',   logo: 'store_mercari.png',        href: 'mobile_purchase_merukari.html' },
@@ -565,12 +650,14 @@
   }
 
   function render() {
+    hydrateProductImages();
     removeNonMainNotice();
 
     if (SHELL_MODE === 'status-only') {
       injectStatusStyles();
       injectPhoneStatusBar();
       pinPhoneStatusBar();
+      hydrateProductImages();
       return;
     }
 
@@ -590,6 +677,7 @@
     userDrawer.innerHTML = rightDrawerHTML();
     bindAvatarTrigger();
     bindUserMenu();
+    hydrateProductImages();
 
     document.dispatchEvent(new CustomEvent('bb:mobile-login', { detail: { loggedIn: isLoggedIn() } }));
   }

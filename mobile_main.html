@@ -152,11 +152,13 @@ body{
 }
 .channel-tabs::-webkit-scrollbar{display:none}
 .ch-tab{
+  display:flex;align-items:center;gap:5px;
   padding:9px 12px 10px;font-size:11px;font-weight:700;color:#707070;
   white-space:nowrap;cursor:pointer;border:0;border-bottom:2px solid transparent;background:transparent;
   flex-shrink:0;font-family:inherit;
   scroll-snap-align:start;
 }
+.ch-flag{width:14px;height:10px;object-fit:cover;display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08);flex:none}
 .ch-tab.active{color:var(--rose);border-bottom-color:var(--rose);font-weight:700}
 .app-notice-bar{
   background:#FFFAF8;border-bottom:1px solid #E6DDDA;overflow:hidden;
@@ -309,8 +311,6 @@ body{
   position:absolute;top:0;right:0;bottom:0;
   width:34px;
   background:linear-gradient(90deg,rgba(240,245,250,0),rgba(240,245,250,.92) 55%,rgba(240,245,250,1));
-  backdrop-filter:blur(4px);
-  -webkit-backdrop-filter:blur(4px);
   pointer-events:none;
 }
 .slide-fade-wrap.light::after{
@@ -374,12 +374,13 @@ body{
   font-family:Pretendard,'Inter','Noto Sans KR',sans-serif;
 }
 .best-price strong{font-size:12px}
-.review-scroll{display:flex;gap:10px;overflow:hidden;scrollbar-width:none;padding:0 26px 2px 0}
-.review-scroll{touch-action:pan-y}
+.review-scroll{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory;padding:0 0 2px;-webkit-overflow-scrolling:touch}
+.review-scroll{touch-action:pan-x pan-y}
 .review-scroll::-webkit-scrollbar{display:none}
 .rv-card{
-  min-width:160px;background:#fff;border-radius:12px;
-  border:1px solid var(--border);padding:12px;flex-shrink:0;scroll-snap-align:start;
+  flex:0 0 calc((100% - 10px) / 2);min-width:0;
+  background:#fff;border-radius:12px;
+  border:1px solid var(--border);padding:12px;scroll-snap-align:start;
 }
 .rv-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:8px;background:#FFF5F7;color:var(--rose);display:inline-block;margin-bottom:8px}
 .rv-badge.mc{background:#E8F5E9;color:var(--green)}
@@ -387,7 +388,7 @@ body{
 .rv-img img{width:100%;height:100%;object-fit:cover}
 .rv-stars{color:var(--amber);font-size:10px;margin-bottom:4px}
 .rv-title{font-size:11px;font-weight:700;color:var(--tp);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rv-text{font-size:10px;color:var(--ts);line-height:1.5}
+.rv-text{font-size:10px;color:var(--ts);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .rv-item{font-size:9px;color:var(--tm);margin-top:5px}
 .notice-card{background:#fff;border-radius:12px;border:1px solid var(--border);overflow:hidden}
 .notice-row{
@@ -400,14 +401,12 @@ body{
 .notice-date{font-size:10px;color:var(--tm);white-space:nowrap}
 .rate-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:14px;margin-top:10px}
 .rate-title{font-size:13px;font-weight:700;color:#111827;margin-bottom:8px}
-.rate-desc{font-size:10px;color:#111827;line-height:1.55;margin-bottom:8px}
-.rate-period{font-size:10px;font-weight:700;color:#111827;margin-bottom:8px}
-.rate-list{display:grid;gap:0}
-.rate-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;min-height:28px;border-bottom:1px solid #d9dee6;font-size:11px}
-.rate-row:last-child{border-bottom:none}
-.rate-currency{display:flex;align-items:center;gap:5px;color:#111827}
-.rate-flag{width:16px;height:11px;object-fit:cover;display:block;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
-.rate-value{font-family:Roboto,Arial,sans-serif;color:#ff4b00;font-weight:700;white-space:nowrap}
+.rate-desc{font-size:11px;color:var(--ts);line-height:1.55;margin-bottom:10px}
+.rate-list{display:grid;gap:6px}
+.rate-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;min-height:38px;padding:0 12px;background:#F7F8FA;border-radius:8px;font-size:12px}
+.rate-currency{display:flex;align-items:center;gap:7px;color:var(--tp);font-weight:700}
+.rate-flag{width:18px;height:13px;object-fit:cover;display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.rate-value{font-family:Roboto,Arial,sans-serif;color:var(--tp);font-weight:700;font-size:13px;white-space:nowrap}
 .cs-mini{background:#fff;border-radius:12px;border:1px solid var(--border);padding:14px;margin-top:10px}
 .cs-mini-title{font-size:13px;font-weight:700;margin-bottom:4px}
 .cs-mini-num{font-size:20px;font-weight:700;color:var(--navy);font-family:'Roboto',sans-serif;margin-bottom:4px}
@@ -686,14 +685,14 @@ button.user-menu-item{
 
       <div class="slide-fade-wrap light">
         <nav class="channel-tabs" aria-label="경매 채널">
-          <button class="ch-tab active" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('야후 옥션')">야후옥션</button>
-          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('메루카리')">메루카리</button>
-          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('라쿠텐')">라쿠텐</button>
-          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('라쿠마')">라쿠마</button>
-          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('야후 쇼핑')">야후쇼핑</button>
-          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('야후 프리마')">야후프리마</button>
-          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('미국 이베이')">미국이베이</button>
-          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('영국 이베이')">영국이베이</button>
+          <button class="ch-tab active" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('야후 옥션')"><img class="ch-flag" src="../images/icon/country_jp.png" alt="">야후옥션</button>
+          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('메루카리')"><img class="ch-flag" src="../images/icon/country_jp.png" alt="">메루카리</button>
+          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('라쿠텐')"><img class="ch-flag" src="../images/icon/country_jp.png" alt="">라쿠텐</button>
+          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('라쿠마')"><img class="ch-flag" src="../images/icon/country_jp.png" alt="">라쿠마</button>
+          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('야후 쇼핑')"><img class="ch-flag" src="../images/icon/country_jp.png" alt="">야후쇼핑</button>
+          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('야후 프리마')"><img class="ch-flag" src="../images/icon/country_jp.png" alt="">야후프리마</button>
+          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('미국 이베이')"><img class="ch-flag" src="../images/icon/country_usa.png" alt="">미국이베이</button>
+          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('영국 이베이')"><img class="ch-flag" src="../images/icon/country_uk.png" alt="">영국이베이</button>
         </nav>
       </div>
     </div>
@@ -753,7 +752,7 @@ button.user-menu-item{
         <div class="sc-item" role="button" tabindex="0" onclick="openWishlistPopup()" onkeydown="handleShortcutKey(event, openWishlistPopup)"><div class="sc-circle si-2"><i class="fas fa-heart"></i></div><span class="sc-label">관심상품</span></div>
         <a class="sc-item" href="mobile_auction_bid_list.html"><div class="sc-circle si-3"><i class="fas fa-gavel"></i></div><span class="sc-label">나의 경매</span></a>
         <a class="sc-item" href="mobile_bundle_shipping_management.html"><div class="sc-circle si-4"><i class="fas fa-box-open"></i></div><span class="sc-label">배송 신청 관리</span></a>
-        <div class="sc-item" role="button" tabindex="0" onclick="openMarketInfoPopup()" onkeydown="handleShortcutKey(event, openMarketInfoPopup)"><div class="sc-circle si-5"><i class="fas fa-thumbs-up"></i></div><span class="sc-label">국가별 운영정보</span></div>
+        <a class="sc-item" href="https://www.bidbuy.co.kr/cs"><div class="sc-circle si-5"><i class="fas fa-thumbs-up"></i></div><span class="sc-label">이용가이드</span></a>
         <div class="sc-item" role="button" tabindex="0" onclick="openConvenienceToolsPopup()" onkeydown="handleShortcutKey(event, openConvenienceToolsPopup)"><div class="sc-circle si-6"><i class="fas fa-toolbox"></i></div><span class="sc-label">편의도구</span></div>
         <a class="sc-item" href="mobile_mileage.html"><div class="sc-circle si-7"><i class="fas fa-ticket"></i></div><span class="sc-label">마일리지/쿠폰</span></a>
         <div class="sc-item" role="button" tabindex="0" onclick="openbidbuycsPopup()" onkeydown="handleShortcutKey(event, openbidbuycsPopup)"><div class="sc-circle si-8"><i class="fas fa-clipboard-list"></i></div><span class="sc-label">자주하는질문</span></div>
@@ -764,19 +763,19 @@ button.user-menu-item{
 
     <div class="section">
       <div class="sec-hd">
-        <span class="sec-title">인기 브랜드</span>
+        <span class="sec-title">인기 카테고리 빠른 검색</span>
       </div>
       <div class="brand-scroll">
-        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('NIKE')"><div class="brand-img"><img src="favorite logo/3.png" alt="NIKE" onerror="this.parentElement.textContent='NIKE'"></div><span class="brand-name">NIKE</span></div>
-        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('CHANEL')"><div class="brand-img"><img src="favorite logo/2.png" alt="CHANEL" onerror="this.parentElement.textContent='CHANEL'"></div><span class="brand-name">CHANEL</span></div>
-        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('HERMES')"><div class="brand-img"><img src="favorite logo/1.png" alt="HERMES" onerror="this.parentElement.textContent='HERMES'"></div><span class="brand-name">HERMES</span></div>
-        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('POLO RALPH LAUREN')"><div class="brand-img"><img src="favorite logo/4.png" alt="POLO" onerror="this.parentElement.textContent='POLO'"></div><span class="brand-name">POLO</span></div>
-        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('LEVI\'S')"><div class="brand-img"><img src="favorite logo/8.png" alt="LEVI'S" onerror="this.parentElement.textContent='LEVI\'S'"></div><span class="brand-name">LEVI'S</span></div>
-        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('BANDAI')"><div class="brand-img"><img src="favorite logo/10.png" alt="BANDAI" onerror="this.parentElement.textContent='BANDAI'"></div><span class="brand-name">BANDAI</span></div>
-        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('COMME des GARÇONS')"><div class="brand-img"><img src="favorite logo/7.png" alt="COMME des" onerror="this.parentElement.textContent='COMME des'"></div><span class="brand-name">COMME des</span></div>
-        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('SHIMANO')"><div class="brand-img"><img src="favorite logo/5.png" alt="SHIMANO" onerror="this.parentElement.textContent='SHIMANO'"></div><span class="brand-name">SHIMANO</span></div>
-        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('COACH')"><div class="brand-img"><img src="favorite logo/6.png" alt="COACH" onerror="this.parentElement.textContent='COACH'"></div><span class="brand-name">COACH</span></div>
-        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('GUCCI')"><div class="brand-img"><img src="favorite logo/9.png" alt="GUCCI" onerror="this.parentElement.textContent='GUCCI'"></div><span class="brand-name">GUCCI</span></div>
+        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('낚시용품')"><div class="brand-img"><img src="../favorite logo/5.png" alt="낚시용품" onerror="this.parentElement.textContent='낚시용품'"></div><span class="brand-name">낚시용품</span></div>
+        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('피규어')"><div class="brand-img"><img src="../favorite logo/10.png" alt="피규어" onerror="this.parentElement.textContent='피규어'"></div><span class="brand-name">피규어</span></div>
+        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('오토바이부품')"><div class="brand-img"><img src="../favorite logo/2.png" alt="오토바이부품" onerror="this.parentElement.textContent='오토바이부품'"></div><span class="brand-name">오토바이부품</span></div>
+        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('카메라')"><div class="brand-img"><img src="../favorite logo/9.png" alt="카메라" onerror="this.parentElement.textContent='카메라'"></div><span class="brand-name">카메라</span></div>
+        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('골프')"><div class="brand-img"><img src="../favorite logo/6.png" alt="골프" onerror="this.parentElement.textContent='골프'"></div><span class="brand-name">골프</span></div>
+        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('음향기기')"><div class="brand-img"><img src="../favorite logo/1.png" alt="음향기기" onerror="this.parentElement.textContent='음향기기'"></div><span class="brand-name">음향기기</span></div>
+        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('포켓몬카드')"><div class="brand-img"><img src="../favorite logo/8.png" alt="포켓몬카드" onerror="this.parentElement.textContent='포켓몬카드'"></div><span class="brand-name">포켓몬카드</span></div>
+        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('시계')"><div class="brand-img"><img src="../favorite logo/11.png" alt="시계" onerror="this.parentElement.textContent='시계'"></div><span class="brand-name">시계</span></div>
+        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('악기')"><div class="brand-img"><img src="../favorite logo/7.png" alt="악기" onerror="this.parentElement.textContent='악기'"></div><span class="brand-name">악기</span></div>
+        <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('슈즈')"><div class="brand-img"><img src="../favorite logo/3.png" alt="슈즈" onerror="this.parentElement.textContent='슈즈'"></div><span class="brand-name">슈즈</span></div>
       </div>
     </div>
 
@@ -945,12 +944,12 @@ button.user-menu-item{
         <span class="sec-title">비드바이 고객후기</span>
         <a href="mobile_review_list.html" class="sec-more">더보기 ›</a>
       </div>
-      <div class="slide-fade-wrap">
+      <div class="review-wrap">
         <div class="review-scroll">
-          <div class="rv-card"><span class="rv-badge">🇺🇸 미국이베이</span><div class="rv-img"><img src="https://picsum.photos/seed/rv1/160" alt=""></div><div class="rv-stars">★★★★★</div><div class="rv-title">일본 H&M 구매 빠르게...</div><div class="rv-text">처음이지만 빠르고 친절해요.</div><div class="rv-item">USD 23.70 · Nike Air Max</div></div>
-          <div class="rv-card"><span class="rv-badge">🇯🇵 야후옥션</span><div class="rv-img"><img src="https://picsum.photos/seed/rv2/160" alt=""></div><div class="rv-stars">★★★★★</div><div class="rv-title">간단하게 좋은 제품...</div><div class="rv-text">담당자님이 꼼꼼하게 처리해 주셨습니다.</div><div class="rv-item">¥45,000 · LV 18패브릭</div></div>
-          <div class="rv-card"><span class="rv-badge mc"><i class="fas fa-bag-shopping" aria-hidden="true"></i> 메루카리</span><div class="rv-img"><img src="https://picsum.photos/seed/rv3/160" alt=""></div><div class="rv-stars">★★★★★</div><div class="rv-title">안전하게 잘 도착했어요</div><div class="rv-text">배송비 계산 딱 맞게 나와서 좋아요.</div><div class="rv-item">¥3,200 · Supreme 티셔츠</div></div>
-          <div class="rv-card"><span class="rv-badge">🇬🇧 영국이베이</span><div class="rv-img"><img src="https://picsum.photos/seed/rv4/160" alt=""></div><div class="rv-stars">★★★★☆</div><div class="rv-title">배송매니저 만족합니다</div><div class="rv-text">영국이베이 처음인데 CS 빠르고 친절해요.</div><div class="rv-item">£185 · Seiko Prospex</div></div>
+          <div class="rv-card"><span class="rv-badge">🇺🇸 미국이베이</span><div class="rv-img"><img src="https://picsum.photos/seed/rv1/160" alt=""></div><div class="rv-stars">★★★★★</div><div class="rv-title">일본 H&M 구매 빠르게...</div><div class="rv-text">처음이지만 빠르고 친절해요.</div><div class="rv-item">ide***님 · 2026.08.06</div></div>
+          <div class="rv-card"><span class="rv-badge">🇯🇵 야후옥션</span><div class="rv-img"><img src="https://picsum.photos/seed/rv2/160" alt=""></div><div class="rv-stars">★★★★★</div><div class="rv-title">간단하게 좋은 제품...</div><div class="rv-text">담당자님이 꼼꼼하게 처리해 주셨습니다.</div><div class="rv-item">rta***님 · 2026.07.30</div></div>
+          <div class="rv-card"><span class="rv-badge mc"><i class="fas fa-bag-shopping" aria-hidden="true"></i> 메루카리</span><div class="rv-img"><img src="https://picsum.photos/seed/rv3/160" alt=""></div><div class="rv-stars">★★★★★</div><div class="rv-title">안전하게 잘 도착했어요</div><div class="rv-text">배송비 계산 딱 맞게 나와서 좋아요.</div><div class="rv-item">kmj***님 · 2026.07.24</div></div>
+          <div class="rv-card"><span class="rv-badge">🇬🇧 영국이베이</span><div class="rv-img"><img src="https://picsum.photos/seed/rv4/160" alt=""></div><div class="rv-stars">★★★★☆</div><div class="rv-title">배송매니저 만족합니다</div><div class="rv-text">영국이베이 처음인데 CS 빠르고 친절해요.</div><div class="rv-item">sun***님 · 2026.07.18</div></div>
         </div>
       </div>
     </div>
@@ -967,13 +966,12 @@ button.user-menu-item{
       </div>
 
       <div class="rate-card">
-        <div class="rate-title">고시환율</div>
-        <p class="rate-desc">관세청에서 관/부가세 계산시 적용되는 환율로 주 단위로 고시되며,<br>매주 금요일에 다음 주 (월~토) 적용 환율을 고시합니다.</p>
-        <div class="rate-period">고시시간 2026-07-14 12:30:00</div>
-        <div class="rate-list" aria-label="고시환율 목록">
-          <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_usa.png" alt="">USD</span><span class="rate-value">1,522.44 </span></div>
-          <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_jp.png" alt="">JPY</span><span class="rate-value">9.39 </span></div>
-          <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_uk.png" alt="">GBP</span><span class="rate-value">2,037.08 </span></div>
+        <div class="rate-title">비드바이 고시환율</div>
+        <p class="rate-desc">비드바이 결제 금액 계산에 적용되는 기준 환율입니다.</p>
+        <div class="rate-list" aria-label="비드바이 고시환율 목록">
+          <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_usa.png" alt="">USD</span><span class="rate-value">1,450.00</span></div>
+          <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_jp.png" alt="">JPY</span><span class="rate-value">9.10</span></div>
+          <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_uk.png" alt="">GBP</span><span class="rate-value">1,960.00</span></div>
         </div>
       </div>
 
@@ -1076,6 +1074,7 @@ button.user-menu-item{
 </div>
 
 <script src="bb-common-mobile.js"></script>
+<script src="bb-search-modal-mobile.js"></script>
 <script>
 // openDrawer/closeDrawer/openUserDrawer/closeUserDrawer/toggleLogin now
 // live in bb-common-mobile.js (shared across mobile_*.html).

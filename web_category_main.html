@@ -53,7 +53,7 @@
     .menu-lines::before { top: -8px; }
     .menu-lines::after { top: 8px; }
 
-    .logo-link { width: 118px; display: block; line-height: 0; }
+    .logo-link { width: 100px; display: block; line-height: 0; }
     .logo-link img { width: 100%; height: auto; display: block; }
 
     .header-search-area { position: relative; min-width: 0; display: grid; gap: 8px; align-content: center; }
@@ -78,17 +78,6 @@
     .user-name { display: grid; gap: 2px; color: #1d2430; font-size: 13px; font-weight: 900; text-align: center; white-space: nowrap; }
     .premium-chip { padding: 2px 9px; border-radius: 999px; background: #fff1cf; color: #f2a300; font-size: 10px; font-weight: 900; }
 
-    /* ── Store strip ── */
-    .store-strip { padding: 14px 0; background: #fff; width: 100vw; }
-    .store-list { width: min(calc(100vw - 60px), 900px); margin: 0 auto; display: grid; grid-template-columns: repeat(8, 1fr); gap: 16px; }
-    .store-chip { position: relative; color: #666680; text-align: center; text-decoration: none; font-size: 11px; font-weight: 500; min-width: 80px; padding: 4px 14px; display: flex; flex-direction: column; align-items: center; gap: 6px; transition: opacity .15s; }
-    .store-chip:hover { opacity: .8; }
-    .store-chip.active { color: #666680; }
-    .store-badge { position: relative; width: 56px; height: 56px; margin: 0 auto; border: 1px solid #E0E4EB; border-radius: 50%; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; color: #1A1A2E; font-size: 12px; font-weight: 900; line-height: 1.1; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.07); transition: box-shadow .15s; }
-    .store-badge .flag { font-size: 16px; line-height: 1; }
-    .store-badge .brand { font-size: 8px; font-weight: 700; color: #1a1a2e; white-space: nowrap; }
-    .store-chip:hover .store-badge { box-shadow: 0 4px 14px rgba(0,0,0,.13); }
-    .store-chip.active .store-badge { border-color: #E0E4EB; box-shadow: 0 2px 8px rgba(0,0,0,.07); transform: none; }
     .store-yahoo { color: #e43e2e; transform: rotate(-42deg); font-size: 11px; }
     .store-mercari { background: #ff1f2f; color: #fff; font-size: 28px; }
     .store-rakuten { color: #c9272d; font-size: 34px; }
@@ -327,28 +316,28 @@
   <div class="store-strip">
     <nav class="store-list" aria-label="스토어 바로가기">
       <a class="store-chip active" href="#" data-store-name="야후 옥션" aria-current="page">
-        <div class="store-badge"><span class="flag">JP</span><span class="brand" style="color:#E60026;font-size:9px;font-weight:900">YAHOO!</span></div><strong>야후 옥션</strong>
+        <div class="store-badge"><img src="../storeicon/store_yahoo_auction.png" alt=""></div><strong>야후 옥션</strong>
       </a>
       <a class="store-chip" href="#" data-store-name="메루카리">
-        <div class="store-badge"><span class="flag" style="font-size:18px;color:#19ce60;font-weight:900">M</span></div><strong>메루카리</strong>
+        <div class="store-badge"><img src="../storeicon/store_mercari.png" alt=""></div><strong>메루카리</strong>
       </a>
-      <a class="store-chip" href="#" data-store-name="라쿠텐">
-        <div class="store-badge"><span class="flag" style="font-size:14px;color:#BF0000;font-weight:900">楽天</span></div><strong>일본 라쿠텐</strong>
+      <a class="store-chip" href="#" data-store-name="일본 라쿠텐">
+        <div class="store-badge"><img src="../storeicon/store_rakuten.png" alt=""></div><strong>일본 라쿠텐</strong>
       </a>
-      <a class="store-chip" href="#" data-store-name="라쿠마">
-        <div class="store-badge"><span class="flag" style="font-size:12px;color:#BF0000;font-weight:700">Rakuten</span></div><strong>일본 라쿠마</strong>
+      <a class="store-chip" href="#" data-store-name="일본 라쿠마">
+        <div class="store-badge"><img src="../storeicon/store_rakuma.png" alt=""></div><strong>일본 라쿠마</strong>
       </a>
       <a class="store-chip" href="#" data-store-name="야후 쇼핑">
-        <div class="store-badge"><span class="flag" style="font-size:12px;color:#FF9900;font-weight:900">amazon</span></div><strong>야후 쇼핑</strong>
+        <div class="store-badge"><img src="../storeicon/store_yahoo_shopping.png" alt=""></div><strong>야후 쇼핑</strong>
       </a>
-      <a class="store-chip" href="#" data-store-name="일본 아마존">
-        <div class="store-badge"><span class="flag" style="font-size:12px;color:#FF9900;font-weight:900">amazon</span></div><strong>일본 아마존</strong>
+      <a class="store-chip" href="#" data-store-name="야후 프리마">
+        <div class="store-badge"><img src="../storeicon/store_yahoo_furima.png" alt=""></div><strong>야후 프리마</strong>
       </a>
       <a class="store-chip" href="#" data-store-name="미국 이베이">
-        <div class="store-badge"><span class="flag">US</span><span class="brand" style="font-size:9px;font-weight:700;color:#E53238">eBay</span></div><strong>미국 이베이</strong>
+        <div class="store-badge"><img src="../storeicon/store_ebay_us.png" alt=""></div><strong>미국 이베이</strong>
       </a>
       <a class="store-chip" href="#" data-store-name="영국 이베이">
-        <div class="store-badge"><span class="flag">UK</span><span class="brand" style="font-size:9px;font-weight:700;color:#E53238">eBay</span></div><strong>영국 이베이</strong>
+        <div class="store-badge"><img src="../storeicon/store_ebay_uk.png" alt=""></div><strong>영국 이베이</strong>
       </a>
     </nav>
   </div>

@@ -82,26 +82,6 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
 .dd-div{height:1px;background:var(--border);margin:4px 8px}
 .dd-logout{color:var(--tm) !important;font-weight:400 !important}
 .dd-logout:hover{color:var(--rose) !important}
-.channel-icons{display:grid;grid-template-columns:repeat(8,1fr);gap:16px;width:min(calc(100vw - 60px),900px);margin:0 auto}
-.channel-icons::-webkit-scrollbar{display:none}
-.ch-circle-logo{width:38px;height:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
-.ch-circle-logo .flag{font-size:16px;line-height:1}
-.ch-circle-logo .brand{font-size:8px;font-weight:700;color:var(--tp);white-space:nowrap}
-
-/* ── 채널 바 ── */
-.channel-bar{background:#fff;border-bottom:1px solid var(--border);padding:8px 0}
-.channel-inner{max-width:1440px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:0;justify-content:center}
-.ch-icon-item{display:flex;flex-direction:column;align-items:center;gap:5px;padding:4px 16px;cursor:pointer;min-width:76px;flex-shrink:0}
-.ch-icon-item:hover .ch-circle{box-shadow:0 4px 14px rgba(0,0,0,.13)}
-.ch-circle{width:48px;height:48px;border-radius:50%;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);transition:box-shadow .15s}
-.ch-circle.active{border-color:var(--rose);box-shadow:0 0 0 3px rgba(232,56,90,.14)}
-.ch-flag{font-size:18px}
-.ch-brand{font-size:8px;font-weight:700;line-height:1}
-.ch-label{font-size:10px;color:var(--ts);font-weight:500;white-space:nowrap}
-.ch-label.active{color:var(--rose);font-weight:700}
-.ch-mercari-badge{background:#FF0F2D;color:#fff;font-size:20px;font-weight:900;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:6px}
-
-/* ── 브레드크럼 ── */
 .breadcrumb-row{max-width:1440px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between}
 .breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ts)}
 .breadcrumb a{color:var(--navy)}
@@ -863,55 +843,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
 
 <div class="channel-bar">
   <div class="channel-inner">
-    <div class="channel-icons">
-      <div class="ch-icon-item" onclick="location.href='web_sub main.html'" style="cursor:pointer">
-        <div class="ch-circle">
-          <div class="ch-circle-logo"><span class="flag">JP</span><span class="brand" style="color:#E60026;font-size:9px;font-weight:900">YAHOO!</span></div>
-        </div>
-        <span class="ch-label">야후 옥션</span>
-      </div>
-      <div class="ch-icon-item" onclick="location.href='web_sub main.html'" style="cursor:pointer">
-        <div class="ch-circle">
-          <div class="ch-circle-logo"><span class="flag" style="font-size:18px;color:#19ce60;font-weight:900">M</span></div>
-        </div>
-        <span class="ch-label">메루카리</span>
-      </div>
-      <div class="ch-icon-item" onclick="location.href='web_sub main.html'" style="cursor:pointer">
-        <div class="ch-circle">
-          <div class="ch-circle-logo"><span class="flag" style="font-size:14px;color:#BF0000;font-weight:900">楽天</span></div>
-        </div>
-        <span class="ch-label">일본 라쿠텐</span>
-      </div>
-      <div class="ch-icon-item" onclick="location.href='web_sub main.html'" style="cursor:pointer">
-        <div class="ch-circle">
-          <div class="ch-circle-logo"><span class="flag" style="font-size:12px;color:#BF0000;font-weight:700">Rakuten</span></div>
-        </div>
-        <span class="ch-label">일본 라쿠마</span>
-      </div>
-      <div class="ch-icon-item" onclick="location.href='web_sub main.html'" style="cursor:pointer">
-        <div class="ch-circle">
-          <div class="ch-circle-logo"><span class="flag" style="font-size:12px;color:#FF9900;font-weight:900">amazon</span></div>
-        </div>
-        <span class="ch-label">야후 쇼핑</span>
-      </div>
-      <div class="ch-icon-item" onclick="location.href='web_sub main.html'" style="cursor:pointer">
-        <div class="ch-circle">
-          <div class="ch-circle-logo"><span class="flag" style="font-size:12px;color:#FF9900;font-weight:900">amazon</span></div>
-        </div>
-        <span class="ch-label">일본 아마존</span>
-      </div>
-      <div class="ch-icon-item" onclick="location.href='web_sub main.html'" style="cursor:pointer">
-        <div class="ch-circle">
-          <div class="ch-circle-logo"><span class="flag">US</span><span class="brand" style="font-size:9px;font-weight:700;color:#E53238">eBay</span></div>
-        </div>
-        <span class="ch-label">미국 이베이</span>
-      </div>
-      <div class="ch-icon-item" onclick="location.href='web_sub main.html'" style="cursor:pointer">
-        <div class="ch-circle">
-          <div class="ch-circle-logo"><span class="flag">UK</span><span class="brand" style="font-size:9px;font-weight:700;color:#E53238">eBay</span></div>
-        </div>
-        <span class="ch-label">영국 이베이</span>
-      </div>
+    <div class="channel-icons"><!-- bb-common.js STORES 목록에서 렌더링 --></div>
     </div>
   </div>
 </div>

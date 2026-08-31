@@ -56,36 +56,10 @@ header{background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 4p
 .u-chv{font-size:9px;color:var(--tm);transition:transform .2s}
 .user-trig.open .u-chv{transform:rotate(180deg)}
 
-/* ? ═ ??? 안: 채널 ? 이 ? ?(? 형) ? ═ */
-.channel-bar{background:#fff;border-bottom:1px solid var(--border);padding:14px 0}
-.channel-inner{max-width:1440px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:0}
 /* ?버?*/
 .hb-btn{display:flex;flex-direction:column;gap:4.5px;padding:8px;border-radius:5px;cursor:pointer;background:none;border:none;margin-right:12px;transition:background .15s;flex-shrink:0}
 .hb-btn:hover{background:var(--bg)}
 .hb-btn span{display:block;width:17px;height:2px;background:var(--tp);border-radius:1px}
-/* ???형 채널 ?이?그리??*/
-.channel-icons{display:flex;gap:16px;width:fit-content;max-width:min(calc(100vw - 60px),820px);margin:0 auto;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity;touch-action:pan-x;padding:0 8px 2px}
-.channel-icons::-webkit-scrollbar{display:none}
-.ch-icon-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:4px 14px;cursor:pointer;min-width:80px;flex:0 0 auto;scroll-snap-align:start;transition:opacity .15s}
-.ch-icon-item:hover{opacity:.8}
-/* ??? 심 변 ? ? 형 배경 ? 에 로고 */
-.ch-circle{
-  width:56px;height:56px;border-radius:50%;background:#fff;
-  border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
-  box-shadow:0 2px 8px rgba(0,0,0,.07);
-  transition:box-shadow .15s;
-}
-.ch-icon-item:hover .ch-circle{box-shadow:0 4px 14px rgba(0,0,0,.13)}
-.ch-circle img{width:38px;height:38px;object-fit:contain}
-.ch-circle img.ch-logo{width:100%;height:100%;object-fit:cover;border-radius:50%}
-/* ? 시 로고 (? 스??? 모지 조합) */
-.ch-circle-logo{width:38px;height:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
-.ch-circle-logo .flag{font-size:16px;line-height:1}
-.ch-circle-logo .brand{font-size:8px;font-weight:700;color:var(--tp);white-space:nowrap}
-.ch-label{font-size:11px;color:var(--ts);font-weight:500;white-space:nowrap}
-/* ?곗륫 硫붾돱 */
 .ch-right{display:flex;gap:0;margin-left:auto;flex-shrink:0}
 .ch-right-item{padding:10px 14px;font-size:13px;font-weight:700;color:var(--navy);white-space:nowrap;cursor:pointer;border-radius:8px;transition:background .15s}
 .ch-right-item:hover{background:var(--bg)}
@@ -202,6 +176,29 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 .hb-dots{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);display:flex;gap:6px}
 .hb-dot{width:6px;height:6px;padding:0;border:none;border-radius:50%;background:var(--border);cursor:pointer}
 .hb-dot.active{background:var(--rose);width:16px;border-radius:4px}
+.hero-banner.is-tabbed{padding-bottom:0}
+.hero-banner.is-tabbed .hero-banner-inner{max-width:1060px;height:112px;margin:0 auto;display:grid;grid-template-columns:248px minmax(0,1fr)}
+.hero-banner.is-tabbed .hb-tabs{border-right:1px solid var(--border);display:grid;grid-template-rows:1fr 1fr;background:#fff}
+.hero-banner.is-tabbed .hb-tab{display:flex;align-items:center;gap:10px;padding:0 28px;border:0;background:#fff;color:#a8b0bd;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;text-align:left}
+.hero-banner.is-tabbed .hb-tab i{width:14px;text-align:center;font-size:13px;color:currentColor}
+.hero-banner.is-tabbed .hb-tab.active{color:var(--rose)}
+.hero-banner.is-tabbed .hb-panels{position:relative;min-width:0;overflow:hidden}
+.hero-banner.is-tabbed .hb-slide{position:absolute;inset:0;height:112px;display:none;align-items:center;overflow:hidden;animation:hbFade .2s ease}
+.hero-banner.is-tabbed .hb-slide.active{display:flex}
+.hero-banner.is-tabbed .hb-dots{display:none}
+.hero-banner.is-tabbed .mb-slide .member-bar{width:100%;height:112px;padding:0;display:flex;align-items:center}
+.hero-banner.is-tabbed .member-inner{width:100%;max-width:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(250px,1.15fr) 1fr 1fr 1fr auto;align-items:center;gap:0;flex-wrap:nowrap}
+.hero-banner.is-tabbed .mb-lbl{display:none}
+.hero-banner.is-tabbed .mb-sub{padding:0 24px;color:#657084;font-size:13px;line-height:1.5}
+.hero-banner.is-tabbed .mb-tiers{display:contents}
+.hero-banner.is-tabbed .mb-tier{text-align:center;padding:0 24px;border-right:0;border-left:1px solid var(--border)}
+.hero-banner.is-tabbed .mb-tier-name{font-size:13px;font-weight:800;color:#111827}
+.hero-banner.is-tabbed .mb-tier-desc{font-size:11px;color:var(--tm);line-height:1.55;margin-top:2px}
+.hero-banner.is-tabbed .mb-detail-btn{display:inline-flex;align-items:center;justify-content:center;width:92px;height:36px;margin:0 40px 0 26px;padding:0;border-radius:5px;background:var(--rose);color:#fff;font-size:13px;font-weight:800}
+.hero-banner.is-tabbed .notice-slide .notice-banner-inner{position:relative;width:100%;max-width:none;height:100%;margin:0;padding:24px 126px 10px 28px;display:block}
+.hero-banner.is-tabbed .notice-slide .nb-more{position:absolute;right:0;top:0;width:112px;height:100%;margin:0;padding:0;border-left:1px solid #eef1f5;border-radius:0;background:#fff;color:#a8b0bd;font-size:13px;font-weight:700;justify-content:center;flex:0 0 auto}
+.hero-banner.is-tabbed .notice-slide .nb-more:hover{background:#fff;color:#7b8494}
+.hero-banner.is-tabbed .nb-viewport{height:78px;padding-right:0;min-width:0}
 
 /* ? ═ 바로가 ?? ═ */
 .sc-bar{background:#fff;border-bottom:1px solid var(--border);padding: 14px 0}
@@ -344,13 +341,12 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 .notice-txt{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .notice-date{font-size:11px;color:var(--tm);white-space:nowrap}
 .rate-title{font-size:16px;font-weight:800;color:#111827;margin-bottom:10px}
-.rate-desc{font-size:11px;color:#111827;line-height:1.55;margin-bottom:8px}
-.rate-period{font-size:11px;font-weight:800;color:#111827;margin-bottom:8px}
-.rate-list{display:grid;gap:0}
-.rate-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;min-height:25px;border-bottom:1px solid #d9dee6;font-size:11px}
-.rate-currency{display:flex;align-items:center;gap:5px;color:#111827}
-.rate-flag{width:16px;height:11px;object-fit:cover;display:block;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
-.rate-value{font-family:Roboto,Arial,sans-serif;color:#ff4b00;font-weight:800;white-space:nowrap}
+.rate-desc{font-size:12px;color:var(--ts);line-height:1.55;margin-bottom:12px}
+.rate-list{display:grid;gap:7px}
+.rate-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;min-height:42px;padding:0 14px;background:#F7F8FA;border-radius:8px;font-size:13px}
+.rate-currency{display:flex;align-items:center;gap:8px;color:var(--tp);font-weight:700}
+.rate-flag{width:20px;height:14px;object-fit:cover;display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.rate-value{font-family:Roboto,Arial,sans-serif;color:var(--tp);font-weight:800;font-size:14px;white-space:nowrap}
 .rate-delta{color:#1f2937;font-weight:600}
 .rate-more{display:flex;justify-content:flex-end;margin-top:9px;color:#0067ff;font-size:11px;font-weight:700}
 .cs-num{font-size:30px;font-weight:900;color:var(--rose);font-family:'Roboto',sans-serif;line-height:1.1;margin-bottom:14px}
@@ -533,13 +529,7 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
   .logo{font-size:18px}
   .logo sub{display:none}
   .search{max-width:none}
-  .search-btn span{display:none}
-  .channel-bar{padding:10px 0}
-  .ch-icon-item{min-width:68px;padding:4px 8px; justify-content:center}
-  .ch-circle{width:46px;height:46px;}
-  .ch-circle-logo .flag{font-size:13px}
-  .ch-label{font-size:10px}
-  .hero-inner{padding:0 14px}
+  .search-btn span{display:none}  .hero-inner{padding:0 14px}
   .banner-slider{height:200px}
   .slide-inner{padding:0 20px}
   .slide-title{font-size:20px}
@@ -777,7 +767,7 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
     <div class="sc-item" role="button" tabindex="0" onclick="openWishlistPopup()" onkeydown="handleShortcutKey(event, openWishlistPopup)"><div class="sc-icon si2"><i class="fas fa-heart"></i></div><span class="sc-lbl">관심상품</span></div>
     <div class="sc-item" onclick="location.href='web_auction_bid_list.html'" style="cursor:pointer"><div class="sc-icon si3"><i class="fas fa-gavel"></i></div><span class="sc-lbl">나의 경매</span></div>
     <div class="sc-item" onclick="location.href='web_bundle_shipping_management.html'" style="cursor:pointer"><div class="sc-icon si4"><i class="fas fa-box-open"></i></div><span class="sc-lbl">배송 신청 관리</span></div>
-    <div class="sc-item" role="button" tabindex="0" onclick="openMarketInfoPopup()" onkeydown="handleShortcutKey(event, openMarketInfoPopup)"><div class="sc-icon si5"><i class="fas fa-thumbs-up"></i></div><span class="sc-lbl">국가별 운영정보</span></div>
+    <div class="sc-item" onclick="location.href='https://www.bidbuy.co.kr/cs'" style="cursor:pointer"><div class="sc-icon si5"><i class="fas fa-thumbs-up"></i></div><span class="sc-lbl">이용가이드</span></div>
     <div class="sc-item" role="button" tabindex="0" onclick="openConvenienceToolsPopup()" onkeydown="handleShortcutKey(event, openConvenienceToolsPopup)"><div class="sc-icon si6"><i class="fas fa-toolbox"></i></div><span class="sc-lbl">편의도구</span></div>
     <div class="sc-item" onclick="location.href='web_mileage.html'" style="cursor:pointer"><div class="sc-icon si7"><i class="fas fa-ticket"></i></div><span class="sc-lbl">마일리지/쿠폰</span></div>
     <div class="sc-item" role="button" tabindex="0" onclick="openbidbuycsPopup()" onkeydown="handleShortcutKey(event, openbidbuycsPopup)"><div class="sc-icon si8"><i class="fas fa-clipboard-list"></i></div><span class="sc-lbl">자주하는질문</span></div>
@@ -786,20 +776,20 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
   </div>
 </div>
 
-<!-- 인기 브랜드-->
+<!-- 인기 카테고리-->
 <div class="section">
-  <div class="sec-hd"><h2 class="sec-title">인기 브랜드 빠른 검색</h2></div>
+  <div class="sec-hd"><h2 class="sec-title">인기 카테고리 빠른 검색</h2></div>
   <div class="brand-grid">
-    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('NIKE')"><div class="br-img"><img src="favorite logo/3.png" alt="NIKE" onerror="this.parentElement.textContent='NIKE'"></div><span class="br-name">NIKE</span></div>
-    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('CHANEL')"><div class="br-img"><img src="favorite logo/2.png" alt="CHANEL" onerror="this.parentElement.textContent='CHANEL'"></div><span class="br-name">CHANEL</span></div>
-    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('HERMES')"><div class="br-img"><img src="favorite logo/1.png" alt="HERMES" onerror="this.parentElement.textContent='HERMES'"></div><span class="br-name">HERMES</span></div>
-    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('POLO RALPH LAUREN')"><div class="br-img"><img src="favorite logo/4.png" alt="POLO" onerror="this.parentElement.textContent='POLO'"></div><span class="br-name">POLO</span></div>
-    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('LEVI\'S')"><div class="br-img"><img src="favorite logo/8.png" alt="LEVI'S" onerror="this.parentElement.textContent='LEVI\'S'"></div><span class="br-name">LEVI'S</span></div>
-    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('BANDAI')"><div class="br-img"><img src="favorite logo/10.png" alt="BANDAI" onerror="this.parentElement.textContent='BANDAI'"></div><span class="br-name">BANDAI</span></div>
-    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('COMME des GARÇONS')"><div class="br-img"><img src="favorite logo/7.png" alt="COMME des" onerror="this.parentElement.textContent='COMME des'"></div><span class="br-name">COMME des</span></div>
-    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('SHIMANO')"><div class="br-img"><img src="favorite logo/5.png" alt="SHIMANO" onerror="this.parentElement.textContent='SHIMANO'"></div><span class="br-name">SHIMANO</span></div>
-    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('COACH')"><div class="br-img"><img src="favorite logo/6.png" alt="COACH" onerror="this.parentElement.textContent='COACH'"></div><span class="br-name">COACH</span></div>
-    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('GUCCI')"><div class="br-img"><img src="favorite logo/9.png" alt="GUCCI" onerror="this.parentElement.textContent='GUCCI'"></div><span class="br-name">GUCCI</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('낚시용품')"><div class="br-img"><img src="../favorite logo/5.png" alt="낚시용품" onerror="this.parentElement.textContent='낚시용품'"></div><span class="br-name">낚시용품</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('피규어')"><div class="br-img"><img src="../favorite logo/10.png" alt="피규어" onerror="this.parentElement.textContent='피규어'"></div><span class="br-name">피규어</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('오토바이부품')"><div class="br-img"><img src="../favorite logo/2.png" alt="오토바이부품" onerror="this.parentElement.textContent='오토바이부품'"></div><span class="br-name">오토바이부품</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('카메라')"><div class="br-img"><img src="../favorite logo/9.png" alt="카메라" onerror="this.parentElement.textContent='카메라'"></div><span class="br-name">카메라</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('골프')"><div class="br-img"><img src="../favorite logo/6.png" alt="골프" onerror="this.parentElement.textContent='골프'"></div><span class="br-name">골프</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('음향기기')"><div class="br-img"><img src="../favorite logo/1.png" alt="음향기기" onerror="this.parentElement.textContent='음향기기'"></div><span class="br-name">음향기기</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('포켓몬카드')"><div class="br-img"><img src="../favorite logo/8.png" alt="포켓몬카드" onerror="this.parentElement.textContent='포켓몬카드'"></div><span class="br-name">포켓몬카드</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('시계')"><div class="br-img"><img src="../favorite logo/11.png" alt="시계" onerror="this.parentElement.textContent='시계'"></div><span class="br-name">시계</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('악기')"><div class="br-img"><img src="../favorite logo/7.png" alt="악기" onerror="this.parentElement.textContent='악기'"></div><span class="br-name">악기</span></div>
+    <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('슈즈')"><div class="br-img"><img src="../favorite logo/3.png" alt="슈즈" onerror="this.parentElement.textContent='슈즈'"></div><span class="br-name">슈즈</span></div>
   </div>
 </div>
 
@@ -839,13 +829,12 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
 <div class="section" style="padding-top:0">
   <div class="info-grid">
     <div class="info-card">
-      <div class="rate-title">고시환율</div>
-      <p class="rate-desc">관세청에서 관/부가세 계산시 적용되는 환율로 주 단위로 고시되며,<br>매주 금요일에 다음 주 (월~토) 적용 환율을 고시합니다.</p>
-      <div class="rate-period">고시시간 2026-07-14 12:30:00</div>
-      <div class="rate-list" aria-label="고시환율 목록">
-        <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_usa.png" alt="">USD</span><span class="rate-value">1,522.44 </span></div>
-        <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_jp.png" alt="">JPY</span><span class="rate-value">9.39 </span></div>
-        <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_uk.png" alt="">GBP</span><span class="rate-value">2,037.08 </span></div>
+      <div class="rate-title">비드바이 고시환율</div>
+      <p class="rate-desc">비드바이 결제 금액 계산에 적용되는 기준 환율입니다.</p>
+      <div class="rate-list" aria-label="비드바이 고시환율 목록">
+        <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_usa.png" alt="">USD</span><span class="rate-value">1,450.00</span></div>
+        <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_jp.png" alt="">JPY</span><span class="rate-value">9.10</span></div>
+        <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_uk.png" alt="">GBP</span><span class="rate-value">1,960.00</span></div>
       </div>
     </div>
     <div class="info-card">
@@ -1121,31 +1110,39 @@ function openbidbuynoticePopup(){
   const slides = banner.querySelectorAll('.hb-slide');
   const dots = banner.querySelectorAll('.hb-dot');
   if(!slides.length) return;
+  banner.classList.add('is-tabbed');
+  if(!banner.querySelector('.hero-banner-inner')){
+    const inner = document.createElement('div');
+    inner.className = 'hero-banner-inner';
+    const tabs = document.createElement('div');
+    tabs.className = 'hb-tabs';
+    tabs.setAttribute('role', 'tablist');
+    tabs.setAttribute('aria-label', '공지 및 마일리지 안내');
+    tabs.innerHTML =
+      '<button class="hb-tab active" type="button" role="tab" aria-selected="true" onclick="hbGoTo(0)"><i class="fas fa-crown" aria-hidden="true"></i><span>등급별 마일리지 제도 오픈!</span></button>' +
+      '<button class="hb-tab" type="button" role="tab" aria-selected="false" onclick="hbGoTo(1)"><i class="fas fa-bullhorn" aria-hidden="true"></i><span>공지사항</span></button>';
+    const panels = document.createElement('div');
+    panels.className = 'hb-panels';
+    slides.forEach(slide => panels.appendChild(slide));
+    inner.append(tabs, panels);
+    dots.forEach(dot => dot.remove());
+    banner.innerHTML = '';
+    banner.appendChild(inner);
+  }
+  const tabs = banner.querySelectorAll('.hb-tab');
   let current = 0;
-  let timer = null;
-  const delay = 5500;
   function goTo(i){
     current = (i + slides.length) % slides.length;
     slides.forEach((s,n)=>s.classList.toggle('active', n===current));
-    dots.forEach((d,n)=>d.classList.toggle('active', n===current));
-  }
-  function stop(){
-    clearInterval(timer);
-    timer = null;
-  }
-  function play(){
-    stop();
-    timer = setInterval(()=>goTo(current + 1), delay);
+    tabs.forEach((tab,n)=>{
+      tab.classList.toggle('active', n===current);
+      tab.setAttribute('aria-selected', String(n===current));
+    });
   }
   window.hbGoTo = function(i){
     goTo(i);
-    play();
   };
-  banner.addEventListener('mouseenter', stop);
-  banner.addEventListener('mouseleave', play);
-  banner.addEventListener('focusin', stop);
-  banner.addEventListener('focusout', play);
-  play();
+  goTo(0);
 })();
 
 /* 공지사항 리스트: 자동 롤링 + 수동 스크롤(드래그/휠 시 일시정지 후 재개) */

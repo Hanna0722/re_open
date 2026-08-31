@@ -1,4 +1,8 @@
-/* BidBuy search modal */
+/* BidBuy search modal (mobile)
+   web/bb-search-modal.js의 모바일 버전.
+   - 검색 범위 / 최근 검색어 / 추천 검색어 / 최근 본 상품 구성과 동작은 웹과 동일하다.
+   - localStorage 키(bb_recent_searches, bb_search_scopes)도 웹과 공유한다.
+   - 좁은 화면에 맞춰 드롭다운 대신 헤더 아래 붙는 전체폭 시트로 표시한다. */
 (function () {
   'use strict';
 
@@ -31,45 +35,39 @@
   ];
 
   var css = [
-    '.bbsm-wrap{position:relative;flex:0 0 540px;min-width:0}',
-    '.bbsm-wrap *{box-sizing:border-box}',
-    '.bbsm-wrap .bbh-search{flex:none;width:100%;border-color:#ff2f59;border-radius:7px;overflow:hidden;background:#fff}',
-    '.bbsm-wrap .bbh-search input{background:#f4f6f9;padding-left:116px}',
-    '.bbsm-panel{position:absolute;top:calc(100% + 1px);left:0;width:100%;background:#fff;border:1px solid #ff2f59;border-top:0;border-radius:0 0 5px 5px;box-shadow:0 4px 14px rgba(15,23,42,.18);padding:20px 20px 44px;z-index:950;font-family:Pretendard,"Apple SD Gothic Neo","Helvetica Neue","Malgun Gothic",sans-serif;color:#111827}',
+    '.bbsm-ov{position:fixed;inset:0;background:rgba(15,23,42,.38);z-index:4000;touch-action:none}',
+    '.bbsm-ov[hidden]{display:none}',
+    '.bbsm-panel{position:fixed;left:0;right:0;background:#fff;border-top:2px solid #ff2f59;box-shadow:0 10px 26px rgba(15,23,42,.2);padding:16px 16px 28px;z-index:4001;overflow-y:auto;-webkit-overflow-scrolling:touch;font-family:Pretendard,"Apple SD Gothic Neo","Helvetica Neue","Malgun Gothic",sans-serif;color:#111827}',
     '.bbsm-panel[hidden]{display:none}',
-    '.bbsm-ai-chip{position:absolute;top:-35px;left:8px;height:26px;padding:0 10px;border-radius:6px;background:#f62f58;color:#fff;font-size:12px;font-weight:900;display:inline-flex;align-items:center;gap:4px;z-index:2;pointer-events:none}',
+    '.bbsm-panel *{box-sizing:border-box}',
+    '.bbsm-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}',
+    '.bbsm-ai-chip{height:28px;padding:0 12px;border-radius:7px;background:#f62f58;color:#fff;font-size:12px;font-weight:900;display:inline-flex;align-items:center;gap:5px}',
     '.bbsm-ai-chip b{font-weight:900}',
-    '.bbsm-section{width:100%;padding-bottom:20px}',
-    '.bbsm-section+.bbsm-section{padding-top:18px;border-top:1px solid #eef1f5}',
-    '.bbsm-row-head{width:100%;display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}',
-    '.bbsm-title{font-size:16px;font-weight:500;color:#111827}',
-    '.bbsm-count{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;margin-left:4px;border-radius:50%;background:#ffe3eb;color:#ef3158;font-size:11px;font-weight:800;vertical-align:1px}',
+    '.bbsm-close{width:30px;height:30px;border:0;background:none;color:#8b95a5;font-size:19px;line-height:1;cursor:pointer;font-family:inherit;padding:0}',
+    '.bbsm-section{width:100%;padding-bottom:16px}',
+    '.bbsm-section+.bbsm-section{padding-top:15px;border-top:1px solid #eef1f5}',
+    '.bbsm-row-head{width:100%;display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}',
+    '.bbsm-title{font-size:14px;font-weight:700;color:#111827}',
+    '.bbsm-count{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;margin-left:4px;border-radius:50%;background:#ffe3eb;color:#ef3158;font-size:10px;font-weight:800}',
     '.bbsm-clearall{border:0;background:none;color:#9aa3b2;font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;padding:0}',
-    '.bbsm-scope-all{width:100%;height:42px;border:1px solid #dfe4ec;border-radius:7px;background:#fff;color:#6f7785;font-size:13px;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:7px}',
-    '.bbsm-scope-grid{width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}',
-    '.bbsm-scope{height:42px;border:1px solid #dfe4ec;border-radius:7px;background:#fff;color:#707783;font-size:13px;font-weight:500;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer;font-family:inherit}',
-    '.bbsm-recent-strip{display:flex;gap:7px;overflow-x:auto;overflow-y:hidden;padding-bottom:4px;scrollbar-width:thin}',
-    '.bbsm-recent-chip{height:38px;min-width:96px;max-width:180px;padding:0 10px;border:1px solid #dfe4ec;border-radius:7px;background:#fff;color:#707783;font-size:13px;font-weight:500;display:inline-flex;align-items:center;justify-content:space-between;gap:8px;flex:0 0 auto;font-family:inherit}',
-    '.bbsm-recent-label{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}',
-    '.bbsm-recent-remove{width:18px;height:18px;border:0;border-radius:50%;background:#f1f3f6;color:#9aa3b2;font-size:11px;line-height:18px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;padding:0}',
-    '.bbsm-recent-remove:hover{background:#ffe3eb;color:#ef3158}',
+    '.bbsm-scope-all{width:100%;height:40px;border:1px solid #dfe4ec;border-radius:7px;background:#fff;color:#6f7785;font-size:12px;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:7px;cursor:pointer;font-family:inherit}',
+    '.bbsm-scope-grid{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}',
+    '.bbsm-scope{height:40px;border:1px solid #dfe4ec;border-radius:7px;background:#fff;color:#707783;font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-family:inherit;padding:0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
     '.bbsm-scope.active{border-color:#ff2f59;background:#fff7f9;color:#f03259}',
-    '.bbsm-flag{width:20px;height:14px;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08);display:inline-block;position:relative;background:#fff;overflow:hidden;flex:0 0 auto}',
-    '.bbsm-flag.jp::before{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#c9002b}',
+    '.bbsm-flag{width:18px;height:13px;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08);display:inline-block;position:relative;background:#fff;overflow:hidden;flex:0 0 auto}',
+    '.bbsm-flag.jp::before{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:#c9002b}',
     '.bbsm-flag.us{background:linear-gradient(#b22234 0 14%,#fff 14% 28%,#b22234 28% 42%,#fff 42% 56%,#b22234 56% 70%,#fff 70% 84%,#b22234 84%)}',
-    '.bbsm-flag.us::before{content:"";position:absolute;left:0;top:0;width:9px;height:8px;background:#24458f}',
+    '.bbsm-flag.us::before{content:"";position:absolute;left:0;top:0;width:8px;height:7px;background:#24458f}',
     '.bbsm-flag.uk{background:#17468f}',
     '.bbsm-flag.uk::before{content:"";position:absolute;inset:0;background:linear-gradient(32deg,transparent 41%,#fff 41% 48%,#d71920 48% 54%,#fff 54% 61%,transparent 61%),linear-gradient(148deg,transparent 41%,#fff 41% 48%,#d71920 48% 54%,#fff 54% 61%,transparent 61%),linear-gradient(90deg,transparent 42%,#fff 42% 58%,transparent 58%),linear-gradient(0deg,transparent 35%,#fff 35% 65%,transparent 65%)}',
-    '.bbsm-hint{display:block;margin-top:10px;color:#a6adba;font-size:12px}',
-    '.bbsm-empty{color:#a6adba;font-size:13px}',
-    '.bbsm-suggest-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:64px;row-gap:13px;counter-reset:bbsm-count}',
-    '.bbsm-suggest-list li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:0;align-items:center;font-size:14px;color:#555b66;cursor:pointer;counter-increment:bbsm-count;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
-    '.bbsm-suggest-list li::before{content:counter(bbsm-count);color:#6d7280;font-size:14px;font-weight:400}',
-    '.bbsm-suggest-list li:hover{color:#ef3158}',
-    '.bbsm-viewed-strip{display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;padding-bottom:4px;scrollbar-width:thin}',
-    '.bbsm-viewed{width:74px;height:72px;border:1px solid #e3e7ee;border-radius:6px;overflow:hidden;background:#f5f7fa;flex:0 0 auto;padding:0;cursor:pointer}',
-    '.bbsm-viewed img{width:100%;height:100%;object-fit:cover;display:block}',
-    '@media (max-width:720px){.bbsm-wrap{flex:1 1 auto}.bbsm-panel{left:50%;transform:translateX(-50%);width:min(540px,calc(100vw - 24px))}.bbsm-scope-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.bbsm-suggest-list{grid-template-columns:1fr;row-gap:10px}}'
+    '.bbsm-empty{color:#a6adba;font-size:12px}',
+    '.bbsm-suggest-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;row-gap:11px;counter-reset:bbsm-count}',
+    '.bbsm-suggest-list li{display:grid;grid-template-columns:18px minmax(0,1fr);align-items:center;font-size:13px;color:#555b66;cursor:pointer;counter-increment:bbsm-count;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
+    '.bbsm-suggest-list li::before{content:counter(bbsm-count);color:#6d7280;font-size:13px;font-weight:400}',
+    '.bbsm-viewed-strip{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}',
+    '.bbsm-viewed-strip::-webkit-scrollbar{display:none}',
+    '.bbsm-viewed{width:70px;height:68px;border:1px solid #e3e7ee;border-radius:6px;overflow:hidden;background:#f5f7fa;flex:0 0 auto;padding:0;cursor:pointer}',
+    '.bbsm-viewed img{width:100%;height:100%;object-fit:cover;display:block}'
   ].join('\n');
 
   function getRecent() {
@@ -109,7 +107,7 @@
   }
 
   function init() {
-    var search = document.querySelector('.bbh-search');
+    var search = document.querySelector('.topbar-search, .app-search');
     if (!search || document.getElementById('bbSearchModal')) return;
 
     if (!document.getElementById('bbSearchModalCss')) {
@@ -123,17 +121,20 @@
     if (!input) return;
     input.placeholder = '검색어 또는 URL을 입력해주세요.';
 
-    var wrap = document.createElement('div');
-    wrap.className = 'bbsm-wrap';
-    search.parentNode.insertBefore(wrap, search);
-    wrap.appendChild(search);
+    var overlay = document.createElement('div');
+    overlay.className = 'bbsm-ov';
+    overlay.hidden = true;
+    document.body.appendChild(overlay);
 
     var panel = document.createElement('div');
     panel.className = 'bbsm-panel';
     panel.id = 'bbSearchModal';
     panel.hidden = true;
     panel.innerHTML =
-      '<div class="bbsm-ai-chip">야후옥션 외 <b data-bbsm-active-count>2</b></div>' +
+      '<div class="bbsm-head">' +
+        '<span class="bbsm-ai-chip">야후옥션 외 <b data-bbsm-active-count>2</b></span>' +
+        '<button type="button" class="bbsm-close" aria-label="검색창 닫기">&times;</button>' +
+      '</div>' +
       '<div class="bbsm-section">' +
         '<div class="bbsm-row-head"><span class="bbsm-title">검색 범위 <span class="bbsm-count" data-bbsm-count>3</span></span><button type="button" class="bbsm-clearall" data-bbsm-scope-clear>선택 해제</button></div>' +
         '<button type="button" class="bbsm-scope-all" data-bbsm-scope-all><i class="fas fa-globe" aria-hidden="true"></i> 통합검색 · 8개 사이트 전체</button>' +
@@ -151,7 +152,7 @@
         '<div class="bbsm-row-head"><span class="bbsm-title">최근 본 상품</span><button type="button" class="bbsm-clearall" data-bbsm-view-clear>전체삭제</button></div>' +
         '<div class="bbsm-viewed-strip" data-bbsm-viewed></div>' +
       '</div>';
-    wrap.appendChild(panel);
+    document.body.appendChild(panel);
 
     var activeCountEl = panel.querySelector('[data-bbsm-active-count]');
     var countEl = panel.querySelector('[data-bbsm-count]');
@@ -195,29 +196,13 @@
         return;
       }
       var chips = document.createElement('div');
-      chips.className = 'bbsm-recent-strip';
-      list.forEach(function (term) {
-        var chip = document.createElement('span');
-        chip.className = 'bbsm-recent-chip';
-
-        var label = document.createElement('span');
-        label.className = 'bbsm-recent-label';
-        label.textContent = term;
-        label.addEventListener('click', function () { runSearch(term); });
-
-        var remove = document.createElement('button');
-        remove.type = 'button';
-        remove.className = 'bbsm-recent-remove';
-        remove.setAttribute('aria-label', term + ' 삭제');
-        remove.textContent = 'x';
-        remove.addEventListener('click', function (e) {
-          e.stopPropagation();
-          setRecent(getRecent().filter(function (t) { return t !== term; }));
-          renderRecent();
-        });
-
-        chip.appendChild(label);
-        chip.appendChild(remove);
+      chips.className = 'bbsm-scope-grid';
+      list.slice(0, 4).forEach(function (term) {
+        var chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'bbsm-scope';
+        chip.textContent = term;
+        chip.addEventListener('click', function () { runSearch(term); });
         chips.appendChild(chip);
       });
       recentEl.appendChild(chips);
@@ -245,18 +230,32 @@
       search.submit();
     }
 
+    // 검색창 바로 아래에 붙이고, 남은 화면 높이만큼만 차지하게 한다.
+    function position() {
+      var rect = search.getBoundingClientRect();
+      var top = Math.max(rect.bottom + 6, 0);
+      panel.style.top = top + 'px';
+      panel.style.maxHeight = Math.max(window.innerHeight - top, 200) + 'px';
+    }
+
     function openPanel() {
       renderRecent();
       renderScopes();
+      overlay.hidden = false;
       panel.hidden = false;
+      position();
     }
 
     function closePanel() {
       panel.hidden = true;
+      overlay.hidden = true;
     }
 
     input.addEventListener('focus', openPanel);
     input.addEventListener('click', openPanel);
+
+    overlay.addEventListener('click', closePanel);
+    panel.querySelector('.bbsm-close').addEventListener('click', closePanel);
 
     panel.querySelector('[data-bbsm-scope-clear]').addEventListener('click', function () {
       states = states.map(function () { return false; });
@@ -279,15 +278,19 @@
     });
 
     document.addEventListener('click', function (e) {
-      if (!wrap.contains(e.target)) closePanel();
+      if (panel.hidden) return;
+      if (!panel.contains(e.target) && !search.contains(e.target)) closePanel();
     });
 
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closePanel();
     });
+
+    window.addEventListener('resize', function () { if (!panel.hidden) position(); });
+    window.addEventListener('scroll', function () { if (!panel.hidden) position(); }, true);
   }
 
-  document.addEventListener('bb:login', init);
+  document.addEventListener('bb:mobile-login', init);
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
