@@ -14,7 +14,7 @@
   var LOGIN_KEY = 'bb_logged_in';
   var SHELL_MODE = document.currentScript?.getAttribute('data-bb-mobile-shell') || 'full';
   var USER_GRADE = (window.bbUserGrade || 'vip').toLowerCase();
-  var GRADE_ICON_DIR = '../gradeicon/';
+  var GRADE_ICON_DIR = 'gradeicon/';
   var GRADE_ICONS = {
     standard: 'grade_standard.png',
     premium: 'grade_premium.png',
@@ -428,7 +428,7 @@
      로고 교체: storeicon/ 안의 파일만 바꾸면
      좌측 드로어에 그대로 반영된다.
      스토어 추가/삭제/순서변경도 이 배열만 수정한다.                */
-  var STORE_LOGO_DIR = '../storeicon/';
+  var STORE_LOGO_DIR = 'storeicon/';
   var STORES = [
     { label: '야후 옥션',   logo: 'store_yahoo_auction.png',  href: 'mobile_sub_main.html' },
     { label: '메루카리',   logo: 'store_mercari.png',        href: 'mobile_purchase_merukari.html' },

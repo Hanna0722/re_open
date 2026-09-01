@@ -143,7 +143,10 @@
     }
     .filter-text-input::placeholder { color: #9aa3b2; }
     .filter-text-input:focus, .filter-select:focus { border-color: var(--brand); }
-    .filter-checkbox-row { display: inline-flex; align-items: center; gap: 7px; margin: 0 0 7px 4px; color: #111827; font-size: 13px; font-weight: 700; }
+    /* 제목 줄에 체크박스를 함께 두어 필터 항목들이 같은 높이에 정렬되도록 한다 */
+    .filter-block-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
+    .filter-block-head .filter-block-title { margin-bottom: 0; white-space: nowrap; }
+    .filter-checkbox-row { display: inline-flex; align-items: center; gap: 7px; margin: 0; color: #111827; font-size: 13px; font-weight: 700; white-space: nowrap; }
     .filter-checkbox-row input { width: 15px; height: 15px; margin: 0; accent-color: var(--brand); }
     .filter-submit { width: 100%; height: 36px; border: 0; border-radius: 5px; background: var(--brand); color: #fff; font-size: 14px; font-weight: 900; }
     @media (max-width: 1100px) {
@@ -227,28 +230,28 @@
   <div class="store-strip">
     <nav class="store-list" aria-label="스토어 바로가기">
       <a class="store-chip active" href="#" data-store-name="야후 옥션" data-best-title="야후 옥션 베스트" aria-current="page">
-        <div class="store-badge"><img src="../storeicon/store_yahoo_auction.png" alt=""></div><strong>야후 옥션</strong>
+        <div class="store-badge"><img src="storeicon/store_yahoo_auction.png" alt=""></div><strong>야후 옥션</strong>
       </a>
       <a class="store-chip" href="#" data-store-name="메루카리" data-best-title="메루카리 베스트">
-        <div class="store-badge"><img src="../storeicon/store_mercari.png" alt=""></div><strong>메루카리</strong>
+        <div class="store-badge"><img src="storeicon/store_mercari.png" alt=""></div><strong>메루카리</strong>
       </a>
       <a class="store-chip" href="#" data-store-name="일본 라쿠텐" data-best-title="일본 라쿠텐 베스트">
-        <div class="store-badge"><img src="../storeicon/store_rakuten.png" alt=""></div><strong>일본 라쿠텐</strong>
+        <div class="store-badge"><img src="storeicon/store_rakuten.png" alt=""></div><strong>일본 라쿠텐</strong>
       </a>
       <a class="store-chip" href="#" data-store-name="일본 라쿠마" data-best-title="일본 라쿠마 베스트">
-        <div class="store-badge"><img src="../storeicon/store_rakuma.png" alt=""></div><strong>일본 라쿠마</strong>
+        <div class="store-badge"><img src="storeicon/store_rakuma.png" alt=""></div><strong>일본 라쿠마</strong>
       </a>
       <a class="store-chip" href="#" data-store-name="야후 쇼핑" data-best-title="야후 쇼핑 베스트">
-        <div class="store-badge"><img src="../storeicon/store_yahoo_shopping.png" alt=""></div><strong>야후 쇼핑</strong>
+        <div class="store-badge"><img src="storeicon/store_yahoo_shopping.png" alt=""></div><strong>야후 쇼핑</strong>
       </a>
       <a class="store-chip" href="#" data-store-name="야후 프리마" data-best-title="야후 프리마 베스트">
-        <div class="store-badge"><img src="../storeicon/store_yahoo_furima.png" alt=""></div><strong>야후 프리마</strong>
+        <div class="store-badge"><img src="storeicon/store_yahoo_furima.png" alt=""></div><strong>야후 프리마</strong>
       </a>
       <a class="store-chip" href="#" data-store-name="미국 이베이" data-best-title="미국 이베이 베스트">
-        <div class="store-badge"><img src="../storeicon/store_ebay_us.png" alt=""></div><strong>미국 이베이</strong>
+        <div class="store-badge"><img src="storeicon/store_ebay_us.png" alt=""></div><strong>미국 이베이</strong>
       </a>
       <a class="store-chip" href="#" data-store-name="영국 이베이" data-best-title="영국 이베이 베스트">
-        <div class="store-badge"><img src="../storeicon/store_ebay_uk.png" alt=""></div><strong>영국 이베이</strong>
+        <div class="store-badge"><img src="storeicon/store_ebay_uk.png" alt=""></div><strong>영국 이베이</strong>
       </a>
     </nav>
   </div>
@@ -339,8 +342,10 @@
         </div>
 
         <div class="filter-block">
-          <div class="filter-block-title">배송/판매</div>
-          <label class="filter-checkbox-row"><input type="checkbox"><span>무료배송</span></label>
+          <div class="filter-block-head">
+            <div class="filter-block-title">배송/판매</div>
+            <label class="filter-checkbox-row"><input type="checkbox"><span>무료배송</span></label>
+          </div>
           <select class="filter-select" aria-label="거래방식">
             <option>거래방식 전체</option>
             <option>경매</option>

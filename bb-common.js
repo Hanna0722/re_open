@@ -344,7 +344,7 @@
      로고 교체: storeicon/ 안의 파일만 바꾸면
      상단 채널바와 좌측 드로어에 그대로 반영된다.
      스토어 추가/삭제/순서변경도 이 배열만 수정한다.                */
-  var STORE_LOGO_DIR = '../storeicon/';
+  var STORE_LOGO_DIR = 'storeicon/';
   var STORES = [
     { label: '야후옥션',   barLabel: '야후 옥션',   logo: 'store_yahoo_auction.png',  href: 'web_sub_main.html',          barHref: 'web_sub_main.html' },
     { label: '메루카리',   barLabel: '메루카리',    logo: 'store_mercari.png',        href: 'web_purchase_merukari.html', barHref: 'web_sub_main.html' },
@@ -374,7 +374,7 @@
 
   function leftDrawerHTML() {
     var header = isLoggedIn()
-      ? '<div id="drUserHd" class="bbd-head"><div class="bbd-user-mini"><div class="bbd-uav grade-img"><img class="grade-icon" src="../gradeicon/grade_vip.png" alt="VIP 등급"></div><div><div class="bbd-uname">홍길동님</div><div class="bbd-ugrade">VIP 회원</div></div></div><button class="bbd-close" type="button" aria-label="메뉴 닫기" onclick="closeDrawer()">×</button></div>'
+      ? '<div id="drUserHd" class="bbd-head"><div class="bbd-user-mini"><div class="bbd-uav grade-img"><img class="grade-icon" src="gradeicon/grade_vip.png" alt="VIP 등급"></div><div><div class="bbd-uname">홍길동님</div><div class="bbd-ugrade">VIP 회원</div></div></div><button class="bbd-close" type="button" aria-label="메뉴 닫기" onclick="closeDrawer()">×</button></div>'
       : '<div id="drGuestHd" class="bbd-head"><span></span><button class="bbd-close" type="button" aria-label="메뉴 닫기" onclick="closeDrawer()">×</button></div><div id="drGuestPanel" class="bbd-guest-card"><div class="bbd-guest-title">비드바이 로그인</div><div class="bbd-guest-copy">로그인하고 입찰 현황, 마일리지, 관심 상품을 빠르게 확인하세요.</div><div class="bbd-login-actions"><button class="bbd-action-btn" type="button" onclick="doLogin();closeDrawer()">로그인</button><button class="bbd-action-btn secondary" type="button">회원가입</button></div></div>';
 
     return (
@@ -420,7 +420,7 @@
     return (
       '<div class="user-drawer-head">' +
         '<div class="user-member-row">' +
-          '<div class="user-crown grade-img"><img class="grade-icon" src="../gradeicon/grade_vip.png" alt="VIP 등급"></div>' +
+          '<div class="user-crown grade-img"><img class="grade-icon" src="gradeicon/grade_vip.png" alt="VIP 등급"></div>' +
           '<div><strong class="user-name-strong">홍길동님</strong><span class="user-vip-chip">VIP</span></div>' +
         '</div>' +
         '<p class="user-vip-copy">Prestige까지 80% 남음</p>' +
