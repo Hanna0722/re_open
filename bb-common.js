@@ -395,7 +395,7 @@
       '<div class="bbd-cs-card">' +
         '<div class="bbd-cs-tel">1544-5224</div>' +
         '<p class="bbd-cs-time">평일 AM 10:00 - PM 17:00 (점심 PM 12:30 - 13:30)</p>' +
-        '<div class="bbd-cs-actions"><button type="button" onclick="location.href=\'web_qna_form.html\'">1:1 문의</button><button type="button" onclick="location.href=\'web_qna.html\'">FAQ</button><button type="button" onclick="location.href=\'web_fakenotice.html\'">공지사항</button></div>' +
+        '<div class="bbd-cs-actions"><button type="button" onclick="location.href=\'web_qna.html\'">1:1 문의</button><button type="button" onclick="location.href=\'https://www.bidbuy.co.kr/cs/faq\'">FAQ</button><button type="button" onclick="location.href=\'https://www.bidbuy.co.kr/cs/notice\'">공지사항</button></div>' +
       '</div>' +
       '<div style="height:24px"></div>'
     );

@@ -48,17 +48,18 @@ a { text-decoration: none; color: inherit; }
 .m-icon-btn .badge{position:absolute;top:3px;right:2px;background:var(--rose);color:#fff;font-size:7px;font-weight:700;min-width:13px;height:13px;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:0 2px}
 .m-login-btn{min-width:62px;height:30px;background:var(--rose);color:#fff;border:none;padding:0 14px;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit}
 .m-user-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--amber));display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;cursor:pointer;border:none;font-family:inherit;flex-shrink:0}
-.m-header-search{display:flex;align-items:center;height:38px;background:#F4EEEA;border:1px solid #E6DDDA;border-radius:10px;overflow:hidden;margin:0 14px 10px}
-.m-header-search::before{content:"";width:15px;height:15px;margin-left:12px;flex:0 0 auto;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238b95a5' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m16.5 16.5 4 4'/%3E%3C/svg%3E") center/contain no-repeat}
-.m-header-search input{flex:1;min-width:0;height:100%;border:0;outline:0;background:transparent;padding:0 8px 0 8px;color:#333;font-size:13px;font-family:inherit}
+.m-header-search{display:flex;align-items:center;height:42px;background:#fff;border:1px solid var(--rose);border-radius:7px;overflow:hidden;margin:0 10px 12px}
+.m-header-search::before{display:none}
+.m-header-search input{flex:1;min-width:0;height:100%;border:0;outline:0;background:transparent;padding:0 13px;color:#333;font-size:13px;font-family:inherit}
 .m-header-search input::placeholder{color:#99A2B0}
-.m-header-search button{width:40px;height:100%;border:0;background:var(--rose);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.m-header-search button i{font-size:13px}
+.m-header-search button{width:48px;height:100%;border:0;background:var(--rose);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.m-header-search button i{font-size:15px}
+.m-header-search + .m-header-search{display:none}
 
 /* ── 스토어 바로가기 (검색 채널 탭) ── */
 .channel-tabs{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 8px;-webkit-overflow-scrolling:touch;background:#fff}
 .channel-tabs::-webkit-scrollbar{display:none}
-.store-shortcuts{border-bottom:1px solid var(--border)}
+.store-shortcuts{display:none;border-bottom:1px solid var(--border)}
 .ch-tab{padding:10px 12px 11px;font-size:12px;font-weight:700;color:#707070;white-space:nowrap;cursor:pointer;border:0;border-bottom:2px solid transparent;background:transparent;flex-shrink:0;font-family:inherit}
 .ch-tab.active{color:var(--rose);border-bottom-color:var(--rose)}
 .ch-tab small{font-weight:600;color:var(--tm);font-size:11px;margin-left:2px;font-family:'Roboto',sans-serif}
@@ -66,6 +67,7 @@ a { text-decoration: none; color: inherit; }
 
 /* ── 스토어 베스트 헤더 ── */
 .store-header {
+  display: none;
   padding: 14px 16px 12px;
   background: #fff;
 }
@@ -79,11 +81,124 @@ a { text-decoration: none; color: inherit; }
 
 /* ── 카테고리 슬라이드 칩 ── */
 .cat-section {
+  background: var(--bg);
+  padding: 0 10px 18px;
+}
+.m-sub-category {
+  overflow: hidden;
+  border: 1px solid #dfe5ee;
+  border-radius: 6px;
   background: #fff;
-  padding: 5px 10px;
+}
+.m-cat-toggle {
+  width: 100%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  border-bottom: 1px solid #e7ebf1;
+  color: #111827;
+  font-size: 14px;
+  font-weight: 800;
+  background: #fff;
+}
+.m-cat-toggle span {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.m-cat-toggle .fa-chevron-down { color: #657083; transition: transform .18s ease; }
+.m-sub-category.is-collapsed .m-cat-toggle { border-bottom: 0; }
+.m-sub-category.is-collapsed .m-cat-toggle .fa-chevron-down { transform: rotate(180deg); }
+.m-cat-body {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.m-cat-body[hidden] { display: none; }
+.m-cat-body a {
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 8px 13px;
+  border-right: 1px solid #e9edf3;
+  border-bottom: 1px solid #e9edf3;
+  color: #101827;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+.m-cat-body a:nth-child(2n) { border-right: 0; }
+.m-cat-body a:nth-last-child(-n+2) { border-bottom: 0; }
+.m-inline-filter {
+  margin-top: 10px;
+  border: 1px solid #dfe5ee;
+  border-radius: 7px;
+  background: #fff;
+  padding: 12px 14px 14px;
+}
+.m-filter-block { margin-bottom: 13px; }
+.m-filter-block label,
+.m-filter-label {
+  display: block;
+  margin-bottom: 7px;
+  color: #111827;
+  font-size: 13px;
+  font-weight: 800;
+}
+.m-price-fields {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+  align-items: center;
+  gap: 10px;
+}
+.m-filter-input,
+.m-filter-select {
+  width: 100%;
+  height: 38px;
+  border: 1px solid #d9dfe8;
+  border-radius: 6px;
+  background: #fff;
+  padding: 0 11px;
+  color: #111827;
+  font-size: 13px;
+  outline: none;
+}
+.m-filter-input::placeholder { color: #9ca6b5; }
+.m-filter-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23909AA8'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 30px;
+}
+.m-filter-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 22px;
+  margin-bottom: 8px;
+  color: #111827;
+  font-size: 13px;
+  font-weight: 700;
+}
+.m-filter-checkbox input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--rose);
+}
+.m-filter-submit {
+  width: 100%;
+  height: 40px;
+  margin-top: 2px;
+  border-radius: 6px;
+  background: var(--rose);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
 }
 .cat-controls {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 8px;
   width: 100%;
@@ -178,7 +293,7 @@ a { text-decoration: none; color: inherit; }
 .btn-filter.has-filter { color: var(--rose); border-color: var(--rose); }
 
 /* ── 상품 그리드 ── */
-.product-section { background: #fff; padding: 12px 16px 40px; }
+.product-section { display: none; background: #fff; padding: 12px 16px 40px; }
 .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .product-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; }
 .product-grid.is-refreshing .product-card { opacity: .35; transform: translateY(6px); transition: opacity .16s ease, transform .16s ease; }
@@ -401,6 +516,10 @@ a { text-decoration: none; color: inherit; }
     </div>
   </div>
   <div class="m-header-search">
+    <input type="text" placeholder="야후 옥션에서 검색" aria-label="검색어 입력">
+    <button type="button" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></button>
+  </div>
+  <div class="m-header-search">
     <input type="text" placeholder="키워드 또는 URL을 입력하세요." aria-label="검색어 입력">
     <button type="button" aria-label="검색"><i class="fa-solid fa-magnifying-glass"></i></button>
   </div>
@@ -426,6 +545,75 @@ a { text-decoration: none; color: inherit; }
 
 <!-- ── 카테고리 칩 슬라이드 ── -->
 <div class="cat-section">
+  <section class="m-sub-category" id="mobileSubCategory">
+    <button class="m-cat-toggle" type="button" aria-expanded="true" aria-controls="mobileSubCategoryBody" onclick="toggleMobileSubCategory()">
+      <span><i class="fa-solid fa-bars" aria-hidden="true"></i> 전체 카테고리</span>
+      <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+    </button>
+    <div class="m-cat-body" id="mobileSubCategoryBody">
+      <a href="#">컴퓨터</a>
+      <a href="#">가전, AV, 카메라</a>
+      <a href="#">자동차, 오토바이</a>
+      <a href="#">패션</a>
+      <a href="#">액세서리, 시계</a>
+      <a href="#">유아용품</a>
+      <a href="#">장난감, 게임</a>
+      <a href="#">스포츠, 레저</a>
+      <a href="#">코믹, 애니메이션</a>
+      <a href="#">책, 잡지</a>
+      <a href="#">음악</a>
+      <a href="#">영화, 비디오</a>
+      <a href="#">취미, 문화</a>
+      <a href="#">앤틱, 컬렉션</a>
+      <a href="#">뷰티, 건강 관리</a>
+      <a href="#">생활, 인테리어</a>
+      <a href="#">탤런트 상품</a>
+      <a href="#">사무, 점포 용품</a>
+      <a href="#">애완동물, 생물</a>
+      <a href="#">식품, 음료</a>
+      <a href="#">꽃, 원예</a>
+      <a href="#">티켓, 금권, 숙박예약</a>
+      <a href="#">자선</a>
+      <a href="#">기타</a>
+    </div>
+  </section>
+
+  <section class="m-inline-filter" aria-label="검색 필터">
+    <div class="m-filter-block">
+      <div class="m-filter-label">가격 (JPY)</div>
+      <div class="m-price-fields">
+        <input class="m-filter-input" type="text" placeholder="최소 JPY" aria-label="최소 가격">
+        <span>~</span>
+        <input class="m-filter-input" type="text" placeholder="최대 JPY" aria-label="최대 가격">
+      </div>
+    </div>
+    <div class="m-filter-block">
+      <label for="mobileItemState">상품상태</label>
+      <select class="m-filter-select" id="mobileItemState">
+        <option>전체</option>
+        <option>새 상품</option>
+        <option>중고</option>
+      </select>
+    </div>
+    <div class="m-filter-block">
+      <div class="m-filter-label">배송/판매</div>
+      <label class="m-filter-checkbox">
+        <input type="checkbox">
+        <span>무료배송</span>
+      </label>
+      <select class="m-filter-select" aria-label="거래방식">
+        <option>거래방식 전체</option>
+        <option>경매</option>
+        <option>즉시구매</option>
+        <option>가격제안</option>
+      </select>
+    </div>
+    <div class="m-filter-block">
+      <label for="mobileSeller">판매자</label>
+      <input class="m-filter-input" id="mobileSeller" type="text" placeholder="판매자">
+    </div>
+    <button class="m-filter-submit" type="button">필터 적용</button>
+  </section>
   <div class="cat-controls" aria-label="필터 탭 선택">
     <button class="cat-chip has-arrow" id="categoryChip" data-filter-chip="category" type="button" onclick="openFilterSheetFromCat('category')">카테고리</button>
     <button class="btn-filter" id="btnFilter" type="button" onclick="openSheet()">
@@ -678,6 +866,17 @@ const storeDescMap = {
   '영국 이베이':  '영국 이베이 인기 상품 TOP을 한눈에',
   '미국 이베이':  '미국 이베이 인기 상품 TOP을 한눈에',
 };
+
+function toggleMobileSubCategory() {
+  const panel = document.getElementById('mobileSubCategory');
+  const body = document.getElementById('mobileSubCategoryBody');
+  const button = panel?.querySelector('.m-cat-toggle');
+  if (!panel || !body || !button) return;
+  const isOpen = button.getAttribute('aria-expanded') !== 'false';
+  button.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+  body.hidden = isOpen;
+  panel.classList.toggle('is-collapsed', isOpen);
+}
 
 function selectStoreTab(tab) {
   if (!tab) return;

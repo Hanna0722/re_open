@@ -750,7 +750,7 @@ button.user-menu-item{
         <div class="sc-item" role="button" tabindex="0" onclick="openWishlistPopup()" onkeydown="handleShortcutKey(event, openWishlistPopup)"><div class="sc-circle si-2"><i class="fas fa-heart"></i></div><span class="sc-label">관심상품</span></div>
         <a class="sc-item" href="mobile_auction_bid_list.html"><div class="sc-circle si-3"><i class="fas fa-gavel"></i></div><span class="sc-label">나의 경매</span></a>
         <a class="sc-item" href="mobile_bundle_shipping_management.html"><div class="sc-circle si-4"><i class="fas fa-box-open"></i></div><span class="sc-label">배송 신청 관리</span></a>
-        <a class="sc-item" href="https://www.bidbuy.co.kr/cs"><div class="sc-circle si-5"><i class="fas fa-thumbs-up"></i></div><span class="sc-label">이용가이드</span></a>
+        <a class="sc-item" href="https://www.bidbuy.co.kr/cs"><div class="sc-circle si-5"><i class="fas fa-thumbs-up"></i></div><span class="sc-label">고객센터</span></a>
         <div class="sc-item" role="button" tabindex="0" onclick="openConvenienceToolsPopup()" onkeydown="handleShortcutKey(event, openConvenienceToolsPopup)"><div class="sc-circle si-6"><i class="fas fa-toolbox"></i></div><span class="sc-label">편의도구</span></div>
         <a class="sc-item" href="mobile_mileage.html"><div class="sc-circle si-7"><i class="fas fa-ticket"></i></div><span class="sc-label">마일리지/쿠폰</span></a>
         <div class="sc-item" role="button" tabindex="0" onclick="openbidbuycsPopup()" onkeydown="handleShortcutKey(event, openbidbuycsPopup)"><div class="sc-circle si-8"><i class="fas fa-clipboard-list"></i></div><span class="sc-label">자주하는질문</span></div>
@@ -996,9 +996,9 @@ button.user-menu-item{
         <div class="cs-mini-num">1544-5224</div>
         <div class="cs-mini-hours">평일 AM 10:00 – PM 17:00<br>(점심 PM 12:30 – 13:30)</div>
         <div class="cs-mini-btns">
-          <button class="cs-mini-btn primary">1:1 문의</button>
-          <button class="cs-mini-btn">FAQ</button>
-          <button class="cs-mini-btn">공지사항</button>
+          <button class="cs-mini-btn primary" type="button" onclick="location.href='mobile_qna_form.html'">1:1 문의</button>
+          <button class="cs-mini-btn" type="button" onclick="location.href='mobile_qna.html'">FAQ</button>
+          <button class="cs-mini-btn" type="button" onclick="location.href='mobile_fakenotice.html'">공지사항</button>
         </div>
       </div>
     </div>
@@ -1149,7 +1149,9 @@ function bindMainBanner() {
 
 function openCustomsTaxPopup() {
   const url = 'https://www.customs.go.kr/kcs/ad/tax/BuyTaxCalculation.do';
-  window.open(url, 'customsTaxCalculation', 'width=1100,height=820,top=80,left=120,scrollbars=yes,resizable=yes');
+  const win = window.open(url, 'customsTaxCalculation', 'width=1100,height=820,top=80,left=120,scrollbars=yes,resizable=yes');
+  // 팝업이 차단되면 같은 탭에서 열어 링크가 먹통이 되지 않도록 한다.
+  if (!win) window.location.href = url;
 }
 
 function openMarketInfoPopup() {
@@ -1178,12 +1180,16 @@ function handleShortcutKey(event, callback) {
 
 function openWishlistPopup() {
   const url = 'https://www.bidbuy.co.kr/mypage/order/wishlist';
-  window.open(url, 'wishlist', 'width=1100,height=820,top=80,left=120,scrollbars=yes,resizable=yes');
+  const win = window.open(url, 'wishlist', 'width=1100,height=820,top=80,left=120,scrollbars=yes,resizable=yes');
+  // 팝업이 차단되면 같은 탭에서 열어 링크가 먹통이 되지 않도록 한다.
+  if (!win) window.location.href = url;
 }
 
 function openbidbuycsPopup() {
   const url = 'https://www.bidbuy.co.kr/cs';
-  window.open(url, 'bidbuycs', 'width=1100,height=820,top=80,left=120,scrollbars=yes,resizable=yes');
+  const win = window.open(url, 'bidbuycs', 'width=1100,height=820,top=80,left=120,scrollbars=yes,resizable=yes');
+  // 팝업이 차단되면 같은 탭에서 열어 링크가 먹통이 되지 않도록 한다.
+  if (!win) window.location.href = url;
 }
 
 function openConvenienceToolsPopup() {

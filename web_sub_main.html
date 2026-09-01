@@ -130,24 +130,26 @@
     .category-search-button { width: 140px; height: 32px; border: 0; background: var(--brand); color: #fff; font-size: 14px; font-weight: 800; }
 
     /* ── Filter panel ── */
-    .filter-panel { padding: 9px 10px 19px; border: 1px solid #d8d8d8; border-radius: 0; background: #fff; }
-    .filter-title { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); }
-    .filter-row { min-height: 51px; display: grid; grid-template-columns: 84px minmax(0, 1fr); align-items: center; border-bottom: 1px solid #e0e0e0; }
-    .filter-row:last-of-type { border-bottom: 0; }
-    .filter-label { width: 84px; height: 30px; display: inline-flex; align-items: center; justify-content: center; background: #9e9e9e; color: #fff; font-size: 12px; font-weight: 800; }
-    .filter-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 9px; padding-left: 15px; }
-    .filter-check { display: inline-flex; align-items: center; gap: 4px; color: #111; font-size: 12px; font-weight: 500; white-space: nowrap; }
-    .filter-check input { width: 13px; height: 13px; margin: 0; accent-color: #006ef5; }
-    .filter-price-group { display: inline-grid; grid-template-columns: 66px auto 66px; align-items: center; gap: 5px; margin-right: 30px; }
-    .filter-price-label { width: 84px; height: 30px; display: inline-flex; align-items: center; justify-content: center; background: #9e9e9e; color: #fff; font-size: 12px; font-weight: 800; }
-    .range-sep { color: #111; font-size: 12px; text-align: center; }
+    .filter-panel { width: 100%; padding: 14px 16px; border: 1px solid #ddd; border-radius: 0; background: #fff; display: grid; grid-template-columns: 94px minmax(220px, 1.4fr) minmax(150px, .8fr) minmax(190px, 1fr) minmax(140px, .75fr) 120px; align-items: end; gap: 14px; }
+    .filter-title { align-self: center; margin: 0; color: #000; font-size: 18px; font-weight: 900; }
+    .filter-block { margin: 0; min-width: 0; }
+    .filter-block:last-of-type { margin: 0; }
+    .filter-block-title { margin-bottom: 7px; color: #000; font-size: 13px; font-weight: 800; }
+    .price-range-fields { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: center; gap: 8px; }
+    .range-sep { color: #111; font-size: 13px; text-align: center; }
     .filter-text-input, .filter-select {
-      width: 100%; height: 30px; padding: 0 9px; border: 1px solid #cfd3da; border-radius: 3px;
-      background: #fff; color: var(--text); font-size: 12px; outline: 0;
+      width: 100%; height: 36px; padding: 0 11px; border: 1px solid #d9d9d9; border-radius: 5px;
+      background: #fff; color: var(--text); font-size: 13px; outline: 0;
     }
+    .filter-text-input::placeholder { color: #9aa3b2; }
     .filter-text-input:focus, .filter-select:focus { border-color: var(--brand); }
-    .filter-keyword-input { width: 120px; }
-    .filter-submit { margin-left: auto; width: 156px; height: 32px; border: 0; border-radius: 4px; background: #d9292f; color: #fff; font-size: 13px; font-weight: 800; }
+    .filter-checkbox-row { display: inline-flex; align-items: center; gap: 7px; margin: 0 0 7px 4px; color: #111827; font-size: 13px; font-weight: 700; }
+    .filter-checkbox-row input { width: 15px; height: 15px; margin: 0; accent-color: var(--brand); }
+    .filter-submit { width: 100%; height: 36px; border: 0; border-radius: 5px; background: var(--brand); color: #fff; font-size: 14px; font-weight: 900; }
+    @media (max-width: 1100px) {
+      .filter-panel { grid-template-columns: 94px repeat(2, minmax(220px, 1fr)); align-items: end; }
+      .filter-submit { grid-column: 3; }
+    }
 
     /* ── Best section (메인 모드) ── */
     .section-title { margin: 0 0 12px; color: #1d2636; font-size: 21px; font-weight: 700; }
@@ -318,48 +320,41 @@
       <section class="filter-panel" aria-label="검색 필터">
         <h2 class="filter-title">검색 필터</h2>
 
-        <div class="filter-row">
-          <span class="filter-label">검색조건</span>
-          <div class="filter-controls">
-            <label class="filter-check"><input type="checkbox"><span>스토어</span></label>
-            <label class="filter-check"><input type="checkbox"><span>즉결</span></label>
-            <label class="filter-check"><input type="checkbox"><span>무료배송</span></label>
-            <label class="filter-check"><input type="checkbox"><span>진품감정</span></label>
-            <label class="filter-check"><input type="radio" name="itemCondition" checked><span>전체</span></label>
-            <label class="filter-check"><input type="radio" name="itemCondition"><span>신품</span></label>
-            <label class="filter-check"><input type="radio" name="itemCondition"><span>중고</span></label>
+        <div class="filter-block">
+          <div class="filter-block-title">가격 (JPY)</div>
+          <div class="price-range-fields">
+            <input type="text" class="filter-text-input" placeholder="최소 JPY" aria-label="최소 JPY">
+            <span class="range-sep" aria-hidden="true">~</span>
+            <input type="text" class="filter-text-input" placeholder="최대 JPY" aria-label="최대 JPY">
           </div>
         </div>
 
-        <div class="filter-row">
-          <span class="filter-price-label">현재가격</span>
-          <div class="filter-controls">
-            <div class="filter-price-group">
-              <input type="text" class="filter-text-input" aria-label="현재가격 최소">
-              <span class="range-sep" aria-hidden="true">~</span>
-              <input type="text" class="filter-text-input" aria-label="현재가격 최대">
-            </div>
-            <span class="filter-price-label">즉결가격</span>
-            <div class="filter-price-group">
-              <input type="text" class="filter-text-input" aria-label="즉결가격 최소">
-              <span class="range-sep" aria-hidden="true">~</span>
-              <input type="text" class="filter-text-input" aria-label="즉결가격 최대">
-            </div>
-          </div>
+        <div class="filter-block">
+          <div class="filter-block-title">상품상태</div>
+          <select class="filter-select" aria-label="상품상태">
+            <option>전체</option>
+            <option>새 상품</option>
+            <option>중고</option>
+          </select>
         </div>
 
-        <div class="filter-row">
-          <span class="filter-label">검색어</span>
-          <div class="filter-controls">
-            <label class="filter-check"><input type="radio" name="keywordTarget" checked><span>제목만</span></label>
-            <label class="filter-check"><input type="radio" name="keywordTarget"><span>본문까지</span></label>
-            <label class="filter-check"><input type="radio" name="keywordTarget"><span>퍼지검색</span></label>
-            <input type="text" class="filter-text-input filter-keyword-input" placeholder="모든단어" aria-label="모든단어">
-            <input type="text" class="filter-text-input filter-keyword-input" placeholder="한단어이상" aria-label="한단어이상">
-            <input type="text" class="filter-text-input filter-keyword-input" placeholder="제외할단어" aria-label="제외할단어">
-            <button class="filter-submit" type="button"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> 위의 조건으로 검색</button>
-          </div>
+        <div class="filter-block">
+          <div class="filter-block-title">배송/판매</div>
+          <label class="filter-checkbox-row"><input type="checkbox"><span>무료배송</span></label>
+          <select class="filter-select" aria-label="거래방식">
+            <option>거래방식 전체</option>
+            <option>경매</option>
+            <option>즉시구매</option>
+            <option>가격제안</option>
+          </select>
         </div>
+
+        <div class="filter-block">
+          <div class="filter-block-title">판매자</div>
+          <input type="text" class="filter-text-input" placeholder="판매자" aria-label="판매자">
+        </div>
+
+        <button class="filter-submit" type="button">적용</button>
       </section>
 
     <!-- 오른쪽: 컨텐츠 영역 -->
