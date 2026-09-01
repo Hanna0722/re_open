@@ -173,27 +173,13 @@
     '.bbd-sec{padding:0;border-bottom:1px solid #ECEFF3;background:#fff}',
     '.bbd-sec:last-child{border-bottom:none}',
     '.bbd-sec-title{height:38px;padding:0 16px;display:flex;align-items:center;background:#F5F6F8;color:#7D8796;font-size:12px;font-weight:700}',
-    '.bbd-quick,.bbd-cat-list,.bbd-guide-list{display:flex;flex-direction:column;padding:6px 0}',
-    '.bbd-quick-item,.bbd-cat-item,.bbd-guide-item{min-height:56px;display:flex;align-items:center;gap:14px;padding:8px 16px 8px 24px;color:#111827;cursor:pointer;text-decoration:none}',
+    '.bbd-quick,.bbd-guide-list{display:flex;flex-direction:column;padding:6px 0}',
+    '.bbd-quick-item,.bbd-guide-item{min-height:56px;display:flex;align-items:center;gap:14px;padding:8px 16px 8px 24px;color:#111827;cursor:pointer;text-decoration:none}',
     '.bbd-quick-icon,.bbd-guide-icon{width:22px;display:flex;align-items:center;justify-content:center;color:#000;font-size:16px;flex-shrink:0}',
     '.bbd-quick-text,.bbd-guide-text{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}',
     '.bbd-quick-label,.bbd-guide-label{font-size:15px;color:#111827;font-weight:700;line-height:1.2}',
     '.bbd-quick-desc,.bbd-guide-desc{font-size:11px;color:#8B94A3;font-weight:500;line-height:1.25}',
-    '.bbd-cat-flag{width:38px;height:38px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:0;background:transparent;box-shadow:none;color:#000;font-size:12px;font-weight:700;text-align:center}',
-    '.bbd-cat-flag img{width:38px;height:38px;border-radius:0;object-fit:contain;display:block}',
-    '.bbd-cat-label{flex:1;color:#111827;font-size:15px;font-weight:700}',
     '.bbd-cat-arrow{font-size:12px;color:#999BAA}',
-    '.bbd-cat-group{border-bottom:1px solid #F0F2F5}',
-    '.bbd-cat-group:last-child{border-bottom:none}',
-    'button.bbd-cat-item{width:100%;border:0;background:#fff;font-family:inherit;text-align:left}',
-    '.bbd-cat-item:hover{background:#FAFBFC}',
-    '.bbd-cat-group.is-open>.bbd-cat-item{background:#FFF8F5;color:#E8385A}',
-    '.bbd-cat-group.is-open .bbd-cat-label{color:#E8385A}',
-    '.bbd-cat-group.is-open .bbd-cat-arrow{transform:rotate(90deg);color:#E8385A}',
-    '.bbd-store-cats{display:none;flex-direction:column;padding:2px 16px 14px 72px;background:#FFFDFB}',
-    '.bbd-cat-group.is-open .bbd-store-cats{display:flex}',
-    '.bbd-store-cat{min-height:32px;display:flex;align-items:center;color:#555E6D;font-size:13px;font-weight:600;text-decoration:none;line-height:1.3}',
-    '.bbd-store-cat:hover{color:#E8385A;text-decoration:underline}',
     '.bbd-link-grid{display:grid;grid-template-columns:repeat(2,1fr);row-gap:14px;column-gap:24px;padding:14px 16px}',
     '.bbd-link-grid a{font-size:14px;color:#666680;text-decoration:none}',
     '.bbd-cs-card{margin:22px 26px 34px;padding:18px 14px;background:#fcfcfd;text-align:center}',
@@ -357,73 +343,6 @@
     });
   }
 
-  var STORE_CATEGORIES = {
-    '야후옥션': [
-      { title: '컴퓨터', subs: ['디지털카메라', '가전/AV/카메라부품', '마사지기/마사지용품', '장난감/게임'] },
-      { title: '유아용품', subs: ['생활/인테리어', '뷰티/건강관리', '책/잡지', '음악'] },
-      { title: '패션', subs: ['남성패션', '여성패션', '남성신발', '여성신발'] },
-      { title: '앤틱/컬렉션', subs: ['피규어', '탤런트상품', '사무/점포용품', '비디오게임기'] },
-      { title: '취미/문화', subs: ['코믹/애니메이션', '액세서리/시계', '영화/비디오', '스포츠/레저'] },
-      { title: '타이어/휠', subs: ['자동차용품', '오토바이용품', '공구', '기타'] }
-    ],
-    '메루카리': [
-      { title: '레이디스', subs: ['원피스', '아우터', '가방', '신발'] },
-      { title: '멘즈', subs: ['상의', '하의', '시계', '신발'] },
-      { title: '키즈/베이비', subs: ['유아복', '완구', '유모차', '기저귀'] },
-      { title: '뷰티/코스메틱', subs: ['스킨케어', '메이크업', '헤어케어', '향수'] },
-      { title: '취미/오락', subs: ['피규어', '트레이딩카드', '악기', '게임'] },
-      { title: '가전/스마트기기', subs: ['카메라', '노트북', '스마트폰', '생활가전'] }
-    ],
-    '라쿠텐': [
-      { title: '식품', subs: ['과자/스낵', '음료', '건강식품', '조미료'] },
-      { title: '패션', subs: ['여성의류', '남성의류', '가방/잡화', '신발'] },
-      { title: '가전', subs: ['TV/영상', '생활가전', '주방가전', '계절가전'] },
-      { title: '인테리어/생활', subs: ['가구', '침구', '수납/정리', '주방용품'] },
-      { title: '스포츠/아웃도어', subs: ['캠핑', '자전거', '피트니스', '낚시'] },
-      { title: '취미/완구', subs: ['프라모델', '보드게임', '악기', '수집품'] }
-    ],
-    '야후쇼핑': [
-      { title: '가전/PC', subs: ['TV/영상기기', '노트북', '주변기기', '생활가전'] },
-      { title: '패션', subs: ['여성패션', '남성패션', '가방/잡화', '시계'] },
-      { title: '식품/음료', subs: ['과자', '주류', '건강식품', '생수/음료'] },
-      { title: '뷰티/헬스', subs: ['스킨케어', '메이크업', '헬스용품', '의료기기'] },
-      { title: '스포츠/레저', subs: ['골프', '캠핑', '자전거', '낚시'] },
-      { title: '유아/반려동물', subs: ['유아용품', '완구', '강아지용품', '고양이용품'] }
-    ],
-    '야후프리마': [
-      { title: '여성 패션', subs: ['원피스', '아우터', '가방', '신발'] },
-      { title: '남성 패션', subs: ['상의', '팬츠', '스니커즈', '시계'] },
-      { title: '취미/컬렉션', subs: ['피규어', '트레이딩카드', '굿즈', '게임'] },
-      { title: '디지털/가전', subs: ['스마트폰', '이어폰', '카메라', '게임기'] },
-      { title: '뷰티/생활', subs: ['화장품', '향수', '인테리어소품', '주방용품'] },
-      { title: '키즈/베이비', subs: ['아동복', '장난감', '유모차', '육아용품'] }
-    ],
-    '라쿠마': [
-      { title: '여성패션', subs: ['원피스', '아우터', '스커트', '가방'] },
-      { title: '남성패션', subs: ['상의', '하의', '아우터', '신발'] },
-      { title: '뷰티', subs: ['스킨케어', '메이크업', '헤어/바디', '향수'] },
-      { title: '잡화/액세서리', subs: ['가방', '지갑', '시계', '주얼리'] },
-      { title: '취미/엔터', subs: ['CD/DVD', '서적', '피규어', '게임'] },
-      { title: '스포츠/기타', subs: ['골프용품', '캠핑용품', '자전거', '기타'] }
-    ],
-    '미국이베이': [
-      { title: '전자기기', subs: ['스마트폰', '노트북', '카메라', '오디오'] },
-      { title: '컬렉터블/아트', subs: ['빈티지', '아트/포스터', '동전/우표', '트레이딩카드'] },
-      { title: '패션', subs: ['여성의류', '남성의류', '신발', '가방'] },
-      { title: '홈/가든', subs: ['가구', '주방용품', '원예', '조명'] },
-      { title: '토이/하비', subs: ['액션피규어', '모형/프라모델', '보드게임', 'RC/드론'] },
-      { title: '자동차용품', subs: ['자동차부품', '오토바이부품', '타이어/휠', '공구'] }
-    ],
-    '영국이베이': [
-      { title: '전자기기', subs: ['스마트폰', '노트북', '카메라', '게임기'] },
-      { title: '패션', subs: ['여성의류', '남성의류', '신발', '액세서리'] },
-      { title: '컬렉터블', subs: ['빈티지', '동전/우표', '피규어', '아트'] },
-      { title: '홈/가든', subs: ['가구', '침구', '원예', '조명'] },
-      { title: '스포츠용품', subs: ['축구', '피트니스', '캠핑', '사이클링'] },
-      { title: '자동차용품', subs: ['자동차부품', '오토바이', '타이어', '공구'] }
-    ]
-  };
-
   /* -- 스토어 단일 목록 --------------------------------------------
      로고 교체: storeicon/ 안의 파일만 바꾸면
      좌측 드로어에 그대로 반영된다.
@@ -441,32 +360,6 @@
   ];
   window.BB_STORES = STORES;
   window.BB_STORE_LOGO_DIR = STORE_LOGO_DIR;
-
-  var CATEGORY_MAIN_PAGE = 'mobile_category_main.html';
-
-  function storeCategoryHTML(store, open) {
-    var label = store.label;
-    var href = store.href;
-    var groups = STORE_CATEGORIES[label] || [];
-    var flatCats = [];
-    groups.forEach(function (g) {
-      flatCats.push(g.title);
-      flatCats = flatCats.concat(g.subs);
-    });
-    var linksHtml = flatCats.map(function (cat) {
-      var catHref = CATEGORY_MAIN_PAGE + '?store=' + encodeURIComponent(label) + '&category=' + encodeURIComponent(cat);
-      return '<a class="bbd-store-cat" href="' + catHref + '">' + cat + '</a>';
-    }).join('');
-    return (
-      '<div class="bbd-cat-group' + (open ? ' is-open' : '') + '">' +
-        '<button class="bbd-cat-item" type="button" aria-expanded="' + (open ? 'true' : 'false') + '" onclick="toggleDrawerStoreCategory(this)"><span class="bbd-cat-flag"><img src="' + STORE_LOGO_DIR + store.logo + '" alt=""></span><span class="bbd-cat-label">' + label + '</span><i class="fas fa-chevron-right bbd-cat-arrow"></i></button>' +
-        '<div class="bbd-store-cats">' +
-          '<a class="bbd-store-cat" href="' + href + '">전체보기</a>' +
-          linksHtml +
-        '</div>' +
-      '</div>'
-    );
-  }
 
   function leftDrawerHTML() {
     var header = isLoggedIn()
@@ -718,21 +611,6 @@
     closeDrawer();
     closeUserDrawer();
     render();
-  };
-  window.toggleDrawerStoreCategory = function (btn) {
-    var group = btn.closest('.bbd-cat-group');
-    var list = btn.closest('.bbd-cat-list');
-    if (!group || !list) return;
-    var willOpen = !group.classList.contains('is-open');
-    list.querySelectorAll('.bbd-cat-group').forEach(function (item) {
-      item.classList.remove('is-open');
-      var itemBtn = item.querySelector('.bbd-cat-item');
-      if (itemBtn) itemBtn.setAttribute('aria-expanded', 'false');
-    });
-    if (willOpen) {
-      group.classList.add('is-open');
-      btn.setAttribute('aria-expanded', 'true');
-    }
   };
   window.openDrawer = function () {
     closeUserDrawer();

@@ -208,7 +208,6 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 .office-time{font-family:pretendard,Arial,sans-serif;font-size:13px;color:#1d74ff;white-space:nowrap}
 
 @media (max-width:720px){
-  .market-info-body{grid-template-columns:1fr}
   .office-grid{grid-template-columns:1fr}
   .office-card,.office-card:nth-child(2n),.office-card:nth-last-child(-n+2){border:0}
   .office-card:last-child{border-bottom:0}
@@ -430,17 +429,16 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
 @media(max-width:1023px){
   .hero-inner{grid-template-columns:1fr}
   .banner-wrap{margin:0}
-  .best-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.rv-grid{grid-template-columns:repeat(2,1fr)}
+.rv-grid{grid-template-columns:repeat(2,1fr)}
   .info-grid{grid-template-columns:1fr}
   .mb-tiers{flex-wrap:wrap}
 }
 @media(max-width:767px){
   :root{--header-h:52px}
-  .hdr{padding:0 14px;gap:10px}
   .logo{font-size:18px}
   .logo sub{display:none}
   .search{max-width:none}
-  .search-btn span{display:none}  .hero-inner{padding:0 14px}
+  .hero-inner{padding:0 14px}
   .banner-slider{height:200px}
   .slide-inner{padding:0 20px}
   .slide-title{font-size:20px}
@@ -448,10 +446,8 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
   .slide-cta{padding:8px 14px;font-size:11px}
   .section{padding:18px 14px}
   .sec-title{font-size:15px}
-  .best-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rv-grid{grid-template-columns:repeat(1,1fr)}
+.rv-grid{grid-template-columns:repeat(1,1fr)}
   .info-grid{grid-template-columns:1fr}
-  .btn-su{display:none}
-  .hbtn span{display:none}
 }
 
 </style>
