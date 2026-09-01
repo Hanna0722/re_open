@@ -82,9 +82,6 @@
       place-items: center;
     }
 
-    .menu-lines { width: 23px; display: grid; gap: 6px; }
-    .menu-lines span { height: 2.5px; border-radius: 999px; background: #1f2530; }
-
     .logo-link { display: inline-flex; align-items: center; width: 100px; line-height: 0; }
     .logo-link img { width: 100%; height: auto; display: block; }
 
@@ -126,15 +123,6 @@
 
     .search button i { font-size: 15px; }
 
-    .user-tools {
-      justify-self: end;
-      display: grid;
-      grid-template-columns: 28px 28px auto;
-      align-items: center;
-      gap: 10px;
-      color: #1d2430;
-    }
-
     .icon-btn {
       width: 28px;
       height: 28px;
@@ -148,30 +136,6 @@
     }
 
     .icon-btn i { font-size: 23px; }
-
-    .user-name {
-      display: grid;
-      justify-items: center;
-      gap: 3px;
-      color: #111827;
-      font-size: 13px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .premium-chip {
-      min-width: 70px;
-      min-height: 18px;
-      padding: 2px 10px;
-      border-radius: 999px;
-      background: var(--grade-vip);
-      color: #fff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: 800;
-    }
 
     .stage {
       position: relative;
@@ -412,7 +376,6 @@
       user-select: none;
     }
 
-
     .group-info {
       margin: 0;
       padding: 0;
@@ -442,23 +405,6 @@
     .group-utils { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
     .group-pay-btn { border-radius: 5px; min-width: 128px; }
     .group-pay-btn .pay-amount { color: #E8385A; }
-
-    .pay-btn {
-      height: 32px;
-      padding: 0 16px;
-      border: 1px solid var(--rose);
-      border-radius: 5px;
-      background: var(--rose);
-      color: #fff;
-      display: inline-flex;
-      align-items: center;
-      font-size: 12px;
-      font-weight: 800;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .pay-btn:hover { background: #d62f54; }
 
     .bundle-head, .bundle-row {
       display: grid;
@@ -571,41 +517,6 @@
 
     .product-name:hover { color: var(--rose); }
 
-    .product-price { color: #2b2f37; font-size: 12px; font-weight: 800; }
-
-    .row-price { display: grid; gap: 3px; }
-    .row-price b { color: #151922; font-size: 12px; font-weight: 800; }
-    .row-price span { color: #8d929d; font-size: 11px; }
-
-    .group-volume {
-      position: absolute;
-      top: 127px;
-      right: 0;
-      bottom: 0;
-      width: 104px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      padding: 12px 6px;
-      border-left: 1px solid var(--line-soft);
-      background: #fff;
-      color: #343942;
-      font-size: 12px;
-      font-weight: 800;
-      text-align: center;
-      line-height: 1.35;
-      z-index: 1;
-    }
-
-    .group-volume span {
-      display: block;
-      color: #7a808a;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
     .group-recipient, .group-shipping {
       position: absolute;
       top: 127px;
@@ -713,23 +624,6 @@
       outline-offset: 2px;
     }
 
-    .table-empty {
-      min-height: 110px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #9da2af;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .empty-table {
-      border: 1px solid var(--line);
-      border-radius: 11px;
-      overflow: hidden;
-      background: #fff;
-    }
-
     /* ── 선택 액션 버튼 ── */
     .bundle-actions {
       display: flex;
@@ -739,7 +633,6 @@
       margin-bottom: 12px;
     }
 
-    .bundle-utils { margin-top: 20px; }
     .bundle-utils .bundle-actions {
       justify-content: center;
       margin-bottom: 0;
@@ -846,10 +739,6 @@
     .modal-actions .line { border: 1px solid var(--line); background: #fff; color: #626672; }
     .modal-actions .primary { border: 1px solid var(--rose); background: var(--rose); color: #fff; }
 
-    
-
-    
-  
     .member-tier-icon { background:#eef5ff !important; color:#1A3C6E !important; }
     .member-tier-icon i { line-height:1; }
   </style>
@@ -1386,7 +1275,6 @@
       });
     });
 
-
     function updateActionBtns() {
       var panel = document.querySelector('.bundle-panel.active');
       if (!panel) return;
@@ -1424,5 +1312,4 @@
 <script src="bb-search-modal.js"></script>
 </body>
 </html>
-
 

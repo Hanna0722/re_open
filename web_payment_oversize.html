@@ -61,8 +61,6 @@
     }
     .brand-area { display: flex; align-items: center; gap: 22px; min-width: 0; }
     .menu-button { width: 25px; height: 25px; border: 0; border-radius: 5px; background: transparent; padding: 0; display: grid; place-items: center; }
-    .menu-lines { width: 23px; display: grid; gap: 6px; }
-    .menu-lines span { height: 2.5px; border-radius: 999px; background: #1f2530; }
     .logo-link { display: inline-flex; align-items: center; width: 100px; line-height: 0; }
     .logo-link img { width: 100%; height: auto; display: block; }
     .search { height: 43px; display: flex; min-width: 0; border: 1px solid #e5dbd7; border-radius: 13px; overflow: hidden; background: #f7f3f0; }
@@ -70,11 +68,8 @@
     .search input::placeholder { color: #8c8985; }
     .search button { width: 111px; border: 0; background: var(--rose); color: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 700; }
     .search button i { font-size: 15px; }
-    .user-tools { justify-self: end; display: grid; grid-template-columns: 28px 28px auto; align-items: center; gap: 10px; color: #1d2430; }
     .icon-btn { width: 28px; height: 28px; display: grid; place-items: center; border: 0; border-radius: 5px; background: transparent; color: #687385; padding: 0; }
     .icon-btn i { font-size: 23px; }
-    .user-name { display: grid; justify-items: center; gap: 3px; color: #111827; font-size: 13px; font-weight: 800; white-space: nowrap; cursor: pointer; }
-    .premium-chip { min-width: 70px; min-height: 18px; padding: 2px 10px; border-radius: 999px; background: var(--grade-vip); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; }
 
     /* ── 드로어 ── */
     .drawer-ov { position:fixed;inset:0;background:rgba(0,0,0,0);z-index:1000;pointer-events:none;transition:background .3s; }
@@ -205,21 +200,6 @@
       box-shadow: 0 20px 60px rgba(0, 0, 0, .18);
       overflow: hidden;
     }
-    .confirm-modal-head {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .confirm-modal-head strong { font-size: 15px; color: var(--tp); }
-    .confirm-modal-close {
-      border: none;
-      background: none;
-      font-size: 18px;
-      color: var(--tm);
-      cursor: pointer;
-    }
     .confirm-modal-body { padding: 20px; }
     .bid-hist-table-wrap { position: relative; }
     .bid-history-table-close {
@@ -341,8 +321,6 @@
       font-size: 14px;
       font-weight: 700;
     }
-    .platform__flag { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; margin: 0; }
-    .platform__flag img { width: 18px; height: 18px; border-radius: 50%; object-fit: cover; }
     .order-item__name {
       grid-area: name;
       display: grid;
@@ -389,23 +367,8 @@
     .order-status-card__list dd strong { font-weight: 700; }
     .order-status-card__list dt:last-of-type,
     .order-status-card__list dd:last-of-type { border-bottom: none; }
-    .order-item__badge {
-      display: none;
-    }
-    .order-item__badge.done { border-color: #b2dfce; background: #eaf8f0; color: #278a46; }
 
     /* 2컬럼 컨테이너 */
-    .order__container {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 42px 56px; align-items: flex-start;
-    }
-    .order__left-container {
-      flex: 1; min-width: 0;
-      display: flex; flex-direction: column; gap: 30px;
-    }
-    .order__right-container {
-      width: auto; flex-shrink: 0;
-      display: flex; flex-direction: column; gap: 30px;
-    }
 
     /* 섹션 타이틀 (레퍼런스: .order-title) */
     .order-title {
@@ -439,49 +402,11 @@
     .order-info-table td.mono, .order-info-table th.mono { font-family: 'Roboto', monospace; }
     .order-info-table th.rgroup { border-left: 0.5px solid var(--line); padding-left: 16px; }
     .order-info-table tr:last-child th, .order-info-table tr:last-child td { border-bottom: none; }
-    .track-btn { height: 22px; margin-left: 8px; padding: 0 8px; border: 0; border-radius: 5px; background: var(--navy); color: #fff; font-size: 11px; font-weight: 700; cursor: pointer; }
 
     /* 정보 행 (레퍼런스: .order-list__line) */
-    .order-list__details { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
-    .order-list__line { display: flex; align-items: flex-start; gap: 5px; padding: 7px 0; border-bottom: 0.5px solid var(--line); }
-    .order-list__line:last-child { border-bottom: none; }
-    .order-list__label { flex-shrink: 0; width: 200px; font-size: 13px; font-weight: 600; color: var(--ts); }
-    .order-list__details .order-list__label::before { content: ""; }
-    .order-list__value { flex: 1; font-size: 13px; color: #000; line-height: 1.55; }
     .order-list__value.mono { font-family: 'Roboto', monospace; }
 
     /* 결제 테이블 (레퍼런스: .payment__summary) */
-    .payment__summary__header {
-      display: flex; align-items: center;
-      height: 50px; background: #f5f5f5;
-      border-radius: 8px 8px 0 0;
-      margin-bottom: 0;
-    }
-    .payment__summary__header p {
-      font-size: 14px; font-weight: 700; color: #000;
-      padding: 0 16px;
-    }
-    .payment__summary__header p:first-child { flex: 0 0 160px; }
-    .payment__summary__header p:nth-child(2) { flex: 1; border-left: 1px solid #e8e8e8; }
-    .payment__summary__header p:last-child { flex: 1; border-left: 1px solid #e8e8e8; }
-
-    .payment__summary__details {
-      padding: 20px 0;
-      border: 1px solid #f0f0f0; border-top: 0; border-radius: 0 0 8px 8px;
-    }
-    .payment-list__line {
-      display: flex; align-items: center;
-      padding: 7px 0; border-bottom: 1px solid #f8f8f8;
-    }
-    .payment-list__line:last-child { border-bottom: 0; }
-    .payment-list__line .order-list__label { flex: 0 0 160px; padding: 0 5px; font-size: 14px; }
-    .payment-list__line .order-list__value { flex: 1; padding: 0 5px; font-size: 14px; border-left: 1px solid #f0f0f0; }
-    .payment-list__line.is-subtotal { background: #fafafa; border-top: 1px solid #e8e8e8; margin-top: 3px; }
-    .payment-list__line.is-subtotal .order-list__label,
-    .payment-list__line.is-subtotal .order-list__value { font-weight: 700; }
-    .payment-list__line.is-total { background: #f0f4fb; border-top: 2px solid var(--navy); }
-    .payment-list__line.is-total .order-list__label { color: var(--navy); font-size: 14px; }
-    .payment-list__line.is-total .order-list__value { color: var(--rose); font-size: 15px; font-weight: 800; }
 
     /* ── 결제정보 1차/2차 좌우 2열 (합계 바닥선 정렬) ── */
     .order__stack { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 42px 56px; }
@@ -589,8 +514,6 @@
 
     /* 합계 영역: margin-top:auto 로 카드 바닥에 고정 → 좌우 같은 평행선 */
     .pay-foot { margin-top: auto; padding-top: 10px; }
-    .pay-meta { font-size: 14px; color: #777; line-height: 1.6; margin-bottom: 10px; }
-    .pay-meta b { color: #666; font-weight: 700; }
     .pay-total {
       display: flex; align-items: center; justify-content: space-between;
       padding: 10px 0 4px;
@@ -641,7 +564,7 @@
       margin-top: 2px;
       color: #d4891a;
       font-size: 15px;
-      
+
     }
     .shipping-fee-compare__table {
       width: 100%;
@@ -673,20 +596,6 @@
     .shipping-fee-compare__table tr.is-admin-fixed .shipping-fee-compare__static,
     .shipping-fee-compare__table tr.is-admin-fixed .shipping-fee-compare__unit {
       color: #7B8494;
-    }
-    .shipping-fee-compare__fixed-badge {
-      display: inline-flex;
-      align-items: center;
-      height: 20px;
-      margin-left: 8px;
-      padding: 0 8px;
-      border-radius: 999px;
-      background: #E1E5EC;
-      color: #687385;
-      font-size: 11px;
-      font-weight: 700;
-      white-space: nowrap;
-      vertical-align: middle;
     }
     .shipping-fee-compare__table td.shipping-fee-compare__cell--flush {
       padding: 0;
@@ -824,11 +733,6 @@
     .order-memo-list .msg.agent .msg-bubble { padding-left: 14px; border-left: 2px solid #dde4ee; }
     .order-memo-list .msg-bubble p { margin: 0 0 8px; }
     .order-memo-list .msg-bubble p:last-child { margin-bottom: 0; }
-    .memo-type-admin,
-    .memo-type-customer { border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 700; margin-right: 6px; }
-    .memo-type-admin { background: #f0f4fb; color: var(--navy); }
-    .memo-type-customer { background: #f5f5f5; color: #555; }
-    .memo-empty { font-size: 13px; color: #aaa; text-align: center; padding: 20px 0; }
 
     /* 관리자 메모 */
     .admin-memo-box { display: grid; gap: 20px; padding: 22px 24px; }
@@ -864,7 +768,6 @@
     .inquiry-btn:hover { background: #152f58; }
     .inquiry-btn--print:hover { background: #fff; }
 
-  
     .member-tier-icon { background:#eef5ff !important; color:#1A3C6E !important; }
     .member-tier-icon i { line-height:1; }
   </style>
@@ -1412,7 +1315,7 @@
                 <div class="msg-bubble">
                   <p>안내 확인했습니다.EMS로 변경 부탁드립니다.</p>
                 </div>
-              </li> 
+              </li>
 
               <li class="msg agent">
                 <div class="msg-head">

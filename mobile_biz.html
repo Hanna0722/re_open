@@ -137,17 +137,10 @@
     }
     .bt-head:first-child { border-top: none; }
     .biz-only-head { background: #eef3fb; color: var(--navy); }
-    .coming-badge {
-      display: inline-block; margin-left: 6px;
-      padding: 2px 7px; border-radius: 4px;
-      background: #c8d8ef; color: var(--navy);
-      font-size: 9px; font-weight: 700; vertical-align: middle;
-    }
     .bt-label { padding: 11px 14px; color: var(--text); font-weight: 500; border-top: 1px solid #f0f0f4; font-size: 13px; }
     .bt-val { padding: 11px 14px; font-weight: 700; border-top: 1px solid #f0f0f4; color: var(--text); text-align: right; }
     .bt-val.navy { color: var(--navy); }
     .bt-empty td { background: #fafbfc; }
-    .bt-muted { color: #b8bfcc !important; font-weight: 500 !important; font-style: italic; }
 
     /* 안내 배너 */
     .info-banner {
@@ -294,18 +287,6 @@
     }
 
     /* 하단 탭바 */
-    .bottom-tab {
-      position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: min(100%, 390px); height: 58px;
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      background: #fff; border-top: 1px solid #e8e2de; z-index: 70;
-    }
-    .tab-item {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 3px; border: 0; background: transparent; color: #9da2af;
-      font-size: 10px; font-weight: 700; font-family: inherit;
-    }
-    .tab-item i { font-size: 22px; line-height: 22px; }
     .tab-item.active { color: var(--brand); }
   </style>
 </head>

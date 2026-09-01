@@ -43,12 +43,10 @@
   .card-title { font-size:14px; font-weight:700; color:var(--navy); margin-bottom:14px; display:flex; align-items:center; gap:6px; }
   .card-title .req { color:var(--red); font-size:12px; }
 
-
   /* 주문상품 */
   .order-item { display:flex; gap:12px; align-items:flex-start; }
   .order-thumb { width:64px; height:64px; flex-shrink:0; background:#3a4a6b; border-radius:6px; }
   .order-info { flex:1; min-width:0; }
-  .order-badge { display:inline-block; font-size:10px; font-weight:600; color:var(--navy); background:#E8EFFF; border-radius:3px; padding:2px 7px; margin-bottom:5px; }
   .order-id   { font-size:11px; color:var(--text-sub); margin-top:5px; margin-bottom:5px; }
   .order-step   { font-size:12px; color:var(--text-sub); font-weight:500; margin-bottom:5px; }
  .order-name { font-size:12px; line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
@@ -70,7 +68,6 @@
   .ship-days { font-weight:700; color:var(--navy); font-family:'Roboto',sans-serif; font-size:13px; }
   .note { color:#999; font-size:11px; }
 
-
   /* 배송형태 테이블 */
   .method-select-table { width:100%; border-collapse:collapse; margin-top:12px; border:1px solid #dde1e7; border-radius:8px; overflow:hidden; }
   .method-select-table thead th { background:#f0f3f8; color:var(--navy); font-size:13px; font-weight:700; padding:10px 14px; text-align:left; border-bottom:1px solid #dde1e7; }
@@ -83,24 +80,15 @@
   .method-select-table .method-name label { display:flex; align-items:center; gap:8px; cursor:pointer; }
   .method-select-table .method-checkbox { width:16px; height:16px; accent-color:var(--navy); flex-shrink:0; cursor:pointer; }
   .method-select-table .method-desc { font-size:12px; color:#555; line-height:1.7; }
-  .warning-note { margin-top:12px; font-size:11px; color:#885500; background:#FFF8EC; border-radius:6px; padding:10px 12px; line-height:1.7; }
 
   /* 사진 카드 */
-  .photo-cards { display:flex; gap:8px; margin-top:10px; }
   .photo-card-opt { flex:1; border:2px solid var(--border); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; transition:border-color .15s,background .15s; }
   .photo-card-opt.active { border-color:var(--navy); background:#F0F4FB; }
-  .p-badge { display:inline-block; font-size:9px; font-weight:700; background:var(--navy); color:#fff; border-radius:3px; padding:1px 5px; margin-bottom:5px; }
   .p-badge.premium { background:var(--amber); }
-  .p-title { font-size:12px; font-weight:500; color:#333; margin-bottom:4px; }
-  .p-price { font-family:'Roboto',sans-serif; font-size:13px; font-weight:700; color:var(--navy); }
-  .p-price small { font-size:10px; font-weight:400; color:#888; }
 
   /* 유료 옵션 */
   .option-item { border:1px solid var(--border); border-radius:8px; overflow:hidden; margin-top:14px; }
   .option-header { display:flex; align-items:center; justify-content:space-between; padding:14px; background:#F8F9FA; border-bottom:1px solid var(--border); gap:10px; }
-  .option-header-left { flex:1; }
-  .option-name { font-size:14px; font-weight:600; color:#222; margin-bottom:3px; }
-  .option-price { font-size:12px; color:var(--red); }
   .option-body { padding:14px; font-size:12px; line-height:1.8; color:#444; }
   .option-body.is-collapsed { display:none; }
   .option-body p { margin-top:8px; }
@@ -135,12 +123,8 @@
   .packing-cost-table .thick-bottom { border-bottom:1px solid #d7dce3; }
   .packing-cost-table .tier-note { display:block; color:#888; font-size:10px; font-weight:400; margin-top:2px; }
   .packing-note { margin:10px 0 0; color:#888; font-size:11px; line-height:1.6; }
-  .toggle-wrap { display:flex; align-items:center; gap:8px; flex-shrink:0; }
-  .toggle-track { width:44px; height:24px; background:#ccc; border-radius:12px; position:relative; transition:background .2s; cursor:pointer; }
   .toggle-track.on { background:var(--green); }
-  .toggle-thumb { position:absolute; top:3px; left:3px; width:18px; height:18px; background:#fff; border-radius:50%; transition:left .2s; box-shadow:0 1px 3px rgba(0,0,0,.2); }
   .toggle-track.on .toggle-thumb { left:23px; }
-  .toggle-text { font-size:12px; font-weight:500; color:#888; min-width:32px; }
   .toggle-text.on { color:var(--green); }
   .modal-overlay { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; padding:20px 14px; background:rgba(0,0,0,.45); opacity:0; visibility:hidden; transition:opacity .2s ease,visibility .2s ease; z-index:1000; }
   .modal-overlay.is-open { opacity:1; visibility:visible; }
@@ -167,8 +151,6 @@
 
   /* 수취인 */
   .recvr-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; padding-bottom:12px; border-bottom:1px solid var(--border); }
-  .check-label { display:inline-flex; align-items:center; gap:6px; font-size:13px; cursor:pointer; }
-  .check-label input { accent-color:var(--navy); width:16px; height:16px; }
   .btn-saved-addr { padding:8px 12px; font-size:12px; font-weight:500; font-family:Pretendard,'Noto Sans KR',sans-serif; border:1px solid var(--navy); border-radius:6px; background:#fff; color:var(--navy); cursor:pointer; }
   .japan-only,
   .japan-only-inline { display:none; }
@@ -310,7 +292,7 @@
       </tr>
     </tbody>
   </table>
-  
+
   <div class="field-label" style="margin-top:16px;">포장 방법</div>
   <div class="option-item">
     <div class="option-header option-header-choice">
@@ -338,7 +320,6 @@
     </div>
   </div>
 </div>
-
 
 <!-- 수취인 정보 -->
 <div class="card recipient-card" id="recipientCard">
@@ -397,11 +378,8 @@
       </div>
     </details>
 
-
   </div>
 </div>
-
-
 
 <!-- 하단 CTA -->
 
@@ -515,8 +493,6 @@
   <button class="cta-btn cta-approve" id="btnApprove" onclick="location.href='mobile_bill_1st_2.html'">다음 단계</button>
 </div>
 
-
-
 <script>
 function activateMobileHeaderUser() {
   const guestArea = document.getElementById('guestArea');
@@ -609,7 +585,6 @@ document.querySelectorAll('.login-btn-sm').forEach(button => {
     if (rowWait) rowWait.classList.toggle('selected', Boolean(cbWait?.checked));
   });
   document.getElementById('shippingMethodSelect')?.dispatchEvent(new Event('change'));
-
 
 /* 포장 옵션 — 하나만 선택 */
 document.querySelectorAll('input[name="packingOption"]').forEach((input) => {

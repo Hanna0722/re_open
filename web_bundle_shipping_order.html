@@ -61,8 +61,6 @@
     }
     .brand-area { display: flex; align-items: center; gap: 22px; min-width: 0; }
     .menu-button { width: 25px; height: 25px; border: 0; border-radius: 5px; background: transparent; padding: 0; display: grid; place-items: center; }
-    .menu-lines { width: 23px; display: grid; gap: 6px; }
-    .menu-lines span { height: 2.5px; border-radius: 999px; background: #1f2530; }
     .logo-link { display: inline-flex; align-items: center; width: 100px; line-height: 0; }
     .logo-link img { width: 100%; height: auto; display: block; }
     .search { height: 43px; display: flex; min-width: 0; border: 1px solid var(--line); border-radius: 13px; overflow: hidden; background: var(--warm-2); }
@@ -70,11 +68,8 @@
     .search input::placeholder { color: #8c8985; }
     .search button { width: 111px; border: 0; background: var(--rose); color: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 700; }
     .search button i { font-size: 15px; }
-    .user-tools { justify-self: end; display: grid; grid-template-columns: 28px 28px auto; align-items: center; gap: 10px; color: #1d2430; }
     .icon-btn { width: 28px; height: 28px; display: grid; place-items: center; border: 0; border-radius: 5px; background: transparent; color: #687385; padding: 0; }
     .icon-btn i { font-size: 23px; }
-    .user-name { display: grid; justify-items: center; gap: 3px; color: #111827; font-size: 13px; font-weight: 800; white-space: nowrap; }
-    .premium-chip { min-width: 70px; min-height: 18px; padding: 2px 10px; border-radius: 999px; background: var(--grade-vip); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; }
 
     /* ── 레이아웃 ── */
     .stage {
@@ -247,31 +242,6 @@
       line-height: 1.6;
     }
 
-    .pickup-date-guide { display: grid; gap: 8px; color: #444; font-size: 12px; line-height: 1.7; }
-    .pickup-date-guide__title { color: #1f2530; font-size: 13px; font-weight: 800; }
-    .pickup-date-guide p { margin: 0; }
-    .pickup-date-guide ul { margin: 0; padding-left: 0; list-style: none; color: #555; }
-    .pickup-date-picker {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 8px;
-      padding-left: 20px;
-      border-left: 1px solid var(--line-soft);
-    }
-    .pickup-date-picker label { font-size: 12px; font-weight: 800; color: #2b2f37; }
-    .pickup-date-picker input {
-      width: 100%;
-      height: 42px;
-      border: 1px solid #d3d8df;
-      border-radius: 6px;
-      padding: 0 12px;
-      color: #111;
-      font-size: 13px;
-      font-family: inherit;
-    }
-    .pickup-date-alert { min-height: 18px; color: var(--rose); font-size: 12px; font-weight: 700; }
-
     /* ── 수취인 정보 테이블 ── */
     .info-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 28px; }
     .info-table th {
@@ -364,28 +334,18 @@
     .paid-option-table td { padding: 22px 18px; vertical-align: top; border: 1px solid #dde1e7; }
     .paid-option-table tr + tr th, .paid-option-table tr + tr td { border-top: 2px solid #dde1e7; }
     .paid-option-common-note { margin: 2px 0 12px; padding: 10px 12px; border: 1px solid rgba(232,56,90,0.18); background: #fff8fa; color: var(--rose); font-size: 12px; font-weight: 700; line-height: 1.5; }
-    .paid-option-name { display: block; margin-bottom: 5px; color: #555; font-weight: 700; }
-    .paid-option-meta { display: grid; gap: 2px; color: #777; font-size: 12px; font-weight: 400; line-height: 1.45; }
-    .paid-option-price { color: var(--rose); font-family: inherit; font-weight: 700; }
     .paid-option-choice { color: #333; }
     .packing-choice-list { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 2px; }
     .packing-choice { display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 10px; border: 1px solid #d6dee9; border-radius: 5px; background: #fff; color: #28344d; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: border-color .15s, background .15s; }
     .packing-choice input { width: 14px; height: 14px; margin: 0; accent-color: var(--navy); flex: 0 0 auto; }
     .packing-choice:has(input:checked) { border-color: var(--navy); background: #f7faff; }
     .packing-choice span { overflow: hidden; text-overflow: ellipsis; }
-    .photo-option-select { width: 120px; height: 34px; padding: 0 10px; border: 1px solid #ccd3dc; border-radius: 4px; background: #fff; color: #333; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
-    .photo-option-select:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(26,60,110,0.12); }
     .paid-option-desc { margin-top: 12px; color: #555; line-height: 1.65; }
     .paid-option-desc p + p { margin-top: 8px; }
     .paid-option-desc ul { margin: 4px 0 10px; padding-left: 18px; list-style-position: outside; }
     .paid-option-desc li { margin: 2px 0; word-break: keep-all; overflow-wrap: anywhere; }
 
     /* ── 안심케어 토글 ── */
-    .care-plus-control { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-    .option-toggle-label { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; }
-    .option-toggle-label input[type="checkbox"] { display: none; }
-    .option-toggle-track { width: 44px; height: 24px; background: #ccc; border-radius: 12px; position: relative; transition: background 0.2s; flex-shrink: 0; }
-    .option-toggle-thumb { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background: #fff; border-radius: 50%; transition: left 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
     .option-chk:checked ~ .option-toggle-track { background: #3AAD4E; }
     .option-chk:checked ~ .option-toggle-track .option-toggle-thumb { left: 23px; }
     .option-toggle-text { font-size: 13px; font-weight: 500; color: #888; min-width: 36px; }
@@ -406,10 +366,6 @@
     .paid-option-detail.care-guide-detail { height: 30px; margin-left: 8px; padding: 0 12px; border: 1px solid var(--rose); border-radius: 5px; background: #fff; color: var(--rose); font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 8px; }
 
     /* ── 안심케어 표 보조 스타일 ── */
-    .paid-option-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    .option-scenario-nav { display: inline-flex; align-items: center; gap: 8px; }
-    .option-scenario-btn { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border: 1px solid #cfd6df; border-radius: 4px; background: #fff; color: var(--navy); cursor: pointer; }
-    .option-scenario-label { min-width: 86px; color: var(--navy); font-size: 13px; font-weight: 700; text-align: center; }
     .vip-care-note { display: none; background: #FFF8E6; border-left: 3px solid #F5A623; border-radius: 4px; padding: 8px 12px; margin-bottom: 12px; font-size: 12px; font-weight: 600; color: #7A5000; }
     .vip-care-note.is-visible { display: block; }
 

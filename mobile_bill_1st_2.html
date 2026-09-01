@@ -39,7 +39,6 @@
   .page-header h1 { font-size:16px; font-weight:700; color:#111; }
 
   /* 카드 */
-  .card { background:var(--card); margin-bottom:8px; padding:16px; }
   .card-title { font-size:14px; font-weight:700; color:var(--navy); margin-bottom:14px; }
 
   /* 1 ?결제 비용 */
@@ -49,7 +48,6 @@
   .fee-row { display:flex; align-items:center; justify-content:space-between; padding:11px 16px; border-bottom:1px solid var(--border); }
   .fee-row:last-child { border-bottom:none; }
   .fee-row-label { font-size:13px; color:var(--text-sub); }
-  .fee-row-label-control { display:inline-flex; align-items:center; gap:7px; }
   .fee-row-val { display:inline-flex; align-items:center; gap:8px; font-family:'Roboto',sans-serif; font-size:13px; font-weight:500; color:var(--text-main); }
   .fee-row-val.undecided { color:var(--text-hint); font-size:12px; }
   .fee-row-toggle { cursor:pointer; user-select:none; }
@@ -65,17 +63,7 @@
   .tax-toggle-btn { border:none; background:#fff; color:#888; font-size:11px; font-weight:600; padding:3px 7px; cursor:pointer; font-family:Pretendard,'Noto Sans KR',sans-serif; }
   .tax-toggle-btn + .tax-toggle-btn { border-left:1px solid var(--border); }
   .tax-toggle-btn.is-active { background:var(--navy); color:#fff; }
-  .fee-action-btn { padding:5px 9px; border:1px solid var(--navy); border-radius:5px; background:#fff; color:var(--navy); font-family:Pretendard,'Noto Sans KR',sans-serif; font-size:11px; font-weight:500; line-height:1.2; cursor:pointer; white-space:nowrap; }
   .fee-action-btn.active { background:#d0d0d0; border-color:#aaa; color:#666; }
-  .fee-help { position:relative; display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border:1px solid #B8C1CF; border-radius:50%; color:#8B95A1; font-family:'Roboto',sans-serif; font-size:10px; font-weight:700; line-height:1; }
-  .fee-help::after { content:attr(data-tooltip); position:absolute; left:50%; bottom:calc(100% + 8px); transform:translateX(-50%); display:none; width:210px; padding:8px 10px; border-radius:6px; background:#1F2937; color:#fff; font-family:Pretendard,'Noto Sans KR',sans-serif; font-size:11px; font-weight:500; line-height:1.5; white-space:normal; box-shadow:0 4px 12px rgba(0,0,0,.18); z-index:10; }
-  .fee-help:hover::after,
-  .fee-help:focus::after { display:block; }
-  .fee-discount-result { display:inline-flex; align-items:center; gap:6px; font-family:'Roboto',sans-serif; color:#006BFF; text-align:right; }
-  .mileage-amount-line { display:inline-flex; align-items:center; gap:6px; }
-  .mileage-hold-row { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; }
-  .mileage-hold-label { font-size:13px; color:#111; }
-  .mileage-hold-value { font-family:'Roboto',sans-serif; font-size:14px; font-weight:700; color:#111; }
   .op {
     display:inline-flex;
     align-items:center;
@@ -92,14 +80,11 @@
   }
   .op-plus,
   .op-equal { background:#5b8fff; }
-  .op-times { background:#888; }
   .fee-row.disc-row { background:#FFF8F0; }
   .fee-row.disc-row .fee-row-label { color:#854F0B; }
-  .disc-detail { display:flex; flex-direction:column; gap:4px; align-items:flex-end; }
   .disc-item { display:flex; align-items:center; gap:6px; }
   .disc-val { font-family:'Roboto',sans-serif; font-size:13px; font-weight:700; color:var(--red); }
   .disc-badge { font-size:10px; font-weight:500; padding:1px 6px; border-radius:3px; }
-  .badge-c { background:#FCEBEB; color:#A32D2D; }
   .badge-m { background:#E6F1FB; color:#185FA5; }
   .disc-total { font-family:'Roboto',sans-serif; font-size:13px; font-weight:700; color:var(--red); padding-top:4px; border-top:1px solid #f5c88a; text-align:right; }
   .fee-row.total-row { background:#F0F4FB; border-top:2px solid var(--navy); border-bottom:2px solid var(--navy); padding:14px 16px; }
@@ -154,24 +139,11 @@
   .photo-option-select:focus { outline:none; border-color:var(--navy); box-shadow:0 0 0 3px rgba(26,60,110,.12); }
 
   /* ?  ? */
-  .toggle-wrap { display:flex; align-items:center; gap:8px; flex-shrink:0; }
-  .toggle-track { width:44px; height:24px; background:#ccc; border-radius:12px; position:relative; transition:background .2s; cursor:pointer; }
   .toggle-track.on { background:var(--green); }
-  .toggle-thumb { position:absolute; top:3px; left:3px; width:18px; height:18px; background:#fff; border-radius:50%; transition:left .2s; box-shadow:0 1px 3px rgba(0,0,0,.2); }
   .toggle-track.on .toggle-thumb { left:23px; }
-  .toggle-text { font-size:12px; font-weight:500; color:#888; min-width:32px; }
   .toggle-text.on { color:var(--green); }
 
   /* 마일리 ? */
-  .mileage-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
-  .mileage-avail { font-size:12px; color:var(--text-sub); }
-  .mileage-avail strong { font-family:'Roboto',monospace; color:#222; font-weight:500; }
-  .mileage-input-row { display:flex; gap:8px; align-items:center; }
-  .mileage-box { flex:1; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #dde1e7; padding:8px 0; cursor:text; }
-  .mileage-placeholder { font-size:13px; color:#bbb; }
-  .mileage-right { display:flex; align-items:center; gap:4px; }
-  .mileage-inp { border:none; outline:none; font-family:'Roboto',monospace; font-size:14px; font-weight:500; color:#222; width:80px; text-align:right; background:transparent; }
-  .mileage-unit { font-size:13px; color:#555; margin-left:-1px; }
   .amount-clear {
     display:none;
     align-items:center;
@@ -189,12 +161,7 @@
     cursor:pointer;
   }
   .amount-clear.show { display:inline-flex; }
-  .btn-mileage-all { padding:8px 12px; font-size:12px; font-weight:500; border:1px solid var(--navy); border-radius:6px; background:#fff; color:var(--navy); cursor:pointer; font-family:Pretendard,'Noto Sans KR',sans-serif; white-space:nowrap; transition:background .15s,color .15s; }
   .btn-mileage-all.active { background:#d0d0d0; border-color:#aaa; color:#666; }
-  .mileage-used-summary { display:none; font-size:12px; color:var(--navy); margin-top:4px; }
-  .mileage-used-summary strong { font-family:'Roboto',monospace; color:var(--red); }
-  .mileage-limit-note { font-size:11px; color:var(--navy); margin-top:6px; }
-  .mileage-warn { display:none; font-size:11px; color:var(--red); margin-top:4px; }
   .mileage-warn.show { display:block; }
 
   /* 결제? 보 ? 인 */
@@ -244,12 +211,6 @@
   .banner-tax strong { color:#7A5500; }
   .banner-tax a { color:#C47D00; text-decoration:underline; font-size:11px; }
   .banner-tax-title { display:block; font-size:12px; font-weight:700; margin-bottom:2px; }
-  .banner-tax-divider { border:0; border-top:1px dashed rgba(122,85,0,.28); margin:10px 0; }
-  .banner-receipt-title { font-size:12px; font-weight:700; color:#7A5500; margin-bottom:4px; }
-  .banner-receipt-notice { font-size:11px; line-height:1.6; color:#664400; margin-bottom:6px; }
-  .banner-receipt-radio-group { display:flex; gap:18px; }
-  .banner-receipt-radio { display:inline-flex; align-items:center; gap:5px; font-size:12px; color:#664400; cursor:pointer; }
-  .banner-receipt-radio input { accent-color:var(--navy); width:14px; height:14px; }
   /* ? 치 ?*/
   .deposit-wrap { padding:14px 16px; border-bottom:1px solid var(--border); }
   .deposit-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
@@ -276,7 +237,6 @@
 
   /* 결제방법 버튼??*/
   .pay-method-wrap { padding:14px 16px; border-bottom:1px solid var(--border); }
-  .pay-method-label { font-size:13px; font-weight:500; color:#333; margin-bottom:10px; }
   .pay-method-label .req { color:var(--red); }
   .pay-method-btn-group { display:flex; gap:8px; }
   .pay-method-btn { flex:1; padding:12px 0; font-size:13px; font-weight:500; font-family:Pretendard,'Noto Sans KR',sans-serif; border:1px solid #ccc; border-radius:5px; background:#fff; color:#444; cursor:pointer; text-align:center; transition:background .15s,border-color .15s,color .15s; }
@@ -300,19 +260,12 @@
   .pay-receipt-radio input { accent-color:var(--navy); width:14px; height:14px; }
 
   /* ? 인 ??*/
-  .disc-pay-row { background:#FFF8F0; border-top:1px solid #f5c88a; border-bottom:1px solid #f5c88a; padding:12px 16px; }
-  .disc-pay-label { font-size:12px; color:#854F0B; font-weight:500; margin-bottom:6px; }
-  .disc-pay-items { display:flex; flex-direction:column; gap:5px; }
-  .disc-pay-item { display:flex; align-items:center; gap:6px; }
-  .disc-pay-note { font-size:11px; color:var(--text-hint); margin-top:6px; }
 
   .fee-mileage-row { display:block; padding:14px 16px 0; background:#fff; overflow:hidden;}
   .mob-mile-wrap { display:flex; flex-direction:column; gap:10px; width:100%; }
-  .mob-mile-state { width:max-content; height:20px; display:inline-flex; align-items:center; padding:0 10px; border-radius:999px; background:#eaf2ff; color:#006bff; font-size:10px; font-weight:700; }
   .mob-mile-top { display:grid; grid-template-columns:48px minmax(0,1fr) 18px 64px; align-items:center; gap:6px; }
   .mob-mile-label { font-size:13px; color:#222; font-weight:700; display:inline-flex; align-items:center; white-space:nowrap; }
   .mob-mile-input-row { position:relative; justify-self:end; width:150px; min-width:86px; height:32px; display:flex; align-items:center; gap:7px; padding:0 25px 0 9px; border:1px solid #d8dce2; border-radius:5px; background:#fff; }
-  .mob-mile-input-lbl { flex:0 0 auto; color:#7b8494; font-size:13px; font-weight:700; }
   .mob-mile-inp { width:100%; min-width:0; border:0; outline:0; background:transparent; color:#222; font-family:'Roboto',monospace; font-size:13px; font-weight:700; text-align:right; }
   .mob-mile-inp.is-empty { text-align:center; }
   .mob-mile-inp::placeholder { color:#9aa3b2; font-family:Pretendard,'Noto Sans KR',sans-serif; font-size:13px; font-weight:500; }
@@ -326,9 +279,6 @@
   .mob-mile-summary strong { font-family:'Roboto',sans-serif; font-size:13px; font-weight:800; color:#111; }
   .mob-mile-summary-divider { color:#c3c8d0; font-weight:700; }
   .mob-mile-note { margin:0; color:#888; font-size:14px; line-height:1.5; text-align:right; }
-  .mob-mile-subtotal { display:flex; align-items:center; justify-content:space-between; margin:4px -8px 0; padding:14px 12px 13px; border-top:1px solid #e9eef5; border-bottom:1.5px solid #1A3C6E; background:#fff; }
-  .mob-mile-subtotal span { color:#111; font-size:13px; font-weight:700; }
-  .mob-mile-subtotal strong { color:#111; font-family:'Roboto',sans-serif; font-size:16px; font-weight:700; }
 
   /* ? 단 CTA */
   .modal-overlay { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; padding:20px 14px; background:rgba(0,0,0,.45); opacity:0; visibility:hidden; transition:opacity .2s ease,visibility .2s ease; z-index:1000; }
@@ -344,7 +294,6 @@
   .packing-modal .modal-body { padding:16px; }
   .packing-modal-meta { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; }
   .packing-unit { margin:0; font-size:12px; font-weight:700; color:#333; }
-  .packing-detail-link { color:var(--navy); font-size:12px; font-weight:700; text-decoration:underline; text-underline-offset:2px; white-space:nowrap; }
   .packing-table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
   .packing-cost-table { width:100%; min-width:720px; border-collapse:collapse; border:2px solid #9a9a9a; color:#5f6770; font-size:11px; text-align:center; }
   .packing-cost-table + .packing-cost-table { margin-top:18px; }
@@ -510,7 +459,7 @@
     <span class="pay-due-label">결제하실 금액</span>
     <span class="pay-due-formula" id="mobFormula">2,300 엔 × 9.6 원 = <strong id="mobPayWon">22,080원</strong></span>
   </div>
-</div>  
+</div>
 <!-- 1차 결제 비용 -->
 <div class="fee-summary">
   <div class="fee-summary-title"><span>1차 결제 비용</span><span class="fee-rate">적용 환율 9.6원</span></div>

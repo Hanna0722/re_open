@@ -17,25 +17,6 @@
     background: #fff;
     padding-top: 64px;line-height:1.5;}
 
-  .bb-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 300;
-    background: #fff;
-    border-bottom: 1px solid #E0E4EB;
-    box-shadow: 0 1px 4px rgba(0,0,0,.06);
-  }
-  .bb-hdr {
-    max-width: 1280px;
-    height: 64px;
-    margin: 0 auto;
-    padding: 0 24px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
   .bb-hb {
     display: flex;
     flex-direction: column;
@@ -49,103 +30,6 @@
   }
   .bb-hb:hover { background: #F5F7FA; }
   .bb-hb span { display: block; width: 17px; height: 2px; border-radius: 1px; background: #1A1A2E; }
-  .bb-logo { display: flex; align-items: center; flex: 0 0 160px; }
-  .bb-logo img { display: block; width: 100px; height: auto; }
-  .bb-search {
-    flex: 0 1 540px;
-    max-width: 540px;
-    display: flex;
-    border: 1.5px solid #E0E4EB;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .bb-search:focus-within { border-color: #E8385A; }
-  .bb-search input {
-    flex: 1;
-    min-width: 0;
-    border: 0;
-    outline: 0;
-    background: #F5F7FA;
-    padding: 10px 14px;
-    font-size: 14px;
-    font-family: inherit;
-  }
-  .bb-search button {
-    border: 0;
-    background: #E8385A;
-    color: #fff;
-    padding: 0 18px;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: inherit;
-  }
-  .bb-hdr-right {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 4px;
-  }
-  .bb-hbtn {
-    min-width: 52px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    padding: 7px 9px;
-    border: 0;
-    border-radius: 5px;
-    background: none;
-    color: #666680;
-    font-size: 10px;
-    cursor: pointer;
-    position: relative;
-    font-family: inherit;
-  }
-  .bb-hbtn:hover, .bb-user:hover { background: #F5F7FA; }
-  .bb-hbtn i { font-size: 18px; line-height: 18px; }
-  .bb-badge {
-    position: absolute;
-    top: 4px;
-    right: 7px;
-    min-width: 14px;
-    height: 14px;
-    padding: 0 2px;
-    border-radius: 7px;
-    background: #E8385A;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 8px;
-    font-weight: 700;
-  }
-  .bb-user {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
-    border: 0;
-    border-radius: 5px;
-    background: none;
-    cursor: pointer;
-    font-family: inherit;
-  }
-  .bb-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: linear-gradient(135deg,#E8385A,#F5A623);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 13px;
-    font-weight: 700;
-  }
-  .bb-user-name { font-size: 13px; font-weight: 700; color: #1A1A2E; line-height: 1.2; text-align: left; }
-  .bb-user-grade { display: inline-block; margin-top: 2px; padding: 1px 6px; border-radius: 8px; background: #FFF8E6; color: #F5A623; font-size: 9px; font-weight: 700; }
   .bb-drawer-ov {
     position: fixed;
     inset: 0;
@@ -177,7 +61,6 @@
   .bb-drawer-section strong { display: block; margin-bottom: 12px; color: #1A3C6E; font-size: 13px; }
   .bb-drawer-links { display: grid; gap: 10px; }
   .bb-drawer-links a { color: #333; text-decoration: none; font-size: 13px; }
-  
 
   .page-wrap {
     max-width: 1220px;
@@ -262,80 +145,9 @@
   }
 
   /* ── 선택옵션 박스 ── */
-  .select-option-box {
-    border: 1px solid #dde1e7;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .select-option-header {
-    background: #f5f7fa;
-    border-bottom: 1px solid #dde1e7;
-    padding: 10px 14px;
-    text-align: center;
-    font-weight: 500;
-    color: #444;
-    font-size: 13px;
-  }
-  .select-option-body { padding: 14px; }
-  .select-row {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-    margin-top: 14px;
-  }
-  .select-row-item {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .select-row-label {
-    font-size: 12px;
-    color: #666;
-    font-weight: 500;
-  }
-  .select-row-item select {
-    width: 100%;
-    padding: 11px 12px;
-    border: 1px solid #dde1e7;
-    border-radius: 4px;
-    font-size: 13px;
-    font-family: Pretendard, 'Noto Sans KR', sans-serif;
-    color: #333;
-    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999'/%3E%3C/svg%3E") no-repeat right 12px center;
-    appearance: none;
-    cursor: pointer;
-  }
-  .select-row-item select:focus { outline: none; border-color: #1A3C6E; }
-  .ship-notice {
-    background: #fffbf0;
-    border: 1px solid #f0e5b1;
-    padding: 14px 16px;
-    margin-bottom: 14px;
-  }
-  .ship-detail-wrap {
-    display: block;
-  }
   .ship-compare-table { margin-top: 14px; }
   .shipping-method-table { table-layout: fixed; width: 100%; }
 
-  .ship-detail-wrap {
-    display: flex;
-    gap: 14px;
-  }
-  .ship-detail-left {
-    flex: 1;
-    border: 1px solid #dde1e7;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .ship-notice {
-    background: #fffbf0;
-    border-bottom: 1px solid #dde1e7;
-    padding: 10px 14px;
-    font-size: 12px;
-    color: #555;
-    line-height: 1.7;
-  }
   .ship-type-label {
     padding: 8px 14px;
     font-size: 13px;
@@ -343,11 +155,6 @@
     color: #333;
     border-bottom: 1px solid #dde1e7;
     background: #f9f9f9;
-  }
-  .ship-fee-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    text-align: center;
   }
   .ship-fee-grid .col-head {
     background: #f5f7fa;
@@ -368,18 +175,6 @@
     background: #e8efff;
     color: #1A3C6E;
     font-weight: 700;
-  }
-  .ship-detail-right {
-    width: 220px;
-    border: 1px solid #dde1e7;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    color: #888;
-    padding: 14px;
-    text-align: center;
   }
 
   /* ── 배송방법 비교 테이블 ── */
@@ -464,38 +259,6 @@
     padding: 10px 14px;
     vertical-align: top;
   }
-  .care-inner {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-  }
-  .btn-care {
-    background: #E8385A;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 16px;
-    font-size: 13px;
-    font-weight: 700;
-    font-family: Pretendard, 'Noto Sans KR', sans-serif;
-    cursor: pointer;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .care-notice { font-size: 12px; line-height: 1.8; color: #444; }
-  .care-notice .icon-info { color: #1A3C6E; margin-right: 4px; }
-  .btn-care-detail {
-    display: inline-block;
-    margin-top: 6px;
-    background: #555;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    padding: 4px 10px;
-    font-size: 12px;
-    cursor: pointer;
-    font-family: Pretendard, 'Noto Sans KR', sans-serif;
-  }
   .warning-note { margin-top:12px; margin-bottom:10px;font-size:12px; color:#885500; background:#FFF8EC; border-radius:6px; padding:10px 20px; line-height:1.9; }
 
   /* ── 주문자/수취인 공통 ── */
@@ -530,7 +293,6 @@
   .info-table .w120 { width: 120px; }
   .info-table .w200 { width: 200px; }
   .info-table .w320 { width: 100%; max-width: 480px; }
-  
 
   .hint { font-size: 12px; color: #1A3C6E; margin-left: 8px; }
   .hint-red { font-size: 12px; color: #E8385A; }
@@ -604,41 +366,10 @@
 
   /* 링크 텍스트 */
   .link-blue { color: #1A3C6E; text-decoration: none; cursor: pointer; }
-  .link-red  { color: #E8385A; text-decoration: none; cursor: pointer; }
 
   /* 강조 텍스트 */
   .bold-red   { font-weight: 700; color: #E8385A; }
   .bold-navy  { font-weight: 700; color: #1A3C6E; }
-  .bold-black { font-weight: 700; color: #111; }
-  .deposit-input {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 6px 10px;
-    font-size: 13px;
-    width: 80px;
-    font-family: 'Roboto', sans-serif;
-    color: #333;
-    text-align: right;
-  }
-  .deposit-input:focus { outline: none; border-color: #1A3C6E; }
-  .deposit-hint { font-size: 12px; color: #666; margin: 0 4px; }
-  .check-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 13px;
-    cursor: pointer;
-  }
-  .mileage-used-summary {
-    display: none;
-    margin-top: 8px;
-    font-size: 12px;
-    color: #1A3C6E;
-  }
-  .mileage-used-summary strong {
-    font-family: 'Roboto', sans-serif;
-    color: #E8385A;
-  }
 
   /* ── 정액권 ── */
   .pass-table th {
@@ -667,88 +398,8 @@
   }
 
   /* ── 유료 옵션 공통 ── */
-  .option-desc-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 6px;
-    margin-bottom: 10px;
-    font-size: 13px;
-    color: #333;
-    line-height: 1.6;
-  }
-  .option-caution-box {
-    background: #fff8f0;
-    border: 1px solid #f5c88a;
-    border-radius: 5px;
-    padding: 10px 14px;
-    margin-top: 2px;
-  }
-  .option-caution-title {
-    font-size: 12px;
-    font-weight: 700;
-    color: #c07000;
-    margin-bottom: 6px;
-  }
-  .option-caution-list {
-    padding-left: 16px;
-    margin: 0;
-    font-size: 12px;
-    color: #555;
-    line-height: 1.8;
-  }
-  .option-caution-list li { margin-bottom: 2px; }
 
   /* 토글 스위치 */
-  .option-toggle-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 10px;
-  }
-  .option-toggle-option {
-    font-size: 13px;
-    color: #333;
-  }
-  .option-toggle-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    user-select: none;
-  }
-  .care-plus-control {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .option-toggle-label input[type="checkbox"] { display: none; }
-  .option-toggle-track {
-    width: 44px; height: 24px;
-    background: #ccc;
-    border-radius: 12px;
-    position: relative;
-    transition: background 0.2s;
-    flex-shrink: 0;
-  }
-  .option-toggle-thumb {
-    position: absolute;
-    top: 3px; left: 3px;
-    width: 18px; height: 18px;
-    background: #fff;
-    border-radius: 50%;
-    transition: left 0.2s;
-    box-shadow: 0 1px 3px rgba(0,0,0,.2);
-  }
-  .option-chk:checked ~ .option-toggle-track { background: #3AAD4E; }
-  .option-chk:checked ~ .option-toggle-track .option-toggle-thumb { left: 23px; }
-  .option-toggle-text {
-    font-size: 13px;
-    font-weight: 500;
-    color: #888;
-    min-width: 36px;
-  }
   .option-toggle-text.active { color: #3AAD4E; }
   .packing-choice-list { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 2px; }
   .packing-choice { display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 10px; border: 1px solid #d6dee9; border-radius: 5px; background: #fff; color: #28344d; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: border-color .15s, background .15s; }
@@ -812,7 +463,6 @@
     padding: 5px 6px;
     border-radius: 3px 3px 0 0;
   }
-  .guide-price { font-family: 'Roboto', sans-serif; font-weight: 700; color: #1A3C6E; }
 
   .paid-option-table th {
     width: 230px;
@@ -858,17 +508,6 @@
     width: 230px;
     min-width: 230px;
     max-width: 230px;
-  }
-  .paid-option-name {
-    display: block;
-    margin-bottom: 12px;
-  }
-  .paid-option-price {
-    display: grid;
-    gap: 3px;
-    color: #E8385A;
-    font-size: 13px;
-    line-height: 1.45;
   }
   .paid-option-choice {
     width: auto;
@@ -997,7 +636,6 @@
   .btn-cancel:hover { background: #888; }
 
   /* 수취인 체크박스 행 */
-  .recv-same { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; cursor: pointer; }
 </style>
 </head>
 <body>
@@ -1025,7 +663,6 @@
     <h1>주문/결제</h1>
     <p>상품 결제를 위한 페이지입니다.</p>
   </div>
-
 
   <!-- ─────────────────────────────────────
        주문 상품 테이블
@@ -1067,7 +704,7 @@
     <div class="section-title">국제 배송방법 선택<span class="required">*</span></div>
 
     <!-- 선택옵션 박스 -->
-     
+
     <!-- 배송방법 비교 테이블 -->
     <table class="ship-compare-table shipping-method-table">
       <colgroup>
@@ -1295,9 +932,6 @@
     </table>
   </div>
 
-
-
-
   <!-- ─────────────────────────────────────
        구매수수료 1개월 정액권 _비활성
   ───────────────────────────────────── -->
@@ -1330,7 +964,6 @@
   </div>
 
 </div><!-- /page-wrap -->
-
 
 <!-- 파손지원 모달 -->
 <div class="modal-overlay" id="damageModal" role="dialog" aria-modal="true" aria-labelledby="damageModalTitle" hidden>
@@ -1533,7 +1166,6 @@
       window.syncCarePlusAvailability?.();
     }
   })();
-
 
   (() => {
     document.querySelectorAll('input[name="packingOption"]').forEach((input) => {

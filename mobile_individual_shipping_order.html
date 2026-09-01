@@ -126,10 +126,6 @@
   /* 유료 옵션 */
   .option-item { border:1px solid var(--border); border-radius:8px; overflow:hidden; }
   .option-item + .option-item { margin-top:10px; }
-  .option-header { display:flex; align-items:center; justify-content:space-between; padding:14px; background:#F8F9FA; border-bottom:1px solid var(--border); }
-  .option-header-left { flex:1; }
-  .option-name { font-size:14px; font-weight:600; color:#222; margin-bottom:3px; }
-  .option-price { font-size:12px; color:var(--red); font-weight:700; }
   .option-body { padding:14px; font-size:12px; line-height:1.8; color:#444; }
   .option-body.is-collapsed { display:none; }
   .option-body p { margin-top:8px; }
@@ -154,12 +150,8 @@
   .care-scenario-btn { width:22px; height:22px; padding:0; border:1px solid #d9d2c7; border-radius:4px; background:#fff; color:#8a5a00; display:inline-flex; align-items:center; justify-content:center; font-size:10px; cursor:pointer; flex:0 0 auto; }
 
   /* 토글 */
-  .toggle-wrap { display:flex; align-items:center; gap:8px; flex-shrink:0; }
-  .toggle-track { width:44px; height:24px; background:#ccc; border-radius:12px; position:relative; transition:background .2s; cursor:pointer; }
   .toggle-track.on { background:var(--green); }
-  .toggle-thumb { position:absolute; top:3px; left:3px; width:18px; height:18px; background:#fff; border-radius:50%; transition:left .2s; box-shadow:0 1px 3px rgba(0,0,0,.2); }
   .toggle-track.on .toggle-thumb { left:23px; }
-  .toggle-text { font-size:12px; font-weight:500; color:#888; min-width:32px; }
   .toggle-text.on { color:var(--green); }
 
   /* 모달 */

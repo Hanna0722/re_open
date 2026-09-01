@@ -23,14 +23,10 @@ a{text-decoration:none;color:inherit}
 .m-header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200}
 .m-header-top{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:1px;min-height:56px;}
 .m-brand-area{display:flex;align-items:center;gap:10px;min-width:0}
-.m-back-btn{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:none;background:none;color:var(--tp);font-size:17px;cursor:pointer;flex-shrink:0;border-radius:5px}
-.m-back-btn:hover{background:var(--bg)}
 .hb{width:34px;height:34px;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0;background:none;border:none;cursor:pointer;flex-shrink:0}
 .hb span{display:block;width:18px;height:2px;background:var(--tp);border-radius:999px}
 .m-logo{display:inline-flex;align-items:center;width:76px;line-height:0;}
 .m-logo img{width:100%;height:auto;display:block;}
-.m-logo-text{font-size:17px;font-weight:700;color:var(--rose);letter-spacing:-0.5px}
-.m-logo-text span{color:var(--tp)}
 .m-header-right{display:flex;gap:4px;align-items:center;justify-self:end}
 .m-icon-btn{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:none;background:none;color:var(--tp);font-size:16px;border-radius:5px;cursor:pointer;position:relative}
 .m-icon-btn:hover{background:var(--bg)}
@@ -47,11 +43,7 @@ a{text-decoration:none;color:inherit}
 /* ── 경매 플랫폼 뱃지 + 관심 ── */
 .m-platform-bar{background:#fff;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
 .m-platform-badge{display:flex;align-items:center;gap:6px}
-.m-platform-icon{font-size:18px}
-.m-platform-label{font-size:11px;font-weight:700;color:var(--navy);background:#EEF2F9;border:1px solid #C5D0E6;padding:3px 8px;border-radius:5px}
 .m-platform-name{font-size:12px;color:var(--ts)}
-.m-wish-btn{display:flex;align-items:center;gap:5px;border:1.5px solid var(--border);border-radius:20px;padding:5px 12px;background:#fff;font-size:12px;font-weight:600;color:var(--ts);cursor:pointer;font-family:inherit;transition:all .15s}
-.m-wish-btn i{font-size:14px}
 .m-wish-btn.active{border-color:var(--rose);color:var(--rose)}
 
 /* ── 상품 타이틀 ── */
@@ -106,19 +98,12 @@ a{text-decoration:none;color:inherit}
 .m-info-subtext{font-size:13px;font-weight:400;color:var(--tp);line-height:1.2}
 .m-info-wish-btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;height:34px;padding:0 12px;border:1.5px solid #111;border-radius:5px;background:#fff;color:#111;font-size:12px;font-weight:700;white-space:nowrap;font-family:inherit;cursor:pointer;flex-shrink:0}
 .m-info-wish-btn.active{border-color:var(--rose);color:var(--rose)}
-.m-divider{height:1px;background:var(--border);margin:0 16px}
 
 /* ── 가격 섹션 ── */
 .m-price-section{background:#fff;padding:8px 16px 0;border-bottom:1px solid var(--border)}
 .m-price-row{display:flex;align-items:center;padding:8px 0;border-bottom:1px solid #F0F2F5}
 .m-price-row:last-child{border-bottom:none;padding-bottom:12px}
 .m-price-label{font-size:12px;color:var(--ts);width:84px;flex-shrink:0}
-.m-price-main{display:flex;flex-direction:column;gap:3px;flex:1}
-.m-price-current{font-size:22px;font-weight:700;color:var(--tp);font-family:'Roboto',sans-serif;line-height:1}
-.m-price-current .unit{font-size:14px;font-weight:700}
-.m-price-tax{font-size:11px;color:var(--ts)}
-.m-price-tax span{font-weight:600;color:var(--tp)}
-.m-price-badges{display:flex;gap:5px;margin-top:3px}
 .m-badge{font-size:10px;font-weight:600;color:var(--navy);background:#EEF2F9;border:1px solid #C5D0E6;padding:2px 7px;border-radius:4px}
 .m-price-val{font-size:14px;font-weight:700;color:var(--tp);font-family:'Roboto',sans-serif}
 .m-price-val.muted{font-weight:400;color:var(--ts)}
@@ -132,10 +117,6 @@ a{text-decoration:none;color:inherit}
 .confirm-modal-close{border:none;background:none;font-size:20px;color:var(--tm);cursor:pointer}
 .confirm-modal-body{padding:16px;max-height:70vh;overflow:auto}
 .bid-history-modal-card{max-width:560px}
-.bid-hist-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
-.bid-hist-btn{padding:8px 12px;border:1.5px solid var(--border);border-radius:5px;background:#fff;font-size:12px;font-weight:600;color:var(--ts);cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .15s}
-.bid-hist-btn:hover{border-color:var(--navy);color:var(--navy)}
-.bid-hist-btn--primary{background:var(--navy);color:#fff;border-color:var(--navy)}
 .bid-hist-table{width:100%;border-collapse:collapse;font-size:12px}
 .bid-hist-table th{padding:8px 6px;text-align:left;font-size:12x;font-weight:700;color:var(--ts);border-bottom:2px solid var(--border);background:#FAFBFC}
 .bid-hist-table td{padding:10px 6px;border-bottom:1px solid #F0F2F5;vertical-align:top}
@@ -203,8 +184,6 @@ a{text-decoration:none;color:inherit}
 .m-acc-section.open .m-acc-trigger i.chevron{transform:rotate(180deg)}
 .m-acc-body{display:none;padding:0 16px 16px;font-size:13px;color:var(--ts);line-height:1.8}
 .m-acc-section.open .m-acc-body{display:block}
-.m-acc-notice-item{display:flex;gap:8px;margin-bottom:6px}
-.m-acc-notice-item::before{content:'·';color:var(--rose);font-weight:700;flex-shrink:0}
 
 /* ── 판매자 정보 ── */
 .m-seller-section{background:#fff;padding:16px;border-bottom:8px solid var(--bg)}
@@ -215,22 +194,13 @@ a{text-decoration:none;color:inherit}
 .m-seller-id{font-size:14px;font-weight:700;color:var(--navy);font-family:'Roboto',sans-serif}
 .m-seller-stats{font-size:11px;color:var(--ts);margin-top:2px}
 .m-seller-stars{color:var(--amber);font-size:11px;margin-right:3px}
-.m-seller-btn{border:1.5px solid var(--border);border-radius:8px;padding:7px 14px;background:#fff;font-size:12px;font-weight:600;color:var(--ts);cursor:pointer;font-family:inherit;white-space:nowrap}
 
 /* ── 관련 상품 그리드 ── */
-.m-related-section{background:#fff;border-bottom:8px solid var(--bg)}
 .m-related-header{padding:16px 16px 10px;display:flex;align-items:center;justify-content:space-between}
 .m-related-title{font-size:14px;font-weight:700;color:var(--tp);display:flex;align-items:center;gap:6px}
 .m-related-title i{color:var(--tp);font-size:13px}
 .m-related-more{font-size:12px;color:var(--navy);font-weight:600}
-.m-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 16px 16px}
-.m-rel-card{background:#FAFBFC;border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer}
 .m-rel-thumb{width:100%;padding-top:100%;background:#EBEBEB;position:relative}
-.m-rel-thumb-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--tm);font-size:20px}
-.m-rel-info{padding:7px 8px}
-.m-rel-name{font-size:11px;color:var(--tp);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:2px}
-.m-rel-price{font-size:13px;font-weight:700;color:var(--tp);font-family:'Roboto',sans-serif}
-.m-rel-krw{font-size:10px;color:var(--ts)}
 
 /* ── 출품자 공개 상품 ── */
 .m-seller-items{background:#fff;border-bottom:8px solid var(--bg)}
@@ -254,9 +224,6 @@ a{text-decoration:none;color:inherit}
 .m-assoc-krw{font-size:11px;color:var(--ts);font-weight:400}
 
 /* ── 하단 고정 바 ── */
-.m-sticky-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;z-index:100;box-shadow:0 -2px 12px rgba(0,0,0,.1)}
-.m-sticky-bid{background:var(--rose);color:#fff;border:none;padding:16px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:7px}
-.m-sticky-wish{background:#fff;color:var(--tp);border:none;border-right:1px solid var(--border);padding:16px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px}
 
 /* ── 푸터 ── */
 .m-footer{background:var(--tp);color:#fff;padding:24px 16px 90px}
@@ -312,8 +279,6 @@ a{text-decoration:none;color:inherit}
 /* ── KRW 환산 표시 ── */
 .m-bid-krw{font-size:11px;font-weight:500;color:var(--ts);font-family:Pretendard,'Noto Sans KR',sans-serif;white-space:nowrap}
 .m-bid-amount-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.m-exchange-rate{font-size:11px;color:var(--tm);margin-bottom:10px;text-align:right}
-.m-exchange-rate span{font-weight:700;color:var(--ts);font-family:'Roboto',sans-serif}
 
 /* ── 로그인 플로우 버튼 ── */
 .m-btn-login-bid{background:var(--rose);color:#fff;border:none;padding:15px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:7px;width:100%}
@@ -333,7 +298,6 @@ a{text-decoration:none;color:inherit}
 .m-desc-block{font-size:13px;color:var(--ts);line-height:1.8}
 .m-desc-block p{margin-bottom:8px}
 .m-desc-block h4{font-size:13px;font-weight:700;color:var(--tp);margin-bottom:8px}
-.m-desc-jp{background:#F5F7FA;border-left:3px solid var(--border);padding:10px 12px;margin-top:12px;font-size:12px;color:var(--tm);line-height:1.8;border-radius:0 6px 6px 0}
 .m-desc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .m-desc-tag{background:#F5F7FA;border:1px solid var(--border);border-radius:20px;padding:4px 10px;font-size:11px;color:var(--ts)}
 
@@ -371,13 +335,10 @@ a{text-decoration:none;color:inherit}
 .m-pubqna-date{font-size:10px;color:var(--tm);margin-top:4px;margin-left:22px;font-family:'Roboto',sans-serif}
 /* 문의 폼 */
 .m-qna-form{padding:14px 16px 16px}
-.m-qna-form-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
 .m-qna-form-label{font-size:11px;font-weight:600;color:var(--ts);margin-bottom:5px}
-.m-qna-form-input{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:inherit;color:var(--tp);background:#FAFBFC;outline:none}
 .m-qna-textarea{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13px;font-family:inherit;resize:none;height:88px;outline:none;color:var(--tp);transition:border-color .2s}
 .m-qna-textarea:focus{border-color:var(--navy)}
 .m-qna-form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
-.m-qna-btn-cancel{padding:9px 20px;border-radius:5px;border:1.5px solid var(--border);background:#fff;font-size:13px;font-weight:600;color:var(--ts);cursor:pointer;font-family:inherit}
 .m-qna-btn-submit{padding:9px 20px;border-radius:5px;border:none;background:#5B9BD5;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
 .m-question-help{margin:8px 0 0;color:var(--tm);font-size:11px;line-height:1.7}
 
@@ -671,11 +632,11 @@ a{text-decoration:none;color:inherit}
     <i class="fa-solid fa-chevron-down chevron"></i>
   </button>
     <div class="m-trans-notice">
-     <div class="bid-check-points"> 
+     <div class="bid-check-points">
        <span>1. 정크/가품 여부 확인 불가</span>
        <span>2. 정크(JUNK) 상품 주의</span>
        <span>3. 반품 가능 여부 확인</span>
-    </div> 
+    </div>
       <div>– 이 제품은 구매대행을 통하여 유통되는 제품입니다.</div>
       <div>– 이 제품은 ［전기용품 및 생활용품 안전관리법］에 따른 안전관리대상 제품입니다.</div>
       <div>– 통관 가능여부는 회원이 미리 관세청에 확인하신 후 입찰을 부탁드립니다.</div>

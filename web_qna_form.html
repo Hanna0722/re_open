@@ -59,8 +59,6 @@
 
     .brand-area { display: flex; align-items: center; gap: 22px; min-width: 0; }
     .menu-button { width: 25px; height: 25px; border: 0; border-radius: 5px; background: transparent; padding: 0; display: grid; place-items: center; }
-    .menu-lines { width: 23px; display: grid; gap: 6px; }
-    .menu-lines span { height: 2.5px; border-radius: 999px; background: #1f2530; }
     .logo-link { display: inline-flex; align-items: center; width: 100px; line-height: 0; }
     .logo-link img { width: 100%; height: auto; display: block; }
 
@@ -81,16 +79,8 @@
       font-size: 13px; font-weight: 700;
     }
 
-    .user-tools { justify-self: end; display: grid; grid-template-columns: 28px 28px auto; align-items: center; gap: 10px; }
     .icon-btn { width: 28px; height: 28px; display: grid; place-items: center; border: 0; border-radius: 5px; background: transparent; color: #687385; padding: 0; }
     .icon-btn i { font-size: 23px; }
-    .user-name { display: grid; justify-items: center; gap: 3px; color: #111827; font-size: 13px; font-weight: 800; white-space: nowrap; }
-    .premium-chip {
-      min-width: 70px; padding: 2px 10px; border-radius: 999px;
-      background: var(--grade-vip); color: #fff;
-      display: inline-flex; align-items: center; justify-content: center;
-      font-size: 10px; font-weight: 800;
-    }
 
     /* ── 스테이지 ── */
     .stage {
@@ -113,37 +103,6 @@
     .nav-list a.active { color: var(--rose); font-weight: 800; border-left-color: var(--rose); background: #fff5f7; }
 
     /* 고객센터 카드 (드로어와 동일) */
-    .cs-call {
-      margin: 22px 12px 0;
-      padding: 18px 14px;
-      background: #fcfcfd;
-      text-align: center;
-    }
-    .cs-call .tel {
-      display: block;
-      color: var(--navy);
-      font-family: Roboto, sans-serif;
-      font-size: 26px;
-      font-weight: 900;
-    }
-    .cs-call p { margin: 8px 0 16px; color: #7b8494; font-size: 11px; }
-    .cs-call-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .cs-call-actions button {
-      height: 34px;
-      border: 1px solid #d9e0e9;
-      border-radius: 5px;
-      background: #fff;
-      color: #1f2530;
-      font-size: 12px;
-      font-weight: 900;
-      font-family: inherit;
-      padding: 0;
-    }
-    .cs-call-actions button:first-child {
-      border-color: var(--rose);
-      background: var(--rose);
-      color: #fff;
-    }
 
     /* ── 메인 ── */
     .page-head {
@@ -337,7 +296,6 @@
     .order-search-row .select-box { width: 110px; }
     .order-search-row .text-input { flex: 1; min-width: 0; }
 
-    .item-code-row { display: flex; gap: 8px; }
     .select-box, .text-input {
       height: 40px;
       border: 1px solid var(--line);
@@ -454,7 +412,7 @@
 <div class="stage">
 
   <!-- 사이드바: 고객센터 -->
-   
+
   <aside class="sidebar">
     <nav class="side-nav" aria-label="고객센터 메뉴">
       <div class="side-title">

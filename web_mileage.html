@@ -98,18 +98,6 @@
       place-items: center;
     }
 
-    .menu-lines {
-      width: 23px;
-      display: grid;
-      gap: 6px;
-    }
-
-    .menu-lines span {
-      height: 2.5px;
-      border-radius: 999px;
-      background: #1f2530;
-    }
-
     .logo-link {
       display: inline-flex;
       align-items: center;
@@ -165,15 +153,6 @@
       font-size: 15px;
     }
 
-    .user-tools {
-      justify-self: end;
-      display: grid;
-      grid-template-columns: 28px 28px auto;
-      align-items: center;
-      gap: 10px;
-      color: #1d2430;
-    }
-
     .icon-btn {
       width: 28px;
       height: 28px;
@@ -200,20 +179,6 @@
       white-space: nowrap;
     }
 
-    .premium-chip {
-      min-width: 70px;
-      min-height: 18px;
-      padding: 2px 10px;
-      border-radius: 999px;
-      background: var(--grade-vip);
-      color: #fff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: 800;
-    }
-
     .stage {
       position: relative;
       display: grid;
@@ -223,40 +188,6 @@
       margin-left: var(--stage-left);
       margin-top: 11px;
       overflow: visible;
-    }
-
-    .asset-strip {
-      position: absolute;
-      top: 0;
-      left: var(--sidebar-w);
-      width: var(--asset-w);
-      height: 40px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      align-items: center;
-      background: var(--warm);
-      border-bottom: 1px solid #f2e9e5;
-      z-index: 1;
-    }
-
-    .asset-item {
-      min-width: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 50px;
-      color: #111;
-      white-space: nowrap;
-    }
-
-    .asset-item span {
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .asset-item strong {
-      font-size: 15px;
-      font-weight: 800;
     }
 
     .sidebar {
@@ -349,57 +280,6 @@
       font-weight: 700;
     }
 
-    .tooltip-dot {
-      position: relative;
-      flex: 0 0 auto;
-      background: #fff;
-    }
-
-    .tooltip-dot::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      right: -8px;
-      bottom: calc(100% + 9px);
-      width: max-content;
-      max-width: 220px;
-      padding: 8px 10px;
-      border-radius: 7px;
-      background: #2f343d;
-      color: #fff;
-      box-shadow: 0 8px 18px rgba(32, 36, 43, 0.16);
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 1.35;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(4px);
-      transition: opacity 0.16s ease, transform 0.16s ease;
-      z-index: 5;
-    }
-
-    .tooltip-dot::before {
-      content: "";
-      position: absolute;
-      right: 2px;
-      bottom: calc(100% + 3px);
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-top: 6px solid #2f343d;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(4px);
-      transition: opacity 0.16s ease, transform 0.16s ease;
-      z-index: 6;
-    }
-
-    .tooltip-dot:hover::after,
-    .tooltip-dot:hover::before,
-    .tooltip-dot:focus-visible::after,
-    .tooltip-dot:focus-visible::before {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
     .profile-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -460,12 +340,6 @@
     .nav-list a.active {
       color: var(--rose);
       font-weight: 700;
-    }
-
-    .drawer-section {
-      padding: 18px 20px 24px;
-      border-bottom: 1px solid #e5e7eb;
-      background: #fff;
     }
 
     .drawer-section-title {
@@ -770,13 +644,6 @@
       background: #fff;
     }
 
-    .panel-title {
-      margin: 0 0 12px;
-      color: #2d3139;
-      font-size: 15px;
-      font-weight: 900;
-    }
-
     .mileage-balance-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -860,91 +727,6 @@
       line-height: 1;
     }
 
-    .summary-tooltip {
-      position: relative;
-      width: 14px;
-      height: 14px;
-      border: 1.5px solid #9da2ad;
-      border-radius: 50%;
-      background: #fff;
-      color: #8a909d;
-      display: inline-grid;
-      place-items: center;
-      flex: 0 0 auto;
-      padding: 0;
-      font-size: 10px;
-      font-weight: 900;
-      line-height: 1;
-      z-index: 30;
-    }
-
-    .summary-tooltip::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      top: 50%;
-      width: max-content;
-      max-width: 300px;
-      padding: 7px 9px;
-      border: 1px solid #d9e0ea;
-      border-radius: 7px;
-      background: #fff;
-      color: #667080;
-      box-shadow: 0 4px 12px rgba(37, 46, 62, .14);
-      font-size: 11px;
-      font-weight: 800;
-      line-height: 1.25;
-      text-align: left;
-      white-space: pre-line;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .16s ease, transform .16s ease;
-      z-index: 40;
-    }
-
-    .summary-tooltip::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .16s ease, transform .16s ease;
-      z-index: 41;
-    }
-
-    .summary-tooltip-left::after {
-      right: calc(100% + 10px);
-      transform: translate(4px, -50%);
-    }
-
-    .summary-tooltip-left::before {
-      right: calc(100% + 4px);
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-left: 6px solid #fff;
-      transform: translate(4px, -50%);
-    }
-
-    .summary-tooltip-right::after {
-      left: calc(100% + 10px);
-      transform: translate(-4px, -50%);
-    }
-
-    .summary-tooltip-right::before {
-      left: calc(100% + 4px);
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-right: 6px solid #fff;
-      transform: translate(-4px, -50%);
-    }
-
-    .summary-tooltip:hover::after,
-    .summary-tooltip:hover::before,
-    .summary-tooltip:focus-visible::after,
-    .summary-tooltip:focus-visible::before {
-      opacity: 1;
-      transform: translate(0, -50%);
-    }
-
     .balance-box[data-summary-tooltip] {
       cursor: pointer;
     }
@@ -1019,36 +801,8 @@
       transform: translateY(0);
     }
 
-    .balance-note {
-      margin-top: 7px;
-      color: #9aa0ae;
-      font-size: 11px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
     .balance-note.expire {
       color: #f29a19;
-    }
-
-    .expire-date {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      margin-top: 14px;
-      color: #4b515d;
-      font-size: 11px;
-      font-weight: 500;
-      white-space: nowrap;
-    }
-
-    .expire-date::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #f0a32a;
-      flex: 0 0 auto;
     }
 
     .stamp-panel {
@@ -1123,50 +877,6 @@
 
     .stamp-panel.expanded .stamp:nth-child(n+11) {
       display: grid;
-    }
-
-    .roulette-button {
-      width: 58px;
-      height: 58px;
-      border: 1px solid #d9d2c7;
-      border-radius: 50%;
-      background: #fffdf0;
-      color: #aaa18f;
-      display: grid;
-      place-items: center;
-      padding: 0;
-      position: relative;
-      box-shadow: inset 0 0 0 2px #fff8dc;
-    }
-
-    .roulette-button::before {
-      content: "";
-      position: absolute;
-      inset: 6px;
-      border: 1px dashed #aaa18f;
-      border-radius: 50%;
-    }
-
-    .roulette-button strong {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      justify-items: center;
-      gap: 1px;
-      font-size: 11px;
-      font-weight: 700;
-      line-height: 1;
-      letter-spacing: 0;
-    }
-
-    .roulette-button strong::before {
-      content: "✓";
-      font-size: 20px;
-      line-height: 1;
-    }
-
-    .roulette-button.is-spinning {
-      animation: roulette-spin 0.65s ease;
     }
 
     @keyframes roulette-spin {
@@ -1712,14 +1422,6 @@
       line-height: 1.25;
     }
 
-    .history-meta {
-      display: block;
-      margin-top: 4px;
-      color: #9da2af;
-      font-size: 12px;
-      line-height: 1.25;
-    }
-
     .history-amount {
       text-align: center;
       color: var(--green);
@@ -1784,13 +1486,6 @@
     .coupon-discount {
       color: #111;
       font-size: 15px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .coupon-period {
-      color: #4b5260;
-      font-size: 12px;
       font-weight: 700;
       white-space: nowrap;
     }
@@ -2069,12 +1764,6 @@
       font-weight: 700;
     }
 
-    
-
-    
-
-    
-  
     .member-tier-icon { background:#eef5ff !important; color:#1A3C6E !important; }
     .member-tier-icon i { line-height:1; }
   </style>

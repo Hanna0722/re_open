@@ -20,28 +20,14 @@ body{font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothi
 
 /* ── 공지 바 (mobile_main 동일) ── */
 .app-notice-bar{background:#FFFAF8;border-bottom:1px solid #E6DDDA;overflow:hidden;height:32px;display:flex;align-items:center;flex-shrink:0}
-.app-notice-track{display:flex;align-items:center;white-space:nowrap;animation:noticeScroll 18s linear infinite}
-.app-notice-text{font-size:11px;color:#000;font-weight:500;padding:0 40px;flex-shrink:0}
-.app-notice-text b{color:var(--amber)}
 @keyframes noticeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* ── 앱 헤더 (mobile_main 동일) ── */
 .app-header{background:#fff;border-bottom:1px solid var(--border);flex-shrink:0;box-shadow:0 1px 0 rgba(32,36,43,.04)}
-.app-header-top{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:1px;min-height:56px;}
-.app-brand-area{display:flex;align-items:center;gap:10px;min-width:0}
 .hb{width:34px;height:34px;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0;background:none;border:none;cursor:pointer}
 .hb span{display:block;width:18px;height:2px;background:#242836;border-radius:999px}
-.app-logo{display:inline-flex;align-items:center;width:76px;line-height:0;}
-.app-logo img{display:block;width:100%;height:auto;}
-.app-header-right{display:flex;gap:4px;align-items:center}
 .icon-btn{width:34px;height:34px;border-radius:9px;background:none;border:none;cursor:pointer;color:#333;font-size:16px;display:flex;align-items:center;justify-content:center;position:relative}
 /* 프리뷰 유틸 */
-.preview-utils{display:flex;align-items:center;gap:6px}
-.now-viewing{font-size:11px;color:var(--ts);background:var(--bg);border:1px solid var(--border);border-radius:999px;padding:5px 12px;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.now-viewing b{color:var(--rose)}
-.top-btn{display:flex;align-items:center;gap:5px;padding:5px 10px;border:1.5px solid var(--border);border-radius:8px;background:#fff;font-size:11px;font-weight:600;color:var(--ts);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none}
-.top-btn:hover{border-color:var(--navy);color:var(--navy)}
-.top-btn i{font-size:10px}
 /* 검색창 */
 .app-search{grid-column:1 / -1;height:40px;display:flex;align-items:center;gap:0;background:#F4EEEA;border:1px solid #E6DDDA;border-radius:10px;overflow:hidden;color:var(--tm)}
 .app-search::before{content:"";width:15px;height:15px;margin-left:12px;flex:0 0 auto;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238b95a5' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m16.5 16.5 4 4'/%3E%3C/svg%3E") center/contain no-repeat}
@@ -52,7 +38,6 @@ body{font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothi
 /* 채널 탭 (mobile_main 동일) */
 .channel-tabs{display:flex;overflow-x:auto;scrollbar-width:none;border-top:1px solid #E6DDDA;padding:0 14px;-webkit-overflow-scrolling:touch}
 .channel-tabs::-webkit-scrollbar{display:none}
-.ch-tab{padding:9px 12px 10px;font-size:11px;font-weight:700;color:#707070;white-space:nowrap;cursor:pointer;border:0;border-bottom:2px solid transparent;background:transparent;flex-shrink:0;font-family:inherit}
 .ch-tab.active{color:var(--rose);border-bottom-color:var(--rose)}
 
 /* ── 레이아웃 ── */
@@ -85,7 +70,6 @@ body{font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothi
 </style>
 </head>
 <body>
-
 
 <div class="layout">
   <nav class="nav" id="pageNav">

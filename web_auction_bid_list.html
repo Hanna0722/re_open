@@ -128,38 +128,6 @@
       box-shadow: 0 2px 8px rgba(0,0,0,.07);
       transform: none;
     }
-    .store-yahoo { color: #e43e2e; transform: rotate(-42deg); font-size: 11px; }
-    .store-mercari {
-      background: var(--rose);
-      color: #fff;
-      font-size: 28px;
-      clip-path: polygon(50% 0, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
-    }
-    .store-rakuten { color: var(--rose-h); font-size: 34px; }
-    .store-cart { color: #ff8a38; font-size: 26px; }
-    .flag-us, .flag-uk { color: #fff; font-size: 12px; text-shadow: 0 1px 1px rgba(0, 0, 0, .2); }
-    .flag-us {
-      background:
-        linear-gradient(90deg, #253d83 0 44%, transparent 44%),
-        repeating-linear-gradient(#c9263b 0 6px, #fff 6px 12px);
-    }
-    .flag-us::before {
-      content: "● ● ●\A ● ● ●\A ● ● ●";
-      position: absolute;
-      left: 6px;
-      top: 7px;
-      color: #fff;
-      font-size: 5px;
-      line-height: 1.6;
-      white-space: pre;
-    }
-    .flag-uk {
-      background:
-        linear-gradient(0deg, transparent 42%, #fff 42% 47%, #d51f35 47% 53%, #fff 53% 58%, transparent 58%),
-        linear-gradient(90deg, transparent 40%, #fff 40% 46%, #d51f35 46% 54%, #fff 54% 60%, transparent 60%),
-        linear-gradient(34deg, transparent 43%, #fff 43% 47%, #d51f35 47% 53%, #fff 53% 57%, transparent 57%),
-        linear-gradient(-34deg, #153f8f 0 43%, #fff 43% 47%, #d51f35 47% 53%, #fff 53% 57%, #153f8f 57%);
-    }
 
     /* 마이페이지 셸 */
     .mypage-shell {
@@ -402,29 +370,10 @@
       outline: 2px solid rgba(37, 99, 235, 0.22);
       outline-offset: 2px;
     }
-    .bid-filter-group {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .bid-filter-btn {
-      height: 36px;
-      padding: 0 14px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: #fff;
-      color: #6b7280;
-      font-size: 13px;
-      font-weight: 800;
-    }
     .bid-filter-btn.active {
       border-color: var(--rose);
       background: #fff5f7;
       color: var(--rose);
-    }
-    .toolbar-panel[hidden] {
-      display: none !important;
     }
     .bid-search {
       display: flex;
@@ -765,7 +714,6 @@
             </div>
           </div>
         </div>
-
 
         <div class="bid-list" data-bid-panel="bidding" id="biddingList"></div>
 

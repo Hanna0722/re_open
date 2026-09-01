@@ -17,15 +17,8 @@
     background: #fff;
     padding-top: 64px;line-height:1.5;}
 
-  .bb-header{position:fixed;top:0;left:0;right:0;z-index:300;background:#fff;border-bottom:1px solid #E0E4EB;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-  .bb-hdr{max-width:1440px;height:64px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:16px}
   .bb-hb{display:flex;flex-direction:column;gap:4.5px;padding:8px;margin-right:4px;border:0;border-radius:5px;background:none;cursor:pointer}.bb-hb:hover{background:#F5F7FA}.bb-hb span{display:block;width:17px;height:2px;border-radius:1px;background:#1A1A2E}
-  .bb-logo{display:flex;align-items:center;flex:0 0 160px}.bb-logo img{display:block;width:100px;height:auto}
-  .bb-search{flex:0 1 540px;max-width:540px;display:flex;border:1.5px solid #E0E4EB;border-radius:8px;overflow:hidden}.bb-search:focus-within{border-color:#E8385A}.bb-search input{flex:1;min-width:0;border:0;outline:0;background:#F5F7FA;padding:10px 14px;font-size:14px;font-family:inherit}.bb-search button{border:0;background:#E8385A;color:#fff;padding:0 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
-  .bb-hdr-right{flex:1;display:flex;align-items:center;justify-content:flex-end;gap:4px}.bb-hbtn{min-width:52px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 9px;border:0;border-radius:5px;background:none;color:#666680;font-size:10px;cursor:pointer;position:relative;font-family:inherit}.bb-hbtn:hover,.bb-user:hover{background:#F5F7FA}.bb-hbtn i{font-size:18px;line-height:18px}.bb-badge{position:absolute;top:4px;right:7px;min-width:14px;height:14px;padding:0 2px;border-radius:7px;background:#E8385A;color:#fff;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700}
-  .bb-user{display:flex;align-items:center;gap:8px;padding:6px 10px;border:0;border-radius:5px;background:none;cursor:pointer;font-family:inherit}.bb-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#E8385A,#F5A623);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700}.bb-user-name{font-size:13px;font-weight:700;color:#1A1A2E;line-height:1.2;text-align:left}.bb-user-grade{display:inline-block;margin-top:2px;padding:1px 6px;border-radius:8px;background:#FFF8E6;color:#F5A623;font-size:9px;font-weight:700}
   .bb-drawer-ov{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .2s ease}.bb-drawer-ov.open{opacity:1;pointer-events:auto}.bb-drawer{position:fixed;top:0;bottom:0;left:-360px;z-index:501;width:340px;max-width:88vw;background:#fff;box-shadow:4px 0 20px rgba(0,0,0,.12);transition:left .24s cubic-bezier(.4,0,.2,1);overflow-y:auto}.bb-drawer.open{left:0}.bb-drawer-head{display:flex;align-items:center;justify-content:space-between;padding:18px 16px 16px;border-bottom:1px solid #E0E4EB}.bb-drawer-title{font-size:17px;font-weight:800;color:#1A1A2E}.bb-drawer-close{width:32px;height:32px;border:0;background:none;font-size:24px;cursor:pointer}.bb-drawer-section{padding:16px;border-bottom:1px solid #F0F2F5}.bb-drawer-section strong{display:block;margin-bottom:12px;color:#1A3C6E;font-size:13px}.bb-drawer-links{display:grid;gap:10px}.bb-drawer-links a{color:#333;text-decoration:none;font-size:13px}
-  
 
   /* ── 공통 컨테이너 ── */
   .page-wrap {
@@ -118,58 +111,9 @@
     font-size: 14px;
     white-space: nowrap;
   }
-  .status-cell { color: #555; white-space: nowrap; }
-  .date-cell {
-    font-family: 'Roboto', sans-serif;
-    font-size: 12px;
-    color: #666;
-    white-space: nowrap;
-  }
 
   /* ── 2차 결제 비용 테이블 ── */
-  .fee-table tbody td {
-    position: relative;
-    font-family: 'Roboto', sans-serif;
-    font-size: 13px;
-  }
-  .fee-table tbody td:not(.total-cell) { z-index: 2; }
-  .fee-table tbody td.total-cell { z-index: 1; }
-  .fee-table .op-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 50%;
-    right: -10px;
-    z-index: 3;
-    width: 18px; height: 18px;
-    border-radius: 50%;
-    font-size: 11px;
-    font-weight: 700;
-    margin-left: 0;
-    transform: translateY(-50%);
-    vertical-align: middle;
-    cursor: default;
-    box-shadow: 0 0 0 2px #fff;
-  }
-  .op-plus  { background: #5b8fff; color: #fff; }
-  .op-equal { background: #5b8fff; color: #fff; }
-  .op-times { background: #888;    color: #fff; }
-  .op-result{ background: #5b8fff; color: #fff; }
 
-  .fee-table .total-cell {
-    background: #f0f5ff;
-    border: 2px solid #1A3C6E !important;
-    font-weight: 700;
-    color: #E8385A;
-    font-size: 15px;
-  }
-  .fee-table .intl-breakdown {
-    font-size: 12px;
-    color: #555;
-    line-height: 1.6;
-  }
-  .fee-table .intl-main { font-weight: 600; color: #333; }
   .fee-table .fee-added {
     color: #E8385A;
     font-weight: 700;
@@ -230,46 +174,6 @@
   .info-table .addr-row input[type="text"] { max-width: 100%; }
 
   /* ── 쿠폰 섹션 ── */
-  .care-table th,
-  .coupon-table th {
-    background: #f5f7fa;
-    border: 1px solid #dde1e7;
-    padding: 10px 14px;
-    text-align: left;
-    font-weight: 500;
-    color: #444;
-    width: 160px;
-    white-space: nowrap;
-    vertical-align: middle;
-    font-size: 13px;
-  }
-  .care-table td,
-  .coupon-table td {
-    border: 1px solid #dde1e7;
-    padding: 10px 14px;
-    text-align: left;
-    vertical-align: middle;
-    font-size: 13px;
-  }
-  .coupon-label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-  }
-  .bold-red { color: #E8385A; }
-  .coupon-count {
-    font-size: 12px;
-    color: #1A3C6E;
-    margin-top: 4px;
-  }
-  .selected-coupon-summary {
-    display: none;
-    margin-top: 8px;
-    font-size: 12px;
-    color: #1A3C6E;
-  }
-  .selected-coupon-summary strong { color: #E8385A; }
   .coupon-modal-overlay {
     position: fixed;
     inset: 0;
@@ -461,35 +365,6 @@
     background: #cfd3d8;
   }
   .deposit-ui.is-applied .dep-input-row { background: #f3f4f6; }
-  .deposit-input {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 6px 10px;
-    font-size: 13px;
-    width: 120px;
-    font-family: 'Roboto', sans-serif;
-    color: #333;
-    text-align: right;
-  }
-  .deposit-input:focus { outline: none; border-color: #1A3C6E; }
-  .deposit-hint { font-size: 12px; color: #666; margin: 0 6px; }
-  .deposit-used-summary {
-    display: none;
-    margin-top: 8px;
-    font-size: 12px;
-    color: #1A3C6E;
-  }
-  .deposit-used-summary strong {
-    font-family: 'Roboto', sans-serif;
-    color: #E8385A;
-  }
-  .check-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 13px;
-    cursor: pointer;
-  }
   .method-group {
     display: flex;
     gap: 8px;
@@ -526,18 +401,6 @@
   }
   .method-wrap-required { background:#FFF8F0; box-shadow:inset 0 0 0 2px rgba(232,56,90,.18); border-radius:4px; padding:10px; }
   .method-wrap-required .method-label { border-color:#E8385A; box-shadow:0 0 0 2px rgba(232,56,90,.12); }
-  .radio-group {
-    display: flex;
-    gap: 16px;
-    margin-top: 4px;
-  }
-  .radio-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 13px;
-    cursor: pointer;
-  }
 
   /* ── CTA 버튼 영역 ── */
   .btn-area {
@@ -712,7 +575,6 @@
   .benefit-row-val.is-discount { color: #E8385A; font-weight: 700; text-decoration: none; }
   .grade-badge-free { display: inline-flex; align-items: center; height: 16px; padding: 0 6px; border-radius: 3px; background: #eaf7ed; color: #3AAD4E; font-family: Pretendard, 'Noto Sans KR', sans-serif; font-size: 10px; font-weight: 700; }
   .fee-badge-rate { display: inline-flex; align-items: center; height: 16px; margin-left: 6px; padding: 0 6px; border-radius: 3px; background: #FCEBEB; color: #E8385A; font-family: Pretendard, 'Noto Sans KR', sans-serif; font-size: 10px; font-weight: 700; vertical-align: middle; }
-  .benefit-note { display: none; }
   .fee-summary-box { margin-top: 14px; padding: 14px 14px 16px; border: 1px solid #cfd8e6; border-radius: 6px; background: #f8fafd; }
   .fee-summary-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 5px 0; font-size: 13px; color: #333; font-weight: 600; }
   .fee-summary-row.is-discount .fee-summary-val { color: #E8385A; }
@@ -720,12 +582,10 @@
   .fee-summary-total { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 2px; color: #1A3C6E; font-size: 15px; font-weight: 700; }
   .fee-summary-total .fee-summary-val { font-family: 'Roboto', Pretendard, sans-serif; color: #E8385A; font-size: 20px; font-weight: 700; white-space: nowrap; }
   .amount-won-sub { margin-left: 3px; color: #8b929c; font-size: 13px; font-weight: 600; vertical-align: baseline; }
-  .fee-disc-val { font-family: 'Roboto', sans-serif; font-size: 13px; font-weight: 700; color: #E8385A; }
   .panel-coupon-btn { height: 28px; min-width: 86px; padding: 0 12px; border: 1px solid #1A3C6E; border-radius: 5px; background: #fff; color: #1A3C6E; font-family: Pretendard, 'Noto Sans KR', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
   .panel-coupon-btn:hover { background: #1A3C6E; color: #fff; }
   .panel-coupon-btn.is-applied { background: #e9eaec; border-color: #bbb; color: #888; }
   .panel-coupon-btn.is-applied:hover { background: #ddd; color: #555; }
-  .fee-disc-val { font-family: 'Roboto', sans-serif; font-size: 13px; font-weight: 700; color: #E8385A; }
 </style>
 </head>
 <body>
@@ -893,7 +753,6 @@
           </td>
         </tr>
 
-
       </tbody>
     </table>
   </div>
@@ -941,7 +800,7 @@
             <span class="amount-display" id="txtPayWon">100,915 원</span>
           </td>
         </tr>
-        
+
         <tr>
           <th>결제 방법 선택 <span style="color:#E8385A;">*</span></th>
           <td>

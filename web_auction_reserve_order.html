@@ -137,26 +137,6 @@
       border-right: 1px solid #b9d9f7;
       padding-right: 18px;
     }
-    .rule-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 7px;
-    }
-    .rule-list li { display: grid; grid-template-columns: 22px minmax(0,1fr); gap: 8px; }
-    .rule-no {
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      display: inline-grid;
-      place-items: center;
-      background: #2f80df;
-      color: #fff;
-      font-family: Roboto, sans-serif;
-      font-size: 11px;
-      font-weight: 900;
-      line-height: 1;
-    }
     @media (max-width: 520px) {
       .reserve-alert {
         grid-template-columns: 1fr;
@@ -178,47 +158,6 @@
     .agree-row input { width: 16px; height: 16px; accent-color: var(--rose); margin: 0; cursor: pointer; }
 
     /* 2. 입찰 입력 */
-    .form-row {
-      display: grid;
-      grid-template-columns: 120px minmax(0,1fr);
-      align-items: center;
-      gap: 14px;
-      padding: 11px 4px;
-      border-bottom: 1px solid var(--line-soft);
-    }
-    .form-row > b { color: #5a5e66; font-size: 12px; font-weight: 800; }
-    .form-row > b .req { color: var(--rose); }
-    .select-box, .text-input {
-      height: 40px;
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      background: #fff;
-      color: var(--text);
-      font-size: 13px;
-      padding: 0 12px;
-      outline: none;
-    }
-    .select-box:focus, .text-input:focus { border-color: var(--navy); }
-    .select-box { width: 120px; }
-    .bid-input-wrap { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .bid-input-wrap .text-input { width: 220px; }
-    .bid-korean { color: var(--muted); font-size: 12px; }
-    .bid-korean b { color: var(--navy); font-weight: 800; }
-    .bid-error { display: none; margin: 6px 0 0; color: var(--rose); font-size: 11px; font-weight: 700; }
-    .bid-error.show { display: block; }
-
-    .radio-chips { display: flex; gap: 8px; }
-    .radio-chip { position: relative; }
-    .radio-chip input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
-    .radio-chip span {
-      display: inline-flex; align-items: center;
-      height: 32px; padding: 0 14px;
-      border: 1px solid var(--line); border-radius: 4px;
-      background: #fff; color: #5c606b;
-      font-size: 12px; font-weight: 700;
-      pointer-events: none;
-    }
-    .radio-chip input:checked + span { border-color: var(--rose); color: var(--rose); font-weight: 800; }
 
     /* 3. 입찰 확인 */
     .confirm-box {
