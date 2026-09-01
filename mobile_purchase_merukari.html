@@ -539,6 +539,11 @@ function stepQty(d){
   input.value = Math.max(1, (parseInt(input.value,10)||1) + d);
 }
 function toggleMAcc(id){ document.getElementById(id).classList.toggle('open'); }
+function toggleKwWish(btn){
+  btn.classList.toggle('active');
+  const icon = btn.querySelector('i');
+  icon.className = btn.classList.contains('active') ? 'fa-solid fa-star' : 'fa-regular fa-star';
+}
 </script>
 <script src="bb-common-mobile.js"></script>
 <script src="bb-search-modal-mobile.js"></script>
