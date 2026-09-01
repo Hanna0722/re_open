@@ -94,12 +94,6 @@
     }
     .icon-btn svg { width: 23px; height: 23px; stroke-width: 1.8; }
     .user-name { display: grid; justify-items: center; gap: 3px; color: #111827; font-size: 13px; font-weight:700; white-space: nowrap; }
-    .premium-chip {
-      min-width: 70px; min-height: 18px; padding: 2px 10px;
-      border-radius: 999px; background: #fff0c9; color: #f4a200;
-      display: inline-flex; align-items: center; justify-content: center;
-      font-size: 10px; font-weight:700;
-    }
     .mobile-channel-tabs { display: none; }
     .login-pill { display: none; }
 
@@ -139,7 +133,7 @@
       background: #ffe7ef; color: var(--brand); font-size: 22px; font-weight:700;
     }
     .profile-name { display: inline-flex; margin-bottom: 0; color: #262a31; font-size: 16px; font-weight:700; line-height: 1; white-space: nowrap; }
-    .profile-tier { display: inline-flex; align-items: center; color: var(--brand); font-size: 12px; font-weight:700; line-height: 1; white-space: nowrap; }
+    .profile-tier { display: inline-flex; align-items: center; color: var(--grade-vip); font-size: 12px; font-weight:700; line-height: 1; white-space: nowrap; }
     .vip-copy { margin: 18px 0 6px; color: #5c6270; font-size: 12px; font-weight: 600; }
     .vip-copy b { color: #454b58; font-weight:700; }
     .vip-row { display: grid; grid-template-columns: 1fr 16px; align-items: center; gap: 8px; }
@@ -454,7 +448,7 @@
         display: grid; place-items: center; font-size: 20px; font-weight:700; flex: 0 0 auto;
       }
       .mpc-name { display: inline-flex; font-size: 17px; font-weight:700; color: #141820; margin-bottom: 0; line-height: 1; white-space: nowrap; }
-      .mpc-grade { display: inline-flex; align-items: center; font-size: 13px; font-weight:700; color: var(--brand); line-height: 1; white-space: nowrap; }
+      .mpc-grade { display: inline-flex; align-items: center; font-size: 13px; font-weight:700; color: var(--grade-vip); line-height: 1; white-space: nowrap; }
       .mpc-vip { font-size: 12px; color: #4d5361; margin-bottom: 8px; font-weight: 500; }
       .mpc-vip b { color: #2c3038; font-weight:700; }
       .mpc-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 0; }
@@ -1921,7 +1915,7 @@
             <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
           </button>
           
-          <button class="user-avatar-sm tier-premium member-tier-icon" type="button" aria-label="회원 메뉴" aria-expanded="false"><i class="fa-solid fa-gem" aria-hidden="true"></i></button>
+          <button class="user-avatar-sm tier-vip member-tier-icon grade-img" type="button" aria-label="회원 메뉴" aria-expanded="false"><img class="grade-icon" src="../gradeicon/grade_vip.png" alt=""></button>
         
         </div>
       </div>
@@ -1941,13 +1935,13 @@
     <div class="mobile-profile-card is-member-only" aria-label="회원 프로필">
       <div class="mpc-inner">
         <div class="mpc-top">
-          <div class="mpc-avatar tier-premium member-tier-icon" aria-label="Premium 등급"><i class="fa-solid fa-gem" aria-hidden="true"></i></div>
+          <div class="mpc-avatar tier-vip member-tier-icon grade-img" aria-label="VIP 등급"><img class="grade-icon" src="../gradeicon/grade_vip.png" alt=""></div>
           <div class="mpc-member">
             <span class="mpc-name">홍길동님</span>
-            <span class="mpc-grade">Premium</span>
+            <span class="mpc-grade">VIP</span>
           </div>
         </div>
-        <div class="mpc-vip">VIP까지 <b>₩23,000</b> 또는 <b>2건</b></div>
+        <div class="mpc-vip">Prestige까지 <b>₩8,500,000</b> 또는 <b>15건</b></div>
         <div class="mpc-bar-row">
           <div class="mpc-bar"><span></span></div>
           <span class="mpc-help">?</span>

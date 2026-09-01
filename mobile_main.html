@@ -158,7 +158,6 @@ body{
   flex-shrink:0;font-family:inherit;
   scroll-snap-align:start;
 }
-.ch-flag{width:14px;height:10px;object-fit:cover;display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08);flex:none}
 .ch-tab.active{color:var(--rose);border-bottom-color:var(--rose);font-weight:700}
 .app-notice-bar{
   background:#FFFAF8;border-bottom:1px solid #E6DDDA;overflow:hidden;
@@ -183,7 +182,7 @@ body{
   background:var(--alert-bg);border-bottom:1px solid #FFE0A0;
   padding:9px 14px;display:none;
 }
-.alert-bar-inner{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.alert-bar-inner{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .al-item{display:flex;align-items:center;gap:4px;font-size:11px}
 .al-dot{width:7px;height:7px;border-radius:50%}
 .al-dot.g{background:var(--dot-green)}
@@ -674,7 +673,7 @@ button.user-menu-item{
             <i class="far fa-bell"></i><span class="i-badge">3</span>
           </button>
           <button class="icon-btn" type="button" aria-label="장바구니"><i class="fas fa-shopping-cart"></i></button>
-          <button class="user-avatar-sm premium" type="button" aria-label="PREMIUM 등급 회원 메뉴" onclick="openUserDrawer()"><i class="fas fa-gem" aria-hidden="true"></i></button>
+          <button class="icon-btn user-avatar-sm plain-user" type="button" aria-label="마이페이지" onclick="location.href='mobile_mypage.html'"><i class="fa-regular fa-user" aria-hidden="true"></i></button>
         </div>
 
         <form class="app-search" role="search" action="mobile_totalsearch.html" method="get">
@@ -684,15 +683,15 @@ button.user-menu-item{
       </div>
 
       <div class="slide-fade-wrap light">
-        <nav class="channel-tabs" aria-label="경매 채널">
-          <button class="ch-tab active" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('야후 옥션')"><img class="ch-flag" src="../images/icon/country_jp.png" alt="">야후옥션</button>
-          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('메루카리')"><img class="ch-flag" src="../images/icon/country_jp.png" alt="">메루카리</button>
-          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('라쿠텐')"><img class="ch-flag" src="../images/icon/country_jp.png" alt="">라쿠텐</button>
-          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('라쿠마')"><img class="ch-flag" src="../images/icon/country_jp.png" alt="">라쿠마</button>
-          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('야후 쇼핑')"><img class="ch-flag" src="../images/icon/country_jp.png" alt="">야후쇼핑</button>
-          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('야후 프리마')"><img class="ch-flag" src="../images/icon/country_jp.png" alt="">야후프리마</button>
-          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('미국 이베이')"><img class="ch-flag" src="../images/icon/country_usa.png" alt="">미국이베이</button>
-          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('영국 이베이')"><img class="ch-flag" src="../images/icon/country_uk.png" alt="">영국이베이</button>
+        <nav class="channel-tabs" aria-label="스토어 바로가기">
+          <button class="ch-tab active" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('야후 옥션')">야후 옥션</button>
+          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('메루카리')">메루카리</button>
+          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('일본 라쿠텐')">일본 라쿠텐</button>
+          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('일본 라쿠마')">일본 라쿠마</button>
+          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('야후 쇼핑')">야후 쇼핑</button>
+          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('야후 프리마')">야후 프리마</button>
+          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('미국 이베이')">미국 이베이</button>
+          <button class="ch-tab" type="button" onclick="location.href='mobile_sub_main.html?store=' + encodeURIComponent('영국 이베이')">영국 이베이</button>
         </nav>
       </div>
     </div>
@@ -705,10 +704,9 @@ button.user-menu-item{
 
     <div class="alert-bar" id="alertBar">
       <div class="alert-bar-inner">
-        <div class="al-item"><span class="al-dot g"></span><span class="al-label">진행 중</span><span class="al-count">3건</span></div>
-        <div class="al-item"><span class="al-dot a"></span><span class="al-label">결제 대기</span><span class="al-count" style="color:var(--rose)">1건</span></div>
-        <div class="al-item"><span class="al-dot gr"></span><span class="al-label">2차</span><span class="al-count">0건</span></div>
-        <a class="al-link" href="mobile_mypage.html" style="text-decoration:none">마이페이지 →</a>
+        <div class="al-item"><span class="al-dot g"></span><span class="al-label">입찰 진행 중</span><span class="al-count">3건</span></div>
+        <div class="al-item"><span class="al-dot a"></span><span class="al-label">1차 결제 대기</span><span class="al-count" style="color:var(--rose)">1건</span></div>
+        <div class="al-item"><span class="al-dot gr"></span><span class="al-label">2차 결제 대기</span><span class="al-count">0건</span></div>
       </div>
     </div>
 
@@ -776,6 +774,24 @@ button.user-menu-item{
         <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('시계')"><div class="brand-img"><img src="../favorite logo/11.png" alt="시계" onerror="this.parentElement.textContent='시계'"></div><span class="brand-name">시계</span></div>
         <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('악기')"><div class="brand-img"><img src="../favorite logo/7.png" alt="악기" onerror="this.parentElement.textContent='악기'"></div><span class="brand-name">악기</span></div>
         <div class="brand-chip" onclick="location.href='mobile_totalsearch.html?q=' + encodeURIComponent('슈즈')"><div class="brand-img"><img src="../favorite logo/3.png" alt="슈즈" onerror="this.parentElement.textContent='슈즈'"></div><span class="brand-name">슈즈</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-hd">
+        <span class="sec-title">인기 브랜드 빠른 검색</span>
+      </div>
+      <div class="brand-scroll">
+        <a class="brand-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Nike"><div class="brand-img">NIKE</div><span class="brand-name">NIKE</span></a>
+        <a class="brand-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Chanel"><div class="brand-img">CHANEL</div><span class="brand-name">CHANEL</span></a>
+        <a class="brand-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Hermes"><div class="brand-img">HERMES</div><span class="brand-name">HERMES</span></a>
+        <a class="brand-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Polo"><div class="brand-img">POLO</div><span class="brand-name">POLO</span></a>
+        <a class="brand-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Levi%27s"><div class="brand-img">LEVI'S</div><span class="brand-name">LEVI'S</span></a>
+        <a class="brand-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Bandai"><div class="brand-img">BANDAI</div><span class="brand-name">BANDAI</span></a>
+        <a class="brand-chip" href="https://www.alpha.bidbuy.co.kr/search?q=COMME%20des"><div class="brand-img">COMME<br>des</div><span class="brand-name">COMME des</span></a>
+        <a class="brand-chip" href="https://www.alpha.bidbuy.co.kr/search?q=SHIMANO"><div class="brand-img">SHIMANO</div><span class="brand-name">SHIMANO</span></a>
+        <a class="brand-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Coach"><div class="brand-img">COACH</div><span class="brand-name">COACH</span></a>
+        <a class="brand-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Gucci"><div class="brand-img">GUCCI</div><span class="brand-name">GUCCI</span></a>
       </div>
     </div>
 

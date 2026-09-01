@@ -205,8 +205,8 @@
       min-height: 18px;
       padding: 2px 10px;
       border-radius: 999px;
-      background: #fff0c9;
-      color: #f4a200;
+      background: var(--grade-vip);
+      color: #fff;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -298,7 +298,7 @@
     }
 
     .profile-tier {
-      color: var(--rose);
+      color: var(--grade-vip);
       font-size: 12px;
       font-weight: 800;
     }
@@ -684,7 +684,7 @@
     .menu-drawer .dr-user-mini{display:flex;align-items:center;gap:10px}
     .menu-drawer .u-av{width:38px;height:38px;border-radius:50%;background:#FFE7EF;color:var(--rose);display:grid;place-items:center;font-size:18px;font-weight:800}
     .menu-drawer .dr-user-mini-name{font-size:15px;font-weight:700;color:var(--tp)}
-    .menu-drawer .dr-user-mini-grade{font-size:11px;color:var(--ts);margin-top:2px}
+    .menu-drawer .dr-user-mini-grade{font-size:11px;color:var(--grade-vip);font-weight:700;margin-top:2px}
     .menu-drawer .dr-guest-card{padding:14px 16px 16px;background:#FFF8F5;border-bottom:1px solid #E5E7EB}
     .menu-drawer .dr-guest-title{font-size:16px;font-weight:800;color:#111827;margin-bottom:4px}
     .menu-drawer .dr-guest-copy{font-size:12px;color:#6B7280;line-height:1.45;margin-bottom:12px}
@@ -1028,49 +1028,17 @@
   <div class="page">
     <div class="top-notice-spacer" aria-hidden="true"></div>
 
-    <header class="topbar">
-      <div class="brand-area">
-        <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" onclick="openMenuDrawer()">
-          <span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span>
-        </button>
-        <a class="logo-link" href="web_main.html" aria-label="Bidbuy 홈">
-          <img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency">
-        </a>
-      </div>
-
-      <form class="search">
-        <input type="text" placeholder="키워드 또는 URL을 입력하세요.">
-        <button type="submit">
-          <i class="fas fa-search" aria-hidden="true"></i>
-          검색
-        </button>
-      </form>
-
-      <div class="user-tools" aria-label="회원 메뉴">
-        <button class="icon-btn" type="button" aria-label="알림">
-          <i class="far fa-bell" aria-hidden="true"></i>
-        </button>
-        <button class="icon-btn" type="button" aria-label="장바구니">
-          <i class="fas fa-shopping-cart" aria-hidden="true"></i>
-        </button>
-        <div class="user-name">
-          홍길동 님
-          <span class="premium-chip">PREMIUM</span>
-        </div>
-      </div>
-    </header>
-
     <div class="stage">
       <aside class="sidebar">
         <section class="profile-card" aria-label="회원 정보">
           <div class="profile-main">
-            <div class="avatar tier-premium member-tier-icon" aria-label="Premium 등급"><i class="fa-solid fa-gem" aria-hidden="true"></i></div>
+            <div class="avatar tier-vip member-tier-icon grade-img" aria-label="VIP 등급"><img class="grade-icon" src="../gradeicon/grade_vip.png" alt=""></div>
             <div>
               <strong class="profile-name">홍길동님</strong>
-              <span class="profile-tier">Premium</span>
+              <span class="profile-tier">VIP</span>
             </div>
           </div>
-          <p class="vip-copy">프리미엄까지 <b>₩215,000</b> 또는 <b>3건</b></p>
+          <p class="vip-copy">Prestige까지 <b>₩8,500,000</b> 또는 <b>15건</b></p>
           <div class="vip-row">
             <div class="vip-progress"><span></span></div>
             <span class="help-dot">?</span>
@@ -1156,13 +1124,7 @@
         </div>
 
         <section class="member-card" aria-label="회원 카드">
-          <div class="member-head">
-            <div class="member-head-info">
-              <div class="member-name"><span>Bidbuy</span><strong>홍길동님</strong></div>
-            </div>
-            <button class="grade-link" type="button" onclick="location.href='web_grade_page.html'">MY 등급 보기<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
-          </div>
-          <div class="asset-grid" aria-label="회원 혜택 요약">
+             <div class="asset-grid" aria-label="회원 혜택 요약">
             <div class="asset-cell"><span class="asset-label">마일리지</span><strong class="asset-value">4,500 원</strong></div>
             <div class="asset-cell"><span class="asset-label">쿠폰</span><strong class="asset-value">23 장</strong></div>
             <div class="asset-cell"><span class="asset-label">예치금</span><strong class="asset-value">13,961 원</strong></div>
@@ -1347,10 +1309,10 @@
       </div>
       <div id="menuDrUserHd" class="dr-head">
         <div class="dr-user-mini">
-          <div class="u-av tier-premium member-tier-icon" aria-label="Premium 등급"><i class="fa-solid fa-gem" aria-hidden="true"></i></div>
+          <div class="u-av tier-vip member-tier-icon grade-img" aria-label="VIP 등급"><img class="grade-icon" src="../gradeicon/grade_vip.png" alt=""></div>
           <div>
             <div class="dr-user-mini-name">홍길동 님</div>
-            <div class="dr-user-mini-grade">PREMIUM 회원</div>
+            <div class="dr-user-mini-grade">VIP 회원</div>
           </div>
         </div>
         <button class="dr-close" onclick="closeMenuDrawer()"><i class="fas fa-times"></i></button>
@@ -1582,5 +1544,6 @@
 
   </script>
 <script src="bb-common.js"></script>
+<script src="bb-search-modal.js"></script>
 </body>
 </html>

@@ -196,19 +196,6 @@
       white-space: nowrap;
     }
 
-    .premium-chip {
-      min-width: 70px;
-      min-height: 18px;
-      padding: 2px 10px;
-      border-radius: 999px;
-      background: #fff0c9;
-      color: #f4a200;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight:700;
-    }
 
     .stage {
       position: relative;
@@ -294,7 +281,7 @@
     }
 
     .profile-tier {
-      color: var(--brand);
+      color: var(--grade-vip);
       font-size: 12px;
       font-weight: 700;
     }
@@ -2014,10 +2001,6 @@
       font-weight:700;
     }
 
-    .premium-chip {
-      display: none;
-    }
-
     .stage {
       display: block;
       width: 100%;
@@ -3443,8 +3426,6 @@
       display: flex !important;
     }
   
-    .member-tier-icon { background:#eef5ff !important; color:#1A3C6E !important; }
-    .member-tier-icon i { line-height:1; }
   </style>
 </head>
 <body>
@@ -3497,7 +3478,7 @@
               <h2>혜택 스탬프</h2>
               <p id="stampSummary">이번 달 구매 0건</p>
             </div>
-            <span class="stamp-badge">PREMIUM</span>
+            <span class="stamp-badge">VIP</span>
           </div>
           <div class="stamp-scroll">
             <div class="stamp-grid" id="stampGrid"></div>
@@ -4092,7 +4073,7 @@
     const mileagePopupData = {
       "earn-purchase": {
         title: "구매 마일리지 적립",
-        badge: "프리미엄 5%",
+        badge: "VIP 5%",
         summary: {
           label: "마일리지",
           amount: "+14,425원",

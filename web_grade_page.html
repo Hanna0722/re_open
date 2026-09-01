@@ -24,7 +24,7 @@
       --gold: #d4891a;
       --grade-std: #D4891A;
       --grade-pre: #1f477d;
-      --grade-vip: #3AAD4E;
+      --grade-vip: #0C5F33;
       --grade-prs: #E8385A;
       --stage-left: max(16px, calc((100vw - 1180px) / 2));
       --sidebar-w: 231px;
@@ -273,8 +273,8 @@
       width: max-content;
       padding: 2px 10px;
       border-radius: 999px;
-      background: #fff2dc;
-      color: #f5a01f;
+      background: var(--grade-vip);
+      color: #fff;
       font-size: 10px;
       font-weight: 900;
       line-height: 1.4;
@@ -331,7 +331,7 @@
     .profile-tier {
       display: block;
       margin-top: 5px;
-      color: var(--rose-h);
+      color: var(--grade-vip);
       font-size: 12px;
       font-weight: 900;
     }
@@ -376,7 +376,7 @@
     }
 
     .vip-progress-bar {
-      width: 80%;
+      width: 50%;
       height: 100%;
       border-radius: inherit;
       background: var(--rose-h);
@@ -744,7 +744,7 @@
     }
 
     .benefit-col.current-grade {
-      border: 2px solid var(--grade-pre);
+      border: 2px solid var(--grade-vip);
     }
 
     .benefit-col-head {
@@ -757,14 +757,40 @@
 
     .benefit-col.current-grade .benefit-col-head {
       margin: 0px 0px 0;
-      border-bottom-color: var(--grade-pre);
-      background: var(--grade-pre);
+      border-bottom-color: var(--grade-vip);
+      background: var(--grade-vip);
     }
 
     .bc-name {
       font-size: 18px;
       font-weight: 800;
       line-height: 1.1;
+    }
+
+    .bc-name {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .bc-badge {
+      width: 28px;
+      height: 28px;
+      flex: 0 0 auto;
+      display: inline-grid;
+      place-items: center;
+      padding: 3px;
+      border: 1.5px solid #999baa;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .bc-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
     }
 
     .bc-sub {
@@ -904,49 +930,17 @@
 <body>
   <div class="top-notice-spacer" aria-hidden="true"></div>
 
-  <header class="topbar">
-    <div class="brand-area">
-      <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false" onclick="openMenuDrawer()">
-        <span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span>
-      </button>
-      <a class="logo-link" href="web_main.html" aria-label="Bidbuy 홈">
-        <img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency">
-      </a>
-    </div>
-
-    <form class="search">
-      <input type="text" placeholder="키워드 또는 URL을 입력하세요.">
-      <button type="submit">
-        <i class="fas fa-search" aria-hidden="true"></i>
-        검색
-      </button>
-    </form>
-
-    <div class="user-tools" aria-label="회원 메뉴">
-      <button class="icon-btn" type="button" aria-label="알림">
-        <i class="far fa-bell" aria-hidden="true"></i>
-      </button>
-      <button class="icon-btn" type="button" aria-label="장바구니">
-        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
-      </button>
-      <div class="user-name">
-        홍길동님
-        <span class="premium-chip">PREMIUM</span>
-      </div>
-    </div>
-  </header>
-
   <div class="wrap">
     <aside class="sidebar">
       <div class="profile-card">
         <div class="profile-main">
-          <div class="avatar tier-premium member-tier-icon" aria-label="Premium 등급"><i class="fa-solid fa-gem" aria-hidden="true"></i></div>
+          <div class="avatar tier-vip member-tier-icon grade-img" aria-label="VIP 등급"><img class="grade-icon" src="../gradeicon/grade_vip.png" alt=""></div>
           <div>
             <span class="profile-name">홍길동님</span>
-            <span class="profile-tier">Premium</span>
+            <span class="profile-tier">VIP</span>
           </div>
         </div>
-        <p class="vip-copy"><b>₩215,000</b> 또는 <b>3건</b><span class="help-dot" aria-hidden="true">?</span></p>
+        <p class="vip-copy"><b>₩8,500,000</b> 또는 <b>15건</b><span class="help-dot" aria-hidden="true">?</span></p>
         <div class="vip-progress-wrap"><div class="vip-progress-bar"></div></div>
         <div class="profile-actions">
           <button class="soft-btn" type="button">1:1 문의내역</button>
@@ -1029,16 +1023,16 @@
               <h2>현재 등급</h2>
               <p class="grade-status-date">2026.08.01 기준</p>
             </div>
-            <span class="grade-badge">Premium</span>
+            <span class="grade-badge">VIP</span>
           </div>
           <div class="grade-progress-row">
             <div class="grade-progress-labels">
-              <span class="current">Premium</span>
-              <span class="next">VIP</span>
+              <span class="current">VIP</span>
+              <span class="next">Prestige</span>
             </div>
-            <div class="grade-progress-track"><div class="grade-progress-fill" style="width:42%;"></div></div>
+            <div class="grade-progress-track"><div class="grade-progress-fill" style="width:50%;"></div></div>
           </div>
-          <p class="grade-progress-hint">VIP까지 <b>5건</b> 또는 <b>₩850,000</b> 더 구매하면 다음달 VIP 승급 확정!</p>
+          <p class="grade-progress-hint">Prestige까지 <b>15건</b> 또는 <b>₩8,500,000</b> 더 구매하면 다음달 Prestige 승급 확정!</p>
         </div>
       </section>
 
@@ -1047,7 +1041,7 @@
       <section class="benefit-grid" aria-label="등급별 혜택">
         <div class="benefit-col">
           <div class="benefit-col-head">
-            <p class="bc-name bc-name-standard">Standard</p>
+            <p class="bc-name bc-name-standard"><span class="bc-badge" aria-hidden="true"><img src="../gradeicon/grade_standard.png" alt=""></span>Standard</p>
             <p class="bc-sub">월 0~6건 이하</p>
           </div>
           <div class="benefit-rows">
@@ -1063,9 +1057,9 @@
           </div>
         </div>
 
-        <div class="benefit-col current-grade">
+        <div class="benefit-col">
           <div class="benefit-col-head">
-            <p class="bc-name bc-name-premium">Premium</p>
+            <p class="bc-name bc-name-premium"><span class="bc-badge" aria-hidden="true"><img src="../gradeicon/grade_premium.png" alt=""></span>Premium</p>
             <p class="bc-sub">월 7건 이상 또는 70만원 이상</p>
           </div>
           <div class="benefit-rows">
@@ -1081,9 +1075,9 @@
           </div>
         </div>
 
-        <div class="benefit-col">
+        <div class="benefit-col current-grade">
           <div class="benefit-col-head">
-            <p class="bc-name bc-name-vip">VIP</p>
+            <p class="bc-name bc-name-vip"><span class="bc-badge" aria-hidden="true"><img src="../gradeicon/grade_vip.png" alt=""></span>VIP</p>
             <p class="bc-sub">월 15건 이상 또는 150만원 이상</p>
           </div>
           <div class="benefit-rows">
@@ -1101,7 +1095,7 @@
 
         <div class="benefit-col">
           <div class="benefit-col-head">
-            <p class="bc-name bc-name-prestige"><i class="fas fa-crown" aria-hidden="true"></i> Prestige</p>
+            <p class="bc-name bc-name-prestige"><span class="bc-badge" aria-hidden="true"><img src="../gradeicon/grade_prestige.png" alt=""></span>Prestige</p>
             <p class="bc-sub">월 30건 이상 또는 1,000만원 이상</p>
           </div>
           <div class="benefit-rows">
@@ -1139,10 +1133,10 @@
     </div>
     <div id="menuDrUserHd" class="dr-head">
       <div class="dr-user-mini">
-        <div class="u-av tier-premium member-tier-icon" aria-label="Premium 등급"><i class="fa-solid fa-gem" aria-hidden="true"></i></div>
+        <div class="u-av tier-vip member-tier-icon grade-img" aria-label="VIP 등급"><img class="grade-icon" src="../gradeicon/grade_vip.png" alt=""></div>
         <div>
           <div class="dr-user-mini-name">홍길동님</div>
-          <div class="dr-user-mini-grade">PREMIUM 회원</div>
+          <div class="dr-user-mini-grade">VIP 회원</div>
         </div>
       </div>
       <button class="dr-close" onclick="closeMenuDrawer()"><i class="fas fa-times"></i></button>
@@ -1265,5 +1259,6 @@
     })();
   </script>
 <script src="bb-common.js"></script>
+<script src="bb-search-modal.js"></script>
 </body>
 </html>

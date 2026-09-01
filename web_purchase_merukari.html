@@ -459,64 +459,6 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
 <body>
 
 <!-- 헤더 -->
-<header>
-  <div class="hdr">
-    <button class="hb-btn" type="button" aria-label="메뉴 열기" aria-expanded="false" onclick="openDrawer()"><span></span><span></span><span></span></button>
-    <a href="web_main.html" class="logo"><img src="bidbuy logo.png" alt="Bidbuy World Auction Agency"></a>
-    <form class="search" id="mainSearchForm" role="search" action="web_totalsearch.html" method="get">
-      <input type="search" name="q" placeholder="키워드 또는 URL을 입력하세요" aria-label="검색어 입력">
-      <button class="search-btn" type="submit"><i class="fas fa-search"></i> <span>AI 검색</span></button>
-    </form>
-    <!-- 비로그인 -->
-    <div class="hdr-right" id="guestArea">
-      <button class="btn-li" onclick="doLogin()"><i class="fas fa-user" style="margin-right:5px"></i>로그인</button>
-    </div>
-    <!-- 로그인 -->
-    <div class="hdr-right" id="userArea" style="display:none">
-      <button class="hbtn" style="position:relative"><i class="far fa-bell"></i><span class="h-badge">3</span><span>알림</span></button>
-      <button class="hbtn"><i class="fas fa-shopping-cart"></i><span>장바구니</span></button>
-      <div style="position:relative">
-        <button class="user-trig" id="userTrig" onclick="toggleDD()">
-          <div class="u-av">홍</div>
-          <div><div class="u-nm">홍길동님</div><span class="u-gr">PREMIUM</span></div>
-          <i class="fas fa-chevron-down u-chv"></i>
-        </button>
-        <div class="user-dd" id="userDD">
-          <div class="dd-hd">
-            <div class="dd-user-row">
-              <div class="dd-crown"><i class="fas fa-crown"></i></div>
-              <div><div class="dd-name">홍길동 회원님</div><div class="dd-grade-txt">PREMIUM</div></div>
-            </div>
-            <div class="dd-milbox">
-              <div class="dd-mil"><div class="dd-mil-label">마일리지</div><div class="dd-mil-val">4,500<span>원</span></div></div>
-              <div class="dd-mil-div"></div>
-              <div class="dd-mil"><div class="dd-mil-label">예치금</div><div class="dd-mil-val">29,870<span>원</span></div></div>
-            </div>
-            <div class="dd-prog-lbl"><span>VIP까지 <b>3,000원</b> 또는 <b>2건</b></span></div>
-            <div class="dd-prog-bg"><div class="dd-prog-fill"></div></div>
-          </div>
-          <div class="dd-status">
-            <div class="dd-st"><div class="dd-st-num">3</div><div class="dd-st-lbl">입찰 진행 중</div></div>
-            <div class="dd-st"><div class="dd-st-num red">1</div><div class="dd-st-lbl">1차 결제 대기</div></div>
-            <div class="dd-st"><div class="dd-st-num">0</div><div class="dd-st-lbl">2차 결제 대기</div></div>
-          </div>
-          <div class="dd-menu">
-            <div class="dd-item"><span class="dd-emoji"><i class="fas fa-gavel"></i></span><span class="dd-lbl">나의 경매</span><span class="dd-dot"></span></div>
-            <div class="dd-item"><span class="dd-emoji"><i class="fas fa-bag-shopping"></i></span><span class="dd-lbl">구매대행 내역</span></div>
-            <div class="dd-item"><span class="dd-emoji"><i class="fas fa-box-open"></i></span><span class="dd-lbl">묶음 배송 관리</span></div>
-            <div class="dd-div"></div>
-            <div class="dd-item"><span class="dd-emoji"><i class="fas fa-heart"></i></span><span class="dd-lbl">관심 물품</span></div>
-            <div class="dd-item" onclick="location.href='web_mypage.html'" style="cursor:pointer"><span class="dd-emoji"><i class="fas fa-user-circle"></i></span><span class="dd-lbl">마이페이지</span></div>
-            <div class="dd-item"><span class="dd-emoji"><i class="fas fa-gear"></i></span><span class="dd-lbl">회원 정보 설정</span></div>
-            <div class="dd-div"></div>
-            <div class="dd-item dd-logout" onclick="doLogout()"><span class="dd-emoji"><i class="fas fa-right-from-bracket"></i></span><span class="dd-lbl">로그아웃</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-
 <div class="channel-bar">
   <div class="channel-inner">
     <div class="channel-icons"><!-- bb-common.js STORES 목록에서 렌더링 --></div>
@@ -1093,5 +1035,6 @@ document.querySelectorAll('.ch-icon-item').forEach(item=>{
   <div class="lightbox-counter" id="lbCounter">1 / 5</div>
 </div>
 <script src="bb-common.js"></script>
+<script src="bb-search-modal.js"></script>
 </body>
 </html>

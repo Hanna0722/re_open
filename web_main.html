@@ -553,64 +553,6 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
 <div class="notice-bar">누적 거래 <b>2백만건</b>, 고객님과 함께 쌓아온 <b>25년</b>, 변함없는 믿음으로 이어갑니다</div>
 
 <!-- 헤더 -->
-<header>
-  <div class="hdr">
-    <button class="hb-btn" type="button" aria-label="메뉴 열기" aria-expanded="false" onclick="openDrawer()"><span></span><span></span><span></span></button>
-    <a href="web_main.html" class="logo"><img src="bidbuy logo.png" alt="Bidbuy World Auction Agency"></a>
-    <form class="search" id="mainSearchForm" role="search" action="web_totalsearch.html" method="get">
-      <input type="search" name="q" placeholder="키워드 또는 URL을 입력하세요" aria-label="검색어 입력">
-      <button class="search-btn" type="submit"><i class="fas fa-search"></i> <span>AI 검색</span></button>
-    </form>
-    <!-- 비로그인 -->
-    <div class="hdr-right" id="guestArea">
-         <button class="btn-su">회원가입</button>
-      <button class="btn-li" onclick="doLogin()">로그인</button>
-    </div>
-    <!-- 로그??-->
-    <div class="hdr-right" id="userArea" style="display:none">
-      <button class="hbtn" style="position:relative"><i class="far fa-bell"></i><span class="h-badge">3</span><span>알림</span></button>
-      <button class="hbtn"><i class="fas fa-shopping-cart"></i><span>장바구니</span></button>
-      <div style="position:relative">
-        <button class="user-trig" id="userTrig" onclick="openUserDrawer()">
-          <div class="u-av">홍</div>
-          <div><div class="u-nm">홍길동님</div><span class="u-gr">PREMIUM</span></div>
-        </button>
-        <!-- ?쒕∼?ㅼ슫 -->
-        <div class="user-dd" id="userDD">
-          <div class="dd-hd">
-            <div class="dd-user-row">
-              <div class="dd-crown"><i class="fas fa-crown"></i></div>
-              <div><div class="dd-name">홍길동 회원님</div><div class="dd-grade-txt">PREMIUM</div></div>
-            </div>
-            <div class="dd-milbox">
-              <div class="dd-mil"><div class="dd-mil-label">마일리지</div><div class="dd-mil-val">4,500<span>원</span></div></div>
-              <div class="dd-mil-div"></div>
-              <div class="dd-mil"><div class="dd-mil-label">예치금</div><div class="dd-mil-val">29,870<span>원</span></div></div>
-            </div>
-            <div class="dd-prog-lbl"><span>VIP까지 <b>3,000원</b> 또는 <b>2건</b></span></div>
-            <div class="dd-prog-bg"><div class="dd-prog-fill"></div></div>
-          </div>
-          <div class="dd-status">
-            <div class="dd-st"><div class="dd-st-num">3</div><div class="dd-st-lbl">입찰 진행 중</div></div>
-            <div class="dd-st"><div class="dd-st-num red">1</div><div class="dd-st-lbl">1차 결제 대기</div></div>
-            <div class="dd-st"><div class="dd-st-num">0</div><div class="dd-st-lbl">2차 결제 대기</div></div>
-          </div>
-          <div class="dd-menu">
-            <div class="dd-item"><span class="dd-emoji"><i class="fas fa-gavel"></i></span><span class="dd-lbl">나의 경매</span><span class="dd-dot"></span></div>
-            <div class="dd-item"><span class="dd-emoji"><i class="fas fa-bag-shopping"></i></span><span class="dd-lbl">구매대행 내역</span></div>
-            <div class="dd-item"><span class="dd-emoji"><i class="fas fa-box-open"></i></span><span class="dd-lbl">묶음 배송 관리</span></div>
-            <div class="dd-div"></div>
-            <div class="dd-item"><span class="dd-emoji"><i class="fas fa-heart"></i></span><span class="dd-lbl">관심 물품</span></div>
-            <div class="dd-item" onclick="location.href='web_mypage.html'" style="cursor:pointer"><span class="dd-emoji"><i class="fas fa-user-circle"></i></span><span class="dd-lbl">마이페이지</span></div>
-            <div class="dd-item"><span class="dd-emoji"><i class="fas fa-gear"></i></span><span class="dd-lbl">회원 정보 설정</span></div>
-            <div class="dd-div"></div>
-            <div class="dd-item dd-logout" onclick="doLogout()"><span class="dd-emoji"><i class="fas fa-right-from-bracket"></i></span><span class="dd-lbl">로그아웃</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
 </div><!-- /sticky-top -->
 
 <!-- ????? 안: ? 형 채널 ? 이 ? ?-->
@@ -684,11 +626,11 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
       <div class="panel-user" id="panelUser">
         <div class="panel-user-top">
           <div class="panel-user-row">
-            <div class="pu-crown"><i class="fas fa-crown"></i></div>
+            <div class="pu-crown grade-img"><img class="grade-icon" src="../gradeicon/grade_vip.png" alt=""></div>
             <div><div class="pu-name">홍길동님</div><span class="pu-grade">마일리지 0원 · 예치금 339,119원</span></div>
           </div>
           <div class="pu-manage-card">
-            <div class="pu-manage-row"><span><i class="fas fa-star"></i> Premium</span><span class="pu-grade-remaining" data-remaining="80">일반회원까지 <strong style="color: #E8385A;">80%</strong> 남음</span></div>
+            <div class="pu-manage-row"><span><i class="fas fa-star"></i> VIP</span><span class="pu-grade-remaining" data-remaining="80">Prestige까지 <strong style="color: #E8385A;">80%</strong> 남음</span></div>
             <div class="pu-grade-progress" aria-hidden="true"><span id="puGradeProgressFill"></span></div>
             <a class="pu-manage-sub" href="web_grade.html">등급 혜택 자세히보기</a>
           </div>
@@ -790,6 +732,23 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
     <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('시계')"><div class="br-img"><img src="../favorite logo/11.png" alt="시계" onerror="this.parentElement.textContent='시계'"></div><span class="br-name">시계</span></div>
     <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('악기')"><div class="br-img"><img src="../favorite logo/7.png" alt="악기" onerror="this.parentElement.textContent='악기'"></div><span class="br-name">악기</span></div>
     <div class="br-chip" onclick="location.href='web_totalsearch.html?q=' + encodeURIComponent('슈즈')"><div class="br-img"><img src="../favorite logo/3.png" alt="슈즈" onerror="this.parentElement.textContent='슈즈'"></div><span class="br-name">슈즈</span></div>
+  </div>
+</div>
+
+<!-- 인기 브랜드-->
+<div class="section">
+  <div class="sec-hd"><h2 class="sec-title">인기 브랜드 빠른 검색</h2></div>
+  <div class="brand-grid">
+    <a class="br-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Nike"><div class="br-img">NIKE</div><span class="br-name">NIKE</span></a>
+    <a class="br-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Chanel"><div class="br-img">CHANEL</div><span class="br-name">CHANEL</span></a>
+    <a class="br-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Hermes"><div class="br-img">HERMES</div><span class="br-name">HERMES</span></a>
+    <a class="br-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Polo"><div class="br-img">POLO</div><span class="br-name">POLO</span></a>
+    <a class="br-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Levi%27s"><div class="br-img">LEVI'S</div><span class="br-name">LEVI'S</span></a>
+    <a class="br-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Bandai"><div class="br-img">BANDAI</div><span class="br-name">BANDAI</span></a>
+    <a class="br-chip" href="https://www.alpha.bidbuy.co.kr/search?q=COMME%20des"><div class="br-img">COMME<br>des</div><span class="br-name">COMME des</span></a>
+    <a class="br-chip" href="https://www.alpha.bidbuy.co.kr/search?q=SHIMANO"><div class="br-img">SHIMANO</div><span class="br-name">SHIMANO</span></a>
+    <a class="br-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Coach"><div class="br-img">COACH</div><span class="br-name">COACH</span></a>
+    <a class="br-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Gucci"><div class="br-img">GUCCI</div><span class="br-name">GUCCI</span></a>
   </div>
 </div>
 
@@ -921,10 +880,10 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
 
       <div id="drUserHd" class="dr-head" style="display:none">
         <div class="dr-user-mini">
-          <div class="u-av"><i class="fas fa-crown" aria-hidden="true"></i></div>
+          <div class="u-av grade-img"><img class="grade-icon" src="../gradeicon/grade_vip.png" alt=""></div>
           <div>
             <div class="dr-user-mini-name">홍길동님</div>
-            <div class="dr-user-mini-grade">PREMIUM 회원</div>
+            <div class="dr-user-mini-grade">VIP 회원</div>
           </div>
         </div>
       </div>

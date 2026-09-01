@@ -72,6 +72,23 @@ button,select{cursor:pointer}
 .cat-open-btn::after{content:"";width:7px;height:7px;margin-top:0;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);opacity:.72}
 .cat-open-btn.cat-selected{border-color:var(--rose);background:#fff0f3;color:var(--rose);font-weight:700}
 
+/* ── 카테고리 선택 후 결과 헤더 (시안) ── */
+.cat-result-top{display:none;align-items:baseline;justify-content:space-between;gap:10px;padding:16px 16px 10px;background:#fff}
+.cat-result-title{margin:0;color:var(--rose);font-size:19px;font-weight:700;line-height:1.25;min-width:0}
+.cat-result-total{margin:0;color:var(--ts);font-size:13px;font-weight:500;white-space:nowrap}
+.cat-result-total b{color:var(--tp);font-weight:700;font-family:'Roboto',sans-serif}
+.cat-quick-select{display:none;flex:1;min-width:0;height:38px;padding:0 26px 0 12px;border:1px solid var(--line);border-radius:8px;background-color:#fff;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23111827' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;color:var(--tp);font-size:13px;font-weight:600;appearance:none;-webkit-appearance:none;-moz-appearance:none;text-overflow:ellipsis;font-family:inherit}
+body.cat-applied .cat-result-top{display:flex}
+body.cat-applied .cat-quick-select{display:block}
+body.cat-applied .category-bar,
+body.cat-applied #resultHeader,
+body.cat-applied #catResultHeader,
+body.cat-applied .filter-bar .result-title{display:none !important}
+body.cat-applied .filter-bar{justify-content:flex-start;gap:6px}
+body.cat-applied .filter-bar .sort-select{flex:1;min-width:0}
+.filter-fab{position:fixed;right:10px;top:42%;z-index:60;width:44px;height:44px;border:1px solid var(--rose);border-radius:50%;background:#fff;color:var(--rose);font-size:16px;display:none;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(17,24,39,.14);cursor:pointer}
+body.cat-applied .filter-fab{display:flex}
+
 /* ── 선택된 카테고리 결과 헤더 (적용 후 노출) ── */
 .cat-result-header{display:none;align-items:center;gap:8px;padding:8px 16px;background:#fff8f9;border-bottom:1px solid #ffd6de}
 .cat-result-tags{display:flex;flex-wrap:wrap;gap:6px;flex:1}
@@ -162,38 +179,16 @@ button,select{cursor:pointer}
 </head>
 <body>
 
-<!-- ══ 헤더 ══ -->
-<header class="header">
-  <div class="header-top">
-    <div class="brand-area">
-      <button class="menu-button" type="button" aria-label="메뉴 열기">
-        <span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span>
-      </button>
-      <a class="logo-link" href="mobile_main.html" aria-label="Bidbuy 홈">
-        <img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency">
-      </a>
-    </div>
-    <div class="header-actions" id="userArea">
-      <button class="icon-btn" type="button" aria-label="알림"><i class="fa-regular fa-bell" aria-hidden="true"></i><span class="i-badge">3</span></button>
-      <button class="icon-btn" type="button" aria-label="장바구니"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></button>
-      <button class="user-avatar-sm" type="button" aria-label="회원 메뉴">한</button>
-    </div>
-  </div>
-  <form class="search-bar" role="search" onsubmit="event.preventDefault(); location.href='mobile_totalsearch.html'">
-    <input type="text" placeholder="키워드 또는 URL을 입력하세요." aria-label="검색어 입력">
-    <button class="search-submit" type="submit" aria-label="검색"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
-  </form>
-  <nav class="channel-tabs" aria-label="스토어 바로가기">
-    <button class="ch-tab active" type="button" data-store-name="야후 옥션" onclick="selectChannel(this)">야후옥션</button>
+<nav class="channel-tabs" aria-label="스토어 바로가기">
+    <button class="ch-tab active" type="button" data-store-name="야후 옥션" onclick="selectChannel(this)">야후 옥션</button>
     <button class="ch-tab" type="button" data-store-name="메루카리" onclick="selectChannel(this)">메루카리</button>
-    <button class="ch-tab" type="button" data-store-name="라쿠텐" onclick="selectChannel(this)">일본라쿠텐</button>
-    <button class="ch-tab" type="button" data-store-name="라쿠마" onclick="selectChannel(this)">일본라쿠마</button>
-    <button class="ch-tab" type="button" data-store-name="야후 쇼핑" onclick="selectChannel(this)">야후쇼핑</button>
-    <button class="ch-tab" type="button" data-store-name="일본 아마존" onclick="selectChannel(this)">일본아마존</button>
-    <button class="ch-tab" type="button" data-store-name="미국 이베이" onclick="selectChannel(this)">미국이베이</button>
-    <button class="ch-tab" type="button" data-store-name="영국 이베이" onclick="selectChannel(this)">영국이베이</button>
+    <button class="ch-tab" type="button" data-store-name="일본 라쿠텐" onclick="selectChannel(this)">일본 라쿠텐</button>
+    <button class="ch-tab" type="button" data-store-name="일본 라쿠마" onclick="selectChannel(this)">일본 라쿠마</button>
+    <button class="ch-tab" type="button" data-store-name="야후 쇼핑" onclick="selectChannel(this)">야후 쇼핑</button>
+    <button class="ch-tab" type="button" data-store-name="야후 프리마" onclick="selectChannel(this)">야후 프리마</button>
+    <button class="ch-tab" type="button" data-store-name="미국 이베이" onclick="selectChannel(this)">미국 이베이</button>
+    <button class="ch-tab" type="button" data-store-name="영국 이베이" onclick="selectChannel(this)">영국 이베이</button>
   </nav>
-</header>
 
 <!-- ── 카테고리 바 ── -->
 <div class="category-bar" id="categoryBar">
@@ -239,6 +234,12 @@ button,select{cursor:pointer}
   <button class="cat-result-clear" type="button" onclick="clearCatFilter()">전체해제</button>
 </div>
 
+<!-- ── 선택된 카테고리 결과 헤더 (시안) ── -->
+<div class="cat-result-top" id="catResultTop">
+  <h1 class="cat-result-title" id="catResultTitle">카테고리</h1>
+  <p class="cat-result-total">전체 <b data-result-count-top>0</b>건</p>
+</div>
+
 <!-- ── 정렬·필터 바 ── -->
 <div class="filter-bar">
   <p class="result-title">전체 <span class="red" data-result-count>4,788,005</span>건</p>
@@ -254,8 +255,12 @@ button,select{cursor:pointer}
       <option>입찰수낮은순</option>
       <option>신상품순</option>
   </select>
-
+  <select class="cat-quick-select" id="catQuickSelect" aria-label="선택한 카테고리"></select>
 </div>
+
+<button class="filter-fab" type="button" aria-label="필터 열기" onclick="openSheet()">
+  <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+</button>
 
 <!-- ── 상품 그리드 ── -->
 <div class="product-grid" id="productSection">
@@ -472,6 +477,7 @@ function renderCatResultHeader() {
     header.style.display = 'none';
     openBtn?.classList.remove('cat-selected');
     btnFilter?.classList.remove('has-filter');
+    renderAppliedCategoryView();
     return;
   }
   selectedCats.forEach(name => {
@@ -483,6 +489,7 @@ function renderCatResultHeader() {
   header.style.display = 'flex';
   openBtn?.classList.add('cat-selected');
   btnFilter?.classList.add('has-filter');
+  renderAppliedCategoryView();
 }
 function removeCatFilter(name) {
   selectedCats.delete(name);
@@ -649,7 +656,45 @@ function updateResultCount() {
     count *= 0.16 - Math.min(index, 2) * 0.03 + (name.length % 3) * 0.01;
   });
   resultCountEl.textContent = formatCount(count);
+  const topCountEl = document.querySelector('[data-result-count-top]');
+  if (topCountEl) topCountEl.textContent = formatCount(count);
   updateCurrentCategory();
+}
+
+/* ── 카테고리 적용 후 화면(제목 + 건수 + 카테고리 셀렉트) ── */
+function renderAppliedCategoryView() {
+  const applied = selectedCats.size > 0;
+  document.body.classList.toggle('cat-applied', applied);
+  if (!applied) return;
+
+  const path = getVisibleCategoryPath();
+  const current = path[path.length - 1];
+  const titleEl = document.getElementById('catResultTitle');
+  if (titleEl) titleEl.textContent = current;
+
+  const select = document.getElementById('catQuickSelect');
+  if (!select) return;
+  const siblings = catStack.length
+    ? (categoryData[activeTopCategory].children[catStack[catStack.length - 1].label] || [])
+    : (categoryData[activeTopCategory]?.subs || []);
+  const options = siblings.includes(current) ? siblings : [current].concat(siblings);
+  select.innerHTML = '';
+  options.forEach(name => {
+    const opt = document.createElement('option');
+    opt.value = name;
+    opt.textContent = name;
+    if (name === current) opt.selected = true;
+    select.appendChild(opt);
+  });
+  select.onchange = () => {
+    selectedCats.clear();
+    selectedCats.add(select.value);
+    document.querySelectorAll('#catList .filter-check').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.trim() === select.value);
+    });
+    updateResultCount();
+    renderCatResultHeader();
+  };
 }
 
 function toggleCat(btn, name) {
@@ -714,6 +759,7 @@ if (catStack.length > 0) {
   catRenderLevel(categoryData[activeTopCategory].subs, 1);
 }
 updateResultCount();
+renderCatResultHeader();
 
 /* ── 상품 이미지 ── */
 const catSeeds = ['cat1','cat2','cat3','cat4','cat5','cat6'];

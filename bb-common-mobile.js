@@ -13,6 +13,21 @@
 
   var LOGIN_KEY = 'bb_logged_in';
   var SHELL_MODE = document.currentScript?.getAttribute('data-bb-mobile-shell') || 'full';
+  var USER_GRADE = (window.bbUserGrade || 'vip').toLowerCase();
+  var GRADE_ICON_DIR = '../gradeicon/';
+  var GRADE_ICONS = {
+    standard: 'grade_standard.png',
+    premium: 'grade_premium.png',
+    vip: 'grade_vip.png',
+    prestige: 'grade_prestige.png'
+  };
+
+  function gradeIconHTML(className, grade) {
+    var key = (grade || USER_GRADE || 'premium').toLowerCase();
+    var label = key.toUpperCase();
+    var file = GRADE_ICONS[key] || GRADE_ICONS.premium;
+    return '<span class="' + className + ' ' + key + ' grade-img" aria-label="' + label + ' 등급"><img class="grade-icon" src="' + GRADE_ICON_DIR + file + '" alt="' + label + '"></span>';
+  }
 
   function isLoggedIn() {
     return localStorage.getItem(LOGIN_KEY) === '1';
@@ -138,11 +153,15 @@
     '.drawer{position:fixed;top:0;left:0;bottom:0;width:88%;max-width:340px;background:#fff;z-index:5001;overflow-y:auto;scrollbar-width:none;transform:translateX(-100%);visibility:hidden;pointer-events:none;transition:transform .3s cubic-bezier(.4,0,.2,1), visibility 0s linear .3s;display:flex;flex-direction:column;box-shadow:4px 0 20px rgba(0,0,0,.12);border-top-right-radius:16px;border-bottom-right-radius:16px}',
     '.drawer::-webkit-scrollbar{display:none}',
     '.drawer.open{transform:translateX(0);visibility:visible;pointer-events:auto;transition:transform .3s cubic-bezier(.4,0,.2,1)}',
+    ':root{--grade-std:#D4891A;--grade-pre:#1f477d;--grade-vip:#0C5F33;--grade-prs:#E8385A}',
+    '.grade-img{background:none!important;box-shadow:none!important;border:0!important;border-radius:0!important;overflow:visible!important;padding:0!important}',
+    'img.grade-icon{width:100%!important;height:100%!important;object-fit:contain!important;display:block;border-radius:0!important;transform:none!important}',
     '.bbd-head{display:flex;align-items:center;justify-content:space-between;min-height:58px;padding:12px 16px;border-bottom:1px solid #ECEFF3;background:#fff}',
+    '#drUserHd.bbd-head{padding-top:32px;padding-bottom:32px}',
     '.bbd-user-mini{display:flex;align-items:center;gap:10px}',
-    '.bbd-uav{width:38px;height:38px;border-radius:50%;background:#E4E9EF;color:#1f477d;display:grid;place-items:center;font-size:18px;font-weight:700}',
+    '.bbd-uav{width:38px;height:38px;border-radius:50%;background:#FFE7EF;color:#E8385A;display:grid;place-items:center;font-size:18px;font-weight:800}',
     '.bbd-uname{font-size:15px;font-weight:700;color:#1A1A2E}',
-    '.bbd-ugrade{font-size:11px;color:#666680;margin-top:2px}',
+    '.bbd-ugrade{font-size:11px;color:var(--grade-vip);font-weight:700;margin-top:2px}',
     '.bbd-guest-card{padding:14px 16px 16px;background:#FFF8F5;border-bottom:1px solid #E5E7EB}',
     '.bbd-guest-title{font-size:16px;font-weight:700;color:#111827;margin-bottom:4px}',
     '.bbd-guest-copy{font-size:12px;color:#6B7280;line-height:1.45;margin-bottom:12px}',
@@ -188,19 +207,18 @@
     '.user-drawer{position:fixed;top:0;right:0;bottom:0;width:84%;max-width:300px;background:#fff;z-index:5003;overflow-y:auto;scrollbar-width:none;transform:translateX(100%);visibility:hidden;pointer-events:none;transition:transform .28s cubic-bezier(.4,0,.2,1), visibility 0s linear .28s}',
     '.user-drawer::-webkit-scrollbar{display:none}',
     '.user-drawer.open{transform:translateX(0);visibility:visible;pointer-events:auto;transition:transform .28s cubic-bezier(.4,0,.2,1)}',
-    '.bbu-avatar{width:50px;height:50px;flex:0 0 auto;display:grid;place-items:center;border-radius:50%;color:#fff;font-size:20px;font-weight:700;box-shadow:0 8px 18px rgba(17,24,39,.14)}',
-    '.bbu-avatar i{line-height:1}',
-    '.bbu-avatar.standard,.m-user-avatar.standard,.user-avatar-sm.standard{background:#D4891A}',
-    '.bbu-avatar.premium,.m-user-avatar.premium,.user-avatar-sm.premium{background:#1f477d}',
-    '.bbu-avatar.vip,.m-user-avatar.vip,.user-avatar-sm.vip{background:#3AAD4E}',
-    '.bbu-avatar.prestige,.m-user-avatar.prestige,.user-avatar-sm.prestige{background:#E8385A}',
-    '.m-user-avatar,.user-avatar-sm{width:30px;height:30px;flex:0 0 auto;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:12px;font-weight:700;border:0;cursor:pointer;font-family:inherit}',
-    '.m-user-avatar i,.user-avatar-sm i{line-height:1}',
-    '.user-drawer-head{padding:18px 14px 12px;background:#fff8f5;border-bottom:1px solid #efe6e2}',
+    '.bbu-avatar{width:50px;height:50px;flex:0 0 auto;display:grid;place-items:center;border-radius:50%;background:#fff;overflow:hidden;box-shadow:0 8px 18px rgba(17,24,39,.14)}',
+    '.m-user-avatar,.user-avatar-sm{width:30px;height:30px;flex:0 0 auto;border-radius:50%;display:grid;place-items:center;background:#fff;overflow:hidden;border:0;cursor:pointer;font-family:inherit;box-shadow:0 4px 10px rgba(17,24,39,.12);padding:0}',
+    '.bbu-avatar img,.m-user-avatar img,.user-avatar-sm img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;transform:scale(1.65)}',
+    '.user-avatar-icon{width:100%;height:100%;display:block;border-radius:50%;overflow:hidden}',
+    '.user-avatar-sm.plain-user,.m-user-avatar.plain-user{background:none!important;box-shadow:none!important;border:0!important;border-radius:0!important;color:#687385!important;display:grid;place-items:center;padding:0!important}',
+    '.user-avatar-sm.plain-user i,.m-user-avatar.plain-user i{font-size:19px;line-height:1}',
+    '.user-drawer-head{padding:38px 14px 12px;background:#fff8f5;border-bottom:1px solid #efe6e2}',
     '.user-member-row{display:flex;align-items:center;gap:12px}',
-    '.user-crown{width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:#ffe6ef;font-size:26px;flex:0 0 auto;color:var(--rose,#E8385A)}',
+    '.user-crown{width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:#fff;overflow:hidden;flex:0 0 auto;box-shadow:0 6px 14px rgba(17,24,39,.12)}',
+    '.user-crown img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;transform:scale(1.65)}',
     '.user-name-strong{display:block;color:#111827;font-size:18px;font-weight:500}',
-    '.user-vip-chip{display:inline-flex;margin-top:5px;padding:2px 12px;border-radius:999px;background:var(--rose,#E8385A);color:#fff;font-size:11px;font-weight:500}',
+    '.user-vip-chip{display:inline-flex;margin-top:5px;padding:2px 12px;border-radius:999px;background:var(--grade-vip);color:#fff;font-size:11px;font-weight:500}',
     '.user-vip-copy{margin:13px 0 4px;color:var(--rose,#E8385A);font-size:11px;font-weight:500}',
     '.user-vip-bar{height:5px;border-radius:999px;background:#eee2de;overflow:hidden}',
     '.user-vip-bar span{display:block;height:100%;background:var(--rose,#E8385A)}',
@@ -412,14 +430,14 @@
      스토어 추가/삭제/순서변경도 이 배열만 수정한다.                */
   var STORE_LOGO_DIR = '../storeicon/';
   var STORES = [
-    { label: '야후옥션',   logo: 'store_yahoo_auction.png',  href: 'mobile_sub_main.html' },
+    { label: '야후 옥션',   logo: 'store_yahoo_auction.png',  href: 'mobile_sub_main.html' },
     { label: '메루카리',   logo: 'store_mercari.png',        href: 'mobile_purchase_merukari.html' },
-    { label: '라쿠텐',     logo: 'store_rakuten.png',        href: 'mobile_purchase_store.html' },
-    { label: '라쿠마',     logo: 'store_rakuma.png',         href: 'mobile_purchase_store.html' },
-    { label: '야후쇼핑',   logo: 'store_yahoo_shopping.png', href: 'mobile_purchase_url.html' },
-    { label: '야후프리마', logo: 'store_yahoo_furima.png',   href: 'mobile_purchase_store.html' },
-    { label: '미국이베이', logo: 'store_ebay_us.png',        href: 'mobile_sub_main.html' },
-    { label: '영국이베이', logo: 'store_ebay_uk.png',        href: 'mobile_sub_main.html' }
+    { label: '일본 라쿠텐',     logo: 'store_rakuten.png',        href: 'mobile_purchase_store.html' },
+    { label: '일본 라쿠마',     logo: 'store_rakuma.png',         href: 'mobile_purchase_store.html' },
+    { label: '야후 쇼핑',   logo: 'store_yahoo_shopping.png', href: 'mobile_purchase_url.html' },
+    { label: '야후 프리마', logo: 'store_yahoo_furima.png',   href: 'mobile_purchase_store.html' },
+    { label: '미국 이베이', logo: 'store_ebay_us.png',        href: 'mobile_sub_main.html' },
+    { label: '영국 이베이', logo: 'store_ebay_uk.png',        href: 'mobile_sub_main.html' }
   ];
   window.BB_STORES = STORES;
   window.BB_STORE_LOGO_DIR = STORE_LOGO_DIR;
@@ -452,7 +470,7 @@
 
   function leftDrawerHTML() {
     var header = isLoggedIn()
-      ? '<div id="drUserHd" class="bbd-head"><div class="bbd-user-mini"><div class="bbd-uav"><i class="fas fa-crown" aria-hidden="true"></i></div><div><div class="bbd-uname">홍길동님</div><div class="bbd-ugrade">PREMIUM 회원</div></div></div><button class="bbd-close" type="button" aria-label="메뉴 닫기" onclick="closeDrawer()">×</button></div>'
+      ? '<div id="drUserHd" class="bbd-head"><div class="bbd-user-mini">' + gradeIconHTML('bbd-uav', USER_GRADE) + '<div><div class="bbd-uname">홍길동님</div><div class="bbd-ugrade">VIP 회원</div></div></div><button class="bbd-close" type="button" aria-label="메뉴 닫기" onclick="closeDrawer()">×</button></div>'
       : '<div id="drGuestHd" class="bbd-head"><span></span><button class="bbd-close" type="button" aria-label="메뉴 닫기" onclick="closeDrawer()">×</button></div><div id="drGuestPanel" class="bbd-guest-card"><div class="bbd-guest-title">비드바이 로그인</div><div class="bbd-guest-copy">로그인하고 입찰 현황, 마일리지, 관심 상품을 빠르게 확인하세요.</div><div class="bbd-login-actions"><button class="bbd-action-btn" type="button" onclick="toggleLogin();closeDrawer()">로그인</button><button class="bbd-action-btn secondary" type="button" onclick="location.href=\'mobile_index.html\'">회원가입</button></div></div>';
 
     return (
@@ -462,12 +480,9 @@
         '<a class="bbd-quick-item" href="mobile_bundle_shipping_management.html"><span class="bbd-quick-icon"><i class="fas fa-box"></i></span><span class="bbd-quick-text"><span class="bbd-quick-label">입고/보관중인 물건 조회</span><span class="bbd-quick-desc">개인 입고 물품 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
         '<a class="bbd-quick-item" href="mobile_bundle_shipping_management_2.html"><span class="bbd-quick-icon"><i class="fas fa-truck-fast"></i></span><span class="bbd-quick-text"><span class="bbd-quick-label">출고 배송중</span><span class="bbd-quick-desc">센터별 출고 일정 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
       '</div></div>' +
-      '<div class="bbd-sec"><div class="bbd-sec-title">카테고리</div><div class="bbd-cat-list">' +
-        STORES.map(function (st) { return storeCategoryHTML(st); }).join('') +
-      '</div></div>' +
       '<div class="bbd-sec"><div class="bbd-sec-title">이용가이드</div><div class="bbd-guide-list">' +
-        '<a class="bbd-guide-item" href="mobile_fakenotice.html"><span class="bbd-guide-icon"><i class="fas fa-book-open"></i></span><span class="bbd-guide-text"><span class="bbd-guide-label">경매대행 이용안내</span><span class="bbd-guide-desc">서비스 이용 절차 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
-        '<a class="bbd-guide-item" href="mobile_fakenotice.html"><span class="bbd-guide-icon"><i class="fas fa-shopping-bag"></i></span><span class="bbd-guide-text"><span class="bbd-guide-label">구매대행 이용안내</span><span class="bbd-guide-desc">구매대행 진행 방식 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
+        '<a class="bbd-guide-item" href="#"><span class="bbd-guide-icon"><i class="fas fa-book-open"></i></span><span class="bbd-guide-text"><span class="bbd-guide-label">경매대행 이용안내</span><span class="bbd-guide-desc">서비스 이용 절차 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
+        '<a class="bbd-guide-item" href="#"><span class="bbd-guide-icon"><i class="fas fa-shopping-bag"></i></span><span class="bbd-guide-text"><span class="bbd-guide-label">구매대행 이용안내</span><span class="bbd-guide-desc">구매대행 진행 방식 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
         '<a class="bbd-guide-item" href="mobile_cs_refund.html"><span class="bbd-guide-icon"><i class="fas fa-coins"></i></span><span class="bbd-guide-text"><span class="bbd-guide-label">수수료 및 관부가세</span><span class="bbd-guide-desc">예상 비용과 세금 안내</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
       '</div></div>' +
       '<div class="bbd-sec" style="border-bottom:none"><div class="bbd-sec-title">고객센터</div><div class="bbd-link-grid">' +
@@ -501,15 +516,16 @@
     return (
       '<div class="user-drawer-head">' +
         '<div class="user-member-row">' +
-          '<div class="user-crown"><i class="fas fa-crown" aria-hidden="true"></i></div>' +
-          '<div><strong class="user-name-strong">홍길동님</strong><span class="user-vip-chip">PREMIUM</span></div>' +
+          gradeIconHTML('user-crown', USER_GRADE) +
+          '<div><strong class="user-name-strong">홍길동님</strong><span class="user-vip-chip">VIP</span></div>' +
         '</div>' +
-        '<p class="user-vip-copy">일반회원까지 80% 남음</p>' +
+        '<p class="user-vip-copy">Prestige까지 80% 남음</p>' +
         '<div class="user-vip-bar"><span style="width:20%"></span></div>' +
         '<div class="user-asset-box"><div><span>마일리지</span><strong>4,500원</strong></div><div><span>예치금</span><strong>29,870원</strong></div></div>' +
       '</div>' +
       '<div class="user-status-grid"><div><strong>3</strong><span>입찰 진행 중</span></div><div><strong>1</strong><span>1차 결제 대기</span></div><div><strong>0</strong><span>2차 결제 대기</span></div></div>' +
       '<nav class="user-menu-list">' +
+        '<a class="user-menu-item" href="mobile_mypage.html"><span class="user-menu-icon"><i class="fas fa-house-user" aria-hidden="true"></i></span><span>마이페이지</span></a>' +
         userMenuSection('fa-gavel', '나의 거래 현황', 'mm-menu-trade',
           userMenuLink('거래 전체 목록', 'mobile_mainlist.html') +
           userMenuLink('경매 입찰/유찰', 'mobile_mypage.html') +
@@ -561,7 +577,7 @@
       ? '<div class="topbar-actions" id="userArea">' +
           '<button class="icon-btn" type="button" aria-label="알림"><i class="fa-regular fa-bell" aria-hidden="true"></i><span class="i-badge">3</span></button>' +
           '<button class="icon-btn" type="button" aria-label="장바구니"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></button>' +
-          '<button class="user-avatar-sm premium" type="button" aria-label="PREMIUM 등급 회원 메뉴" onclick="openUserDrawer()"><i class="fa-solid fa-gem" aria-hidden="true"></i></button>' +
+          '<button class="icon-btn user-avatar-sm plain-user" type="button" aria-label="회원 메뉴" onclick="openUserDrawer()"><i class="fa-regular fa-user" aria-hidden="true"></i></button>' +
         '</div>'
       : '<div class="topbar-actions" id="guestArea">' +
           '<button class="login-btn-sm" type="button" onclick="toggleLogin()">로그인</button>' +
@@ -592,7 +608,7 @@
 
     var preserved = [];
     oldHeaders.forEach(function (el) {
-      el.querySelectorAll('.slide-fade-wrap').forEach(function (node) { preserved.push(node); });
+      el.querySelectorAll('.slide-fade-wrap, .channel-tabs').forEach(function (node) { preserved.push(node); });
     });
 
     var header = document.getElementById('bbmHeader');
@@ -632,15 +648,17 @@
     return node;
   }
 
-  // 우측 상단 회원 아이콘(회원 메뉴)에 우측 드로어 오픈을 자동으로 연결한다.
+  // 우측 상단 회원 아이콘을 사람 아이콘으로 통일하고 우측 회원 드로어에 연결한다.
   // 페이지마다 onclick이 없거나("," alert 같은 미구현 placeholder여도) 여기서
-  // 무조건 실제 동작으로 덮어써서 모든 페이지에서 동일하게 열리도록 한다.
+  // 무조건 실제 동작으로 덮어써서 모든 페이지에서 동일하게 동작하도록 한다.
   function bindAvatarTrigger() {
     document.querySelectorAll('[aria-label="회원 메뉴"], [aria-label="PREMIUM 등급 회원 메뉴"]').forEach(function (btn) {
       if (btn.classList.contains('m-user-avatar') || btn.classList.contains('user-avatar-sm')) {
-        btn.classList.add('premium');
-        btn.setAttribute('aria-label', 'PREMIUM 등급 회원 메뉴');
-        btn.innerHTML = '<i class="fas fa-gem" aria-hidden="true"></i>';
+        btn.classList.remove('grade-img', 'standard', 'premium', 'vip', 'prestige',
+          'tier-premium', 'tier-standard', 'tier-vip', 'tier-prestige', 'member-tier-icon');
+        btn.classList.add('plain-user');
+        btn.setAttribute('aria-label', '회원 메뉴');
+        btn.innerHTML = '<i class="fa-regular fa-user" aria-hidden="true"></i>';
       }
       btn.onclick = function (e) {
         e.preventDefault();

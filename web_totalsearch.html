@@ -22,8 +22,6 @@
       --warm: #fcf8f6;
       --soft: #f4eeea;
       --thumb-bg: #f4eeea;
-      --premium-bg: #fff0c9;
-      --premium-text: #f4a200;
       --focus-ring: rgba(232, 56, 90, .36);
       --radius-card: 12px;
       --radius-button: 10px;
@@ -229,8 +227,8 @@
     .premium-chip {
       padding: 2px 9px;
       border-radius: 999px;
-      background: var(--premium-bg);
-      color: var(--premium-text);
+      background: var(--grade-vip);
+      color: #fff;
       font-size: 10px;
       font-weight: 900;
     }
@@ -908,40 +906,6 @@
   <div class="page-canvas">
     <div class="top-notice-spacer" aria-hidden="true"></div>
 
-    <header class="site-header">
-      <div class="header-main">
-        <div class="brand-area">
-          <button class="menu-button" type="button" aria-label="메뉴 열기"><span class="menu-lines"></span></button>
-          <a class="logo-link" href="web_main.html" aria-label="Bidbuy 홈">
-            <img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency">
-          </a>
-        </div>
-
-        <div class="header-search-area">
-          <form class="global-search" data-global-search>
-            <input type="search" placeholder="키워드 또는 URL을 입력하세요.">
-            <button type="submit">
-              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-              검색
-            </button>
-          </form>
-          <div class="chip-list header-keyword-list" data-keyword-list>
-            <span class="search-chip">나이키 <button type="button" aria-label="나이키 삭제" data-keyword-index="0"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></span>
-            <span class="search-chip">박스 <button type="button" aria-label="박스 삭제" data-keyword-index="1"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></span>
-          </div>
-        </div>
-
-        <div class="user-tools" aria-label="회원 메뉴">
-          <button class="icon-btn" type="button" aria-label="알림">
-            <i class="fa-regular fa-bell" aria-hidden="true"></i>
-          </button>
-          <button class="icon-btn" type="button" aria-label="장바구니">
-            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
-          </button>
-          <div class="user-name">홍길동님<span class="premium-chip">PREMIUM</span></div>
-        </div>
-      </div>
-    </header>
     <div class="store-strip">
       <nav class="store-list" aria-label="스토어 바로가기">
         <a class="store-chip active" href="#" data-store-name="야후 옥션" data-best-title="야후 옥션 베스트" aria-current="page">

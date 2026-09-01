@@ -140,18 +140,8 @@
     '.bbh-btn-login:hover{background:#C42F4C}',
     '.bbh-btn-join{background:#fff;color:#666680;border:1.5px solid #E0E4EB;padding:8px 16px;border-radius:5px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;margin-right:6px}',
     '.bbh-btn-join:hover{border-color:#E8385A;color:#E8385A}',
-    '.bbh-user{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:5px;cursor:pointer;border:none;background:none;font-family:inherit;transition:background .15s}',
-    '.bbh-user:hover{background:#F5F7FA}',
-    '.bbh-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:800;flex-shrink:0;box-shadow:0 4px 10px rgba(17,24,39,.12)}',
-    '.bbh-av i{line-height:1}',
-    '.bbh-av.standard{background:linear-gradient(135deg,#5F7EA6,#29496E)}',
-    '.bbh-av.premium{background:linear-gradient(135deg,#F5A623,#E8385A)}',
-    '.bbh-av.vip{background:linear-gradient(135deg,#8B5CF6,#1A3C6E)}',
-    '.bbh-av.prestige{background:linear-gradient(135deg,#111827,#B58A44)}',
-    '.bbh-nm{font-size:13px;font-weight:700;color:#1A1A2E;line-height:1.2;text-align:left;white-space:nowrap}',
-    '.bbh-gr{display:inline-block;background:#FFF3E0;color:#F5A623;font-size:9px;font-weight:700;padding:1px 6px;border-radius:8px;margin-top:2px}',
-    '.bbh-chev{margin-left:2px;font-size:11px;color:#9aa3b2;transition:transform .18s}',
-    '.bbh-user.open .bbh-chev{transform:rotate(180deg)}',
+    '.grade-img{background:none!important;box-shadow:none!important;border:0!important;border-radius:0!important;overflow:visible!important;padding:0!important}',
+    'img.grade-icon{width:100%;height:100%;object-fit:contain;display:block}',
 
     '.bbd-ov{position:fixed;inset:0;background:rgba(0,0,0,0);pointer-events:none;transition:background .3s;z-index:1000}',
     '.bbd-ov.open{background:rgba(0,0,0,.45);pointer-events:all}',
@@ -162,11 +152,13 @@
     '.bbu::-webkit-scrollbar{display:none}',
     '.bbu.open{opacity:1;visibility:visible;transform:translateY(0)}',
 
+    ':root{--grade-std:#D4891A;--grade-pre:#1f477d;--grade-vip:#0C5F33;--grade-prs:#E8385A}',
     '.bbd-head{display:flex;align-items:center;justify-content:space-between;min-height:58px;padding:12px 16px;border-bottom:1px solid #ECEFF3;background:#fff}',
+    '#drUserHd.bbd-head{padding-top:32px;padding-bottom:32px}',
     '.bbd-user-mini{display:flex;align-items:center;gap:10px}',
     '.bbd-uav{width:38px;height:38px;border-radius:50%;background:#FFE7EF;color:#E8385A;display:grid;place-items:center;font-size:18px;font-weight:800}',
     '.bbd-uname{font-size:15px;font-weight:700;color:#1A1A2E}',
-    '.bbd-ugrade{font-size:11px;color:#666680;margin-top:2px}',
+    '.bbd-ugrade{font-size:11px;color:var(--grade-vip);font-weight:700;margin-top:2px}',
     '.bbd-guest-card{padding:14px 16px 16px;background:#FFF8F5;border-bottom:1px solid #E5E7EB}',
     '.bbd-guest-title{font-size:16px;font-weight:700;color:#111827;margin-bottom:4px}',
     '.bbd-guest-copy{font-size:12px;color:#6B7280;line-height:1.45;margin-bottom:12px}',
@@ -178,39 +170,27 @@
     '.bbd-sec{padding:0;border-bottom:1px solid #ECEFF3;background:#fff}',
     '.bbd-sec:last-child{border-bottom:none}',
     '.bbd-sec-title{height:38px;padding:0 16px;display:flex;align-items:center;background:#F5F6F8;color:#7D8796;font-size:12px;font-weight:800}',
-    '.bbd-quick,.bbd-cat-list,.bbd-guide-list{display:flex;flex-direction:column;padding:6px 0}',
-    '.bbd-quick-item,.bbd-cat-item,.bbd-guide-item{min-height:56px;display:flex;align-items:center;gap:14px;padding:8px 16px 8px 24px;color:#111827;cursor:pointer;text-decoration:none}',
+    '.bbd-quick,.bbd-guide-list{display:flex;flex-direction:column;padding:6px 0}',
+    '.bbd-quick-item,.bbd-guide-item{min-height:56px;display:flex;align-items:center;gap:14px;padding:8px 16px 8px 24px;color:#111827;cursor:pointer;text-decoration:none}',
     '.bbd-quick-icon,.bbd-guide-icon{width:22px;display:flex;align-items:center;justify-content:center;color:#000;font-size:16px;flex-shrink:0}',
     '.bbd-quick-text,.bbd-guide-text{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}',
     '.bbd-quick-label,.bbd-guide-label{font-size:15px;color:#111827;font-weight:700;line-height:1.2}',
     '.bbd-quick-desc,.bbd-guide-desc{font-size:11px;color:#8B94A3;font-weight:500;line-height:1.25}',
-    '.bbd-cat-flag{width:38px;height:38px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:0;background:transparent;box-shadow:none;color:#000;font-size:12px;font-weight:700;text-align:center}',
-    '.bbd-cat-flag img{width:38px;height:38px;border-radius:0;object-fit:contain;display:block}',
-    '.bbd-cat-label{flex:1;color:#111827;font-size:15px;font-weight:700}',
     '.bbd-cat-arrow{font-size:12px;color:#999BAA}',
-    '.bbd-cat-group{border-bottom:1px solid #F0F2F5}',
-    '.bbd-cat-group:last-child{border-bottom:none}',
-    'button.bbd-cat-item{width:100%;border:0;background:#fff;font-family:inherit;text-align:left}',
-    '.bbd-cat-item:hover{background:#FAFBFC}',
-    '.bbd-cat-group.is-open>.bbd-cat-item{background:#FFF8F5;color:#E8385A}',
-    '.bbd-cat-group.is-open .bbd-cat-label{color:#E8385A}',
-    '.bbd-cat-group.is-open .bbd-cat-arrow{transform:rotate(90deg);color:#E8385A}',
-    '.bbd-store-cats{display:none;flex-direction:column;padding:2px 16px 14px 72px;background:#FFFDFB}',
-    '.bbd-cat-group.is-open .bbd-store-cats{display:flex}',
-    '.bbd-store-cat{min-height:32px;display:flex;align-items:center;color:#555E6D;font-size:13px;font-weight:600;text-decoration:none;line-height:1.3}',
-    '.bbd-store-cat:hover{color:#E8385A;text-decoration:underline}',
     '.bbd-link-grid{display:grid;grid-template-columns:repeat(2,1fr);row-gap:14px;column-gap:24px;padding:14px 16px}',
     '.bbd-link-grid a{font-size:14px;color:#666680;text-decoration:none}',
-    '.bbd-cs-card{margin:5px 5px 5px;padding:18px 14px;background:#fcfcfd;text-align:center}',
-    '.bbd-cs-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:240px;margin:0 auto}',
-    '.bbd-cs-actions button{height:39px;border:1px solid #d9e0e9;border-radius:5px;background:#fff;color:#1f2530;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer}',
+    '.bbd-cs-card{margin:22px 26px 34px;padding:18px 14px;background:#fcfcfd;text-align:center}',
+    '.bbd-cs-tel{color:#1A3C6E;font-family:Roboto,sans-serif;font-size:26px;font-weight:700}',
+    '.bbd-cs-time{margin:8px 0 16px;color:#7b8494;font-size:11px}',
+    '.bbd-cs-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}',
+    '.bbd-cs-actions button{height:34px;border:1px solid #d9e0e9;border-radius:5px;background:#fff;color:#1f2530;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer}',
     '.bbd-cs-actions button:first-child{border-color:#E8385A;background:#E8385A;color:#fff}',
 
-    '.user-drawer-head{padding:18px 16px 12px;background:#fff8f5;border-bottom:1px solid #efe6e2}',
+    '.user-drawer-head{padding:38px 16px 12px;background:#fff8f5;border-bottom:1px solid #efe6e2}',
     '.user-member-row{display:flex;align-items:center;gap:12px}',
-    '.user-crown{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:#ffe6ef;font-size:22px;flex:0 0 auto;color:#E8385A}',
+    '.user-crown{width:44px;height:44px;display:grid;place-items:center;flex:0 0 auto}',
     '.user-name-strong{display:block;color:#111827;font-size:16px;font-weight:500}',
-    '.user-vip-chip{display:inline-flex;margin-top:5px;padding:2px 12px;border-radius:999px;background:#E8385A;color:#fff;font-size:11px;font-weight:500}',
+    '.user-vip-chip{display:inline-flex;margin-top:5px;padding:2px 12px;border-radius:999px;background:var(--grade-vip);color:#fff;font-size:11px;font-weight:500}',
     '.user-vip-copy{margin:13px 0 4px;color:#E8385A;font-size:11px;font-weight:500}',
     '.user-vip-bar{height:5px;border-radius:999px;background:#eee2de;overflow:hidden}',
     '.user-vip-bar span{display:block;height:100%;background:#E8385A}',
@@ -277,7 +257,7 @@
           '<div class="bbh-right">' +
             '<button class="bbh-ibtn" type="button" aria-label="알림"><i class="far fa-bell"></i><span class="bbh-badge">3</span><span>알림</span></button>' +
             '<button class="bbh-ibtn" type="button" aria-label="장바구니"><i class="fas fa-shopping-cart"></i><span>장바구니</span></button>' +
-            '<button class="bbh-user" id="bbhUserTrig" type="button" aria-label="회원 메뉴" aria-haspopup="true" aria-expanded="false" onclick="toggleUserDrawer()"><span class="bbh-av premium" aria-label="PREMIUM 등급"><i class="fas fa-gem" aria-hidden="true"></i></span><span><span class="bbh-nm">홍길동님</span><br><span class="bbh-gr">PREMIUM</span></span><i class="fas fa-chevron-down bbh-chev" aria-hidden="true"></i></button>' +
+            '<button class="bbh-ibtn" id="bbhUserTrig" type="button" aria-label="회원 메뉴" aria-haspopup="true" aria-expanded="false" onclick="toggleUserDrawer()"><i class="far fa-user"></i><span>마이페이지</span></button>' +
           '</div>' +
         '</div>'
       );
@@ -378,34 +358,6 @@
   window.BB_STORES = STORES;
   window.BB_STORE_LOGO_DIR = STORE_LOGO_DIR;
 
-  var CATEGORY_MAIN_PAGE = 'web_category_main.html';
-
-  function storeCategoryHTML(store, open) {
-    var label = store.label;
-    var href = store.href;
-    var groups = STORE_CATEGORIES[label] || [];
-    var linksHtml = groups.map(function (group) {
-      var groupPath = group.title;
-      var groupHref = CATEGORY_MAIN_PAGE + '?store=' + encodeURIComponent(label) + '&category=' + encodeURIComponent(group.title) + '&path=' + encodeURIComponent(groupPath);
-      var groupLink = '<a class="bbd-store-cat" href="' + groupHref + '">' + group.title + '</a>';
-      var subLinks = group.subs.map(function (cat) {
-        var catPath = group.title + '>' + cat;
-        var catHref = CATEGORY_MAIN_PAGE + '?store=' + encodeURIComponent(label) + '&category=' + encodeURIComponent(cat) + '&path=' + encodeURIComponent(catPath);
-        return '<a class="bbd-store-cat" href="' + catHref + '">' + cat + '</a>';
-      }).join('');
-      return groupLink + subLinks;
-    }).join('');
-    return (
-      '<div class="bbd-cat-group' + (open ? ' is-open' : '') + '">' +
-        '<button class="bbd-cat-item" type="button" aria-expanded="' + (open ? 'true' : 'false') + '" onclick="toggleDrawerStoreCategory(this)"><span class="bbd-cat-flag"><img src="' + STORE_LOGO_DIR + store.logo + '" alt=""></span><span class="bbd-cat-label">' + label + '</span><i class="fas fa-chevron-right bbd-cat-arrow"></i></button>' +
-        '<div class="bbd-store-cats">' +
-          '<a class="bbd-store-cat" href="' + href + '">전체보기</a>' +
-          linksHtml +
-        '</div>' +
-      '</div>'
-    );
-  }
-
   function storeChannelBarHTML() {
     return STORES.map(function (st) {
       return '<div class="ch-icon-item" style="cursor:pointer" onclick="location.href=' + "'" + st.barHref + "'" + '">' +
@@ -422,7 +374,7 @@
 
   function leftDrawerHTML() {
     var header = isLoggedIn()
-      ? '<div id="drUserHd" class="bbd-head"><div class="bbd-user-mini"><div class="bbd-uav"><i class="fas fa-crown" aria-hidden="true"></i></div><div><div class="bbd-uname">홍길동님</div><div class="bbd-ugrade">PREMIUM 회원</div></div></div><button class="bbd-close" type="button" aria-label="메뉴 닫기" onclick="closeDrawer()">×</button></div>'
+      ? '<div id="drUserHd" class="bbd-head"><div class="bbd-user-mini"><div class="bbd-uav grade-img"><img class="grade-icon" src="../gradeicon/grade_vip.png" alt="VIP 등급"></div><div><div class="bbd-uname">홍길동님</div><div class="bbd-ugrade">VIP 회원</div></div></div><button class="bbd-close" type="button" aria-label="메뉴 닫기" onclick="closeDrawer()">×</button></div>'
       : '<div id="drGuestHd" class="bbd-head"><span></span><button class="bbd-close" type="button" aria-label="메뉴 닫기" onclick="closeDrawer()">×</button></div><div id="drGuestPanel" class="bbd-guest-card"><div class="bbd-guest-title">비드바이 로그인</div><div class="bbd-guest-copy">로그인하고 입찰 현황, 마일리지, 관심 상품을 빠르게 확인하세요.</div><div class="bbd-login-actions"><button class="bbd-action-btn" type="button" onclick="doLogin();closeDrawer()">로그인</button><button class="bbd-action-btn secondary" type="button">회원가입</button></div></div>';
 
     return (
@@ -432,16 +384,19 @@
         '<a class="bbd-quick-item" href="web_bundle_shipping_management.html"><span class="bbd-quick-icon"><i class="fas fa-box"></i></span><span class="bbd-quick-text"><span class="bbd-quick-label">입고/보관중인 물건 조회</span><span class="bbd-quick-desc">개인 입고 물품 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
         '<a class="bbd-quick-item" href="web_bundle_shipping_management_2.html"><span class="bbd-quick-icon"><i class="fas fa-truck-fast"></i></span><span class="bbd-quick-text"><span class="bbd-quick-label">출고 배송중</span><span class="bbd-quick-desc">센터별 출고 일정 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
       '</div></div>' +
-      '<div class="bbd-sec"><div class="bbd-sec-title">카테고리</div><div class="bbd-cat-list">' +
-        STORES.map(function (st) { return storeCategoryHTML(st); }).join('') +
-      '</div></div>' +
       '<div class="bbd-sec"><div class="bbd-sec-title">이용가이드</div><div class="bbd-guide-list">' +
         '<a class="bbd-guide-item" href="#"><span class="bbd-guide-icon"><i class="fas fa-book-open"></i></span><span class="bbd-guide-text"><span class="bbd-guide-label">경매대행 이용안내</span><span class="bbd-guide-desc">서비스 이용 절차 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
         '<a class="bbd-guide-item" href="#"><span class="bbd-guide-icon"><i class="fas fa-shopping-bag"></i></span><span class="bbd-guide-text"><span class="bbd-guide-label">구매대행 이용안내</span><span class="bbd-guide-desc">구매대행 진행 방식 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
-        '<a class="bbd-guide-item" href="#"><span class="bbd-guide-icon"><i class="fas fa-coins"></i></span><span class="bbd-guide-text"><span class="bbd-guide-label">수수료 및 관부가세</span><span class="bbd-guide-desc">예상 비용과 세금 안내</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
+        '<a class="bbd-guide-item" href="web_cs_refund.html"><span class="bbd-guide-icon"><i class="fas fa-coins"></i></span><span class="bbd-guide-text"><span class="bbd-guide-label">수수료 및 관부가세</span><span class="bbd-guide-desc">예상 비용과 세금 안내</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
       '</div></div>' +
-      '<div class="bbd-sec" style="border-bottom:none"><div class="bbd-sec-title">고객센터</div><div class="bbd-link-grid"><a href="#">공지사항<sup class="new-n" aria-label="새 소식">N</sup></a><a href="#">자주하는질문</a><a href="web_qna_form.html">1:1문의<sup class="new-n" aria-label="새 답변">N</sup></a><a href="#">커뮤니티</a></div></div>' +
-      '<div class="bbd-cs-card"><div class="bbd-cs-actions"><button type="button" onclick="doLogout()">로그아웃</button><button type="button" onclick="location.href=\'https://www.bidbuy.co.kr/cs\'">FAQ</button></div></div>' +
+      '<div class="bbd-sec" style="border-bottom:none"><div class="bbd-sec-title">고객센터</div><div class="bbd-link-grid">' +
+        '<a href="web_fakenotice.html">공지사항<sup class="new-n" aria-label="새 소식">N</sup></a><a href="web_qna.html">자주하는질문</a><a href="web_qna_form.html">1:1문의<sup class="new-n" aria-label="새 답변">N</sup></a><a href="web_qna.html">커뮤니티</a>' +
+      '</div></div>' +
+      '<div class="bbd-cs-card">' +
+        '<div class="bbd-cs-tel">1544-5224</div>' +
+        '<p class="bbd-cs-time">평일 AM 10:00 - PM 17:00 (점심 PM 12:30 - 13:30)</p>' +
+        '<div class="bbd-cs-actions"><button type="button" onclick="location.href=\'web_qna_form.html\'">1:1 문의</button><button type="button" onclick="location.href=\'web_qna.html\'">FAQ</button><button type="button" onclick="location.href=\'web_fakenotice.html\'">공지사항</button></div>' +
+      '</div>' +
       '<div style="height:24px"></div>'
     );
   }
@@ -465,15 +420,16 @@
     return (
       '<div class="user-drawer-head">' +
         '<div class="user-member-row">' +
-          '<div class="user-crown"><i class="fas fa-crown" aria-hidden="true"></i></div>' +
-          '<div><strong class="user-name-strong">홍길동님</strong><span class="user-vip-chip">PREMIUM</span></div>' +
+          '<div class="user-crown grade-img"><img class="grade-icon" src="../gradeicon/grade_vip.png" alt="VIP 등급"></div>' +
+          '<div><strong class="user-name-strong">홍길동님</strong><span class="user-vip-chip">VIP</span></div>' +
         '</div>' +
-        '<p class="user-vip-copy">일반회원까지 80% 남음</p>' +
+        '<p class="user-vip-copy">Prestige까지 80% 남음</p>' +
         '<div class="user-vip-bar"><span style="width:20%"></span></div>' +
         '<div class="user-asset-box"><div><span>마일리지</span><strong>4,500원</strong></div><div><span>예치금</span><strong>29,870원</strong></div></div>' +
       '</div>' +
       '<div class="user-status-grid"><div><strong>3</strong><span>입찰 진행 중</span></div><div><strong>1</strong><span>1차 결제 대기</span></div><div><strong>0</strong><span>2차 결제 대기</span></div></div>' +
       '<nav class="user-menu-list">' +
+        '<a class="user-menu-item" href="web_mypage.html"><span class="user-menu-icon"><i class="fas fa-house-user" aria-hidden="true"></i></span><span>마이페이지</span></a>' +
         userMenuSection('fa-gavel', '나의 거래 현황', 'wm-menu-trade',
           userMenuLink('거래 전체 목록', 'web_mainlist.html') +
           userMenuLink('경매 입찰/유찰', 'web_mypage.html') +
@@ -617,21 +573,6 @@
     var right = document.getElementById('bbUserDrawer');
     if (right && right.classList.contains('open')) closeUserDrawer();
     else window.openUserDrawer();
-  };
-  window.toggleDrawerStoreCategory = function (btn) {
-    var group = btn.closest('.bbd-cat-group');
-    var list = btn.closest('.bbd-cat-list');
-    if (!group || !list) return;
-    var willOpen = !group.classList.contains('is-open');
-    list.querySelectorAll('.bbd-cat-group').forEach(function (item) {
-      item.classList.remove('is-open');
-      var itemBtn = item.querySelector('.bbd-cat-item');
-      if (itemBtn) itemBtn.setAttribute('aria-expanded', 'false');
-    });
-    if (willOpen) {
-      group.classList.add('is-open');
-      btn.setAttribute('aria-expanded', 'true');
-    }
   };
 
   function closeDrawer() {

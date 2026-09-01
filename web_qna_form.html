@@ -87,7 +87,7 @@
     .user-name { display: grid; justify-items: center; gap: 3px; color: #111827; font-size: 13px; font-weight: 800; white-space: nowrap; }
     .premium-chip {
       min-width: 70px; padding: 2px 10px; border-radius: 999px;
-      background: #fff0c9; color: #f4a200;
+      background: var(--grade-vip); color: #fff;
       display: inline-flex; align-items: center; justify-content: center;
       font-size: 10px; font-weight: 800;
     }
@@ -450,26 +450,6 @@
 <div class="top-notice-spacer"></div>
 
 <!-- ── 상단바 ── -->
-<header class="topbar">
-  <div class="brand-area">
-    <button class="menu-button" type="button" aria-label="전체 메뉴">
-      <span class="menu-lines"><span></span><span></span><span></span></span>
-    </button>
-    <a class="logo-link" href="web_main.html" aria-label="Bidbuy 홈">
-      <img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency">
-    </a>
-  </div>
-  <form class="search" role="search" onsubmit="return false">
-    <input type="search" placeholder="키워드 또는 URL을 입력하세요." aria-label="통합검색">
-    <button type="submit"><i class="fas fa-magnifying-glass"></i> 검색</button>
-  </form>
-  <div class="user-tools">
-    <button class="icon-btn" type="button" aria-label="알림"><i class="far fa-bell"></i></button>
-    <button class="icon-btn" type="button" aria-label="장바구니"><i class="fas fa-cart-shopping"></i></button>
-    <div class="user-name">홍길동 님 <span class="premium-chip">PREMIUM</span></div>
-  </div>
-</header>
-
 <!-- ── 본문 ── -->
 <div class="stage">
 
@@ -827,5 +807,6 @@ function clearQnaItem() {
 onTypeChange();
 </script>
 <script src="bb-common.js"></script>
+<script src="bb-search-modal.js"></script>
 </body>
 </html>

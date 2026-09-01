@@ -192,13 +192,10 @@
       box-shadow: inset 0 0 0 1px rgba(255,255,255,.65);
     }
     .avatar i { line-height: 1; }
-    .avatar.tier-standard { background: #eef2f7; color: #64748b; }
-    .avatar.tier-premium { background: #eef5ff; color: var(--navy); }
     .avatar.tier-vip { background: #fff7e6; color: #f5a623; }
-    .avatar.tier-prestige { background: #fff0f4; color: var(--rose); }
     .profile-name { display: block; margin-bottom: 3px; color: #262a31; font-size: 16px; font-weight: 800; line-height: 1.25; }
     .profile-tier {
-      color: var(--rose);
+      color: var(--grade-vip);
       font-size: 12px;
       font-weight: 800;
     }
@@ -594,13 +591,13 @@
     <aside class="sidebar">
       <section class="profile-card" aria-label="회원 정보">
         <div class="profile-main login-only">
-          <div class="avatar tier-premium member-tier-icon" aria-label="Premium 등급"><i class="fa-solid fa-gem" aria-hidden="true"></i></div>
+          <div class="avatar tier-vip member-tier-icon grade-img" aria-label="VIP 등급"><img class="grade-icon" src="../gradeicon/grade_vip.png" alt=""></div>
           <div>
             <strong class="profile-name">홍길동님</strong>
-            <span class="profile-tier">Premium</span>
+            <span class="profile-tier">VIP</span>
           </div>
         </div>
-        <p class="vip-copy login-only">VIP까지 <b>₩215,000</b> 또는 <b>3건</b></p>
+        <p class="vip-copy login-only">Prestige까지 <b>₩8,500,000</b> 또는 <b>15건</b></p>
         <div class="vip-row login-only">
           <div class="vip-progress"><span></span></div>
           <span class="help-dot">?</span>
@@ -1014,5 +1011,6 @@
     });
   </script>
   <script src="bb-common.js"></script>
+<script src="bb-search-modal.js"></script>
 </body>
 </html>
