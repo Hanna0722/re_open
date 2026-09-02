@@ -61,14 +61,7 @@
     .category-grid { padding: 22px 28px 16px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 40px; }
     .category-group { display: grid; gap: 8px; align-content: start; }
     .category-group a { color: #0f253a; font-size: 14px; font-weight: 700; text-decoration: none; white-space: nowrap; }
-    .category-group a.active { color: var(--brand); }
 
-    .sub-category-row { padding: 10px 28px 14px; border-top: 1px solid var(--line); background: #fafaf8; }
-    .sub-category-row + .sub-category-row { background: #f4f3f0; border-top: 1px dashed #d0d5de; }
-    .sub-cat-list { display: flex; flex-wrap: wrap; gap: 7px; }
-    .sub-cat-item { padding: 4px 14px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: #2d3747; font-size: 13px; font-weight: 700; cursor: pointer; transition: border-color .12s, color .12s, background .12s; }
-    .sub-cat-item:hover { border-color: #b0b8c4; color: #111; }
-    .sub-cat-item.active { border-color: var(--brand); background: #fff5f7; color: var(--brand); }
 
     .category-more-wrap { display: none; }
     .all-category-button { width: 100%; height: 36px; padding: 0 14px; border: 1px solid #e8e8e8; border-radius: 4px; background: #f5f5f5; color: #111; font-size: 12px; font-weight: 600; text-align: right; }
@@ -77,7 +70,6 @@
     .category-search-bar { display: grid; grid-template-columns: 320px 420px 140px minmax(0, 1fr); align-items: center; height: 48px; margin: 0; border-top: 1px solid #d4dce8; background: #f7f7f7; overflow: hidden; }
     .category-store-label { display: flex; align-items: center; justify-content: flex-start; gap: 10px; padding: 0 14px; color: #0f253a; font-size: 14px; font-weight: 800; white-space: nowrap; }
     .category-store-label i { color: #6f7785; font-size: 17px; flex: 0 0 auto; }
-    .category-breadcrumb { color: var(--muted); font-size: 14px; font-weight: 700; }
     .category-search-input { min-width: 0; height: 32px; padding: 0 14px; border: 1px solid #d4dce8; border-right: 0; background: #fff; color: var(--text); font-size: 14px; outline: 0; }
     .category-search-input::placeholder { color: #8b919d; }
     .category-search-button { width: 140px; height: 32px; border: 0; background: var(--brand); color: #fff; font-size: 14px; font-weight: 800; }
@@ -180,28 +172,28 @@
 
   <div class="store-strip">
     <nav class="store-list" aria-label="스토어 바로가기">
-      <a class="store-chip active" href="#" data-store-name="야후 옥션" data-best-title="야후 옥션 베스트" aria-current="page">
+      <a class="store-chip active" href="#" data-store-name="야후 옥션" aria-current="page">
         <div class="store-badge"><img src="storeicon/store_yahoo_auction.png" alt=""></div><strong>야후 옥션</strong>
       </a>
-      <a class="store-chip" href="#" data-store-name="메루카리" data-best-title="메루카리 베스트">
+      <a class="store-chip" href="#" data-store-name="메루카리">
         <div class="store-badge"><img src="storeicon/store_mercari.png" alt=""></div><strong>메루카리</strong>
       </a>
-      <a class="store-chip" href="#" data-store-name="일본 라쿠텐" data-best-title="일본 라쿠텐 베스트">
+      <a class="store-chip" href="#" data-store-name="일본 라쿠텐">
         <div class="store-badge"><img src="storeicon/store_rakuten.png" alt=""></div><strong>일본 라쿠텐</strong>
       </a>
-      <a class="store-chip" href="#" data-store-name="일본 라쿠마" data-best-title="일본 라쿠마 베스트">
+      <a class="store-chip" href="#" data-store-name="일본 라쿠마">
         <div class="store-badge"><img src="storeicon/store_rakuma.png" alt=""></div><strong>일본 라쿠마</strong>
       </a>
-      <a class="store-chip" href="#" data-store-name="야후 쇼핑" data-best-title="야후 쇼핑 베스트">
+      <a class="store-chip" href="#" data-store-name="야후 쇼핑">
         <div class="store-badge"><img src="storeicon/store_yahoo_shopping.png" alt=""></div><strong>야후 쇼핑</strong>
       </a>
-      <a class="store-chip" href="#" data-store-name="야후 프리마" data-best-title="야후 프리마 베스트">
+      <a class="store-chip" href="#" data-store-name="야후 프리마">
         <div class="store-badge"><img src="storeicon/store_yahoo_furima.png" alt=""></div><strong>야후 프리마</strong>
       </a>
-      <a class="store-chip" href="#" data-store-name="미국 이베이" data-best-title="미국 이베이 베스트">
+      <a class="store-chip" href="#" data-store-name="미국 이베이">
         <div class="store-badge"><img src="storeicon/store_ebay_us.png" alt=""></div><strong>미국 이베이</strong>
       </a>
-      <a class="store-chip" href="#" data-store-name="영국 이베이" data-best-title="영국 이베이 베스트">
+      <a class="store-chip" href="#" data-store-name="영국 이베이">
         <div class="store-badge"><img src="storeicon/store_ebay_uk.png" alt=""></div><strong>영국 이베이</strong>
       </a>
     </nav>
@@ -250,19 +242,13 @@
           <a href="#">기타</a>
         </div>
       </div>
-      <div class="sub-category-row" id="subCatRow1" hidden>
-        <div class="sub-cat-list" id="subCatList1"></div>
-      </div>
-      <div class="sub-category-row" id="subCatRow2" hidden>
-        <div class="sub-cat-list" id="subCatList2"></div>
-      </div>
       <div class="category-more-wrap">
         <button class="all-category-button" type="button">전체 카테고리</button>
       </div>
       <form class="category-search-bar" data-category-search-form aria-label="카테고리 검색">
         <div class="category-store-label">
           <i class="fa-solid fa-house" aria-hidden="true"></i>
-          <span data-category-store-name>야후 옥션</span><span class="category-breadcrumb" data-category-breadcrumb></span>
+          <span data-category-store-name>야후 옥션</span>
         </div>
         <input class="category-search-input" type="search" name="q" placeholder="전체 카테고리에서 검색" data-category-search-input>
         <button class="category-search-button" type="submit">검색</button>
@@ -313,76 +299,9 @@
       </section>
 
     <!-- 오른쪽: 컨텐츠 영역 -->
-    <div class="content-area">
-    <!-- 베스트 섹션 (메인 모드) -->
-    <section data-view-main aria-labelledby="best-title">
-      <h2 class="section-title" id="best-title">야후옥션 베스트</h2>
-      <div class="product-grid">
-        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/fashion?lock=1" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
-        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/food?lock=2" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
-        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/toys?lock=3" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
-        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/fashion?lock=4" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
-        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/food?lock=5" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
-        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/toys?lock=6" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
-        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/fashion?lock=7" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
-        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/food?lock=8" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
-      </div>
-      <div class="more-row">펼쳐보기</div>
-    </section>
-
-    <!-- 검색결과 섹션 (검색 모드, 기본 hidden) -->
-    <section data-view-search hidden aria-label="검색 결과">
-      <div class="result-title-row">
-        <div class="result-title-wrap">
-          <h1 class="result-title" data-result-title>검색 결과</h1>
-          <button class="favorite-search" type="button" aria-label="검색조건 저장">
-            <i class="fa-solid fa-star" aria-hidden="true"></i>
-          </button>
-        </div>
-        <form class="result-rescan" data-result-rescan>
-          <input type="search" placeholder="결과 내 재검색" aria-label="결과 내 재검색">
-          <button type="submit">검색</button>
-        </form>
-      </div>
-
-      <div class="result-control-row">
-        <div class="result-tabs" role="tablist" aria-label="거래 방식">
-          <button class="result-tab active" type="button" role="tab" aria-selected="true">전체</button>
-          <button class="result-tab" type="button" role="tab" aria-selected="false">경매</button>
-          <button class="result-tab" type="button" role="tab" aria-selected="false">즉시낙찰</button>
-        </div>
-        <div class="filter-actions">
-          <select class="sort-select" aria-label="정렬">
-            <option>인기상품순</option>
-            <option>마감임박순</option>
-            <option>낮은가격순</option>
-            <option>높은가격순</option>
-            <option>입찰수높은순</option>
-            <option>입찰수낮은순</option>
-            <option>신상품순</option>
-          </select>
-          <div class="view-buttons">
-            <button class="view-button" type="button" aria-label="목록 보기">
-              <span class="view-list" aria-hidden="true"><span></span><span></span><span></span></span>
-            </button>
-            <button class="view-button active" type="button" aria-label="그리드 보기">
-              <span class="view-grid" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-grid">
-        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/toys?lock=9" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
-        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/fashion?lock=10" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
-        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/food?lock=11" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
-        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/toys?lock=12" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
-        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/fashion?lock=13" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
-        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/food?lock=14" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
-        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/toys?lock=15" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
-        <article class="product-card"><div class="product-thumb"><img src="https://loremflickr.com/400/400/fashion?lock=16" alt="상품 이미지"><button class="heart" type="button" aria-label="관심상품"><i class="fa-regular fa-heart" aria-hidden="true"></i></button></div><div class="site-badge" data-site-badge><span class="site-dot" aria-hidden="true"></span>야후</div><p class="product-name">니콘 수동 필름 카메라 바디</p><div class="price-row"><strong class="price">¥ 1,650</strong></div></article>
-      </div>
-    </section>
+    <div class="content-area" hidden>
+      <section data-view-main hidden aria-hidden="true"></section>
+      <section data-view-search hidden aria-label="검색 결과"></section>
     </div><!-- /.content-area -->
     </div><!-- /.content-layout -->
   </main>
@@ -398,7 +317,6 @@
     const catSearchForm     = document.querySelector("[data-category-search-form]");
     const catSearchInput    = document.querySelector("[data-category-search-input]");
     const catStoreName      = document.querySelector("[data-category-store-name]");
-    const catBreadcrumb     = document.querySelector("[data-category-breadcrumb]");
     const storePageTitle    = document.getElementById("storePageTitle");
     const resultCopy        = document.querySelector("[data-result-copy]");
     const resultTitleEl     = document.querySelector("[data-result-title]");
@@ -493,182 +411,13 @@
       switchToSearch();
     }
 
-    // ── Category data ──
-    const categoryData = {
-      '가전, AV, 카메라': {
-        subs: ['TV, 영상기기', '카메라', '오디오기기', '생활가전', '스마트기기', '계절가전', '조명기기'],
-        children: {
-          'TV, 영상기기': ['TV', 'DVD/블루레이', '프로젝터', '모니터', '셋톱박스'],
-          '카메라': ['DSLR', '미러리스', '콤팩트', '필름카메라', '액션캠', '렌즈', '액세서리'],
-          '오디오기기': ['스피커', '헤드폰/이어폰', 'AV리시버', 'CD플레이어', '레코드플레이어'],
-          '생활가전': ['냉장고', '세탁기', '청소기', '전자레인지', '식기세척기'],
-        }
-      },
-      '뷰티, 건강 관리': {
-        subs: ['스킨케어', '메이크업', '헤어케어', '바디케어', '향수', '건강보조식품', '의료기기'],
-        children: {
-          '스킨케어': ['클렌징', '토너/로션', '에센스/세럼', '크림', '마스크팩', '선케어'],
-          '메이크업': ['파운데이션', '립메이크업', '아이메이크업', '블러셔', '네일아트'],
-        }
-      },
-      '영화, 동영상': {
-        subs: ['DVD/블루레이', 'VHS', '영화', 'TV방송', '애니메이션', '다큐멘터리'],
-        children: { 'DVD/블루레이': ['국내영화', '외국영화', '드라마', '애니메이션', '다큐', '음악DVD'] }
-      },
-      '취미, 문화': { subs: ['독서', '영화감상', '음악감상', '여행', '요리', '미술/공예', '사진'], children: {} },
-      '거주지, 인테리어': {
-        subs: ['가구', '조명', '커튼/블라인드', '침구류', '수납/정리', '인테리어소품', '주방용품'],
-        children: {
-          '가구': ['소파', '침대', '책상/책장', '식탁', '수납장', 'TV장'],
-          '조명': ['실링라이트', '스탠드', '벽조명', '야외조명', 'LED조명'],
-        }
-      },
-      '사무, 점포 용품': {
-        subs: ['문구류', '사무기기', '점포용품', '사무가구', 'POS/결제시스템', '진열/쇼케이스', '포장재'],
-        children: {
-          '문구류': ['볼펜/만년필', '연필/샤프', '노트/다이어리', '파일/바인더', '테이프/접착제', '수정용품'],
-          '사무기기': ['프린터', '복사기', '스캐너', '팩스', '문서세단기', '제본기'],
-          '점포용품': ['쇼핑백', '영수증용지', '가격태그', '쇼케이스', '행거'],
-        }
-      },
-      '음식, 음료': {
-        subs: ['과자/스낵', '음료수', '주류', '인스턴트식품', '건강식품', '조미료/소스', '냉동식품'],
-        children: { '주류': ['맥주', '와인', '소주/위스키', '사케', '막걸리', '양주'] }
-      },
-      '컴퓨터': {
-        subs: ['데스크탑', '노트북', '모니터', '주변기기', 'CPU/메모리', 'HDD/SSD', '네트워크'],
-        children: {
-          '노트북': ['게이밍노트북', '울트라북', '비즈니스노트북', '크롬북', '2in1노트북'],
-          '주변기기': ['키보드', '마우스', '웹캠', 'USB허브', '프린터', '스캐너'],
-        }
-      },
-      '골동품, 컬렉션': { subs: ['도자기', '그림/서예', '동전/화폐', '우표', '장난감/피규어', '포카드', '고서적'], children: {} },
-      '스포츠, 레저': {
-        subs: ['구기종목', '수상스포츠', '겨울스포츠', '캠핑/아웃도어', '자전거', '요가/피트니스', '낚시'],
-        children: {
-          '캠핑/아웃도어': ['텐트', '침낭', '코펠/버너', '랜턴', '배낭', '등산화'],
-          '자전거': ['로드바이크', '산악자전거', '폴딩바이크', '자전거 액세서리'],
-        }
-      },
-      '음악': {
-        subs: ['기타', '피아노/건반', '드럼/퍼커션', '관악기', '현악기', '악보/교재', '음향장비'],
-        children: { '기타': ['어쿠스틱기타', '일렉기타', '베이스기타', '클래식기타', '기타 액세서리'] }
-      },
-      '탤런트 상품': { subs: ['K-POP', 'J-POP', '연예인 굿즈', '포토카드', '응원용품', '공식 MD', '한정판'], children: {} },
-      '기타': { subs: ['기타 물품', '미분류'], children: {} },
-      '아기 용품': { subs: ['유모차/카시트', '수유용품', '이유식', '기저귀', '아기옷', '장난감', '침구/가구'], children: {} },
-      '자동차, 오토바이': { subs: ['자동차 부품', '오토바이 부품', '카오디오', '네비게이션', '차량용품', '타이어/휠'], children: {} },
-      '티켓, 금권, 숙박예약': { subs: ['공연티켓', '스포츠티켓', '상품권', '숙박쿠폰', '여행패키지', '항공권'], children: {} },
-      '꽃, 원예': { subs: ['생화', '조화', '화분/화분받침', '비료/흙', '원예도구', '씨앗/구근'], children: {} },
-      '애완 동물, 생물': {
-        subs: ['강아지 용품', '고양이 용품', '조류 용품', '어류/수족관', '소동물', '사료'],
-        children: {
-          '강아지 용품': ['사료', '간식', '장난감', '의류', '이동장', '목욕용품'],
-          '고양이 용품': ['사료', '간식', '장난감', '캣타워', '이동장', '화장실'],
-        }
-      },
-      '장난감, 게임': {
-        subs: ['피규어', '프라모델', 'RC카/드론', '보드게임', '비디오게임', '트레이딩카드', '퍼즐'],
-        children: {
-          '피규어': ['애니메이션 피규어', '히어로/캐릭터', '군사 피규어', '스태츄', '가샤폰'],
-          '비디오게임': ['플레이스테이션', '닌텐도', 'Xbox', 'PC게임', '레트로게임'],
-        }
-      },
-      '패션': {
-        subs: ['남성의류', '여성의류', '아동의류', '신발', '가방', '모자/소품', '언더웨어/양말'],
-        children: {
-          '남성의류': ['티셔츠/폴로', '셔츠', '바지', '아우터', '정장', '스포츠웨어'],
-          '여성의류': ['블라우스/셔츠', '원피스', '바지', '아우터', '정장', '스포츠웨어'],
-          '신발': ['스니커즈', '구두', '샌들/슬리퍼', '부츠', '운동화'],
-        }
-      },
-      '만화, 애니메이션 상품': { subs: ['만화책', '애니메이션 DVD', '피규어/굿즈', '코스튬/코스프레', '포스터/아트', '원화'], children: {} },
-      '액세서리, 시계': {
-        subs: ['반지', '목걸이', '귀걸이', '팔찌', '시계', '브로치', '헤어액세서리'],
-        children: { '시계': ['남성시계', '여성시계', '스마트워치', '빈티지시계', '시계부품'] }
-      },
-      '책, 잡지': { subs: ['소설', '실용서', '만화', '잡지', '교재/참고서', '외국서적', '사전'], children: {} },
-      '브랜드 소품': {
-        subs: ['명품가방', '명품지갑', '명품시계', '명품의류', '명품신발', '명품액세서리'],
-        children: {
-          '명품가방': ['루이비통', '구찌', '샤넬', '에르메스', '프라다', '버버리'],
-          '명품시계': ['롤렉스', '오메가', '태그호이어', '까르띠에', 'IWC'],
-        }
-      },
-    };
-
-    // ── Category DOM ──
-    const subCatRow1  = document.getElementById("subCatRow1");
-    const subCatList1 = document.getElementById("subCatList1");
-    const subCatRow2  = document.getElementById("subCatRow2");
-    const subCatList2 = document.getElementById("subCatList2");
-
-    let selCat  = null;
-    let selSub1 = null;
-
-    function updateBreadcrumb() {
-      const parts = [];
-      if (selCat)  parts.push(selCat);
-      if (selSub1) parts.push(selSub1);
-      catBreadcrumb.textContent = parts.length ? " > " + parts.join(" > ") : "";
-    }
-
-    function resetCategories() {
-      selCat = null; selSub1 = null;
-      document.querySelectorAll(".category-group a").forEach(a => a.classList.remove("active"));
-      subCatRow1.hidden = true;
-      subCatRow2.hidden = true;
-      updateBreadcrumb();
-    }
-
-    function renderSubCats(container, row, items) {
-      container.replaceChildren();
-      items.forEach(name => {
-        const btn = document.createElement("button");
-        btn.type = "button"; btn.className = "sub-cat-item";
-        btn.textContent = name; btn.dataset.subCatName = name;
-        container.append(btn);
-      });
-      row.hidden = false;
-    }
-
     document.querySelectorAll(".category-group a").forEach(link => {
       link.addEventListener("click", e => {
         e.preventDefault();
         const name = link.textContent.trim();
-        if (selCat === name) { resetCategories(); return; }
-        document.querySelectorAll(".category-group a").forEach(a => a.classList.remove("active"));
-        link.classList.add("active");
-        selCat = name; selSub1 = null;
-        const data = categoryData[name];
-        if (data?.subs?.length) renderSubCats(subCatList1, subCatRow1, data.subs);
-        else subCatRow1.hidden = true;
-        subCatRow2.hidden = true;
-        updateBreadcrumb();
+        const params = new URLSearchParams({ store: activeStore, category: name, path: name });
+        location.href = "web_category_main.html?" + params.toString();
       });
-    });
-
-    subCatList1.addEventListener("click", e => {
-      const btn = e.target.closest(".sub-cat-item");
-      if (!btn) return;
-      const name = btn.dataset.subCatName;
-      if (selSub1 === name) {
-        selSub1 = null; btn.classList.remove("active");
-        subCatRow2.hidden = true; updateBreadcrumb(); return;
-      }
-      subCatList1.querySelectorAll(".sub-cat-item").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active"); selSub1 = name;
-      const children = categoryData[selCat]?.children?.[name];
-      if (children?.length) renderSubCats(subCatList2, subCatRow2, children);
-      else subCatRow2.hidden = true;
-      updateBreadcrumb();
-    });
-
-    subCatList2.addEventListener("click", e => {
-      const btn = e.target.closest(".sub-cat-item");
-      if (!btn) return;
-      subCatList2.querySelectorAll(".sub-cat-item").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
     });
 
     // ── Store chips ──
@@ -712,10 +461,9 @@
         if (sn) {
           if (catStoreName) catStoreName.textContent = sn;
           if (storePageTitle) storePageTitle.textContent = compactStoreLabel(sn);
-          if (bestTitleEl) bestTitleEl.textContent = chip.dataset.bestTitle || sn + " 베스트";
+          if (bestTitleEl) bestTitleEl.textContent = chip.dataset.bestTitle || sn;
         }
         updateSiteBadges();
-        resetCategories();
       });
     });
 

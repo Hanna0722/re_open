@@ -71,6 +71,9 @@
     .category-bar-keyword-btn { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; border: 1.5px solid var(--line); border-radius: 6px; background: #fff; color: var(--text); font-size: 13px; font-weight: 700; white-space: nowrap; transition: border-color .15s, color .15s, background .15s; }
     .category-bar-keyword-btn:hover { border-color: var(--rose); color: var(--rose); }
     .category-bar-keyword-btn.active { border-color: var(--rose); background: #fff5f7; color: var(--rose); }
+    .result-current .category-bar-keyword-btn { height: auto; padding: 0; border: 0; background: none; color: #4b5563; font-size: 13px; font-weight: 700; }
+    .result-current .category-bar-keyword-btn:hover { color: var(--rose); }
+    .result-current .category-bar-keyword-btn.active { background: none; color: var(--rose); }
 
     .category-bar-item { display: contents; }
     .cat-reset-btn {
@@ -105,10 +108,11 @@
 
     /* ── Result header ── */
     .result-header { display: grid; gap: 10px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #111; }
-    .result-current { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; min-width: 0; }
-    .current-category-name { color: var(--rose); font-size: 24px; font-weight: 900; line-height: 1.2; min-width: 0; }
-    .result-meta-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .result-title { margin: 0; color: #111827; font-size: 17px; font-weight: 900; line-height: 1.25; white-space: nowrap; }
+    .result-current { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; min-width: 0; }
+    .current-category-name { color: #111827; font-size: 20px; font-weight: 900; line-height: 1.2; min-width: 0; }
+    .result-divider { width: 1px; height: 15px; background: #d9dde3; flex: 0 0 auto; }
+    .result-meta-row { display: flex; align-items: center; justify-content: flex-end; gap: 16px; }
+    .result-title { margin: 0 0 0 auto; color: #111827; font-size: 15px; font-weight: 800; line-height: 1.25; white-space: nowrap; }
     .result-title .red { color: red; font-weight: 900; }
     .result-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
     .sort-select { width: 112px; height: 30px; padding: 0 28px 0 12px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: #1f497a; font-size: 12px; font-weight: 900; }
@@ -265,60 +269,42 @@
       <span class="category-bar-item" data-cat-item="0">
         <span class="category-crumb-sep">›</span>
         <select class="category-bar-select" aria-label="1차 카테고리" data-category-level="1" data-breadcrumb-select>
-          <option selected>앤틱, 컬렉션</option>
-          <option>패션</option>
-          <option>가전, AV, 카메라</option>
-          <option>장난감, 게임</option>
+          <option value="" selected disabled>전체</option>
         </select>
         <button class="cat-reset-btn" type="button" aria-label="1차 카테고리 취소" data-cat-reset="0">×</button>
       </span>
-      <span class="category-bar-item" data-cat-item="1">
+      <span class="category-bar-item is-hidden" data-cat-item="1">
         <span class="category-crumb-sep">›</span>
         <select class="category-bar-select" aria-label="2차 카테고리" data-category-level="2" data-breadcrumb-select>
-          <option selected>공예품</option>
-          <option>회화</option>
-          <option>서예</option>
-          <option>조각</option>
+          <option value="" selected disabled>전체</option>
         </select>
         <button class="cat-reset-btn" type="button" aria-label="2차 카테고리 취소" data-cat-reset="1">×</button>
       </span>
-      <span class="category-bar-item" data-cat-item="2">
+      <span class="category-bar-item is-hidden" data-cat-item="2">
         <span class="category-crumb-sep">›</span>
         <select class="category-bar-select" aria-label="3차 카테고리" data-category-level="3" data-breadcrumb-select>
-          <option selected>도자기</option>
-          <option>목공예</option>
-          <option>금속공예</option>
-          <option>유리공예</option>
+          <option value="" selected disabled>전체</option>
         </select>
         <button class="cat-reset-btn" type="button" aria-label="3차 카테고리 취소" data-cat-reset="2">×</button>
       </span>
-      <span class="category-bar-item" data-cat-item="3">
+      <span class="category-bar-item is-hidden" data-cat-item="3">
         <span class="category-crumb-sep">›</span>
         <select class="category-bar-select" aria-label="4차 카테고리" data-breadcrumb-select>
-          <option selected>중국, 한반도</option>
-          <option>일본</option>
-          <option>서양</option>
-          <option>동남아시아</option>
+          <option value="" selected disabled>전체</option>
         </select>
         <button class="cat-reset-btn" type="button" aria-label="4차 카테고리 취소" data-cat-reset="3">×</button>
       </span>
-      <span class="category-bar-item" data-cat-item="4">
+      <span class="category-bar-item is-hidden" data-cat-item="4">
         <span class="category-crumb-sep">›</span>
         <select class="category-bar-select" aria-label="5차 카테고리" data-breadcrumb-select>
-          <option selected>골동품도자기일반</option>
-          <option>청자</option>
-          <option>백자</option>
-          <option>분청사기</option>
+          <option value="" selected disabled>전체</option>
         </select>
         <button class="cat-reset-btn" type="button" aria-label="5차 카테고리 취소" data-cat-reset="4">×</button>
       </span>
-      <span class="category-bar-item" data-cat-item="5">
+      <span class="category-bar-item is-hidden" data-cat-item="5">
         <span class="category-crumb-sep">›</span>
         <select class="category-bar-select current" aria-label="6차 카테고리" data-current-category-label data-breadcrumb-select>
-          <option selected>염부</option>
-          <option>도자기병</option>
-          <option>접시</option>
-          <option>화병</option>
+          <option value="" selected disabled>전체</option>
         </select>
         <button class="cat-reset-btn" type="button" aria-label="6차 카테고리 취소" data-cat-reset="5">×</button>
       </span>
@@ -372,13 +358,15 @@
     <div class="content-area">
       <div class="result-header">
         <div class="result-current">
-          <strong class="current-category-name" data-current-category-heading>염부</strong>
-          <h1 class="result-title">전체 <span class="red">12,340</span> 건</h1>
-        </div>
-        <div class="result-meta-row">
+          <strong class="current-category-name" data-current-category-heading>컴퓨터</strong>
+          <span class="result-divider" aria-hidden="true"></span>
           <button class="category-bar-keyword-btn" type="button" id="categoryKeywordBtn" onclick="toggleCategoryKeyword(this)">
             <i class="fa-regular fa-star" aria-hidden="true"></i> 관심키워드 등록
           </button>
+          <span class="result-divider" aria-hidden="true"></span>
+          <h1 class="result-title">전체 <span class="red">12,340</span> 건</h1>
+        </div>
+        <div class="result-meta-row">
           <div class="result-actions">
           <select class="sort-select" aria-label="정렬">
             <option>인기상품순</option>
@@ -641,7 +629,7 @@
       const lastSelect = [...visibleSelects].reverse().find(select => !select.options[select.selectedIndex]?.disabled)
         || visibleSelects[visibleSelects.length - 1]
         || breadcrumbSelects[breadcrumbSelects.length - 1];
-      const currentName = lastSelect?.value || "염부";
+      const currentName = lastSelect?.value || "컴퓨터";
       if (currentCategoryHeadingEl) currentCategoryHeadingEl.textContent = currentName;
     }
 
@@ -664,15 +652,138 @@
       if (visibleItems.length) visibleItems[visibleItems.length - 1].classList.add("is-last");
     }
 
-    const childCategoryOptionsByTopIndex = [
-      ["공예품", "회화", "서예", "조각"],
-      ["여성 패션", "남성 패션", "가방", "신발", "액세서리"],
-      ["카메라", "렌즈", "오디오", "영상기기", "휴대용 플레이어"],
-      ["피규어", "프라모델", "비디오게임", "보드게임", "트레이딩 카드"]
-    ];
-    const defaultLowerCategoryOptions = breadcrumbSelects.map(select =>
-      Array.from(select.options).map(option => option.textContent)
-    );
+    // ── 대분류별 하위 카테고리 데이터 ──
+    const categoryData = {
+      '가전, AV, 카메라': {
+        subs: ['TV, 영상기기', '카메라', '오디오기기', '생활가전', '스마트기기', '계절가전', '조명기기'],
+        children: {
+          'TV, 영상기기': ['TV', 'DVD/블루레이', '프로젝터', '모니터', '셋톱박스'],
+          '카메라': ['DSLR', '미러리스', '콤팩트', '필름카메라', '액션캠', '렌즈', '액세서리'],
+          '오디오기기': ['스피커', '헤드폰/이어폰', 'AV리시버', 'CD플레이어', '레코드플레이어'],
+          '생활가전': ['냉장고', '세탁기', '청소기', '전자레인지', '식기세척기'],
+        }
+      },
+      '뷰티, 건강 관리': {
+        subs: ['스킨케어', '메이크업', '헤어케어', '바디케어', '향수', '건강보조식품', '의료기기'],
+        children: {
+          '스킨케어': ['클렌징', '토너/로션', '에센스/세럼', '크림', '마스크팩', '선케어'],
+          '메이크업': ['파운데이션', '립메이크업', '아이메이크업', '블러셔', '네일아트'],
+        }
+      },
+      '영화, 동영상': {
+        subs: ['DVD/블루레이', 'VHS', '영화', 'TV방송', '애니메이션', '다큐멘터리'],
+        children: { 'DVD/블루레이': ['국내영화', '외국영화', '드라마', '애니메이션', '다큐', '음악DVD'] }
+      },
+      '취미, 문화': { subs: ['독서', '영화감상', '음악감상', '여행', '요리', '미술/공예', '사진'], children: {} },
+      '거주지, 인테리어': {
+        subs: ['가구', '조명', '커튼/블라인드', '침구류', '수납/정리', '인테리어소품', '주방용품'],
+        children: {
+          '가구': ['소파', '침대', '책상/책장', '식탁', '수납장', 'TV장'],
+          '조명': ['실링라이트', '스탠드', '벽조명', '야외조명', 'LED조명'],
+        }
+      },
+      '사무, 점포 용품': {
+        subs: ['문구류', '사무기기', '점포용품', '사무가구', 'POS/결제시스템', '진열/쇼케이스', '포장재'],
+        children: {
+          '문구류': ['볼펜/만년필', '연필/샤프', '노트/다이어리', '파일/바인더', '테이프/접착제', '수정용품'],
+          '사무기기': ['프린터', '복사기', '스캐너', '팩스', '문서세단기', '제본기'],
+          '점포용품': ['쇼핑백', '영수증용지', '가격태그', '쇼케이스', '행거'],
+        }
+      },
+      '음식, 음료': {
+        subs: ['과자/스낵', '음료수', '주류', '인스턴트식품', '건강식품', '조미료/소스', '냉동식품'],
+        children: { '주류': ['맥주', '와인', '소주/위스키', '사케', '막걸리', '양주'] }
+      },
+      '컴퓨터': {
+        subs: ['데스크탑', '노트북', '모니터', '주변기기', 'CPU/메모리', 'HDD/SSD', '네트워크'],
+        children: {
+          '노트북': ['게이밍노트북', '울트라북', '비즈니스노트북', '크롬북', '2in1노트북'],
+          '주변기기': ['키보드', '마우스', '웹캠', 'USB허브', '프린터', '스캐너'],
+        }
+      },
+      '골동품, 컬렉션': { subs: ['도자기', '그림/서예', '동전/화폐', '우표', '장난감/피규어', '포카드', '고서적'], children: {} },
+      '스포츠, 레저': {
+        subs: ['구기종목', '수상스포츠', '겨울스포츠', '캠핑/아웃도어', '자전거', '요가/피트니스', '낚시'],
+        children: {
+          '캠핑/아웃도어': ['텐트', '침낭', '코펠/버너', '랜턴', '배낭', '등산화'],
+          '자전거': ['로드바이크', '산악자전거', '폴딩바이크', '자전거 액세서리'],
+        }
+      },
+      '음악': {
+        subs: ['기타', '피아노/건반', '드럼/퍼커션', '관악기', '현악기', '악보/교재', '음향장비'],
+        children: { '기타': ['어쿠스틱기타', '일렉기타', '베이스기타', '클래식기타', '기타 액세서리'] }
+      },
+      '탤런트 상품': { subs: ['K-POP', 'J-POP', '연예인 굿즈', '포토카드', '응원용품', '공식 MD', '한정판'], children: {} },
+      '기타': { subs: ['기타 물품', '미분류'], children: {} },
+      '아기 용품': { subs: ['유모차/카시트', '수유용품', '이유식', '기저귀', '아기옷', '장난감', '침구/가구'], children: {} },
+      '자동차, 오토바이': { subs: ['자동차 부품', '오토바이 부품', '카오디오', '네비게이션', '차량용품', '타이어/휠'], children: {} },
+      '티켓, 금권, 숙박예약': { subs: ['공연티켓', '스포츠티켓', '상품권', '숙박쿠폰', '여행패키지', '항공권'], children: {} },
+      '꽃, 원예': { subs: ['생화', '조화', '화분/화분받침', '비료/흙', '원예도구', '씨앗/구근'], children: {} },
+      '애완 동물, 생물': {
+        subs: ['강아지 용품', '고양이 용품', '조류 용품', '어류/수족관', '소동물', '사료'],
+        children: {
+          '강아지 용품': ['사료', '간식', '장난감', '의류', '이동장', '목욕용품'],
+          '고양이 용품': ['사료', '간식', '장난감', '캣타워', '이동장', '화장실'],
+        }
+      },
+      '장난감, 게임': {
+        subs: ['피규어', '프라모델', 'RC카/드론', '보드게임', '비디오게임', '트레이딩카드', '퍼즐'],
+        children: {
+          '피규어': ['애니메이션 피규어', '히어로/캐릭터', '군사 피규어', '스태츄', '가샤폰'],
+          '비디오게임': ['플레이스테이션', '닌텐도', 'Xbox', 'PC게임', '레트로게임'],
+        }
+      },
+      '패션': {
+        subs: ['남성의류', '여성의류', '아동의류', '신발', '가방', '모자/소품', '언더웨어/양말'],
+        children: {
+          '남성의류': ['티셔츠/폴로', '셔츠', '바지', '아우터', '정장', '스포츠웨어'],
+          '여성의류': ['블라우스/셔츠', '원피스', '바지', '아우터', '정장', '스포츠웨어'],
+          '신발': ['스니커즈', '구두', '샌들/슬리퍼', '부츠', '운동화'],
+        }
+      },
+      '만화, 애니메이션 상품': { subs: ['만화책', '애니메이션 DVD', '피규어/굿즈', '코스튬/코스프레', '포스터/아트', '원화'], children: {} },
+      '액세서리, 시계': {
+        subs: ['반지', '목걸이', '귀걸이', '팔찌', '시계', '브로치', '헤어액세서리'],
+        children: { '시계': ['남성시계', '여성시계', '스마트워치', '빈티지시계', '시계부품'] }
+      },
+      '책, 잡지': { subs: ['소설', '실용서', '만화', '잡지', '교재/참고서', '외국서적', '사전'], children: {} },
+      '브랜드 소품': {
+        subs: ['명품가방', '명품지갑', '명품시계', '명품의류', '명품신발', '명품액세서리'],
+        children: {
+          '명품가방': ['루이비통', '구찌', '샤넬', '에르메스', '프라다', '버버리'],
+          '명품시계': ['롤렉스', '오메가', '태그호이어', '까르띠에', 'IWC'],
+        }
+      },
+    };
+
+    // sub_main 링크 표기와 데이터 키가 다른 카테고리 보정
+    const categoryAliases = {
+      "앤틱, 컬렉션": "골동품, 컬렉션",
+      "유아용품": "아기 용품",
+      "코믹, 애니메이션": "만화, 애니메이션 상품",
+      "생활, 인테리어": "거주지, 인테리어",
+      "식품, 음료": "음식, 음료",
+      "영화, 비디오": "영화, 동영상",
+      "애완동물, 생물": "애완 동물, 생물",
+      "브랜드 소품": "브랜드 소품"
+    };
+
+    function resolveCategoryKey(name) {
+      if (!name) return null;
+      if (categoryData[name]) return name;
+      const alias = categoryAliases[name];
+      if (alias && categoryData[alias]) return alias;
+      const flat = name.replace(/\s/g, "");
+      return Object.keys(categoryData).find(key => key.replace(/\s/g, "") === flat) || null;
+    }
+
+    function childOptionsFor(pathItems) {
+      const topKey = resolveCategoryKey(pathItems[0]);
+      if (!topKey) return [];
+      if (pathItems.length === 1) return categoryData[topKey].subs || [];
+      if (pathItems.length === 2) return categoryData[topKey].children?.[pathItems[1]] || [];
+      return [];
+    }
 
     function resetSelectOptions(select, options) {
       if (!select) return;
@@ -681,19 +792,32 @@
       options.forEach(label => select.add(new Option(label, label)));
     }
 
+    function visiblePathUpTo(index) {
+      return breadcrumbSelects
+        .slice(0, index + 1)
+        .filter(isSelectVisible)
+        .map(select => select.value)
+        .filter(Boolean);
+    }
+
+    // 선택된 카테고리의 하위 목록
+    function lowerOptionsFor(index) {
+      return childOptionsFor(visiblePathUpTo(index));
+    }
+
     function setCategoryItemVisible(index, visible) {
       catItems[index]?.classList.toggle("is-hidden", !visible);
     }
 
     function resetAndHideLowerCategories(startIndex) {
       for (let index = startIndex; index < breadcrumbSelects.length; index += 1) {
-        resetSelectOptions(breadcrumbSelects[index], defaultLowerCategoryOptions[index] || []);
+        resetSelectOptions(breadcrumbSelects[index], []);
         setCategoryItemVisible(index, false);
       }
     }
 
     function handlePrimaryCategoryChange() {
-      resetSelectOptions(breadcrumbSelects[1], childCategoryOptionsByTopIndex[breadcrumbSelects[0].selectedIndex] || []);
+      resetSelectOptions(breadcrumbSelects[1], lowerOptionsFor(0));
       setCategoryItemVisible(0, true);
       setCategoryItemVisible(1, true);
       resetAndHideLowerCategories(2);
@@ -708,8 +832,9 @@
       }
       const hasValue = !!select.value && !select.options[select.selectedIndex]?.disabled;
       resetAndHideLowerCategories(index + 1);
-      if (hasValue && index + 1 < breadcrumbSelects.length) {
-        resetSelectOptions(breadcrumbSelects[index + 1], defaultLowerCategoryOptions[index + 1] || []);
+      const lowerOptions = hasValue ? lowerOptionsFor(index) : [];
+      if (lowerOptions.length && index + 1 < breadcrumbSelects.length) {
+        resetSelectOptions(breadcrumbSelects[index + 1], lowerOptions);
         setCategoryItemVisible(index + 1, true);
       }
       updateLastMarker();
@@ -725,7 +850,13 @@
     document.querySelectorAll("[data-cat-reset]").forEach(btn => {
       btn.addEventListener("click", () => {
         const level = parseInt(btn.dataset.catReset);
-        catItems[level].classList.add("is-hidden");
+        resetAndHideLowerCategories(level);
+        // 취소한 단계는 선택만 비우고 하위 단계는 접는다
+        resetSelectOptions(
+          breadcrumbSelects[level],
+          level === 0 ? Object.keys(categoryData) : lowerOptionsFor(level - 1)
+        );
+        setCategoryItemVisible(level, true);
         updateLastMarker();
         updateResultCount();
       });
@@ -752,12 +883,24 @@
 
     function applyCategoryPath(pathItems) {
       if (!pathItems.length) return;
+      const topKey = resolveCategoryKey(pathItems[0]);
+      if (topKey) {
+        resetSelectOptions(breadcrumbSelects[0], Object.keys(categoryData));
+        pathItems = [topKey, ...pathItems.slice(1)];
+      }
       breadcrumbSelects.forEach((select, index) => {
         const item = select.closest(".category-bar-item");
         const hasPathValue = index < pathItems.length;
         item?.classList.toggle("is-hidden", !hasPathValue);
         if (hasPathValue) setSelectValue(select, pathItems[index]);
       });
+      // 선택된 카테고리의 하위 카테고리를 다음 단계 셀렉트로 노출
+      const nextIndex = pathItems.length;
+      const lowerOptions = lowerOptionsFor(nextIndex - 1);
+      if (lowerOptions.length && nextIndex < breadcrumbSelects.length) {
+        resetSelectOptions(breadcrumbSelects[nextIndex], lowerOptions);
+        setCategoryItemVisible(nextIndex, true);
+      }
       updateLastMarker();
       if (currentCategoryHeadingEl) {
         currentCategoryHeadingEl.textContent = pathItems[pathItems.length - 1];
@@ -775,7 +918,8 @@
       });
     }
 
-    const pathItems = (requestedPath || requestedCategory || "")
+    const defaultCategory = "컴퓨터";
+    const pathItems = (requestedPath || requestedCategory || defaultCategory)
       .split(">")
       .map(item => item.trim())
       .filter(Boolean);

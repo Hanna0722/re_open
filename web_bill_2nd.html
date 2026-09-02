@@ -947,10 +947,6 @@
             <span class="benefit-row-val is-discount" id="panelVipDiscount">-235엔</span>
           </div>
           <div class="benefit-row">
-            <span class="benefit-row-lbl">안심케어 <span class="grade-badge-free">무료</span></span>
-            <span class="benefit-row-val" id="gradeBenefitCare">200엔</span>
-          </div>
-          <div class="benefit-row">
             <span class="benefit-row-lbl">묶음배송 10건 <span class="grade-badge-free">무료</span></span>
             <span class="benefit-row-val" id="gradeBenefitBundle">500엔</span>
           </div>
@@ -1339,12 +1335,10 @@
       if (panelTotal) panelTotal.innerHTML = `${fmt(finalYen)}엔<span class="amount-won-sub">(${fmt(finalWon)}원)</span>`;
 
       // VIP 등급혜택 — 무료 제공 항목 합계
-      const gradeCareYen   = 200;
       const gradeBundleYen = 500;
       const el = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
-      el('gradeBenefitCare',   `${fmt(gradeCareYen)}엔`);
       el('gradeBenefitBundle', `${fmt(gradeBundleYen)}엔`);
-      el('gradeBenefitTotal',  fmt(gradeCareYen + gradeBundleYen));
+      el('gradeBenefitTotal',  fmt(gradeBundleYen));
     };
 
     renderPaymentSummary();

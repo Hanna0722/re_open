@@ -134,7 +134,7 @@
     '.bbh-right{flex:1;display:flex;align-items:center;justify-content:flex-end;gap:4px}',
     '.bbh-ibtn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 10px;border-radius:5px;cursor:pointer;color:#666680;font-size:10px;border:none;background:none;font-family:inherit;position:relative}',
     '.bbh-ibtn:hover{background:#F5F7FA}',
-    '.bbh-ibtn i{font-size:17px}',
+    '.bbh-ibtn i{font-size:20px}',
     '.bbh-badge{position:absolute;top:4px;right:4px;background:#E8385A;color:#fff;font-size:8px;font-weight:700;min-width:14px;height:14px;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:0 2px}',
     '.bbh-btn-login{background:#E8385A;color:#fff;border:none;padding:8px 18px;border-radius:5px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;white-space:nowrap}',
     '.bbh-btn-login:hover{background:#C42F4C}',
@@ -221,18 +221,16 @@
     /* -- 상단 스토어 채널 바 (모든 페이지 공통) -- */
     '.channel-bar{background:#fff;border-bottom:1px solid #E0E4EB;padding:14px 0}',
     '.channel-inner{max-width:1060px;margin:0 auto;padding:0;display:flex;align-items:center;gap:0}',
-    '.channel-icons{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:0;width:100%;min-width:0;flex:1 1 auto;margin:0;padding:0;border:1px solid #E0E4EB;border-radius:8px;overflow:hidden}',
+    '.channel-icons{display:grid;grid-template-columns:repeat(8,1fr);gap:16px;width:min(calc(100vw - 60px),900px);margin:0 auto}',
     '.channel-icons::-webkit-scrollbar{display:none}',
-    '.ch-icon-item{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;padding:10px 5px;cursor:pointer;min-width:0;transition:background .15s;border-left:1px solid #E0E4EB;text-decoration:none}',
-    '.ch-icon-item:first-child{border-left:0}',
-    '.ch-icon-item:hover{background:#F5F7FA}',
-    '.ch-circle{width:30px;height:30px;background:transparent;border:0;box-shadow:none;display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none}',
-    '.ch-icon-item:hover .ch-circle{box-shadow:none}',
+    '.ch-icon-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:4px 14px;cursor:pointer;min-width:80px;flex-shrink:0;transition:opacity .15s;text-decoration:none}',
+    '.ch-icon-item:hover{opacity:.8}',
+    '.ch-circle{width:55px;height:55px;border-radius:20px;background:#fff;border:1px solid #E0E4EB;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);transition:box-shadow .15s;flex:none}',
+    '.ch-icon-item:hover .ch-circle{box-shadow:0 4px 14px rgba(0,0,0,.13)}',
     '.ch-circle img{width:100%;height:100%;object-fit:contain}',
-    '.ch-circle img.ch-logo{width:30px;height:30px;object-fit:contain;border-radius:0}',
-    '.ch-label{font-size:13px;color:#1A1A2E;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}',
-    '.ch-icon-item.active{background:#FFF5F7}',
-    '.ch-circle.active{border:0;box-shadow:none}',
+    '.ch-circle img.ch-logo{width:100%;height:100%;object-fit:contain;border-radius:0}',
+    '.ch-label{font-size:14px;color:#666B75;font-weight:500;white-space:nowrap}',
+    '.ch-circle.active{border-color:#E8385A;box-shadow:0 0 0 3px rgba(232,56,90,.14)}',
     '.ch-label.active{color:#E8385A;font-weight:700}',
 
     /* -- 서브/카테고리/통합검색 상단 스토어 바 (채널 바와 동일 모양) -- */
@@ -255,9 +253,9 @@
           '<a href="web_main.html" class="bbh-logo"><img src="Bidbuy logo.png" alt="Bidbuy World Auction Agency"></a>' +
           '<form class="bbh-search" role="search" action="web_totalsearch.html" method="get"><input type="search" name="q" placeholder="키워드 또는 구매신청을 원하시는 URL을 입력해주세요" aria-label="검색어 입력"><button type="submit"><i class="fas fa-search"></i> <span>AI 검색</span></button></form>' +
           '<div class="bbh-right">' +
-            '<button class="bbh-ibtn" type="button" aria-label="알림"><i class="far fa-bell"></i><span class="bbh-badge">3</span><span>알림</span></button>' +
-            '<button class="bbh-ibtn" type="button" aria-label="장바구니"><i class="fas fa-shopping-cart"></i><span>장바구니</span></button>' +
-            '<button class="bbh-ibtn" id="bbhUserTrig" type="button" aria-label="회원 메뉴" aria-haspopup="true" aria-expanded="false" onclick="toggleUserDrawer()"><i class="far fa-user"></i><span>마이페이지</span></button>' +
+            '<button class="bbh-ibtn" type="button" aria-label="알림"><i class="far fa-bell"></i><span class="bbh-badge">3</span></button>' +
+            '<button class="bbh-ibtn" type="button" aria-label="장바구니"><i class="fas fa-shopping-cart"></i></button>' +
+            '<button class="bbh-ibtn" id="bbhUserTrig" type="button" aria-label="회원 메뉴" aria-haspopup="true" aria-expanded="false" onclick="toggleUserDrawer()"><i class="far fa-user"></i></button>' +
           '</div>' +
         '</div>'
       );
