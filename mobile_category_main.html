@@ -36,85 +36,42 @@ button,select{cursor:pointer}
 /* ── 스토어 바로가기 (검색 채널 탭) ── */
 .channel-tabs{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 8px;-webkit-overflow-scrolling:touch;background:#fff}
 .channel-tabs::-webkit-scrollbar{display:none}
-.ch-tab{padding:10px 12px 11px;font-size:12px;font-weight:700;color:#707070;white-space:nowrap;cursor:pointer;border:0;border-bottom:2px solid transparent;background:transparent;flex-shrink:0;font-family:inherit}
+.ch-tab{display:inline-flex;align-items:center;gap:5px;padding:10px 12px 11px;font-size:12px;font-weight:700;color:#707070;white-space:nowrap;cursor:pointer;border:0;border-bottom:2px solid transparent;background:transparent;flex-shrink:0;font-family:inherit}
 .ch-tab.active{color:var(--rose);border-bottom-color:var(--rose)}
 .ch-tab small{font-weight:600;color:var(--tm);font-size:11px;margin-left:2px;font-family:'Roboto',sans-serif}
 .ch-tab.active small{color:var(--rose)}
+.ch-dot{width:6px;height:6px;border-radius:50%;background:var(--rose);flex:0 0 auto}
+.ch-tab i{font-size:13px;color:#707070}
+.ch-tab.active i{color:var(--rose)}
 
-/* ── 카테고리 바 ── */
-.category-bar{display:flex;align-items:center;flex-wrap:nowrap;gap:6px;padding:14px 16px 10px;background:#fff;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.category-bar::-webkit-scrollbar{display:none}
-.category-bar-title{color:var(--rose);font-size:15px;font-weight:700;white-space:nowrap;flex-shrink:0}
-.category-bar-item{display:none;align-items:center;gap:4px;flex-shrink:0}
-.category-bar-item.is-hidden{display:none}
-.category-crumb-sep{color:var(--tm);font-size:12px;flex-shrink:0}
-.category-bar-select{flex-shrink:0;max-width:120px;height:30px;padding:0 22px 0 8px;border:1px solid var(--line);border-radius:6px;background-color:#fff;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23111827' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;color:var(--tp);font-size:12px;font-weight:700;appearance:none;-webkit-appearance:none;-moz-appearance:none;text-overflow:ellipsis}
-.cat-reset-btn{display:none;width:16px;height:16px;padding:0;border:0;border-radius:50%;background:#e5e7eb;color:#6b7280;font-size:10px;line-height:1;align-items:center;justify-content:center;flex-shrink:0}
-.category-bar-item.is-last .cat-reset-btn{display:inline-flex}
-
-/* ── 현재 카테고리 결과 헤더 ── */
-.result-header{padding:10px 15px 5px;background:#fff;border-top:1px solid var(--border)}
-.result-current{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px}
-.category-bar-keyword-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;flex:0 0 auto;height:32px;min-width:76px;padding:0 10px;border:1px solid #d8dce2;border-radius:5px;background:#fff;color:var(--muted, var(--ts));font-size:12px;font-weight:600;line-height:1;white-space:nowrap}
-.category-bar-keyword-btn i{font-size:12px;line-height:1}
-.category-bar-keyword-btn.active{border-color:var(--rose);background:#fff0f3;color:var(--rose);font-weight:700}
-.cat-open-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;flex:0 0 auto;height:32px;min-width:76px;padding:0 10px;border:1px solid #d8dce2;border-radius:5px;background:#fff;color:var(--muted, var(--ts));font-size:12px;font-weight:600;line-height:1;white-space:nowrap}
-.cat-open-btn::after{content:"";width:7px;height:7px;margin-top:0;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);opacity:.72}
-.cat-open-btn.cat-selected{border-color:var(--rose);background:#fff0f3;color:var(--rose);font-weight:700}
-
-/* ── 카테고리 선택 후 결과 헤더 (시안) ── */
-.cat-result-top{display:none;align-items:baseline;justify-content:space-between;gap:10px;padding:16px 16px 10px;background:#fff}
-.cat-result-title{margin:0;color:var(--rose);font-size:19px;font-weight:700;line-height:1.25;min-width:0}
+/* ── 카테고리 결과 헤더 ── */
+.cat-result-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:16px 16px 12px;background:#fff}
+.cat-result-title{display:flex;align-items:center;gap:8px;margin:0;color:var(--rose);font-size:19px;font-weight:700;line-height:1.25;min-width:0}
 .cat-result-total{margin:0;color:var(--ts);font-size:13px;font-weight:500;white-space:nowrap}
 .cat-result-total b{color:var(--tp);font-weight:700;font-family:'Roboto',sans-serif}
-.cat-quick-select{display:none;flex:1;min-width:0;height:38px;padding:0 26px 0 12px;border:1px solid var(--line);border-radius:8px;background-color:#fff;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23111827' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;color:var(--tp);font-size:13px;font-weight:600;appearance:none;-webkit-appearance:none;-moz-appearance:none;text-overflow:ellipsis;font-family:inherit}
-body.cat-applied .cat-result-top{display:flex}
-body.cat-applied .cat-quick-select{display:block}
-body.cat-applied .category-bar,
-body.cat-applied #resultHeader,
-body.cat-applied #catResultHeader,
-body.cat-applied .filter-bar .result-title{display:none !important}
-body.cat-applied .filter-bar{justify-content:flex-start;gap:6px}
-body.cat-applied .filter-bar .sort-select{flex:1;min-width:0}
-.filter-fab{position:fixed;right:10px;top:42%;z-index:60;width:44px;height:44px;border:1px solid var(--rose);border-radius:50%;background:#fff;color:var(--rose);font-size:16px;display:none;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(17,24,39,.14);cursor:pointer}
-body.cat-applied .filter-fab{display:flex}
+.category-bar-keyword-btn{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:26px;height:26px;padding:0;border:1px solid #d8dce2;border-radius:5px;background:#fff;color:var(--ts);font-size:12px;line-height:1}
+.category-bar-keyword-btn.active{border-color:var(--rose);background:#fff0f3;color:var(--rose)}
 
-/* ── 선택된 카테고리 결과 헤더 (적용 후 노출) ── */
-.cat-result-header{display:none;align-items:center;gap:8px;padding:8px 16px;background:#fff8f9;border-bottom:1px solid #ffd6de}
-.cat-result-tags{display:flex;flex-wrap:wrap;gap:6px;flex:1}
-.cat-result-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:#fff;border:1px solid var(--rose);border-radius:999px;font-size:11px;color:var(--rose);font-weight:600}
-.cat-result-tag button{display:flex;align-items:center;color:var(--rose);opacity:.7;padding:0;font-size:13px;line-height:1;border:none;background:none}
-.cat-result-clear{flex-shrink:0;font-size:11px;color:var(--ts);text-decoration:underline;padding:0;border:none;background:none}
+/* ── 결과 내 검색 ── */
+.refine-box{padding:0 16px 14px;background:#fff}
+.refine-label{margin:0 0 8px;color:var(--tp);font-size:14px;font-weight:700}
+.refine-field{display:flex;align-items:center;height:44px;border:1px solid var(--border);border-radius:8px;background:#fff;overflow:hidden}
+.refine-field:focus-within{border-color:var(--rose)}
+.refine-field input{flex:1;min-width:0;height:100%;padding:0 12px;border:0;outline:0;background:transparent;color:var(--tp);font-size:13px;font-family:inherit}
+.refine-field input::placeholder{color:var(--tm)}
+.refine-help{margin:8px 0 0;color:var(--ts);font-size:12px;line-height:1.5}
 
-/* ── 필터 시트 내 탭 ── */
-.filter-tabs{display:flex;gap:20px;padding:0 16px;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;flex-shrink:0}
-.filter-tabs::-webkit-scrollbar{display:none}
-.filter-tab{position:relative;flex:0 0 auto;height:42px;color:var(--ts);font-size:13px;font-weight:600;white-space:nowrap;background:none;border:none}
-.filter-tab.active{color:var(--rose);font-weight:700}
-.filter-tab.active::after{content:"";position:absolute;right:0;bottom:0;left:0;height:2px;background:var(--rose)}
-.filter-panel{display:none;padding:12px 0 8px}
-.filter-panel.active{display:block}
-.cat-top-chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid var(--line)}
-.cat-top-chips::-webkit-scrollbar{display:none}
-.cat-top-chip{flex:0 0 auto;height:30px;padding:0 12px;border:1px solid var(--line);border-radius:20px;background:#fff;color:var(--ts);font-size:12px;font-weight:700;white-space:nowrap}
-.cat-top-chip.active{border-color:var(--brand);background:#fff5f7;color:var(--rose)}
-.filter-check-list{display:grid;gap:14px}
-.filter-check{display:flex;align-items:center;gap:10px;min-height:22px;color:#3c4148;font-size:13px;text-align:left;background:none;border:none}
-.filter-check::before{content:"✓";display:grid;place-items:center;width:18px;height:18px;border:1px solid var(--line);border-radius:50%;color:#c3c8d0;font-size:10px;flex:0 0 auto}
-.filter-check.active::before{border-color:var(--brand);background:var(--brand);color:#fff}
-.filter-check.has-children{justify-content:space-between}
-.filter-check.has-children .cat-arrow{color:#b7bbc4;flex-shrink:0;margin-left:auto;padding:4px}
-.cat-breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
-.cat-back-btn{display:inline-flex;align-items:center;gap:5px;color:var(--rose);font-size:12px;font-weight:700}
-.cat-breadcrumb-path{font-size:12px;color:var(--ts);font-weight:500}
-.result-title{margin:0;color:var(--tp);font-size:13px;font-weight:700}
-.result-title .red{color:red;font-weight:700;font-family:'Roboto',sans-serif}
+/* ── 카테고리 셀렉트 (정렬·필터 바) ── */
+.cat-quick-select{flex:1;min-width:0;height:32px;padding:0 24px 0 10px;border:1px solid var(--border);border-radius:8px;background-color:#fff;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999BAA'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;color:var(--ts);font-size:12px;font-weight:700;font-family:inherit;outline:none;appearance:none;-webkit-appearance:none;-moz-appearance:none;text-overflow:ellipsis}
 
+/* ── 필터 플로팅 버튼 ── */
+.filter-fab{position:fixed;right:10px;top:42%;z-index:60;width:44px;height:44px;border:1px solid var(--rose);border-radius:50%;background:#fff;color:var(--rose);font-size:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(17,24,39,.14);cursor:pointer}
+.filter-fab-badge{position:absolute;right:-3px;bottom:-3px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;background:var(--rose);color:#fff;font-size:10px;font-weight:700;font-family:'Roboto',sans-serif;display:flex;align-items:center;justify-content:center}
+.filter-fab-badge[hidden]{display:none}
 /* ── 정렬·필터 바 ── */
-.filter-bar{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:10px 15px;background:#fff;border-bottom:1px solid var(--border)}
-.filter-bar .result-title{margin-right:auto;flex:1;min-width:0}
-.sort-select{height:32px;padding:0 20px 0 10px;border:1px solid var(--border);border-radius:8px;background:#fff;color:var(--ts);font-size:12px;font-weight:700;font-family:inherit;outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999BAA'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
-.btn-filter{display:flex;align-items:center;gap:6px;height:32px;padding:0 13px;border:1px solid var(--border);border-radius:5px;background:#fff;color:var(--ts);font-size:12px;font-weight:700;font-family:inherit}
+.filter-bar{display:flex;align-items:center;gap:8px;padding:10px 15px;background:#fff;border-bottom:1px solid var(--border)}
+.sort-select{flex:1;min-width:0;height:32px;padding:0 20px 0 10px;border:1px solid var(--border);border-radius:8px;background:#fff;color:var(--ts);font-size:12px;font-weight:700;font-family:inherit;outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999BAA'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.btn-filter{flex:0 0 auto;display:flex;align-items:center;gap:6px;height:32px;padding:0 13px;border:1px solid var(--border);border-radius:5px;background:#fff;color:var(--ts);font-size:12px;font-weight:700;font-family:inherit}
 .btn-filter i{font-size:12px}
 .btn-filter.has-filter{color:var(--brand);border-color:var(--brand)}
 
@@ -151,15 +108,18 @@ body.cat-applied .filter-fab{display:flex}
 .sheet-title{font-size:15px;font-weight:700}
 .btn-sheet-close{width:30px;height:30px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:20px;background:none;border:none}
 .sheet-body{overflow-y:auto;flex:1;min-height:0;padding:0 16px 8px}
-.sheet-section{padding:16px 0;border-bottom:1px solid var(--line)}
-.sheet-section:last-child{border-bottom:none}
-.sheet-section-label{font-size:12px;font-weight:700;color:#111;margin-bottom:10px}
-.price-range-fields{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
-.range-sep{color:var(--muted);font-size:13px;text-align:center}
-.filter-text-input,.filter-select{width:100%;height:38px;padding:0 10px;border:1px solid #ddd;border-radius:6px;background:#fff;color:var(--tp);font-size:13px;outline:0}
-.filter-text-input:focus,.filter-select:focus{border-color:var(--rose)}
-.filter-checkbox-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;color:var(--tp);font-size:13px;font-weight:600}
-.filter-checkbox-row input{width:16px;height:16px;accent-color:var(--rose)}
+/* 필터 항목 (m-inline-filter) */
+.m-filter-block{padding:16px 0;border-bottom:1px solid var(--line)}
+.m-filter-block:last-child{border-bottom:none}
+.m-filter-block label,.m-filter-label{display:block;margin-bottom:8px;color:#111827;font-size:13px;font-weight:800}
+.m-price-fields{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:10px}
+.m-price-fields span{color:var(--muted);font-size:13px;text-align:center}
+.m-filter-input,.m-filter-select{width:100%;height:38px;border:1px solid #d9dfe8;border-radius:6px;background:#fff;padding:0 11px;color:#111827;font-size:13px;outline:none;font-family:inherit}
+.m-filter-input::placeholder{color:#9ca6b5}
+.m-filter-input:focus,.m-filter-select:focus{border-color:var(--rose)}
+.m-filter-select{appearance:none;-webkit-appearance:none;-moz-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23909AA8'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:30px}
+.m-filter-checkbox{display:flex;align-items:center;gap:8px;height:22px;margin-bottom:8px;color:#111827;font-size:13px;font-weight:700}
+.m-filter-checkbox input{width:16px;height:16px;accent-color:var(--rose)}
 .sheet-actions{display:flex;gap:8px;padding:12px 16px 20px;border-top:1px solid var(--line);flex-shrink:0;background:#fff}
 .btn-sheet-reset{padding:13px 20px;border:1px solid var(--line);border-radius:5px;font-size:14px;color:var(--muted);background:#fff}
 .btn-sheet-apply{flex:1;padding:13px;background:var(--brand);border-radius:5px;font-size:14px;font-weight:700;color:#fff;border:none}
@@ -168,69 +128,37 @@ body.cat-applied .filter-fab{display:flex}
 <body>
 
 <nav class="channel-tabs" aria-label="스토어 바로가기">
-    <button class="ch-tab active" type="button" data-store-name="야후 옥션" onclick="selectChannel(this)">야후 옥션</button>
-    <button class="ch-tab" type="button" data-store-name="메루카리" onclick="selectChannel(this)">메루카리</button>
-    <button class="ch-tab" type="button" data-store-name="일본 라쿠텐" onclick="selectChannel(this)">일본 라쿠텐</button>
-    <button class="ch-tab" type="button" data-store-name="일본 라쿠마" onclick="selectChannel(this)">일본 라쿠마</button>
-    <button class="ch-tab" type="button" data-store-name="야후 쇼핑" onclick="selectChannel(this)">야후 쇼핑</button>
-    <button class="ch-tab" type="button" data-store-name="야후 프리마" onclick="selectChannel(this)">야후 프리마</button>
-    <button class="ch-tab" type="button" data-store-name="미국 이베이" onclick="selectChannel(this)">미국 이베이</button>
-    <button class="ch-tab" type="button" data-store-name="영국 이베이" onclick="selectChannel(this)">영국 이베이</button>
-  </nav>
+  <button class="ch-tab" type="button" data-store-name="전체" onclick="selectChannel(this)"><i class="fa-solid fa-globe" aria-hidden="true"></i>전체</button>
+  <button class="ch-tab active" type="button" data-store-name="야후 옥션" onclick="selectChannel(this)"><span class="ch-dot" aria-hidden="true"></span>야후 옥션 <small>677,354</small></button>
+  <button class="ch-tab" type="button" data-store-name="메루카리" onclick="selectChannel(this)"><span class="ch-dot" aria-hidden="true"></span>메루카리 <small>128,940</small></button>
+  <button class="ch-tab" type="button" data-store-name="일본 라쿠텐" onclick="selectChannel(this)"><span class="ch-dot" aria-hidden="true"></span>일본 라쿠텐 <small>96,412</small></button>
+  <button class="ch-tab" type="button" data-store-name="일본 라쿠마" onclick="selectChannel(this)"><span class="ch-dot" aria-hidden="true"></span>일본 라쿠마 <small>54,208</small></button>
+  <button class="ch-tab" type="button" data-store-name="야후 쇼핑" onclick="selectChannel(this)"><span class="ch-dot" aria-hidden="true"></span>야후 쇼핑 <small>71,663</small></button>
+  <button class="ch-tab" type="button" data-store-name="야후 프리마" onclick="selectChannel(this)"><span class="ch-dot" aria-hidden="true"></span>야후 프리마 <small>18,905</small></button>
+  <button class="ch-tab" type="button" data-store-name="미국 이베이" onclick="selectChannel(this)"><span class="ch-dot" aria-hidden="true"></span>미국 이베이 <small>240,117</small></button>
+  <button class="ch-tab" type="button" data-store-name="영국 이베이" onclick="selectChannel(this)"><span class="ch-dot" aria-hidden="true"></span>영국 이베이 <small>62,338</small></button>
+</nav>
 
-<!-- ── 카테고리 바 ── -->
-<div class="category-bar" id="categoryBar">
-  <strong class="category-bar-title">장난감, 게임</strong>
-  <span class="category-bar-item" data-cat-item="0">
-    <span class="category-crumb-sep" aria-hidden="true">›</span>
-    <select class="category-bar-select" aria-label="1차 카테고리 선택" data-breadcrumb-select>
-      <option value="" selected disabled>하위 카테고리</option>
-    </select>
-    <button class="cat-reset-btn" type="button" aria-label="1차 카테고리 선택 취소" data-cat-reset="0">×</button>
-  </span>
-  <span class="category-bar-item is-hidden" data-cat-item="1">
-    <span class="category-crumb-sep" aria-hidden="true">›</span>
-    <select class="category-bar-select" aria-label="2차 카테고리 선택" data-breadcrumb-select>
-      <option value="" selected disabled>전체</option>
-    </select>
-    <button class="cat-reset-btn" type="button" aria-label="2차 카테고리 선택 취소" data-cat-reset="1">×</button>
-  </span>
-  <span class="category-bar-item is-hidden" data-cat-item="2">
-    <span class="category-crumb-sep" aria-hidden="true">›</span>
-    <select class="category-bar-select" aria-label="3차 카테고리 선택" data-breadcrumb-select>
-      <option value="" selected disabled>전체</option>
-    </select>
-    <button class="cat-reset-btn" type="button" aria-label="3차 카테고리 선택 취소" data-cat-reset="2">×</button>
-  </span>
+<!-- ── 카테고리 결과 헤더 ── -->
+<div class="cat-result-top">
+  <h1 class="cat-result-title">
+    <span id="catResultTitle">컴퓨터</span>
+    <button class="category-bar-keyword-btn" type="button" id="categoryKeywordBtn" aria-label="관심키워드 등록" onclick="toggleCategoryKeyword(this)"><i class="fa-regular fa-star" aria-hidden="true"></i></button>
+  </h1>
+  <p class="cat-result-total">전체 <b data-result-count>677,354</b>건</p>
 </div>
 
-<!-- ── 현재 카테고리 결과 헤더 ── -->
-<div class="result-header" id="resultHeader">
-  <div class="result-current">
-    <button class="cat-open-btn" type="button" id="catOpenBtn" onclick="openFilterSheetFromCat('category')">
-      카테고리
-    </button>
-    <button class="category-bar-keyword-btn" type="button" id="categoryKeywordBtn" onclick="toggleCategoryKeyword(this)">
-      <i class="fa-regular fa-star" aria-hidden="true"></i> 관심키워드 등록
-    </button>
+<!-- ── 결과 내 검색 ── -->
+<section class="refine-box" aria-label="결과 내 검색">
+  <p class="refine-label">결과 내 검색</p>
+  <div class="refine-field">
+    <input type="text" id="refineInput" placeholder="키워드 추가" aria-label="결과 내 검색어">
   </div>
-</div>
-
-<!-- ── 선택된 하위 카테고리 태그 (적용 후 노출) ── -->
-<div class="cat-result-header" id="catResultHeader">
-  <div class="cat-result-tags" id="catResultTags"></div>
-  <button class="cat-result-clear" type="button" onclick="clearCatFilter()">전체해제</button>
-</div>
-
-<!-- ── 선택된 카테고리 결과 헤더 (시안) ── -->
-<div class="cat-result-top" id="catResultTop">
-  <h1 class="cat-result-title" id="catResultTitle">카테고리</h1>
-  <p class="cat-result-total">전체 <b data-result-count-top>0</b>건</p>
-</div>
+  <p class="refine-help">검색 결과 안에서 다시 좁힙니다. 일본어·영어로 넣으면 더 잘 찾습니다</p>
+</section>
 
 <!-- ── 정렬·필터 바 ── -->
 <div class="filter-bar">
-  <p class="result-title">전체 <span class="red" data-result-count>4,788,005</span>건</p>
   <button class="btn-filter" id="btnFilter" type="button" onclick="openSheet()">
     <i class="fa-solid fa-filter" aria-hidden="true"></i> 필터
   </button>
@@ -243,13 +171,13 @@ body.cat-applied .filter-fab{display:flex}
       <option>입찰수낮은순</option>
       <option>신상품순</option>
   </select>
-  <select class="cat-quick-select" id="catQuickSelect" aria-label="선택한 카테고리"></select>
+  <select class="cat-quick-select" id="catQuickSelect" aria-label="카테고리 선택"></select>
 </div>
 
 <button class="filter-fab" type="button" aria-label="필터 열기" onclick="openSheet()">
   <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+  <span class="filter-fab-badge" id="filterFabBadge" hidden>0</span>
 </button>
-
 <!-- ── 상품 그리드 ── -->
 <div class="product-grid" id="productSection">
   <div class="product-card" onclick="location.href='mobile_auction.html'">
@@ -316,7 +244,7 @@ body.cat-applied .filter-fab{display:flex}
 
 <button class="btn-more" type="button">상품 더보기 <i class="fa-solid fa-chevron-down"></i></button>
 
-<!-- ══ 필터 바텀시트 ══ -->
+<!-- ══ 필터 바텀시트 (필터 버튼 / 우측 플로팅 버튼 공용) ══ -->
 <div class="sheet-overlay" id="overlay" onclick="closeSheet()"></div>
 
 <div class="filter-sheet" id="filterSheet" aria-hidden="true">
@@ -326,73 +254,39 @@ body.cat-applied .filter-fab{display:flex}
     <button class="btn-sheet-close" type="button" onclick="closeSheet()" aria-label="닫기"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
   </div>
 
-  <div class="filter-tabs" role="tablist">
-    <button class="filter-tab active" type="button" data-filter-tab="category" onclick="switchFilterTab('category')">카테고리</button>
-    <button class="filter-tab" type="button" data-filter-tab="price" onclick="switchFilterTab('price')">가격</button>
-    <button class="filter-tab" type="button" data-filter-tab="condition" onclick="switchFilterTab('condition')">상품상태</button>
-    <button class="filter-tab" type="button" data-filter-tab="shipping" onclick="switchFilterTab('shipping')">배송/판매</button>
-    <button class="filter-tab" type="button" data-filter-tab="seller" onclick="switchFilterTab('seller')">판매자</button>
-    <button class="filter-tab" type="button" data-filter-tab="etc" onclick="switchFilterTab('etc')">기타</button>
-  </div>
-
-  <div class="sheet-body">
-    <div class="filter-panel active" data-filter-panel="category">
-      <div class="cat-top-chips" id="catTopChips" aria-label="대분류 선택"></div>
-      <div class="cat-breadcrumb" id="catBreadcrumb" style="display:none;">
-        <button class="cat-back-btn" type="button" onclick="catGoBack()">
-          <i class="fa-solid fa-chevron-left" aria-hidden="true"></i> 이전
-        </button>
-        <span class="cat-breadcrumb-path" id="catBreadcrumbPath"></span>
-      </div>
-      <div class="filter-check-list" id="catList"></div>
-    </div>
-
-    <div class="filter-panel" data-filter-panel="price">
-      <div class="sheet-section">
-        <div class="sheet-section-label">가격</div>
-        <div class="price-range-fields">
-          <input type="text" class="filter-text-input" placeholder="최소" aria-label="최소 가격">
-          <span class="range-sep" aria-hidden="true">~</span>
-          <input type="text" class="filter-text-input" placeholder="최대" aria-label="최대 가격">
-        </div>
+  <div class="sheet-body" id="sheetBody">
+    <div class="m-filter-block">
+      <div class="m-filter-label">가격 (JPY)</div>
+      <div class="m-price-fields">
+        <input class="m-filter-input" type="text" placeholder="최소 JPY" aria-label="최소 가격">
+        <span aria-hidden="true">~</span>
+        <input class="m-filter-input" type="text" placeholder="최대 JPY" aria-label="최대 가격">
       </div>
     </div>
-
-    <div class="filter-panel" data-filter-panel="condition">
-      <div class="sheet-section">
-        <div class="sheet-section-label">상품상태</div>
-        <select class="filter-select" aria-label="상품상태">
-          <option>전체</option>
-          <option>신품</option>
-          <option>중고</option>
-        </select>
-      </div>
+    <div class="m-filter-block">
+      <label for="sheetItemState">상품상태</label>
+      <select class="m-filter-select" id="sheetItemState">
+        <option>전체</option>
+        <option>새 상품</option>
+        <option>중고</option>
+      </select>
     </div>
-
-    <div class="filter-panel" data-filter-panel="shipping">
-      <div class="sheet-section">
-        <div class="sheet-section-label">배송/판매</div>
-        <label class="filter-checkbox-row"><input type="checkbox"><span>무료배송</span></label>
-        <select class="filter-select" aria-label="거래방식">
-          <option>거래방식 전체</option>
-          <option>경매</option>
-          <option>즉시구매</option>
-        </select>
-      </div>
+    <div class="m-filter-block">
+      <div class="m-filter-label">배송/판매</div>
+      <label class="m-filter-checkbox">
+        <input type="checkbox">
+        <span>무료배송</span>
+      </label>
+      <select class="m-filter-select" aria-label="거래방식">
+        <option>거래방식 전체</option>
+        <option>경매</option>
+        <option>즉시구매</option>
+        <option>가격제안</option>
+      </select>
     </div>
-
-    <div class="filter-panel" data-filter-panel="seller">
-      <div class="sheet-section">
-        <div class="sheet-section-label">판매자</div>
-        <input type="text" class="filter-text-input" placeholder="판매자" aria-label="판매자">
-      </div>
-    </div>
-
-    <div class="filter-panel" data-filter-panel="etc">
-      <div class="sheet-section">
-        <div class="sheet-section-label">기타</div>
-        <input type="text" class="filter-text-input" placeholder="지역/국가" aria-label="지역/국가">
-      </div>
+    <div class="m-filter-block">
+      <label for="sheetSeller">판매자</label>
+      <input class="m-filter-input" id="sheetSeller" type="text" placeholder="판매자">
     </div>
   </div>
 
@@ -410,7 +304,7 @@ function toggleWish(btn) {
   btn.style.color = on ? 'var(--rose)' : '';
 }
 
-/* ── 필터 바텀시트 ── */
+/* ── 필터 바텀시트 (필터 버튼 / 우측 플로팅 버튼 공용) ── */
 function openSheet() {
   document.getElementById('overlay').classList.add('open');
   document.getElementById('filterSheet').classList.add('open');
@@ -424,84 +318,33 @@ function closeSheet() {
   document.body.style.overflow = '';
 }
 function resetSheet() {
-  document.querySelectorAll('.filter-text-input').forEach(i => i.value = '');
-  document.querySelectorAll('.filter-select').forEach(s => s.selectedIndex = 0);
-  document.querySelectorAll('.filter-checkbox-row input').forEach(c => c.checked = false);
-  selectedCats.clear();
-  catStack = [];
-  initCatPanel();
-  updateResultCount();
-  renderCatResultHeader();
+  document.querySelectorAll('#sheetBody .m-filter-input').forEach(i => i.value = '');
+  document.querySelectorAll('#sheetBody .m-filter-select').forEach(s => s.selectedIndex = 0);
+  document.querySelectorAll('#sheetBody input[type="checkbox"]').forEach(c => c.checked = false);
+  syncFilterState();
 }
 
-/* ── 필터 시트 내 탭 전환 ── */
-function switchFilterTab(tabName) {
-  document.querySelectorAll('[data-filter-tab]').forEach(tab => {
-    tab.classList.toggle('active', tab.dataset.filterTab === tabName);
-  });
-  document.querySelectorAll('[data-filter-panel]').forEach(panel => {
-    panel.classList.toggle('active', panel.dataset.filterPanel === tabName);
-  });
-  if (tabName === 'category') initCatPanel();
+/* 적용된 필터 개수 → 필터 버튼 강조 + 플로팅 버튼 배지 */
+function countAppliedFilters() {
+  let count = 0;
+  document.querySelectorAll('#sheetBody .m-filter-input').forEach(i => { if (i.value.trim()) count += 1; });
+  document.querySelectorAll('#sheetBody .m-filter-select').forEach(s => { if (s.selectedIndex > 0) count += 1; });
+  document.querySelectorAll('#sheetBody input[type="checkbox"]').forEach(c => { if (c.checked) count += 1; });
+  return count;
 }
-function openFilterSheetFromCat(tabName) {
-  switchFilterTab(tabName);
-  openSheet();
-}
-function initCatPanel() {
-  catStack = [];
-  catRenderLevel(categoryData[activeTopCategory].subs, 1);
-}
-
-/* ── 선택된 하위 카테고리 태그(적용 후 노출) ── */
-function renderCatResultHeader() {
-  const header = document.getElementById('catResultHeader');
-  const tags = document.getElementById('catResultTags');
-  const openBtn = document.getElementById('catOpenBtn');
-  const btnFilter = document.getElementById('btnFilter');
-  if (!header || !tags) return;
-  tags.innerHTML = '';
-  if (selectedCats.size === 0) {
-    header.style.display = 'none';
-    openBtn?.classList.remove('cat-selected');
-    btnFilter?.classList.remove('has-filter');
-    renderAppliedCategoryView();
-    return;
+function syncFilterState() {
+  appliedFilterCount = countAppliedFilters();
+  const badge = document.getElementById('filterFabBadge');
+  if (badge) {
+    badge.textContent = appliedFilterCount;
+    badge.hidden = appliedFilterCount === 0;
   }
-  selectedCats.forEach(name => {
-    const tag = document.createElement('span');
-    tag.className = 'cat-result-tag';
-    tag.innerHTML = `${name}<button type="button" onclick="removeCatFilter('${name}')" aria-label="${name} 해제">×</button>`;
-    tags.appendChild(tag);
-  });
-  header.style.display = 'flex';
-  openBtn?.classList.add('cat-selected');
-  btnFilter?.classList.add('has-filter');
-  renderAppliedCategoryView();
-}
-function removeCatFilter(name) {
-  selectedCats.delete(name);
-  document.querySelectorAll('#catList .filter-check').forEach(btn => {
-    if (btn.textContent.trim() === name) btn.classList.remove('active');
-  });
+  document.getElementById('btnFilter')?.classList.toggle('has-filter', appliedFilterCount > 0);
   updateResultCount();
-  renderCatResultHeader();
-}
-function clearCatFilter() {
-  selectedCats.clear();
-  updateResultCount();
-  renderCatResultHeader();
-  initCatPanel();
-}
-function applyCurrentCategoryPath() {
-  if (selectedCats.size > 0 || catStack.length === 0) return;
-  const current = catStack[catStack.length - 1]?.label;
-  if (current) selectedCats.add(current);
 }
 function applyFilter() {
-  applyCurrentCategoryPath();
-  updateResultCount();
-  renderCatResultHeader();
+  syncFilterState();
+  shuffleCategoryProductPreview();
   closeSheet();
 }
 
@@ -510,9 +353,6 @@ const urlParams = new URLSearchParams(window.location.search);
 const requestedCategory = urlParams.get('category');
 const requestedPath = urlParams.get('path');
 const requestedSelectedCategory = urlParams.get('selected');
-if (requestedCategory) {
-  document.querySelector('.category-bar-title').textContent = requestedCategory;
-}
 const requestedStore = urlParams.get('store');
 if (requestedStore) {
   document.querySelectorAll('.ch-tab').forEach(tab => {
@@ -547,167 +387,45 @@ const categoryData = {
   '브랜드 소품': { subs: ['명품가방','명품지갑','명품시계','명품의류','명품신발','명품액세서리'], children: { '명품가방': ['루이비통','구찌','샤넬','에르메스','프라다','버버리'] } },
   '애완 동물, 생물': { subs: ['강아지 용품','고양이 용품','조류 용품','어류/수족관','소동물','사료'], children: {} },
   '만화, 애니메이션 상품': { subs: ['만화책','애니메이션 DVD','피규어/굿즈','코스튬/코스프레','포스터/아트','원화'], children: {} },
-  '기타': { subs: ['기타 물품','미분류'], children: {} }
+  '기타': { subs: ['기타 물품','미분류'], children: {} },
+  '아기 용품': { subs: ['유모차/카시트','수유용품','이유식','기저귀','아기옷','장난감','침구/가구'], children: {} },
+  '자동차, 오토바이': { subs: ['자동차 부품','오토바이 부품','카오디오','네비게이션','차량용품','타이어/휠'], children: {} },
+  '티켓, 금권, 숙박예약': { subs: ['공연티켓','스포츠티켓','상품권','숙박쿠폰','여행패키지','항공권'], children: {} },
+  '꽃, 원예': { subs: ['생화','조화','화분/화분받침','비료/흙','원예도구','씨앗/구근'], children: {} }
 };
+
+/* sub_main 링크 표기와 데이터 키가 다른 카테고리 보정 */
+const categoryAliases = {
+  '앤틱, 컬렉션': '골동품, 컬렉션',
+  '유아용품': '아기 용품',
+  '코믹, 애니메이션': '만화, 애니메이션 상품',
+  '생활, 인테리어': '거주지, 인테리어',
+  '식품, 음료': '음식, 음료',
+  '영화, 비디오': '영화, 동영상',
+  '애완동물, 생물': '애완 동물, 생물'
+};
+
+function resolveCategoryKey(name) {
+  if (!name) return null;
+  if (categoryData[name]) return name;
+  const alias = categoryAliases[name];
+  if (alias && categoryData[alias]) return alias;
+  const flat = name.replace(/\s/g, '');
+  return Object.keys(categoryData).find(key => key.replace(/\s/g, '') === flat) || null;
+}
+
+/* ── 상태 ── */
 const resultCountEl = document.querySelector('[data-result-count]');
-const categoryBarTitleEl = document.querySelector('.category-bar-title');
-const baseResultCount = 4788005;
-let activeTopCategory = categoryData[categoryBarTitleEl?.textContent] ? categoryBarTitleEl.textContent : Object.keys(categoryData)[0];
-let catStack = [];
-const selectedCats = new Set();
+const catResultTitleEl = document.getElementById('catResultTitle');
+const catQuickSelect = document.getElementById('catQuickSelect');
+const refineInput = document.getElementById('refineInput');
+const baseResultCount = 677354;
+let activeTopCategory = Object.keys(categoryData)[0];
+let activeSubCategory = '';
+let appliedFilterCount = 0;
+let refineKeyword = '';
 
-function renderTopChips() {
-  const wrap = document.getElementById('catTopChips');
-  if (!wrap) return;
-  wrap.innerHTML = '';
-  Object.keys(categoryData).forEach(name => {
-    const chip = document.createElement('button');
-    chip.type = 'button';
-    chip.className = 'cat-top-chip' + (name === activeTopCategory ? ' active' : '');
-    chip.textContent = name;
-    chip.onclick = () => switchTopCategory(name);
-    wrap.appendChild(chip);
-  });
-}
-
-function getVisibleCategoryPath() {
-  const path = [activeTopCategory, ...catStack.map(item => item.label)];
-  const selected = Array.from(selectedCats);
-  const current = selected[selected.length - 1];
-  if (current && path[path.length - 1] !== current) path.push(current);
-  return path.filter(Boolean);
-}
-
-function updateCategoryBarTitle() {
-  if (!categoryBarTitleEl) return;
-  categoryBarTitleEl.textContent = getVisibleCategoryPath().join(' > ');
-}
-
-function switchTopCategory(name) {
-  if (name === activeTopCategory) return;
-  activeTopCategory = name;
-  selectedCats.clear();
-  renderTopChips();
-  initCatPanel();
-  updateResultCount();
-  renderCatResultHeader();
-}
-
-function catHasChildren(name, depth) {
-  const d = categoryData[activeTopCategory];
-  return depth === 1 && d && Array.isArray(d.children[name]) && d.children[name].length > 0;
-}
-
-function catRenderLevel(items, depth) {
-  const list = document.getElementById('catList');
-  const crumb = document.getElementById('catBreadcrumb');
-  const crumbPath = document.getElementById('catBreadcrumbPath');
-  if (!list) return;
-  list.innerHTML = '';
-  if (catStack.length > 0) {
-    crumb.style.display = 'flex';
-    crumbPath.textContent = [activeTopCategory, ...catStack.map(s => s.label)].filter(Boolean).join(' > ');
-  } else {
-    crumb.style.display = 'none';
-  }
-  updateCategoryBarTitle();
-  items.forEach(item => {
-    const btn = document.createElement('button');
-    btn.className = 'filter-check';
-    btn.type = 'button';
-    const hasChildren = catHasChildren(item, depth);
-    if (hasChildren) {
-      btn.classList.add('has-children');
-      btn.innerHTML = `<span style="display:flex;align-items:center;gap:10px;"><span class="cat-check-icon"></span>${item}</span><svg class="cat-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>`;
-      btn.onclick = () => catDrillDown(item, depth);
-    } else {
-      btn.innerHTML = `<span style="display:flex;align-items:center;gap:10px;"><span class="cat-check-icon"></span>${item}</span>`;
-      btn.onclick = () => toggleCat(btn, item);
-    }
-    if (selectedCats.has(item)) btn.classList.add('active');
-    list.appendChild(btn);
-  });
-}
-
-function formatCount(value) {
-  return Math.max(0, Math.round(value)).toLocaleString('ko-KR');
-}
-
-function updateCurrentCategory() {
-  updateCategoryBarTitle();
-}
-
-function updateResultCount() {
-  if (!resultCountEl) return;
-  let count = baseResultCount;
-  Array.from(selectedCats).forEach((name, index) => {
-    count *= 0.16 - Math.min(index, 2) * 0.03 + (name.length % 3) * 0.01;
-  });
-  resultCountEl.textContent = formatCount(count);
-  const topCountEl = document.querySelector('[data-result-count-top]');
-  if (topCountEl) topCountEl.textContent = formatCount(count);
-  updateCurrentCategory();
-}
-
-/* ── 카테고리 적용 후 화면(제목 + 건수 + 카테고리 셀렉트) ── */
-function renderAppliedCategoryView() {
-  const applied = selectedCats.size > 0;
-  document.body.classList.toggle('cat-applied', applied);
-  if (!applied) return;
-
-  const path = getVisibleCategoryPath();
-  const current = path[path.length - 1];
-  const titleEl = document.getElementById('catResultTitle');
-  if (titleEl) titleEl.textContent = current;
-
-  const select = document.getElementById('catQuickSelect');
-  if (!select) return;
-  const siblings = catStack.length
-    ? (categoryData[activeTopCategory].children[catStack[catStack.length - 1].label] || [])
-    : (categoryData[activeTopCategory]?.subs || []);
-  const options = siblings.includes(current) ? siblings : [current].concat(siblings);
-  select.innerHTML = '';
-  options.forEach(name => {
-    const opt = document.createElement('option');
-    opt.value = name;
-    opt.textContent = name;
-    if (name === current) opt.selected = true;
-    select.appendChild(opt);
-  });
-  select.onchange = () => {
-    selectedCats.clear();
-    selectedCats.add(select.value);
-    document.querySelectorAll('#catList .filter-check').forEach(btn => {
-      btn.classList.toggle('active', btn.textContent.trim() === select.value);
-    });
-    updateResultCount();
-    renderCatResultHeader();
-  };
-}
-
-function toggleCat(btn, name) {
-  if (selectedCats.has(name)) {
-    selectedCats.delete(name);
-    btn.classList.remove('active');
-  } else {
-    selectedCats.add(name);
-    btn.classList.add('active');
-  }
-  updateResultCount();
-}
-
-function catDrillDown(name, depth) {
-  if (depth !== 1) return;
-  const d = categoryData[activeTopCategory];
-  catStack = [{ label: name, items: d.subs, depth }];
-  catRenderLevel(d.children[name] || [], 2);
-}
-
-function catGoBack() {
-  catStack = [];
-  catRenderLevel(categoryData[activeTopCategory].subs, 1);
-}
-
+/* URL 파라미터(category/path/selected)로 진입 카테고리 결정 */
 function applyRequestedCategoryPath() {
   const pathItems = (requestedPath || requestedCategory || '')
     .split('>')
@@ -715,20 +433,58 @@ function applyRequestedCategoryPath() {
     .filter(Boolean);
   if (pathItems.length === 0) return;
 
-  const topCategory = categoryData[pathItems[0]] ? pathItems[0] : activeTopCategory;
-  activeTopCategory = topCategory;
-  catStack = [];
-  selectedCats.clear();
-
-  const d = categoryData[activeTopCategory];
-  const firstSub = pathItems[1];
-  if (firstSub && d?.subs?.includes(firstSub)) {
-    catStack = [{ label: firstSub, items: d.subs, depth: 1 }];
-  }
-
+  activeTopCategory = resolveCategoryKey(pathItems[0]) || activeTopCategory;
+  const subs = categoryData[activeTopCategory]?.subs || [];
   const selected = requestedSelectedCategory || pathItems[pathItems.length - 1];
-  if (selected && selected !== activeTopCategory) selectedCats.add(selected);
+  activeSubCategory = subs.includes(selected) ? selected : '';
 }
+
+/* ── 카테고리 셀렉트(대분류 + 하위 카테고리) ── */
+function renderCategorySelect() {
+  if (!catQuickSelect) return;
+  const subs = categoryData[activeTopCategory]?.subs || [];
+  catQuickSelect.replaceChildren();
+  [activeTopCategory, ...subs].forEach(name => {
+    const value = name === activeTopCategory ? '' : name;
+    const opt = new Option(name, value);
+    opt.selected = value === activeSubCategory;
+    catQuickSelect.add(opt);
+  });
+}
+
+function updateCategoryTitle() {
+  if (catResultTitleEl) catResultTitleEl.textContent = activeSubCategory || activeTopCategory;
+}
+
+function formatCount(value) {
+  return Math.max(0, Math.round(value)).toLocaleString('ko-KR');
+}
+
+function updateResultCount() {
+  if (!resultCountEl) return;
+  let count = baseResultCount;
+  if (activeSubCategory) count *= 0.14 + (activeSubCategory.length % 4) * 0.04;
+  if (refineKeyword) count *= 0.38;
+  count *= Math.pow(0.72, appliedFilterCount);
+  resultCountEl.textContent = formatCount(count);
+}
+
+catQuickSelect?.addEventListener('change', () => {
+  activeSubCategory = catQuickSelect.value;
+  updateCategoryTitle();
+  updateResultCount();
+  shuffleCategoryProductPreview();
+});
+
+/* ── 결과 내 검색 ── */
+refineInput?.addEventListener('change', () => {
+  refineKeyword = refineInput.value.trim();
+  updateResultCount();
+  shuffleCategoryProductPreview();
+});
+refineInput?.addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); refineInput.blur(); }
+});
 
 /* ── 관심키워드 등록 버튼 ── */
 function toggleCategoryKeyword(el) {
@@ -737,17 +493,6 @@ function toggleCategoryKeyword(el) {
     ? 'fa-solid fa-star'
     : 'fa-regular fa-star';
 }
-
-applyRequestedCategoryPath();
-renderTopChips();
-if (catStack.length > 0) {
-  const parent = catStack[0].label;
-  catRenderLevel(categoryData[activeTopCategory]?.children?.[parent] || [], 2);
-} else {
-  catRenderLevel(categoryData[activeTopCategory].subs, 1);
-}
-updateResultCount();
-renderCatResultHeader();
 
 /* ── 상품 이미지 ── */
 const catSeeds = ['cat1','cat2','cat3','cat4','cat5','cat6'];
@@ -771,6 +516,11 @@ function shuffleCategoryProductPreview() {
     requestAnimationFrame(() => grid.classList.remove('is-refreshing'));
   }, 160);
 }
+
+applyRequestedCategoryPath();
+renderCategorySelect();
+updateCategoryTitle();
+syncFilterState();
 setCategoryPreviewImages();
 document.querySelector('.sort-select')?.addEventListener('change', shuffleCategoryProductPreview);
 </script>

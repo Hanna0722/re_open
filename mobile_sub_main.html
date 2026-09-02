@@ -63,19 +63,6 @@ a { text-decoration: none; color: inherit; }
 .ch-tab small{font-weight:600;color:var(--tm);font-size:11px;margin-left:2px;font-family:'Roboto',sans-serif}
 .ch-tab.active small{color:var(--rose)}
 
-/* ── 스토어 베스트 헤더 ── */
-.store-header {
-  display: none;
-  padding: 14px 16px 12px;
-  background: #fff;
-}
-.store-title {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 18px; font-weight:700; color: var(--tp);
-}
-.store-title em { color: var(--rose); font-style: normal; }
-.store-title .crown { font-size: 15px; }
-
 /* ── 카테고리 슬라이드 칩 ── */
 .cat-section {
   background: var(--bg);
@@ -135,6 +122,17 @@ a { text-decoration: none; color: inherit; }
   padding: 12px 14px 14px;
 }
 .m-filter-block { margin-bottom: 13px; }
+.m-filter-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+}
+.m-filter-head .m-filter-label,
+.m-filter-head .m-filter-checkbox {
+  margin-bottom: 0;
+}
 .m-filter-block label,
 .m-filter-label {
   display: block;
@@ -178,6 +176,7 @@ a { text-decoration: none; color: inherit; }
   color: #111827;
   font-size: 13px;
   font-weight: 700;
+  white-space: nowrap;
 }
 .m-filter-checkbox input {
   width: 16px;
@@ -533,13 +532,6 @@ a { text-decoration: none; color: inherit; }
   <button class="ch-tab" type="button" data-store-name="영국 이베이">영국 이베이</button>
 </nav>
 
-<!-- ── 스토어 베스트 헤더 ── -->
-<div class="store-header">
-  <div class="store-title">
-   <em id="storeNameTitle">야후 옥션</em> 베스트
-  </div>
-</div>
-
 <!-- ── 카테고리 칩 슬라이드 ── -->
 <div class="cat-section">
   <section class="m-sub-category" id="mobileSubCategory">
@@ -593,11 +585,13 @@ a { text-decoration: none; color: inherit; }
       </select>
     </div>
     <div class="m-filter-block">
-      <div class="m-filter-label">배송/판매</div>
-      <label class="m-filter-checkbox">
-        <input type="checkbox">
-        <span>무료배송</span>
-      </label>
+      <div class="m-filter-head">
+        <div class="m-filter-label">배송/판매</div>
+        <label class="m-filter-checkbox">
+          <input type="checkbox">
+          <span>무료배송</span>
+        </label>
+      </div>
       <select class="m-filter-select" aria-label="거래방식">
         <option>거래방식 전체</option>
         <option>경매</option>
@@ -631,97 +625,8 @@ a { text-decoration: none; color: inherit; }
 </div>
 
 <!-- ── 상품 그리드 ── -->
-<div class="product-section" id="productSection">
-  <div class="product-grid" id="productGrid">
+<div class="product-section" id="productSection" hidden><div class="product-grid" id="productGrid"></div></div>
 
-    <div class="product-card" onclick="location.href='mobile_auction.html'">
-      <div class="card-thumb">
-        <div class="card-thumb-inner"><i class="fa-regular fa-image"></i></div>
-        <button class="btn-wish" type="button" aria-label="관심상품" onclick="event.stopPropagation();toggleWish(this)"><i class="fa-regular fa-heart"></i></button>
-      </div>
-      <div class="card-store"><span class="site-dot"></span>야후 경매</div>
-      <div class="card-info">
-        <p class="card-name">빈티지 필름 카메라 세트 니콘 바디 올드렌즈 포함</p>
-        <div class="card-price-row"><span class="card-price">810 엔</span><span class="card-bids">3 Bids</span></div>
-        <div class="card-buyout">즉시낙찰 3,200 엔</div>
-        <div class="card-time">2026.07.22 21:23 (2시간)</div>
-      </div>
-    </div>
-
-    <div class="product-card" onclick="location.href='mobile_auction.html'">
-      <div class="card-thumb">
-        <div class="card-thumb-inner"><i class="fa-regular fa-image"></i></div>
-        <button class="btn-wish" type="button" aria-label="관심상품" onclick="event.stopPropagation();toggleWish(this)"><i class="fa-regular fa-heart"></i></button>
-      </div>
-      <div class="card-store"><span class="site-dot"></span>메루카리</div>
-      <div class="card-info">
-        <p class="card-name">니콘 수동 필름 카메라 바디 FM2</p>
-        <div class="card-price-row"><span class="card-price">1,650 엔</span></div>
-        <div class="card-buyout">무료배송</div>
-        <div class="card-time">2026.07.20 10:02</div>
-      </div>
-    </div>
-
-    <div class="product-card" onclick="location.href='mobile_auction.html'">
-      <div class="card-thumb">
-        <div class="card-thumb-inner"><i class="fa-regular fa-image"></i></div>
-        <button class="btn-wish" type="button" aria-label="관심상품" onclick="event.stopPropagation();toggleWish(this)"><i class="fa-regular fa-heart"></i></button>
-      </div>
-      <div class="card-store"><span class="site-dot"></span>라쿠텐</div>
-      <div class="card-info">
-        <p class="card-name">중형 카메라 M10 블랙 바디 한정판</p>
-        <div class="card-price-row"><span class="card-price">31,000 엔</span></div>
-        <div class="card-buyout">리뷰 128</div>
-        <div class="card-time">2026.07.18 09:40</div>
-      </div>
-    </div>
-
-    <div class="product-card" onclick="location.href='mobile_auction.html'">
-      <div class="card-thumb">
-        <div class="card-thumb-inner"><i class="fa-regular fa-image"></i></div>
-        <button class="btn-wish" type="button" aria-label="관심상품" onclick="event.stopPropagation();toggleWish(this)"><i class="fa-regular fa-heart"></i></button>
-      </div>
-      <div class="card-store"><span class="site-dot"></span>야후 경매</div>
-      <div class="card-info">
-        <p class="card-name">레어 미니카 에디션 한정판 박스 포함</p>
-        <div class="card-price-row"><span class="card-price">151,000 엔</span><span class="card-bids">24 Bids</span></div>
-        <div class="card-buyout">즉시낙찰 178,000 엔</div>
-        <div class="card-time">2026.07.22 20:05 (1시간)</div>
-      </div>
-    </div>
-
-    <div class="product-card" onclick="location.href='mobile_auction.html'">
-      <div class="card-thumb">
-        <div class="card-thumb-inner"><i class="fa-regular fa-image"></i></div>
-        <button class="btn-wish" type="button" aria-label="관심상품" onclick="event.stopPropagation();toggleWish(this)"><i class="fa-regular fa-heart"></i></button>
-      </div>
-      <div class="card-store"><span class="site-dot"></span>이베이 US</div>
-      <div class="card-info">
-        <p class="card-name">Vintage Truck 1980s Diecast Model Replica</p>
-        <div class="card-price-row"><span class="card-price">$17.50</span><span class="card-bids">2 Bids</span></div>
-        <div class="card-buyout">즉시낙찰 $29.00</div>
-        <div class="card-time">2026.07.23 15:11 (22시간)</div>
-      </div>
-    </div>
-
-    <div class="product-card" onclick="location.href='mobile_auction.html'">
-      <div class="card-thumb">
-        <div class="card-thumb-inner"><i class="fa-regular fa-image"></i></div>
-        <button class="btn-wish" type="button" aria-label="관심상품" onclick="event.stopPropagation();toggleWish(this)"><i class="fa-regular fa-heart"></i></button>
-      </div>
-      <div class="card-store"><span class="site-dot"></span>이베이 UK</div>
-      <div class="card-info">
-        <p class="card-name">High Top Limited Edition Sneakers Original Box</p>
-        <div class="card-price-row"><span class="card-price">£89.00</span></div>
-        <div class="card-buyout">무료배송</div>
-        <div class="card-time">2026.07.19 13:27</div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ── 필터 바텀시트 ── -->
 <div class="sheet-overlay" id="overlay" onclick="closeAllSheets()"></div>
 
 <div class="filter-sheet" id="filterSheet" aria-hidden="true">
@@ -829,7 +734,6 @@ a { text-decoration: none; color: inherit; }
         <button class="sheet-opt" type="button" data-market="rakuten" onclick="selectMarketOpt(this)" aria-pressed="false">일본 라쿠텐</button>
         <button class="sheet-opt" type="button" data-market="rakuma" onclick="selectMarketOpt(this)" aria-pressed="false">일본 라쿠마</button>
         <button class="sheet-opt" type="button" data-market="yahoo-shopping" onclick="selectMarketOpt(this)" aria-pressed="false">야후 쇼핑</button>
-        <button class="sheet-opt" type="button" data-market="amazon-jp" onclick="selectMarketOpt(this)" aria-pressed="false">일본 아마존</button>
         <button class="sheet-opt" type="button" data-market="ebay-us" onclick="selectMarketOpt(this)" aria-pressed="false">미국 이베이</button>
         <button class="sheet-opt" type="button" data-market="ebay-uk" onclick="selectMarketOpt(this)" aria-pressed="false">영국 이베이</button>
       </div>
@@ -859,7 +763,6 @@ const storeDescMap = {
   '라쿠텐':       '라쿠텐 인기 상품 TOP을 한눈에',
   '라쿠마':       '라쿠마 인기 상품 TOP을 한눈에',
   '야후 쇼핑':    '야후 쇼핑 인기 상품 TOP을 한눈에',
-  '일본 아마존':  '일본 아마존 인기 상품 TOP을 한눈에',
   '영국 이베이':  '영국 이베이 인기 상품 TOP을 한눈에',
   '미국 이베이':  '미국 이베이 인기 상품 TOP을 한눈에',
 };
@@ -938,7 +841,7 @@ function openFilterSheetFromCat(tabName) {
 const MARKET_LABELS = {
   yahoo: '야후경매', mercari: '메루카리', rakuten: '일본 라쿠텐',
   rakuma: '일본 라쿠마', 'yahoo-shopping': '야후 쇼핑',
-  'amazon-jp': '일본 아마존', 'ebay-us': '미국 이베이', 'ebay-uk': '영국 이베이'
+  'ebay-us': '미국 이베이', 'ebay-uk': '영국 이베이'
 };
 
 function getSelectedMarkets() {
@@ -1160,6 +1063,18 @@ function applyFilter() {
   if (goCategoryMainFromSub()) return;
   closeSheet();
 }
+
+/* ── 전체 카테고리 목록 → 카테고리 메인 이동 ── */
+document.getElementById('mobileSubCategoryBody')?.addEventListener('click', e => {
+  const link = e.target.closest('a');
+  if (!link) return;
+  e.preventDefault();
+  const name = link.textContent.trim();
+  const storeName = document.querySelector('.ch-tab.active')?.dataset.storeName
+    || document.getElementById('storeNameTitle')?.textContent?.trim() || '';
+  const params = new URLSearchParams({ store: storeName, category: name, path: name, selected: name });
+  location.href = `mobile_category_main.html?${params.toString()}`;
+});
 
 function removeCatFilter(name) {
   selectedCats.delete(name);

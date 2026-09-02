@@ -488,10 +488,6 @@
         <span class="benefit-row-val is-discount" id="vipDiscountVal">-235엔</span>
       </div>
       <div class="benefit-row">
-        <span class="benefit-row-lbl">안심케어 <span class="grade-badge-free">무료</span></span>
-        <span class="benefit-row-val" id="gradeBenefitCare">200엔</span>
-      </div>
-      <div class="benefit-row">
         <span class="benefit-row-lbl">묶음배송 10건 <span class="grade-badge-free">무료</span></span>
         <span class="benefit-row-val" id="gradeBenefitBundle">500엔</span>
       </div>
@@ -713,7 +709,6 @@ const PRODUCT_YEN        = 0;      // 2차 결제에서는 물품가 제외
 const BASE_YEN  = PRODUCT_YEN + TAX_YEN + LOCAL_SHIP_YEN + STORAGE_YEN + INTL_SHIP_YEN + ORDER_EXTRA_YEN;
 const RATE      = 9.6;
 /* VIP 등급혜택 무료 제공 항목 */
-const GRADE_CARE_YEN   = 200;
 const GRADE_BUNDLE_YEN = 500;
 const DEP_AVAIL = 25840;
 let couponDiscWon   = 10000;
@@ -797,9 +792,8 @@ function render() {
 
   /* VIP 등급혜택 — 무료 제공 항목 합계 */
   const elM = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
-  elM('gradeBenefitCare',   `${fmt(GRADE_CARE_YEN)}엔`);
   elM('gradeBenefitBundle', `${fmt(GRADE_BUNDLE_YEN)}엔`);
-  elM('gradeBenefitTotal',  fmt(GRADE_CARE_YEN + GRADE_BUNDLE_YEN));
+  elM('gradeBenefitTotal',  fmt(GRADE_BUNDLE_YEN));
   const formula = document.getElementById('mobFormula');
   if (formula) {
     if (depWon > 0) {

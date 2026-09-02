@@ -143,8 +143,6 @@
   .packing-choice { display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:#222; cursor:pointer; }
   .packing-choice input { width:16px; height:16px; accent-color:var(--red); }
   .bold-red { color:var(--red); }
-  .vip-care-note { display:flex; align-items:center; gap:6px; margin-bottom:8px; padding:8px 10px; border-radius:6px; background:#FFF6E6; color:#8a5a00; font-size:11px; font-weight:700; }
-  .vip-care-note i { color:#d99a1a; }
 
   /* 토글 */
   .toggle-track.on { background:var(--green); }
@@ -299,29 +297,6 @@
       </div>
     </div>
   </div>
-
-  <div class="option-item">
-    <div class="packing-choice-list" aria-label="안심 케어 옵션 선택">
-      <label class="packing-choice"><input type="checkbox" name="careOption" value="care" data-paid-option-yen="200"><span>안심 케어(200엔)</span></label>
-    </div>
-    <div class="option-body">
-      <div class="vip-care-note"><i class="fa-solid fa-gem"></i> [VIP / PRESTIGE 회원] 전용 혜택 | 안심 케어 무료 제공</div>
-      <p><i class="fa-solid fa-circle-info" aria-hidden="true"></i> <strong>국제배송중 파손에 대비한 선택 옵션입니다.</strong></p>
-      <ul>
-        <li>안심 케어 가입 송장건에 한해 최대 20만원 까지 보상이 적용됩니다.</li>
-        <li>선택한 송장 건의 물품 총액을 기준으로 보상됩니다.</li>
-      </ul>
-      <p><strong><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> 주의사항</strong></p>
-      <ul>
-        <li><strong class="bold-red">파손보상 불가 품목</strong>은 안심 케어 서비스를 가입하더라도 보상이 불가하므로, 가입전 반드시 확인해주시기 바랍니다.</li>
-        <li>전체 물품중 파손보상 불가 품목이 포함된 경우, <strong class="bold-red">해당 품목을 제외하고 보상이 적용됩니다.</strong></li>
-        <li>미가입시 파손 물품에 대해 보상이 일체 불가 합니다.</li>
-      </ul>
-      <div style="margin-top:8px;">
-        <button class="paid-option-detail damage-detail" type="button">파손보상 불가 품목 보기</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- 수취인 정보 -->
@@ -410,31 +385,6 @@
   <button class="cta-btn cta-approve" type="button">저장하기</button>
 </div>
 
-<!-- 파손보상 불가 품목 모달 -->
-<div class="modal-overlay" id="damageModalOverlay">
-  <div class="modal" id="damageModal">
-    <div class="modal-header">
-      <h3 class="modal-title">파손보상 불가 품목</h3>
-      <button class="modal-close" type="button" aria-label="닫기">✕</button>
-    </div>
-    <div class="modal-body">
-      <ul>
-        <li>주류 병 파손은 보상 가능하나, 코르크 손상 또는 누액은 보상 불가</li>
-        <li>턴테이블 및 턴테이블 부품(톤암, 카트리지, 더스트 커버 등)</li>
-        <li>도자기, 사기, 유리, 크리스탈 등으로 만들었거나 주재료인 물품</li>
-        <li>(브라운관 모니터, 조명, 진공관, 램프, 차량 유리 등)</li>
-        <li>미술 및 상업용으로 제작된 조각상(스태츄), 프라모델 및 피규어, 미니카</li>
-        <li>비행기 모형(다이캐스트 모델 포함), 완구류 일체</li>
-        <li>정크품</li>
-        <li>균열, 파손, 사용감 등 기존 하자가 있는 상품</li>
-        <li>상품 작동 여부</li>
-        <li>구성품 누락, 진품·가품 여부 등 현지 입고 시 확인이 어려운 상품</li>
-        <li>단순 기스, 올 풀림, 오염, 찍힘 등 경미한 손상</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
 <!-- 튼튼 포장비 참고표 모달 -->
 <div class="modal-overlay" id="packingCostModal" role="dialog" aria-modal="true" aria-labelledby="packingCostModalTitle" hidden>
   <div class="modal packing-modal">
@@ -518,27 +468,15 @@
 </div>
 
 <script>
-  // 포장 옵션 / 안심 케어 옵션은 그룹당 한 가지만 선택 가능
-  ['packingOption', 'careOption'].forEach((groupName) => {
-    document.querySelectorAll(`input[name="${groupName}"]`).forEach((input) => {
-      input.addEventListener('change', () => {
-        if (!input.checked) return;
-        document.querySelectorAll(`input[name="${groupName}"]`).forEach((other) => {
-          if (other !== input) other.checked = false;
-        });
+  // 포장 옵션은 한 가지만 선택 가능
+  document.querySelectorAll('input[name="packingOption"]').forEach((input) => {
+    input.addEventListener('change', () => {
+      if (!input.checked) return;
+      document.querySelectorAll('input[name="packingOption"]').forEach((other) => {
+        if (other !== input) other.checked = false;
       });
     });
   });
-
-  (() => {
-    const damageModalOverlay = document.getElementById('damageModalOverlay');
-    if (!damageModalOverlay) return;
-    document.querySelectorAll('.damage-detail').forEach((btn) => {
-      btn.addEventListener('click', () => damageModalOverlay.classList.add('is-open'));
-    });
-    damageModalOverlay.addEventListener('click', (e) => { if (e.target === damageModalOverlay) damageModalOverlay.classList.remove('is-open'); });
-    damageModalOverlay.querySelector('.modal-close').addEventListener('click', () => damageModalOverlay.classList.remove('is-open'));
-  })();
 
   (() => {
     const btn = document.querySelector('.packing-cost-detail');
