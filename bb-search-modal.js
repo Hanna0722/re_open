@@ -60,7 +60,7 @@
     '.bbsm-scope-all.active{border-color:#ff2f59;background:#fff7f9;color:#f03259;font-weight:700}',
     '.bbsm-count[hidden],.bbsm-clearall[hidden]{display:none}',
     '.bbsm-scope-grid{width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}',
-    '.bbsm-scope{height:58px;border:1px solid #dfe4ec;border-radius:7px;background:#fff;color:#707783;font-size:12px;font-weight:500;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;font-family:inherit;white-space:nowrap}',
+    '.bbsm-scope{height:40px;padding:0 8px;border:1px solid #dfe4ec;border-radius:7px;background:#fff;color:#707783;font-size:12px;font-weight:500;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-family:inherit;white-space:nowrap}',
     '.bbsm-recent-clip{width:100%;overflow:hidden}',
     '.bbsm-recent-strip{display:flex;gap:7px;max-width:100%;overflow-x:auto;overflow-y:hidden;padding-bottom:18px;margin-bottom:-18px;scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}',
     '.bbsm-recent-strip::-webkit-scrollbar{width:0;height:0;display:none;background:transparent}',
@@ -86,7 +86,7 @@
     '.bbsm-viewed-strip{display:flex;gap:8px;max-width:100%;overflow-x:auto;overflow-y:hidden;padding-bottom:4px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}',
     '.bbsm-viewed{width:74px;height:72px;border:1px solid #e3e7ee;border-radius:6px;overflow:hidden;background:#f5f7fa;flex:0 0 auto;padding:0;cursor:pointer}',
     '.bbsm-viewed img{width:100%;height:100%;object-fit:cover;display:block}',
-    '@media (max-width:720px){.bbsm-wrap{flex:1 1 auto}.bbsm-panel{left:50%;transform:translateX(-50%);width:min(540px,calc(100vw - 24px))}.bbsm-scope-grid{gap:6px}.bbsm-scope{font-size:11px;height:54px}.bbsm-suggest-list{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:10px;row-gap:10px}.bbsm-suggest-list li{grid-template-columns:16px minmax(0,1fr);font-size:12px}.bbsm-suggest-list li::before{font-size:12px}}'
+    '@media (max-width:720px){.bbsm-wrap{flex:1 1 auto}.bbsm-panel{left:50%;transform:translateX(-50%);width:min(540px,calc(100vw - 24px))}.bbsm-scope-grid{gap:6px}.bbsm-scope{font-size:11px;height:38px}.bbsm-suggest-list{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:10px;row-gap:10px}.bbsm-suggest-list li{grid-template-columns:16px minmax(0,1fr);font-size:12px}.bbsm-suggest-list li::before{font-size:12px}}'
   ].join('\n');
 
   function getRecent() {
