@@ -83,17 +83,6 @@
     /* ── MAIN ── */
     .main { min-width: 0; padding-top: 58px; padding-bottom: 40px; }
     .shopping-head h2, .list-title { margin: 0; color: #2b2f37; font-size: 15px; font-weight:700; }
-    .status-links { display: flex; align-items: center; }
-    .outline-pill { border: 1px solid var(--line);
-    }
-    .status-board { grid-template-columns: 127px repeat(6, 87px); align-items: stretch; margin-left: 6px; }
-    .status-card { color: #383b40;
-    }
-    .status-card[data-status] { cursor: pointer; transition: border-color .16s, box-shadow .16s; }
-    .status-card[data-status]:hover { border-color: rgba(232,56,90,.55); box-shadow: 0 0 0 2px rgba(232,56,90,.08); outline: 0; }
-    .status-card.status-active { border-color: var(--brand); box-shadow: 0 0 0 2px rgba(232,56,90,.12); }
-    .status-card em { display: block; font-style: normal; }
-    .status-card strong { display: block; }
     .tab {
       position: relative; min-width: 0; padding: 0 0 7px;
       border: 0; border-radius: 0; background: transparent;
@@ -195,22 +184,6 @@
       .main { padding: 24px 14px 56px; }
       .shopping-head { margin: 0 0 14px; }
       .shopping-head h2, .list-title { font-size: 18px; }
-      .status-links { gap: 10px; }
-      .outline-pill { min-width: 79px; height: 31px; padding: 0 14px; }
-
-      /* status board: 모바일 그리드 */
-      .status-board {
-        display: flex; flex-direction: column;
-        gap: 6px; margin-left: 0; margin-bottom: 20px;
-      }
-      .status-stack {
-        display: grid;
-        grid-template-columns: 1fr 1fr; gap: 8px;
-      }
-      .status-card-primary { height: 54px; min-height: 54px; }
-      .status-card { min-height: 80px; padding: 10px 6px; border-radius: 8px; }
-      .status-card em { font-size: 16px; margin-bottom: 4px; }
-      .status-card strong { font-size: 12px; }
 
       /* filter row */
 
@@ -426,8 +399,8 @@
       margin: 0 0 14px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+      justify-content: flex-start;
+      gap: 8px;
       min-height: 30px;
       padding-bottom: 7px;
       border-bottom: 1.5px solid var(--brand);
@@ -438,38 +411,76 @@
       font-weight:700;
     }
     .mypage-assets { margin: 0 0 30px; }
-    .asset-cards {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 6px;
-    }
-    .asset-card {
-      grid-column: span 2;
-      min-height: 62px;
-      display: grid;
-      place-items: center;
-      align-content: center;
-      gap: 4px;
-      padding: 10px 4px;
+    .asset-list {
       border: 1px solid #e5dcd8;
-      border-radius: 8px;
+      border-radius: 5px;
       background: #fff;
-      text-align: center;
+      overflow: hidden;
     }
-    .asset-card.wide { grid-column: span 3; }
-    .asset-card span { color: #2b2f37; font-size: 13px; font-weight: 700; }
-    .asset-card strong { color: #111827; font-size: 15px; font-weight: 500; }
-    .status-links { gap: 6px; }
-    .outline-pill {
-      height: 32px;
-      min-width: 0;
-      padding: 0 10px;
-      border-color: #e5dcd8;
-      border-radius: 999px;
-      background: #fff;
-      color: #6d6470;
+    .asset-line { display: grid; align-items: center; }
+    .asset-line.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .asset-line.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .asset-line + .asset-line { border-top: 1px solid var(--line-soft); }
+    .asset-cell {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      padding: 14px 4px;
+    }
+    .asset-cell + .asset-cell::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 22px;
+      background: var(--line-soft);
+    }
+    .asset-cell span {
+      color: #8a8d95;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: -.03em;
+    }
+    .asset-cell strong {
+      color: #1f232a;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -.03em;
+    }
+    .asset-cell strong u {
+      margin-left: 1px;
+      color: #6a6c74;
       font-size: 12px;
-      font-weight:700;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .asset-cell.sub strong { color: #3a3d44; font-size: 14px; font-weight: 700; }
+    .status-period {
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .status-more {
+      margin-left: auto;
+      display: flex;
+      padding: 4px;
+      border: 0;
+      background: none;
+      color: #c3c0bd;
+      cursor: pointer;
+    }
+    .status-more svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
     .tab {
       height: 28px;
@@ -785,52 +796,84 @@
       line-height: 1.35;
     }
     .status-board {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
       margin: 0 0 18px;
     }
-    .status-stack {
+    .status-steps {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 2px;
+      padding: 8px 4px 16px;
     }
-    .status-row {
+    .status-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 0;
+      border: 0;
+      background: none;
+      font-family: inherit;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .status-step em {
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #f4f1ef;
+      color: #2b2f37;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      transition: transform .16s ease;
+    }
+    .status-step:active em { transform: scale(.93); }
+    .status-step em.zero { color: #c7c4c2; font-weight: 700; }
+    .status-step strong {
+      min-height: 28px;
+      color: #6a6c74;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: -.045em;
+      line-height: 1.35;
+      text-align: center;
+    }
+    .status-step.hot em { background: #ffe9ee; color: var(--brand); }
+    .status-step.hot strong { color: var(--brand); font-weight: 700; }
+    .status-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
+      gap: 6px;
     }
-    .status-card {
-      height: 60px;
-      min-height: 60px;
-      padding: 10px 10px;
+    .status-grid button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 13px 4px;
       border: 1px solid #e5dcd8;
       border-radius: 5px;
       background: #fff;
-      box-shadow: none;
-      display: grid;
-      place-items: center;
-      text-align: center;
+      color: #5f6169;
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: -.035em;
+      cursor: pointer;
     }
-    .status-card-primary {
-      height: 54px;
-      min-height: 54px;
-      padding: 7px 6px;
+    .status-grid i {
+      color: #2b2f37;
+      font-size: 13px;
+      font-style: normal;
+      font-weight: 800;
     }
-    .status-card em {
-      margin-bottom: 4px;
-      color: #0f2a4a;
-      font-size: 18px;
-      font-weight:500;
-      line-height: 1;
-    }
-    .status-card em.hot { color: var(--brand); }
-    .status-card strong {
-      color: #172238;
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 1.35;
-    }
+    .status-grid i.zero { color: #c4c1bf; }
+    .status-grid button.hot { color: var(--brand); font-weight: 700; }
+    .status-grid button.hot i { color: var(--brand); }
     .seller {
       font-size: 11px;
     }
@@ -1019,12 +1062,16 @@
         <div class="shopping-head">
           <h2 id="mypage-assets-title">마이페이지</h2>
         </div>
-        <div class="asset-cards">
-          <div class="asset-card wide"><span>야후 보증금</span><strong>30,000 원</strong></div>
-          <div class="asset-card wide"><span>이베이 보증금</span><strong>0 원</strong></div>
-          <div class="asset-card"><span>마일리지</span><strong>4,500 원</strong></div>
-          <div class="asset-card"><span>쿠폰</span><strong>23 장</strong></div>
-          <div class="asset-card"><span>예치금</span><strong>13,961 원</strong></div>
+        <div class="asset-list">
+          <div class="asset-line two">
+            <div class="asset-cell sub"><span>야후 보증금</span><strong>30,000<u>원</u></strong></div>
+            <div class="asset-cell sub"><span>이베이 보증금</span><strong>0<u>원</u></strong></div>
+          </div>
+          <div class="asset-line three">
+            <div class="asset-cell"><span>마일리지</span><strong>4,500<u>원</u></strong></div>
+            <div class="asset-cell"><span>쿠폰</span><strong>23<u>장</u></strong></div>
+            <div class="asset-cell"><span>예치금</span><strong>13,961<u>원</u></strong></div>
+          </div>
         </div>
       </section>
 
@@ -1032,26 +1079,26 @@
       <section aria-labelledby="shopping-status-title">
         <div class="shopping-head">
           <h2 id="shopping-status-title">나의 거래 현황</h2>
-          <div class="status-links">
-            <button class="outline-pill" type="button">거래완료</button>
-            <button class="outline-pill" type="button">취소/반품</button>
-          </div>
+          <span class="status-period">최근 3개월 기준</span>
+          <button class="status-more" type="button" aria-label="거래 현황 전체보기">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
         </div>
         <div class="status-board">
-          <div class="status-row">
-            <div class="status-card" role="button" tabindex="0" data-status="auction-bid" data-label="경매입찰"><div><em>5</em><strong>경매입찰</strong></div></div>
-            <div class="status-card" role="button" tabindex="0" data-status="purchase-request" data-label="구매 신청"><div><em>5</em><strong>구매 신청</strong></div></div>
-            <div class="status-card" role="button" tabindex="0" data-status="local-arrive" data-label="현지도착"><div><em>5</em><strong>현지도착</strong></div></div>
+          <div class="status-steps">
+            <button class="status-step" type="button" data-status="auction-bid" data-label="입찰/구매신청"><em>10</em><strong>입찰/<br>구매신청</strong></button>
+            <button class="status-step hot" type="button" data-status="first-payment-wait" data-label="1차 결제대기"><em>5</em><strong>1차<br>결제대기</strong></button>
+            <button class="status-step" type="button" data-status="local-arrive" data-label="현지도착"><em>5</em><strong>현지도착</strong></button>
+            <button class="status-step hot" type="button" data-status="second-payment-wait" data-label="2차 결제대기"><em>5</em><strong>2차<br>결제대기</strong></button>
+            <button class="status-step" type="button" data-status="international-shipping" data-label="국제배송"><em>3</em><strong>국제배송</strong></button>
           </div>
-          <div class="status-row">
-            <div class="status-card" role="button" tabindex="0" data-status="first-payment-wait" data-label="1차 결제대기"><div><em class="hot">5</em><strong>1차 결제대기</strong></div></div>
-            <div class="status-card" role="button" tabindex="0" data-status="first-payment-complete" data-label="1차 결제완료"><div><em>5</em><strong>1차 결제완료</strong></div></div>
-            <div class="status-card" role="button" tabindex="0" data-status="shipping-waitd" data-label="배송대기"><div><em class="hot">5</em><strong>배송대기</strong></div></div>
-          </div>
-          <div class="status-row">
-            <div class="status-card" role="button" tabindex="0" data-status="second-payment-wait" data-label="2차 결제대기"><div><em class="hot">5</em><strong>2차 결제대기</strong></div></div>
-            <div class="status-card" role="button" tabindex="0" data-status="second-payment-complete" data-label="2차 결제 완료"><div><em>5</em><strong>2차 결제 완료</strong></div></div>
-            <div class="status-card" role="button" tabindex="0" data-status="international-shipping" data-label="국제배송"><div><em>3</em><strong>국제배송</strong></div></div>
+          <div class="status-grid">
+            <button type="button" data-status="first-payment-complete" data-label="1차 결제완료">1차 결제완료 <i>5</i></button>
+            <button type="button" data-status="second-payment-complete" data-label="2차 결제완료">2차 결제완료 <i>5</i></button>
+            <button class="hot" type="button" data-status="shipping-wait" data-label="배송대기">배송대기 <i>5</i></button>
+            <button type="button" data-status="cancel-return" data-label="취소/반품">취소/반품 <i class="zero">0</i></button>
+            <button type="button" data-status="trade-complete" data-label="거래완료">거래완료 <i>12</i></button>
+            <button type="button" data-status="shipping-request" data-label="배송신청/변경">배송신청/변경 <i>3</i></button>
           </div>
         </div>
       </section>
@@ -1227,20 +1274,10 @@
 
   renderAuthState();
 
-  // 쇼핑 현황 카드 → 관련 목록 페이지로 이동 (경매입찰만 경매 입찰/유찰 목록으로 연결)
-  document.querySelectorAll(".status-card[data-status]").forEach(el => {
+  // 쇼핑 현황 → 관련 목록 페이지로 이동 (입찰/구매신청만 경매 입찰/유찰 목록으로 연결)
+  document.querySelectorAll(".status-board [data-status]").forEach(el => {
     const dest = el.dataset.status === "auction-bid" ? "mobile_auction_bid_list.html" : "mobile_mainlist.html";
-    el.addEventListener("click", e => {
-      if (el.classList.contains("sub")) e.stopPropagation();
-      location.href = dest;
-    });
-    el.addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        if (el.classList.contains("sub")) e.stopPropagation();
-        location.href = dest;
-      }
-    });
+    el.addEventListener("click", () => { location.href = dest; });
   });
 </script>
 <script src="bb-common-mobile.js"></script>
