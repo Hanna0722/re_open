@@ -1069,7 +1069,7 @@
           </div>
           <div class="asset-line three">
             <div class="asset-cell"><span>마일리지</span><strong>4,500<u>원</u></strong></div>
-            <div class="asset-cell"><span>쿠폰</span><strong>23<u>장</u></strong></div>
+            <a class="asset-cell" href="mobile_mainlist.html"><span>쿠폰</span><strong>23<u>장</u></strong></a>
             <div class="asset-cell"><span>예치금</span><strong>13,961<u>원</u></strong></div>
           </div>
         </div>
@@ -1079,16 +1079,16 @@
       <section aria-labelledby="shopping-status-title">
         <div class="shopping-head">
           <h2 id="shopping-status-title">나의 거래 현황</h2>
-          <span class="status-period">최근 3개월 기준</span>
-          <button class="status-more" type="button" aria-label="거래 현황 전체보기">
+          <span class="status-period">최근 6개월 기준</span>
+          <a class="status-more" href="mobile_mainlist.html" aria-label="거래 현황 전체보기">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
-          </button>
+          </a>
         </div>
         <div class="status-board">
           <div class="status-steps">
             <button class="status-step" type="button" data-status="auction-bid" data-label="입찰/구매신청"><em>10</em><strong>입찰/<br>구매신청</strong></button>
             <button class="status-step hot" type="button" data-status="first-payment-wait" data-label="1차 결제대기"><em>5</em><strong>1차<br>결제대기</strong></button>
-            <button class="status-step" type="button" data-status="local-arrive" data-label="현지도착"><em>5</em><strong>현지도착</strong></button>
+            <button class="status-step" type="button" data-status="local-arrived" data-label="현지도착"><em>5</em><strong>현지도착</strong></button>
             <button class="status-step hot" type="button" data-status="second-payment-wait" data-label="2차 결제대기"><em>5</em><strong>2차<br>결제대기</strong></button>
             <button class="status-step" type="button" data-status="international-shipping" data-label="국제배송"><em>3</em><strong>국제배송</strong></button>
           </div>
@@ -1274,9 +1274,15 @@
 
   renderAuthState();
 
-  // 쇼핑 현황 → 관련 목록 페이지로 이동 (입찰/구매신청만 경매 입찰/유찰 목록으로 연결)
+  // 쇼핑 현황 → 관련 목록 페이지로 이동
+  const statusDestinations = {
+    "auction-bid": "mobile_auction_bid_list.html",
+    "cancel-return": "mobile_mainlist.html?status=trade-cancel",
+    "shipping-request": "mobile_bundle_shipping_management.html"
+  };
   document.querySelectorAll(".status-board [data-status]").forEach(el => {
-    const dest = el.dataset.status === "auction-bid" ? "mobile_auction_bid_list.html" : "mobile_mainlist.html";
+    const status = el.dataset.status;
+    const dest = statusDestinations[status] || `mobile_mainlist.html?status=${encodeURIComponent(status)}`;
     el.addEventListener("click", () => { location.href = dest; });
   });
 </script>

@@ -48,27 +48,28 @@ button,select{cursor:pointer}
 /* ── 나의 거래 현황 ── */
 .shopping-head{margin:24px 10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:42px;padding-bottom:7px;border-bottom:1.5px solid var(--brand)}
 .shopping-head h3{margin:0;color:var(--brand);font-size:15px;font-weight:700}
-.status-links{display:flex;align-items:center;gap:8px}
-.outline-pill{display:inline-flex;align-items:center;justify-content:center;height:32px;min-width:74px;padding:0 13px;border:1px solid #e5dcd8;border-radius:999px;background:#fff;color:#6d6470;font-size:12px;font-weight:700}
-
-.status-board{display:flex;flex-direction:column;gap:8px;margin:0 10px 18px}
-.status-stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.status-flow-row{display:grid;grid-template-columns:minmax(0,1fr) 10px minmax(0,1fr) 10px minmax(0,1fr);align-items:center;gap:4px}
-.flow-arr{display:block;width:7px;height:7px;border-top:1.5px solid #c7cdd6;border-right:1.5px solid #c7cdd6;transform:rotate(45deg);justify-self:center;flex-shrink:0}
-.status-card{
-  height:80px;min-height:80px;padding:12px 6px;border:1px solid #e5dcd8;border-radius:8px;background:#fff;
-  box-shadow:none;display:grid;place-items:center;text-align:center;
-}
-.status-card[data-status]{cursor:pointer;transition:border-color .16s,box-shadow .16s}
-.status-card[data-status]:hover{border-color:rgba(232,56,90,.55);box-shadow:0 0 0 2px rgba(232,56,90,.08);outline:0}
-.status-card.status-active{border-color:var(--brand);box-shadow:0 0 0 2px rgba(232,56,90,.12)}
-.status-card-primary{height:54px;min-height:54px;padding:7px 6px}
-.status-card-flow{height:116px;min-height:116px}
-.status-card em{display:block;margin-bottom:4px;color:#0f2a4a;font-style:normal;font-size:18px;font-weight:700;line-height:1}
-.status-card em.hot{color:var(--brand)}
-.status-card strong{display:block;color:#172238;font-size:12px;font-weight:700;line-height:1.35}
-.status-local-stack{display:grid;gap:8px}
-.status-card-local{height:54px;min-height:54px;padding:7px 6px}
+.status-period{color:#9aa3b2;font-size:12px;font-weight:500}
+.status-more{margin-left:auto;display:flex;padding:4px;border:0;background:none;color:#c3c0bd;cursor:pointer}
+.status-more svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.4}
+.status-board{margin:0 10px 18px}
+.status-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;padding:8px 4px 16px}
+.status-step{display:flex;flex-direction:column;align-items:center;gap:8px;padding:0;border:0;background:none;font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;text-decoration:none}
+.status-step em{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#f4f1ef;color:#2b2f37;font-size:18px;font-style:normal;font-weight:800;letter-spacing:-.03em;transition:transform .16s ease}
+.status-step:active em{transform:scale(.93)}
+.status-step em.zero{color:#c7c4c2;font-weight:700}
+.status-step strong{min-height:28px;color:#6a6c74;font-size:11px;font-weight:600;letter-spacing:-.045em;line-height:1.35;text-align:center}
+.status-step.hot em{background:#ffe9ee;color:var(--brand)}
+.status-step.hot strong{color:var(--brand);font-weight:700}
+.status-step.status-active em{box-shadow:0 0 0 2px rgba(232,56,90,.18);background:#ffe9ee;color:var(--brand)}
+.status-step.status-active strong{color:var(--brand);font-weight:700}
+.status-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.status-grid a{display:flex;align-items:center;justify-content:center;gap:6px;padding:13px 4px;border:1px solid #e5dcd8;border-radius:5px;background:#fff;color:#5f6169;font-family:inherit;font-size:12.5px;font-weight:600;letter-spacing:-.035em;cursor:pointer;text-decoration:none}
+.status-grid i{color:#2b2f37;font-size:13px;font-style:normal;font-weight:800}
+.status-grid i.zero{color:#c4c1bf}
+.status-grid a.hot{color:var(--brand);font-weight:700}
+.status-grid a.hot i{color:var(--brand)}
+.status-grid a.status-active{border-color:var(--brand);box-shadow:0 0 0 2px rgba(232,56,90,.12);color:var(--brand);font-weight:700}
+.status-grid a.status-active i{color:var(--brand)}
 
 /* ── 거래 목록 필터 (web_mainlist 기준) ── */
 .trade-area{border-top:8px solid #f0f2f5;margin-top:4px}
@@ -194,33 +195,27 @@ button,select{cursor:pointer}
 <!-- ── 나의 거래 현황 ── -->
 <div class="shopping-head">
   <h3>나의 거래 현황</h3>
-  <div class="status-links">
-    <a class="outline-pill" href="mobile_mainlist.html?status=completed">거래완료</a>
-    <a class="outline-pill" href="mobile_mainlist.html?status=canceled">취소/반품</a>
-  </div>
+  <span class="status-period">최근 6개월 기준</span>
+  <a class="status-more" href="mobile_mainlist.html" aria-label="거래 현황 전체보기">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+  </a>
 </div>
 
 <div class="status-board">
-  <div class="status-stack">
-    <a class="status-card status-card-primary" href="mobile_auction_bid_list.html" data-status="auction-bid" data-label="경매입찰"><div><em>5</em><strong>경매입찰</strong></div></a>
-    <a class="status-card status-card-primary" href="mobile_mainlist.html?status=purchase-request" data-status="purchase-request" data-label="구매 신청"><div><em>5</em><strong>구매 신청</strong></div></a>
+  <div class="status-steps">
+    <a class="status-step" href="mobile_auction_bid_list.html" data-status="auction-bid" data-label="입찰/구매신청"><em>10</em><strong>입찰/<br>구매신청</strong></a>
+    <a class="status-step hot" href="mobile_mainlist.html?status=first-payment-wait" data-status="first-payment-wait" data-label="1차 결제대기"><em>5</em><strong>1차<br>결제대기</strong></a>
+    <a class="status-step" href="mobile_mainlist.html?status=local-arrived" data-status="local-arrived" data-label="현지도착"><em>5</em><strong>현지도착</strong></a>
+    <a class="status-step hot" href="mobile_mainlist.html?status=second-payment-wait" data-status="second-payment-wait" data-label="2차 결제대기"><em>5</em><strong>2차<br>결제대기</strong></a>
+    <a class="status-step" href="mobile_mainlist.html?status=international-shipping" data-status="international-shipping" data-label="국제배송"><em>3</em><strong>국제배송</strong></a>
   </div>
-  <div class="status-flow-row">
-    <a class="status-card status-card-flow" href="mobile_mainlist.html?status=first-payment-wait" data-status="first-payment-wait" data-label="1차 결제대기"><div><em class="hot">5</em><strong>1차<br>결제대기</strong></div></a>
-    <span class="flow-arr" aria-hidden="true"></span>
-    <a class="status-card status-card-flow" href="mobile_mainlist.html?status=first-payment-complete" data-status="first-payment-complete" data-label="1차 결제완료"><div><em>5</em><strong>1차<br>결제완료</strong></div></a>
-    <span class="flow-arr" aria-hidden="true"></span>
-    <div class="status-local-stack">
-      <a class="status-card status-card-local" href="mobile_mainlist.html?status=local-arrived" data-status="local-arrived" data-label="현지도착"><div><em>5</em><strong>현지도착</strong></div></a>
-      <a class="status-card status-card-local" href="mobile_mainlist.html?status=shipping-wait" data-status="shipping-wait" data-label="배송대기"><div><em>3</em><strong>배송대기</strong></div></a>
-    </div>
-  </div>
-  <div class="status-flow-row">
-    <a class="status-card status-card-flow" href="mobile_mainlist.html?status=second-payment-wait" data-status="second-payment-wait" data-label="2차 결제대기"><div><em class="hot">5</em><strong>2차<br>결제대기</strong></div></a>
-    <span class="flow-arr" aria-hidden="true"></span>
-    <a class="status-card status-card-flow" href="mobile_mainlist.html?status=second-payment-complete" data-status="second-payment-complete" data-label="2차 결제 완료"><div><em>5</em><strong>2차<br>결제 완료</strong></div></a>
-    <span class="flow-arr" aria-hidden="true"></span>
-    <a class="status-card status-card-flow" href="mobile_mainlist.html?status=international-shipping" data-status="international-shipping" data-label="국제배송"><div><em class="hot">5</em><strong>국제배송</strong></div></a>
+  <div class="status-grid">
+    <a href="mobile_mainlist.html?status=first-payment-complete" data-status="first-payment-complete" data-label="1차 결제완료">1차 결제완료 <i>5</i></a>
+    <a href="mobile_mainlist.html?status=second-payment-complete" data-status="second-payment-complete" data-label="2차 결제완료">2차 결제완료 <i>5</i></a>
+    <a class="hot" href="mobile_mainlist.html?status=shipping-wait" data-status="shipping-wait" data-label="배송대기">배송대기 <i>5</i></a>
+    <a href="mobile_mainlist.html?status=trade-cancel" data-status="trade-cancel" data-label="취소/반품">취소/반품 <i class="zero">0</i></a>
+    <a href="mobile_mainlist.html?status=trade-complete" data-status="trade-complete" data-label="거래완료">거래완료 <i>12</i></a>
+    <a href="mobile_bundle_shipping_management.html" data-status="shipping-request" data-label="배송신청/변경">배송신청/변경 <i>3</i></a>
   </div>
 </div>
 
@@ -254,6 +249,7 @@ button,select{cursor:pointer}
         <option value="trade-cancel">거래취소</option>
         <option value="first-payment-wait">1차 결제대기</option>
         <option value="first-payment-complete">1차 결제완료</option>
+        <option value="local-arrived">현지도착</option>
         <option value="second-payment-wait">2차 결제대기</option>
         <option value="second-payment-complete">2차 결제완료</option>
         <option value="international-shipping">국제배송</option>
@@ -773,7 +769,7 @@ function applyTradeFilters() {
     wrap.classList.toggle('is-hidden', !anyVisible);
   });
 
-  document.querySelectorAll('.status-card[data-status]').forEach((card) => {
+  document.querySelectorAll('.status-board [data-status]').forEach((card) => {
     card.classList.toggle('status-active', Boolean(activeStatus) && card.dataset.status === activeStatus);
   });
 
