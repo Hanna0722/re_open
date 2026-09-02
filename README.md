@@ -51,9 +51,6 @@ BidBuy 리뉴얼 HTML 산출물 정리 문서입니다.
 | `web/web_qna.html` | 1:1 문의내역 |
 | `web/web_qna_details.html` | 1:1 문의 상세 |
 | `web/web_qna_form.html` | 1:1 문의하기 |
-| `web/web_cs_refund.html` | 취소/반품/환불/교환 안내 |
-| `web/web_cs_damage.html` | 파손 보상안내 |
-| `web/web_fakenotice.html` | 가품 관련 주의사항 |
 | `web/web_biz.html` | 사업자 회원 전환 |
 
 ## Mobile Pages
@@ -96,9 +93,6 @@ BidBuy 리뉴얼 HTML 산출물 정리 문서입니다.
 | `mobile/mobile_qna.html` | 1:1 문의내역 |
 | `mobile/mobile_qna_details.html` | 1:1 문의 상세 |
 | `mobile/mobile_qna_form.html` | 1:1 문의하기 |
-| `mobile/mobile_cs_refund.html` | 취소/반품/환불/교환 안내 |
-| `mobile/mobile_cs_damage.html` | 파손 보상안내 |
-| `mobile/mobile_fakenotice.html` | 가품 관련 주의사항 |
 | `mobile/mobile_biz.html` | 사업자 회원 전환 |
 
 ## 작성 기준
