@@ -334,7 +334,7 @@
       viewMain.hidden = true;
       viewSearch.hidden = false;
       moreFooter.hidden = false;
-      resultCopy.hidden = false;
+      if (resultCopy) resultCopy.hidden = false;
       updateResultText();
     }
 
@@ -343,7 +343,7 @@
       viewMain.hidden = false;
       viewSearch.hidden = true;
       moreFooter.hidden = true;
-      resultCopy.hidden = true;
+      if (resultCopy) resultCopy.hidden = true;
       keywords = [];
       syncUrl();
       renderKeywords();
@@ -366,33 +366,35 @@
 
     function updateResultText() {
       if (!keywords.length) {
-        resultCopy.textContent = "검색어를 입력해 주세요.";
-        resultTitleEl.replaceChildren("검색 결과 (전체 ", countNode(), "건)");
+        if (resultCopy) resultCopy.textContent = "검색어를 입력해 주세요.";
+        if (resultTitleEl) resultTitleEl.replaceChildren("검색 결과 (전체 ", countNode(), "건)");
         catSearchInput.value = "";
         return;
       }
       const hl = document.createElement("span");
       hl.className = "red";
       hl.textContent = `'${joined()}'`;
-      resultCopy.replaceChildren(hl, "에 대한 검색결과 입니다.");
-      resultTitleEl.replaceChildren(`'${joined()}' 검색 결과 (전체 `, countNode(), "건)");
+      if (resultCopy) resultCopy.replaceChildren(hl, "에 대한 검색결과 입니다.");
+      if (resultTitleEl) resultTitleEl.replaceChildren(`'${joined()}' 검색 결과 (전체 `, countNode(), "건)");
       catSearchInput.value = joined();
     }
 
     function renderKeywords() {
-      keywordList.replaceChildren();
-      keywords.forEach((kw, i) => {
-        const chip = document.createElement("span");
-        chip.className = "search-chip";
-        chip.append(document.createTextNode(kw + " "));
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.setAttribute("aria-label", kw + " 삭제");
-        btn.dataset.keywordIndex = String(i);
-        btn.innerHTML = '<i class="fa-solid fa-xmark" aria-hidden="true"></i>';
-        chip.append(btn);
-        keywordList.append(chip);
-      });
+      if (keywordList) {
+        keywordList.replaceChildren();
+        keywords.forEach((kw, i) => {
+          const chip = document.createElement("span");
+          chip.className = "search-chip";
+          chip.append(document.createTextNode(kw + " "));
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.setAttribute("aria-label", kw + " 삭제");
+          btn.dataset.keywordIndex = String(i);
+          btn.innerHTML = '<i class="fa-solid fa-xmark" aria-hidden="true"></i>';
+          chip.append(btn);
+          keywordList.append(chip);
+        });
+      }
       if (mode === "search") updateResultText();
     }
 
@@ -663,7 +665,7 @@
     });
 
     // ── Keyword chip removal ──
-    keywordList.addEventListener("click", e => {
+    if (keywordList) keywordList.addEventListener("click", e => {
       const btn = e.target.closest("[data-keyword-index]");
       if (!btn) return;
       keywords.splice(Number(btn.dataset.keywordIndex), 1);
@@ -672,7 +674,7 @@
     });
 
     // ── Form submissions ──
-    globalSearch.addEventListener("submit", e => {
+    if (globalSearch) globalSearch.addEventListener("submit", e => {
       e.preventDefault();
       const inp = globalSearch.querySelector("input");
       addKeywords(inp.value); inp.value = "";
@@ -684,7 +686,7 @@
       if (q) addKeywords(q);
     });
 
-    resultRescan.addEventListener("submit", e => {
+    if (resultRescan) resultRescan.addEventListener("submit", e => {
       e.preventDefault();
       const inp = resultRescan.querySelector("input");
       addKeywords(joined() + " " + inp.value); inp.value = "";
