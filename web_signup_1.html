@@ -41,22 +41,35 @@ button{cursor:pointer}
 .benefit-copy{font-size:11px;line-height:1.5;opacity:.95}
 .benefit-copy strong{display:block;margin-top:2px;font-size:15px;font-weight:800;opacity:1}
 
-/* ── 약관 카드 ── */
-.terms-card{max-width:600px;margin:26px auto 0;border:1px solid var(--border);border-radius:8px;padding:22px}
-.terms-block + .terms-block{margin-top:22px}
-.terms-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
-.terms-title{font-size:14px;font-weight:700;color:var(--tp)}
-.chk{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--ts);cursor:pointer;white-space:nowrap}
-.chk input{width:15px;height:15px;margin:0;accent-color:var(--navy)}
-.terms-body{max-height:78px;overflow-y:auto;padding:14px 16px;border-radius:4px;background:#F7F8FA;color:var(--ts);font-size:12px;line-height:1.7}
-.terms-body::-webkit-scrollbar{width:6px}
-.terms-body::-webkit-scrollbar-thumb{background:#D5DAE1;border-radius:999px}
+/* ── 약관 동의 (리스트형) ── */
+.terms-card{max-width:600px;margin:26px auto 0;border:1px solid var(--border);border-radius:8px;padding:26px 28px 22px}
+.terms-heading{font-size:16px;font-weight:700;color:var(--tp);margin-bottom:16px}
 
-/* ── 만 14세 · 전체동의 ── */
-.age-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:22px;font-size:13px;color:var(--tp)}
-.radio{display:inline-flex;align-items:center;gap:6px;cursor:pointer}
-.radio input{width:15px;height:15px;margin:0;accent-color:var(--navy)}
-.agree-all{display:flex;justify-content:center;margin-top:12px}
+.tchk{display:inline-flex;align-items:center;gap:11px;cursor:pointer;color:var(--ts)}
+.tchk input{appearance:none;-webkit-appearance:none;width:20px;height:20px;margin:0;flex:0 0 auto;border:1.5px solid #D5D8DE;border-radius:4px;background:#fff;display:grid;place-items:center;transition:background .12s,border-color .12s}
+.tchk input::after{content:"";width:6px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg);opacity:0}
+.tchk input:checked{background:var(--navy);border-color:var(--navy)}
+.tchk input:checked::after{opacity:1}
+.tchk input:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+
+.tchk-all{font-size:14px;color:var(--tp)}
+.tchk-all input{width:22px;height:22px}
+
+.terms-list{list-style:none;margin-top:8px;padding-left:34px}
+.terms-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+.terms-row .tchk{font-size:14px}
+.terms-more{flex:0 0 auto;background:none;border:none;padding:0;font-size:13px;color:var(--ts);text-decoration:underline;text-underline-offset:3px;font-family:inherit}
+.terms-more:hover{color:var(--tp)}
+.terms-detail{display:none;margin:0 0 10px;max-height:120px;overflow-y:auto;padding:14px 16px;border-radius:4px;background:#F7F8FA;color:var(--ts);font-size:12px;line-height:1.7}
+.terms-detail.open{display:block}
+.terms-detail::-webkit-scrollbar{width:6px}
+.terms-detail::-webkit-scrollbar-thumb{background:#D5DAE1;border-radius:999px}
+
+.terms-notes{list-style:none;margin-top:16px;padding-top:18px;border-top:1px solid var(--line)}
+.terms-notes li{position:relative;padding-left:11px;font-size:12.5px;color:var(--ts);line-height:1.65;word-break:keep-all}
+.terms-notes li + li{margin-top:8px}
+.terms-notes li::before{content:"•";position:absolute;left:0;top:0}
+.terms-notes a{text-decoration:underline;text-underline-offset:2px}
 
 /* ── CTA ── */
 .join-actions{display:grid;gap:20px;max-width:600px;margin:26px auto 0}
@@ -109,70 +122,76 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
 
   <!-- 회원 혜택 -->
   <section class="benefit-grid" aria-label="회원 혜택">
-  <div class="benefit-box a">
-    <span class="benefit-tag">가입 혜택 1</span>
-    <p class="benefit-copy">회원가입을 축하드려요!<strong>마일리지 5천원 즉시 지급</strong></p>
-  </div>
-  <div class="benefit-box b">
-    <span class="benefit-tag">가입 혜택 2</span>
-    <p class="benefit-copy">국제운임 부담을 덜어드려요!<strong>국제운임 할인 쿠폰 5천원권 지급</strong></p>
-  </div>
-  <div class="benefit-box a">
-    <span class="benefit-tag">가입 혜택 3</span>
-    <p class="benefit-copy">가입 즉시 STANDARD 등급 적용!<strong>대행수수료의 2% 마일리지 적립</strong></p>
-  </div>
-</section>
-
-  <!-- 필수 약관 -->
-  <section class="terms-card">
-    <div class="terms-block">
-      <div class="terms-head">
-        <span class="terms-title">비드바이 회원 이용약관 (필수)</span>
-        <label class="chk"><input type="checkbox" class="agree-item" data-required="1" id="agreeTerms"> 이용약관 동의함</label>
-      </div>
-      <div class="terms-body">
-        제 1조 목적이 약관은 주)비드바이 코리아가 제공하는 해외 경매 대행 서비스와 위임형 구매대행 관련 서비스(이하 "서비스")를 이용함에 있어 회사와 이용자 간의 권리,의무,책임사항 및 절차 등을 규정함을 목적으로 합니다.
-      </div>
+    <div class="benefit-box a">
+      <span class="benefit-tag">가입 혜택 1</span>
+      <p class="benefit-copy">회원가입을 축하드려요!<strong>마일리지 5천원 즉시 지급</strong></p>
     </div>
-    <div class="terms-block">
-      <div class="terms-head">
-        <span class="terms-title">개인정보의 수집 및 이용목적 (필수)</span>
-        <label class="chk"><input type="checkbox" class="agree-item" data-required="1" id="agreePrivacy"> 개인정보의 수집목적 및 이용목적에 동의함</label>
-      </div>
-      <div class="terms-body">
-        제 1조 목적이 약관은 주)비드바이 코리아가 제공하는 해외 경매 대행 서비스와 위임형 구매대행 관련 서비스(이하 "서비스")를 이용함에 있어 회사와 이용자 간의 권리,의무,책임사항 및 절차 등을 규정함을 목적으로 합니다.<br>
-        제 1조 목적이 약관은 주)비드바이 코리아가 제공하는 해외 경매 대행 서비스와 위임형 구매대행 관련 서비스(이하 "서비스")를 이용함에 있어 회사와 이용자 간의 권리,의무,책임사항 및 절차 등을 규정함을 목적으로 합니다.
-      </div>
+    <div class="benefit-box b">
+      <span class="benefit-tag">가입 혜택 2</span>
+      <p class="benefit-copy">국제운임 부담을 덜어드려요!<strong>국제운임 할인 쿠폰 5천원권 지급</strong></p>
+    </div>
+    <div class="benefit-box a">
+      <span class="benefit-tag">가입 혜택 3</span>
+      <p class="benefit-copy">가입 즉시 STANDARD 등급 적용!<strong>대행수수료의 2% 마일리지 적립</strong></p>
     </div>
   </section>
 
-  <!-- 선택 약관 -->
+  <!-- 약관 동의 -->
   <section class="terms-card">
-    <div class="terms-block">
-      <div class="terms-head">
-        <span class="terms-title">이메일 수신 동의 (선택)</span>
-        <label class="chk"><input type="checkbox" class="agree-item" id="agreeEmail"> 동의함</label>
-      </div>
-      <div class="terms-body">경매대행 및 국제배송 수수료 할인쿠폰과 최신 마케팅 정보를 이메일로 받아볼 수 있습니다.</div>
-    </div>
-    <div class="terms-block">
-      <div class="terms-head">
-        <span class="terms-title">SNS 수신 동의 (선택)</span>
-        <label class="chk"><input type="checkbox" class="agree-item" id="agreeSns"> 동의함</label>
-      </div>
-      <div class="terms-body">경매대행 및 국제배송 수수료 할인쿠폰과 최신 마케팅 정보를 SMS로 받아볼 수 있습니다.</div>
-    </div>
-  </section>
+    <h2 class="terms-heading">비드바이 회원 이용 약관 동의</h2>
 
-  <!-- 만 14세 확인 -->
-  <div class="age-row">
-    <span>본인은 만 14세 이상 입니까?</span>
-    <label class="radio"><input type="radio" name="age14" value="yes" checked> 예</label>
-    <label class="radio"><input type="radio" name="age14" value="no"> 아니오</label>
-  </div>
-  <div class="agree-all">
-    <label class="chk"><input type="checkbox" id="agreeAll" onchange="toggleAgreeAll(this)"> 전체동의</label>
-  </div>
+    <label class="tchk tchk-all">
+      <input type="checkbox" id="agreeAll" onchange="toggleAgreeAll(this)">
+      약관 전체 동의하기 (선택 동의 포함)
+    </label>
+
+    <ul class="terms-list">
+      <li>
+        <div class="terms-row">
+          <label class="tchk"><input type="checkbox" class="agree-item" data-required="1" id="age14"> 만 14세 이상입니다. (필수)</label>
+        </div>
+      </li>
+      <li>
+        <div class="terms-row">
+          <label class="tchk"><input type="checkbox" class="agree-item" data-required="1" id="agreeTerms"> 비드바이 회원 이용약관 동의 (필수)</label>
+          <button class="terms-more" type="button" onclick="toggleDetail(this)" aria-expanded="false">자세히</button>
+        </div>
+        <div class="terms-detail">
+          제 1조 목적이 약관은 주)비드바이 코리아가 제공하는 해외 경매 대행 서비스와 위임형 구매대행 관련 서비스(이하 "서비스")를 이용함에 있어 회사와 이용자 간의 권리,의무,책임사항 및 절차 등을 규정함을 목적으로 합니다.
+        </div>
+      </li>
+      <li>
+        <div class="terms-row">
+          <label class="tchk"><input type="checkbox" class="agree-item" data-required="1" id="agreePrivacy"> 개인정보 수집 및 이용 동의 (필수)</label>
+          <button class="terms-more" type="button" onclick="toggleDetail(this)" aria-expanded="false">자세히</button>
+        </div>
+        <div class="terms-detail">
+          제 1조 목적이 약관은 주)비드바이 코리아가 제공하는 해외 경매 대행 서비스와 위임형 구매대행 관련 서비스(이하 "서비스")를 이용함에 있어 회사와 이용자 간의 권리,의무,책임사항 및 절차 등을 규정함을 목적으로 합니다.<br>
+          제 1조 목적이 약관은 주)비드바이 코리아가 제공하는 해외 경매 대행 서비스와 위임형 구매대행 관련 서비스(이하 "서비스")를 이용함에 있어 회사와 이용자 간의 권리,의무,책임사항 및 절차 등을 규정함을 목적으로 합니다.
+        </div>
+      </li>
+      <li>
+        <div class="terms-row">
+          <label class="tchk"><input type="checkbox" class="agree-item" id="agreeEmail"> 이메일 수신 동의 (선택)</label>
+          <button class="terms-more" type="button" onclick="toggleDetail(this)" aria-expanded="false">자세히</button>
+        </div>
+        <div class="terms-detail">경매대행 및 국제배송 수수료 할인쿠폰과 최신 마케팅 정보를 이메일로 받아볼 수 있습니다.</div>
+      </li>
+      <li>
+        <div class="terms-row">
+          <label class="tchk"><input type="checkbox" class="agree-item" id="agreeSns"> SNS 수신 동의 (선택)</label>
+          <button class="terms-more" type="button" onclick="toggleDetail(this)" aria-expanded="false">자세히</button>
+        </div>
+        <div class="terms-detail">경매대행 및 국제배송 수수료 할인쿠폰과 최신 마케팅 정보를 SMS로 받아볼 수 있습니다.</div>
+      </li>
+    </ul>
+
+    <ul class="terms-notes">
+      <li>필수 항목에 동의하셔야 회원 가입이 가능합니다.</li>
+      <li>선택 항목에 동의하지 않아도 회원 서비스와 마일리지 서비스는 정상적으로 이용하실 수 있습니다.</li>
+      <li>정보주체의 개인정보 및 권리 보호를 위해 「개인정보 보호법」 및 관계 법령이 정한 바를 준수하여 안전하게 관리하고 있습니다.<br>자세한 사항은 <a href="#">개인정보처리방침</a> 에서 확인할 수 있습니다.</li>
+    </ul>
+  </section>
 
   <!-- CTA -->
   <div class="join-actions">
@@ -227,15 +246,23 @@ document.querySelectorAll('.agree-item').forEach(function (chk) {
   });
 });
 
+/* 자세히 → 약관 본문 펼침/접힘 */
+function toggleDetail(btn) {
+  var detail = btn.closest('li').querySelector('.terms-detail');
+  var open = detail.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  btn.textContent = open ? '닫기' : '자세히';
+}
+
 /* 필수 약관 확인 후 다음 단계 */
 function goNextStep() {
+  if (!document.getElementById('age14').checked) {
+    alert('만 14세 미만은 회원 가입이 제한됩니다.');
+    return;
+  }
   var required = Array.prototype.slice.call(document.querySelectorAll('.agree-item[data-required="1"]'));
   if (!required.every(function (i) { return i.checked; })) {
     alert('필수 약관에 동의해 주세요.');
-    return;
-  }
-  if (document.querySelector('input[name="age14"]:checked').value !== 'yes') {
-    alert('만 14세 미만은 회원 가입이 제한됩니다.');
     return;
   }
   location.href = 'web_signup_2.html';
