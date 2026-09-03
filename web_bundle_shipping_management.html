@@ -75,7 +75,7 @@
 
     .sidebar { min-width: 0; }
 
-    .profile-card { height: 172px; padding: 19px 22px 12px; background: var(--warm); }
+    .profile-card { height: 120px; padding: 19px 22px 12px; background: var(--warm); }
     .profile-main { display: flex; align-items: center; gap: 13px; }
 
     .avatar {
@@ -664,6 +664,10 @@
     #modal-carecare-guard .modal-actions.wrap { grid-template-columns: 1fr; }
     .modal-actions.wrap button { height: auto; min-height: 44px; padding: 8px 6px; font-size: 12.5px; line-height: 1.35; white-space: normal; }
 
+  .profile-id { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .profile-id .profile-name { display: inline; margin: 0; }
+  .profile-id .profile-tier { display: inline-flex; align-items: center; margin: 0; padding: 2px 9px; border-radius: 5px; background: #f1f2f4; color: var(--grade-vip); font-size: 12px; font-weight: 700; line-height: 1.4; }
+  .profile-id + .vip-copy { margin: 4px 0 0; padding-right: 0; }
   </style>
 </head>
 <body>
@@ -676,17 +680,12 @@
           <div class="profile-main">
             <div class="avatar">홍</div>
             <div>
-              <strong class="profile-name">홍길동님</strong>
-              <span class="profile-tier">VIP</span>
+              <div class="profile-id"><strong class="profile-name">홍길동님</strong><span class="profile-tier">VIP</span></div>
+              <p class="vip-copy">Prestige까지 <b>65%</b> 달성</p>
             </div>
           </div>
-          <p class="vip-copy">Prestige까지 <b>₩8,500,000</b> 또는 <b>15건</b></p>
-          <div class="vip-row">
-            <div class="vip-progress"><span></span></div>
-            <span class="help-dot">?</span>
-          </div>
           <div class="profile-actions">
-            <button class="soft-btn" type="button">1:1 문의내역</button>
+            <button class="soft-btn" type="button">나의 문의 내역</button>
             <button class="soft-btn" type="button">로그아웃</button>
           </div>
         </section>

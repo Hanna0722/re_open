@@ -26,7 +26,6 @@
       --sidebar-w: 221px;
       --main-w: 812px;
       --gap: 24px;
-      --asset-w: 861px;
       --stage-left: max(16px, calc((100vw - 1057px) / 2));
       --mobile-w: 390px;
     }
@@ -62,21 +61,6 @@
       margin-left: var(--stage-left);
     }
 
-    /* ── ASSET STRIP ── */
-    .asset-strip {
-      position: absolute; top: 0; left: var(--sidebar-w);
-      width: var(--asset-w); height: 36px;
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      align-items: center; background: var(--warm);
-      border-bottom: 1px solid #f2e9e5; z-index: 1;
-    }
-    .asset-item {
-      display: flex; align-items: center; justify-content: center;
-      gap: 50px; color: #111; white-space: nowrap;
-    }
-    .asset-item span { font-size: 13px; font-weight: 600; }
-    .asset-item strong { font-size: 15px; font-weight:700; }
-
     /* ── SIDEBAR (desktop) ── */
     .nav-list a:hover, .nav-list a.active { color: var(--brand); font-weight:700; }
 
@@ -106,7 +90,6 @@
     .drawer-mypage-link.active, .drawer-mypage-link.danger { color: var(--brand); font-weight:700; }
 
     /* 모바일 전용 컴포넌트: 기본 hidden */
-    .mobile-profile-card { display: none; }
     .mypage-menu-section { display: none; }
 
     /* ================================================================
@@ -133,50 +116,6 @@
 
       /* stage: 그리드 해제 */
       .stage { display: block; width: 100%; margin-left: 0; }
-
-      /* 모바일 인라인 프로필 카드 */
-      .mobile-profile-card {
-        display: block; padding: 12px 14px 6px; background: var(--warm);
-      }
-      .mpc-inner {
-        background: transparent; border-radius: 0;
-        padding: 0; border: 0;
-      }
-      .mpc-top { display: flex; align-items: center; gap: 12px; margin-bottom: 21px; }
-      .mpc-member { display: flex; align-items: center; gap: 6px; min-width: 0; }
-      .mpc-avatar {
-        width: 44px; height: 44px; border-radius: 50%;
-        background: #ffe7ef; color: var(--brand);
-        display: grid; place-items: center; font-size: 20px; font-weight:700; flex: 0 0 auto;
-      }
-      .mpc-name { display: inline-flex; font-size: 17px; font-weight:700; color: #141820; margin-bottom: 0; line-height: 1; white-space: nowrap; }
-      .mpc-grade { display: inline-flex; align-items: center; font-size: 13px; font-weight:700; color: var(--grade-vip); line-height: 1; white-space: nowrap; }
-      .mpc-vip { font-size: 12px; color: #4d5361; margin-bottom: 8px; font-weight: 500; }
-      .mpc-vip b { color: #2c3038; font-weight:700; }
-      .mpc-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 0; }
-      .mpc-bar { flex: 1; height: 7px; border-radius: 999px; background: #eee2de; overflow: hidden; }
-      .mpc-bar span { display: block; width: 84%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #ff8499, var(--brand)); }
-      .mpc-help {
-        width: 15px; height: 15px; border: 1.5px solid #aaa; border-radius: 50%;
-        display: inline-grid; place-items: center; color: #888; font-size: 10px; font-weight:700; flex: 0 0 auto;
-      }
-      .mpc-actions { display: none; grid-template-columns: 1fr 1fr; gap: 8px; }
-      .mpc-btn {
-        height: 32px; border: 1px solid var(--line); border-radius: 5px;
-        background: #fff; color: #4a4f5b; font-size: 12px; font-weight: 700;
-      }
-      .mpc-btn.primary { border-color: var(--brand); color: var(--brand); font-weight:700; }
-
-      /* asset strip: 인라인 */
-      .asset-strip {
-        position: static; width: 100%; margin: 0;
-        grid-template-columns: repeat(4, minmax(0,1fr));
-        height: 41px; border-top: 1px solid #ede6e2; border-bottom: 0;
-        background: var(--warm);
-      }
-      .asset-item { flex-direction: column; gap: 1px; padding: 0 4px; justify-content: center; }
-      .asset-item span { font-size: 10px; font-weight: 600; color: #888; }
-      .asset-item strong { font-size: 11px; font-weight:700; color: #2c3038; }
 
       /* sidebar → drawer */
 
@@ -392,8 +331,6 @@
       border-bottom-color: var(--brand);
     }
     .stage { display: block; width: 100%; margin: 0; }
-    .mobile-profile-card,
-    .asset-strip { display: none !important; }
     .main { padding: 24px 10px 68px; background: #fff; }
     .shopping-head {
       margin: 0 0 14px;
@@ -411,54 +348,143 @@
       font-weight:700;
     }
     .mypage-assets { margin: 0 0 30px; }
-    .asset-list {
-      border: 1px solid #e5dcd8;
-      border-radius: 5px;
-      background: #fff;
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
       overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
-    .asset-line { display: grid; align-items: center; }
-    .asset-line.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .asset-line.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .asset-line + .asset-line { border-top: 1px solid var(--line-soft); }
-    .asset-cell {
-      position: relative;
+    .my-summary-card {
+      margin: 0 12px;
+      padding: 0;
+      background: #fff;
+    }
+    .my-summary-top {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 5px;
-      padding: 14px 4px;
+      gap: 12px;
+      min-height: 54px;
     }
-    .asset-cell + .asset-cell::before {
+    .my-avatar {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: #E4E9EF;
+    }
+    .my-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .my-member-info {
+      min-width: 0;
+      flex: 1;
+    }
+    .my-member-name {
+      display: block;
+      margin-bottom: 3px;
+      color: #000;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .my-member-grade {
+      color: #5c6270;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+    .my-member-grade b {
+      color: #454b58;
+      font-weight: 800;
+    }
+    .my-quick-row {
+      display: grid;
+      grid-template-columns: auto auto 1fr 58px 58px 58px;
+      align-items: end;
+      margin-top: 5px;
+      padding: 2px 0;
+    }
+    .my-quick-item {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      align-content: end;
+      gap: 4px;
+      min-height: 44px;
+      text-align: center;
+      text-decoration: none;
+    }
+    .my-quick-item:nth-child(-n+2) {
+      padding: 0 8px;
+    }
+    .my-quick-item:nth-child(1) {
+      padding-left: 0;
+    }
+    .my-quick-item:nth-child(n+3) {
+      padding: 0;
+    }
+    .my-quick-item:nth-child(3) {
+      grid-column: 4;
+    }
+    .my-quick-item + .my-quick-item::before {
       content: "";
       position: absolute;
-      left: 0;
+      left: -1px;
       top: 50%;
       transform: translateY(-50%);
       width: 1px;
-      height: 22px;
-      background: var(--line-soft);
+      height: 30px;
+      background: #e5e7eb;
     }
-    .asset-cell span {
-      color: #8a8d95;
-      font-size: 11.5px;
-      font-weight: 600;
-      letter-spacing: -.03em;
+    .my-quick-item:nth-child(3)::before {
+      left: -10px;
+      width: 2px;
+      height: 38px;
+      background: #b0b6c0;
     }
-    .asset-cell strong {
-      color: #1f232a;
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: -.03em;
+    .my-quick-item i {
+      font-size: 17px;
+      line-height: 1;
+      color: #e8385a;
     }
-    .asset-cell strong u {
-      margin-left: 1px;
-      color: #6a6c74;
+    .my-quick-item .lbl {
+      color: #5e6470;
       font-size: 12px;
       font-weight: 600;
-      text-decoration: none;
+      line-height: 1.15;
+      letter-spacing: -.03em;
     }
-    .asset-cell.sub strong { color: #3a3d44; font-size: 14px; font-weight: 700; }
+    .my-quick-value {
+      display: inline-flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 1px;
+      white-space: nowrap;
+    }
+    .my-quick-value strong {
+      color: #1f232a;
+      font-family: Roboto, Pretendard, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -.02em;
+    }
+    .my-quick-value span {
+      color: #8a8f99;
+      font-size: 10px;
+      font-weight: 600;
+    }
     .status-period {
       color: var(--faint);
       font-size: 12px;
@@ -590,12 +616,6 @@
       background: var(--navy);
       color: #fff;
     }
-    .sidebar .drawer-head.is-guest-only,
-    .sidebar .drawer-guest-panel.is-guest-only { display: none !important; }
-    .sidebar .drawer-head.is-member-only { display: flex !important; }
-    .sidebar .drawer-vip-copy.is-member-only { display: block !important; }
-    .sidebar .drawer-vip-row.is-member-only,
-    .sidebar .drawer-asset-strip.is-member-only { display: grid !important; }
     .user-drawer {
       position: fixed;
       top: 30px;
@@ -1025,52 +1045,43 @@
   </header>
 
   <div class="stage">
-    <!-- ① 모바일 전용: 인라인 프로필 -->
-    <div class="mobile-profile-card is-member-only" aria-label="회원 프로필">
-      <div class="mpc-inner">
-        <div class="mpc-top">
-          <div class="mpc-avatar tier-vip member-tier-icon grade-img" aria-label="VIP 등급"><img class="grade-icon" src="gradeicon/grade_vip.png" alt=""></div>
-          <div class="mpc-member">
-            <span class="mpc-name">홍길동님</span>
-            <span class="mpc-grade">VIP</span>
-          </div>
-        </div>
-        <div class="mpc-vip">Prestige까지 <b>₩8,500,000</b> 또는 <b>15건</b></div>
-        <div class="mpc-bar-row">
-          <div class="mpc-bar"><span></span></div>
-          <span class="mpc-help">?</span>
-        </div>
-        <div class="mpc-actions">
-          <button class="mpc-btn primary" type="button">1:1 문의</button>
-          <button class="mpc-btn js-auth-toggle" type="button">로그아웃</button>
-        </div>
-      </div>
-    </div>
-    <!-- ② 자산 스트립 -->
-    <section class="asset-strip is-member-only" aria-label="나의 자산 요약">
-      <div class="asset-item"><span>마일리지</span><strong>4,500 원</strong></div>
-      <div class="asset-item"><span>예치금</span><strong>21,560 원</strong></div>
-      <div class="asset-item"><span>보증금</span><strong>50,000원</strong></div>
-      <div class="asset-item"><span>쿠폰</span><strong>8장</strong></div>
-    </section>
-
-    <!-- ④ 메인 콘텐츠 -->
+    <!-- 메인 콘텐츠 -->
     <main class="main">
 
-      <!-- 마이페이지 (웹 member-card와 동일 항목) -->
+      <!-- 마이페이지 -->
       <section class="mypage-assets" aria-labelledby="mypage-assets-title">
         <div class="shopping-head">
           <h2 id="mypage-assets-title">마이페이지</h2>
         </div>
-        <div class="asset-list">
-          <div class="asset-line two">
-            <div class="asset-cell sub"><span>야후 보증금</span><strong>30,000<u>원</u></strong></div>
-            <div class="asset-cell sub"><span>이베이 보증금</span><strong>0<u>원</u></strong></div>
+        <div class="my-summary-card">
+          <div class="my-summary-top">
+            <div class="my-avatar grade-img" aria-label="VIP 등급"><img class="grade-icon" src="gradeicon/grade_vip.png" alt="VIP"></div>
+            <div class="my-member-info">
+              <strong class="my-member-name">홍길동님</strong>
+              <div class="my-member-grade">VIP 까지 <b>65% 달성</b></div>
+            </div>
           </div>
-          <div class="asset-line three">
-            <div class="asset-cell"><span>마일리지</span><strong>4,500<u>원</u></strong></div>
-            <a class="asset-cell" href="mobile_mainlist.html"><span>쿠폰</span><strong>23<u>장</u></strong></a>
-            <div class="asset-cell"><span>예치금</span><strong>13,961<u>원</u></strong></div>
+          <div class="my-quick-row" aria-label="마이페이지 바로가기">
+            <a class="my-quick-item" href="mobile_bundle_shipping_management.html">
+              <i class="fa-solid fa-coins" aria-hidden="true"></i>
+              <span class="lbl">보증금 관리</span>
+            </a>
+            <a class="my-quick-item" href="mobile_qna.html">
+              <i class="fa-regular fa-comment-dots" aria-hidden="true"></i>
+              <span class="lbl">나의 문의내역</span>
+            </a>
+            <a class="my-quick-item" href="mobile_mileage.html">
+              <span class="my-quick-value"><strong>28,540</strong><span>원</span></span>
+              <span class="lbl">마일리지</span>
+            </a>
+            <a class="my-quick-item" href="#">
+              <span class="my-quick-value"><strong>21,560</strong><span>원</span></span>
+              <span class="lbl">예치금</span>
+            </a>
+            <a class="my-quick-item" href="mobile_mileage.html">
+              <span class="my-quick-value"><strong>0</strong><span>장</span></span>
+              <span class="lbl">쿠폰</span>
+            </a>
           </div>
         </div>
       </section>

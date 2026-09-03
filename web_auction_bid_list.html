@@ -71,7 +71,7 @@
     }
     .sidebar { min-width: 0; }
     .profile-card {
-      height: 172px;
+      height: 120px;
       padding: 19px 22px 12px;
       background: var(--warm);
     }
@@ -424,6 +424,10 @@
       .bid-meta { flex: 1 1 100%; }
       .bid-actions { flex-direction: row; }
     }
+  .profile-id { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .profile-id .profile-name { display: inline; margin: 0; }
+  .profile-id .profile-tier { display: inline-flex; align-items: center; margin: 0; padding: 2px 9px; border-radius: 5px; background: #f1f2f4; color: var(--grade-vip); font-size: 12px; font-weight: 700; line-height: 1.4; }
+  .profile-id + .vip-copy { margin: 4px 0 0; padding-right: 0; }
   </style>
 </head>
 <body>
@@ -464,20 +468,14 @@
         <div class="profile-main login-only">
           <div class="avatar tier-vip member-tier-icon grade-img" aria-label="VIP 등급"><img class="grade-icon" src="gradeicon/grade_vip.png" alt=""></div>
           <div>
-            <strong class="profile-name">홍길동님</strong>
-            <span class="profile-tier">VIP</span>
+            <div class="profile-id"><strong class="profile-name">홍길동님</strong><span class="profile-tier">VIP</span></div>
+            <p class="vip-copy">Prestige까지 <b>65%</b> 달성</p>
           </div>
-        </div>
-        <p class="vip-copy login-only">Prestige까지 <b>₩8,500,000</b> 또는 <b>15건</b></p>
-        <div class="vip-row login-only">
-          <div class="vip-progress"><span></span></div>
-          <span class="help-dot">?</span>
         </div>
         <div class="profile-main guest-only">
           <div class="avatar" aria-label="비회원"><i class="fa-regular fa-user" aria-hidden="true"></i></div>
           <div>
-            <strong class="profile-name">로그인이 필요합니다</strong>
-            <span class="profile-tier">Guest</span>
+            <div class="profile-id"><strong class="profile-name">로그인이 필요합니다</strong><span class="profile-tier">Guest</span></div>
           </div>
         </div>
         <p class="vip-copy guest-only">로그인하고 거래 현황과 혜택을 확인하세요.</p>
