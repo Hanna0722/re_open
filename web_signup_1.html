@@ -59,15 +59,17 @@ button{cursor:pointer}
 .agree-all{display:flex;justify-content:center;margin-top:12px}
 
 /* ── CTA ── */
-.join-actions{display:flex;justify-content:center;gap:12px;margin-top:26px}
-.btn{height:46px;padding:0 40px;border:1px solid transparent;border-radius:5px;font-size:14px;font-weight:700;font-family:inherit;transition:background .15s}
-.btn-primary{background:var(--rose);color:#fff}
-.btn-primary:hover{background:var(--rose-h)}
-.btn-outline{background:#fff;border-color:var(--border);color:var(--tp);display:inline-flex;align-items:center;gap:10px}
-.btn-outline:hover{border-color:var(--navy);color:var(--navy)}
-.sns-list{display:inline-flex;align-items:center;gap:6px}
-.sns-ico{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:800;color:#fff}
-.sns-n{background:#03C75A}.sns-k{background:#FEE500;color:#3C1E1E}.sns-g{background:#fff;border:1px solid var(--border);color:#4285F4}.sns-a{background:#111}
+.join-actions{display:grid;gap:20px;max-width:600px;margin:26px auto 0}
+.btn{height:50px;padding:0 18px;border:1px solid transparent;border-radius:5px;font-size:14px;font-weight:800;font-family:inherit;transition:background .15s,border-color .15s,color .15s;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap}
+.btn-primary{background:#000;color:#fff}
+.btn-primary:hover{background:#222}
+.social-login-row{display:flex;align-items:flex-start;justify-content:center;gap:58px}
+.social-login-btn{min-width:68px;border:0;background:transparent;color:#4c5564;font-size:13px;font-weight:500;font-family:inherit;display:inline-flex;flex-direction:column;align-items:center;gap:9px;cursor:pointer}
+.social-login-btn:hover{color:var(--rose)}
+.social-circle{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#f2f3f5;color:#111;box-shadow:inset 0 0 0 1px rgba(0,0,0,.03)}
+.social-circle.naver{color:#03C75A;font-family:Arial,sans-serif;font-size:16px;font-weight:900}
+.social-circle.kakao{color:#191919;font-size:14px}
+.social-circle.google{color:#4285F4;font-size:15px}
 
 /* ── 푸터 ── */
 footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
@@ -174,16 +176,21 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
 
   <!-- CTA -->
   <div class="join-actions">
-    <button class="btn btn-primary" type="button" id="btnJoinNext" onclick="goNextStep()">일반 회원가입</button>
-    <button class="btn btn-outline" type="button">
-      소셜간편 회원가입
-      <span class="sns-list" aria-hidden="true">
-        <span class="sns-ico sns-n">N</span>
-        <span class="sns-ico sns-k">K</span>
-        <span class="sns-ico sns-g">G</span>
-        <span class="sns-ico sns-a"><i class="fa-brands fa-apple"></i></span>
-      </span>
-    </button>
+    <button class="btn btn-primary" type="button" id="btnJoinNext" onclick="goNextStep()">회원가입</button>
+    <div class="social-login-row" aria-label="소셜 회원가입">
+      <button class="social-login-btn" type="button">
+        <span class="social-circle naver" aria-hidden="true">N</span>
+        <span>네이버로 회원가입</span>
+      </button>
+      <button class="social-login-btn" type="button">
+        <span class="social-circle kakao" aria-hidden="true"><i class="fa-solid fa-comment"></i></span>
+        <span>카카오로 회원가입</span>
+      </button>
+      <button class="social-login-btn" type="button">
+        <span class="social-circle google" aria-hidden="true"><i class="fa-brands fa-google"></i></span>
+        <span>구글로 회원가입</span>
+      </button>
+    </div>
   </div>
 </div>
 
