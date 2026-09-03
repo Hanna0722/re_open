@@ -117,10 +117,12 @@
   }
 
   var css = [
-    'body{min-width:1280px !important}',
+    /* 전체 페이지 공통 콘텐츠 폭 (퍼블리싱 기준 1140px) */
+    ':root{--bb-page-w:1140px}',
+    'body{min-width:1200px !important}',
 
     '.bbh-header{background:#fff;border-bottom:1px solid #E0E4EB;position:sticky;top:0;z-index:900;box-shadow:0 1px 4px rgba(0,0,0,.06);font-family:Pretendard,"Apple SD Gothic Neo","Helvetica Neue","Malgun Gothic",sans-serif;font-size:14px;color:#1A1A2E}',
-    '.bbh-hdr{max-width:1440px;margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;gap:16px}',
+    '.bbh-hdr{max-width:var(--bb-page-w);margin:0 auto;padding:0;height:56px;display:flex;align-items:center;gap:16px}',
     '.bbh-menu{display:flex;flex-direction:column;gap:4.5px;padding:8px;border-radius:5px;cursor:pointer;background:none;border:none;margin-right:12px;transition:background .15s;flex-shrink:0}',
     '.bbh-menu:hover{background:#F5F7FA}',
     '.bbh-menu span{display:block;width:17px;height:2px;background:#1A1A2E;border-radius:1px}',
@@ -220,7 +222,7 @@
 
     /* -- 상단 스토어 채널 바 (모든 페이지 공통) -- */
     '.channel-bar{background:#fff;border-bottom:1px solid #E0E4EB;padding:14px 0}',
-    '.channel-inner{max-width:1060px;margin:0 auto;padding:0;display:flex;align-items:center;gap:0}',
+    '.channel-inner{max-width:var(--bb-page-w);margin:0 auto;padding:0;display:flex;align-items:center;gap:0}',
     '.channel-icons{display:grid;grid-template-columns:repeat(8,1fr);gap:16px;width:min(calc(100vw - 60px),900px);margin:0 auto}',
     '.channel-icons::-webkit-scrollbar{display:none}',
     '.ch-icon-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:4px 14px;cursor:pointer;min-width:80px;flex-shrink:0;transition:opacity .15s;text-decoration:none}',
@@ -235,14 +237,15 @@
 
     /* -- 서브/카테고리/통합검색 상단 스토어 바 (채널 바와 동일 모양) -- */
     '.store-strip{background:#fff;border-bottom:1px solid #E0E4EB;padding:14px 0;width:auto;overflow:visible}',
-    '.store-list{max-width:1060px;width:100%;margin:0 auto;padding:0;box-sizing:border-box;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:0;border:1px solid #E0E4EB;border-radius:8px;overflow:hidden}',
-    '.store-chip{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;padding:10px 5px;min-width:0;cursor:pointer;text-decoration:none;transition:background .15s;border-left:1px solid #E0E4EB}',
-    '.store-chip:first-child{border-left:0}',
-    '.store-chip:hover{opacity:1;background:#F5F7FA}',
-    '.store-chip strong{font-size:13px;font-weight:700;color:#1A1A2E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}',
-    '.store-badge{width:30px;height:30px;margin:0;border:0;background:transparent;box-shadow:none;display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none}',
-    '.store-chip:hover .store-badge,.store-chip.active .store-badge{border:0;box-shadow:none;transform:none}',
-    '.store-badge img{width:30px;height:30px;object-fit:contain;border-radius:0}'
+    '.store-list{display:grid;grid-template-columns:repeat(8,1fr);gap:16px;width:min(calc(100vw - 60px),900px);margin:0 auto;padding:0;box-sizing:border-box}',
+    '.store-chip{display:flex;flex-direction:column;align-items:center;gap:6px;padding:4px 14px;min-width:80px;flex-shrink:0;cursor:pointer;text-decoration:none;transition:opacity .15s}',
+    '.store-chip:hover{opacity:.8}',
+    '.store-chip strong{font-size:11px;font-weight:500;color:#666B75;white-space:nowrap}',
+    '.store-badge{width:55px;height:55px;margin:0;border:1px solid #E0E4EB;border-radius:20px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.07);display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none;transition:box-shadow .15s}',
+    '.store-chip:hover .store-badge{box-shadow:0 4px 14px rgba(0,0,0,.13)}',
+    '.store-chip.active .store-badge{border-color:#E8385A;box-shadow:0 0 0 3px rgba(232,56,90,.14)}',
+    '.store-chip.active strong{color:#E8385A;font-weight:700}',
+    '.store-badge img{width:100%;height:100%;object-fit:contain;border-radius:0}'
   ].join('\n');
 
   function headerHTML() {
