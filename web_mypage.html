@@ -25,9 +25,9 @@
       --warm: #fbf7f5;
       --warm-2: #f7f3f0;
       --yellow: #f5a623;
-      --stage-left: max(16px, calc((100vw - 1180px) / 2));
+      --stage-left: max(16px, calc((100vw - 1140px) / 2));
       --sidebar-w: 231px;
-      --main-w: 925px;
+      --main-w: 885px;
       --gap: 24px;
       --asset-w: 710px;
     }
@@ -68,116 +68,18 @@
       background: #fff;
     }
 
-    .topbar {
-      height: 67px;
-      width: min(calc(100vw - 32px), 1056px);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 221px minmax(0, 714px) 221px;
-      align-items: center;
-      gap: 16px;
-      padding: 0;
-      background: #fff;
-    }
 
-    .brand-area {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      min-width: 0;
-    }
 
-    .menu-button {
-      width: 40px;
-      height: 40px;
-      border: 0;
-      border-radius: 5px;
-      background: transparent;
-      padding: 0;
-      display: grid;
-      place-items: center;
-    }
 
-    .logo-link {
-      display: inline-flex;
-      align-items: center;
-      width: 100px;
-      line-height: 0;
-    }
 
-    .logo-link img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
 
-    .search {
-      height: 43px;
-      display: flex;
-      min-width: 0;
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      overflow: hidden;
-      background: var(--warm-2);
-    }
 
-    .search input {
-      flex: 1;
-      min-width: 0;
-      border: 0;
-      outline: 0;
-      padding: 0 18px;
-      background: transparent;
-      color: var(--text);
-      font-size: 13px;
-    }
 
-    .search input::placeholder {
-      color: #8c8985;
-    }
 
-    .search button {
-      width: 111px;
-      border: 0;
-      background: var(--brand-hot);
-      color: #fff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 700;
-    }
 
-    .search button i {
-      font-size: 15px;
-    }
 
-    .icon-btn {
-      width: 28px;
-      height: 28px;
-      display: grid;
-      place-items: center;
-      border: 0;
-      border-radius: 5px;
-      background: transparent;
-      color: #687385;
-      padding: 0;
-    }
 
-    .icon-btn i {
-      font-size: 23px;
-    }
 
-    .user-name {
-      display: grid;
-      justify-items: center;
-      gap: 3px;
-      color: #111827;
-      font-size: 13px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
 
     .stage {
       position: relative;
@@ -342,257 +244,35 @@
       font-weight: 800;
     }
 
-    .drawer-section-title {
-      margin: 0 0 18px;
-      color: #111827;
-      font-size: 17px;
-      font-weight: 900;
-      letter-spacing: 0;
-    }
 
-    .user-menu-list {
-      padding: 0;
-      display: grid;
-      gap: 0;
-    }
 
-    .user-menu-item {
-      min-height: 45px;
-      padding: 0 18px 0 14px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      color: #111827;
-      font-size: 14px;
-      font-weight: 900;
-      text-decoration: none;
-      border: 0;
-      background: transparent;
-      text-align: left;
-      cursor: pointer;
-    }
 
-    .user-menu-item:hover,
-    .user-menu-link:hover {
-      color: var(--rose);
-    }
 
-    .user-menu-item .user-menu-icon,
-    .user-menu-item .emoji {
-      width: 22px;
-      text-align: center;
-      font-size: 17px;
-      flex: 0 0 auto;
-    }
 
-    .user-menu-item .chev {
-      margin-left: auto;
-      color: #a8b0bd;
-      font-weight: 700;
-      font-size: 17px;
-      line-height: 1;
-    }
 
-    .user-menu-section {
-      border-bottom: 1px solid #f0f0f3;
-    }
 
-    .user-menu-panel {
-      display: none;
-      padding: 0 0 8px 56px;
-    }
 
-    .user-menu-section.is-open .user-menu-panel {
-      display: grid;
-      gap: 0;
-    }
 
-    .user-menu-link {
-      min-height: 34px;
-      display: flex;
-      align-items: center;
-      color: #666b75;
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-    }
 
-    .user-menu-link.danger {
-      color: #8f949f;
-    }
 
-    .user-name {
-      cursor: pointer;
-    }
 
-    .drawer-ov {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.35);
-      z-index: 800;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
 
-    .drawer-ov.open {
-      opacity: 1;
-      pointer-events: all;
-    }
 
-    .drawer {
-      position: fixed;
-      top: 0;
-      right: -360px;
-      bottom: 0;
-      width: min(340px, 100vw);
-      background: #fff;
-      z-index: 801;
-      box-shadow: -8px 0 24px rgba(0, 0, 0, 0.15);
-      display: flex;
-      flex-direction: column;
-      transition: right 0.3s ease;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
 
-    .drawer.open {
-      right: 0;
-    }
 
-    .drawer-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px;
-      border-bottom: 1px solid #f0f0f3;
-      background: #fff;
-    }
 
-    .dr-close {
-      border: 0;
-      background: transparent;
-      font-size: 24px;
-      line-height: 1;
-      width: 36px;
-      height: 36px;
-      cursor: pointer;
-      color: #5c606b;
-    }
 
-    .drawer .drawer-section-title {
-      margin: 0;
-      font-size: 18px;
-    }
 
-    .drawer .user-menu-list {
-      padding: 0 0 24px;
-    }
 
-    .drawer .user-menu-panel {
-      padding: 0 0 8px 56px;
-    }
 
-    .drawer .user-menu-link {
-      min-height: 34px;
-    }
 
-    .drawer .user-menu-item.logout {
-      margin-top: 6px;
-      border-top: 1px solid #e5e7eb;
-    }
 
-    .user-menu-item.logout {
-      margin-top: 6px;
-      border-top: 1px solid #e5e7eb;
-      color: #9aa3b2;
-      font-weight: 700;
-    }
 
-    .menu-drawer-ov {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0);
-      z-index: 1000;
-      pointer-events: none;
-      transition: background 0.3s;
-    }
 
-    .menu-drawer-ov.open {
-      background: rgba(0, 0, 0, 0.45);
-      pointer-events: all;
-    }
 
-    .menu-drawer {
-      position: fixed;
-      top: 0;
-      left: -100%;
-      bottom: 0;
-      width: 88%;
-      max-width: 340px;
-      background: #fff;
-      z-index: 1001;
-      overflow-y: auto;
-      scrollbar-width: none;
-      transition: left 0.3s cubic-bezier(.4,0,.2,1);
-      display: flex;
-      flex-direction: column;
-      box-shadow: 4px 0 20px rgba(0,0,0,.12);
-      border-top-right-radius: 16px;
-      border-bottom-right-radius: 16px;
-    }
 
-    .menu-drawer::-webkit-scrollbar {
-      display: none;
-    }
 
-    .menu-drawer.open {
-      left: 0;
-    }
 
-    .menu-drawer .dr-head {display:flex;align-items:center;justify-content:space-between;padding:18px 16px 16px;border-bottom:1px solid #D8D8DE}
-    .menu-drawer .dr-login-link{display:inline-flex;align-items:center;gap:10px;padding:0;border:none;background:none;color:var(--tp);font-size:17px;font-weight:800;font-family:inherit;cursor:pointer}
-    .menu-drawer .dr-login-link i{font-size:16px;color:var(--rose)}
-    .menu-drawer .dr-close{width:32px;height:32px;border:none;background:none;color:var(--tp);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-    .menu-drawer .dr-user-mini{display:flex;align-items:center;gap:10px}
-    .menu-drawer .u-av{width:38px;height:38px;border-radius:50%;background:#FFE7EF;color:var(--rose);display:grid;place-items:center;font-size:18px;font-weight:800}
-    .menu-drawer .dr-user-mini-name{font-size:15px;font-weight:700;color:var(--tp)}
-    .menu-drawer .dr-user-mini-grade{font-size:11px;color:var(--grade-vip);font-weight:700;margin-top:2px}
-    .menu-drawer .dr-guest-card{padding:14px 16px 16px;background:#FFF8F5;border-bottom:1px solid #E5E7EB}
-    .menu-drawer .dr-guest-title{font-size:16px;font-weight:800;color:#111827;margin-bottom:4px}
-    .menu-drawer .dr-guest-copy{font-size:12px;color:#6B7280;line-height:1.45;margin-bottom:12px}
-    .menu-drawer .dr-login-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    .menu-drawer .dr-action-btn{height:36px;border-radius:5px;border:1px solid var(--rose);background:var(--rose);color:#fff;font-size:12px;font-weight:800;font-family:inherit;cursor:pointer}
-    .menu-drawer .dr-action-btn.secondary{background:#fff;color:#4B5563;border-color:#D9E0E9}
-    .menu-drawer .dr-user-assets{display:grid;grid-template-columns:1fr 1px 1fr;margin:12px 16px 0;border:1px solid #E5E7EB;border-radius:10px;overflow:hidden;background:#fff}
-    .menu-drawer .dr-user-asset{text-align:center;padding:9px 6px}
-    .menu-drawer .dr-user-asset span{display:block;font-size:10px;color:#8B95A5;margin-bottom:2px}
-    .menu-drawer .dr-user-asset strong{display:block;font-size:13px;color:#1F2530;font-family:'Roboto',sans-serif}
-    .menu-drawer .dr-user-asset-div{background:#E5E7EB}
-    .menu-drawer .dr-member-panel{display:none}
-    .menu-drawer .dr-mypage-list{display:grid;gap:6px;padding:0 16px 6px}
-    .menu-drawer .dr-mypage-item{min-height:40px;display:flex;align-items:center;gap:12px;color:#202633;font-size:14px;font-weight:700;text-decoration:none}
-    .menu-drawer .dr-mypage-item i{width:20px;color:#111827;text-align:center;font-size:15px}
-    .menu-drawer .dr-mypage-item .dr-cat-arrow{margin-left:auto}
-    .menu-drawer .dr-mypage-sub{display:grid;gap:2px;margin:-2px 0 8px 32px;padding:4px 0 6px 12px;border-left:1px solid #EEF0F3}
-    .menu-drawer .dr-mypage-sub a{min-height:30px;display:flex;align-items:center;color:#4B5563;font-size:12px;font-weight:500;text-decoration:none}
-    .menu-drawer .dr-mypage-sub a.active{color:var(--rose);font-weight:800}
-    .menu-drawer .dr-sec{padding:14px 0 10px;border-bottom:1px solid #D8D8DE}
-    .menu-drawer .dr-sec:last-child{border-bottom:none}
-    .menu-drawer .dr-sec-title{padding:0 16px 14px;color:var(--tp);font-size:13px;font-weight:800}
-    .menu-drawer .dr-quick{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:0 8px}
-    .menu-drawer .dr-quick-item{display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px 4px 14px;cursor:pointer}
-    .menu-drawer .dr-quick-icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;color:var(--rose)}
-    .menu-drawer .dr-quick-label{font-size:13px;color:var(--ts);word-break:keep-all;text-align:center}
-    .menu-drawer .dr-cat-list{padding:0 0 2px}
-    .menu-drawer .dr-cat-item{display:flex;align-items:center;gap:12px;padding:15px 16px;border-top:1px solid #D8D8DE;font-size:15px;color:var(--tp);cursor:pointer}
-    .menu-drawer .dr-cat-item:first-child{border-top:none}
-    .menu-drawer .dr-cat-flag{width:30px;flex-shrink:0;color:var(--tp);font-size:14px;font-weight:700}
-    .menu-drawer .dr-cat-label{flex:1}
-    .menu-drawer .dr-cat-arrow{font-size:12px;color:var(--tm)}
-    .menu-drawer .dr-link-grid{display:grid;grid-template-columns:repeat(2,1fr);row-gap:14px;column-gap:24px;padding:0 16px 14px}
-    .menu-drawer .dr-link-grid a{font-size:14px;color:var(--ts);text-decoration:none}
 
     .main {
       min-width: 0;
@@ -1126,248 +806,8 @@
       </main>
     </div>
 
-    <div class="menu-drawer-ov" id="menuDrawerOv" onclick="closeMenuDrawer()"></div>
-    <div class="menu-drawer" id="menuDrawer">
-      <div id="menuDrGuestHd" class="dr-head" style="display:none">
-        <button class="dr-login-link" onclick="toggleMenuDrawerLogin();closeMenuDrawer()"><span>로그인하기</span><i class="fas fa-chevron-right"></i></button>
-        <button class="dr-close" onclick="closeMenuDrawer()"><i class="fas fa-times"></i></button>
-      </div>
-      <div id="menuDrUserHd" class="dr-head">
-        <div class="dr-user-mini">
-          <div class="u-av tier-vip member-tier-icon grade-img" aria-label="VIP 등급"><img class="grade-icon" src="gradeicon/grade_vip.png" alt=""></div>
-          <div>
-            <div class="dr-user-mini-name">홍길동 님</div>
-            <div class="dr-user-mini-grade">VIP 회원</div>
-          </div>
-        </div>
-        <button class="dr-close" onclick="closeMenuDrawer()"><i class="fas fa-times"></i></button>
-      </div>
-      <div id="menuDrGuestPanel" class="dr-guest-card" style="display:none">
-        <div class="dr-guest-title">비드바이 로그인</div>
-        <div class="dr-guest-copy">로그인하고 입찰 현황, 마일리지, 관심 상품을 빠르게 확인하세요.</div>
-        <div class="dr-login-actions">
-          <button class="dr-action-btn" type="button" onclick="toggleMenuDrawerLogin();closeMenuDrawer()">로그인</button>
-          <button class="dr-action-btn secondary" type="button">회원가입</button>
-        </div>
-      </div>
-      <div id="menuDrUserAssets" class="dr-user-assets">
-        <div class="dr-user-asset"><span>마일리지</span><strong>4,500원</strong></div>
-        <div class="dr-user-asset-div"></div>
-        <div class="dr-user-asset"><span>예치금</span><strong>29,870원</strong></div>
-      </div>
-      <div class="dr-sec">
-        <div class="dr-sec-title">바로가기</div>
-        <div class="dr-quick">
-          <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-truck-fast"></i></div><div class="dr-quick-label">배송현황</div></div>
-          <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-won-sign"></i></div><div class="dr-quick-label">비용계산기</div></div>
-          <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-file-invoice"></i></div><div class="dr-quick-label">관세안내</div></div>
-          <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-calendar-check"></i></div><div class="dr-quick-label">출석부</div></div>
-        </div>
-      </div>
-      <div class="dr-sec">
-        <div class="dr-sec-title">카테고리</div>
-        <div class="dr-cat-list">
-          <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본야후경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
-          <div class="dr-cat-item"><span class="dr-cat-flag">US</span><span class="dr-cat-label">미국이베이경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
-          <div class="dr-cat-item"><span class="dr-cat-flag">GB</span><span class="dr-cat-label">영국이베이경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
-          <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본메루카리</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
-          <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본구매대행</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
-        </div>
-      </div>
-      <div id="menuDrMemberPanel" class="dr-member-panel" style="display:block">
-        <div class="dr-sec">
-          <div class="dr-sec-title">마이페이지</div>
-          <div class="dr-mypage-list">
-            <a class="dr-mypage-item" href="#"><i class="far fa-user"></i><span>마이쇼핑</span><i class="fas fa-chevron-down dr-cat-arrow"></i></a>
-            <div class="dr-mypage-sub">
-              <a href="#">거래 목록</a>
-              <a href="#">경매 입찰/유찰</a>
-              <a href="#">구매 신청 목록</a>
-              <a href="#">관심 항목 관리</a>
-            </div>
-            <a class="dr-mypage-item" href="#"><i class="fas fa-truck"></i><span>배송관리</span><i class="fas fa-chevron-right dr-cat-arrow"></i></a>
-            <a class="dr-mypage-item" href="#"><i class="fas fa-gift"></i><span>MY 혜택</span><i class="fas fa-chevron-right dr-cat-arrow"></i></a>
-            <a class="dr-mypage-item" href="#"><i class="fas fa-gear"></i><span>나의정보관리</span><i class="fas fa-chevron-right dr-cat-arrow"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="dr-sec">
-        <div class="dr-sec-title">이용가이드</div>
-        <div class="dr-link-grid">
-          <a href="#">초보자가이드</a>
-          <a href="#">수수료안내</a>
-          <a href="#">배송비안내</a>
-          <a href="#">관부가세안내</a>
-        </div>
-      </div>
-      <div class="dr-sec" style="border-bottom:none">
-        <div class="dr-sec-title">고객센터</div>
-        <div class="dr-link-grid">
-          <a href="#">공지사항</a>
-          <a href="#">자주하는질문</a>
-          <a href="#">1:1 문의하기</a>
-          <a href="#">블로그</a>
-        </div>
-      </div>
-      <div style="height:24px"></div>
-    </div>
-
-    <div class="drawer-ov" id="drawerOv" hidden></div>
-    <aside class="drawer" id="userDrawer" hidden aria-labelledby="drawerTitle" aria-hidden="true">
-      <div class="drawer-header">
-        <h2 id="drawerTitle" class="drawer-section-title">마이페이지</h2>
-        <button class="dr-close" type="button" aria-label="닫기" id="drawerCloseBtn"><i class="fas fa-times" aria-hidden="true"></i></button>
-      </div>
-      <nav class="user-menu-list" aria-label="회원 메뉴">
-        <div class="user-menu-section">
-          <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="drawer-menu-trade">
-            <span class="user-menu-icon"><i class="fas fa-shopping-cart" aria-hidden="true"></i></span><span>나의 거래 현황</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
-          </button>
-          <div class="user-menu-panel" id="drawer-menu-trade">
-            <a class="user-menu-link active" href="web_mainlist.html">거래 전체 목록</a>
-            <a class="user-menu-link" href="#">경매 입찰/유찰</a>
-            <a class="user-menu-link" href="#">구매 신청 목록</a>
-          </div>
-        </div>
-
-        <div class="user-menu-section">
-          <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="drawer-menu-delivery">
-            <span class="user-menu-icon"><i class="fas fa-truck-fast" aria-hidden="true"></i></span><span>배송관리</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
-          </button>
-          <div class="user-menu-panel" id="drawer-menu-delivery">
-            <a class="user-menu-link" href="#">배송신청/변경</a>
-            <a class="user-menu-link" href="#">배송지 관리</a>
-          </div>
-        </div>
-
-        <div class="user-menu-section">
-          <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="drawer-menu-favorites">
-            <span class="user-menu-icon"><i class="fas fa-heart" aria-hidden="true"></i></span><span>관심 항목 관리</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
-          </button>
-          <div class="user-menu-panel" id="drawer-menu-favorites">
-            <a class="user-menu-link" href="web_favorites.html?tab=seller">관심 출품자</a>
-            <a class="user-menu-link" href="web_favorites.html?tab=auction">경매 관심물품</a>
-        <a class="user-menu-link" href="web_favorites.html?tab=purchase">구매 관심물품</a>
-            <a class="user-menu-link" href="web_favorites.html?tab=keyword">관심 키워드</a>
-            <a class="user-menu-link" href="web_favorites.html?tab=shortcut">바로가기</a>
-          </div>
-        </div>
-
-        <div class="user-menu-section">
-          <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="drawer-menu-benefit">
-            <span class="user-menu-icon"><i class="fas fa-gift" aria-hidden="true"></i></span><span>MY 혜택</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
-          </button>
-          <div class="user-menu-panel" id="drawer-menu-benefit">
-            <a class="user-menu-link" href="web_mileage.html">마일리지 / 쿠폰</a>
-            <a class="user-menu-link" href="web_grade page.html">MY 등급</a>
-          </div>
-        </div>
-
-        <div class="user-menu-section">
-          <button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="drawer-menu-info">
-            <span class="user-menu-icon"><i class="fas fa-user" aria-hidden="true"></i></span><span>나의 정보관리</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>
-          </button>
-          <div class="user-menu-panel" id="drawer-menu-info">
-            <a class="user-menu-link" href="#">예치금 관리</a>
-            <a class="user-menu-link" href="#">보증금 관리</a>
-            <a class="user-menu-link" href="#">회원정보 수정</a>
-            <a class="user-menu-link" href="#">비밀번호 변경</a>
-            <a class="user-menu-link danger" href="#">회원 탈퇴</a>
-          </div>
-        </div>
-
-        <button class="user-menu-item logout" type="button"><span class="emoji">🔒</span><span>로그아웃</span></button>
-      </nav>
-    </aside>
-
   </div>
 
-  <script>
-    document.querySelectorAll(".user-menu-trigger").forEach((triggerButton) => {
-      triggerButton.addEventListener("click", () => {
-        const section = triggerButton.closest(".user-menu-section");
-        const isOpen = section?.classList.toggle("is-open");
-        triggerButton.setAttribute("aria-expanded", String(Boolean(isOpen)));
-      });
-    });
-
-    let menuDrawerLoggedIn = true;
-
-    function renderMenuDrawerState() {
-      document.getElementById("menuDrGuestHd").style.display = menuDrawerLoggedIn ? "none" : "flex";
-      document.getElementById("menuDrUserHd").style.display = menuDrawerLoggedIn ? "flex" : "none";
-      document.getElementById("menuDrGuestPanel").style.display = menuDrawerLoggedIn ? "none" : "block";
-      document.getElementById("menuDrUserAssets").style.display = menuDrawerLoggedIn ? "grid" : "none";
-      document.getElementById("menuDrMemberPanel").style.display = menuDrawerLoggedIn ? "block" : "none";
-    }
-
-    function toggleMenuDrawerLogin() {
-      menuDrawerLoggedIn = !menuDrawerLoggedIn;
-      closeMenuDrawer();
-      renderMenuDrawerState();
-    }
-
-    function openMenuDrawer() {
-      renderMenuDrawerState();
-      document.getElementById("menuDrawer")?.classList.add("open");
-      document.getElementById("menuDrawerOv")?.classList.add("open");
-      document.querySelectorAll(".menu-button").forEach((button) => {
-        button.setAttribute("aria-expanded", "true");
-      });
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeMenuDrawer() {
-      document.getElementById("menuDrawer")?.classList.remove("open");
-      document.getElementById("menuDrawerOv")?.classList.remove("open");
-      document.querySelectorAll(".menu-button").forEach((button) => {
-        button.setAttribute("aria-expanded", "false");
-      });
-      document.body.style.overflow = "";
-    }
-
-    renderMenuDrawerState();
-
-    const userNameButton = document.querySelector(".user-name");
-    const userDrawer = document.getElementById("userDrawer");
-    const drawerOv = document.getElementById("drawerOv");
-    const drawerCloseBtn = document.getElementById("drawerCloseBtn");
-
-    function openDrawer() {
-      if (userDrawer && drawerOv) {
-        userDrawer.hidden = false;
-        drawerOv.hidden = false;
-        requestAnimationFrame(() => {
-          userDrawer.classList.add("open");
-          drawerOv.classList.add("open");
-          userDrawer.setAttribute("aria-hidden", "false");
-        });
-      }
-    }
-
-    function closeDrawer() {
-      if (userDrawer && drawerOv) {
-        userDrawer.classList.remove("open");
-        drawerOv.classList.remove("open");
-        userDrawer.setAttribute("aria-hidden", "true");
-        document.querySelectorAll(".user-menu-section.is-open").forEach((section) => {
-          section.classList.remove("is-open");
-          section.querySelector(".user-menu-trigger")?.setAttribute("aria-expanded", "false");
-        });
-        setTimeout(() => {
-          if (!userDrawer.classList.contains("open")) {
-            userDrawer.hidden = true;
-            drawerOv.hidden = true;
-          }
-        }, 300);
-      }
-    }
-
-    userNameButton?.addEventListener("click", openDrawer);
-    drawerOv?.addEventListener("click", closeDrawer);
-    drawerCloseBtn?.addEventListener("click", closeDrawer);
-
-  </script>
 <script src="bb-common.js"></script>
 <script src="bb-search-modal.js"></script>
 </body>

@@ -24,9 +24,9 @@
       --border: #e0e4eb;
       --green: #3aad4e;
       --sidebar-w: 231px;
-      --main-w: 925px;
+      --main-w: 885px;
       --gap: 24px;
-      --stage-left: max(16px, calc((100vw - 1180px) / 2));
+      --stage-left: max(16px, calc((100vw - 1140px) / 2));
     }
 
     * { box-sizing: border-box; }
@@ -49,51 +49,11 @@
     .top-notice-spacer { height: 34px; }
     .page { min-height: 100vh; background: #fff; }
 
-    .topbar {
-      height: 67px;
-      width: min(calc(100vw - 32px), 1057px);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 221px minmax(0, 714px) 221px;
-      align-items: center;
-      gap: 16px;
-      background: #fff;
-    }
 
-    .brand-area { display: flex; align-items: center; gap: 22px; }
 
-    .menu-button {
-      width: 25px; height: 25px;
-      border: 0; border-radius: 5px; background: transparent; padding: 0;
-      display: grid; place-items: center;
-    }
 
-    .logo-link { display: inline-flex; align-items: center; width: 100px; line-height: 0; }
-    .logo-link img { width: 100%; height: auto; display: block; }
 
-    .search {
-      height: 43px; display: flex; min-width: 0;
-      border: 1px solid var(--line); border-radius: 13px;
-      overflow: hidden; background: var(--warm-2);
-    }
-    .search input {
-      flex: 1; min-width: 0; border: 0; outline: 0;
-      padding: 0 18px; background: transparent;
-      color: var(--text); font-size: 13px;
-    }
-    .search input::placeholder { color: #8c8985; }
-    .search button {
-      width: 111px; border: 0; background: var(--rose-h); color: #fff;
-      display: inline-flex; align-items: center; justify-content: center;
-      gap: 8px; font-size: 13px; font-weight: 700;
-    }
-    .search button i { font-size: 15px; line-height: 15px; }
 
-    .icon-btn {
-      width: 28px; height: 28px; display: grid; place-items: center;
-      border: 0; border-radius: 5px; background: transparent; color: #687385; padding: 0;
-    }
-    .icon-btn i { font-size: 23px; line-height: 23px; }
 
     /* ───── 레이아웃 ───── */
     .stage {
@@ -446,26 +406,6 @@
     }
     .back-btn:hover { background: var(--navy); color: #fff; }
 
-    /* ───── 드로어 (기존 동일) ───── */
-    .drawer-ov { position:fixed;inset:0;background:rgba(0,0,0,0);z-index:500;pointer-events:none;transition:background .3s }
-    .drawer-ov.open { background:rgba(0,0,0,.45);pointer-events:all }
-    .drawer {
-      position:fixed;top:0;left:-100%;bottom:0;
-      width:88%;max-width:340px;background:#fff;z-index:501;overflow-y:auto;scrollbar-width:none;
-      transition:left .3s cubic-bezier(.4,0,.2,1);
-      display:flex;flex-direction:column;
-      box-shadow:4px 0 20px rgba(0,0,0,.12);
-      border-top-right-radius:16px;border-bottom-right-radius:16px;
-    }
-    .drawer::-webkit-scrollbar { display:none; }
-    .drawer.open { left:0 }
-    .dr-head { display:flex;align-items:center;justify-content:space-between;padding:18px 16px 16px;border-bottom:1px solid #D8D8DE; }
-    .dr-close { width:32px;height:32px;border:none;background:none;color:var(--tp);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center; }
-    .dr-user-mini { display:flex;align-items:center;gap:10px }
-    .u-av { border-radius:50%;background:#FFE7EF;color:var(--rose);display:grid;place-items:center;font-size:18px;font-weight:800; }
-    .dr-user-mini .u-av { width:38px;height:38px }
-    .dr-user-mini-name { font-size:15px;font-weight:700;color:var(--tp) }
-    .dr-user-mini-grade { font-size:11px;color:var(--ts);margin-top:2px }
 
     /* ───── 반응형 ───── */
 
@@ -802,32 +742,7 @@
   </div>
 </div>
 
-<!-- 드로어 오버레이 -->
-<div class="drawer-ov" id="drawerOv" onclick="closeDrawer()"></div>
-<div class="drawer" id="drawer">
-  <div class="dr-head">
-    <div class="dr-user-mini">
-      <div class="u-av grade-img" style="width:38px;height:38px"><img class="grade-icon" src="gradeicon/grade_vip.png" alt=""></div>
-      <div>
-        <div class="dr-user-mini-name">홍길동님</div>
-        <div class="dr-user-mini-grade">VIP 회원</div>
-      </div>
-    </div>
-    <button class="dr-close" onclick="closeDrawer()"><i class="fas fa-times"></i></button>
-  </div>
-</div>
-
 <script>
-  // 드로어
-  function openDrawer() {
-    document.getElementById('drawer').classList.add('open');
-    document.getElementById('drawerOv').classList.add('open');
-  }
-  function closeDrawer() {
-    document.getElementById('drawer').classList.remove('open');
-    document.getElementById('drawerOv').classList.remove('open');
-  }
-
   // 파일 업로드
   function handleFile(input) {
     if (!input.files.length) return;

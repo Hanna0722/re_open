@@ -25,9 +25,9 @@
       --warm: #fbf7f5;
       --warm-2: #f7f3f0;
       --yellow: #f4b400;
-      --stage-left: max(16px, calc((100vw - 1180px) / 2));
+      --stage-left: max(16px, calc((100vw - 1140px) / 2));
       --sidebar-w: 231px;
-      --main-w: 925px;
+      --main-w: 885px;
       --gap: 24px;
       --asset-w: 710px;
     }
@@ -80,116 +80,18 @@
       background: #fff;
     }
 
-    .topbar {
-      height: 67px;
-      width: min(calc(100vw - 32px), 1057px);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 221px minmax(0, 714px) 221px;
-      align-items: center;
-      gap: 16px;
-      padding: 0;
-      background: #fff;
-    }
 
-    .brand-area {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      min-width: 0;
-    }
 
-    .menu-button {
-      width: 25px;
-      height: 25px;
-      border: 0;
-      border-radius: 5px;
-      background: transparent;
-      padding: 0;
-      display: grid;
-      place-items: center;
-    }
 
-    .logo-link {
-      display: inline-flex;
-      align-items: center;
-      width: 100px;
-      line-height: 0;
-    }
 
-    .logo-link img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
 
-    .search {
-      height: 43px;
-      display: flex;
-      min-width: 0;
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      overflow: hidden;
-      background: var(--warm-2);
-    }
 
-    .search input {
-      flex: 1;
-      min-width: 0;
-      border: 0;
-      outline: 0;
-      padding: 0 18px;
-      background: transparent;
-      color: var(--text);
-      font-size: 13px;
-    }
 
-    .search input::placeholder {
-      color: #8c8985;
-    }
 
-    .search button {
-      width: 111px;
-      border: 0;
-      background: var(--brand-hot);
-      color: #fff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 700;
-    }
 
-    .search button i {
-      font-size: 15px;
-    }
 
-    .icon-btn {
-      width: 28px;
-      height: 28px;
-      display: grid;
-      place-items: center;
-      border: 0;
-      border-radius: 5px;
-      background: transparent;
-      color: #687385;
-      padding: 0;
-    }
 
-    .icon-btn i {
-      font-size: 23px;
-    }
 
-    .user-name {
-      display: grid;
-      justify-items: center;
-      gap: 3px;
-      color: #111827;
-      font-size: 13px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
 
     .stage {
       position: relative;
@@ -363,193 +265,18 @@
       font-weight: 800;
     }
 
-    .user-menu-list {
-      padding: 0;
-      display: grid;
-      gap: 0;
-    }
 
-    .user-menu-item {
-      min-height: 45px;
-      padding: 0 18px 0 14px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      color: #111827;
-      font-size: 14px;
-      font-weight: 900;
-      text-decoration: none;
-      border: 0;
-      background: transparent;
-      text-align: left;
-      cursor: pointer;
-    }
 
-    .user-menu-item:hover,
-    .user-menu-link:hover {
-      color: var(--rose);
-    }
 
-    .user-menu-item .user-menu-icon,
-    .user-menu-item .emoji {
-      width: 22px;
-      text-align: center;
-      font-size: 17px;
-      flex: 0 0 auto;
-    }
 
-    .user-menu-item .chev {
-      margin-left: auto;
-      color: #a8b0bd;
-      font-weight: 700;
-      font-size: 17px;
-      line-height: 1;
-    }
 
-    .user-menu-section {
-      border-bottom: 1px solid #f0f0f3;
-    }
 
-    .user-menu-panel {
-      display: none;
-      padding: 0 0 8px 56px;
-    }
 
-    .user-menu-section.is-open .user-menu-panel {
-      display: grid;
-      gap: 0;
-    }
 
-    .user-menu-link {
-      min-height: 34px;
-      display: flex;
-      align-items: center;
-      color: #666b75;
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-    }
 
-    .user-menu-link.danger {
-      color: #8f949f;
-    }
 
-    .user-menu-item.logout {
-      margin-top: 6px;
-      border-top: 1px solid #e5e7eb;
-      color: #9aa3b2;
-      font-weight: 700;
-    }
 
-    .user-name {
-      cursor: pointer;
-    }
 
-    .drawer-ov{
-      position:fixed;inset:0;background:rgba(0,0,0,0);z-index:1000;pointer-events:none;transition:background .3s
-    }
-    .drawer-ov.open{background:rgba(0,0,0,.45);pointer-events:all}
-    .drawer{
-      position:fixed;top:0;left:-100%;bottom:0;
-      width:88%;max-width:340px;
-      background:#fff;z-index:1001;overflow-y:auto;scrollbar-width:none;
-      transition:left .3s cubic-bezier(.4,0,.2,1);
-      display:flex;flex-direction:column;
-      box-shadow:4px 0 20px rgba(0,0,0,.12);
-      border-top-right-radius:16px;border-bottom-right-radius:16px;
-    }
-    .drawer::-webkit-scrollbar{display:none}
-    .drawer.open{left:0}
-    .dr-head{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:18px 16px 16px;
-      border-bottom:1px solid #D8D8DE;
-    }
-    .dr-login-link{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:0;border:none;background:none;
-      color:var(--tp);font-size:17px;font-weight:800;
-      font-family:inherit;cursor:pointer;
-    }
-    .dr-login-link i{font-size:16px;color:var(--rose)}
-    .dr-close{
-      width:32px;height:32px;border:none;background:none;
-      color:var(--tp);font-size:22px;cursor:pointer;
-      display:flex;align-items:center;justify-content:center;
-    }
-    .dr-user-mini{display:flex;align-items:center;gap:10px}
-    .u-av{
-      border-radius:50%;background:#FFE7EF;color:var(--rose);
-      display:grid;place-items:center;font-size:18px;font-weight:800;
-    }
-    .u-av.tier-vip{background:#fff7e6;color:#f5a623}
-    .dr-user-mini .u-av{width:38px;height:38px}
-    .dr-user-mini-name{font-size:15px;font-weight:700;color:var(--tp)}
-    .dr-user-mini-grade{font-size:11px;color:var(--ts);margin-top:2px}
-    .dr-guest-card{
-      padding:14px 16px 16px;
-      background:#FFF8F5;border-bottom:1px solid #E5E7EB;
-    }
-    .dr-guest-title{font-size:16px;font-weight:800;color:#111827;margin-bottom:4px}
-    .dr-guest-copy{font-size:12px;color:#6B7280;line-height:1.45;margin-bottom:12px}
-    .dr-login-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    .dr-action-btn{
-      height:36px;border-radius:5px;border:1px solid var(--rose);
-      background:var(--rose);color:#fff;font-size:12px;font-weight:800;
-      font-family:inherit;cursor:pointer;
-    }
-    .dr-action-btn.secondary{background:#fff;color:#4B5563;border-color:#D9E0E9}
-    .dr-user-assets{
-      display:grid;grid-template-columns:1fr 1px 1fr;
-      margin:12px 16px 0;border:1px solid #E5E7EB;border-radius:10px;
-      overflow:hidden;background:#fff;
-    }
-    .dr-user-asset{text-align:center;padding:9px 6px}
-    .dr-user-asset span{display:block;font-size:10px;color:#8B95A5;margin-bottom:2px}
-    .dr-user-asset strong{display:block;font-size:13px;color:#1F2530;font-family:'Roboto',sans-serif}
-    .dr-user-asset-div{background:#E5E7EB}
-    .dr-mypage-item .dr-cat-arrow{margin-left:auto}
-    .dr-mypage-sub a.active{color:var(--rose);font-weight:800}
-    .dr-sec{padding:14px 0 10px;border-bottom:1px solid #D8D8DE}
-    .dr-sec:last-child{border-bottom:none}
-    .dr-sec-title{
-      padding:0 16px 14px;
-      color:var(--tp);font-size:13px;font-weight:800;
-    }
-    .dr-quick{
-      display:grid;grid-template-columns:repeat(4,1fr);
-      gap:4px;padding:0 8px;
-    }
-    .dr-quick-item{
-      display:flex;flex-direction:column;align-items:center;gap:10px;
-      padding:10px 4px 14px;cursor:pointer;
-    }
-    .dr-quick-icon{
-      width:44px;height:44px;
-      display:flex;align-items:center;justify-content:center;
-      font-size:28px;flex-shrink:0;color:var(--rose);
-    }
-    .dr-quick-label{font-size:13px;color:var(--ts);word-break:keep-all;text-align:center}
-    .dr-cat-list{padding:0 0 2px}
-    .dr-cat-item{
-      display:flex;align-items:center;gap:12px;
-      padding:15px 16px;border-top:1px solid #D8D8DE;
-      font-size:15px;color:var(--tp);cursor:pointer;
-    }
-    .dr-cat-item:first-child{border-top:none}
-    .dr-cat-flag{
-      width:30px;flex-shrink:0;
-      color:var(--tp);font-size:14px;font-weight:700;
-    }
-    .dr-cat-label{flex:1}
-    .dr-cat-arrow{font-size:12px;color:var(--tm)}
-    .dr-link-grid{
-      display:grid;grid-template-columns:repeat(2,1fr);
-      row-gap:14px;column-gap:24px;
-      padding:0 16px 14px;
-    }
-    .dr-link-grid a{font-size:14px;color:var(--ts);text-decoration:none}
 
     .main {
       min-width: 0;
@@ -2433,82 +2160,7 @@
     </div>
   </div>
 
-  <div class="drawer-ov" id="drawerOv" onclick="closeDrawer()"></div>
 
-  <div class="drawer" id="drawer">
-    <div id="drGuestHd" class="dr-head" style="display:none">
-      <button class="dr-login-link" onclick="toggleLogin();closeDrawer()"><span>로그인하기</span><i class="fas fa-chevron-right"></i></button>
-      <button class="dr-close" onclick="closeDrawer()"><i class="fas fa-times"></i></button>
-    </div>
-
-    <div id="drUserHd" class="dr-head">
-      <div class="dr-user-mini">
-        <div class="u-av tier-vip member-tier-icon grade-img" aria-label="VIP 등급"><img class="grade-icon" src="gradeicon/grade_vip.png" alt=""></div>
-        <div>
-          <div class="dr-user-mini-name">홍길동님</div>
-          <div class="dr-user-mini-grade">VIP 회원</div>
-        </div>
-      </div>
-      <button class="dr-close" onclick="closeDrawer()"><i class="fas fa-times"></i></button>
-    </div>
-
-    <div id="drGuestPanel" class="dr-guest-card" style="display:none">
-      <div class="dr-guest-title">비드바이 로그인</div>
-      <div class="dr-guest-copy">로그인하고 입찰 현황, 마일리지, 관심 상품을 빠르게 확인하세요.</div>
-      <div class="dr-login-actions">
-        <button class="dr-action-btn" type="button" onclick="toggleLogin();closeDrawer()">로그인</button>
-        <button class="dr-action-btn secondary" type="button">회원가입</button>
-      </div>
-    </div>
-
-    <div id="drUserAssets" class="dr-user-assets">
-      <div class="dr-user-asset"><span>마일리지</span><strong>4,500원</strong></div>
-      <div class="dr-user-asset-div"></div>
-      <div class="dr-user-asset"><span>예치금</span><strong>29,870원</strong></div>
-    </div>
-
-    <div class="dr-sec">
-      <div class="dr-sec-title">바로가기</div>
-      <div class="dr-quick">
-        <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-truck-fast"></i></div><div class="dr-quick-label">배송현황</div></div>
-        <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-won-sign"></i></div><div class="dr-quick-label">비용계산기</div></div>
-        <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-file-invoice"></i></div><div class="dr-quick-label">관세안내</div></div>
-        <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-calendar-check"></i></div><div class="dr-quick-label">출석부</div></div>
-      </div>
-    </div>
-
-    <div class="dr-sec">
-      <div class="dr-sec-title">카테고리</div>
-      <div class="dr-cat-list">
-        <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본야후경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
-        <div class="dr-cat-item"><span class="dr-cat-flag">US</span><span class="dr-cat-label">미국이베이경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
-        <div class="dr-cat-item"><span class="dr-cat-flag">GB</span><span class="dr-cat-label">영국이베이경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
-        <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본메루카리</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
-        <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본구매대행</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
-      </div>
-    </div>
-
-     <div class="dr-sec">
-      <div class="dr-sec-title">이용가이드</div>
-      <div class="dr-link-grid">
-        <a href="#">초보자가이드</a>
-        <a href="#">수수료안내</a>
-        <a href="#">배송비안내</a>
-        <a href="#">관부가세안내</a>
-      </div>
-    </div>
-
-    <div class="dr-sec" style="border-bottom:none">
-      <div class="dr-sec-title">고객센터</div>
-      <div class="dr-link-grid">
-        <a href="#">공지사항</a>
-        <a href="#">자주하는질문</a>
-        <a href="#">1:1 문의하기</a>
-        <a href="#">블로그</a>
-      </div>
-    </div>
-    <div style="height:24px"></div>
-  </div>
   <script>
     document.querySelectorAll(".filter-group").forEach((group) => {
       const tabs = group.querySelectorAll("button");
@@ -2862,57 +2514,6 @@
       }
     }
 
-    let drawerLoggedIn = true;
-
-    function renderDrawerState() {
-      document.getElementById("drGuestHd").style.display = drawerLoggedIn ? "none" : "flex";
-      document.getElementById("drUserHd").style.display = drawerLoggedIn ? "flex" : "none";
-      document.getElementById("drGuestPanel").style.display = drawerLoggedIn ? "none" : "block";
-      document.getElementById("drUserAssets").style.display = drawerLoggedIn ? "grid" : "none";
-      document.getElementById("drMemberPanel").style.display = drawerLoggedIn ? "block" : "none";
-    }
-
-    function toggleLogin() {
-      drawerLoggedIn = !drawerLoggedIn;
-      closeDrawer();
-      renderDrawerState();
-    }
-
-    function openDrawer() {
-      const drawer = document.getElementById("drawer");
-      const overlay = document.getElementById("drawerOv");
-      renderDrawerState();
-      drawer?.classList.add("open");
-      overlay?.classList.add("open");
-      document.querySelectorAll(".menu-button").forEach((button) => {
-        button.setAttribute("aria-expanded", "true");
-      });
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeDrawer() {
-      const drawer = document.getElementById("drawer");
-      const overlay = document.getElementById("drawerOv");
-      drawer?.classList.remove("open");
-      overlay?.classList.remove("open");
-      document.querySelectorAll(".menu-button").forEach((button) => {
-        button.setAttribute("aria-expanded", "false");
-      });
-      document.body.style.overflow = "";
-    }
-
-    document.querySelectorAll(".user-menu-trigger").forEach((triggerButton) => {
-      triggerButton.addEventListener("click", () => {
-        const section = triggerButton.closest(".user-menu-section");
-        const isOpen = section?.classList.toggle("is-open");
-        triggerButton.setAttribute("aria-expanded", String(Boolean(isOpen)));
-      });
-    });
-
-    document.querySelectorAll(".user-name").forEach((userName) => {
-      userName.addEventListener("click", openDrawer);
-    });
-
     const quickBidModal = document.getElementById("quickBidModal");
     const quickBidAmount = document.getElementById("quickBidAmount");
 
@@ -2946,8 +2547,6 @@
         closeQuickBidModal();
       }
     });
-
-    renderDrawerState();
   </script>
 <script src="bb-common.js"></script>
 <script src="bb-search-modal.js"></script>

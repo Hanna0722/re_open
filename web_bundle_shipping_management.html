@@ -25,9 +25,9 @@
       --warm: #fbf7f5;
       --warm-2: #f7f3f0;
       --yellow: #f4b400;
-      --stage-left: max(16px, calc((100vw - 1180px) / 2));
+      --stage-left: max(16px, calc((100vw - 1140px) / 2));
       --sidebar-w: 231px;
-      --main-w: 925px;
+      --main-w: 885px;
       --gap: 24px;
     }
 
@@ -52,90 +52,16 @@
 
     .page { min-height: 100vh; background: #fff; }
 
-    .topbar {
-      height: 67px;
-      width: min(calc(100vw - 32px), 1057px);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 221px minmax(0, 714px) 221px;
-      align-items: center;
-      gap: 16px;
-      padding: 0;
-      background: #fff;
-    }
 
-    .brand-area {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      min-width: 0;
-    }
 
-    .menu-button {
-      width: 25px;
-      height: 25px;
-      border: 0;
-      border-radius: 5px;
-      background: transparent;
-      padding: 0;
-      display: grid;
-      place-items: center;
-    }
 
-    .logo-link { display: inline-flex; align-items: center; width: 100px; line-height: 0; }
-    .logo-link img { width: 100%; height: auto; display: block; }
 
-    .search {
-      height: 43px;
-      display: flex;
-      min-width: 0;
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      overflow: hidden;
-      background: var(--warm-2);
-    }
 
-    .search input {
-      flex: 1;
-      min-width: 0;
-      border: 0;
-      outline: 0;
-      padding: 0 18px;
-      background: transparent;
-      color: var(--text);
-      font-size: 13px;
-    }
 
-    .search input::placeholder { color: #8c8985; }
 
-    .search button {
-      width: 111px;
-      border: 0;
-      background: var(--brand-hot);
-      color: #fff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 700;
-    }
 
-    .search button i { font-size: 15px; }
 
-    .icon-btn {
-      width: 28px;
-      height: 28px;
-      display: grid;
-      place-items: center;
-      border: 0;
-      border-radius: 5px;
-      background: transparent;
-      color: #687385;
-      padding: 0;
-    }
 
-    .icon-btn i { font-size: 23px; }
 
     .stage {
       position: relative;

@@ -28,27 +28,16 @@ a{text-decoration:none;color:inherit}
 /* ?먥븧 ?ㅻ뜑 ?먥븧 */
 .sticky-top{position:fixed;top:0;left:0;right:0;z-index:300}
 header{background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.logo{display:flex;align-items:center;flex-shrink:0;flex:1}
-.logo img{display:block;width:100px;height:auto}
-.search{flex:0 0 540px;max-width:540px;display:flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .2s}
-.search:focus-within{border-color:var(--rose)}
-.search input{flex:1;border:none;background:var(--bg);padding:10px 14px;font-size:14px;font-family:inherit;outline:none}
-.search input::placeholder{color:var(--tm)}
 /* 비로그인 버튼 */
 /* 로그???  ? ? 리 ?*/
 .user-trig:hover,.user-trig.open{background:var(--bg)}
-.u-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--amber));display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;flex-shrink:0}
 .user-trig.open .u-chv{transform:rotate(180deg)}
 
-/* ?버?*/
-.hb-btn{display:flex;flex-direction:column;gap:4.5px;padding:8px;border-radius:5px;cursor:pointer;background:none;border:none;margin-right:12px;transition:background .15s;flex-shrink:0}
-.hb-btn:hover{background:var(--bg)}
-.hb-btn span{display:block;width:17px;height:2px;background:var(--tp);border-radius:1px}
 
 /* ? ═ ????? 안: 배너( ? + ? 원? 널(?? 2컬럼 73:27 ? ═ */
 .main-hero{background:#fff;padding:0}
 .hero-inner{
-  max-width:1060px;margin:0 auto;padding:15px 0 18px;
+  max-width:1140px;margin:0 auto;padding:15px 0 18px;
   display:grid;
   grid-template-columns:73fr 27fr;
   gap:16px;
@@ -124,7 +113,7 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 
 /* ? ═ 멤버??배너 ? ═ */
 .member-bar{background:#fff;padding:16px 0}
-.member-inner{max-width:1060px;margin:0 auto;padding:0;display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.member-inner{max-width:1140px;margin:0 auto;padding:0;display:flex;align-items:center;gap:32px;flex-wrap:wrap}
 .mb-lbl{font-size:13px;font-weight:700;color:var(--navy);flex-shrink:0}
 .mb-sub{font-size:12px;color:var(--ts);flex-shrink:0}
 /* 비로그인 3??*/
@@ -142,7 +131,7 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 .hb-slide.active{display:block}
 @keyframes hbFade{from{opacity:0}to{opacity:1}}
 .mb-slide .member-bar{height:100px;padding:0;display:flex;align-items:center}
-.notice-slide .notice-banner-inner{position:relative;max-width:1060px;margin:0 auto;padding:10px 10px 0}
+.notice-slide .notice-banner-inner{position:relative;max-width:1140px;margin:0 auto;padding:10px 10px 0}
 .notice-slide .nb-more{position:absolute;right:10px;top:10px;z-index:2;font-size:12px;color:var(--tm);font-weight:700;display:inline-flex;align-items:center;gap:4px;background:#fff;padding-left:14px}
 .notice-slide .nb-more:hover{color:var(--rose)}
 .nb-viewport{height:78px;overflow-y:auto;scrollbar-width:none;cursor:grab;padding-right:76px}
@@ -158,7 +147,7 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 .hb-dot{width:6px;height:6px;padding:0;border:none;border-radius:50%;background:var(--border);cursor:pointer}
 .hb-dot.active{background:var(--rose);width:16px;border-radius:4px}
 .hero-banner.is-tabbed{padding-bottom:0}
-.hero-banner.is-tabbed .hero-banner-inner{max-width:1060px;height:112px;margin:0 auto;display:grid;grid-template-columns:248px minmax(0,1fr)}
+.hero-banner.is-tabbed .hero-banner-inner{max-width:1140px;height:112px;margin:0 auto;display:grid;grid-template-columns:248px minmax(0,1fr)}
 .hero-banner.is-tabbed .hb-tabs{border-right:1px solid var(--border);display:grid;grid-template-rows:1fr 1fr;background:#fff}
 .hero-banner.is-tabbed .hb-tab{display:flex;align-items:center;gap:10px;padding:0 28px;border:0;background:#fff;color:#a8b0bd;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;text-align:left}
 .hero-banner.is-tabbed .hb-tab i{width:14px;text-align:center;font-size:13px;color:currentColor}
@@ -183,7 +172,7 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 
 /* ? ═ 바로가 ?? ═ */
 .sc-bar{background:#fff;border-bottom:1px solid var(--border);padding: 14px 0}
-.sc-inner{max-width:1060px;margin:0 auto;padding:0;display:flex;justify-content:space-between;gap:8px;overflow-x:auto;scrollbar-width:none}
+.sc-inner{max-width:1140px;margin:0 auto;padding:0;display:flex;justify-content:space-between;gap:8px;overflow-x:auto;scrollbar-width:none}
 .sc-inner::-webkit-scrollbar{display:none}
 .sc-item{display:flex;flex-direction:column;align-items:center;gap:7px;padding:8px 10px;border-radius:10px;cursor:pointer;min-width:74px;border:1.5px solid transparent;transition:all .15s}
 .sc-item:hover{background:#FFF5F7;border-color:rgba(232,56,90,.15)}
@@ -239,7 +228,7 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 }
 
 /* ? ═ ? 션 공통 ? ═ */
-.section{max-width:1060px;margin:0 auto;padding:30px 0}
+.section{max-width:1140px;margin:0 auto;padding:30px 0}
 /* 인기 카테고리 ~ 인기 브랜드 사이 여백 20px */
 #popularCategorySec{padding-bottom:8px}
 #popularBrandSec{padding-top:8px}
@@ -326,13 +315,13 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 
 /* ? ═ 앱 다운로드 ? ═ */
 .app-dl{background:#fff;border-top:1px solid var(--border);padding:16px 0}
-.app-dl-inner{max-width:1440px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:flex-end;gap:10px}
+.app-dl-inner{max-width:1140px;margin:0 auto;padding:0;display:flex;align-items:center;justify-content:flex-end;gap:10px}
 .app-dl-btn{display:flex;align-items:center;gap:7px;background:var(--tp);color:#fff;border:none;padding:10px 18px;border-radius:5px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .15s}
 .app-dl-btn:hover{opacity:.85}
 
 /* ?먥븧 ?명꽣 ?먥븧 */
 footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
-.ft-inner{max-width:1440px;margin:0 auto;padding:0 24px}
+.ft-inner{max-width:1140px;margin:0 auto;padding:0}
 .ft-top{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.1)}
 .ft-logo{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}
 .ft-desc{font-size:12px;line-height:1.8;max-width:340px}
@@ -346,86 +335,7 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
 .user-dd.open{display:block}
 .dd-st-num.red{color:var(--rose)}
 
-.drawer-ov{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:500;pointer-events:none;transition:background .3s}
-.drawer-ov.open{background:rgba(0,0,0,.45);pointer-events:all}
-.drawer{
-  position:fixed;top:0;left:-100%;bottom:0;
-  width:88%;max-width:340px;
-  background:#fff;z-index:501;overflow-y:auto;scrollbar-width:none;
-  transition:left .3s cubic-bezier(.4,0,.2,1);
-  display:flex;flex-direction:column;
-  box-shadow:4px 0 20px rgba(0,0,0,.12);
-  border-top-right-radius:16px;border-bottom-right-radius:16px;
-}
-.drawer::-webkit-scrollbar{display:none}
-.drawer.open{left:0}
-.dr-head{display:flex;align-items:center;justify-content:space-between;padding:18px 16px 16px;border-bottom:1px solid #D8D8DE}
-.dr-user-mini{display:flex;align-items:center;gap:10px}
-.u-av{border-radius:50%;background:#FFE7EF;color:var(--rose);display:grid;place-items:center;font-size:18px;font-weight:800}
-.dr-user-mini .u-av{width:38px;height:38px}
-.dr-user-mini-name{font-size:15px;font-weight:700;color:var(--tp)}
-.dr-user-mini-grade{font-size:11px;color:var(--ts);margin-top:2px}
-.dr-guest-card{padding:14px 16px 16px;background:#FFF8F5;border-bottom:1px solid #E5E7EB}
-.dr-guest-title{font-size:16px;font-weight:800;color:#111827;margin-bottom:4px}
-.dr-guest-copy{font-size:12px;color:#6B7280;line-height:1.45;margin-bottom:12px}
-.dr-login-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.dr-action-btn{height:36px;border-radius:5px;border:1px solid var(--rose);background:var(--rose);color:#fff;font-size:12px;font-weight:800;font-family:inherit;cursor:pointer}
-.dr-action-btn.secondary{background:#fff;color:#4B5563;border-color:#D9E0E9}
-.dr-mypage-item .dr-cat-arrow{margin-left:auto}
-.dr-mypage-sub a.active{color:var(--rose);font-weight:800}
-.dr-sec{padding:14px 0 10px;border-bottom:1px solid #D8D8DE}
-.dr-sec:last-child{border-bottom:none}
-.dr-sec-title{padding:0 16px 14px;color:var(--tp);font-size:13px;font-weight:800}
-.dr-quick{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:0 8px}
-.dr-quick-item{display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px 4px 14px;cursor:pointer}
-.dr-quick-icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;color:var(--rose)}
-.dr-quick-label{font-size:13px;color:var(--ts);word-break:keep-all;text-align:center}
-.dr-cat-list{padding:0 0 2px}
-.dr-cat-item{display:flex;align-items:center;gap:12px;padding:15px 16px;border-top:1px solid #D8D8DE;font-size:15px;color:var(--tp);cursor:pointer}
-.dr-cat-item:first-child{border-top:none}
-.dr-cat-flag{width:30px;flex-shrink:0;color:var(--tp);font-size:14px;font-weight:700}
-.dr-cat-label{flex:1}
-.dr-cat-arrow{font-size:12px;color:var(--tm)}
-.dr-link-grid{display:grid;grid-template-columns:repeat(2,1fr);row-gap:14px;column-gap:24px;padding:0 16px 14px}
-.dr-link-grid a{font-size:14px;color:var(--ts);text-decoration:none}
 
-.drawer-cs-card {
-  margin: 22px 26px 34px;
-  padding: 18px 14px;
-  background: #fcfcfd;
-  text-align: center;
-}
-.drawer-cs-tel {
-  color: var(--navy);
-  font-family: Roboto, sans-serif;
-  font-size: 26px;
-  font-weight: 900;
-}
-.drawer-cs-time {
-  margin: 8px 0 16px;
-  color: #7b8494;
-  font-size: 11px;
-}
-.drawer-cs-actions {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-.drawer-cs-actions button {
-  height: 34px;
-  border: 1px solid #d9e0e9;
-  border-radius: 8px;
-  background: #fff;
-  color: #1f2530;
-  font-size: 12px;
-  font-weight: 900;
-  font-family: inherit;
-}
-.drawer-cs-actions button:first-child {
-  border-color: var(--rose);
-  background: var(--rose);
-  color: #fff;
-}
 
 @media(max-width:1023px){
   .hero-inner{grid-template-columns:1fr}
@@ -435,12 +345,7 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
   .mb-tiers{flex-wrap:wrap}
 }
 @media(max-width:767px){
-  :root{--header-h:52px}
-  .hdr{padding:0 14px;gap:10px}
-  .logo{font-size:18px}
-  .logo sub{display:none}
-  .search{max-width:none}
-  .search-btn span{display:none}  .hero-inner{padding:0 14px}
+  :root{--header-h:52px}  .hero-inner{padding:0 14px}
   .banner-slider{height:200px}
   .slide-inner{padding:0 20px}
   .slide-title{font-size:20px}
@@ -450,8 +355,6 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
   .sec-title{font-size:15px}
   .best-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rv-grid{grid-template-columns:repeat(1,1fr)}
   .info-grid{grid-template-columns:1fr}
-  .btn-su{display:none}
-  .hbtn span{display:none}
 }
 
 </style>
@@ -780,81 +683,8 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
 </footer>
 
 <!-- ?쒕줈???ㅻ쾭?덉씠 -->
-<div class="drawer-ov" id="drawerOv" onclick="closeDrawer()"></div>
 
 <!-- ? 버 ?? 로??-->
-    <div class="drawer" id="drawer">
-      <div id="drGuestHd" class="dr-head">
-      </div>
-
-      <div id="drUserHd" class="dr-head" style="display:none">
-        <div class="dr-user-mini">
-          <div class="u-av grade-img"><img class="grade-icon" src="gradeicon/grade_vip.png" alt=""></div>
-          <div>
-            <div class="dr-user-mini-name">홍길동님</div>
-            <div class="dr-user-mini-grade">VIP 회원</div>
-          </div>
-        </div>
-      </div>
-
-      <div id="drGuestPanel" class="dr-guest-card">
-        <div class="dr-guest-title">비드바이 로그인</div>
-        <div class="dr-guest-copy">로그인하고 입찰 현황, 마일리지, 관심 상품을 빠르게 확인하세요.</div>
-        <div class="dr-login-actions">
-          <button class="dr-action-btn" type="button" onclick="toggleLogin();closeDrawer()">로그인</button>
-          <button class="dr-action-btn secondary" type="button">회원가입</button>
-        </div>
-      </div>
-      <div class="dr-sec">
-        <div class="dr-quick">
-          <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-truck-fast"></i></div><div class="dr-quick-label">배송관리</div></div>
-          <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-won-sign"></i></div><div class="dr-quick-label">MY혜택</div></div>
-          <div class="dr-quick-item"><div class="dr-quick-icon"><i class="fas fa-file-invoice"></i></div><div class="dr-quick-label">관심항목</div></div>
-          <div class="dr-quick-item" onclick="location.href='web_mypage.html'" style="cursor:pointer"><div class="dr-quick-icon"><i class="fas fa-calendar-check"></i></div><div class="dr-quick-label">마이페이지</div></div>
-        </div>
-      </div>
-
-      <div class="dr-sec">
-        <div class="dr-sec-title">카테고리</div>
-        <div class="dr-cat-list">
-          <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본야후경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
-          <div class="dr-cat-item"><span class="dr-cat-flag">US</span><span class="dr-cat-label">미국이베이경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
-          <div class="dr-cat-item"><span class="dr-cat-flag">GB</span><span class="dr-cat-label">영국이베이경매</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
-          <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본메루카리</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
-          <div class="dr-cat-item"><span class="dr-cat-flag">JP</span><span class="dr-cat-label">일본구매대행</span><i class="fas fa-chevron-down dr-cat-arrow"></i></div>
-        </div>
-      </div>
-      <div class="dr-sec">
-        <div class="dr-sec-title">이용가이드</div>
-        <div class="dr-link-grid">
-          <a href="#">초보자가이드</a>
-          <a href="#">수수료안내</a>
-          <a href="#">배송비안내</a>
-          <a href="#">관부가세안내</a>
-        </div>
-      </div>
-
-      <div class="dr-sec" style="border-bottom:none">
-        <div class="dr-sec-title">고객센터</div>
-        <div class="dr-link-grid">
-          <a href="#">공지사항</a>
-          <a href="#">자주하는질문</a>
-          <a href="web_qna_form.html">1:1문의</a>
-          <a href="#">블로그</a>
-        </div>
-      </div>
-            <div class="drawer-cs-card">
-        <div class="drawer-cs-tel">1544-5224</div>
-        <p class="drawer-cs-time">평일 AM 10:00 - PM 17:00 (점심 PM 12:30 - 13:30)</p>
-        <div class="drawer-cs-actions">
-          <button type="button" onclick="location.href='web_qna_form.html'">1:1 문의</button>
-          <button type="button">FAQ</button>
-          <button type="button">공지사항</button>
-        </div>
-
-      </div>
-      <div style="height:24px"></div>
-    </div>
 
 <div class="convenience-overlay" id="convenienceToolsPopup" aria-hidden="true" onclick="closeConvenienceToolsPopup(event)">
   <div class="convenience-popup" role="dialog" aria-modal="true" aria-label="편의도구">
@@ -944,20 +774,6 @@ document.addEventListener('click',e=>{
   if(t&&!t.contains(e.target)&&dd&&!dd.contains(e.target)){dd.classList.remove('open');t.classList.remove('open');}
 });
 
-// drawer
-function openDrawer(){
-  closeUserDrawer();
-  document.getElementById('drawer').classList.add('open');
-  document.getElementById('drawerOv').classList.add('open');
-  document.querySelector('.hb-btn')?.setAttribute('aria-expanded','true');
-  document.body.style.overflow='hidden';
-}
-function closeDrawer(){
-  document.getElementById('drawer').classList.remove('open');
-  document.getElementById('drawerOv').classList.remove('open');
-  document.querySelector('.hb-btn')?.setAttribute('aria-expanded','false');
-  document.body.style.overflow='';
-}
 function openCustomsTaxPopup(){
   const url = 'https://www.customs.go.kr/kcs/ad/tax/BuyTaxCalculation.do';
   const win = window.open(url, 'customsTaxCalculation', 'width=1100,height=820,top=80,left=120,scrollbars=yes,resizable=yes');

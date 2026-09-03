@@ -17,55 +17,13 @@
     background: #fff;
     padding-top: 64px;line-height:1.5;}
 
-  .bb-hb {
-    display: flex;
-    flex-direction: column;
-    gap: 4.5px;
-    padding: 8px;
-    margin-right: 4px;
-    border: 0;
-    border-radius: 5px;
-    background: none;
-    cursor: pointer;
-  }
-  .bb-hb:hover { background: #F5F7FA; }
-  .bb-hb span { display: block; width: 17px; height: 2px; border-radius: 1px; background: #1A1A2E; }
-  .bb-drawer-ov {
-    position: fixed;
-    inset: 0;
-    z-index: 500;
-    background: rgba(0,0,0,.45);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .2s ease;
-  }
-  .bb-drawer-ov.open { opacity: 1; pointer-events: auto; }
-  .bb-drawer {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: -360px;
-    z-index: 501;
-    width: 340px;
-    max-width: 88vw;
-    background: #fff;
-    box-shadow: 4px 0 20px rgba(0,0,0,.12);
-    transition: left .24s cubic-bezier(.4,0,.2,1);
-    overflow-y: auto;
-  }
-  .bb-drawer.open { left: 0; }
-  .bb-drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 16px 16px; border-bottom: 1px solid #E0E4EB; }
-  .bb-drawer-title { font-size: 17px; font-weight: 800; color: #1A1A2E; }
-  .bb-drawer-close { width: 32px; height: 32px; border: 0; background: none; font-size: 24px; cursor: pointer; }
-  .bb-drawer-section { padding: 16px; border-bottom: 1px solid #F0F2F5; }
-  .bb-drawer-section strong { display: block; margin-bottom: 12px; color: #1A3C6E; font-size: 13px; }
-  .bb-drawer-links { display: grid; gap: 10px; }
-  .bb-drawer-links a { color: #333; text-decoration: none; font-size: 13px; }
+  
+  
 
   .page-wrap {
-    max-width: 1220px;
+    max-width: 1140px;
     margin: 0 auto;
-    padding: 30px 20px 60px;
+    padding: 30px 0 60px;
   }
 
   /* ── 페이지 타이틀 ── */
@@ -639,22 +597,6 @@
 </style>
 </head>
 <body>
-<div class="bb-drawer-ov" id="bbDrawerOv" onclick="bbCloseDrawer()"></div>
-<aside class="bb-drawer" id="bbDrawer" aria-label="사이트 메뉴" aria-hidden="true">
-  <div class="bb-drawer-head">
-    <span class="bb-drawer-title">Bidbuy 메뉴</span>
-    <button class="bb-drawer-close" type="button" aria-label="메뉴 닫기" onclick="bbCloseDrawer()"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-  </div>
-  <div class="bb-drawer-section">
-    <strong>바로가기</strong>
-    <div class="bb-drawer-links">
-      <a href="web_main.html">홈</a>
-      <a href="web_totalsearch.html">통합검색</a>
-      <a href="web_mypage.html">마이페이지</a>
-      <a href="web_mileage.html">마일리지 / 쿠폰</a>
-    </div>
-  </div>
-</aside>
 
 <div class="page-wrap">
 
@@ -1056,28 +998,6 @@
   </div>
 </div>
 <script>
-  function bbOpenDrawer() {
-    document.getElementById('bbDrawer')?.classList.add('open');
-    document.getElementById('bbDrawer')?.setAttribute('aria-hidden', 'false');
-    document.getElementById('bbDrawerOv')?.classList.add('open');
-    document.querySelector('.bb-hb')?.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-  }
-  function bbCloseDrawer() {
-    document.getElementById('bbDrawer')?.classList.remove('open');
-    document.getElementById('bbDrawer')?.setAttribute('aria-hidden', 'true');
-    document.getElementById('bbDrawerOv')?.classList.remove('open');
-    document.querySelector('.bb-hb')?.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-  function bbSubmitSearch(event) {
-    event.preventDefault();
-    const query = event.currentTarget.querySelector('input[name="q"]')?.value.trim().replace(/\s+/g, ' ');
-    if (query) location.href = `web_totalsearch.html?q=${encodeURIComponent(query)}`;
-  }
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') bbCloseDrawer();
-  });
 
   /* ── sessionStorage 저장 후 2차 결제 페이지 이동 ── */
   document.getElementById('btnApprove').addEventListener('click', function () {

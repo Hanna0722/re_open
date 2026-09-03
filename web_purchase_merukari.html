@@ -26,20 +26,15 @@ a{text-decoration:none;color:inherit}
 
 /* ── 헤더 ── */
 header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:300;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.logo{display:flex;align-items:center;flex-shrink:0;flex:1}
-.logo img{display:block;width:100px;height:auto}
-.search{flex:0 0 520px;display:flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .2s}
-.search:focus-within{border-color:var(--rose)}
-.search input{flex:1;border:none;background:var(--bg);padding:10px 14px;font-size:14px;font-family:inherit;outline:none}
 .user-trig:hover,.user-trig.open{background:var(--bg)}
 .user-trig.open .u-chv{transform:rotate(180deg)}
 .user-dd.open{display:block}
-.breadcrumb-row{max-width:1440px;margin:0 auto;padding:12px 24px 6px;display:flex;align-items:center;justify-content:flex-start}
+.breadcrumb-row{max-width:1140px;margin:0 auto;padding:12px 0 6px;display:flex;align-items:center;justify-content:flex-start}
 .breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ts)}
 .breadcrumb a{color:var(--navy)}
 .breadcrumb a:hover{text-decoration:underline}
 .breadcrumb i{font-size:9px;color:var(--tm)}
-.top-title-wrap{max-width:1440px;margin:0 auto;padding:0 24px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.top-title-wrap{max-width:1140px;margin:0 auto;padding:0 0 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
 .top-title-text{flex:1;min-width:0}
 .top-title-actions{display:flex;align-items:center;gap:8px;flex-shrink:0;padding-top:3px}
 .title-action-btn{display:flex;align-items:center;gap:5px;padding:7px 13px;border:1.5px solid var(--border);border-radius:5px;background:#fff;font-size:12px;font-weight:600;color:var(--ts);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
@@ -62,7 +57,7 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
 .lightbox-counter{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:12px;font-family:'Roboto',sans-serif}
 
 /* ── 메인 상품 레이아웃 (좌4 : 우6) ── */
-.item-wrapper{max-width:1440px;margin:0 auto;padding:0 24px 32px;display:grid;grid-template-columns:4fr 6fr;gap:32px;align-items:stretch}
+.item-wrapper{max-width:1140px;margin:0 auto;padding:0 0 32px;display:grid;grid-template-columns:4fr 6fr;gap:32px;align-items:stretch}
 
 /* 좌측: 이미지 갤러리 */
 .gallery-area{display:flex;flex-direction:column}
@@ -197,14 +192,14 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
 
 /* ── 탭 + 상세 정보 (하단 전체 너비) ── */
 .bottom-area{background:#fff;border-top:3px solid var(--border);margin-top:32px}
-.seller-other-panel{max-width:1440px;margin:0 auto;padding:28px 24px 0}
+.seller-other-panel{max-width:1140px;margin:0 auto;padding:28px 0 0}
 .seller-other-panel-card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden}
 .seller-other-panel-head{padding:14px 20px;border-bottom:1px solid var(--border);font-size:13px;font-weight:700;color:var(--tp);display:flex;align-items:center;justify-content:space-between;background:#FAFBFC}
 .seller-other-panel-head span:first-child{display:flex;align-items:center;gap:8px}
 .seller-other-panel-head i{color:var(--ts);font-size:12px}
 .seller-other-panel-body{padding:16px 20px}
 .seller-other-panel .seller-other-grid{grid-template-columns:repeat(6,1fr);gap:12px}
-.detail-section{max-width:1440px;margin:0 auto;padding:32px 24px 0}
+.detail-section{max-width:1140px;margin:0 auto;padding:32px 0 0}
 .buy-check-title{display:flex;align-items:center;gap:8px;margin-bottom:10px;color:var(--tp);font-size:15px;font-weight:800}
 .buy-check-title i{color:var(--ts);font-size:14px}
 
@@ -251,7 +246,7 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
 .related-thumb{width:100%;height:110px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;color:var(--tm);font-size:24px}
 
 /* 관련 상품 섹션 */
-.related-all-section{max-width:1440px;margin:0 auto;padding:32px 24px 40px}
+.related-all-section{max-width:1140px;margin:0 auto;padding:32px 0 40px}
 .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .section-title{font-size:17px;font-weight:700;color:var(--tp)}
 .section-more{font-size:12px;color:var(--navy);display:flex;align-items:center;gap:4px;cursor:pointer}
@@ -268,7 +263,7 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
 
 /* ── 푸터 ── */
 footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
-.footer-inner{max-width:1440px;margin:0 auto}
+.footer-inner{max-width:1140px;margin:0 auto}
 .footer-links{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px;font-size:12px}
 .footer-links a{color:var(--ts)}
 .footer-links a:hover{color:var(--tp)}

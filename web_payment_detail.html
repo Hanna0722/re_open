@@ -27,9 +27,9 @@
       --warm: #fbf7f5;
       --warm-2: #f7f3f0;
       --yellow: #f4b400;
-      --stage-left: max(16px, calc((100vw - 1180px) / 2));
+      --stage-left: max(16px, calc((100vw - 1140px) / 2));
       --sidebar-w: 231px;
-      --main-w: 925px;
+      --main-w: 885px;
       --gap: 24px;
     }
 
@@ -47,56 +47,7 @@
     .top-notice-spacer { height: 34px; }
     .page { min-height: 100vh; background: #fff; }
 
-    /* ── 헤더 (web_mypage 동일) ── */
-    .topbar {
-      height: 67px;
-      width: min(calc(100vw - 32px), 1057px);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 221px minmax(0, 714px) 221px;
-      align-items: center;
-      gap: 16px;
-      padding: 0;
-      background: #fff;
-    }
-    .brand-area { display: flex; align-items: center; gap: 22px; min-width: 0; }
-    .menu-button { width: 25px; height: 25px; border: 0; border-radius: 5px; background: transparent; padding: 0; display: grid; place-items: center; }
-    .logo-link { display: inline-flex; align-items: center; width: 100px; line-height: 0; }
-    .logo-link img { width: 100%; height: auto; display: block; }
-    .search { height: 43px; display: flex; min-width: 0; border: 1px solid #e5dbd7; border-radius: 13px; overflow: hidden; background: #f7f3f0; }
-    .search input { flex: 1; min-width: 0; border: 0; outline: 0; padding: 0 18px; background: transparent; color: var(--text); font-size: 13px; }
-    .search input::placeholder { color: #8c8985; }
-    .search button { width: 111px; border: 0; background: var(--rose); color: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 700; }
-    .search button i { font-size: 15px; }
-    .icon-btn { width: 28px; height: 28px; display: grid; place-items: center; border: 0; border-radius: 5px; background: transparent; color: #687385; padding: 0; }
-    .icon-btn i { font-size: 23px; }
 
-    /* ── 드로어 ── */
-    .drawer-ov { position:fixed;inset:0;background:rgba(0,0,0,0);z-index:1000;pointer-events:none;transition:background .3s; }
-    .drawer-ov.open { background:rgba(0,0,0,.45);pointer-events:all; }
-    .drawer { position:fixed;top:0;left:-100%;bottom:0;width:88%;max-width:340px;background:#fff;z-index:1001;overflow-y:auto;scrollbar-width:none;transition:left .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:4px 0 20px rgba(0,0,0,.12);border-top-right-radius:16px;border-bottom-right-radius:16px; }
-    .drawer::-webkit-scrollbar { display:none; }
-    .drawer.open { left:0; }
-    .dr-head { display:flex;align-items:center;justify-content:space-between;padding:18px 16px 16px;border-bottom:1px solid #D8D8DE; }
-    .dr-close { width:32px;height:32px;border:none;background:none;color:var(--tp);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center; }
-    .dr-user-mini { display:flex;align-items:center;gap:10px; }
-    .u-av { border-radius:50%;background:#FFE7EF;color:var(--rose);display:grid;place-items:center;font-size:18px;font-weight:800; }
-    .dr-user-mini .u-av { width:38px;height:38px; }
-    .dr-user-mini-name { font-size:15px;font-weight:700;color:var(--tp); }
-    .dr-user-mini-grade { font-size:11px;color:var(--ts);margin-top:2px; }
-    .dr-user-assets { display:grid;grid-template-columns:1fr 1px 1fr;margin:12px 16px 0;border:1px solid #E5E7EB;border-radius:10px;overflow:hidden;background:#fff; }
-    .dr-user-asset { text-align:center;padding:9px 6px; }
-    .dr-user-asset span { display:block;font-size:10px;color:#8B95A5;margin-bottom:2px; }
-    .dr-user-asset strong { display:block;font-size:13px;color:#1F2530; }
-    .dr-user-asset-div { background:#E5E7EB; }
-    .dr-mypage-list { display:grid;gap:6px;padding:14px 16px 6px; }
-    .dr-mypage-item { min-height:40px;display:flex;align-items:center;gap:12px;color:#202633;font-size:14px;font-weight:700;text-decoration:none; }
-    .dr-mypage-item i { width:20px;color:#111827;text-align:center;font-size:15px; }
-    .dr-sec { padding:14px 0 10px;border-bottom:1px solid #D8D8DE; }
-    .dr-sec:last-child { border-bottom:none; }
-    .dr-sec-title { padding:0 16px 10px;color:var(--tp);font-size:13px;font-weight:800; }
-    .dr-link-grid { display:grid;grid-template-columns:repeat(2,1fr);row-gap:14px;column-gap:24px;padding:0 16px 14px; }
-    .dr-link-grid a { font-size:14px;color:var(--ts);text-decoration:none; }
 
     /* ── 스테이지 레이아웃 ── */
     .stage {
@@ -666,6 +617,12 @@
   </style>
 </head>
 <body>
+<!-- 상단 스토어 채널 바 (bb-common.js STORES 목록에서 렌더링) -->
+<div class="channel-bar">
+  <div class="channel-inner">
+    <div class="channel-icons"></div>
+  </div>
+</div>
 <div class="page">
   <div class="top-notice-spacer" aria-hidden="true"></div>
 
@@ -1312,59 +1269,7 @@
   </div>
 </div>
 
-<!-- ── 드로어 ── -->
-<div class="drawer-ov" id="drawerOv" onclick="closeDrawer()"></div>
-<nav class="drawer" id="drawer" aria-label="사이트 메뉴" aria-hidden="true">
-  <div class="dr-head">
-    <div class="dr-user-mini">
-      <div class="u-av tier-vip member-tier-icon grade-img" aria-label="VIP 등급"><img class="grade-icon" src="gradeicon/grade_vip.png" alt=""></div>
-      <div>
-        <div class="dr-user-mini-name">홍길동님</div>
-        <div class="dr-user-mini-grade">VIP 회원</div>
-      </div>
-    </div>
-    <button class="dr-close" type="button" aria-label="메뉴 닫기" onclick="closeDrawer()">
-      <i class="fas fa-times"></i>
-    </button>
-  </div>
-  <div class="dr-user-assets">
-    <div class="dr-user-asset"><span>마일리지</span><strong>485점</strong></div>
-    <div class="dr-user-asset-div"></div>
-    <div class="dr-user-asset"><span>쿠폰</span><strong>7장</strong></div>
-  </div>
-  <div class="dr-sec">
-    <div class="dr-sec-title">마이페이지</div>
-    <div class="dr-mypage-list">
-      <a class="dr-mypage-item" href="web_mypage.html"><i class="fas fa-list-check"></i> 거래 전체 목록</a>
-      <a class="dr-mypage-item" href="#"><i class="fas fa-receipt"></i> 결제상세내역</a>
-      <a class="dr-mypage-item" href="#"><i class="fas fa-gavel"></i> 경매 입찰/유찰</a>
-      <a class="dr-mypage-item" href="#"><i class="fas fa-truck"></i> 배송신청/변경</a>
-      <a class="dr-mypage-item" href="#"><i class="fas fa-coins"></i> 마일리지 / 쿠폰</a>
-    </div>
-  </div>
-  <div class="dr-sec">
-    <div class="dr-sec-title">바로가기</div>
-    <div class="dr-link-grid">
-      <a href="web_main.html">홈</a>
-      <a href="#">통합검색</a>
-      <a href="#">고객센터</a>
-      <a href="#">도움말</a>
-    </div>
-  </div>
-</nav>
-
 <script>
-function openDrawer() {
-  document.getElementById('drawer').classList.add('open');
-  document.getElementById('drawerOv').classList.add('open');
-  document.getElementById('drawer').setAttribute('aria-hidden', 'false');
-}
-function closeDrawer() {
-  document.getElementById('drawer').classList.remove('open');
-  document.getElementById('drawerOv').classList.remove('open');
-  document.getElementById('drawer').setAttribute('aria-hidden', 'true');
-}
-
 function openBidHistoryModal() {
   document.getElementById('bidHistoryModal')?.classList.add('open');
 }

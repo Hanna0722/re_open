@@ -22,20 +22,15 @@ a{text-decoration:none;color:inherit}
 
 /* ── 헤더 ── */
 header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:300;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.logo{display:flex;align-items:center;flex-shrink:0;flex:1}
-.logo img{display:block;width:100px;height:auto}
-.search{flex:0 0 520px;display:flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .2s}
-.search:focus-within{border-color:var(--rose)}
-.search input{flex:1;border:none;background:var(--bg);padding:10px 14px;font-size:14px;font-family:inherit;outline:none}
 .user-trig:hover,.user-trig.open{background:var(--bg)}
 .user-trig.open .u-chv{transform:rotate(180deg)}
 .user-dd.open{display:block}
-.breadcrumb-row{max-width:1440px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between}
+.breadcrumb-row{max-width:1140px;margin:0 auto;padding:12px 0;display:flex;align-items:center;justify-content:space-between}
 .breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ts)}
 .breadcrumb a{color:var(--navy)}
 .breadcrumb a:hover{text-decoration:underline}
 .breadcrumb i{font-size:9px;color:var(--tm)}
-.top-title-wrap{max-width:1440px;margin:0 auto;padding:0 24px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.top-title-wrap{max-width:1140px;margin:0 auto;padding:0 0 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
 .top-title-text{flex:1;min-width:0}
 .top-title-actions{display:flex;align-items:center;gap:8px;flex-shrink:0;padding-top:3px}
 .title-action-btn{display:flex;align-items:center;gap:5px;padding:7px 13px;border:1.5px solid var(--border);border-radius:5px;background:#fff;font-size:12px;font-weight:600;color:var(--ts);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
@@ -43,7 +38,7 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
 .title-action-btn i{font-size:12px}
 
 /* ── 메인 상품 레이아웃 (좌4 : 우6) ── */
-.item-wrapper{max-width:1440px;margin:0 auto;padding:0 24px 32px;display:grid;grid-template-columns:4fr 6fr;gap:12px 16px;align-items:stretch}
+.item-wrapper{max-width:1140px;margin:0 auto;padding:0 0 32px;display:grid;grid-template-columns:4fr 6fr;gap:12px 16px;align-items:stretch}
 .item-wrapper>#bidStatusCard{grid-column:1/-1;margin-bottom:0}
 
 /* 좌측: 이미지 갤러리 */
@@ -395,7 +390,7 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
 /* ── 상단/하단 구분 ── */
 
 /* ── 이미지 하단 좌우 정보 패널 ── */
-.info-panels{max-width:1440px;margin:0 auto;padding:10px 14px 0;display:grid;grid-template-columns:1fr;gap:10px;align-items:stretch}
+.info-panels{max-width:1140px;margin:0 auto;padding:10px 0 0;display:grid;grid-template-columns:1fr;gap:10px;align-items:stretch}
 .info-panel-card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
 .info-panel-card .info-panel-body{flex:1;display:flex;flex-direction:column}
 .info-panel-card .cost-rows{flex:1;display:flex;flex-direction:column;justify-content:space-between}
@@ -413,7 +408,7 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
 
 /* ── 탭 + 상세 정보 (하단 전체 너비) ── */
 .bottom-area{background:#fff;border-top:3px solid var(--border);margin-top:32px}
-.detail-section{max-width:1440px;margin:0 auto;padding:32px 24px 0}
+.detail-section{max-width:1140px;margin:0 auto;padding:32px 0 0}
 
 /* 탭 */
 .tab-header{display:flex;border-bottom:2px solid var(--border);margin-bottom:20px}
@@ -499,7 +494,7 @@ button.seller-qna-status[aria-expanded="true"] i{transform:rotate(180deg)}
 .related-price-krw{font-size:10px;color:var(--ts)}
 
 /* 연관 상품 섹션 */
-.related-all-section{max-width:1440px;margin:0 auto;padding:32px 24px 40px}
+.related-all-section{max-width:1140px;margin:0 auto;padding:32px 0 40px}
 .tab-content .related-all-section{max-width:none;padding:0}
 .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .section-title{font-size:17px;font-weight:700;color:var(--tp)}
@@ -517,7 +512,7 @@ button.seller-qna-status[aria-expanded="true"] i{transform:rotate(180deg)}
 
 /* ── 푸터 ── */
 footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
-.footer-inner{max-width:1440px;margin:0 auto}
+.footer-inner{max-width:1140px;margin:0 auto}
 .footer-links{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px;font-size:12px}
 .footer-links a{color:var(--ts)}
 .footer-links a:hover{color:var(--tp)}
