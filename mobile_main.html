@@ -253,11 +253,6 @@ body{
 .si-4{background:#10B981}.si-5{background:#3B82F6}.si-6{background:#F97316}
 .si-7{background:#8B5CF6}.si-8{background:#06B6D4}.si-9{background:#14B8A6}.si-10{background:#64748B}
 .sc-label{font-size:10px;color:var(--ts);font-weight:500;white-space:nowrap;text-align:center}
-.market-info-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(17,24,39,.46);z-index:900}
-.market-info-overlay.open{display:flex}
-.market-info-popup{width:min(742px,calc(100vw - 28px));max-width:430px;background:#f5f7fa;border:1px solid #d9dee6;box-shadow:0 18px 48px rgba(15,23,42,.2);position:relative}
-.market-info-close{position:absolute;top:10px;right:10px;width:28px;height:28px;border:0;background:#fff;color:#697386;border-radius:4px;display:grid;place-items:center;z-index:2}
-.market-info-body{display:grid;grid-template-columns:1fr;gap:20px;padding:14px}
 .convenience-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(17,24,39,.46);z-index:910}
 .convenience-overlay.open{display:flex}
 .convenience-popup{width:min(742px,calc(100vw - 28px));max-width:430px;background:#fff;border:1px solid var(--border);box-shadow:0 18px 48px rgba(15,23,42,.2);position:relative}
@@ -274,20 +269,9 @@ body{
 .convenience-panel.active{display:block}
 .convenience-panel-title{font-size:14px;font-weight:900;color:#111827;margin-bottom:6px}
 .convenience-panel-desc{font-size:12px;color:#6B7280;line-height:1.6}
-.office-grid{display:grid;grid-template-columns:1fr;background:#fff;border:0}
-.office-card{min-height:92px;padding:10px 12px 8px 10px;border:0;display:flex;align-items:center;gap:8px}
-.office-card+.office-card{border-top:1px solid #f0f2f5}
-.office-status{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 auto;background:#d8c7cc;color:#7d6068;font-size:11px;font-weight:600}
-.office-status.is-open{background:#E8385A;color:#fff}
-.office-info{min-width:0}
-.office-country{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#111827;margin-bottom:4px}
-.office-country .flag{width:18px;height:13px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
-.office-country .flag img{width:100%;height:100%;display:block;object-fit:cover;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
-.office-branch{font-size:13px;color:#4b5563}
-.office-time{font-family:Pretendard,Arial,sans-serif;font-size:13px;color:#1d74ff;white-space:nowrap}
 .section{padding:14px}
 .sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.sec-title{font-size:15px;font-weight:700;color:var(--tp)}
+.sec-title{font-size:16px;font-weight:700;color:var(--tp)}
 .sec-more{font-size:12px;color:var(--tm)}
 .sec-meta{font-size:10px;color:var(--tm)}
 .slide-fade-wrap{position:relative}
@@ -385,20 +369,33 @@ body{
 .notice-txt{flex:1;font-size:11px;color:var(--tp);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .notice-date{font-size:10px;color:var(--tm);white-space:nowrap}
 .rate-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:14px;margin-top:10px}
-.rate-title{font-size:13px;font-weight:700;color:#111827;margin-bottom:8px}
+.rate-title{font-size:16px;font-weight:700;color:#111827;margin-bottom:8px}
 .rate-desc{font-size:11px;color:var(--ts);line-height:1.55;margin-bottom:10px}
 .rate-list{display:grid;gap:6px}
 .rate-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;min-height:38px;padding:0 12px;background:#F7F8FA;border-radius:8px;font-size:12px}
 .rate-currency{display:flex;align-items:center;gap:7px;color:var(--tp);font-weight:700}
 .rate-flag{width:18px;height:13px;object-fit:cover;display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
 .rate-value{font-family:Roboto,Arial,sans-serif;color:var(--tp);font-weight:700;font-size:13px;white-space:nowrap}
-.cs-mini{background:#fff;border-radius:12px;border:1px solid var(--border);padding:14px;margin-top:10px}
-.cs-mini-title{font-size:13px;font-weight:700;margin-bottom:4px}
-.cs-mini-num{font-size:20px;font-weight:700;color:var(--navy);font-family:'Roboto',sans-serif;margin-bottom:4px}
-.cs-mini-hours{font-size:10px;color:var(--ts);line-height:1.6;margin-bottom:10px}
-.cs-mini-btns{display:flex;gap:6px}
-.cs-mini-btn{flex:1;padding:7px;border-radius:5px;border:1.5px solid var(--border);background:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;text-align:center}
-.cs-mini-btn.primary{background:var(--rose);color:#fff;border-color:var(--rose)}
+.cs-duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;align-items:stretch}
+.cs-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:14px 12px}
+.cs-card-hd{font-size:16px;font-weight:700;color:var(--tp);text-align:center;padding-bottom:10px;border-bottom:1px solid var(--border);margin-bottom:12px}
+.cs-ico{display:block;width:60px;height:auto;margin:2px auto 10px}
+.cs-rep-label{font-size:15px;color:var(--tm);text-align:center;margin-bottom:2px}
+.cs-rep-num{font-size:20px;font-weight:800;color:var(--navy);font-family:'Roboto',Arial,sans-serif;text-align:center;letter-spacing:-.01em}
+.cs-div{height:1px;background:var(--border);margin:12px 0}
+.cs-field{margin-bottom:9px}
+.cs-field:last-child{margin-bottom:0}
+.cs-field-k{font-size:13px;font-weight:600;color:var(--ts);margin-bottom:2px}
+.cs-field-v{font-size:14px;font-weight:800;color:#000;font-family:'Roboto',Arial,sans-serif;word-break:break-all;line-height:1.5}
+.cs-note{font-size:12px;color:var(--tm);line-height:1.5;margin:0 0 10px}
+.cs-call-check-btn{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 auto;background:#fff5ed;color:#f47920;border:0.2px solid #f47920;padding:5px 30px;border-radius:5px;cursor:pointer;font-size:12px;font-weight:400}
+.cs-contact{display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid #F2F4F7}
+.cs-contact:last-child{border-bottom:none;padding-bottom:0}
+.cs-contact.grp{border-top:1px solid var(--border);margin-top:4px;padding-top:10px}
+.cs-contact-ico{width:18px;text-align:center;font-size:13px;flex:0 0 auto;margin-top:1px}
+.cs-contact-body{min-width:0}
+.cs-contact-name{font-size:12px;font-weight:700;color:var(--tp);line-height:1.35}
+.cs-contact-num{font-size:12px;color:var(--ts);font-family:'Roboto',Arial,sans-serif;line-height:1.35}
 .home-indicator{ display:none; }
 .home-bar{width:120px;height:4px;background:var(--tp);border-radius:2px;opacity:.15}
 .drawer-ov{position:absolute;inset:0;background:rgba(0,0,0,0);z-index:100;pointer-events:none;transition:background .3s}
@@ -833,20 +830,37 @@ button.user-menu-item{
         <div class="rate-title">비드바이 고시환율</div>
         <p class="rate-desc">비드바이 결제 금액 계산에 적용되는 기준 환율입니다.</p>
         <div class="rate-list" aria-label="비드바이 고시환율 목록">
-          <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_usa.png" alt="">USD</span><span class="rate-value">1,450.00</span></div>
-          <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_jp.png" alt="">JPY</span><span class="rate-value">9.10</span></div>
-          <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="../images/icon/country_uk.png" alt="">GBP</span><span class="rate-value">1,960.00</span></div>
+          <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="flagicon/us.jpg" alt="">USD</span><span class="rate-value">1,450.00</span></div>
+          <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="flagicon/jp.jpg" alt="">JPY</span><span class="rate-value">9.10</span></div>
+          <div class="rate-row"><span class="rate-currency"><img class="rate-flag" src="flagicon/uk.png" alt="">GBP</span><span class="rate-value">1,960.00</span></div>
         </div>
       </div>
 
-      <div class="cs-mini">
-        <div class="cs-mini-title">고객센터</div>
-        <div class="cs-mini-num">1544-5224</div>
-        <div class="cs-mini-hours">평일 AM 10:00 – PM 17:00<br>(점심 PM 12:30 – 13:30)</div>
-        <div class="cs-mini-btns">
-          <button class="cs-mini-btn primary" type="button" onclick="location.href='mobile_qna_form.html'">1:1 문의</button>
-          <button class="cs-mini-btn" type="button" onclick="location.href='mobile_qna.html'">FAQ</button>
-          <button class="cs-mini-btn" type="button">공지사항</button>
+      <div class="cs-duo">
+        <div class="cs-card">
+          <div class="cs-card-hd">고객센터</div>
+          <img class="cs-ico" src="etc%20icon/cs.png" alt="고객센터">
+          <div class="cs-rep-label">대표번호</div>
+          <div class="cs-rep-num">1544-5224</div>
+          <div class="cs-div"></div>
+          <div class="cs-field"><div class="cs-field-k">FAX</div><div class="cs-field-v">070-4009-0304</div></div>
+          <div class="cs-field"><div class="cs-field-k">MAIL</div><div class="cs-field-v">korea@bidbuy.co.kr</div></div>
+          <div class="cs-div"></div>
+          <div class="cs-field"><div class="cs-field-k">평일 업무시간</div><div class="cs-field-v">AM 10:00 - PM 17:00</div></div>
+          <div class="cs-field"><div class="cs-field-k">점심시간</div><div class="cs-field-v">PM 12:30 - PM 13:30</div></div>
+          <div class="cs-note">주말/공휴일은 휴무입니다.</div>
+          <button class="cs-call-check-btn" type="button">전화전확인</button>
+        </div>
+        <div class="cs-card">
+          <div class="cs-card-hd">편의연락정보</div>
+          <div class="cs-contact"><span class="cs-contact-ico" style="color:var(--navy)"><i class="fas fa-landmark" aria-hidden="true"></i></span><div class="cs-contact-body"><div class="cs-contact-name">관세청</div><div class="cs-contact-num">125</div></div></div>
+          <div class="cs-contact"><span class="cs-contact-ico" style="color:#6B7280"><i class="fas fa-user-tie" aria-hidden="true"></i></span><div class="cs-contact-body"><div class="cs-contact-name">대교관세사</div><div class="cs-contact-num">032-719-2196</div></div></div>
+          <div class="cs-contact"><span class="cs-contact-ico" style="color:#6B7280"><i class="fas fa-user-tie" aria-hidden="true"></i></span><div class="cs-contact-body"><div class="cs-contact-name">정운관세사</div><div class="cs-contact-num">032-752-5926</div></div></div>
+          <div class="cs-contact"><span class="cs-contact-ico" style="color:var(--green)"><i class="fas fa-globe" aria-hidden="true"></i></span><div class="cs-contact-body"><div class="cs-contact-name">관세법인 천지인</div><div class="cs-contact-num">032-887-5144</div></div></div>
+          <div class="cs-contact grp"><span class="cs-contact-ico" style="color:var(--amber)"><i class="fas fa-truck" aria-hidden="true"></i></span><div class="cs-contact-body"><div class="cs-contact-name">판토스</div><div class="cs-contact-num">032-744-1528</div></div></div>
+          <div class="cs-contact"><span class="cs-contact-ico" style="color:var(--amber)"><i class="fas fa-envelope" aria-hidden="true"></i></span><div class="cs-contact-body"><div class="cs-contact-name">EMS</div><div class="cs-contact-num">1588-1300</div></div></div>
+          <div class="cs-contact"><span class="cs-contact-ico" style="color:var(--navy)"><i class="fas fa-box" aria-hidden="true"></i></span><div class="cs-contact-body"><div class="cs-contact-name">한진</div><div class="cs-contact-num">1588-1612(3번)</div></div></div>
+          <div class="cs-contact"><span class="cs-contact-ico" style="color:var(--rose)"><i class="fas fa-ship" aria-hidden="true"></i></span><div class="cs-contact-body"><div class="cs-contact-name">국제선편 특송</div><div class="cs-contact-num">02-3143-5555</div></div></div>
         </div>
       </div>
     </div>
@@ -864,48 +878,6 @@ button.user-menu-item{
   <div class="home-indicator"><div class="home-bar"></div></div>
 
 </div>
-</div>
-
-<div class="market-info-overlay" id="marketInfoPopup" aria-hidden="true" onclick="closeMarketInfoPopup(event)">
-  <div class="market-info-popup" role="dialog" aria-modal="true" aria-label="환율정보 및 나라별 근무시간">
-    <button class="market-info-close" type="button" aria-label="닫기" onclick="closeMarketInfoPopup()"><i class="fas fa-times" aria-hidden="true"></i></button>
-    <div class="market-info-body">
-      <div class="office-grid" aria-label="나라별 근무시간">
-        <div class="office-card" data-office-timezone="Asia/Seoul">
-          <div class="office-status">업무중</div>
-          <div class="office-info">
-            <div class="office-country"><span class="flag"><img src="../images/icon/country_kor.png" alt="Korea"></span>Korea</div>
-            <div class="office-branch">서울 사무소</div>
-            <div class="office-time">-</div>
-          </div>
-        </div>
-        <div class="office-card" data-office-timezone="Asia/Tokyo">
-          <div class="office-status">업무중</div>
-          <div class="office-info">
-            <div class="office-country"><span class="flag"><img src="../images/icon/country_jp.png" alt="Japan"></span>Japan</div>
-            <div class="office-branch">오사카 사무소</div>
-            <div class="office-time">-</div>
-          </div>
-        </div>
-        <div class="office-card" data-office-timezone="America/Los_Angeles">
-          <div class="office-status">업무중</div>
-          <div class="office-info">
-            <div class="office-country"><span class="flag"><img src="../images/icon/country_usa.png" alt="USA"></span>USA</div>
-            <div class="office-branch">캘리포니아 사무소</div>
-            <div class="office-time">-</div>
-          </div>
-        </div>
-        <div class="office-card" data-office-timezone="Europe/London">
-          <div class="office-status">업무중</div>
-          <div class="office-info">
-            <div class="office-country"><span class="flag"><img src="../images/icon/country_uk.png" alt="UK"></span>UK</div>
-            <div class="office-branch">런던 사무소</div>
-            <div class="office-time">-</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
 <div class="convenience-overlay" id="convenienceToolsPopup" aria-hidden="true" onclick="closeConvenienceToolsPopup(event)">
@@ -1002,24 +974,6 @@ function openCustomsTaxPopup() {
   if (!win) window.location.href = url;
 }
 
-function openMarketInfoPopup() {
-  const popup = document.getElementById('marketInfoPopup');
-  if (!popup) return;
-  updateMarketInfo();
-  popup.classList.add('open');
-  popup.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeMarketInfoPopup(event) {
-  const popup = document.getElementById('marketInfoPopup');
-  if (!popup) return;
-  if (event && event.target !== popup) return;
-  popup.classList.remove('open');
-  popup.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-}
-
 function handleShortcutKey(event, callback) {
   if (event.key !== 'Enter' && event.key !== ' ') return;
   event.preventDefault();
@@ -1076,54 +1030,7 @@ document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && document.getElementById('convenienceToolsPopup')?.classList.contains('open')) {
     closeConvenienceToolsPopup();
   }
-  if (event.key === 'Escape' && document.getElementById('marketInfoPopup')?.classList.contains('open')) {
-    closeMarketInfoPopup();
-  }
 });
-
-function getZonedParts(date, timeZone) {
-  return Object.fromEntries(new Intl.DateTimeFormat('en-US', {
-    timeZone,
-    year: '2-digit',
-    month: '2-digit',
-    day: '2-digit',
-    weekday: 'short',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true,
-  }).formatToParts(date).map(part => [part.type, part.value]));
-}
-
-function formatOfficeTime(date, timeZone) {
-  const parts = getZonedParts(date, timeZone);
-  return `${parts.year}.${parts.month}.${parts.day} ${parts.dayPeriod.toLowerCase()} ${parts.hour}:${parts.minute}:${parts.second}`;
-}
-
-function isOfficeOpen(date, timeZone) {
-  const parts = getZonedParts(date, timeZone);
-  const weekday = parts.weekday;
-  let hour = Number(parts.hour);
-  if (parts.dayPeriod === 'PM' && hour !== 12) hour += 12;
-  if (parts.dayPeriod === 'AM' && hour === 12) hour = 0;
-  const isWeekday = !['Sat', 'Sun'].includes(weekday);
-  return isWeekday && hour >= 9 && hour < 18;
-}
-
-function updateMarketInfo() {
-  const now = new Date();
-  document.querySelectorAll('.office-card[data-office-timezone]').forEach(card => {
-    const timeZone = card.dataset.officeTimezone;
-    const open = isOfficeOpen(now, timeZone);
-    const status = card.querySelector('.office-status');
-    const time = card.querySelector('.office-time');
-    if (status) {
-      status.textContent = open ? '업무중' : '업무종료';
-      status.classList.toggle('is-open', open);
-    }
-    if (time) time.textContent = formatOfficeTime(now, timeZone);
-  });
-}
 
 function init() {
   renderLoginState();
@@ -1131,7 +1038,6 @@ function init() {
   bindBestCards();
   bindMainBanner();
   goMbSlide(0);
-  updateMarketInfo();
 }
 
 window.addEventListener('load', init);
