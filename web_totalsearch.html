@@ -23,10 +23,10 @@
       --soft: #f4eeea;
       --thumb-bg: #f4eeea;
       --focus-ring: rgba(232, 56, 90, .36);
-      --radius-card: 12px;
-      --radius-button: 10px;
-      --radius-input: 10px;
-      --radius-pill: 999px;
+      --radius-card: var(--r-lg, 12px);
+      --radius-button: var(--r-sm, 5px);
+      --radius-input: var(--r-sm, 5px);
+      --radius-pill: var(--r-pill, 999px);
       --page-w: 1140px;
       --header-w: 1140px;
     }
@@ -122,32 +122,6 @@
       align-items: start;
       gap: 28px;
       margin-top: 28px;
-    }
-
-    .search-chip {
-      height: 24px;
-      padding: 0 10px;
-      border: 0;
-      border-radius: 3px;
-      background: #f2f0ec;
-      color: var(--ink);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .search-chip button {
-      width: 14px;
-      height: 14px;
-      padding: 0;
-      border: 0;
-      background: transparent;
-      color: var(--ink);
-      font-size: 13px;
-      line-height: 13px;
     }
 
     .result-copy-row {
@@ -862,8 +836,6 @@
 
   <script>
     const storeChips = document.querySelectorAll(".store-chip");
-    const globalSearch = document.querySelector("[data-global-search]");
-    const keywordList = document.querySelector("[data-keyword-list]");
     const resultCopy = document.querySelector("[data-result-copy]");
     const favoriteKeywordBtn = document.querySelector("[data-favorite-keyword]");
     const searchParams = new URLSearchParams(window.location.search);
@@ -1206,55 +1178,6 @@
       resultCopy.append(highlighted, "에 대한 검색결과 입니다.");
     }
 
-    function renderKeywords() {
-      keywordList.replaceChildren();
-
-      keywords.forEach((keyword, index) => {
-        const chip = document.createElement("span");
-        chip.className = "search-chip";
-        chip.append(document.createTextNode(`${keyword} `));
-
-        const removeButton = document.createElement("button");
-        removeButton.type = "button";
-        removeButton.setAttribute("aria-label", `${keyword} 삭제`);
-        removeButton.dataset.keywordIndex = String(index);
-        removeButton.innerHTML = '<i class="fa-solid fa-xmark" aria-hidden="true"></i>';
-        chip.append(removeButton);
-        keywordList.append(chip);
-      });
-
-      updateResultCopy();
-      updateFavoriteKeywordButton();
-    }
-
-    keywordList.addEventListener("click", (event) => {
-      const removeButton = event.target.closest("[data-keyword-index]");
-      if (!removeButton) return;
-
-      keywords.splice(Number(removeButton.dataset.keywordIndex), 1);
-      const nextQuery = keywords.join(" ");
-      const nextUrl = nextQuery
-        ? `${window.location.pathname}?q=${encodeURIComponent(nextQuery)}`
-        : window.location.pathname;
-      window.history.replaceState(null, "", nextUrl);
-      renderKeywords();
-    });
-
-    globalSearch.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      const input = globalSearch.querySelector("input");
-      const nextKeywords = input.value.trim().split(/\s+/).filter(Boolean);
-      if (!nextKeywords.length) return;
-
-      keywords = [...keywords, ...nextKeywords];
-      const nextQuery = keywords.join(" ");
-      const nextUrl = `${window.location.pathname}?q=${encodeURIComponent(nextQuery)}`;
-      window.history.replaceState(null, "", nextUrl);
-      renderKeywords();
-      input.value = "";
-    });
-
     favoriteKeywordBtn?.addEventListener("click", () => {
       const currentKeyword = getCurrentKeywordText();
       if (!currentKeyword) return;
@@ -1268,7 +1191,8 @@
       updateFavoriteKeywordButton();
     });
 
-    renderKeywords();
+    updateResultCopy();
+    updateFavoriteKeywordButton();
   </script>
 <script src="bb-common.js"></script>
 <script src="bb-quickview.js"></script>

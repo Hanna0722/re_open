@@ -8,23 +8,23 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --rose: #E8385A;
+      --rose: var(--rose);
       --rose-h: #C42F4C;
       --tp: #1a1a2e;
       --ts: #666680;
       --tm: #999baa;
       --border: #e0e4eb;
-      --navy: #1A3C6E;
+      --navy: var(--navy);
       --ink: #20242b;
       --text: #33363d;
       --muted: #777985;
-      --faint: #a1a5b3;
+      --faint: #9ba0ae;
       --line: #e5dbd7;
       --line-soft: #eee6e2;
       --paper: #fff;
       --warm: #fbf7f5;
       --warm-2: #f7f3f0;
-      --yellow: #f4b400;
+      --yellow: #f5a623;
       --stage-left: max(16px, calc((100vw - 1140px) / 2));
       --sidebar-w: 231px;
       --main-w: 885px;
@@ -153,7 +153,7 @@
     .product-market { display: block; margin-bottom: 4px; color: #59606d; font-size: 11px; font-weight: 700; }
     .product-market .flag { display: inline-block; width: 16px; height: 11px; border-radius: 2px; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08); vertical-align: -1px; margin-right: 5px; background: #fff center / cover no-repeat; }
     .product-market .flag.jp { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'%3E%3Crect width='30' height='20' fill='%23ffffff'/%3E%3Ccircle cx='15' cy='10' r='6' fill='%23bc002d'/%3E%3C/svg%3E"); }
-    .order-table .price-cell { font-family: 'Roboto', sans-serif; font-weight: 700; color: #1A3C6E; font-size: 14px; white-space: nowrap; }
+    .order-table .price-cell { font-family: 'Roboto', sans-serif; font-weight: 700; color: var(--navy); font-size: 14px; white-space: nowrap; }
     .order-table .date-cell { font-family: 'Roboto', sans-serif; font-size: 12px; color: #666; white-space: nowrap; }
     .thumb-placeholder { width: 60px; height: 60px; background: #3a4a6b; border-radius: 4px; display: inline-block; }
     .price-link { color: var(--rose); font-weight: 700; text-decoration: none; }
@@ -213,7 +213,7 @@
       font-family: 'Roboto', sans-serif;
       font-weight: 700;
       text-align: center;
-      color: #1A3C6E;
+      color: var(--navy);
       white-space: normal;
       overflow-wrap: anywhere;
       word-break: keep-all;
@@ -235,7 +235,7 @@
     }
     .info-table td { border: 1px solid #dde1e7; padding: 8px 12px; vertical-align: middle; }
     .info-table input[type="text"] { border: 1px solid #ccc; border-radius: 4px; padding: 6px 10px; font-size: 13px; color: #333; background: #fff; font-family: inherit; }
-    .info-table input[type="text"]:focus { outline: none; border-color: #1A3C6E; }
+    .info-table input[type="text"]:focus { outline: none; border-color: var(--navy); }
     .info-table select { padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; font-family: inherit; }
     .info-table tr[hidden] { display: none; }
     .info-table .w80  { width: 80px; }
@@ -244,18 +244,18 @@
     .info-table .w320 { width: 100%; max-width: 480px; }
 
     .hint { font-size: 12px; color: #888; margin-left: 8px; }
-    .hint-red { font-size: 12px; color: #E8385A; display: block; margin-top: 4px; }
+    .hint-red { font-size: 12px; color: var(--rose); display: block; margin-top: 4px; }
     .hint-gray { font-size: 12px; color: #888; }
-    .bold-navy { font-weight: 700; color: #1A3C6E; }
-    .link-blue { color: #1A3C6E; text-decoration: none; }
+    .bold-navy { font-weight: 700; color: var(--navy); }
+    .link-blue { color: var(--navy); text-decoration: none; }
     .recv-same { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; cursor: pointer; margin-right: 10px; }
     .phone-row { display: flex; align-items: center; gap: 6px; }
     .phone-dash { color: #888; }
 
-    .btn-saved { height: 32px; padding: 0 14px; border: 1px solid #1A3C6E; border-radius: 5px; background: #fff; color: #1A3C6E; font-size: 12px; font-weight: 700; cursor: pointer; }
+    .btn-saved { height: 32px; padding: 0 14px; border: 1px solid var(--navy); border-radius: 5px; background: #fff; color: var(--navy); font-size: 12px; font-weight: 700; cursor: pointer; }
     .btn-zip { height: 32px; padding: 0 12px; border: 1px solid #666; border-radius: 5px; background: #fff; color: #333; font-size: 12px; font-weight: 700; cursor: pointer; margin-left: 6px; }
-    .btn-customs { height: 30px; padding: 0 12px; border: 1px solid #1A3C6E; border-radius: 5px; background: #fff; color: #1A3C6E; font-size: 12px; font-weight: 700; cursor: pointer; margin-left: 6px; }
-    .btn-customs-add { height: 30px; padding: 0 12px; border: 1px solid #1A3C6E; border-radius: 5px; background: #fff; color: #1A3C6E; font-size: 12px; font-weight: 700; cursor: pointer; margin-top: 4px; display: inline-block; }
+    .btn-customs { height: 30px; padding: 0 12px; border: 1px solid var(--navy); border-radius: 5px; background: #fff; color: var(--navy); font-size: 12px; font-weight: 700; cursor: pointer; margin-left: 6px; }
+    .btn-customs-add { height: 30px; padding: 0 12px; border: 1px solid var(--navy); border-radius: 5px; background: #fff; color: var(--navy); font-size: 12px; font-weight: 700; cursor: pointer; margin-top: 4px; display: inline-block; }
 
     /* 관·부가세 안내 */
     .duty-notice {
@@ -294,7 +294,7 @@
     .big-btn.line { border: 1px solid var(--line); background: #fff; color: #626672; }
     .big-btn.line:hover { border-color: #b9b2ad; color: #41454f; }
 
-    .member-tier-icon { background:#eef5ff !important; color:#1A3C6E !important; }
+    .member-tier-icon { background:#eef5ff !important; color:var(--navy) !important; }
     .member-tier-icon i { line-height:1; }
 
     /* ── 배송형태 선택 테이블 ── */
@@ -308,7 +308,7 @@
 
     /* ── 유료옵션 테이블 ── */
     .paid-option-table { border-collapse: collapse; width: 100%; margin-bottom: 28px; }
-    .paid-option-table th { width: 230px; min-width: 230px; max-width: 230px; padding: 28px 20px; background: #f5f7fa; color: #444; font-size: 13px; font-weight: 500; line-height: 1.5; text-align: left; vertical-align: top; border: 1px solid #dde1e7; }
+    .paid-option-table th { width: var(--label-col-w,230px); min-width: var(--label-col-w,230px); max-width: var(--label-col-w,230px); padding: 28px 20px; background: #f5f7fa; color: #444; font-size: 13px; font-weight: 500; line-height: 1.5; text-align: left; vertical-align: top; border: 1px solid #dde1e7; }
     .paid-option-table td { padding: 22px 18px; vertical-align: top; border: 1px solid #dde1e7; }
     .paid-option-table tr + tr th, .paid-option-table tr + tr td { border-top: 2px solid #dde1e7; }
     .paid-option-common-note { margin: 2px 0 12px; padding: 10px 12px; border: 1px solid rgba(232,56,90,0.18); background: #fff8fa; color: var(--rose); font-size: 12px; font-weight: 700; line-height: 1.5; }

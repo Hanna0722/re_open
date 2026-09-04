@@ -8,23 +8,23 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --rose: #E8385A;
+      --rose: var(--rose);
       --rose-h: #C42F4C;
       --tp: #1a1a2e;
       --ts: #666680;
       --tm: #999baa;
       --border: #e0e4eb;
-      --navy: #1A3C6E;
+      --navy: var(--navy);
       --ink: #20242b;
       --text: #33363d;
       --muted: #777985;
-      --faint: #a1a5b3;
+      --faint: #9ba0ae;
       --line: #e5dbd7;
       --line-soft: #eee6e2;
       --paper: #fff;
       --warm: #fbf7f5;
       --warm-2: #f7f3f0;
-      --yellow: #f4b400;
+      --yellow: #f5a623;
       --stage-left: max(16px, calc((100vw - 1140px) / 2));
       --sidebar-w: 231px;
       --main-w: 885px;
@@ -330,7 +330,7 @@
 
     .group-utils { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
     .group-pay-btn { border-radius: 5px; min-width: 128px; }
-    .group-pay-btn .pay-amount { color: #E8385A; }
+    .group-pay-btn .pay-amount { color: var(--rose); }
 
     .bundle-head, .bundle-row {
       display: grid;
@@ -478,7 +478,7 @@
     }
     .row-auction-cell strong { font-size: 12px; font-weight: 800; color: #151922; }
     .row-auction-cell span { font-size: 11px; color: #7a808a; font-weight: 600; }
-    .row-auction-cell .second-pay-amount { color: #E8385A; font-size: 12px;font-weight: 800; }
+    .row-auction-cell .second-pay-amount { color: var(--rose); font-size: 12px;font-weight: 800; }
     .row-pay-btn {
       min-width: 76px;
       height: 24px;
@@ -665,7 +665,7 @@
     .modal-actions .line { border: 1px solid var(--line); background: #fff; color: #626672; }
     .modal-actions .primary { border: 1px solid var(--rose); background: var(--rose); color: #fff; }
 
-    .member-tier-icon { background:#eef5ff !important; color:#1A3C6E !important; }
+    .member-tier-icon { background:#eef5ff !important; color:var(--navy) !important; }
     .member-tier-icon i { line-height:1; }
   .profile-id { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .profile-id .profile-name { display: inline; margin: 0; }

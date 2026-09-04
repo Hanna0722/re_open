@@ -14,7 +14,7 @@
   --tp:#1A1A2E;--ts:#666680;--tm:#999BAA;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Pretendard,'Apple SD Gothic Neo','Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif;color:var(--tp);font-size:14px;line-height:1.5;background:#fff;-webkit-font-smoothing:antialiased}
+body{font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;color:var(--tp);font-size:14px;line-height:1.5;background:#fff;-webkit-font-smoothing:antialiased}
 a{text-decoration:none;color:inherit}
 button,input,select{font:inherit}
 button{cursor:pointer}
@@ -54,23 +54,21 @@ button{cursor:pointer}
 .signup-table-title{margin-bottom:10px;font-size:16px;font-weight:500;color:var(--tp)}
 .signup-table-title strong{font-weight:700}
 .signup-table-title span{font-size:14px;font-weight:600;color:var(--ts)}
-.signup-table-title .req{color:#e60012;font-weight:700}
-.required-note{margin-bottom:12px;color:var(--ts);font-size:12px}
-.req{color:#e60012;font-weight:600}
+.required-note{margin-bottom:12px}
 .join-table{width:100%;border-collapse:collapse;border-top:1px solid #ddd;background:#fff}
 .join-table th,.join-table td{border-bottom:1px solid #e5e5e5}
 .join-table th{width:136px;padding:16px 12px;background:#fafafa;text-align:left;color:#111;font-size:13px;font-weight:600;vertical-align:middle}
 .join-table td{padding:10px 14px;vertical-align:middle}
 .field-line{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.join-table .inp{width:242px;height:31px;padding:0 8px;border:1px solid #d8d8d8;border-radius:0;background:#fff;color:var(--tp);font-size:13px;outline:none}
+.join-table .inp{width:242px;height:31px;padding:0 8px;border:1px solid var(--border);border-radius:var(--r-sm,5px);background:#fff;color:var(--tp);font-size:13px;outline:none}
 .join-table .inp.id-ok{background:#eaf1fb}
 .join-table .inp.short{width:74px}
 .join-table .inp.mid{width:122px}
 .join-table .inp.email{width:115px}
-.join-table .sel{width:74px;height:31px;padding:0 4px;border:1px solid #d8d8d8;border-radius:0;background:#fff;color:var(--tp);font-size:12px;appearance:auto;outline:none}
+.join-table .sel{width:74px;height:31px;padding:0 4px;border:1px solid var(--border);border-radius:var(--r-sm,5px);background:#fff;color:var(--tp);font-size:12px;appearance:auto;outline:none}
 .join-table .sel.email-domain{width:92px}
-.join-table .btn-side{height:31px;padding:0 12px;border:1px solid #999;border-radius:0;background:#999;color:#fff;font-size:12px;font-weight:700}
-.join-table .btn-side:hover{background:#777;border-color:#777}
+.join-table .btn-side{height:31px;padding:0 12px;border:1px solid var(--navy);border-radius:var(--r-sm,5px);background:var(--navy);color:#fff;font-size:12px;font-weight:700}
+.join-table .btn-side:hover{background:#152f58;border-color:#152f58}
 .join-table .field-hint{font-size:11px;font-weight:500;color:#0070ff}
 .join-table .field-note{margin-top:5px;font-size:11px;color:#111;line-height:1.5}
 .join-table .field-note .blue{color:#0070ff}
@@ -107,9 +105,9 @@ button{cursor:pointer}
 
 /* ── CTA ── */
 .join-actions{display:flex;justify-content:center;gap:12px;margin-top:30px}
-.btn{height:46px;padding:0 56px;border:1px solid transparent;border-radius:5px;font-size:14px;font-weight:700;font-family:inherit;transition:background .15s}
-.btn-primary{background:var(--navy);color:#fff}
-.btn-primary:hover{background:#152f58}
+.btn{height:46px;padding:0 56px;border:1px solid transparent;border-radius:var(--r-sm,5px);font-size:14px;font-weight:700;font-family:inherit;transition:background .15s}
+.btn-primary{background:var(--rose);color:#fff}
+.btn-primary:hover{background:var(--rose-h)}
 .btn-cancel{background:#aaa;color:#fff}
 .btn-cancel:hover{background:#888}
 
@@ -150,12 +148,12 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
   </section>
 
   <section class="form-section signup-table-section">
-    <h2 class="signup-table-title"><strong>회원가입 정보 </strong><span class="req">(필수)*</span></h2>
+    <h2 class="signup-table-title"><strong>회원가입 정보</strong></h2>
     <p class="required-note"><span class="req">*</span> 는 필수 입력사항입니다. 해당 항목은 반드시 입력하여 주시기 바랍니다.</p>
     <table class="join-table" aria-label="회원 가입 정보 입력">
       <tbody>
         <tr>
-          <th><span class="req">*</span> 아이디</th>
+          <th>아이디<span class="req">*</span></th>
           <td>
             <div class="field-line">
               <input class="inp id-ok" type="text" aria-label="아이디">
@@ -164,7 +162,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
           </td>
         </tr>
         <tr>
-          <th><span class="req">*</span> 비밀번호</th>
+          <th>비밀번호<span class="req">*</span></th>
           <td>
             <div class="field-line">
               <input class="inp" type="password" aria-label="비밀번호">
@@ -173,7 +171,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
           </td>
         </tr>
         <tr>
-          <th><span class="req">*</span> 비밀번호 확인</th>
+          <th>비밀번호 확인<span class="req">*</span></th>
           <td>
             <div class="field-line">
               <input class="inp" type="password" aria-label="비밀번호 확인">
@@ -182,11 +180,11 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
           </td>
         </tr>
         <tr>
-          <th><span class="req">*</span> 이름</th>
+          <th>이름<span class="req">*</span></th>
           <td><input class="inp" type="text" placeholder="본인인증 후 자동 입력" aria-label="이름"></td>
         </tr>
         <tr>
-          <th><span class="req">*</span> 이메일</th>
+          <th>이메일<span class="req">*</span></th>
           <td>
             <div class="field-line">
               <input class="inp email" type="text" aria-label="이메일 아이디">
@@ -203,7 +201,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
           </td>
         </tr>
         <tr>
-          <th><span class="req">*</span> 휴대전화</th>
+          <th>휴대전화<span class="req">*</span></th>
           <td>
             <div class="field-line field-line--phone">
               <select class="sel" data-phone-part aria-label="휴대전화 앞자리">

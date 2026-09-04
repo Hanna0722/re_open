@@ -15,7 +15,7 @@
     --tp:#1A1A2E; --ts:#666680; --tm:#999BAA;
   }
   html, body { width:100%; max-width:390px; margin:0 auto; background:#fff; overflow-x:hidden; }
-  body { font-family:Pretendard,'Noto Sans KR',sans-serif; font-size:14px; color:var(--tp); line-height:1.5; padding-bottom:40px; }
+  body { font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif; font-size:14px; color:var(--tp); line-height:1.5; padding-bottom:40px; }
   a { text-decoration:none; color:inherit; }
   button, input, select { font:inherit; }
   button { cursor:pointer; }
@@ -53,9 +53,7 @@
   .form-section-title{ margin-bottom:8px; font-size:15px; font-weight:500; color:var(--tp); }
   .form-section-title strong{ font-weight:800; }
   .form-section-title span{ font-size:13px; font-weight:600; color:var(--ts); }
-  .form-section-title .req{ color:#e60012; font-weight:800; }
   .required-note{ margin-bottom:8px; font-size:11px; color:var(--ts); line-height:1.5; }
-  .req{ color:#e60012; font-weight:800; }
   .join-table{ width:100%; border-collapse:collapse; border-top:1px solid #ddd; background:#fff; table-layout:fixed; }
   .join-table th,.join-table td{ border-bottom:1px solid #e5e5e5; }
   .join-table th{ width:92px; padding:13px 8px; background:#fafafa; text-align:left; color:#111; font-size:12px; font-weight:700; vertical-align:middle; word-break:keep-all; }
@@ -109,7 +107,7 @@
   /* ── CTA ── */
   .join-actions{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:22px 12px 0; }
   .btn{ height:46px; border:1px solid transparent; border-radius:5px; font-size:14px; font-weight:700; font-family:inherit; }
-  .btn-primary{ background:var(--navy); color:#fff; }
+  .btn-primary{ background:var(--rose); color:#fff; }
   .btn-cancel{ background:#aaa; color:#fff; }
 </style>
 </head>
@@ -157,12 +155,12 @@
 
 <!-- 회원 정보(필수) -->
 <section class="form-section">
-  <h2 class="form-section-title"><strong>회원 정보</strong><span><span class="req">*</span>(필수)</span></h2>
+  <h2 class="form-section-title"><strong>회원 정보</strong><span>(필수)</span></h2>
   <p class="required-note"><span class="req">*</span> 는 필수 입력사항입니다. 해당 항목은 반드시 입력하여 주시기 바랍니다.</p>
   <table class="join-table" aria-label="회원 가입 정보 입력">
     <tbody>
       <tr>
-        <th><span class="req">*</span> 아이디</th>
+        <th>아이디<span class="req">*</span></th>
         <td>
           <div class="field-line field-line--row">
             <input class="inp id-ok" type="text" aria-label="아이디">
@@ -171,7 +169,7 @@
         </td>
       </tr>
       <tr>
-        <th><span class="req">*</span> 비밀번호</th>
+        <th>비밀번호<span class="req">*</span></th>
         <td>
           <div class="field-line">
             <input class="inp" type="password" aria-label="비밀번호">
@@ -180,7 +178,7 @@
         </td>
       </tr>
       <tr>
-        <th><span class="req">*</span> 비밀번호 확인</th>
+        <th>비밀번호 확인<span class="req">*</span></th>
         <td>
           <div class="field-line">
             <input class="inp" type="password" aria-label="비밀번호 확인">
@@ -189,11 +187,11 @@
         </td>
       </tr>
       <tr>
-        <th><span class="req">*</span> 이름</th>
+        <th>이름<span class="req">*</span></th>
         <td><input class="inp" type="text" placeholder="본인인증 후 자동 입력" aria-label="이름"></td>
       </tr>
       <tr>
-        <th><span class="req">*</span> 이메일</th>
+        <th>이메일<span class="req">*</span></th>
         <td>
           <div class="field-line field-line--email">
             <input class="inp email" type="text" aria-label="이메일 아이디">
@@ -210,7 +208,7 @@
         </td>
       </tr>
       <tr>
-        <th><span class="req">*</span> 휴대전화</th>
+        <th>휴대전화<span class="req">*</span></th>
         <td>
           <div class="field-line field-line--phone">
             <select class="sel" data-phone-part aria-label="휴대전화 앞자리">

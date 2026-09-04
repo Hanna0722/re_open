@@ -121,6 +121,20 @@
     ':root{--bb-page-w:1140px}',
     'body{min-width:1200px !important}',
 
+    /* 전 페이지 공통 디자인 토큰 (계열별로 갈렸던 값 강제 통일) */
+    ':root{' +
+      '--page-w:var(--bb-page-w);' +
+      '--rose:#E8385A;--rose-h:#C42F4C;' +
+      '--brand:#E8385A;--brand-dark:#C42F4C;' +
+      '--blue:#E8385A;--blue-dark:#C42F4C;' +
+      '--navy:#1A3C6E;' +
+      '--r-sm:5px;--r-md:8px;--r-lg:12px;--r-pill:999px;' +
+      '--btn-h-sm:36px;--btn-h-md:44px;--btn-h-lg:52px;' +
+      '--label-col-w:230px;' +
+    '}',
+    '.req{color:var(--rose);font-weight:700;margin-left:2px}',
+    '.required-note{color:#666680;font-size:12px}',
+
     '.bbh-header{background:#fff;border-bottom:1px solid #E0E4EB;position:sticky;top:0;z-index:900;box-shadow:0 1px 4px rgba(0,0,0,.06);font-family:Pretendard,"Apple SD Gothic Neo","Helvetica Neue","Malgun Gothic",sans-serif;font-size:14px;color:#1A1A2E}',
     '.bbh-hdr{max-width:var(--bb-page-w);margin:0 auto;padding:0;height:56px;display:flex;align-items:center;gap:16px}',
     '.bbh-menu{display:flex;flex-direction:column;gap:4.5px;padding:8px;border-radius:5px;cursor:pointer;background:none;border:none;margin-right:12px;transition:background .15s;flex-shrink:0}',

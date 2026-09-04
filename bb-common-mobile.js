@@ -154,6 +154,18 @@
     '.drawer::-webkit-scrollbar{display:none}',
     '.drawer.open{transform:translateX(0);visibility:visible;pointer-events:auto;transition:transform .3s cubic-bezier(.4,0,.2,1)}',
     ':root{--grade-std:#D4891A;--grade-pre:#1f477d;--grade-vip:#0C5F33;--grade-prs:#E8385A}',
+    /* 전 페이지 공통 디자인 토큰 (계열별로 갈렸던 브랜드색 별칭·곡률 통일) */
+    ':root{' +
+      '--rose:#E8385A;--rose-h:#C42F4C;' +
+      '--brand:#E8385A;--brand-dark:#C42F4C;' +
+      '--red:#E8385A;--red-h:#C42F4C;' +
+      '--blue:#E8385A;--blue-dark:#C42F4C;' +
+      '--navy:#1A3C6E;' +
+      '--r-sm:5px;--r-md:8px;--r-lg:12px;--r-pill:999px;' +
+      '--btn-h-sm:36px;--btn-h-md:44px;--btn-h-lg:48px;' +
+    '}',
+    '.req{color:var(--rose);font-weight:700;margin-left:2px}',
+    '.required-note{color:#666680;font-size:12px}',
     '.grade-img{background:none!important;box-shadow:none!important;border:0!important;border-radius:0!important;overflow:visible!important;padding:0!important}',
     'img.grade-icon{width:100%!important;height:100%!important;object-fit:contain!important;display:block;border-radius:0!important;transform:none!important}',
     '.bbd-head{display:flex;align-items:center;justify-content:space-between;min-height:58px;padding:12px 16px;border-bottom:1px solid #ECEFF3;background:#fff}',

@@ -10,7 +10,7 @@
     :root {
       --rose: #E8385A;
       --rose-h: #C42F4C;
-      --navy: #1a3c6e;
+      --navy: #1A3C6E;
       --navy-light: #eef3fb;
       --navy-mid: #4f6b9a;
       --tp: #1a1a2e;
@@ -22,7 +22,7 @@
       --warm: #fbf7f5;
       --warm-2: #f7f3f0;
       --border: #e0e4eb;
-      --green: #3aad4e;
+      --green: #3AAD4E;
       --sidebar-w: 231px;
       --main-w: 885px;
       --gap: 24px;
@@ -355,13 +355,13 @@
 
     .submit-btn {
       width: 100%; height: 52px;
-      background: var(--navy); color: #fff;
-      border: none; border-radius: 5px;
+      background: var(--rose); color: #fff;
+      border: none; border-radius: var(--r-sm,5px);
       font-size: 15px; font-weight: 800;
       display: flex; align-items: center; justify-content: center; gap: 8px;
       transition: background 0.15s, transform 0.1s;
     }
-    .submit-btn:hover { background: #142f58; }
+    .submit-btn:hover { background: var(--rose-h); }
     .submit-btn:active { transform: scale(0.99); }
     .submit-btn:disabled {
       background: #c5cdd9; cursor: not-allowed; transform: none;
