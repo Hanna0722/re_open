@@ -58,11 +58,12 @@
   .btn{ height:48px; width:100%; border:1px solid transparent; border-radius:8px; font-size:15px; font-weight:700; font-family:inherit; }
   .btn-primary{ background:var(--rose); color:#fff; }
 
-  .login-divider{ display:flex; align-items:center; gap:8px; margin:22px 0; color:var(--tm); font-size:11px; font-weight:600; padding:0 20px; }
+  .login-divider{ display:flex; align-items:center; gap:8px; margin:22px 0; color:var(--tm); font-size:11.5px; font-weight:600; padding:0 20px; }
   .login-divider::before, .login-divider::after{ content:""; flex:1; height:1px; background:var(--line); }
 
-  .sns-login-list{ display:flex; justify-content:center; gap:12px; margin:0 20px 26px; }
-  .sns-login-btn{ width:44px; height:44px; border-radius:50%; display:grid; place-items:center; font-size:14px; font-weight:800; color:#fff; border:1px solid var(--border); }
+  .sns-login-list{ display:flex; justify-content:center; gap:14px; margin:0 20px 26px; }
+  .sns-login-btn{ width:48px; height:48px; border-radius:50%; display:grid; place-items:center; font-size:15px; font-weight:800; color:#fff; border:1px solid var(--border); transition:transform .15s; }
+  .sns-login-btn:hover{ transform:translateY(-2px); }
   .sns-n{ background:#03C75A; border-color:#03C75A; }
   .sns-k{ background:#FEE500; border-color:#FEE500; color:#3C1E1E; }
   .sns-g{ background:#fff; color:#4285F4; }
@@ -126,12 +127,12 @@
   <button class="btn btn-primary" type="submit">로그인</button>
 </form>
 
-<div class="login-divider">SNS 계정으로 간편 로그인</div>
+<div class="login-divider">소셜 간편 로그인</div>
 <div class="sns-login-list" aria-label="소셜 로그인">
-  <button class="sns-login-btn sns-n" type="button" aria-label="네이버 로그인">N</button>
-  <button class="sns-login-btn sns-k" type="button" aria-label="카카오 로그인">K</button>
-  <button class="sns-login-btn sns-g" type="button" aria-label="구글 로그인"><i class="fa-brands fa-google"></i></button>
-  <button class="sns-login-btn sns-a" type="button" aria-label="애플 로그인"><i class="fa-brands fa-apple"></i></button>
+  <button class="sns-login-btn sns-n" type="button" aria-label="네이버 로그인" onclick="completeLogin()">N</button>
+  <button class="sns-login-btn sns-k" type="button" aria-label="카카오 로그인" onclick="completeLogin()">K</button>
+  <button class="sns-login-btn sns-g" type="button" aria-label="구글 로그인" onclick="completeLogin()"><i class="fa-brands fa-google"></i></button>
+  <button class="sns-login-btn sns-a" type="button" aria-label="애플 로그인" onclick="completeLogin()"><i class="fa-brands fa-apple"></i></button>
 </div>
 
 <div class="login-signup">
@@ -162,6 +163,16 @@ function submitLogin(event) {
   var params = new URLSearchParams(location.search);
   location.href = params.get('redirect') || 'mobile_mypage.html';
   return false;
+}
+
+function completeLogin() {
+  var alreadyLoggedIn = typeof window.bbIsLoggedIn === 'function' && window.bbIsLoggedIn();
+  if (!alreadyLoggedIn) {
+    if (typeof window.toggleLogin === 'function') window.toggleLogin();
+    else localStorage.setItem('bb_logged_in', '1');
+  }
+  var params = new URLSearchParams(location.search);
+  location.href = params.get('redirect') || 'mobile_mypage.html';
 }
 </script>
 <script src="bb-common-mobile.js"></script>
