@@ -58,23 +58,18 @@
   .fee-row-label { font-size:13px; color:var(--text-sub); display:flex; align-items:center; gap:6px; }
   .fee-row-val { font-family:'Roboto',sans-serif; font-size:13px; font-weight:500; color:var(--text-main); }
   .fee-row-val.is-care-added { color:var(--red); font-weight:700; }
-  .fee-row-subtotal { background:#fafbfc; border-top:1px solid #dde1e7 !important; }
-  .fee-row-subtotal .fee-row-label { color:#333; font-weight:600; }
-  .fee-row-subtotal .fee-row-val { color:#333; font-size:14px; font-weight:700; text-align:right; }
-  .fee-subtotal-won { margin-left:4px; color:#666; font-size:12px; font-weight:500; }
   .fee-section-title { padding:13px 16px 8px; border-top:1px solid var(--navy); border-bottom:1px solid var(--border); background:#fff; color:var(--navy); font-size:13px; font-weight:700; }
-  .fee-row-benefit .fee-row-label,
-  .fee-row-discount-total .fee-row-label { color:#333; font-weight:600; }
-  .fee-row-benefit .fee-row-label { flex:1; min-width:0; }
+  .fee-row-benefit .fee-row-label { color:#333; font-weight:600; flex:1; min-width:0; }
   .fee-benefit-brand { color:var(--red); }
-  .fee-row-benefit .fee-row-val,
-  .fee-row-discount-total .fee-row-val { color:var(--red); font-weight:700; text-align:right; }
+  .fee-row-benefit .fee-row-val { color:var(--red); font-weight:700; text-align:right; }
   .fee-coupon-action { display:inline-flex; align-items:center; justify-content:flex-end; gap:8px; flex-shrink:0; }
-  .fee-row-discount-total { background:#fff8fa; border-top:1px solid #f2d6dd; }
-  .fee-row.total-row { background:#F0F4FB; border-top:2px solid var(--navy); border-bottom:2px solid var(--navy); padding:14px 16px; }
-  .fee-row.total-row .fee-row-label { font-size:14px; font-weight:700; color:var(--navy); }
-  .fee-row.total-row .fee-row-val { font-size:18px; font-weight:700; color:var(--red); }
   .amount-won-sub { margin-left:3px; color:#8b929c; font-size:12px; font-weight:600; vertical-align:baseline; }
+  .fee-summary-box { margin:0; padding:14px 16px 16px; border:0; border-radius:0; background:#f8fafd; }
+  .fee-summary-box .fee-summary-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:5px 0; font-size:13px; color:#333; font-weight:600; }
+  .fee-summary-box .fee-summary-row.is-discount .fee-summary-val { color:var(--red); }
+  .fee-summary-divider { border-top:1px dashed #bfc9d8; margin:8px 0; }
+  .fee-summary-total { display:flex; align-items:center; justify-content:space-between; gap:10px; padding-top:2px; color:var(--navy); font-size:15px; font-weight:700; }
+  .fee-summary-total .fee-summary-val { font-family:'Roboto',Pretendard,sans-serif; color:var(--red); font-size:20px; font-weight:700; white-space:nowrap; }
 
   /* 국제운송료 상세 */
   .intl-detail { display:flex; flex-direction:column; align-items:flex-end; gap:2px; }
@@ -463,10 +458,6 @@
     <div class="extra-detail-item"><span>검수 수수료</span><span class="extra-detail-val">600 엔</span></div>
   </div>
 
-  <div class="fee-row fee-row-subtotal">
-    <span class="fee-row-label">결제비용</span>
-    <span class="fee-row-val"><span id="totalYenVal">10,512엔</span><span class="fee-subtotal-won" id="totalWonHint"></span></span>
-  </div>
   <div class="fee-section-title">할인/혜택</div>
   <div class="fee-row fee-row-benefit">
     <span class="fee-row-label">쿠폰 할인</span>
@@ -494,13 +485,20 @@
       <p class="benefit-note">※ 등급 혜택은 결제 시 자동 적용됩니다.</p>
     </div>
   </div>
-  <div class="fee-row fee-row-discount-total">
-    <span class="fee-row-label">총 할인금액</span>
-    <span class="fee-row-val" id="discountTotalVal">-1,276엔</span>
-  </div>
-  <div class="fee-row total-row">
-    <span class="fee-row-label">총 결제금액</span>
-    <span class="fee-row-val" id="mobCellTotal">9,236엔<span class="amount-won-sub">(88,666원)</span></span>
+  <div class="fee-summary-box">
+    <div class="fee-summary-row">
+      <span>전체 금액</span>
+      <span class="fee-summary-val" id="totalYenVal">10,512엔</span>
+    </div>
+    <div class="fee-summary-row is-discount">
+      <span>할인/혜택</span>
+      <span class="fee-summary-val" id="discountTotalVal">-1,276엔</span>
+    </div>
+    <div class="fee-summary-divider"></div>
+    <div class="fee-summary-total">
+      <span>총 결제금액</span>
+      <span class="fee-summary-val" id="mobCellTotal">9,236엔<span class="amount-won-sub">(88,666원)</span></span>
+    </div>
   </div>
 </div>
 
