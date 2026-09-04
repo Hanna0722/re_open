@@ -217,6 +217,10 @@
       word-break: keep-all;
       line-height: 1.6;
     }
+    .shipping-method-table.is-japan-local col.feature-col { width: 30%; }
+    .shipping-method-table.is-japan-local col.size-col { width: 22%; }
+    .shipping-method-table.is-japan-local col.days-col { width: 30%; }
+    .shipping-method-table.is-japan-local .days-cell { font-weight: 400; color: #444; text-align: left; }
 
     /* ── 유료옵션 테이블 ── */
     .paid-option-table { border-collapse: collapse; width: 100%; margin-bottom: 28px; }
@@ -902,6 +906,8 @@
     }
   }
 
+  const shippingMethodTable = document.querySelector('.shipping-method-table');
+
   setupPickupDateRange();
   if (shippingMethodSelect) {
     shippingMethodSelect.addEventListener('change', function() {
@@ -909,6 +915,7 @@
       if (featureCell) featureCell.innerHTML = d.feature;
       if (sizeCell) sizeCell.innerHTML = d.size;
       if (daysCell) daysCell.innerHTML = d.days;
+      if (shippingMethodTable) shippingMethodTable.classList.toggle('is-japan-local', shippingMethodSelect.value === '일본내배송');
       updatePickupDatePanel();
       updateRecipientForm();
     });

@@ -664,6 +664,8 @@
     #modal-carecare-guard .modal-actions.wrap { grid-template-columns: 1fr; }
     .modal-actions.wrap button { height: auto; min-height: 44px; padding: 8px 6px; font-size: 12.5px; line-height: 1.35; white-space: normal; }
 
+    .member-tier-icon { background:#eef5ff !important; color:var(--navy) !important; }
+    .member-tier-icon i { line-height:1; }
   .profile-id { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .profile-id .profile-name { display: inline; margin: 0; }
   .profile-id .profile-tier { display: inline-flex; align-items: center; margin: 0; padding: 2px 9px; border-radius: 5px; background: #f1f2f4; color: var(--grade-vip); font-size: 12px; font-weight: 700; line-height: 1.4; }
@@ -678,7 +680,7 @@
       <aside class="sidebar">
         <section class="profile-card" aria-label="회원 정보">
           <div class="profile-main">
-            <div class="avatar">홍</div>
+            <div class="avatar tier-vip member-tier-icon grade-img" aria-label="VIP 등급"><img class="grade-icon" src="gradeicon/grade_vip.png" alt=""></div>
             <div>
               <div class="profile-id"><strong class="profile-name">홍길동님</strong><span class="profile-tier">VIP</span></div>
               <p class="vip-copy">Prestige까지 <b>65%</b> 달성</p>

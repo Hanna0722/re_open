@@ -75,6 +75,7 @@
   .ship-info-label { display:block; margin-top:8px; color:#333; font-size:12px; font-weight:700; }
   .ship-info-label:first-child { margin-top:0; }
   .ship-days { font-weight:700; color:var(--navy); font-family:'Roboto',sans-serif; font-size:13px; }
+  .ship-days.is-japan { font-weight:400; color:#444; font-family:inherit; text-align:left; }
   .note { color:#999; font-size:11px; }
 
   /* 인수희망 날짜 */
@@ -584,6 +585,7 @@
     document.getElementById('shipDays').innerHTML = desc.days;
 
     const isJapan = val === '일본내배송';
+    document.getElementById('shipDays').classList.toggle('is-japan', isJapan);
     domesticFields.classList.toggle('hide', isJapan);
     japanFields.classList.toggle('show', isJapan);
     recipientJapanNote.style.display = isJapan ? 'inline' : 'none';
