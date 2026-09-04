@@ -28,18 +28,9 @@ button{cursor:pointer}
 .step-list{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:14px}
 .step-item{width:190px;padding:20px 10px 18px;border:1px solid var(--border);border-radius:8px;background:#fff;text-align:center}
 .step-item.active{border:2px solid var(--navy)}
-.step-num{width:48px;height:48px;margin:0 auto 14px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700;line-height:1.25}
+.step-num{width:44px;height:44px;margin:0 auto 12px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-family:Roboto,sans-serif;font-size:16px;font-weight:800;line-height:1}
 .step-name{font-size:14px;font-weight:700;color:var(--tp)}
 .step-arrow{color:var(--tm);font-size:13px}
-
-/* ── 혜택 카드 ── */
-.benefit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:760px;margin:34px auto 0}
-.benefit-box{border-radius:5px;padding:16px 12px 20px;text-align:center;color:#fff}
-.benefit-box.a{background:var(--navy)}
-.benefit-box.b{background:var(--rose)}
-.benefit-tag{display:inline-block;margin-bottom:8px;padding:3px 22px;border-radius:5px;background:rgba(255,255,255,.92);color:var(--tp);font-size:12px;font-weight:600}
-.benefit-copy{font-size:12px;line-height:1.5;opacity:.95}
-.benefit-copy strong{display:block;margin-top:2px;font-size:15px;font-weight:600;opacity:1}
 
 /* ── 폼 ── */
 .form-section{max-width:600px;margin:34px auto 0}
@@ -142,35 +133,19 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
     <h1 class="join-hero-title">비드바이코리아 회원가입</h1>
     <div class="step-list">
       <div class="step-item">
-        <div class="step-num">Step<br>01</div>
+        <div class="step-num">01</div>
         <div class="step-name">이용약관 동의</div>
       </div>
       <i class="fa-solid fa-chevron-right step-arrow" aria-hidden="true"></i>
       <div class="step-item active">
-        <div class="step-num">Step<br>02</div>
+        <div class="step-num">02</div>
         <div class="step-name">회원정보 입력</div>
       </div>
       <i class="fa-solid fa-chevron-right step-arrow" aria-hidden="true"></i>
       <div class="step-item">
-        <div class="step-num">Step<br>03</div>
+        <div class="step-num">03</div>
         <div class="step-name">회원가입완료</div>
       </div>
-    </div>
-  </section>
-
-  <!-- 회원 혜택 -->
-      <section class="benefit-grid" aria-label="멤버십 혜택">
-    <div class="benefit-box a">
-      <span class="benefit-tag">가입 혜택 1</span>
-      <p class="benefit-copy">회원가입을 축하드려요!<strong>마일리지 5천원 즉시 지급</strong></p>
-    </div>
-    <div class="benefit-box b">
-      <span class="benefit-tag">가입 혜택 2</span>
-      <p class="benefit-copy">국제운임 부담을 덜어드려요!<strong>국제운임 할인 쿠폰 5천원권 지급</strong></p>
-    </div>
-    <div class="benefit-box a">
-      <span class="benefit-tag">가입 혜택 3</span>
-      <p class="benefit-copy">가입 즉시 STANDARD 등급 적용!<strong>대행수수료의 2% 마일리지 적립</strong></p>
     </div>
   </section>
 
