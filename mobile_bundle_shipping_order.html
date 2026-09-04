@@ -206,7 +206,7 @@
 
 <!-- 유저 컨텍스트 -->
 <div class="ctx-card">
-  <div class="ctx-stats">묶음배송 <span class="accent">2건</span><span class="ctx-divider">|</span>상품금액 합계 <span>64,070원</span></div>
+  <div class="ctx-stats">묶음배송 <span class="accent">2건</span><span class="ctx-divider">|</span>총 비용 <span>64,070원</span></div>
 </div>
 
 <!-- 상품묶음 정보 -->
@@ -500,28 +500,28 @@
   const shippingDescriptions = {
     '비바항공특송': {
       feature: '- 현재 화물 위치 추적 가능<br>- 전담관세사가 통관대행처리<br><br><span class="note">※ 멀티박스 : 박스당 250엔 추가비용 발생</span><br><span class="note">※ 부피무게 30KG 이상인 경우 부피무게 적용</span><br><span class="note">※ 20만원 이상 수출 시, 수출대액통관료 1,500엔 발생</span>',
-      size: '※ 오버사이즈 : 1,550엔 추가비용 발생<br>중량 : 20KG / 세변의합 : 160cm / 한변 100cm 중 한가지 이상 초과하는 경우<br>국내배송시 화물택배(대신, 천일, 경동 등)으로 진행<br>도서산간비용 : 지역에 따라 비용발생',
+      size: '<strong>※ 오버사이즈 : 1,550엔 추가비용 발생</strong><br>중량 : 20KG / 세변의합 : 160cm / 한변 100cm 중 한가지 이상 초과하는 경우<br>국내배송시 화물택배(대신, 천일, 경동 등)으로 진행<br>도서산간비용 : 지역에 따라 비용발생',
       days: '3 ~ 5일'
     },
     'EMS': {
-      feature: '- 현재 화물 위치 추적 가능<br>- 파손, 분실 시 보상 받기 쉬움<br>- 20만엔 초과시 2차 결제시 통관 수수료 2,800엔이 청구됩니다.',
+      feature: '- 현재 화물 위치 추적 가능<br>- 파손, 분실 시 보상 받기 쉬움<br>- 20만엔 초과 상품은 통관 수수료 2,800엔이 2차 결제 시 청구 됩니다.',
       size: '- 30kg까지 취급<br>- 한변길이 150cm미만',
       days: '3 ~ 5일'
     },
     '선편특송': {
       feature: '- 대량 화물에 적합한 경제적인 특송 서비스<br>- 항공보다 저렴하지만 배송기간이 더 길어집니다<br>- 통관 및 운송비가 합리적인 옵션',
-      size: '- 30kg 초과시 5kg당 + 2,000엔',
-      days: '5 ~ 7일'
+      size: '- 중량 및 부피에 따라 별도 문의<br>- 일반적으로 30kg 이상 대량 화물에 적합',
+      days: '7 ~ 12일'
     },
     '최저가배송': {
-      feature: '- 물품이 현지 도착후 포장이 완료되면, 국제배송료가 가장 저렴한 배송방법으로 2차 결제를 안내해 드립니다.<br>- 단, 배송기간과 통관 절차는 고려하지 않으며 오직 국제 운송료만을 기준으로 방법을 선택합니다.',
-      size: '- 운송방법에 따라 다름',
+      feature: '- 물품 도착 및 포장 후, 국제운송료가 가장 저렴한 운송 방법으로 2차 결제를 안내드립니다.<br>- 단, 배송기간과 통관절차는 고려하지 않고 국제운송료 기준으로만 진행됩니다.',
+      size: '운송방법에 따라 다름',
       days: '운송방법에 따라 다름'
     },
     '일본내배송': {
-      feature: '- 주문 건당 수수료 <strong>￥1,000 별도 발생</strong><br>- 현지배송은 배송대기 상태로만 지정 가능합니다.<br>- 물품입고후 <strong>인수희망일을 별도로 지정</strong>할 수 있습니다.<br><br><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> 물품 파손의 경우, 고객님께서 직접 택배사에 접수해주셔야 합니다.<br><br><span class="note">※ 일본 영업일 기준 주말, 공휴일은 지정 불가</span><br><span class="note" style="color:var(--red)">※ 택배 영업소의 경우, 인수 날짜 지정 불가</span>',
+      feature: '- 주문 건당 수수료 <strong>￥1,000 별도 발생</strong><br>- 물품입고후 <strong>인수희망일을 별도로 지정</strong>할 수 있습니다.<br><br><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> 파손 및 보상기준<br>물품의 파손 및 상품이상 등의 클레임 대행 일절 불가.<br>(직접 택배사에 접수 필요)<br>',
       size: '- 일본 내 일반택배(야마토)로 배송 가능한 사이즈<br>(세변의 합 200cm까지)',
-      days: '인수희망일 신청: 물품 입고일로부터 <strong style="color:var(--red)">5일 이후</strong>부터 지정 가능'
+      days: '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> 인수희망일 신청<br><strong>결제완료 상태</strong><br>: 창고 미도착단계에서는 지정불가, 현지도착일 기준 <strong class="bold-red">5일 이후</strong><br><strong>현지도착 상태</strong><br>:일본내 배송요청 일자로부터 <strong class="bold-red">5일 이후</strong><br><br>※일본공휴일 제외, 일본영업일 기준 5일 이후부터 날짜 지정가능<br><strong class="bold-red">※택배 영업소의 경우, 인수 날짜 지정 불가</strong>'
     }
   };
 
