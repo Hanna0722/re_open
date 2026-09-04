@@ -38,11 +38,11 @@
   .join-hero::after{ content:""; position:absolute; right:-70px; bottom:-110px; width:260px; height:260px; border-radius:50%; background:#EDEFF2; }
   .join-hero-sub{ position:relative; z-index:1; font-size:11px; font-weight:600; color:var(--ts); }
   .join-hero-title{ position:relative; z-index:1; margin:4px 0 16px; font-size:17px; font-weight:700; }
-  .step-list{ position:relative; z-index:1; display:flex; align-items:center; justify-content:center; gap:6px; }
-  .step-item{ flex:1; padding:12px 4px 11px; border:1px solid var(--border); border-radius:8px; background:#fff; }
+  .step-list{ position:relative; z-index:1; display:flex; align-items:center; justify-content:center; gap:4px; }
+  .step-item{ flex:1; min-width:0; padding:12px 2px 11px; border:1px solid var(--border); border-radius:8px; background:#fff; }
   .step-item.active{ border:2px solid var(--navy); }
   .step-num{ width:32px; height:32px; margin:0 auto 7px; border-radius:50%; background:var(--navy); color:#fff; display:grid; place-items:center; font-family:Roboto,sans-serif; font-size:13px; font-weight:800; line-height:1; }
-  .step-name{ font-size:11px; font-weight:700; }
+  .step-name{ font-size:11px; font-weight:700; white-space:nowrap; }
   .step-arrow{ color:var(--tm); font-size:10px; flex-shrink:0; }
 
   /* ── 환영 배너 ── */
@@ -102,17 +102,17 @@
   <div class="step-list">
     <div class="step-item">
       <div class="step-num">01</div>
-      <div class="step-name">이용약관<br>동의</div>
+      <div class="step-name">이용약관 동의</div>
     </div>
     <i class="fa-solid fa-chevron-right step-arrow" aria-hidden="true"></i>
     <div class="step-item">
       <div class="step-num">02</div>
-      <div class="step-name">회원정보<br>입력</div>
+      <div class="step-name">회원정보 입력</div>
     </div>
     <i class="fa-solid fa-chevron-right step-arrow" aria-hidden="true"></i>
     <div class="step-item active">
       <div class="step-num">03</div>
-      <div class="step-name">회원가입<br>완료</div>
+      <div class="step-name">회원가입완료</div>
     </div>
   </div>
 </section>
