@@ -45,34 +45,38 @@
   .step-name{ font-size:11px; font-weight:700; white-space:nowrap; }
   .step-arrow{ color:var(--tm); font-size:10px; flex-shrink:0; }
 
-  /* ── 환영 배너 ── */
-  .welcome-banner{ position:relative; overflow:hidden; margin:16px 12px 0; padding:28px 20px; border-radius:2px; background:var(--navy); color:#fff; text-align:center; }
-  .welcome-banner::before{ content:""; position:absolute; left:-30px; bottom:-70px; width:160px; height:160px; border-radius:50%; background:rgba(255,255,255,.08); }
-  .welcome-banner::after{ content:""; position:absolute; left:40px; bottom:-95px; width:160px; height:160px; border-radius:50%; background:rgba(255,255,255,.06); }
-  .welcome-inner{ position:relative; z-index:1; }
-  .welcome-title{ font-size:17px; font-weight:700; line-height:1.45; }
-  .welcome-copy{ margin-top:8px; font-size:12px; opacity:.92; }
+  /* ── 환영 카드 ── */
+  .welcome-card{ margin:14px 12px 0; padding:26px 16px; min-height:120px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; background:url("etc%20icon/signup3_mobile.png") no-repeat top center/100% auto; }
+  .welcome-card h1{ font-size:17px; font-weight:800; }
+  .welcome-card p{ margin-top:8px; font-size:12px; color:var(--ts); }
 
-  /* ── 쿠폰 ── */
-  .coupon-list{ display:grid; gap:10px; margin:16px 12px 0; }
-  .coupon-card{ background:var(--card); border:1px solid var(--border); border-radius:8px; overflow:hidden; }
-  .coupon-top{ position:relative; display:grid; grid-template-columns:72px minmax(0,1fr); align-items:center; gap:8px; padding:16px 14px; background:var(--bg); }
-  .coupon-ico{ display:grid; place-items:center; height:100%; border-right:1px dashed var(--border); font-size:24px; color:var(--rose); }
-  .coupon-body{ text-align:center; }
-  .coupon-badge{ display:inline-block; margin-bottom:6px; padding:2px 10px; border-radius:999px; background:var(--rose); color:#fff; font-size:10px; font-weight:700; }
-  .coupon-name{ font-size:11px; color:var(--ts); }
-  .coupon-amount{ margin:2px 0 8px; font-family:'Roboto',sans-serif; font-size:19px; font-weight:700; color:var(--tp); }
-  .coupon-btn{ height:26px; padding:0 12px; border:1px solid var(--border); border-radius:4px; background:#fff; color:var(--ts); font-size:11px; font-weight:700; font-family:inherit; }
-  .coupon-detail{ padding:12px 14px 14px; }
-  .coupon-detail-title{ margin-bottom:6px; font-size:13px; font-weight:700; }
-  .coupon-detail li{ position:relative; padding-left:10px; list-style:none; font-size:12px; color:var(--ts); line-height:1.9; }
-  .coupon-detail li::before{ content:"·"; position:absolute; left:2px; top:0; }
+  /* ── 가입 혜택 ── */
+  .benefit-head{ margin:20px 0 12px; text-align:center; font-size:15px; font-weight:700; }
+  .benefit-grid{ display:grid; gap:10px; margin:0 12px; }
+  .benefit-card{ display:grid; grid-template-columns:72px minmax(0,1fr); align-items:stretch; border:1px solid var(--border); border-radius:10px; overflow:hidden; background:#fff; }
+  .benefit-icon{ background-repeat:no-repeat; background-position:center; background-size:cover; }
+  .benefit-icon.rose{ background-color:var(--rose); background-image:url("etc%20icon/benefit%20(2).png"); }
+  .benefit-icon.navy{ background-color:var(--navy); background-image:url("etc%20icon/benefit%20(1).png"); }
+  .benefit-body{ padding:16px 14px; text-align:center; }
+  .benefit-name{ font-size:13px; font-weight:700; }
+  .benefit-amount{ margin:5px 0 6px; font-family:'Roboto',sans-serif; font-size:18px; font-weight:800; color:var(--rose); }
+  .benefit-amount.navy{ color:var(--navy); }
+  .benefit-amount .won{ font-size:13px; }
+  .benefit-amount .give{ margin-left:3px; font-size:12px; font-weight:600; color:var(--ts); font-family:inherit; }
+  .benefit-desc{ font-size:12px; color:var(--tm); }
+
+  /* ── 안내 박스 ── */
+  .benefit-note{ display:flex; gap:10px; margin:14px 12px 0; padding:14px 16px; border:1px solid var(--line); border-radius:10px; background:var(--bg); }
+  .benefit-note > i{ color:var(--tm); font-size:15px; flex:0 0 auto; margin-top:1px; }
+  .benefit-note ul{ list-style:none; display:grid; gap:6px; }
+  .benefit-note li{ position:relative; padding-left:11px; font-size:12px; color:var(--ts); line-height:1.6; }
+  .benefit-note li::before{ content:"·"; position:absolute; left:3px; top:0; }
 
   /* ── CTA ── */
-  .join-actions{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:24px 12px 0; }
-  .btn{ height:46px; border:1px solid transparent; border-radius:5px; font-size:14px; font-weight:700; font-family:inherit; }
+  .join-actions{ display:grid; grid-template-columns:1fr 1.3fr 1fr; gap:8px; margin:22px 12px 0; }
+  .btn{ height:46px; padding:0; border:1px solid transparent; border-radius:6px; font-size:13px; font-weight:700; font-family:inherit; }
   .btn-primary{ background:var(--rose); color:#fff; }
-  .btn-cancel{ background:#aaa; color:#fff; }
+  .btn-line{ background:#fff; border-color:var(--border); color:var(--tp); }
 </style>
 </head>
 <body>
@@ -117,61 +121,47 @@
   </div>
 </section>
 
-<!-- 환영 배너 -->
-<section class="welcome-banner">
-  <div class="welcome-inner">
-    <h2 class="welcome-title">OOO님 비드바이코리아<br>회원가입을 환영합니다</h2>
-    <p class="welcome-copy">글로벌 쇼핑의 탁월한 경험~ 함께 시작 해요~</p>
+<!-- 환영 카드 -->
+<section class="welcome-card">
+  <h1>비드바이 회원이 되신 것을 환영합니다</h1>
+  <p>이제 해외 쇼핑과 경매를 더욱 간편하게 이용하실 수 있습니다.</p>
+</section>
+
+<!-- 가입 감사 혜택 -->
+<h2 class="benefit-head">회원가입 감사 혜택</h2>
+<section class="benefit-grid" aria-label="회원가입 감사 혜택">
+  <div class="benefit-card">
+    <div class="benefit-icon rose" aria-hidden="true"></div>
+    <div class="benefit-body">
+      <p class="benefit-name">가입 축하 마일리지</p>
+      <p class="benefit-amount">5,000<span class="won">원</span><span class="give">지급</span></p>
+      <p class="benefit-desc">발급일로부터 유효기간 1개월</p>
+    </div>
+  </div>
+  <div class="benefit-card">
+    <div class="benefit-icon navy" aria-hidden="true"></div>
+    <div class="benefit-body">
+      <p class="benefit-name">비바항공 국제운임 할인 쿠폰</p>
+      <p class="benefit-amount navy">5,000<span class="won">원</span><span class="give">지급</span></p>
+      <p class="benefit-desc">발급일로부터 유효기간 2개월</p>
+    </div>
   </div>
 </section>
 
-<!-- 가입 축하 쿠폰 -->
-<section class="coupon-list" aria-label="가입 축하 쿠폰">
-  <div class="coupon-card">
-    <div class="coupon-top">
-      <div class="coupon-ico"><i class="fa-solid fa-ticket" aria-hidden="true"></i></div>
-      <div class="coupon-body">
-        <span class="coupon-badge">coupon</span>
-        <p class="coupon-name">회원가입 축하 쿠폰</p>
-        <p class="coupon-amount">3,000원</p>
-        <button class="coupon-btn" type="button" onclick="location.href='mobile_mileage.html'">쿠폰함 보기</button>
-      </div>
-    </div>
-    <div class="coupon-detail">
-      <p class="coupon-detail-title">· 회원가입 축하 쿠폰</p>
-      <ul>
-        <li>사용기간 : 2024년 10월 28일 까지</li>
-        <li>할인 : 3,000원</li>
-        <li>수량 1 매</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="coupon-card">
-    <div class="coupon-top">
-      <div class="coupon-ico"><i class="fa-solid fa-ticket" aria-hidden="true"></i></div>
-      <div class="coupon-body">
-        <span class="coupon-badge">coupon</span>
-        <p class="coupon-name">대행수수료 할인 쿠폰</p>
-        <p class="coupon-amount">5,000원</p>
-        <button class="coupon-btn" type="button" onclick="location.href='mobile_mileage.html'">쿠폰함 보기</button>
-      </div>
-    </div>
-    <div class="coupon-detail">
-      <p class="coupon-detail-title">· 경매 및 구매 대행수수료 할인 쿠폰</p>
-      <ul>
-        <li>사용기간 : 2024년 6월 28일 까지</li>
-        <li>할인 : 5,000월 (최대 4달러 / 566엔)</li>
-        <li>수량 2 매</li>
-      </ul>
-    </div>
-  </div>
-</section>
+<!-- 안내 -->
+<div class="benefit-note">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <ul>
+    <li>마일리지는 1차 결제 시 구매수수료 할인에 사용 가능합니다.</li>
+    <li>혜택은 마이페이지 또는 쿠폰함에서 확인할 수 있습니다.</li>
+  </ul>
+</div>
 
 <!-- CTA -->
 <div class="join-actions">
-  <button class="btn btn-cancel" type="button" onclick="location.href='mobile_mypage.html'">마이페이지</button>
-  <button class="btn btn-primary" type="button" onclick="location.href='mobile_main.html'">로그인</button>
+  <button class="btn btn-line" type="button" onclick="location.href='mobile_mypage.html'">마이페이지</button>
+  <button class="btn btn-primary" type="button" onclick="startShopping()">쇼핑 시작하기</button>
+  <button class="btn btn-line" type="button" onclick="location.href='mobile_mileage.html'">쿠폰함 보기</button>
 </div>
 
 <script>
@@ -182,6 +172,11 @@ function activateMobileHeaderUser() {
 document.querySelectorAll('.m-login-btn').forEach(function (btn) {
   btn.addEventListener('click', activateMobileHeaderUser);
 });
+
+function startShopping() {
+  try { localStorage.setItem('bb_logged_in', '1'); } catch (e) {}
+  location.href = 'mobile_main.html';
+}
 </script>
 <script src="bb-common-mobile.js"></script>
 <script src="bb-search-modal-mobile.js"></script>
