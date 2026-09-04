@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>멤버십 가입 - 가입 정보입력 | BidBuy</title>
+<title>회원가입 - 가입 정보입력 | BidBuy</title>
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -14,7 +14,7 @@
     --bg:#F5F6F8; --card:#fff; --border:#E0E4EB; --line:#EEEEEE;
     --tp:#1A1A2E; --ts:#666680; --tm:#999BAA;
   }
-  html, body { width:100%; max-width:390px; margin:0 auto; background:var(--bg); overflow-x:hidden; }
+  html, body { width:100%; max-width:390px; margin:0 auto; background:#fff; overflow-x:hidden; }
   body { font-family:Pretendard,'Noto Sans KR',sans-serif; font-size:14px; color:var(--tp); line-height:1.5; padding-bottom:40px; }
   a { text-decoration:none; color:inherit; }
   button, input, select { font:inherit; }
@@ -57,28 +57,51 @@
 
   /* ── 폼 ── */
   .form-section{ margin:20px 12px 0; }
-  .form-section-title{ margin-bottom:8px; font-size:15px; font-weight:700; }
+  .form-section + .form-section{ margin-top:18px; }
+  .form-section-title{ margin-bottom:8px; font-size:15px; font-weight:500; color:var(--tp); }
+  .form-section-title strong{ font-weight:800; }
   .form-section-title span{ font-size:13px; font-weight:600; color:var(--ts); }
-  .form-card{ background:var(--card); border:1px solid var(--border); border-radius:8px; padding:16px; }
-  .field{ margin-bottom:8px; }
-  .field:last-child{ margin-bottom:0; }
-  .field-row{ display:grid; grid-template-columns:minmax(0,1fr) 96px; gap:8px; }
-  .inp{ width:100%; height:40px; padding:0 12px; border:1px solid var(--border); border-radius:5px; background:#fff; color:var(--tp); font-size:13px; outline:none; }
+  .required-note{ margin-bottom:8px; font-size:11px; color:var(--ts); line-height:1.5; }
+  .req{ color:#e60012; font-weight:800; }
+  .join-table{ width:100%; border-collapse:collapse; border-top:1px solid #ddd; background:#fff; table-layout:fixed; }
+  .join-table th,.join-table td{ border-bottom:1px solid #e5e5e5; }
+  .join-table th{ width:92px; padding:13px 8px; background:#fafafa; text-align:left; color:#111; font-size:12px; font-weight:700; vertical-align:middle; word-break:keep-all; }
+  .join-table td{ padding:9px 10px; vertical-align:middle; }
+  .field-line{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  .inp{ width:100%; height:34px; padding:0 9px; border:1px solid #d8d8d8; border-radius:0; background:#fff; color:var(--tp); font-size:12px; outline:none; }
   .inp::placeholder{ color:var(--tm); }
   .inp:focus{ border-color:var(--navy); }
-  .sel{ width:100%; height:40px; padding:0 26px 0 10px; border:1px solid var(--border); border-radius:5px; background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999BAA'/%3E%3C/svg%3E") no-repeat right 10px center; color:var(--tp); font-size:12px; appearance:none; outline:none; }
-  .btn-side{ height:40px; border:1px solid var(--navy); border-radius:5px; background:#fff; color:var(--navy); font-size:12px; font-weight:700; font-family:inherit; }
-  .field-hint{ margin-top:8px; font-size:11px; font-weight:600; color:var(--navy); line-height:1.5; }
-  .field-note{ margin-top:6px; font-size:11px; color:var(--ts); line-height:1.6; }
-
-  /* 수신 동의 */
-  .consent-copy{ font-size:12px; color:var(--tp); line-height:1.6; margin-bottom:10px; }
-  .consent-line{ display:flex; align-items:center; gap:12px; margin-bottom:8px; font-size:12px; color:var(--ts); }
-  .consent-line b{ min-width:66px; font-weight:600; color:var(--tp); }
-  .radio{ display:inline-flex; align-items:center; gap:5px; font-size:12px; color:var(--ts); }
-  .radio input{ width:15px; height:15px; margin:0; accent-color:var(--navy); }
-  .birth-row{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; }
-  .cal-opts{ display:flex; align-items:center; gap:14px; margin-top:8px; }
+  .inp.id-ok{ background:#eaf1fb; }
+  .inp.short{ width:50px; }
+  .inp.email{ width:78px; }
+  .sel{ width:62px; height:34px; padding:0 4px; border:1px solid #d8d8d8; border-radius:0; background:#fff; color:var(--tp); font-size:11px; appearance:auto; outline:none; }
+  .sel.email-domain{ width:88px; }
+  .btn-side{ height:34px; padding:0 10px; border:1px solid #999; border-radius:0; background:#999; color:#fff; font-size:11px; font-weight:700; font-family:inherit; white-space:nowrap; }
+  .field-hint{ display:block; margin-top:5px; font-size:11px; font-weight:500; color:#0070ff; line-height:1.5; }
+  .field-note{ margin-top:6px; font-size:11px; color:#111; line-height:1.5; }
+  .field-note .blue{ color:#0070ff; }
+  .dash{ color:#555; }
+  .radio{ display:inline-flex; align-items:center; gap:4px; margin-right:12px; font-size:12px; color:var(--tp); }
+  .radio input{ width:13px; height:13px; margin:0; accent-color:#0070ff; }
+  .ad-consent-cell{ padding:16px 10px 18px; }
+  .th-muted{ display:block; color:#888; font-weight:600; }
+  .ad-consent{ display:grid; gap:18px; }
+  .ad-consent-main,.ad-consent-item{ display:grid; grid-template-columns:18px minmax(0,1fr); column-gap:9px; align-items:start; }
+  .ad-consent-item{ margin-left:22px; }
+  .ad-consent input[type="checkbox"]{ width:18px; height:18px; margin:0; appearance:none; border-radius:5px; border:1px solid #555; background:#fff; accent-color:var(--navy); }
+  .ad-consent input[type="checkbox"]:checked{ appearance:auto; }
+  .ad-consent-title{ display:block; font-size:13px; font-weight:700; color:#111; line-height:1.4; }
+  .ad-consent-sub{ display:block; font-size:12px; font-weight:500; color:#111; line-height:1.4; }
+  .ad-consent-desc{ display:block; margin-top:5px; font-size:11px; color:#999; line-height:1.5; }
+  .ad-consent-alert{ display:block; margin-top:4px; color:#888; font-size:11px; font-weight:500; line-height:1.5; }
+  .ad-consent-detail{ display:block; margin-top:10px; }
+  .ad-consent-detail:first-child{ margin-top:0; }
+  .ad-consent-detail-title{ display:block; font-size:12px; font-weight:500; color:#111; line-height:1.4; }
+  .join-path-group{ display:grid; gap:9px; }
+  .join-path-question{ font-size:12px; color:#111; line-height:1.4; }
+  .join-path-options{ display:grid; gap:8px; }
+  .join-path-options .radio{ margin-right:0; }
+  .join-path-etc{ display:grid; grid-template-columns:auto minmax(0,1fr); align-items:center; gap:6px; }
 
   /* ── CTA ── */
   .join-actions{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:22px 12px 0; }
@@ -110,11 +133,11 @@
 <!-- 스텝 히어로 -->
 <section class="join-hero">
   <p class="join-hero-sub">글로벌쇼핑의 탁월한 경험!</p>
-  <h1 class="join-hero-title">비드바이코리아 멤버십 가입</h1>
+  <h1 class="join-hero-title">비드바이코리아 회원가입</h1>
   <div class="step-list">
     <div class="step-item">
       <div class="step-num">Step<br>01</div>
-      <div class="step-name">멤버십 혜택<br>및 약관</div>
+      <div class="step-name">회원가입 혜택<br>및 약관</div>
     </div>
     <i class="fa-solid fa-chevron-right step-arrow" aria-hidden="true"></i>
     <div class="step-item active">
@@ -124,13 +147,13 @@
     <i class="fa-solid fa-chevron-right step-arrow" aria-hidden="true"></i>
     <div class="step-item">
       <div class="step-num">Step<br>03</div>
-      <div class="step-name">멤버십<br>가입완료</div>
+      <div class="step-name">회원가입<br>완료</div>
     </div>
   </div>
 </section>
 
-<!-- 멤버십 혜택 -->
-<section class="benefit-grid" aria-label="멤버십 혜택">
+<!-- 회원가입 혜택 -->
+<section class="benefit-grid" aria-label="회원가입 혜택">
   <div class="benefit-box a">
     <span class="benefit-tag">가입 혜택 1</span>
     <p class="benefit-copy">회원가입을 축하드려요!<strong>마일리지 5천원 즉시 지급</strong></p>
@@ -145,75 +168,185 @@
   </div>
 </section>
 
-<!-- 멤버십 가입 정보(필수) -->
+<!-- 회원가입 정보(필수) -->
 <section class="form-section">
-  <h2 class="form-section-title">멤버십 가입 정보<span>(필수)</span></h2>
-  <div class="form-card">
-    <div class="field"><input class="inp" type="text" placeholder="아이디 (4~12자, 영문 또는 숫자 가능)" aria-label="아이디"></div>
-    <div class="field"><input class="inp" type="password" placeholder="비밀번호 (6~16자, 영문/숫자/특수문자 2가지 조합 필수)" aria-label="비밀번호"></div>
-    <div class="field"><input class="inp" type="password" placeholder="비밀번호 확인" aria-label="비밀번호 확인"></div>
-    <div class="field"><input class="inp" type="text" placeholder="성명 (2~5자 이내로 입력 가능)" aria-label="성명"></div>
-    <div class="field"><input class="inp" type="email" placeholder="이메일 주소" aria-label="이메일 주소"></div>
-    <div class="field field-row">
-      <input class="inp" type="tel" id="phoneInput" placeholder="휴대전화번호" aria-label="휴대전화번호">
-      <button class="btn-side" type="button" onclick="sendAuthCode()">인증번호 발송</button>
-    </div>
-    <div class="field field-row">
-      <input class="inp" type="text" id="authInput" placeholder="인증번호 입력" aria-label="인증번호 입력">
-      <button class="btn-side" type="button" onclick="confirmAuthCode()">인증번호 확인</button>
-    </div>
-    <p class="field-hint" id="authHint">인증번호 발송이 완료되지 못했습니다. 휴대전화번호를 확인해 주세요.</p>
-  </div>
+  <h2 class="form-section-title"><strong>회원가입 정보</strong><span>(필수)</span></h2>
+  <p class="required-note"><span class="req">*</span> 는 필수 입력사항입니다. 해당 항목은 반드시 입력하여 주시기 바랍니다.</p>
+  <table class="join-table" aria-label="회원 가입 정보 입력">
+    <tbody>
+      <tr>
+        <th><span class="req">*</span> 아이디</th>
+        <td>
+          <div class="field-line">
+            <input class="inp id-ok" type="text" aria-label="아이디">
+            <button class="btn-side" type="button">중복 확인</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th><span class="req">*</span> 비밀번호</th>
+        <td>
+          <div class="field-line">
+            <input class="inp" type="password" aria-label="비밀번호">
+            <span class="field-hint">영문대소문자, 숫자 및 특수문자 조합 6-16자리</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th><span class="req">*</span> 비밀번호 확인</th>
+        <td>
+          <div class="field-line">
+            <input class="inp" type="password" aria-label="비밀번호 확인">
+            <span class="field-hint">비밀번호를 다시 한번 입력해주세요.</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th><span class="req">*</span> 이름</th>
+        <td><input class="inp" type="text" placeholder="본인인증 후 자동 입력" aria-label="이름"></td>
+      </tr>
+      <tr>
+        <th><span class="req">*</span> 이메일</th>
+        <td>
+          <div class="field-line">
+            <input class="inp email" type="text" aria-label="이메일 아이디">
+            <span>@</span>
+            <input class="inp email" type="text" aria-label="이메일 도메인">
+            <select class="sel email-domain" aria-label="이메일 도메인 선택">
+              <option>선택해 주세요</option>
+              <option>naver.com</option>
+              <option>gmail.com</option>
+              <option>daum.net</option>
+            </select>
+            <button class="btn-side" type="button">중복 확인</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th><span class="req">*</span> 휴대전화</th>
+        <td>
+          <div class="field-line">
+            <input class="inp short" type="tel" data-phone-part aria-label="휴대전화 앞자리">
+            <span class="dash">-</span>
+            <input class="inp short" type="tel" data-phone-part aria-label="휴대전화 가운데자리">
+            <span class="dash">-</span>
+            <input class="inp short" type="tel" data-phone-part aria-label="휴대전화 뒷자리">
+            <button class="btn-side" type="button" onclick="sendAuthCode()">본인인증</button>
+            <span class="field-hint" id="authHint">서비스 이용을 위해 NICE 휴대폰 본인인증이 필요합니다.</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>전화번호</th>
+        <td>
+          <div class="field-line">
+            <select class="sel" aria-label="전화번호 지역번호"><option>02</option><option>031</option><option>032</option><option>051</option></select>
+            <span class="dash">-</span>
+            <input class="inp short" type="tel" aria-label="전화번호 가운데자리">
+            <span class="dash">-</span>
+            <input class="inp short" type="tel" aria-label="전화번호 뒷자리">
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </section>
 
-<!-- 멤버십 혜택 추가 정보(선택) -->
+<!-- 서비스 알림 수신동의(선택) -->
 <section class="form-section">
-  <h2 class="form-section-title">멤버십 혜택 추가 정보<span>(선택)</span></h2>
-  <div class="form-card">
-    <p class="consent-copy">경매 종료 30분 전 알리미 서비스, 낙찰 및 결제 안내 메시지 전송 동의</p>
-    <div class="consent-line">
-      <b>SMS 수신</b>
-      <label class="radio"><input type="radio" name="smsAgree" value="yes"> 동의</label>
-      <label class="radio"><input type="radio" name="smsAgree" value="no" checked> 동의 안함</label>
-    </div>
-    <div class="consent-line">
-      <b>이메일 수신</b>
-      <label class="radio"><input type="radio" name="emailAgree" value="yes" checked> 동의</label>
-      <label class="radio"><input type="radio" name="emailAgree" value="no"> 동의 안함</label>
-    </div>
+  <h2 class="form-section-title"><strong>서비스 알림 수신동의</strong><span>(선택)</span></h2>
+  <table class="join-table" aria-label="서비스 알림 수신동의">
+    <tbody>
+      <tr>
+        <th>서비스 알림<span class="th-muted">(선택)</span></th>
+        <td class="ad-consent-cell">
+          <div class="ad-consent">
+            <label class="ad-consent-main">
+              <input type="checkbox" name="serviceAlertAgree" data-alert-consent>
+              <span>
+                <span class="ad-consent-title">서비스 알림 수신동의</span>
+                <span class="ad-consent-desc">낙찰·결제 및 마일리지 소멸 예정 등 서비스 이용에 필요한 안내를 보내드립니다.</span>
+                <span class="ad-consent-alert">※ 카카오 알림톡으로 발송하며, 알림톡이 전달되지 않을 경우 SMS로 안내드립니다.</span>
+              </span>
+            </label>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
 
-    <div class="field"><input class="inp" type="tel" placeholder="일반전화번호" aria-label="일반전화번호"></div>
-
-    <div class="field birth-row">
-      <select class="sel" aria-label="출생년도"><option>출생년도</option><option>1990</option><option>1995</option><option>2000</option></select>
-      <select class="sel" aria-label="월 선택"><option>월 선택</option><option>1월</option><option>2월</option><option>3월</option></select>
-      <select class="sel" aria-label="일 선택"><option>일 선택</option><option>1일</option><option>2일</option><option>3일</option></select>
-    </div>
-    <div class="cal-opts">
-      <label class="radio"><input type="radio" name="calType" value="solar" checked> 양력</label>
-      <label class="radio"><input type="radio" name="calType" value="lunar"> 음력</label>
-    </div>
-
-    <div class="field field-row" style="margin-top:8px;">
-      <input class="inp" type="text" placeholder="추천인의 비드베이코리아 아이디 입력" aria-label="추천인 아이디">
-      <button class="btn-side" type="button">아이디 검색</button>
-    </div>
-    <p class="field-hint">추천인 등록이 완료 되었습니다.</p>
-    <p class="field-note">추천인 등록시 회원님과 추천인에게 각각 대행료 할인쿠폰(5,000원)을 지급해 드립니다.</p>
-  </div>
+<!-- 광고성 정보 수신동의(선택) -->
+<section class="form-section">
+  <h2 class="form-section-title"><strong>광고성 정보 수신동의</strong><span>(선택)</span></h2>
+  <table class="join-table" aria-label="광고성 정보 수신동의">
+    <tbody>
+      <tr>
+        <th>광고성 정보<span class="th-muted">(선택)</span></th>
+        <td class="ad-consent-cell">
+          <div class="ad-consent">
+            <label class="ad-consent-main">
+              <input type="checkbox" name="marketingAgree" data-ad-consent-all>
+              <span>
+                <span class="ad-consent-title">광고성 정보 수신 일괄 동의</span>
+              </span>
+            </label>
+            <label class="ad-consent-item">
+              <input type="checkbox" name="emailAgree" data-ad-consent-item>
+              <span>
+                <span class="ad-consent-sub">이메일 수신동의</span>
+              </span>
+            </label>
+            <label class="ad-consent-item">
+              <input type="checkbox" name="popularAgree" data-ad-consent-item>
+              <span>
+                <span class="ad-consent-sub">카카오톡·SMS 수신동의</span>
+              </span>
+            </label>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </section>
 
 <!-- 가입경로(선택) -->
 <section class="form-section">
-  <h2 class="form-section-title">가입경로<span>(선택)</span></h2>
-  <div class="form-card">
-    <p class="consent-copy">비드바이코리아를 어떻게 알고 가입하게 되셨나요?</p>
-    <div class="consent-line">
-      <label class="radio"><input type="radio" name="joinPath" value="naver"> 네이버</label>
-      <label class="radio"><input type="radio" name="joinPath" value="etc" checked> 기타</label>
-    </div>
-    <div class="field"><input class="inp" type="text" placeholder="직접입력" aria-label="가입경로 직접입력"></div>
-  </div>
+  <h2 class="form-section-title"><strong>가입경로</strong><span>(선택)</span></h2>
+  <table class="join-table" aria-label="가입경로 입력">
+    <tbody>
+      <tr>
+        <th>추천인 아이디</th>
+        <td>
+          <div class="field-line">
+            <input class="inp" type="text" aria-label="추천인 아이디">
+            <button class="btn-side" type="button">추천인 아이디 검색</button>
+          </div>
+          <p class="field-note">추천인을 적어주시면 회원님과 추천인에게 각각 <span class="blue">비바항공 운임 할인쿠폰(5,000원권)</span>을 지급해 드립니다.</p>
+        </td>
+      </tr>
+      <tr>
+        <th>가입경로</th>
+        <td>
+          <div class="join-path-group">
+            <p class="join-path-question">비드바이코리아를 어떻게 알고 가입하게 되셨나요?</p>
+            <div class="join-path-options">
+              <label class="radio"><input type="radio" name="joinPath" value="naver">네이버</label>
+              <label class="radio"><input type="radio" name="joinPath" value="google">구글</label>
+              <label class="radio"><input type="radio" name="joinPath" value="youtube">유튜브</label>
+              <label class="radio"><input type="radio" name="joinPath" value="instagram">인스타그램</label>
+              <label class="radio"><input type="radio" name="joinPath" value="community">카페 및 커뮤니티</label>
+              <label class="radio"><input type="radio" name="joinPath" value="recommend">지인추천</label>
+              <div class="join-path-etc">
+                <label class="radio"><input type="radio" name="joinPath" value="etc">기타</label>
+                <input class="inp" type="text" placeholder="적어주세요" aria-label="가입경로 기타 입력">
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </section>
 
 <!-- CTA -->
@@ -231,22 +364,43 @@ document.querySelectorAll('.m-login-btn').forEach(function (btn) {
   btn.addEventListener('click', activateMobileHeaderUser);
 });
 
-/* 인증번호 발송/확인 — 시안용 상태 문구 전환 */
 function sendAuthCode() {
-  var phone = document.getElementById('phoneInput').value.replace(/[^\d]/g, '');
+  var phone = Array.prototype.map.call(document.querySelectorAll('[data-phone-part]'), function(input) {
+    return input.value;
+  }).join('').replace(/[^\d]/g, '');
   var hint = document.getElementById('authHint');
   if (phone.length < 10) {
-    hint.textContent = '인증번호 발송이 완료되지 못했습니다. 휴대전화번호를 확인해 주세요.';
+    hint.textContent = '휴대전화번호를 확인해 주세요.';
     return;
   }
-  hint.textContent = '인증번호가 발송되었습니다. 3분 이내에 입력해 주세요.';
+  hint.textContent = '본인인증 요청이 전송되었습니다.';
 }
 
-function confirmAuthCode() {
-  var code = document.getElementById('authInput').value.trim();
-  var hint = document.getElementById('authHint');
-  hint.textContent = code ? '휴대전화 인증이 완료되었습니다.' : '인증번호를 입력해 주세요.';
-}
+document.addEventListener('DOMContentLoaded', function() {
+  var allCheckbox = document.querySelector('[data-ad-consent-all]');
+  var itemCheckboxes = Array.prototype.slice.call(document.querySelectorAll('[data-ad-consent-item]'));
+  if (!allCheckbox || itemCheckboxes.length === 0) return;
+
+  function syncAllState() {
+    var checkedCount = itemCheckboxes.filter(function(checkbox) {
+      return checkbox.checked;
+    }).length;
+    allCheckbox.checked = checkedCount === itemCheckboxes.length;
+    allCheckbox.indeterminate = checkedCount > 0 && checkedCount < itemCheckboxes.length;
+  }
+
+  allCheckbox.addEventListener('change', function() {
+    itemCheckboxes.forEach(function(checkbox) {
+      checkbox.checked = allCheckbox.checked;
+    });
+    allCheckbox.indeterminate = false;
+  });
+
+  itemCheckboxes.forEach(function(checkbox) {
+    checkbox.addEventListener('change', syncAllState);
+  });
+  syncAllState();
+});
 </script>
 <script src="bb-common-mobile.js"></script>
 <script src="bb-search-modal-mobile.js"></script>

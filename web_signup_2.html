@@ -67,7 +67,7 @@ button{cursor:pointer}
 .req{color:#e60012;font-weight:800}
 .join-table{width:100%;border-collapse:collapse;border-top:1px solid #ddd;background:#fff}
 .join-table th,.join-table td{border-bottom:1px solid #e5e5e5}
-.join-table th{width:136px;padding:16px 12px;background:#fafafa;text-align:left;color:#111;font-size:13px;font-weight:800;vertical-align:middle}
+.join-table th{width:136px;padding:16px 12px;background:#fafafa;text-align:left;color:#111;font-size:13px;font-weight:600;vertical-align:middle}
 .join-table td{padding:10px 14px;vertical-align:middle}
 .field-line{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .join-table .inp{width:242px;height:31px;padding:0 8px;border:1px solid #d8d8d8;border-radius:0;background:#fff;color:var(--tp);font-size:13px;outline:none}
@@ -85,22 +85,29 @@ button{cursor:pointer}
 .join-table .field-warn{margin-top:4px;font-size:11px;color:#ff2b2b}
 .join-table .radio{display:inline-flex;align-items:center;gap:4px;margin-right:16px;cursor:pointer;font-size:13px;color:var(--tp)}
 .join-table .radio input{width:13px;height:13px;margin:0;accent-color:#0070ff}
+.join-path-group{display:grid;gap:9px}
+.join-path-question{font-size:13px;color:#111;line-height:1.4}
+.join-path-options{display:grid;gap:8px}
+.join-path-options .radio{margin-right:0}
+.join-path-etc{display:flex;align-items:center;gap:6px}
+.join-table .join-path-etc .inp{width:300px}
 .join-table .ad-consent-cell{padding:18px 14px 20px}
 .join-table .th-muted{color:#888;font-weight:600}
 .ad-consent{display:grid;gap:22px;max-width:520px}
 .ad-consent-main,.ad-consent-item{display:grid;grid-template-columns:18px minmax(0,1fr);column-gap:10px;align-items:start}
 .ad-consent-main{margin-left:0}
 .ad-consent-item{margin-left:26px}
-.ad-consent input[type="checkbox"]{width:18px;height:18px;margin:0;appearance:none;border:1px solid #555;background:#fff;accent-color:var(--navy)}
+.ad-consent input[type="checkbox"]{width:18px;height:18px;margin:0;appearance:none;border-radius:5px;border:1px solid #555;background:#fff;accent-color:var(--navy)}
 .ad-consent input[type="checkbox"]:checked{appearance:auto}
-.ad-consent-title{display:block;font-size:13px;font-weight:800;color:#111;line-height:1.4}
+.ad-consent-title{display:block;font-size:14px;font-weight:700;color:#111;line-height:1.4}
+.ad-consent-sub{display:block;font-size:13px;font-weight:500;color:#111;line-height:1.4}
 .ad-consent-title .optional{font-weight:500;color:#666}
-.ad-consent-desc{margin-top:6px;font-size:11px;color:#999;line-height:1.5}
-.ad-consent-alert{display:block;margin-top:4px;color:#888;font-size:11px;font-weight:700;line-height:1.5}
+.ad-consent-desc{margin-top:6px;font-size:12px;color:#999;line-height:1.5}
+.ad-consent-alert{display:block;margin-top:4px;color:#888;font-size:12px;font-weight:500;line-height:1.5}
 .ad-consent-alert .red{color:var(--rose)}
 .ad-consent-detail{display:block;margin-top:10px}
 .ad-consent-detail:first-child{margin-top:0}
-.ad-consent-detail-title{display:block;font-size:13px;font-weight:800;color:#111;line-height:1.4}
+.ad-consent-detail-title{display:block;font-size:13px;font-weight:500;color:#111;line-height:1.4}
 .join-table .dash{color:#555}
 
 /* ── CTA ── */
@@ -248,32 +255,31 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
 
   <section class="form-section signup-table-section">
     <h2 class="signup-table-title"><strong>서비스 알림 수신동의</strong><span>(선택)</span></h2>
-    <table class="join-table" aria-label="회원 안내 추가 정보 입력">
+    <table class="join-table" aria-label="서비스 알림 수신동의">
       <tbody>
-                <tr>
-          <th>알림 서비스<span class="th-muted">(선택)</span></th>
+        <tr>
+          <th>서비스 알림<span class="th-muted">(선택)</span></th>
           <td class="ad-consent-cell">
             <div class="ad-consent">
-              <label class="ad-consent-item">
+              <label class="ad-consent-main">
                 <input type="checkbox" name="serviceAlertAgree" data-alert-consent>
                 <span>
-                  <span class="ad-consent-detail">
-                    <span class="ad-consent-detail-title">낙찰 및 결제 알림</span>
-                    <span class="ad-consent-desc">경매 종료 알림 및 거래 진행 상황을 보내드립니다.
-                      <span class="ad-consent-alert"><strong>※ 미수신 시</strong> <strong>주문에 필요한 안내를 받지 못할 수 있습니다.</strong></span>
-                    </span>
-                  </span>
-                  <span class="ad-consent-detail">
-                    <span class="ad-consent-detail-title">마일리지 소멸 예정 알림</span>
-                    <span class="ad-consent-desc">적립 마일리지 소멸전 알림톡으로 보내드립니다.
-                      <span class="ad-consent-alert"><strong>※ 카카오 알림톡</strong> <strong>으로 발송하며, 알림톡이 전달되지 않을 경우</strong> <strong>SMS로 안내드립니다.</strong></span>
-                    </span>
-                  </span>
+                  <span class="ad-consent-title">서비스 알림 수신동의</span>
+                  <span class="ad-consent-desc">낙찰·결제 및 마일리지 소멸 예정 등 서비스 이용에 필요한 안내를 보내드립니다.</span>
+                  <span class="ad-consent-alert">※ 카카오 알림톡으로 발송하며, 알림톡이 전달되지 않을 경우 SMS로 안내드립니다.</span>
                 </span>
               </label>
             </div>
           </td>
         </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="form-section signup-table-section">
+    <h2 class="signup-table-title"><strong>광고성 정보 수신동의</strong><span>(선택)</span></h2>
+    <table class="join-table" aria-label="광고성 정보 수신동의">
+      <tbody>
         <tr>
           <th>광고성 정보<span class="th-muted">(선택)</span></th>
           <td class="ad-consent-cell">
@@ -287,29 +293,15 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
               <label class="ad-consent-item">
                 <input type="checkbox" name="emailAgree" data-ad-consent-item>
                 <span>
-                  <span class="ad-consent-title">이메일 수신동의</span>
-                  <span class="ad-consent-desc">이메일로 이벤트, 할인 쿠폰 및 새로운 혜택 정보를 보내드립니다.</span>
+                  <span class="ad-consent-sub">이메일 수신동의</span>
                 </span>
               </label>
               <label class="ad-consent-item">
                 <input type="checkbox" name="popularAgree" data-ad-consent-item>
                 <span>
-                  <span class="ad-consent-title">카카오톡·SMS 수신동의</span>
-                  <span class="ad-consent-desc">카카오톡 또는 SMS로 이벤트, 할인 쿠폰 및 새로운 혜택 정보를 보내드립니다.</span>
+                  <span class="ad-consent-sub">카카오톡·SMS 수신동의</span>
                 </span>
               </label>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th>생년월일</th>
-          <td>
-            <div class="field-line">
-              <select class="sel" aria-label="생년"><option>선택</option></select>
-              <select class="sel" aria-label="월"><option>선택</option></select>
-              <select class="sel" aria-label="일"><option>선택</option></select>
-              <label class="radio"><input type="radio" name="calType" value="solar" checked> 양력</label>
-              <label class="radio"><input type="radio" name="calType" value="lunar"> 음력</label>
             </div>
           </td>
         </tr>
@@ -334,10 +326,20 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
         <tr>
           <th>가입경로</th>
           <td>
-            <div class="field-line">
-              <label class="radio"><input type="radio" name="joinPath" value="naver"> 네이버</label>
-              <label class="radio"><input type="radio" name="joinPath" value="etc" checked> 기타</label>
-              <input class="inp mid" type="text" placeholder="직접입력" aria-label="가입경로 직접입력">
+            <div class="join-path-group">
+              <p class="join-path-question">비드바이코리아를 어떻게 알고 가입하게 되셨나요?</p>
+              <div class="join-path-options">
+                <label class="radio"><input type="radio" name="joinPath" value="naver">네이버</label>
+                <label class="radio"><input type="radio" name="joinPath" value="google">구글</label>
+                <label class="radio"><input type="radio" name="joinPath" value="youtube">유튜브</label>
+                <label class="radio"><input type="radio" name="joinPath" value="instagram">인스타그램</label>
+                <label class="radio"><input type="radio" name="joinPath" value="community">카페 및 커뮤니티</label>
+                <label class="radio"><input type="radio" name="joinPath" value="recommend">지인추천</label>
+                <div class="join-path-etc">
+                  <label class="radio"><input type="radio" name="joinPath" value="etc">기타</label>
+                  <input class="inp" type="text" placeholder="적어주세요" aria-label="가입경로 기타 입력">
+                </div>
+              </div>
             </div>
           </td>
         </tr>
