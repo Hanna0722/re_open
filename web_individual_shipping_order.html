@@ -283,18 +283,6 @@
     .btn-customs { height: 30px; padding: 0 12px; border: 1px solid var(--navy); border-radius: 5px; background: #fff; color: var(--navy); font-size: 12px; font-weight: 700; cursor: pointer; margin-left: 6px; }
     .btn-customs-add { height: 30px; padding: 0 12px; border: 1px solid var(--navy); border-radius: 5px; background: #fff; color: var(--navy); font-size: 12px; font-weight: 700; cursor: pointer; margin-top: 4px; display: inline-block; }
 
-    /* 관·부가세 안내 */
-    .duty-notice {
-      border: 1px solid #f5b8c2;
-      border-radius: 10px;
-      background: #fff8f9;
-      padding: 16px 18px;
-      font-size: 13px;
-      line-height: 1.7;
-      color: #6b2c3a;
-      margin-bottom: 28px;
-    }
-
     /* 하단 버튼 */
     .form-actions { display: flex; justify-content: center; gap: 12px; }
     .big-btn {
@@ -683,11 +671,16 @@
       </table>
 
       <!-- 관·부가세 안내 -->
-      <div style="font-size:13px; font-weight:800; color:#2b2f37; margin-bottom:10px;">관·부가세 안내</div>
-      <div class="duty-notice">
-        2차 결제 시 추가되는 비용 및 물품 입항일 환율에 따라 면세 한도를 초과할 수 있습니다.<br>
-        ※ 과세가격 = 물품가 + 현지세금 + 현지배송비 + 국제운임 + 보험료 + 포장비 (CIF)<br>
-        ※ 물품가액 = 물품가 + 현지세금 + 현지배송비 (국제운임·보험료 제외)
+      <div style="background:#FFF8EC; border-left:3px solid #F5A623; border-radius:0 4px 4px 0; padding:14px 16px; margin-bottom:24px; font-size:13px; line-height:1.75; color:#664400;">
+        <div style="display:flex; align-items:flex-start; gap:8px;">
+          <span style="color:#D4891A; font-size:15px; flex-shrink:0; margin-top:1px;">&#9888;</span>
+          <div>
+            <strong style="color:#7A5500; display:block; margin-bottom:3px;">관·부가세 안내</strong>
+            2차 결제 시 추가되는 비용 및 물품 입항일 환율에 따라 면세 한도를 초과할 수 있습니다.
+            <br>※ 과세가격 = 물품가 + 현지세금 + 현지배송비 + 국제운임 + 보험료 + 포장비 (CIF)
+            <br>※ 물품가액 = 물품가 + 현지세금 + 현지배송비 (국제운임·보험료 제외)
+          </div>
+        </div>
       </div>
 
       <!-- 저장하기 / 목록보기 -->
