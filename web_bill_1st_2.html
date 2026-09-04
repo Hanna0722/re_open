@@ -55,10 +55,6 @@
   .fee-summary-divider { border-top: 1px dashed #bfc9d8; margin: 8px 0; }
   .fee-summary-total { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 2px; color: var(--navy); font-size: 15px; font-weight: 700; }
   .fee-summary-total .fee-summary-val { font-family: 'Roboto', Pretendard, sans-serif; color: var(--rose); font-size: 20px; font-weight: 700; white-space: nowrap; }
-  .tax-toggle { display: inline-flex; border: 1px solid #dde1e7; border-radius: 4px; overflow: hidden; }
-  .tax-toggle-btn { border: none; background: #fff; color: #888; font-size: 11px; font-weight: 600; padding: 3px 7px; cursor: pointer; font-family: inherit; }
-  .tax-toggle-btn + .tax-toggle-btn { border-left: 1px solid #dde1e7; }
-  .tax-toggle-btn.is-active { background: var(--navy); color: #fff; }
   .panel-action-btn.is-applied { background: #e9eaec; border-color: #bbb; color: #888; }
 
   /* ── 섹션 ── */
@@ -300,7 +296,7 @@
           <tbody>
             <tr>
               <th>청구 금액</th>
-              <td><span class="amount-total" id="txtTotalWon">14,400 원</span></td>
+              <td><span class="amount-total" id="txtTotalWon">22,464 원</span></td>
             </tr>
             <tr>
               <th>결제할 예치금</th>
@@ -328,8 +324,8 @@
             <tr>
               <th>결제하실 금액</th>
               <td>
-                <span class="formula" id="txtFormula">1,500 엔 × 9.6 원 =</span>
-                <span class="amount-red" id="txtPayWon">14,400 원</span>
+                <span class="formula" id="txtFormula">2,340 엔 × 9.6 원 =</span>
+                <span class="amount-red" id="txtPayWon">22,464 원</span>
               </td>
             </tr>
             <tr>
@@ -383,7 +379,7 @@
         <div class="fee-row fee-row-toggle" data-panel-toggle="panelLocalDetail">
           <span class="fee-row-label">상품 및 현지비용</span>
           <span class="fee-row-action">
-            <span class="fee-row-val" id="panelLocalTotal">1,320 엔</span>
+            <span class="fee-row-val" id="panelLocalTotal">1,540 엔</span>
             <button class="fee-toggle-btn" type="button" aria-expanded="false" aria-controls="panelLocalDetail">
               <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
             </button>
@@ -392,14 +388,8 @@
         <div class="fee-detail" id="panelLocalDetail">
           <div class="fee-extra-item"><span>상품가</span><strong>1,200 엔</strong></div>
           <div class="fee-extra-item">
-            <span>소비세</span>
-            <strong style="display:flex; align-items:center; gap:6px;">
-              <span class="tax-toggle" id="panelTaxToggle" role="group" aria-label="소비세 기준 전환">
-                <button type="button" class="tax-toggle-btn is-active" data-tax-mode="taxed">상품가 10%</button>
-                <button type="button" class="tax-toggle-btn" data-tax-mode="exempt">0엔</button>
-              </span>
-              <span id="panelTaxVal">120 엔</span>
-            </strong>
+            <span>현지배송료</span>
+            <strong><span id="panelTaxVal">340 엔</span></strong>
           </div>
         </div>
 
@@ -472,7 +462,7 @@
         <div class="fee-summary-box">
           <div class="fee-summary-row">
             <span>전체 금액</span>
-            <span class="fee-summary-val" id="panelWholeAmount">2,120 엔</span>
+            <span class="fee-summary-val" id="panelWholeAmount">2,340 엔</span>
           </div>
           <div class="fee-summary-row is-discount">
             <span>할인/혜택</span>
@@ -481,7 +471,7 @@
           <div class="fee-summary-divider"></div>
           <div class="fee-summary-total">
             <span>총 결제 금액</span>
-            <span class="fee-summary-val" id="panelTotal">20,352원</span>
+            <span class="fee-summary-val" id="panelTotal">22,464원</span>
           </div>
         </div>
 
@@ -612,11 +602,10 @@
   const agencyBase=()=>Number(sessionStorage.getItem('bb_agency_base')||800);
 
   const PRODUCT_YEN=1200;
-  let taxMode='taxed'; // 'taxed'(상품가 10%) | 'exempt'(0엔)
-  const taxYen=()=>taxMode==='taxed'?Math.round(PRODUCT_YEN*0.1):0;
+  const LOCAL_SHIP_YEN=340; // 현지배송료 (고정)
+  const taxYen=()=>LOCAL_SHIP_YEN;
   document.querySelectorAll('[data-panel-toggle]').forEach(row=>{
     row.addEventListener('click',(event)=>{
-      if(event.target.closest('button.tax-toggle-btn')) return;
       const detail=document.getElementById(row.dataset.panelToggle);
       const btn=row.querySelector('.fee-toggle-btn');
       if(!detail) return;
@@ -631,14 +620,6 @@
     const btn=head.querySelector('.panel-earn-toggle');
     if(btn) btn.setAttribute('aria-expanded', String(isOpen));
   }
-
-  document.querySelectorAll('#panelTaxToggle .tax-toggle-btn').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      taxMode=btn.dataset.taxMode;
-      document.querySelectorAll('#panelTaxToggle .tax-toggle-btn').forEach(b=>b.classList.toggle('is-active',b===btn));
-      window.renderPaymentSummary?.();
-    });
-  });
 
   window.renderPaymentSummary=function(){
     const mileageDisc=Number(sessionStorage.getItem('bb_mileage_discount')||0);
