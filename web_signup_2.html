@@ -39,7 +39,7 @@ button{cursor:pointer}
 .inp::placeholder{color:var(--tm)}
 .inp:focus{border-color:var(--navy)}
 .sel{width:100%;height:40px;padding:0 30px 0 12px;border:1px solid var(--border);border-radius:5px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999BAA'/%3E%3C/svg%3E") no-repeat right 12px center;color:var(--tp);font-size:13px;appearance:none;outline:none}
-.btn-side{height:40px;border:1px solid var(--navy);border-radius:5px;background:#fff;color:var(--navy);font-size:12px;font-weight:700}
+.btn-side{height:40px;border:1px solid var(--navy);border-radius:5px;background:#fff;color:var(--navy);font-size:13px;font-weight:400}
 .btn-side:hover{background:var(--navy);color:#fff}
 .field-hint{margin-top:8px;font-size:11px;font-weight:600;color:var(--navy)}
 .field-hint.done{color:var(--navy)}
@@ -66,9 +66,9 @@ button{cursor:pointer}
 .join-table .inp.short{width:74px}
 .join-table .inp.mid{width:122px}
 .join-table .inp.email{width:115px}
-.join-table .sel{width:74px;height:31px;padding:0 4px;border:1px solid var(--border);border-radius:var(--r-sm,5px);background:#fff;color:var(--tp);font-size:12px;appearance:auto;outline:none}
-.join-table .sel.email-domain{width:92px}
-.join-table .btn-side{height:31px;padding:0 12px;border:1px solid #999;border-radius:var(--r-sm,5px);background:#999;color:#fff;font-size:12px;font-weight:700}
+.join-table .sel{width:74px;height:31px;padding:0 4px;border:1px solid var(--border);border-radius:var(--r-sm,5px);background:#fff;color:var(--tp);font-size:13px;appearance:auto;outline:none}
+.join-table .sel.email-domain{width:110px}
+.join-table .btn-side{height:31px;padding:0 12px;border:1px solid #999;border-radius:var(--r-sm,5px);background:#999;color:#fff;font-size:13px;font-weight:400}
 .join-table .btn-side:hover{background:#7a7a7a;border-color:#7a7a7a}
 .join-table .field-hint{font-size:11px;font-weight:500;color:#0070ff}
 .join-table .field-note{margin-top:5px;font-size:11px;color:#111;line-height:1.5}
@@ -88,9 +88,9 @@ button{cursor:pointer}
 .ad-consent-main,.ad-consent-item{display:grid;grid-template-columns:18px minmax(0,1fr);column-gap:10px;align-items:start}
 .ad-consent-main{margin-left:0}
 .ad-consent-item{margin-left:26px}
-.ad-consent input[type="checkbox"]{width:18px;height:18px;margin:0;appearance:none;border-radius:5px;border:1px solid #555;background:#fff;accent-color:var(--navy)}
+.ad-consent input[type="checkbox"]{width:16px;height:16px;margin:0;appearance:none;border-radius:0;border:1px solid #555;background:#fff;accent-color:var(--navy)}
 .ad-consent input[type="checkbox"]:checked{appearance:auto}
-.ad-consent-title{display:block;font-size:14px;font-weight:700;color:#111;line-height:1.4}
+.ad-consent-title{display:block;font-size:15px;font-weight:700;color:#111;line-height:1.4}
 .ad-consent-sub{display:block;font-size:13px;font-weight:500;color:#111;line-height:1.4}
 .ad-consent-title .optional{font-weight:500;color:#666}
 .ad-consent-desc{margin-top:6px;font-size:12px;color:#999;line-height:1.5}
@@ -324,7 +324,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
                 <label class="radio"><input type="radio" name="joinPath" value="recommend">지인추천</label>
                 <div class="join-path-etc">
                   <label class="radio"><input type="radio" name="joinPath" value="etc">기타</label>
-                  <input class="inp" type="text" placeholder="적어주세요" aria-label="가입경로 기타 입력">
+                  <input class="inp" type="text" placeholder="그 외 기타경로를 적어주세요" aria-label="가입경로 기타 입력">
                 </div>
               </div>
             </div>

@@ -65,9 +65,9 @@
   .inp.id-ok{ background:#eaf1fb; }
   .inp.short{ width:50px; }
   .inp.email{ width:78px; }
-  .sel{ width:62px; height:34px; padding:0 4px; border:1px solid #d8d8d8; border-radius:0; background:#fff; color:var(--tp); font-size:11px; appearance:auto; outline:none; }
-  .sel.email-domain{ width:88px; }
-  .btn-side{ height:34px; padding:0 10px; border:1px solid #999; border-radius:0; background:#999; color:#fff; font-size:11px; font-weight:700; font-family:inherit; white-space:nowrap; }
+  .sel{ width:62px; height:34px; padding:0 4px; border:1px solid #d8d8d8; border-radius:5px; background:#fff; color:var(--tp); font-size:12px; appearance:auto; outline:none; }
+  .sel.email-domain{ width:100px; }
+  .btn-side{ height:34px; padding:0 10px; border:1px solid #999; border-radius:5px; background:#999; color:#fff; font-size:12px; font-weight:400; font-family:inherit; white-space:nowrap; }
   .field-line.field-line--row{ flex-wrap:nowrap; }
   .field-line--row .inp{ flex:1 1 auto; width:auto; min-width:0; }
   .field-line--row .btn-side{ flex:0 0 auto; }
@@ -89,7 +89,7 @@
   .ad-consent{ display:grid; gap:18px; }
   .ad-consent-main,.ad-consent-item{ display:grid; grid-template-columns:18px minmax(0,1fr); column-gap:9px; align-items:start; }
   .ad-consent-item{ margin-left:22px; }
-  .ad-consent input[type="checkbox"]{ width:18px; height:18px; margin:0; appearance:none; border-radius:5px; border:1px solid #555; background:#fff; accent-color:var(--navy); }
+  .ad-consent input[type="checkbox"]{ width:16px; height:16px; margin:0; appearance:none; border-radius:0px; border:0.5px solid #555; background:#fff; accent-color:var(--navy); }
   .ad-consent input[type="checkbox"]:checked{ appearance:auto; }
   .ad-consent-title{ display:block; font-size:13px; font-weight:700; color:#111; line-height:1.4; }
   .ad-consent-sub{ display:block; font-size:12px; font-weight:500; color:#111; line-height:1.4; }
@@ -333,7 +333,7 @@
               <label class="radio"><input type="radio" name="joinPath" value="recommend">지인추천</label>
               <div class="join-path-etc">
                 <label class="radio"><input type="radio" name="joinPath" value="etc">기타</label>
-                <input class="inp" type="text" placeholder="적어주세요" aria-label="가입경로 기타 입력">
+                <input class="inp" type="text" placeholder="그 외 기타경로를 적어주세요" aria-label="가입경로 기타 입력">
               </div>
             </div>
           </div>
