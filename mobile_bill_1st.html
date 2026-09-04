@@ -66,6 +66,7 @@
   .ship-info-label { display:block; margin-top:8px; color:#333; font-size:12px; font-weight:700; }
   .ship-info-label:first-child { margin-top:0; }
   .ship-days { font-weight:700; color:var(--navy); font-family:'Roboto',sans-serif; font-size:13px; }
+  .bold-red { color:#c00; }
   .note { color:#999; font-size:11px; }
 
   /* 배송형태 테이블 */
@@ -523,9 +524,9 @@ document.querySelectorAll('.login-btn-sm').forEach(button => {
       size: '* 중량 및 부피에 따라 별도 문의<br>* 일반적으로 30kg 이상 대량 화물에 적합'
     },
     '현지배송': {
-      f: '* 주문 건당 수수료 <strong>￥1,000 별도 발생</strong><br>* 현지배송은 배송대기 또는 개별배송으로 지정 가능합니다.<br><br>* 물품 파손, 상품 이상 등과 관련된 클레임 대행은 불가하며, 고객님께서 직접 택배사에 접수해주셔야 합니다.<br><br>* 물품입고후 배송신청시 <strong>인수희망일을 별도로 지정</strong>해주셔야 합니다.',
+      f: '* 주문 건당 수수료 <strong>￥1,000 별도 발생</strong><br>* 물품입고후 <strong>인수희망일을 별도로 지정</strong>할 수 있습니다.<br><br><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> 파손 및 보상기준<br>물품의 파손 및 상품이상 등의 클레임 대행 일절 불가.<br>(직접 택배사에 접수 필요)<br>',
       size: '* 일본 내 일반택배(야마토)로 배송 가능한 사이즈<br>(세변의 합 200cm까지)',
-      days: '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> 물품 입고일로부터 <strong style="color:#c00">5일 이후</strong>부터 지정 가능<br><br><strong>※일본 영업일 기준 주말, 공휴일은 지정 불가</strong><br><strong style="color:#c00">※택배 영업소의 경우, 인수 날짜 지정 불가</strong>'
+      days: '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> 인수희망일 신청<br>결제완료 상태: 창고 미도착단계에서는 지정불가, 현지도착일 기준 <strong class="bold-red">5일 이후</strong><br>현지도착 상태: 일본내 배송요청 일자로부터 <strong class="bold-red">5일 이후</strong><br><br><strong>※일본공휴일 제외, 일본영업일 기준 5일 이후부터 날짜 지정가능</strong><br><strong class="bold-red">※택배 영업소의 경우, 인수 날짜 지정 불가</strong>'
     },
     '최저가배송': {
       days: '운송방법에 따라 다름',
