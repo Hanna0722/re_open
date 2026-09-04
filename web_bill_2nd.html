@@ -537,9 +537,9 @@
   .bill-panel-head { background: #fff; padding: 14px 18px 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #eee; }
   .bill-panel-title { color: var(--navy); font-size: 14px; line-height: 1.25; font-weight: 700; letter-spacing: 0; }
   .bill-panel-sub { color: #666; font-size: 12px; font-weight: 500; white-space: nowrap; }
-  .bill-panel-body { padding: 12px 14px 16px; }
+  .bill-panel-body { padding: 0; }
   .fee-cost-card { border: 0; border-radius: 0; overflow: visible; background: #fff; }
-  .fee-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 46px; padding: 11px 14px; border-bottom: 1px solid #f0f2f5; background: #fff; }
+  .fee-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 11px 18px; border-bottom: 1px solid #f0f2f5; background: #fff; }
   .fee-row:last-child { border-bottom: none; }
   .fee-row-left { display: flex; align-items: center; min-width: 0; }
   .fee-row-label { font-size: 13px; color: #333; font-weight: 600; white-space: nowrap; }
@@ -550,7 +550,7 @@
   .fee-toggle-btn[aria-expanded="true"] i { transform: rotate(180deg); }
   .fee-row-toggle { cursor: pointer; }
   .fee-row-action { display: inline-flex; align-items: center; justify-content: flex-end; gap: 6px; }
-  .fee-detail { display: none; padding: 2px 14px 12px 14px; border-bottom: 1px solid #f0f2f5; background: #fbfcfe; }
+  .fee-detail { display: none; padding: 2px 18px 12px 26px; border-bottom: 1px solid #f0f2f5; background: #fbfcfe; }
   .fee-detail.is-open { display: block; }
   .fee-detail-list { border-left: 0; padding: 4px 0 0 8px; }
   .fee-extra-item { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 28px; font-size: 12px; color: #666; border-bottom: 1px dashed #d6dce6; }
@@ -558,14 +558,14 @@
   .fee-extra-item strong { font-family: 'Roboto', Pretendard, sans-serif; font-size: 12px; color: #222; font-weight: 500; white-space: nowrap; }
   .fee-extra-item strong.is-active { color: #222; }
   .fee-extra-item strong.is-free { color: var(--green); }
-  .fee-section-title { padding: 14px 0 8px; margin-top: 14px; border-top: 1px solid var(--navy); color: var(--navy); font-size: 13px; line-height: 1.2; font-weight: 700; background: #fff; }
-  .fee-row-benefit { min-height: 44px; padding: 10px 14px; border-bottom: 1px solid #f0f2f5; }
+  .fee-section-title { padding: 14px 18px 8px; border-top: 1px solid var(--navy); border-bottom: 1px solid #f0f2f5; color: var(--navy); font-size: 13px; line-height: 1.2; font-weight: 700; background: #fff; }
+  .fee-row-benefit { padding: 10px 18px; border-bottom: 1px solid #f0f2f5; }
   .fee-row-benefit .fee-row-label { font-size: 13px; font-weight: 600; }
   .fee-row-benefit .fee-row-val { color: var(--rose); }
   .fee-coupon-action { display: inline-flex; align-items: center; justify-content: flex-end; gap: 8px; }
   .panel-earn { background: #fff; }
   .panel-earn .fee-row { border-bottom: none; }
-  .panel-earn-body { display: none; padding: 0 14px 12px 26px; border-bottom: 1px solid #f0f2f5; background: #fbfcfe; }
+  .panel-earn-body { display: none; padding: 0 18px 12px 26px; border-bottom: 1px solid #f0f2f5; background: #fbfcfe; }
   .panel-earn-body.is-open { display: block; }
   .benefit-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 3px 0; font-size: 12px; }
   .benefit-row-lbl { display: flex; align-items: center; gap: 6px; color: #333; font-weight: 500; }
@@ -573,10 +573,10 @@
   .benefit-row-val.is-discount { color: var(--rose); font-weight: 700; text-decoration: none; }
   .grade-badge-free { display: inline-flex; align-items: center; height: 16px; padding: 0 6px; border-radius: 3px; background: #eaf7ed; color: var(--green); font-family: inherit; font-size: 10px; font-weight: 700; }
   .fee-badge-rate { display: inline-flex; align-items: center; height: 16px; margin-left: 6px; padding: 0 6px; border-radius: 3px; background: #FCEBEB; color: var(--rose); font-family: inherit; font-size: 10px; font-weight: 700; vertical-align: middle; }
-  .fee-summary-box { margin-top: 14px; padding: 14px 14px 16px; border: 1px solid #cfd8e6; border-radius: 6px; background: #f8fafd; }
+  .fee-summary-box { margin: 0; padding: 14px 18px 16px; border: 0; border-radius: 0; background: #f8fafd; }
   .fee-summary-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 5px 0; font-size: 13px; color: #333; font-weight: 600; }
   .fee-summary-row.is-discount .fee-summary-val { color: var(--rose); }
-  .fee-summary-divider { border-top: 1px dashed #bfc9d8; margin: 8px 0 8px; }
+  .fee-summary-divider { border-top: 1px dashed #bfc9d8; margin: 8px 0; }
   .fee-summary-total { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 2px; color: var(--navy); font-size: 15px; font-weight: 700; }
   .fee-summary-total .fee-summary-val { font-family: 'Roboto', Pretendard, sans-serif; color: var(--rose); font-size: 20px; font-weight: 700; white-space: nowrap; }
   .amount-won-sub { margin-left: 3px; color: #8b929c; font-size: 13px; font-weight: 600; vertical-align: baseline; }
