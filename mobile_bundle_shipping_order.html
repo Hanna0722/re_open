@@ -99,10 +99,6 @@
   .form-row .form-input { flex:1; margin-bottom:0; }
   .btn-sm { padding:10px 12px; font-size:12px; font-weight:500; font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif; border:1px solid #bbb; border-radius:5px; background:#f5f5f5; color:#444; cursor:pointer; white-space:nowrap; }
 
-  /* 관부가세 안내 */
-  .duty-box { background:#fff8f9; border:1px solid #f5b8c2; border-radius:8px; padding:14px; font-size:12px; line-height:1.7; color:#6b2c3a; }
-  .duty-box-title { font-size:13px; font-weight:700; color:#c0203a; margin-bottom:6px; }
-
   /* 일본 수취인 (hidden by default) */
   .japan-fields { display:none; }
   .japan-fields.show { display:block; }
@@ -371,12 +367,15 @@
 </div>
 
 <!-- 관·부가세 안내 -->
-<div class="card">
-  <div class="duty-box">
-    <div class="duty-box-title">관·부가세 안내</div>
-    2차 결제 시 추가되는 비용 및 물품 입항일 환율에 따라 면세 한도를 초과할 수 있습니다.<br>
-    <span class="note">※ 과세가격 = 물품가 + 현지세금 + 현지배송비 + 국제운임 + 보험료 + 포장비 (CIF)</span><br>
-    <span class="note">※ 물품가액 = 물품가 + 현지세금 + 현지배송비 (국제운임·보험료 제외)</span>
+<div style="background:#FFF8EC; border-left:3px solid #F5A623; border-radius:0 4px 4px 0; padding:14px 16px; margin-bottom:8px; font-size:13px; line-height:1.75; color:#664400;">
+  <div style="display:flex; align-items:flex-start; gap:8px;">
+    <span style="color:#D4891A; font-size:15px; flex-shrink:0; margin-top:1px;">&#9888;</span>
+    <div>
+      <strong style="color:#7A5500; display:block; margin-bottom:3px;">관·부가세 안내</strong>
+      2차 결제 시 추가되는 비용 및 물품 입항일 환율에 따라 면세 한도를 초과할 수 있습니다.
+      <br>※ 과세가격 = 물품가 + 현지세금 + 현지배송비 + 국제운임 + 보험료 + 포장비 (CIF)
+      <br>※ 물품가액 = 물품가 + 현지세금 + 현지배송비 (국제운임·보험료 제외)
+    </div>
   </div>
 </div>
 
