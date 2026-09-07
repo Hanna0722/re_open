@@ -321,9 +321,9 @@ button,select{cursor:pointer}
 /* 국기 아이콘: 미/영/일 랜덤 (캐러셀 복제 전에 실행) */
 (function () {
   var flags = [
-    { src: 'flagicon/us.jpg', alt: '미국' },
-    { src: 'flagicon/uk.png', alt: '영국' },
-    { src: 'flagicon/jp.jpg', alt: '일본' }
+    { src: 'flagicon/us_circle.png', alt: '미국' },
+    { src: 'flagicon/uk_circle.png', alt: '영국' },
+    { src: 'flagicon/jp_circle.png', alt: '일본' }
   ];
   document.querySelectorAll('.country-badge img').forEach(function (img) {
     var f = flags[Math.floor(Math.random() * flags.length)];
