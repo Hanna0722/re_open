@@ -699,14 +699,15 @@
       padding: 14px;
     }
 
-    .range-shortcuts {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
+    .preset-row {
+      display: flex;
+      align-items: center;
       gap: 6px;
-      margin-bottom: 13px;
+      margin-bottom: 12px;
     }
 
-    .range-shortcuts button {
+    .preset-row button {
+      flex: 1;
       height: 30px;
       border: 1px solid var(--line);
       border-radius: 5px;
@@ -716,11 +717,53 @@
       font-weight: 700;
     }
 
-    .range-shortcuts button.active,
-    .range-shortcuts button:hover {
+    .preset-row button.active,
+    .preset-row button:hover {
       border-color: var(--rose);
       background: var(--rose);
       color: #fff;
+    }
+
+    .preset-row .year-list {
+      flex: 1;
+      display: flex;
+      gap: 6px;
+    }
+
+    .calendar-range {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .calendar-range .range-field {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      height: 32px;
+      padding: 0 8px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: #252a32;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .calendar-range .range-field.active {
+      border-color: var(--rose);
+    }
+
+    .calendar-range .range-field i {
+      color: #9ca1ad;
+      font-size: 11px;
+    }
+
+    .calendar-range .range-dash {
+      color: #9ca1ad;
     }
 
     .calendar-head {
@@ -770,6 +813,11 @@
       color: #505762;
       font-size: 12px;
       font-weight: 700;
+    }
+
+    .calendar-days button.in-range {
+      background: #fdeef1;
+      color: #c4304b;
     }
 
     .calendar-days button:hover,
@@ -1592,57 +1640,33 @@
                   <span class="chevron" aria-hidden="true"></span>
                 </button>
                 <div class="dropdown-panel calendar-panel" role="dialog" aria-label="조회 기간 선택">
-                  <div class="range-shortcuts" aria-label="빠른 기간 선택">
-                    <button type="button" data-period-label="1주일">1주일</button>
-                    <button class="active" type="button" data-period-label="최근 1개월">1개월</button>
-                    <button type="button" data-period-label="6개월">6개월</button>
-                    <button type="button" data-period-label="1년">1년</button>
+                  <div class="calendar-range">
+                    <button type="button" class="range-field active" data-range-field="start">
+                      <span data-range-start>2024-03-17</span><i class="far fa-calendar" aria-hidden="true"></i>
+                    </button>
+                    <span class="range-dash">–</span>
+                    <button type="button" class="range-field" data-range-field="end">
+                      <span data-range-end>2024-04-17</span><i class="far fa-calendar" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <div class="preset-row" aria-label="빠른 기간 선택">
+                    <button type="button" data-preset="week">1주일</button>
+                    <button class="active" type="button" data-preset="month">1개월</button>
+                    <button type="button" data-preset="6month">6개월</button>
+                    <button type="button" data-preset="year">1년</button>
+                  </div>
+                  <div class="preset-row year-row" aria-label="년도별 선택">
+                    <span class="year-list" data-year-list></span>
                   </div>
                   <div class="calendar-head">
-                    <button type="button" aria-label="이전 달">‹</button>
-                    <strong>2024.04</strong>
-                    <button type="button" aria-label="다음 달">›</button>
+                    <button type="button" data-cal-nav="month-prev" aria-label="이전 달">‹</button>
+                    <strong data-cal-title>2024.04</strong>
+                    <button type="button" data-cal-nav="month-next" aria-label="다음 달">›</button>
                   </div>
                   <div class="calendar-week" aria-hidden="true">
                     <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
                   </div>
-                  <div class="calendar-days" aria-label="날짜 선택">
-                    <button class="is-muted" type="button">31</button>
-                    <button type="button">1</button>
-                    <button type="button">2</button>
-                    <button type="button">3</button>
-                    <button type="button">4</button>
-                    <button type="button">5</button>
-                    <button type="button">6</button>
-                    <button type="button">7</button>
-                    <button type="button">8</button>
-                    <button type="button">9</button>
-                    <button type="button">10</button>
-                    <button type="button">11</button>
-                    <button type="button">12</button>
-                    <button type="button">13</button>
-                    <button type="button">14</button>
-                    <button type="button">15</button>
-                    <button type="button">16</button>
-                    <button class="selected" type="button">17</button>
-                    <button type="button">18</button>
-                    <button type="button">19</button>
-                    <button type="button">20</button>
-                    <button type="button">21</button>
-                    <button type="button">22</button>
-                    <button type="button">23</button>
-                    <button type="button">24</button>
-                    <button type="button">25</button>
-                    <button type="button">26</button>
-                    <button type="button">27</button>
-                    <button type="button">28</button>
-                    <button type="button">29</button>
-                    <button type="button">30</button>
-                    <button class="is-muted" type="button">1</button>
-                    <button class="is-muted" type="button">2</button>
-                    <button class="is-muted" type="button">3</button>
-                    <button class="is-muted" type="button">4</button>
-                  </div>
+                  <div class="calendar-days" aria-label="날짜 선택"></div>
                   <div class="calendar-actions">
                     <button type="button" data-calendar-reset>초기화</button>
                     <button class="primary" type="button" data-calendar-apply>적용</button>
@@ -2239,38 +2263,161 @@
     });
 
     const periodLabel = document.querySelector('[data-dropdown-label="period"]');
-    const rangeButtons = document.querySelectorAll(".range-shortcuts button");
-    const calendarDays = document.querySelectorAll(".calendar-days button:not(.is-muted)");
+    const calendarPanel = document.querySelector(".calendar-panel");
 
-    rangeButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        rangeButtons.forEach((item) => item.classList.toggle("active", item === button));
+    if (calendarPanel) {
+      const calTitle = calendarPanel.querySelector("[data-cal-title]");
+      const calDaysWrap = calendarPanel.querySelector(".calendar-days");
+      const yearListWrap = calendarPanel.querySelector("[data-year-list]");
+      const fieldStart = calendarPanel.querySelector("[data-range-field='start']");
+      const fieldEnd = calendarPanel.querySelector("[data-range-field='end']");
+      const rangeStartText = calendarPanel.querySelector("[data-range-start]");
+      const rangeEndText = calendarPanel.querySelector("[data-range-end]");
+      const presetButtons = calendarPanel.querySelectorAll(".preset-row:not(.year-row) button");
 
-        if (periodLabel) {
-          periodLabel.textContent = button.dataset.periodLabel || button.textContent.trim();
-        }
-      });
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const DEFAULT_PRESET = "month";
 
-    });
-
-    calendarDays.forEach((day) => {
-      day.addEventListener("click", () => {
-        calendarDays.forEach((item) => item.classList.toggle("selected", item === day));
-      });
-    });
-
-    document.querySelector("[data-calendar-reset]")?.addEventListener("click", () => {
-      rangeButtons.forEach((item) => item.classList.toggle("active", item.dataset.periodLabel === "최근 1개월"));
-      calendarDays.forEach((item) => item.classList.toggle("selected", item.textContent.trim() === "17"));
-
-      if (periodLabel) {
-        periodLabel.textContent = "최근 1개월";
+      function presetStart(key) {
+        const d = new Date(today);
+        if (key === "week") d.setDate(d.getDate() - 7);
+        else if (key === "month") d.setMonth(d.getMonth() - 1);
+        else if (key === "6month") d.setMonth(d.getMonth() - 6);
+        else if (key === "year") d.setFullYear(d.getFullYear() - 1);
+        return d;
       }
-    });
+      function presetLabelText(key) {
+        return { week: "최근 1주일", month: "최근 1개월", "6month": "최근 6개월", year: "최근 1년" }[key] || "최근 1개월";
+      }
+      function fmt(d) {
+        return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+      }
+      function sameDay(a, b) {
+        return a && b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+      }
 
-    document.querySelector("[data-calendar-apply]")?.addEventListener("click", () => {
-      closeDropdowns();
-    });
+      let rangeStart, rangeEnd, activeField, viewYear, viewMonth, activePreset, activeYear;
+
+      const baseYear = today.getFullYear();
+      for (let y = baseYear; y >= baseYear - 4; y--) {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = y;
+        b.dataset.year = y;
+        b.addEventListener("click", () => applyYear(y));
+        yearListWrap.appendChild(b);
+      }
+
+      function renderCalendar() {
+        calTitle.textContent = viewYear + "." + String(viewMonth).padStart(2, "0");
+        const startDow = new Date(viewYear, viewMonth - 1, 1).getDay();
+        const daysInMonth = new Date(viewYear, viewMonth, 0).getDate();
+        const prevMonthDays = new Date(viewYear, viewMonth - 1, 0).getDate();
+        let html = "";
+        for (let i = startDow; i > 0; i--) {
+          html += '<button class="is-muted" type="button">' + (prevMonthDays - i + 1) + "</button>";
+        }
+        for (let d = 1; d <= daysInMonth; d++) {
+          const cur = new Date(viewYear, viewMonth - 1, d);
+          let cls = "";
+          if (sameDay(cur, rangeStart) || sameDay(cur, rangeEnd)) cls = "selected";
+          else if (cur > rangeStart && cur < rangeEnd) cls = "in-range";
+          html += "<button" + (cls ? ' class="' + cls + '"' : "") + ' type="button">' + d + "</button>";
+        }
+        const trailing = (7 - ((startDow + daysInMonth) % 7)) % 7;
+        for (let d = 1; d <= trailing; d++) {
+          html += '<button class="is-muted" type="button">' + d + "</button>";
+        }
+        calDaysWrap.innerHTML = html;
+      }
+
+      function syncUI() {
+        rangeStartText.textContent = fmt(rangeStart);
+        rangeEndText.textContent = fmt(rangeEnd);
+        fieldStart.classList.toggle("active", activeField === "start");
+        fieldEnd.classList.toggle("active", activeField === "end");
+        presetButtons.forEach((b) => b.classList.toggle("active", b.dataset.preset === activePreset));
+        yearListWrap.querySelectorAll("button").forEach((b) => b.classList.toggle("active", Number(b.dataset.year) === activeYear));
+        renderCalendar();
+      }
+
+      function applyPreset(key) {
+        activePreset = key;
+        activeYear = null;
+        rangeEnd = new Date(today);
+        rangeStart = presetStart(key);
+        activeField = "start";
+        viewYear = rangeEnd.getFullYear();
+        viewMonth = rangeEnd.getMonth() + 1;
+        syncUI();
+      }
+
+      function applyYear(y) {
+        activeYear = y;
+        activePreset = null;
+        rangeStart = new Date(y, 0, 1);
+        rangeEnd = new Date(y, 11, 31);
+        activeField = "start";
+        viewYear = y;
+        viewMonth = 1;
+        syncUI();
+      }
+
+      calDaysWrap.addEventListener("click", (event) => {
+        const btn = event.target.closest("button");
+        if (!btn || btn.classList.contains("is-muted")) return;
+        const picked = new Date(viewYear, viewMonth - 1, parseInt(btn.textContent, 10));
+        if (activeField === "start") {
+          rangeStart = picked;
+          if (rangeEnd < rangeStart) rangeEnd = picked;
+          activeField = "end";
+        } else {
+          rangeEnd = picked;
+          if (rangeEnd < rangeStart) rangeStart = picked;
+          activeField = "start";
+        }
+        activePreset = null;
+        activeYear = null;
+        syncUI();
+      });
+
+      [fieldStart, fieldEnd].forEach((field) => {
+        field.addEventListener("click", () => {
+          activeField = field.dataset.rangeField;
+          const target = activeField === "start" ? rangeStart : rangeEnd;
+          viewYear = target.getFullYear();
+          viewMonth = target.getMonth() + 1;
+          syncUI();
+        });
+      });
+
+      calendarPanel.querySelectorAll("[data-cal-nav]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          viewMonth += btn.dataset.calNav === "month-next" ? 1 : -1;
+          if (viewMonth > 12) { viewMonth = 1; viewYear += 1; }
+          if (viewMonth < 1) { viewMonth = 12; viewYear -= 1; }
+          syncUI();
+        });
+      });
+
+      presetButtons.forEach((btn) => {
+        btn.addEventListener("click", () => applyPreset(btn.dataset.preset));
+      });
+
+      calendarPanel.querySelector("[data-calendar-reset]")?.addEventListener("click", () => applyPreset(DEFAULT_PRESET));
+
+      calendarPanel.querySelector("[data-calendar-apply]")?.addEventListener("click", () => {
+        if (periodLabel) {
+          periodLabel.textContent = activePreset ? presetLabelText(activePreset)
+            : activeYear ? activeYear + "년"
+            : fmt(rangeStart) + " ~ " + fmt(rangeEnd);
+        }
+        closeDropdowns();
+      });
+
+      applyPreset(DEFAULT_PRESET);
+    }
 
     const statusTriggers = document.querySelectorAll(".status-card[data-status], .status-card .sub[data-status], .status-filter-option[data-status]");
     const statusOptions = document.querySelectorAll(".status-filter-option[data-status]");
