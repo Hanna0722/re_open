@@ -108,8 +108,8 @@ button,select{cursor:pointer}
 /* 후기 본문은 2~5줄로 작성되며 3줄을 넘으면 생략 */
 .rv-text{font-size:13px;color:var(--ts);line-height:1.6;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
 .rv-thumb{grid-column:1;grid-row:1;width:132px;height:132px;border-radius:8px;overflow:hidden;background:var(--bg);transition:width .2s ease,height .2s ease}
-/* 사진 없는 텍스트 후기: 같은 1열에 텍스트 리뷰 placeholder를 둔다 */
-.rv-row.no-photo::before{content:"일반후기";grid-column:1;grid-row:1;width:132px;height:132px;border-radius:8px;border:1px solid #E7ECF3;background:#F7F9FC;color:#9AA6B5;display:flex;align-items:center;justify-content:center;font-family:'Roboto',sans-serif;font-size:13px;font-weight:700;letter-spacing:.08em;box-sizing:border-box}
+/* 사진 없는 텍스트 후기: 이미지 열을 없앤다 */
+.rv-row.no-photo{grid-template-columns:minmax(0,1fr) 172px}
 .rv-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .rv-row.is-open{background:#fff}
 .rv-row.is-open:not(.no-photo){grid-template-columns:220px minmax(0,1fr) 172px}
@@ -128,7 +128,7 @@ button,select{cursor:pointer}
   .bs-medal{width:46px;height:46px;font-size:19px}
   .rv-row{grid-template-columns:96px minmax(0,1fr) 128px;gap:14px;padding:16px}
   .rv-thumb{width:96px;height:96px}
-  .rv-row.no-photo::before{width:96px;height:96px}
+  .rv-row.no-photo{grid-template-columns:minmax(0,1fr) 128px}
   .rv-row.is-open:not(.no-photo){grid-template-columns:140px minmax(0,1fr) 128px}
   .rv-row.is-open .rv-thumb{width:140px;height:140px}
 }
@@ -149,7 +149,7 @@ button,select{cursor:pointer}
     <div class="best-bar">
       <span class="bb-crown"><i class="fas fa-crown" aria-hidden="true"></i></span>
       <h2>BEST 후기</h2>
-      <span class="bb-sub">비드바이가 선정한 추천 후기</span>
+      <span class="bb-sub">베스트 후기로 선정되면 대행수수료 1만 원 쿠폰을 드려요!</span>
     </div>
 
     <div class="best-viewport">
@@ -369,6 +369,20 @@ button,select{cursor:pointer}
 </div>
 
 <script>
+/* 국기 아이콘: 미/영/일 랜덤 (캐러셀 복제 전에 실행) */
+(function () {
+  var flags = [
+    { src: 'flagicon/us.jpg', alt: '미국' },
+    { src: 'flagicon/uk.png', alt: '영국' },
+    { src: 'flagicon/jp.jpg', alt: '일본' }
+  ];
+  document.querySelectorAll('.country-badge img').forEach(function (img) {
+    var f = flags[Math.floor(Math.random() * flags.length)];
+    img.src = f.src;
+    img.alt = f.alt;
+  });
+})();
+
 /* ── BEST 후기 캐러셀 ──
    가로 스크롤(스냅) + 자동 순환. 양옆 후기가 살짝 보이고 가장자리에서 페이드아웃.
    원본을 앞뒤로 한 벌씩 복제해 3세트를 만들어, 끝에서 처음으로 되감기지 않고
