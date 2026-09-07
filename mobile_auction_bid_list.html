@@ -7,6 +7,7 @@
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="bb-trade-status-mobile.css">
 <style>
 :root{
   --rose:#E8385A;--rose-h:#C42F4C;--amber:#F5A623;
@@ -46,29 +47,6 @@ button,select{cursor:pointer}
 /* ── 페이지 타이틀 ── */
 
 /* ── 나의 거래 현황 ── */
-.shopping-head{margin:24px 10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:42px;padding-bottom:7px;border-bottom:1.5px solid var(--brand)}
-.shopping-head h3{margin:0;color:var(--brand);font-size:15px;font-weight:700}
-.status-period{color:#9aa3b2;font-size:12px;font-weight:500}
-.status-more{margin-left:auto;display:flex;padding:4px;border:0;background:none;color:#c3c0bd;cursor:pointer}
-.status-more svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.4}
-.status-board{margin:0 10px 18px}
-.status-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;padding:8px 4px 16px}
-.status-step{display:flex;flex-direction:column;align-items:center;gap:8px;padding:0;border:0;background:none;font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;text-decoration:none}
-.status-step em{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#f4f1ef;color:#2b2f37;font-size:18px;font-style:normal;font-weight:800;letter-spacing:-.03em;transition:transform .16s ease}
-.status-step:active em{transform:scale(.93)}
-.status-step em.zero{color:#c7c4c2;font-weight:700}
-.status-step strong{min-height:28px;color:#6a6c74;font-size:11px;font-weight:600;letter-spacing:-.045em;line-height:1.35;text-align:center}
-.status-step.hot em{background:#ffe9ee;color:var(--brand)}
-.status-step.hot strong{color:var(--brand);font-weight:700}
-.status-step.active em{box-shadow:0 0 0 2px rgba(232,56,90,.18);background:#ffe9ee;color:var(--brand)}
-.status-step.active strong{color:var(--brand);font-weight:700}
-.status-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
-.status-grid a{display:flex;align-items:center;justify-content:center;gap:6px;padding:13px 4px;border:1px solid #e5dcd8;border-radius:5px;background:#fff;color:#5f6169;font-family:inherit;font-size:12.5px;font-weight:600;letter-spacing:-.035em;cursor:pointer;text-decoration:none}
-.status-grid i{color:#2b2f37;font-size:13px;font-style:normal;font-weight:800}
-.status-grid i.zero{color:#c4c1bf}
-.status-grid a.hot{color:var(--brand);font-weight:700}
-.status-grid a.hot i{color:var(--brand)}
-
 /* ── 입찰/유찰 목록 (web_auction_bid_list 기준) ── */
 .bid-area{border-top:8px solid #f0f2f5;margin-top:4px}
 .bid-head{margin:18px 10px 14px;min-height:42px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:7px;border-bottom:1.5px solid var(--rose)}
@@ -152,31 +130,7 @@ button,select{cursor:pointer}
 </header>
 
 <!-- ── 나의 거래 현황 ── -->
-<div class="shopping-head">
-  <h3>나의 거래 현황</h3>
-  <span class="status-period">최근 6개월 기준</span>
-  <a class="status-more" href="mobile_mainlist.html" aria-label="거래 현황 전체보기">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
-  </a>
-</div>
-
-<div class="status-board">
-  <div class="status-steps">
-    <a class="status-step active" href="mobile_auction_bid_list.html" data-status="auction-bid" data-label="입찰/구매신청"><em>10</em><strong>입찰/<br>구매신청</strong></a>
-    <a class="status-step hot" href="mobile_mainlist.html?status=first-payment-wait" data-status="first-payment-wait" data-label="1차 결제대기"><em>5</em><strong>1차<br>결제대기</strong></a>
-    <a class="status-step" href="mobile_mainlist.html?status=local-arrived" data-status="local-arrived" data-label="현지도착"><em>5</em><strong>현지도착</strong></a>
-    <a class="status-step hot" href="mobile_mainlist.html?status=second-payment-wait" data-status="second-payment-wait" data-label="2차 결제대기"><em>5</em><strong>2차<br>결제대기</strong></a>
-    <a class="status-step" href="mobile_mainlist.html?status=international-shipping" data-status="international-shipping" data-label="국제배송"><em>3</em><strong>국제배송</strong></a>
-  </div>
-  <div class="status-grid">
-    <a href="mobile_mainlist.html?status=first-payment-complete" data-status="first-payment-complete" data-label="1차 결제완료">1차 결제완료 <i>5</i></a>
-    <a href="mobile_mainlist.html?status=second-payment-complete" data-status="second-payment-complete" data-label="2차 결제완료">2차 결제완료 <i>5</i></a>
-    <a class="hot" href="mobile_mainlist.html?status=shipping-wait" data-status="shipping-wait" data-label="배송대기">배송대기 <i>5</i></a>
-    <a href="mobile_mainlist.html?status=trade-cancel" data-status="trade-cancel" data-label="취소/반품">취소/반품 <i class="zero">0</i></a>
-    <a href="mobile_mainlist.html?status=trade-complete" data-status="trade-complete" data-label="거래완료">거래완료 <i>12</i></a>
-    <a href="mobile_bundle_shipping_management.html" data-status="shipping-request" data-label="배송신청/변경">배송신청/변경 <i>3</i></a>
-  </div>
-</div>
+<script src="bb-trade-status-mobile.js" data-current-status="auction-bid"></script>
 
 <!-- ── 입찰/유찰 목록 (web_auction_bid_list 동일 내용) ── -->
 <div class="bid-area">
