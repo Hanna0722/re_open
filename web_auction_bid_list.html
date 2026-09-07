@@ -10,10 +10,10 @@
     :root {
       --blue: #E8385A;
       --blue-dark: #C42F4C;
-      --ink: #111827;
+      --ink: #20242b;
       --text: #33363d;
-      --muted: #6b7280;
-      --line: #dfe3ea;
+      --muted: #777985;
+      --line: #e5dbd7;
       --line-dark: #c9ced7;
       --panel: #f8f9fb;
       --rose: #e8385a;
@@ -35,7 +35,8 @@
       font-size: 14px;
       line-height: 1.5;
     }
-    button { font: inherit; cursor: pointer; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
     a { color: inherit; text-decoration: none; }
 
     .guest-only { display: none !important; }
@@ -62,8 +63,7 @@
     /* 마이페이지 셸 */
     .mypage-shell {
       width: calc(var(--sidebar-w) + var(--gap) + var(--main-w));
-      max-width: calc(100vw - 32px);
-      margin: 8px auto 56px;
+      margin: 0 0 40px max(16px, calc((100vw - 1140px) / 2));
       display: grid;
       grid-template-columns: var(--sidebar-w) minmax(0, var(--main-w));
       gap: var(--gap);
@@ -150,10 +150,27 @@
     .side-title { margin: 0 0 18px; padding: 0 15px 17px; border-bottom: 1px solid #dcd9d6; color: #111; font-size: 16px; font-weight: 900; }
     .side-title a { color: inherit; text-decoration: none; }
     .nav-section { padding: 0 20px; margin-bottom: 14px; }
-    .nav-section strong { display: block; margin: 0 0 9px; padding: 7px 0; color: #111; font-size: 14px; font-weight: 900; }
-    .nav-list { display: grid; gap: 6px; }
-    .nav-list a { color: #777985; font-size: 12px; font-weight: 700; }
-    .nav-list a:hover, .nav-list a.active { color: var(--rose); }
+    .nav-section strong {
+display: block;
+      margin-bottom: 11px;
+      color: #292d35;
+      font-size: 14px;
+      font-weight: 900;
+    }
+    .nav-list {
+display: grid;
+      gap: 13px;
+    }
+    .nav-list a {
+color: #666b75;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .nav-list a:hover, .nav-list a.active {
+      color: var(--rose);
+      font-weight: 800;
+    }
     .biz-convert-link { display: block; margin-top: 8px; padding: 13px 14px; border: 1px solid #e5dbd7; background: #fff; }
     .biz-convert-inner { display: flex; align-items: center; gap: 10px; }
     .biz-convert-icon { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: #eef5ff; color: #1a3c6e; flex: 0 0 auto; }
@@ -164,7 +181,9 @@
     .page { min-width: 0; }
 
     .section { margin-top: 0; }
-    .section + .section { margin-top: 44px; }
+    .section + .section {
+      margin-top: 22px;
+    }
     .section-head {
       min-height: 42px;
       display: flex;
@@ -180,13 +199,13 @@
     .section-title { margin: 0; color: var(--rose); font-size: 15px; font-weight: 900; }
     .status-links { display: flex; align-items: center; justify-content: flex-end; gap: 16px; margin: 0; }
     .outline-pill {
-      height: 31px;
+height: 31px;
       padding: 0 15px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       border: 1px solid var(--line);
-      border-radius: 999px;
+      border-radius: 5px;
       background: #fff;
       color: #8a7f7a;
       font-size: 12px;
@@ -231,9 +250,8 @@
     }
     .status-card > div { width: 100%; }
     .status-card:hover, .status-card:focus-visible {
-      border-color: var(--rose);
-      box-shadow: 0 8px 18px rgba(0, 0, 0, .08);
-      transform: translateY(-1px);
+      border-color: rgba(240, 59, 99, .55);
+      box-shadow: 0 0 0 2px rgba(240, 59, 99, .08);
       outline: 0;
     }
     .status-stack { gap: 19px; }
@@ -241,6 +259,11 @@
     .status-card em { display: block; margin-bottom: 5px; color: #3c3f45; font-style: normal; font-size: 18px; font-weight: 900; line-height: 1; }
     .status-card em.hot { color: var(--rose); }
     .status-card strong { display: block; color: #3e4249; font-size: 13px; font-weight: 600; line-height: 1.45; word-break: keep-all; overflow-wrap: break-word; }
+
+    .section[aria-labelledby="bid-list-title"] .section-head { padding-bottom: 0; border-bottom: 0; }
+    #bid-list-title { color: #222831; font-size: 18px; font-weight: 900; }
+    .status-card.status-active { border-color: var(--rose); box-shadow: 0 0 0 2px rgba(240, 59, 99, .12); }
+    .empty { padding: 36px 18px; border: 1px solid var(--line); border-radius: 7px; color: var(--muted); text-align: center; }
 
     /* 입찰/유찰 탭 */
     .bid-tabs {
@@ -250,51 +273,49 @@
       margin: 0;
     }
     .bid-tab {
-      height: 30px;
-      padding: 0 0 8px;
+      height: 34px;
+      padding: 0 0 7px;
       border: 0;
       border-bottom: 2px solid transparent;
-      background: none;
-      color: #8a8f98;
+      background: transparent;
+      color: #7f8794;
       font-size: 13px;
-      font-weight: 800;
+      font-weight: 700;
+      line-height: 1;
     }
+    .bid-tab:focus-visible, .bid-actions button:focus-visible { outline: 2px solid rgba(240,59,99,.28); outline-offset: 3px; }
     .bid-tab.active { color: var(--rose); border-bottom-color: var(--rose); }
 
     .bid-topline {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      margin: 14px 0 8px;
+      gap: 18px;
+      min-height: 34px;
+      margin: 4px 0 12px;
     }
     .bid-toolbar {
       display: flex;
       align-items: center;
       justify-content: flex-end;
       gap: 8px;
-      margin: 0 0 4px auto;
+      margin: 0 0 0 auto;
       flex-wrap: wrap;
     }
     .bid-count-select {
-      height: 28px;
-      min-width: 100px;
-      padding: 0 24px 0 12px;
+height: 28px;
+      padding: 0 22px 0 10px;
       border: 1px solid var(--line);
-      border-radius: 6px;
-      background: #fff;
-      color: var(--text);
-      display: inline-flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
+      border-radius: 5px;
+      background-color: #fff;
+      color: #4b5563;
       font-size: 12px;
       font-weight: 700;
-      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
-      line-height: 1;
-      letter-spacing: 0;
-      white-space: nowrap;
-      position: relative;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='6'%3E%3Cpath d='M0 0l4.5 6 4.5-6z' fill='%235d6470'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
     }
     .bid-count-select:focus-visible {
       outline: 2px solid rgba(37, 99, 235, 0.22);
@@ -308,29 +329,33 @@
     .bid-search {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
     .bid-search input {
       height: 28px;
-      width: 128px;
-      padding: 0 12px;
+      width: 200px;
+      padding: 0 10px;
       border: 1px solid var(--line);
-      border-radius: 6px;
+      border-radius: 5px;
+      background: #fff;
+      color: #333;
       font-size: 12px;
       outline: 0;
     }
     .bid-search input:focus { border-color: var(--rose); }
     .btn-search {
-      height: 28px;
+height: 28px;
       padding: 0 16px;
       border: 0;
       border-radius: 5px;
-      background: var(--rose);
+      background: var(--navy);
       color: #fff;
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 700;
     }
-    .btn-search:hover { background: var(--rose-h); }
+    .btn-search:hover {
+      background: #15315b;
+    }
     .btn-bulk {
       height: 28px;
       padding: 0 14px;
@@ -342,10 +367,13 @@
       font-weight: 800;
     }
 
-    .bid-list { display: grid; gap: 14px; }
+    .bid-list {
+      display: grid;
+      gap: 10px;
+    }
     .bid-row {
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: 7px;
       background: #fff;
       overflow: hidden;
     }
@@ -359,8 +387,8 @@
       border-bottom: 1px solid #DED8D4;
     }
     .bid-status {
-      font-size: 12px;
-      font-weight: 700;
+      font-size: 13px;
+      font-weight: 600;
       color: #3d4452;
       display: flex;
       align-items: center;
@@ -371,57 +399,95 @@
     .bid-row[data-status="auction-bid"] .bid-status { color: var(--navy); }
     .bid-row[data-status="successful-bid"] .bid-status { color: var(--navy); }
     .bid-row[data-status="failed-bid"] .bid-status { color: #aaa; }
-    .bid-body { display: flex; align-items: center; gap: 16px; padding: 16px 18px; }
-    .bid-product { display: flex; align-items: center; gap: 14px; flex: 1.6; min-width: 0; }
+    .bid-body {
+      display: grid;
+      grid-template-columns: 335px 448px 100px;
+      min-height: 100px;
+    }
+    .bid-product {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 15px 18px;
+      border-right: 1px solid #DED8D4;
+      min-width: 0;
+    }
     .bid-thumb {
-      width: 72px;
-      height: 72px;
+      width: 68px;
+      height: 68px;
       flex: 0 0 auto;
-      border-radius: 6px;
-      background: #2b3546;
+      border-radius: 8px;
+      background: #eae6e3;
       overflow: hidden;
     }
     .bid-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .bid-title-wrap { min-width: 0; }
     .bid-title {
-      color: #1f2530;
+      margin: 0 0 5px;
+      color: #222;
       font-size: 13px;
       font-weight: 700;
-      line-height: 1.4;
+      line-height: 1.42;
+      text-decoration: none;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-    .bid-title-origin { display: block; margin-top: 3px; color: #999; font-size: 11px; font-weight: 400; }
-    .bid-meta { flex: 1; display: grid; gap: 6px; min-width: 0; }
-    .bid-meta-row { display: flex; gap: 8px; font-size: 12px; }
-    .bid-meta-row .ml { flex: 0 0 78px; color: #9aa3b2;font-size: 12px; font-weight: 700; }
-    .bid-meta-row .mv { color: #33363d; font-size: 12px;font-weight: 700; }
+    .bid-title-origin {
+      display: block; margin-top: -2px; margin-bottom: 5px; color: #999; font-size: 11px; font-weight: 400;
+    }
+    .bid-meta {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 1fr);
+      align-content: center;
+      gap: 7px 10px;
+      padding: 14px 16px;
+      min-width: 0;
+      border-right: 1px solid #DED8D4;
+    }
+    .bid-meta-row {
+      display: contents;
+    }
+    .bid-meta-row .ml {
+      color: #9aa3b2; font-size: 12px; font-weight: 600; white-space: nowrap;
+    }
+    .bid-meta-row .mv {
+      color: #222; font-size: 12px; font-weight: 600; overflow-wrap: anywhere;
+    }
     .bidder-status-win { color: var(--rose) !important; }
-    .bid-actions { display: grid; gap: 8px; flex: 0 0 auto; }
+    .bid-actions {
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 12px 10px;
+    }
     .btn-view, .btn-rebid {
-      min-width: 76px;
-      height: 32px;
-      padding: 0 12px;
-      border-radius: 5px;
-      font-size: 12px;
-      font-weight: 800;
+      min-width: 76px; height: 38px; padding: 0 16px; border-radius: 5px; font-size: 13px; font-weight: 600;
     }
     .btn-view { border: 1px solid #1675cf; background: #fff; color: #1675cf; }
     .btn-rebid { border: 0; background: var(--rose); color: #fff; }
     .btn-rebid:hover { background: var(--rose-h); }
 
+    @media (min-width: 761px) and (max-width: 900px) {
+      .bid-body { grid-template-columns: minmax(0, 335fr) minmax(0, 448fr) 100px; }
+    }
+
     @media (max-width: 900px) {
-      .mypage-shell { width: calc(100% - 24px); grid-template-columns: 1fr; margin-top: 18px; }
+      .mypage-shell { width: calc(100% - 24px); grid-template-columns: 1fr; margin: 18px 12px 40px; }
       .sidebar { display: none; }
     }
     @media (max-width: 760px) {
       .status-board { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
       .status-step:not(:last-child)::after { display: none; }
       .status-card, .status-stack .status-card { min-height: 82px; }
-      .bid-body { flex-wrap: wrap; }
-      .bid-meta { flex: 1 1 100%; }
+      .bid-topline, .bid-toolbar { flex-wrap: wrap; }
+      .bid-toolbar { margin-left: 0; }
+      .bid-search { flex-wrap: wrap; }
+      .bid-search input { width: min(200px, 40vw); }
+      .bid-body { grid-template-columns: minmax(0, 1fr); }
+      .bid-row[data-status="failed-bid"] .bid-meta { border-bottom: 0; }
+      .bid-actions:empty { display: none; }
+      .bid-product, .bid-meta { border-right: 0; border-bottom: 1px solid var(--line); }
+      .bid-meta { grid-template-columns: auto minmax(0, 1fr); }
+      .bid-row-head { gap: 8px; flex-wrap: wrap; }
       .bid-actions { flex-direction: row; }
     }
   .profile-id { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
@@ -431,35 +497,10 @@
   </style>
 </head>
 <body>
-  <div class="notice-bar">누적 거래 2백만건 거래금액 2200억 <b>비드바이의 25년 기록</b>으로 증명합니다</div>
-
-  <div class="store-strip">
-    <nav class="store-list" aria-label="스토어 바로가기">
-      <a class="store-chip active" href="web_sub_main.html" data-store-name="야후 옥션" data-best-title="야후옥션 베스트" aria-current="page">
-        <div class="store-badge"><img src="storeicon/store_yahoo_auction.png" alt=""></div><strong>야후 옥션</strong>
-      </a>
-      <a class="store-chip" href="web_sub_main.html" data-store-name="메루카리" data-best-title="메루카리 베스트">
-        <div class="store-badge"><img src="storeicon/store_mercari.png" alt=""></div><strong>메루카리</strong>
-      </a>
-      <a class="store-chip" href="web_sub_main.html" data-store-name="일본 라쿠텐" data-best-title="라쿠텐 베스트">
-        <div class="store-badge"><img src="storeicon/store_rakuten.png" alt=""></div><strong>일본 라쿠텐</strong>
-      </a>
-      <a class="store-chip" href="web_sub_main.html" data-store-name="일본 라쿠마" data-best-title="라쿠마 베스트">
-        <div class="store-badge"><img src="storeicon/store_rakuma.png" alt=""></div><strong>일본 라쿠마</strong>
-      </a>
-      <a class="store-chip" href="web_sub_main.html" data-store-name="야후 쇼핑" data-best-title="야후쇼핑 베스트">
-        <div class="store-badge"><img src="storeicon/store_yahoo_shopping.png" alt=""></div><strong>야후 쇼핑</strong>
-      </a>
-      <a class="store-chip" href="web_sub_main.html" data-store-name="야후 프리마" data-best-title="야후 프리마 베스트">
-        <div class="store-badge"><img src="storeicon/store_yahoo_furima.png" alt=""></div><strong>야후 프리마</strong>
-      </a>
-      <a class="store-chip" href="web_sub_main.html" data-store-name="미국 이베이" data-best-title="미국 이베이 베스트">
-        <div class="store-badge"><img src="storeicon/store_ebay_us.png" alt=""></div><strong>미국 이베이</strong>
-      </a>
-      <a class="store-chip" href="web_sub_main.html" data-store-name="영국 이베이" data-best-title="영국 이베이 베스트">
-        <div class="store-badge"><img src="storeicon/store_ebay_uk.png" alt=""></div><strong>영국 이베이</strong>
-      </a>
-    </nav>
+  <div class="channel-bar">
+    <div class="channel-inner">
+      <div class="channel-icons"><!-- bb-common.js의 공통 스토어 목록 --></div>
+    </div>
   </div>
 
   <div class="mypage-shell">
@@ -540,7 +581,7 @@
             <a href="web_qna_form.html">1:1 문의하기</a>
           </div>
         </div>
-        <div class="nav-section biz-convert-section"style="display: none;"
+        <div class="nav-section biz-convert-section" style="display: none;">
           <a href="web_biz.html" class="biz-convert-link">
             <span class="biz-convert-inner">
               <span class="biz-convert-icon"><i class="fas fa-building"></i></span>
@@ -566,44 +607,44 @@
         </div>
         <div class="status-board">
           <div class="status-step status-stack">
-            <a class="status-card" href="web_auction_bid_list.html" data-status="auction-bid" data-label="경매입찰">
-              <div><em>12</em><strong>경매 입찰 상품</strong></div>
+            <a class="status-card status-active" href="#biddingList" data-status="auction-bid" data-label="경매입찰">
+              <div><em>9</em><strong>경매 입찰 상품</strong></div>
             </a>
             <a class="status-card" href="web_mainlist.html" data-status="purchase-request" data-label="구매 신청">
-              <div><em>20</em><strong>구매 신청 상품</strong></div>
+              <div><em>7</em><strong>구매 신청 상품</strong></div>
             </a>
           </div>
           <div class="status-step">
             <a class="status-card" href="web_mainlist.html" data-status="first-payment-wait" data-label="1차 결제대기">
-              <div><em class="hot">1</em><strong>1차<br>결제대기</strong></div>
+              <div><em class="hot">12</em><strong>1차<br>결제대기</strong></div>
             </a>
           </div>
           <div class="status-step">
             <a class="status-card" href="web_mainlist.html" data-status="first-payment-complete" data-label="1차 결제완료">
-              <div><em>1,062</em><strong>1차<br>결제완료</strong></div>
+              <div><em>8</em><strong>1차<br>결제완료</strong></div>
             </a>
           </div>
           <div class="status-step status-stack">
             <a class="status-card" href="web_mainlist.html" data-status="local-arrived" data-label="현지도착">
-              <div><em>8</em><strong>현지도착</strong></div>
+              <div><em>6</em><strong>현지도착</strong></div>
             </a>
             <a class="status-card" href="web_mainlist.html" data-status="shipping-wait" data-label="배송대기">
-              <div><em>0</em><strong>배송대기</strong></div>
+              <div><em>14</em><strong>배송대기</strong></div>
             </a>
           </div>
           <div class="status-step">
             <a class="status-card" href="web_mainlist.html" data-status="second-payment-wait" data-label="2차 결제대기">
-              <div><em class="hot">9</em><strong>2차<br>결제대기</strong></div>
+              <div><em class="hot">11</em><strong>2차<br>결제대기</strong></div>
             </a>
           </div>
           <div class="status-step">
             <a class="status-card" href="web_mainlist.html" data-status="second-payment-complete" data-label="2차 결제 완료">
-              <div><em>2</em><strong>2차<br>결제 완료</strong></div>
+              <div><em>5</em><strong>2차<br>결제 완료</strong></div>
             </a>
           </div>
           <div class="status-step">
             <a class="status-card" href="web_mainlist.html" data-status="international-shipping" data-label="국제배송">
-              <div><em class="hot">11</em><strong>국제배송</strong></div>
+              <div><em class="hot">10</em><strong>국제배송</strong></div>
             </a>
           </div>
         </div>
@@ -638,30 +679,92 @@
         <div class="bid-list" data-bid-panel="bidding" id="biddingList"></div>
 
         <div class="bid-list" data-bid-panel="failed" id="failedList" style="display:none">
-          <article class="bid-row" data-market="JP" data-status="failed-bid">
+          <article class="bid-row" data-market="US" data-code="297609052814" data-status="failed-bid">
             <div class="bid-row-head">
               <span class="bid-status">유찰</span>
-              <span class="bid-oid">야후경매 · a2024032210</span>
+              <span class="bid-oid">EBAY · 297609052814</span>
             </div>
             <div class="bid-body">
               <div class="bid-product">
-                <div class="bid-thumb"><img src="https://images.unsplash.com/photo-1585011664466-b7bbf827d51d?auto=format&fit=crop&w=200&q=80" alt="닌텐도 스위치 게임 카트리지"></div>
+                <div class="bid-thumb"><img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=200&q=80" alt="레고 스타워즈 미니피규어 컬렉션"></div>
                 <div class="bid-title-wrap">
-                  <p class="bid-title">닌텐도 스위치 게임 카트리지 젤다의 전설 왕국의 눈물</p>
-                  <span class="bid-title-origin">ニンテンドースイッチ ゲームカートリッジ ゼルダの伝説 王国の涙</span>
+                  <p class="bid-title">레고 스타워즈 미니피규어 컬렉션</p>
+                  <span class="bid-title-origin">LEGO Star Wars Minifigure Collection</span>
                 </div>
               </div>
               <div class="bid-meta">
-                <div class="bid-meta-row"><span class="ml">종료일시</span><span class="mv">2024.03.22 21:00</span></div>
-                <div class="bid-meta-row"><span class="ml">예약시간</span><span class="mv">2024.03.22 20:59</span></div>
+                <div class="bid-meta-row"><span class="ml">입찰금액/수량</span><span class="mv">5개 / 94.99 달러</span></div>
+                <div class="bid-meta-row"><span class="ml">낙찰가/입찰수</span><span class="mv">102.48 달러 / 13명</span></div>
+                <div class="bid-meta-row"><span class="ml">종료일시</span><span class="mv">2026-09-03 21:30</span></div>
+                <div class="bid-meta-row"><span class="ml">예약시간</span><span class="mv">2026-09-03 21:29</span></div>
+              </div>
+              <div class="bid-actions" aria-hidden="true"></div>
+            </div>
+          </article>
+          <article class="bid-row" data-market="UK" data-code="UK5526090618" data-status="failed-bid">
+            <div class="bid-row-head">
+              <span class="bid-status">유찰</span>
+              <span class="bid-oid">EBAY UK · UK5526090618</span>
+            </div>
+            <div class="bid-body">
+              <div class="bid-product">
+                <div class="bid-thumb"><img src="https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=200&q=80" alt="비틀즈 영국 초판 LP 레코드"></div>
+                <div class="bid-title-wrap">
+                  <p class="bid-title">비틀즈 영국 초판 LP 레코드</p>
+                  <span class="bid-title-origin">The Beatles Original Vinyl UK Pressing</span>
+                </div>
               </div>
               <div class="bid-meta">
-               <div class="bid-meta-row"><span class="ml">입찰금액</span><span class="mv">1개 / 4,500 엔</span></div>
-                <div class="bid-meta-row"><span class="ml">낙찰가/입찰수</span><span class="mv">6,200 엔 / 3명</span></div>
+                <div class="bid-meta-row"><span class="ml">입찰금액/수량</span><span class="mv">3개 / 93.67 파운드</span></div>
+                <div class="bid-meta-row"><span class="ml">낙찰가/입찰수</span><span class="mv">106.23 파운드 / 15명</span></div>
+                <div class="bid-meta-row"><span class="ml">종료일시</span><span class="mv">2026-09-04 21:30</span></div>
+                <div class="bid-meta-row"><span class="ml">예약시간</span><span class="mv">2026-09-04 21:29</span></div>
               </div>
-              <div class="bid-actions">
-                <button class="btn-view" type="button" onclick="location.href='web_payment_detail.html'">조회</button>
+              <div class="bid-actions" aria-hidden="true"></div>
+            </div>
+          </article>
+          <article class="bid-row" data-market="UK" data-code="6090639271" data-status="failed-bid">
+            <div class="bid-row-head">
+              <span class="bid-status">유찰</span>
+              <span class="bid-oid">EBAY UK · 6090639271</span>
+            </div>
+            <div class="bid-body">
+              <div class="bid-product">
+                <div class="bid-thumb"><img src="https://images.unsplash.com/photo-1558584673-c834fb1cc3ca?auto=format&fit=crop&w=200&q=80" alt="소니 워크맨 빈티지 카세트 플레이어"></div>
+                <div class="bid-title-wrap">
+                  <p class="bid-title">소니 워크맨 빈티지 카세트 플레이어</p>
+                  <span class="bid-title-origin">Sony Walkman Vintage Cassette Player</span>
+                </div>
               </div>
+              <div class="bid-meta">
+                <div class="bid-meta-row"><span class="ml">입찰금액/수량</span><span class="mv">3개 / 103.86 파운드</span></div>
+                <div class="bid-meta-row"><span class="ml">낙찰가/입찰수</span><span class="mv">127.49 파운드 / 16명</span></div>
+                <div class="bid-meta-row"><span class="ml">종료일시</span><span class="mv">2026-09-05 21:30</span></div>
+                <div class="bid-meta-row"><span class="ml">예약시간</span><span class="mv">2026-09-05 21:29</span></div>
+              </div>
+              <div class="bid-actions" aria-hidden="true"></div>
+            </div>
+          </article>
+          <article class="bid-row" data-market="JP" data-code="a2026090417" data-status="failed-bid">
+            <div class="bid-row-head">
+              <span class="bid-status">유찰</span>
+              <span class="bid-oid">야후경매 · a2026090417</span>
+            </div>
+            <div class="bid-body">
+              <div class="bid-product">
+                <div class="bid-thumb"><img src="https://images.unsplash.com/photo-1585011664466-b7bbf827d51d?auto=format&fit=crop&w=200&q=80" alt="닌텐도 스위치 젤다의 전설 게임 카트리지"></div>
+                <div class="bid-title-wrap">
+                  <p class="bid-title">닌텐도 스위치 젤다의 전설 게임 카트리지</p>
+                  <span class="bid-title-origin">ニンテンドースイッチ ゼルダの伝説</span>
+                </div>
+              </div>
+              <div class="bid-meta">
+                <div class="bid-meta-row"><span class="ml">입찰금액/수량</span><span class="mv">1개 / 10,200 엔</span></div>
+                <div class="bid-meta-row"><span class="ml">낙찰가/입찰수</span><span class="mv">11,200 엔 / 12명</span></div>
+                <div class="bid-meta-row"><span class="ml">종료일시</span><span class="mv">2026-09-06 21:30</span></div>
+                <div class="bid-meta-row"><span class="ml">예약시간</span><span class="mv">2026-09-06 21:29</span></div>
+              </div>
+              <div class="bid-actions" aria-hidden="true"></div>
             </div>
           </article>
         </div>
@@ -684,24 +787,25 @@
     });
 
     const biddingItems = [
-      { market: "US", site: "EBAY", code: "375604375357", title: "Transformers G1 G2 Go Bots Collector Case Bumblebee Skywarp Blurr Bl", image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=200&q=80", bid: "13.00 달러", reserve: "18.00 달러", hoursLeft: 0.5 },
-      { market: "US", site: "EBAY", code: "297323435868", title: "Mario Kart 64 Toy Biz Mario & Wario With Kart And Projectile", image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=200&q=80", bid: "24.00 달러", reserve: "31.00 달러", hoursLeft: 0.9 },
-      { market: "UK", site: "EBAY UK", code: "UK9081745521", title: "Vintage Barbour Wax Jacket Made in England Navy Size M", image: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=200&q=80", bid: "42.00 파운드", reserve: "55.00 파운드", hoursLeft: 2.5 },
-      { market: "JP", site: "Yahoo JP", code: "j1102849304", title: "Nintendo Switch Pokemon Scarlet Violet Double Pack Japan", origin: "ニンテンドースイッチ ポケットモンスター スカーレット・バイオレット ダブルパック 日本版", image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=200&q=80", bid: "6,800 엔", reserve: "8,200 엔", hoursLeft: 5.2 },
-      { market: "US", site: "EBAY", code: "126908552032", title: "Apple iPod Classic 7th Generation 160GB Silver Working", image: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?auto=format&fit=crop&w=200&q=80", bid: "86.00 달러", reserve: "102.00 달러", hoursLeft: 8 },
-      { market: "JP", site: "Yahoo JP", code: "r1150092841", title: "Seiko Prospex Diver Automatic Watch Used Japan Limited", origin: "セイコー プロスペックス ダイバー 自動巻き 中古 日本限定", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=200&q=80", bid: "18,500 엔", reserve: "22,000 엔", hoursLeft: 12 },
-      { market: "UK", site: "EBAY UK", code: "UK7742198306", title: "The Beatles Original Vinyl LP Collection UK Pressing", image: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=200&q=80", bid: "68.00 파운드", reserve: "81.00 파운드", hoursLeft: 18 },
-      { market: "JP", site: "Mercari JP", code: "m83920147562", title: "Studio Ghibli Totoro Plush Set Original Japan", origin: "スタジオジブリ トトロ ぬいぐるみセット オリジナル 日本製", image: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=200&q=80", bid: "4,200 엔", reserve: "5,000 엔", hoursLeft: 23 },
-      { market: "US", site: "EBAY", code: "404912875620", title: "Sony Walkman WM-FX Vintage Cassette Player Tested", image: "https://images.unsplash.com/photo-1558584673-c834fb1cc3ca?auto=format&fit=crop&w=200&q=80", bid: "57.00 달러", reserve: "70.00 달러", hoursLeft: 31 },
-      { market: "UK", site: "EBAY UK", code: "UK5529081774", title: "Burberry Nova Check Scarf Lambswool Classic Beige", image: "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&w=200&q=80", bid: "35.00 파운드", reserve: "44.00 파운드", hoursLeft: 44 },
-      { market: "JP", site: "Rakuten JP", code: "rak2026071501", title: "Canon EF 50mm F1.8 STM Lens Excellent Condition", origin: "キヤノン EF 50mm F1.8 STM レンズ 美品", image: "https://images.unsplash.com/photo-1500634245200-e5245c7574ef?auto=format&fit=crop&w=200&q=80", bid: "9,900 엔", reserve: "12,000 엔", hoursLeft: 67 },
-      { market: "US", site: "EBAY", code: "995120774412", title: "LEGO Star Wars Retired Minifigure Lot Collector Set", image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=200&q=80", bid: "112.00 달러", reserve: "135.00 달러", hoursLeft: 86 }
+      { market: "US", site: "EBAY", code: "375604375357", title: "트랜스포머 G1·G2 고봇 수집용 케이스 범블비·스카이워프·블러", origin: "Transformers G1 G2 Go Bots Collector Case Bumblebee Skywarp Blurr Bl", image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=200&q=80", bid: "13.00 달러", reserve: "18.00 달러", hoursLeft: 0.5 },
+      { market: "US", site: "EBAY", code: "297323435868", title: "토이비즈 마리오 카트 64 마리오·와리오 카트 및 발사체 세트", origin: "Mario Kart 64 Toy Biz Mario & Wario With Kart And Projectile", image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=200&q=80", bid: "24.00 달러", reserve: "31.00 달러", hoursLeft: 0.9 },
+      { market: "UK", site: "EBAY UK", code: "UK9081745521", title: "영국산 빈티지 바버 왁스 재킷 네이비 M 사이즈", origin: "Vintage Barbour Wax Jacket Made in England Navy Size M", image: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=200&q=80", bid: "42.00 파운드", reserve: "55.00 파운드", hoursLeft: 2.5 },
+      { market: "JP", site: "Yahoo JP", code: "j1102849304", title: "닌텐도 스위치 포켓몬스터 스칼렛·바이올렛 더블 팩 일본판", origin: "ニンテンドースイッチ ポケットモンスター スカーレット・バイオレット ダブルパック 日本版", image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=200&q=80", bid: "6,800 엔", reserve: "8,200 엔", hoursLeft: 5.2 },
+      { market: "US", site: "EBAY", code: "126908552032", title: "애플 아이팟 클래식 7세대 160GB 실버 정상 작동", origin: "Apple iPod Classic 7th Generation 160GB Silver Working", image: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?auto=format&fit=crop&w=200&q=80", bid: "86.00 달러", reserve: "102.00 달러", hoursLeft: 8 },
+      { market: "JP", site: "Yahoo JP", code: "r1150092841", title: "세이코 프로스펙스 다이버 오토매틱 시계 일본 한정 중고", origin: "セイコー プロスペックス ダイバー 自動巻き 中古 日本限定", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=200&q=80", bid: "18,500 엔", reserve: "22,000 엔", hoursLeft: 12 },
+      { market: "UK", site: "EBAY UK", code: "UK7742198306", title: "비틀즈 영국 프레싱 오리지널 LP 컬렉션", origin: "The Beatles Original Vinyl LP Collection UK Pressing", image: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=200&q=80", bid: "68.00 파운드", reserve: "81.00 파운드", hoursLeft: 18 },
+      { market: "JP", site: "Mercari JP", code: "m83920147562", title: "스튜디오 지브리 토토로 정품 봉제인형 세트 일본산", origin: "スタジオジブリ トトロ ぬいぐるみセット オリジナル 日本製", image: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=200&q=80", bid: "4,200 엔", reserve: "5,000 엔", hoursLeft: 23 },
+      { market: "US", site: "EBAY", code: "404912875620", title: "소니 워크맨 WM-FX 빈티지 카세트 플레이어 작동 확인", origin: "Sony Walkman WM-FX Vintage Cassette Player Tested", image: "https://images.unsplash.com/photo-1558584673-c834fb1cc3ca?auto=format&fit=crop&w=200&q=80", bid: "57.00 달러", reserve: "70.00 달러", hoursLeft: 31 },
+      { market: "UK", site: "EBAY UK", code: "UK5529081774", title: "버버리 노바 체크 램스울 머플러 클래식 베이지", origin: "Burberry Nova Check Scarf Lambswool Classic Beige", image: "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&w=200&q=80", bid: "35.00 파운드", reserve: "44.00 파운드", hoursLeft: 44 },
+      { market: "JP", site: "Rakuten JP", code: "rak2026071501", title: "캐논 EF 50mm F1.8 STM 렌즈 상태 우수", origin: "キヤノン EF 50mm F1.8 STM レンズ 美品", image: "https://images.unsplash.com/photo-1500634245200-e5245c7574ef?auto=format&fit=crop&w=200&q=80", bid: "9,900 엔", reserve: "12,000 엔", hoursLeft: 67 },
+      { market: "US", site: "EBAY", code: "995120774412", title: "레고 스타워즈 단종 미니피규어 수집용 세트", origin: "LEGO Star Wars Retired Minifigure Lot Collector Set", image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=200&q=80", bid: "112.00 달러", reserve: "135.00 달러", hoursLeft: 86 }
     ];
 
     function pad2(value) {
       return String(value).padStart(2, "0");
     }
 
+    let activeBidTab = "bidding";
     let activeMarketFilter = "all";
     let activeCodeSearch = "";
 
@@ -733,11 +837,14 @@
       const select = document.getElementById("marketFilterSelect");
       if (!select) return;
       const labels = { all: "전체", JP: "일본", US: "미국", UK: "영국" };
+      const items = activeBidTab === "failed"
+        ? Array.from(document.querySelectorAll("#failedList .bid-row")).map((row) => ({ market: row.dataset.market }))
+        : biddingItems;
       Array.from(select.options).forEach((option) => {
         const value = option.value;
         const count = value === "all"
-          ? biddingItems.length
-          : biddingItems.filter((item) => item.market === value).length;
+          ? items.length
+          : items.filter((item) => item.market === value).length;
         option.textContent = `${labels[value] || option.textContent} (${count}건)`;
       });
     }
@@ -756,20 +863,18 @@
             </div>
             <div class="bid-body">
               <div class="bid-product">
-                <div class="bid-thumb"><img src="${item.image}" alt=""></div>
+                <div class="bid-thumb"><img src="${item.image}" alt="${item.title}"></div>
                 <div class="bid-title-wrap">
-                  <p class="bid-title">[${item.market}] ${item.title}</p>
+                  <p class="bid-title">${item.title}</p>
                   ${item.origin ? `<span class="bid-title-origin">${item.origin}</span>` : ""}
                 </div>
               </div>
               <div class="bid-meta">
                 <div class="bid-meta-row"><span class="ml">입찰금액/수량</span><span class="mv">1개 / ${item.bid}</span></div>
-                <div class="bid-meta-row"><span class="ml">종료일시</span><span class="mv">${futureDateFromHours(item.hoursLeft)}</span></div>
-                <div class="bid-meta-row"><span class="ml">예약시간</span><span class="mv">${futureDateFromHours(Math.max(0.25, item.hoursLeft - 0.1))}</span></div>
-              </div>
-              <div class="bid-meta">
                 <div class="bid-meta-row"><span class="ml">현재가격/입찰수</span><span class="mv" data-current-price>-</span></div>
+                <div class="bid-meta-row"><span class="ml">종료일시</span><span class="mv">${futureDateFromHours(item.hoursLeft)}</span></div>
                 <div class="bid-meta-row"><span class="ml">입찰예약가</span><span class="mv">${item.reserve}</span></div>
+                <div class="bid-meta-row"><span class="ml">예약시간</span><span class="mv">${futureDateFromHours(Math.max(0.25, item.hoursLeft - 0.1))}</span></div>
                 <div class="bid-meta-row"><span class="ml">최고입찰여부</span><span class="mv" data-bidder-status>-</span></div>
               </div>
               <div class="bid-actions">
@@ -787,6 +892,15 @@
     }
 
     function bindBidLookup() {
+      document.querySelectorAll(".btn-rebid").forEach((button) => {
+        button.addEventListener("click", () => {
+          const row = button.closest(".bid-row");
+          const item = row ? biddingItems[Number(row.dataset.bidIndex)] : null;
+          if (!item) return;
+          const params = new URLSearchParams({ code: item.code, market: item.market });
+          window.location.href = `web_auction.html?${params.toString()}`;
+        });
+      });
       document.querySelectorAll("[data-check-bid]").forEach((button) => {
         button.addEventListener("click", () => {
           const row = button.closest(".bid-row");
@@ -822,7 +936,9 @@
       const rows = Array.from(failedList.querySelectorAll(".bid-row"));
       let visibleCount = 0;
       rows.forEach((row) => {
-        const isVisible = activeMarketFilter === "all" || row.dataset.market === activeMarketFilter;
+        const matchesMarket = activeMarketFilter === "all" || row.dataset.market === activeMarketFilter;
+        const matchesCode = !activeCodeSearch || row.dataset.code.toLowerCase().includes(activeCodeSearch);
+        const isVisible = matchesMarket && matchesCode;
         row.style.display = isVisible ? "" : "none";
         if (isVisible) visibleCount += 1;
       });
@@ -852,6 +968,7 @@
     function applyAuctionCodeSearch() {
       activeCodeSearch = (document.getElementById("auctionCodeSearch")?.value || "").trim().toLowerCase();
       renderBiddingItems();
+      applyFailedMarketFilter();
     }
 
     document.getElementById("auctionCodeSearchBtn")?.addEventListener("click", applyAuctionCodeSearch);
@@ -864,19 +981,41 @@
 
     const bidTabs = document.querySelectorAll(".bid-tab");
     const bidPanels = document.querySelectorAll("[data-bid-panel]");
+    function selectBidTab(target) {
+      activeBidTab = target;
+      bidTabs.forEach((tab) => {
+        const selected = tab.dataset.bidTab === target;
+        tab.classList.toggle("active", selected);
+        tab.setAttribute("aria-selected", String(selected));
+      });
+      bidPanels.forEach((panel) => {
+        panel.style.display = panel.dataset.bidPanel === target ? "grid" : "none";
+      });
+      document.querySelectorAll('.status-card[data-status="auction-bid"]').forEach((card) => {
+        const selected = target === "bidding";
+        card.classList.toggle("status-active", selected);
+        if (selected) card.setAttribute("aria-current", "true");
+        else card.removeAttribute("aria-current");
+      });
+      updateMarketFilterCounts();
+      applyFailedMarketFilter();
+    }
     bidTabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        bidTabs.forEach((t) => { t.classList.remove("active"); t.setAttribute("aria-selected", "false"); });
-        tab.classList.add("active");
-        tab.setAttribute("aria-selected", "true");
-
-        const target = tab.dataset.bidTab;
-        bidPanels.forEach((panel) => {
-          panel.style.display = panel.dataset.bidPanel === target ? "grid" : "none";
-        });
-        applyFailedMarketFilter();
+      tab.addEventListener("click", () => selectBidTab(tab.dataset.bidTab));
+    });
+    document.querySelectorAll('.status-card[data-status="auction-bid"]').forEach((card) => {
+      card.addEventListener("click", (event) => {
+        event.preventDefault();
+        activeMarketFilter = "all";
+        activeCodeSearch = "";
+        document.getElementById("marketFilterSelect").value = "all";
+        document.getElementById("auctionCodeSearch").value = "";
+        renderBiddingItems();
+        selectBidTab("bidding");
       });
     });
+    selectBidTab(location.hash === "#failedList" ? "failed" : "bidding");
+
   </script>
   <script src="bb-common.js"></script>
 <script src="bb-search-modal.js"></script>
