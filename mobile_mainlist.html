@@ -81,6 +81,11 @@ button,select{cursor:pointer}
 .tab.active{color:var(--rose)}
 .tab.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--rose);border-radius:999px}
 .utility-group{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:100%}
+.search-group{display:grid;grid-template-columns:92px minmax(0,1fr) auto;gap:6px;width:100%;margin-top:2px}
+.search-group .dd-select{height:34px}
+.search-input{height:34px;min-width:0;padding:0 10px;border:1px solid #e5dbd7;border-radius:8px;background:#fff;color:var(--tp);font-size:12px;outline:none}
+.search-input::placeholder{color:#a7a29e}
+.search-btn{height:34px;padding:0 18px;border:0;border-radius:8px;background:var(--navy);color:#fff;font-size:12px;font-weight:700}
 .dd-select{
   height:32px;padding:0 8px;border:1px solid #e5dbd7;border-radius:8px;background:#fff;
   color:var(--navy);font-size:11px;font-weight:700;outline:none;
@@ -284,6 +289,14 @@ button,select{cursor:pointer}
         <option value="international-shipping">국제배송</option>
         <option value="trade-complete">거래완료</option>
       </select>
+    </div>
+    <div class="search-group" role="search">
+      <select class="dd-select" id="searchField" aria-label="검색 대상">
+        <option value="oid">물품아이디</option>
+        <option value="name">상품명</option>
+      </select>
+      <input type="search" class="search-input" id="searchKeyword" placeholder="검색어 입력" aria-label="검색어">
+      <button type="button" class="search-btn" id="searchBtn">검색</button>
     </div>
   </div>
 
@@ -820,16 +833,29 @@ const ddStatus = document.getElementById('ddStatus');
 let activeStatus = '';
 let activeType = '';
 let activeCountry = '';
+let activeSearch = '';
+
+const searchField = document.getElementById('searchField');
+const searchKeyword = document.getElementById('searchKeyword');
+
+function matchesSearch(card) {
+  if (!activeSearch) return true;
+  const source = searchField.value === 'name'
+    ? (card.querySelector('.tr-prod-name')?.textContent || '')
+    : (card.querySelector('.tr-oid')?.textContent || '');
+  return source.toLowerCase().includes(activeSearch.toLowerCase());
+}
 
 function applyTradeFilters() {
-  const isFiltered = Boolean(activeStatus || activeType || activeCountry);
+  const isFiltered = Boolean(activeStatus || activeType || activeCountry || activeSearch);
   tradeTable.classList.toggle('status-filtered', isFiltered);
 
   let visibleCount = 0;
   orderCards.forEach((card) => {
     const show = (!activeStatus || card.dataset.status === activeStatus)
       && (!activeType || card.dataset.tradeType === activeType)
-      && (!activeCountry || card.dataset.country === activeCountry);
+      && (!activeCountry || card.dataset.country === activeCountry)
+      && matchesSearch(card);
     card.classList.toggle('is-hidden', !show);
     if (show) visibleCount += 1;
   });
@@ -864,6 +890,10 @@ document.querySelectorAll('.filter-group .tab').forEach((tab) => {
 
 ddCountry.addEventListener('change', () => { activeCountry = ddCountry.value; applyTradeFilters(); });
 ddStatus.addEventListener('change', () => { activeStatus = ddStatus.value; applyTradeFilters(); });
+
+function runSearch() { activeSearch = searchKeyword.value.trim(); applyTradeFilters(); }
+document.getElementById('searchBtn').addEventListener('click', runSearch);
+searchKeyword.addEventListener('keydown', (e) => { if (e.key === 'Enter') runSearch(); });
 
 activeStatus = new URLSearchParams(location.search).get('status') || '';
 if (activeStatus && [...ddStatus.options].some((o) => o.value === activeStatus)) {

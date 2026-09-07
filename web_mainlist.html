@@ -495,8 +495,7 @@
       display: flex;
       align-items: center;
       gap: 18px;
-      margin: -38px 0 12px;
-      padding-left: 136px;
+      margin: 4px 0 12px;
     }
 
     .filter-group,
@@ -514,6 +513,54 @@
     .utility-group {
       margin-left: auto;
       gap: 8px;
+    }
+
+    .search-group {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-select {
+      height: 28px;
+      padding: 0 22px 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background-color: #fff;
+      color: #4b5563;
+      font-size: 12px;
+      font-weight: 700;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='6'%3E%3Cpath d='M0 0l4.5 6 4.5-6z' fill='%235d6470'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+    }
+
+    .search-input {
+      width: 200px;
+      height: 28px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: #333;
+      font-size: 12px;
+      outline: none;
+    }
+
+    .search-input::placeholder { color: #9aa1ac; }
+
+    .search-btn {
+      height: 28px;
+      padding: 0 16px;
+      border: 0;
+      border-radius: 5px;
+      background: var(--navy);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
     }
 
     .tab,
@@ -1614,13 +1661,6 @@
         <section class="trade-area" aria-labelledby="trade-list-title">
           <div class="trade-head">
             <h2 class="list-title" id="trade-list-title">거래 전체 목록</h2>
-          </div>
-          <div class="filter-row">
-            <div class="filter-group" aria-label="거래 유형">
-              <button class="tab active" type="button" data-trade-type="">전체</button>
-              <button class="tab" type="button" data-trade-type="auction">경매</button>
-              <button class="tab" type="button" data-trade-type="purchase">구매</button>
-            </div>
             <div class="utility-group">
               <div class="filter-dropdown" data-dropdown>
                 <button class="dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
@@ -1691,6 +1731,21 @@
                   <button class="status-filter-option" type="button" role="menuitem" data-status="trade-complete" data-label="거래완료">거래완료</button>
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="filter-row">
+            <div class="filter-group" aria-label="거래 유형">
+              <button class="tab active" type="button" data-trade-type="">전체</button>
+              <button class="tab" type="button" data-trade-type="auction">경매</button>
+              <button class="tab" type="button" data-trade-type="purchase">구매</button>
+            </div>
+            <div class="search-group" role="search">
+              <select class="search-select" id="searchField" aria-label="검색 대상">
+                <option value="oid">물품아이디</option>
+                <option value="name">상품명</option>
+              </select>
+              <input type="search" class="search-input" id="searchKeyword" placeholder="검색어 입력" aria-label="검색어">
+              <button type="button" class="search-btn" id="searchBtn">검색</button>
             </div>
           </div>
 
@@ -2426,9 +2481,21 @@
     const tradeEmpty = document.querySelector(".trade-empty");
     const tradeTitle = document.querySelector("#trade-list-title");
     const statusDropdownLabel = document.querySelector('[data-dropdown-label="status"]');
+    const searchField = document.querySelector("#searchField");
+    const searchKeyword = document.querySelector("#searchKeyword");
+    const searchBtn = document.querySelector("#searchBtn");
     let activeStatus = "";
     let activeType = "";
     let activeCountry = "";
+    let activeSearch = "";
+
+    function matchesSearch(row) {
+      if (!activeSearch) return true;
+      const source = searchField && searchField.value === "name"
+        ? (row.querySelector(".tr-prod-name")?.textContent || "")
+        : (row.querySelector(".tr-oid")?.textContent || "");
+      return source.toLowerCase().includes(activeSearch.toLowerCase());
+    }
 
     function placeOrderActionsAtTableEnd() {
       document.querySelectorAll(".order-table").forEach((table) => {
@@ -2541,7 +2608,7 @@
 
     function applyTradeFilters() {
       if (tradeTable) {
-        tradeTable.classList.toggle("status-filtered", Boolean(activeStatus || activeType || activeCountry));
+        tradeTable.classList.toggle("status-filtered", Boolean(activeStatus || activeType || activeCountry || activeSearch));
       }
 
       let visibleCount = 0;
@@ -2549,7 +2616,7 @@
         const matchesStatus = !activeStatus || row.dataset.status === activeStatus;
         const matchesType = !activeType || row.dataset.tradeType === activeType;
         const matchesCountry = !activeCountry || row.dataset.country === activeCountry;
-        const shouldShow = matchesStatus && matchesType && matchesCountry;
+        const shouldShow = matchesStatus && matchesType && matchesCountry && matchesSearch(row);
         row.classList.toggle("is-hidden", !shouldShow);
         if (shouldShow) {
           visibleCount += 1;
@@ -2622,6 +2689,15 @@
 
     updateStatusCounts();
     applyTradeFilters();
+
+    function runSearch() {
+      activeSearch = searchKeyword ? searchKeyword.value.trim() : "";
+      applyTradeFilters();
+    }
+    if (searchBtn) searchBtn.addEventListener("click", runSearch);
+    if (searchKeyword) searchKeyword.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") runSearch();
+    });
 
     statusTriggers.forEach((trigger) => {
       trigger.setAttribute("aria-pressed", "false");
