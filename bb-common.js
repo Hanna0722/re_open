@@ -168,7 +168,7 @@
     '.bbu::-webkit-scrollbar{display:none}',
     '.bbu.open{opacity:1;visibility:visible;transform:translateY(0)}',
 
-    ':root{--grade-std:#D4891A;--grade-pre:#1f477d;--grade-vip:#0C5F33;--grade-prs:#E8385A}',
+    ':root{--grade-std:#7A828C;--grade-pre:#28705F;--grade-vip:#174F8A;--grade-prs:#E8385A}',
     '.bbd-head{display:flex;align-items:center;justify-content:space-between;min-height:58px;padding:12px 16px;border-bottom:1px solid #ECEFF3;background:#fff}',
     '#drUserHd.bbd-head{padding-top:32px;padding-bottom:32px}',
     '.bbd-user-mini{display:flex;align-items:center;gap:10px}',

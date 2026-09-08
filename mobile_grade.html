@@ -8,7 +8,7 @@
   --bg-primary:#fff;--bg-tertiary:#F4EEEA;
   --border-default:#E6DDDA;--border-strong:#D7CBC7;--divider:#EEE5E2;
   --brand:#E8385A;
-  --grade-std:#888;--grade-pre:#3AAD4E;--grade-vip:#1A3C6E;--grade-prs:#D4891A;
+  --grade-std:#7A828C;--grade-pre:#28705F;--grade-vip:#174F8A;--grade-prs:#E8385A;
   --r-card:12px;--r-pill:999px;--r-badge:8px;
 }
 .phone{width:100%;max-width:390px;margin:0 auto;background:#fff;font-family:Pretendard,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--text-primary);padding-bottom:32px;overflow-x:hidden}
@@ -43,7 +43,7 @@
 
 .grade-status-card{margin:12px 16px 0;background:#fff;border:1px solid var(--border-default);border-radius:var(--r-card);padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
 .status-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.grade-badge-chip{display:inline-block;padding:4px 12px;border-radius:var(--r-pill);font-size:12px;font-weight:700;background:#edf7ef;color:var(--grade-pre)}
+.grade-badge-chip{display:inline-block;padding:4px 12px;border-radius:var(--r-pill);font-size:12px;font-weight:700;background:#e4efec;color:var(--grade-pre)}
 .renewal{font-size:12px;color:var(--text-muted)}
 .progress-labels{display:flex;justify-content:space-between;margin-bottom:6px}
 .progress-labels span{font-size:12px;font-weight:600}
@@ -67,21 +67,21 @@
 }
 
 /* 일반 선택 상태 */
-.gtab.sel-std{background:#f5f5f5;color:var(--grade-std);border-color:var(--border-strong)}
-.gtab.sel-vip{background:#e6f0fa;color:var(--grade-vip);border-color:var(--grade-vip)}
-.gtab.sel-prs{background:#fef4e7;color:var(--grade-prs);border-color:var(--grade-prs)}
+.gtab.sel-std{background:#eef0f2;color:var(--grade-std);border-color:var(--border-strong)}
+.gtab.sel-vip{background:#e5edf6;color:var(--grade-vip);border-color:var(--grade-vip)}
+.gtab.sel-prs{background:#fce9ee;color:var(--grade-prs);border-color:var(--grade-prs)}
 
 /* 현재 등급 탭 — 테두리 2px + 그림자 하이라이트, dot 없음 */
 .gtab.sel-pre{
   background:var(--grade-pre);
   color:#fff;
   border:2px solid var(--grade-pre);
-  box-shadow:0 0 0 3px rgba(58,173,78,0.22);
+  box-shadow:0 0 0 3px rgba(40,112,95,0.22);
 }
 /* 현재 등급이지만 다른 탭 선택 중일 때 — 테두리+그림자만 유지 */
 .gtab.is-current:not(.sel-pre){
   border:2px solid var(--grade-pre);
-  box-shadow:0 0 0 3px rgba(58,173,78,0.15);
+  box-shadow:0 0 0 3px rgba(40,112,95,0.15);
   color:var(--grade-pre);
   background:#fff;
 }
@@ -89,7 +89,7 @@
 .benefit-card{margin:0 16px;background:#fff;border:1px solid var(--border-default);border-radius:var(--r-card);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
 .bc-head{padding:16px;border-bottom:1px solid var(--divider)}
 .bc-head.current{border-left:3px solid var(--grade-pre);padding-left:13px}
-.bc-current-label{display:inline-block;font-size:10px;font-weight:700;color:var(--grade-pre);background:#edf7ef;border-radius:var(--r-pill);padding:2px 8px;margin-bottom:6px;letter-spacing:.04em}
+.bc-current-label{display:inline-block;font-size:10px;font-weight:700;color:var(--grade-pre);background:#e4efec;border-radius:var(--r-pill);padding:2px 8px;margin-bottom:6px;letter-spacing:.04em}
 .bc-grade{font-size:16px;font-weight:700;margin-bottom:2px}
 .bc-cond{font-size:12px;color:var(--text-muted)}
 .bc-body{padding:0 16px}
@@ -97,14 +97,22 @@
 .bc-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--divider)}
 .bc-row:last-child{border-bottom:none;padding-bottom:14px}
 .bc-label{font-size:14px;color:var(--text-secondary)}
-.bc-val{font-size:14px;font-weight:600;color:var(--text-strong)}
-.bc-val.pre{color:var(--grade-pre)}.bc-val.vip{color:var(--grade-vip)}.bc-val.prs{color:var(--grade-prs)}.bc-val.muted{color:var(--text-muted);font-weight:400}
+.bc-val{font-size:14px;font-weight:600}
+
+/* 등급명 + 혜택 값 색상 = 각 등급 색상 (카드 단위로 한 번만 지정) */
+.bc-std .bc-grade,.bc-std .bc-val{color:var(--grade-std)}
+.bc-pre .bc-grade,.bc-pre .bc-val{color:var(--grade-pre)}
+.bc-vip .bc-grade,.bc-vip .bc-val{color:var(--grade-vip)}
+.bc-prs .bc-grade,.bc-prs .bc-val{color:var(--grade-prs)}
+
+/* 값이 없는 칸(—)은 등급 색상 대신 흐린 회색 */
+.benefit-card .bc-val.muted{color:var(--text-muted);font-weight:400}
 
 .downgrade-notice{margin:16px 16px 0;background:#f7f3f0;border-radius:var(--r-badge);padding:15px 18px 14px}
 .downgrade-notice p{position:relative;padding-left:13px;color:#555;font-size:14px;line-height:1.75}
 .downgrade-notice p::before{content:"•";position:absolute;left:0;top:0}
 
-    .member-tier-icon { background:#eef5ff !important; color:#1A3C6E !important; }
+    .member-tier-icon { background:#e4efec !important; color:#1F5A4B !important; }
     .member-tier-icon i { line-height:1; }
   </style>
 
@@ -167,8 +175,8 @@
   </div>
 
   <!-- Standard -->
-  <div class="benefit-card" id="bp-std" style="display:none">
-    <div class="bc-head"><div class="bc-grade" style="color:var(--grade-std)">Standard</div><div class="bc-cond">월 0~4건</div></div>
+  <div class="benefit-card bc-std" id="bp-std" style="display:none">
+    <div class="bc-head"><div class="bc-grade">Standard</div><div class="bc-cond">월 0~4건</div></div>
     <div class="bc-body">
       <div class="bc-divider">마일리지</div>
       <div class="bc-row"><span class="bc-label">월간 지급</span><span class="bc-val">5,000원</span></div>
@@ -185,20 +193,20 @@
   </div>
 
   <!-- Premium (현재 등급 — 디폴트 노출) -->
-  <div class="benefit-card" id="bp-pre" style="display:block">
+  <div class="benefit-card bc-pre" id="bp-pre" style="display:block">
     <div class="bc-head current">
       <div class="bc-current-label">현재 등급</div>
-      <div class="bc-grade" style="color:var(--grade-pre)">Premium</div>
+      <div class="bc-grade">Premium</div>
       <div class="bc-cond">월 5건 or 5만엔↑</div>
     </div>
     <div class="bc-body">
       <div class="bc-divider">마일리지</div>
-      <div class="bc-row"><span class="bc-label">월간 지급</span><span class="bc-val pre">10,000원</span></div>
-      <div class="bc-row"><span class="bc-label">거래 적립</span><span class="bc-val pre">5%</span></div>
+      <div class="bc-row"><span class="bc-label">월간 지급</span><span class="bc-val">10,000원</span></div>
+      <div class="bc-row"><span class="bc-label">거래 적립</span><span class="bc-val">5%</span></div>
       <div class="bc-divider">배송</div>
       <div class="bc-row"><span class="bc-label">무료 보관</span><span class="bc-val">30일</span></div>
       <div class="bc-row"><span class="bc-label">묶음 비용</span><span class="bc-val" style="font-size:13px">건당 ¥100 (6건~)</span></div>
-      <div class="bc-row"><span class="bc-label">EMS·비바특송</span><span class="bc-val pre">3% 할인</span></div>
+      <div class="bc-row"><span class="bc-label">EMS·비바특송</span><span class="bc-val">3% 할인</span></div>
       <div class="bc-divider">쿠폰 · CS</div>
       <div class="bc-row"><span class="bc-label">생일 쿠폰</span><span class="bc-val">10,000원</span></div>
       <div class="bc-row"><span class="bc-label">VIP 전담 CS</span><span class="bc-val muted">—</span></div>
@@ -207,38 +215,38 @@
   </div>
 
   <!-- VIP -->
-  <div class="benefit-card" id="bp-vip" style="display:none">
-    <div class="bc-head"><div class="bc-grade" style="color:var(--grade-vip)">VIP</div><div class="bc-cond">월 10건 or 15만엔↑</div></div>
+  <div class="benefit-card bc-vip" id="bp-vip" style="display:none">
+    <div class="bc-head"><div class="bc-grade">VIP</div><div class="bc-cond">월 10건 or 15만엔↑</div></div>
     <div class="bc-body">
       <div class="bc-divider">마일리지</div>
-      <div class="bc-row"><span class="bc-label">월간 지급</span><span class="bc-val vip">20,000원</span></div>
-      <div class="bc-row"><span class="bc-label">거래 적립</span><span class="bc-val vip">8%</span></div>
+      <div class="bc-row"><span class="bc-label">월간 지급</span><span class="bc-val">20,000원</span></div>
+      <div class="bc-row"><span class="bc-label">거래 적립</span><span class="bc-val">8%</span></div>
       <div class="bc-divider">배송</div>
       <div class="bc-row"><span class="bc-label">무료 보관</span><span class="bc-val">60일</span></div>
-      <div class="bc-row"><span class="bc-label">묶음 비용</span><span class="bc-val vip" style="font-size:13px">건당 ¥50 (4건~)</span></div>
-      <div class="bc-row"><span class="bc-label">EMS·비바특송</span><span class="bc-val vip">5% 할인</span></div>
+      <div class="bc-row"><span class="bc-label">묶음 비용</span><span class="bc-val" style="font-size:13px">건당 ¥50 (4건~)</span></div>
+      <div class="bc-row"><span class="bc-label">EMS·비바특송</span><span class="bc-val">5% 할인</span></div>
       <div class="bc-divider">쿠폰 · CS</div>
       <div class="bc-row"><span class="bc-label">생일 쿠폰</span><span class="bc-val">20,000원</span></div>
-      <div class="bc-row"><span class="bc-label">VIP 전담 CS</span><span class="bc-val vip">전용 라인</span></div>
+      <div class="bc-row"><span class="bc-label">VIP 전담 CS</span><span class="bc-val">전용 라인</span></div>
       <div class="bc-row"><span class="bc-label">안심 플랜</span><span class="bc-val muted">—</span></div>
     </div>
   </div>
 
   <!-- Prestige -->
-  <div class="benefit-card" id="bp-prs" style="display:none">
-    <div class="bc-head"><div class="bc-grade" style="color:var(--grade-prs)">Prestige</div><div class="bc-cond">월 30건 or 100만엔↑</div></div>
+  <div class="benefit-card bc-prs" id="bp-prs" style="display:none">
+    <div class="bc-head"><div class="bc-grade">Prestige</div><div class="bc-cond">월 30건 or 100만엔↑</div></div>
     <div class="bc-body">
       <div class="bc-divider">마일리지</div>
-      <div class="bc-row"><span class="bc-label">월간 지급</span><span class="bc-val prs">50,000원</span></div>
-      <div class="bc-row"><span class="bc-label">거래 적립</span><span class="bc-val prs">12%</span></div>
+      <div class="bc-row"><span class="bc-label">월간 지급</span><span class="bc-val">50,000원</span></div>
+      <div class="bc-row"><span class="bc-label">거래 적립</span><span class="bc-val">12%</span></div>
       <div class="bc-divider">배송</div>
       <div class="bc-row"><span class="bc-label">무료 보관</span><span class="bc-val">90일</span></div>
-      <div class="bc-row"><span class="bc-label">묶음 비용</span><span class="bc-val prs">무료</span></div>
-      <div class="bc-row"><span class="bc-label">EMS·비바특송</span><span class="bc-val prs">10% 할인</span></div>
+      <div class="bc-row"><span class="bc-label">묶음 비용</span><span class="bc-val">무료</span></div>
+      <div class="bc-row"><span class="bc-label">EMS·비바특송</span><span class="bc-val">10% 할인</span></div>
       <div class="bc-divider">쿠폰 · CS</div>
       <div class="bc-row"><span class="bc-label">생일 쿠폰</span><span class="bc-val">50,000원</span></div>
-      <div class="bc-row"><span class="bc-label">VIP 전담 CS</span><span class="bc-val prs">전용 라인</span></div>
-      <div class="bc-row"><span class="bc-label">안심 플랜</span><span class="bc-val prs">제공</span></div>
+      <div class="bc-row"><span class="bc-label">VIP 전담 CS</span><span class="bc-val">전용 라인</span></div>
+      <div class="bc-row"><span class="bc-label">안심 플랜</span><span class="bc-val">제공</span></div>
     </div>
   </div>
 

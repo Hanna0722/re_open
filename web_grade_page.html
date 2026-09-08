@@ -14,7 +14,6 @@
       --ts: #666680;
       --tm: #999baa;
       --border: #e0e4eb;
-      --navy: #1A3C6E;
       --text: #20242b;
       --muted: #777985;
       --soft: #f8f4f1;
@@ -22,9 +21,9 @@
       --line-soft: #eee6e2;
       --green: #35a94d;
       --gold: #d4891a;
-      --grade-std: #D4891A;
-      --grade-pre: #1f477d;
-      --grade-vip: #0C5F33;
+      --grade-std: #7A828C;
+      --grade-pre: #28705F;
+      --grade-vip: #174F8A;
       --grade-prs: #E8385A;
       --stage-left: max(16px, calc((100vw - 1140px) / 2));
       --sidebar-w: 231px;
@@ -59,23 +58,6 @@
     .top-notice-spacer {
       height: 34px;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     .wrap {
       display: grid;
@@ -399,10 +381,10 @@
       min-width: 90px;
       min-height: 25px;
       padding: 4px 15px;
-      border: 1px solid var(--navy);
+      border: 1px solid var(--grade-vip);
       border-radius: 50px;
       background: #fff;
-      color: var(--navy);
+      color: var(--grade-vip);
       font-size: 12px;
       font-weight: 700;
       line-height: 1;
@@ -428,7 +410,7 @@
     }
 
     .grade-progress-labels .next {
-      color: var(--navy);
+      color: var(--grade-prs);
     }
 
     .grade-progress-track {
@@ -441,7 +423,7 @@
     .grade-progress-fill {
       height: 100%;
       border-radius: inherit;
-      background: var(--navy);
+      background: var(--grade-vip);
     }
 
     .grade-progress-hint {
@@ -499,7 +481,7 @@
 
     .bc-name {
       font-size: 18px;
-      font-weight: 800;
+      font-weight: 700;
       line-height: 1.1;
     }
 
@@ -517,7 +499,6 @@
       display: inline-grid;
       place-items: center;
       padding: 3px;
-      border: 1px solid #999baa59;
       border-radius: 50%;
       background: #fff;
     }
@@ -602,21 +583,25 @@
     }
 
     .br-val {
-      color: #D4891A;
       font-size: 14px;
       font-weight: 700;
       line-height: 1.1;
     }
 
-     .br-val_pre {
-      color: #1f477d;
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 1.1;
-    }
+    /* 혜택 값 색상 = 각 등급 색상 (컬럼 단위로 한 번만 지정) */
+    .benefit-col-standard .br-val { color: var(--grade-std); }
+    .benefit-col-premium  .br-val { color: var(--grade-pre); }
+    .benefit-col-vip      .br-val { color: var(--grade-vip); }
+    .benefit-col-prestige .br-val { color: var(--grade-prs); }
 
     .br-val.small {
       font-size: 12px;
+    }
+
+    /* 값이 없는 칸(-)은 등급 색상 대신 흐린 회색 */
+    .benefit-col .br-val.muted {
+      color: #c2bdba;
+      font-weight: 700;
     }
 
     .br-sub {
@@ -625,23 +610,6 @@
       font-size: 12px;
       font-weight: 500;
       line-height: 1.35;
-    }
-
-    .br-val.accent {
-      color: var(--grade-prs);
-    }
-
-    .br-val.navy {
-      color: var(--grade-vip);
-    }
-
-    .br-val.green {
-      color: var(--grade-pre);
-    }
-
-    .br-val.muted {
-      color: #c2bdba;
-      font-weight: 700;
     }
 
     .downgrade-notice {
@@ -784,7 +752,7 @@
       <h2 class="section-head">등급별 혜택</h2>
 
       <section class="benefit-grid" aria-label="등급별 혜택">
-        <div class="benefit-col">
+        <div class="benefit-col benefit-col-standard">
           <div class="benefit-col-head">
             <p class="bc-name bc-name-standard"><span class="bc-badge" aria-hidden="true"><img src="gradeicon/grade_standard.png" alt=""></span>Standard</p>
             <p class="bc-sub">월 0~6건 이하</p>
@@ -798,63 +766,63 @@
             <div class="benefit-row"><p class="br-label">묶음 배송 비용</p><p class="br-val">건당 ¥100 (6건~)</p></div>
             <div class="benefit-row"><p class="br-label">국제운임 할인율</p><p class="br-val muted">-</p><p class="br-sub">물품 파손 시 최대 $200까지 보상</p></div>
             <div class="benefit-section-divider">생일 혜택</div>
-            <div class="benefit-row"><p class="br-label">비바항공 국제운임 쿠폰</p><p class="br-val" style="color:var(--grade-std)">5,000원 * 1장</p></div>
+            <div class="benefit-row"><p class="br-label">비바항공 국제운임 쿠폰</p><p class="br-val">5,000원 * 1장</p></div>
           </div>
         </div>
 
-        <div class="benefit-col">
+        <div class="benefit-col benefit-col-premium">
           <div class="benefit-col-head">
             <p class="bc-name bc-name-premium"><span class="bc-badge" aria-hidden="true"><img src="gradeicon/grade_premium.png" alt=""></span>Premium</p>
             <p class="bc-sub">월 7건 이상 또는 70만원 이상</p>
           </div>
           <div class="benefit-rows">
             <div class="benefit-section-divider">마일리지 혜택</div>
-            <div class="benefit-row"><p class="br-label">월간 마일리지</p><p class="br-val"style="color:var(--grade-pre)">10,000원</p></div>
-            <div class="benefit-row"><p class="br-label">구매수수료 적립률</p><p class="br-val green"style="color:var(--grade-pre)">5%</p></div>
+            <div class="benefit-row"><p class="br-label">월간 마일리지</p><p class="br-val">10,000원</p></div>
+            <div class="benefit-row"><p class="br-label">구매수수료 적립률</p><p class="br-val">5%</p></div>
             <div class="benefit-section-divider">배송 혜택</div>
-            <div class="benefit-row"><p class="br-label">무료 보관</p><p class="br-val_pre">30일</p></div>
-            <div class="benefit-row"><p class="br-label">묶음 배송 비용</p><p class="br-val_pre">건당 ¥100 (6건~)</p></div>
-            <div class="benefit-row"><p class="br-label">국제운임 할인율</p><p class="br-val_pre">비바항공 5% 할인</p><p class="br-sub">물품 파손 시 최대 $200까지 보상</p></div>
+            <div class="benefit-row"><p class="br-label">무료 보관</p><p class="br-val">30일</p></div>
+            <div class="benefit-row"><p class="br-label">묶음 배송 비용</p><p class="br-val">건당 ¥100 (6건~)</p></div>
+            <div class="benefit-row"><p class="br-label">국제운임 할인율</p><p class="br-val">비바항공 5% 할인</p><p class="br-sub">물품 파손 시 최대 $200까지 보상</p></div>
             <div class="benefit-section-divider">생일 혜택</div>
-            <div class="benefit-row"><p class="br-label">비바항공 국제운임 쿠폰</p><p class="br-val_pre">5,000원 * 2장</p></div>
+            <div class="benefit-row"><p class="br-label">비바항공 국제운임 쿠폰</p><p class="br-val">5,000원 * 2장</p></div>
           </div>
         </div>
 
-        <div class="benefit-col current-grade">
+        <div class="benefit-col benefit-col-vip current-grade">
           <div class="benefit-col-head">
             <p class="bc-name bc-name-vip"><span class="bc-badge" aria-hidden="true"><img src="gradeicon/grade_vip.png" alt=""></span>VIP</p>
             <p class="bc-sub">월 15건 이상 또는 150만원 이상</p>
           </div>
           <div class="benefit-rows">
             <div class="benefit-section-divider">마일리지 혜택</div>
-            <div class="benefit-row"><p class="br-label">월간 마일리지</p><p class="br-val navy">20,000원</p></div>
-            <div class="benefit-row"><p class="br-label">구매수수료 적립률</p><p class="br-val navy">10%</p></div>
+            <div class="benefit-row"><p class="br-label">월간 마일리지</p><p class="br-val">20,000원</p></div>
+            <div class="benefit-row"><p class="br-label">구매수수료 적립률</p><p class="br-val">10%</p></div>
             <div class="benefit-section-divider">배송 혜택</div>
-            <div class="benefit-row"><p class="br-label">무료 보관</p><p class="br-val navy">45일</p></div>
-            <div class="benefit-row"><p class="br-label">묶음 배송 비용</p><p class="br-val navy">무료 (최대 10건)</p></div>
-            <div class="benefit-row"><p class="br-label">국제운임 할인율</p><p class="br-val navy" style="color:var(--grade-vip)">비바항공 10% / EMS 5% 할인</p><p class="br-sub">물품 파손 시 최대 $200까지 보상</p></div>
+            <div class="benefit-row"><p class="br-label">무료 보관</p><p class="br-val">45일</p></div>
+            <div class="benefit-row"><p class="br-label">묶음 배송 비용</p><p class="br-val">무료 (최대 10건)</p></div>
+            <div class="benefit-row"><p class="br-label">국제운임 할인율</p><p class="br-val">비바항공 10% / EMS 5% 할인</p><p class="br-sub">물품 파손 시 최대 $200까지 보상</p></div>
             <div class="benefit-section-divider">생일 혜택</div>
-            <div class="benefit-row"><p class="br-label">비바항공 국제운임 쿠폰</p><p class="br-val navy" style="color:var(--grade-vip)">5,000원 * 3장</p></div>
+            <div class="benefit-row"><p class="br-label">비바항공 국제운임 쿠폰</p><p class="br-val">5,000원 * 3장</p></div>
           </div>
         </div>
 
-        <div class="benefit-col">
+        <div class="benefit-col benefit-col-prestige">
           <div class="benefit-col-head">
             <p class="bc-name bc-name-prestige"><span class="bc-badge" aria-hidden="true"><img src="gradeicon/grade_prestige.png" alt=""></span>Prestige</p>
             <p class="bc-sub">월 30건 이상 또는 1,000만원 이상</p>
           </div>
           <div class="benefit-rows">
             <div class="benefit-section-divider">마일리지 혜택</div>
-            <div class="benefit-row"><p class="br-label">월간 마일리지</p><p class="br-val accent">30,000원</p></div>
-            <div class="benefit-row"><p class="br-label">구매수수료 적립률</p><p class="br-val accent">15%</p></div>
+            <div class="benefit-row"><p class="br-label">월간 마일리지</p><p class="br-val">30,000원</p></div>
+            <div class="benefit-row"><p class="br-label">구매수수료 적립률</p><p class="br-val">15%</p></div>
             <div class="benefit-section-divider">배송 혜택</div>
-            <div class="benefit-row"><p class="br-label">무료 보관</p><p class="br-val" style="color:var(--grade-prs)">45일</p></div>
-            <div class="benefit-row"><p class="br-label">묶음배송 비용</p><p class="br-val" style="color:var(--grade-prs)">무료 (최대 10건)</p></div>
-            <div class="benefit-row"><p class="br-label">국제운임 할인율</p><p class="br-val" style="color:var(--grade-prs)">비바항공 10% / EMS,선편 5%</p><p class="br-sub">물품 파손 시 최대 $200까지 보상</p></div>
+            <div class="benefit-row"><p class="br-label">무료 보관</p><p class="br-val">45일</p></div>
+            <div class="benefit-row"><p class="br-label">묶음배송 비용</p><p class="br-val">무료 (최대 10건)</p></div>
+            <div class="benefit-row"><p class="br-label">국제운임 할인율</p><p class="br-val">비바항공 10% / EMS,선편 5%</p><p class="br-sub">물품 파손 시 최대 $200까지 보상</p></div>
             <div class="benefit-section-divider">생일 혜택</div>
-            <div class="benefit-row"><p class="br-label">비바항공 국제운임 쿠폰</p><p class="br-val" style="color:var(--grade-prs)">5,000원 * 4장</p></div>
+            <div class="benefit-row"><p class="br-label">비바항공 국제운임 쿠폰</p><p class="br-val">5,000원 * 4장</p></div>
             <div class="benefit-section-divider">Prestige 전용</div>
-            <div class="benefit-row"><p class="br-label">연간 추가 마일리지</p><p class="br-val accent">30,000원 지급</p></div>
+            <div class="benefit-row"><p class="br-label">연간 추가 마일리지</p><p class="br-val">30,000원 지급</p></div>
             <div class="benefit-row"><p class="br-label"><i class="fas fa-gift" aria-hidden="true"></i> Prestige 전용 Gift 제공</p></div>
           </div>
         </div>
