@@ -36,18 +36,8 @@ a{text-decoration:none;color:inherit}
 .ss-note span::before{content:"";width:26px;height:22px;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='22' fill='none'%3E%3Cpath d='M3 19c6-1 12-5 13-12M16 7l-1 8 7-3' stroke='%231A1A2E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
 /* ── 밑: 히어로 배너 ── */
 .hero{padding:36px 0 44px}
-.hero-card{position:relative;overflow:hidden;border-radius:20px;background:linear-gradient(120deg,#FFF3F5 0%,#FFE8DC 55%,#FFF6E9 100%);border:1px solid #FBD9D0;padding:52px 56px;display:flex;align-items:center;justify-content:space-between;gap:32px}
-.hero-tag{display:inline-block;background:var(--rose);color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:5px;margin-bottom:16px}
-.hero-title{font-size:38px;font-weight:800;line-height:1.28;color:var(--tp)}
-.hero-title b{color:var(--rose)}
-.hero-accent{margin-top:10px;font-size:22px;font-weight:800;color:var(--rose)}
-.hero-sub{margin-top:16px;font-size:14px;color:var(--ts);line-height:1.7}
-.hero-obj{flex-shrink:0;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFD1DC,#F58AA3 55%,var(--rose));display:flex;align-items:center;justify-content:center;font-size:92px;color:#fff}
-@media(max-width:900px){
-  .hero-card{flex-direction:column;text-align:center;padding:40px 24px}
-  .hero-obj{width:160px;height:160px;font-size:64px}
-  .hero-title{font-size:28px}
-}
+.hero-card{overflow:hidden;border-radius:20px;background:#fff}
+.hero-banner{display:block;width:100%;height:auto}
 /* ── 진행 안내 ── */
 .steps{padding:8px 0 48px}
 .steps h2{font-size:20px;font-weight:700;text-align:center;margin-bottom:24px}
@@ -78,11 +68,6 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
 <body>
 
 <!-- 헤더 -->
-<div class="channel-bar">
-  <div class="channel-inner">
-    <div class="channel-icons"><!-- bb-common.js STORES 목록에서 렌더링 --></div>
-  </div>
-</div>
 
 <!-- 상단: 커진 검색창 -->
 <section class="start-search">
@@ -104,13 +89,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
 <section class="hero">
   <div class="wrap">
     <div class="hero-card">
-      <div class="hero-text">
-        <span class="hero-tag">RENEWAL OPEN EVENT</span>
-        <h2 class="hero-title">일본 직구, 지금은 <b>0원</b> 혜택!</h2>
-        <div class="hero-accent">대행 수수료 0원 + 첫 국제 배송비 0원</div>
-        <p class="hero-sub">첫 구매대행 고객이라면 대행 수수료와 첫 국제 배송비를 비드바이가 부담합니다.<br>원하는 상품 URL만 넣으면 견적부터 결제까지 한 번에 진행돼요.</p>
-      </div>
-      <div class="hero-obj" aria-hidden="true"><i class="fas fa-gift"></i></div>
+      <img class="hero-banner" src="urlbanner.png" width="2167" height="726" alt="원하는 일본 상품 URL을 입력해 주세요. 상품 검색창에 URL을 입력하면 간편하게 구매대행을 시작할 수 있습니다.">
     </div>
   </div>
 </section>
@@ -139,18 +118,6 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
   </div>
 </section>
 
-<!-- 지원 스토어 -->
-<section class="stores">
-  <div class="wrap">
-    <h2>이런 사이트를 지원해요</h2>
-    <div class="store-row">
-      <a href="web_purchase_url.html">일본 아마존</a>
-      <a href="web_purchase_url.html">스루가야</a>
-      <a href="web_purchase_url.html">그 외 일본 구매 사이트</a>
-    </div>
-    <p class="step-d" style="text-align:center;margin-top:16px">야후옥션·메루카리는 URL 구매대행 대상에서 제외됩니다.</p>
-  </div>
-</section>
 
 <!-- 푸터 -->
 <footer>

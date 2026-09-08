@@ -24,6 +24,18 @@
     return file === 'web_mypage.html';
   }
 
+  /* 상단 스토어 채널 바를 노출하는 페이지 (마크업은 이 스크립트가 주입) */
+  var CHANNEL_BAR_PAGES = [
+    'web_main.html', 'web_sub_main.html', 'web_category_main.html', 'web_totalsearch.html',
+    'web_mainlist.html', 'web_auction.html', 'web_auction_bid_list.html', 'web_mypage.html',
+    'web_login.html', 'web_payment_detail.html', 'web_payment_oversize.html',
+    'web_purchase_start.html', 'web_purchase_merukari.html', 'web_purchase_store.html', 'web_purchase_url.html'
+  ];
+  function wantsChannelBar() {
+    var file = (location.pathname.split('/').pop() || '').toLowerCase();
+    return CHANNEL_BAR_PAGES.indexOf(file) > -1;
+  }
+
   function removeNonMainNotice() {
     if (isMainPage()) return;
     document.querySelectorAll('.notice-bar, .top-notice-spacer').forEach(function (el) {
@@ -312,9 +324,25 @@
     }).join('');
   }
 
-  function renderStoreChannelBar() {
-    var host = document.querySelector('.channel-icons');
-    if (host) host.innerHTML = storeChannelBarHTML();
+  function renderStoreChannelBar(afterEl) {
+    /* 페이지에 남아있던 기존 마크업(채널바/스토어스트립)은 제거하고 표준 바로 교체 */
+    /* 페이지에 남아있던 기존 스토어바 마크업 정리 */
+    document.querySelectorAll('.store-strip > .store-list, .channel-bar:not(#bbChannelBar) > .channel-inner').forEach(function (el) {
+      el.remove();
+    });
+    document.querySelectorAll('.store-strip, .channel-bar:not(#bbChannelBar)').forEach(function (el) {
+      if (!el.children.length && !el.textContent.trim()) el.remove();
+    });
+    if (!wantsChannelBar()) return;
+    var bar = document.getElementById('bbChannelBar');
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.id = 'bbChannelBar';
+      bar.className = 'channel-bar';
+      if (afterEl) afterEl.insertAdjacentElement('afterend', bar);
+      else document.body.insertBefore(bar, document.body.firstChild);
+    }
+    bar.innerHTML = '<div class="channel-inner"><div class="channel-icons">' + storeChannelBarHTML() + '</div></div>';
   }
 
   function leftDrawerHTML() {
@@ -424,7 +452,6 @@
   function render() {
     hydrateProductImages();
     removeNonMainNotice();
-    renderStoreChannelBar();
 
     if (!document.getElementById('bbCommonCss')) {
       var style = document.createElement('style');
@@ -455,6 +482,8 @@
       }
     }
     header.innerHTML = headerHTML();
+
+    renderStoreChannelBar(header);
 
     var leftOv = ensureNode('bbDrawerOv', 'div', 'bbd-ov');
     var left = ensureNode('bbDrawer', 'aside', 'bbd');
