@@ -20,6 +20,22 @@ Uses a 4px base grid with scale: 1, 2, 3, 4, 5, 6, 8, 10.
 - **Border Gray** (#E0E4EB): Card borders, input borders, dividers
 - **Notice Bar** (#F1F3F5): Top notice bar background
 
+### Grade colors
+
+Membership tiers use a dedicated 4-color scale, exposed as `:root` tokens
+(`bb-common.js` / `bb-common-mobile.js` inject them; grade pages also
+declare them inline). Used for the tier name, benefit values, tab/badge
+accents and the current-grade highlight.
+
+```css
+:root{
+  --grade-std: #7A828C;  /* Standard — silver  */
+  --grade-pre: #28705F;  /* Premium  — teal    */
+  --grade-vip: #174F8A;  /* VIP      — blue     */
+  --grade-prs: #E8385A;  /* Prestige — rose (== brand) */
+}
+```
+
 ## Typography
 
 ### Font tokens (single source of truth)
