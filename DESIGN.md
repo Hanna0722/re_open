@@ -31,10 +31,10 @@ CSS reference the tokens — never a literal stack.
 
 ```css
 :root{
-  --font-sans: Pretendard, 'Apple SD Gothic Neo', 'Helvetica Neue', 'Malgun Gothic', '맑은 고딕', sans-serif;
+  --font-sans: 'Pretendard', 'Malgun Gothic', '돋움', 'Dotum', Arial, sans-serif;
   --font-num:  Roboto, var(--font-sans);
 }
-body{ font-family: var(--font-sans); }
+body{ font: 400 14px/1 var(--font-sans); }
 ```
 
 - **`--font-sans`** — headlines, body, labels, buttons, everything textual (Korean + Latin).

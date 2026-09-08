@@ -133,7 +133,7 @@
       '--label-col-w:230px;' +
     '}',
     /* 공통 폰트 토큰 (DESIGN.md 기준) — 페이지 인라인 :root의 백업 */
-    ":root{--font-sans:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;--font-num:Roboto,var(--font-sans)}",
+    ":root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}",
     'body{font-family:var(--font-sans)}',
     '.req{color:var(--rose);font-weight:700;margin-left:2px}',
     '.required-note{color:#666680;font-size:12px}',
@@ -243,8 +243,8 @@
     '.channel-icons{display:grid;grid-template-columns:repeat(8,1fr);gap:16px;width:min(calc(100vw - 60px),900px);margin:0 auto}',
     '.channel-icons::-webkit-scrollbar{display:none}',
     '.ch-icon-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:4px 14px;cursor:pointer;min-width:80px;flex-shrink:0;transition:opacity .15s;text-decoration:none}',
-    '.ch-icon-item:hover{opacity:.8}',
-    '.ch-label{font-size:19px;color:#666B75;font-weight:500;white-space:nowrap}',
+    '.ch-icon-item:hover .ch-label{color:#222831}',
+    '.ch-label{font-size:14.7px;color:#666B75;font-weight:500;white-space:nowrap;transition:color .15s}',
     '.ch-label.active{color:#E8385A;font-weight:700}',
 
     /* -- 서브/카테고리/통합검색 상단 스토어 바 (채널 바와 동일 모양) -- */
