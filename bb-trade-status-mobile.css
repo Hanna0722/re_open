@@ -8,6 +8,7 @@
 .status-step{display:flex;flex-direction:column;align-items:center;gap:8px;padding:0;border:0;background:none;font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;text-decoration:none}
 .status-step em{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#f4f1ef;color:#2b2f37;font-size:18px;font-style:normal;font-weight:800;letter-spacing:-.03em;transition:transform .16s ease}
 .status-step:active em{transform:scale(.93)}
+.status-step em.status-count-pair{gap:4px;font-size:14px}
 .status-step em.zero{color:#c7c4c2;font-weight:700}
 .status-step strong{min-height:28px;color:#6a6c74;font-size:11px;font-weight:600;letter-spacing:-.045em;line-height:1.35;text-align:center}
 .status-step.hot em{color:var(--brand)}

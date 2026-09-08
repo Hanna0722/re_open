@@ -7,6 +7,7 @@
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="bb-trade-status-mobile.css">
   <style>
     :root {
       --brand: #E8385A;
@@ -121,7 +122,7 @@
 
       /* main */
       .main { padding: 24px 14px 56px; }
-      .shopping-head { margin: 0 0 14px; }
+      .mypage-assets .shopping-head { margin: 0 0 14px; }
       .shopping-head h2, .list-title { font-size: 18px; }
 
       /* filter row */
@@ -332,7 +333,7 @@
     }
     .stage { display: block; width: 100%; margin: 0; }
     .main { padding: 24px 10px 68px; background: #fff; }
-    .shopping-head {
+    .mypage-assets .shopping-head {
       margin: 0 0 14px;
       display: flex;
       align-items: center;
@@ -482,29 +483,6 @@
       color: #8a8f99;
       font-size: 10px;
       font-weight: 600;
-    }
-    .status-period {
-      color: var(--faint);
-      font-size: 12px;
-      font-weight: 500;
-    }
-    .status-more {
-      margin-left: auto;
-      display: flex;
-      padding: 4px;
-      border: 0;
-      background: none;
-      color: #c3c0bd;
-      cursor: pointer;
-    }
-    .status-more svg {
-      width: 16px;
-      height: 16px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2.4;
-      stroke-linecap: round;
-      stroke-linejoin: round;
     }
     .tab {
       height: 28px;
@@ -813,85 +791,6 @@
       font-weight: 700;
       line-height: 1.35;
     }
-    .status-board {
-      margin: 0 0 18px;
-    }
-    .status-steps {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 2px;
-      padding: 8px 4px 16px;
-    }
-    .status-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      padding: 0;
-      border: 0;
-      background: none;
-      font-family: inherit;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .status-step em {
-      width: 52px;
-      height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: #f4f1ef;
-      color: #2b2f37;
-      font-size: 18px;
-      font-style: normal;
-      font-weight: 800;
-      letter-spacing: -.03em;
-      transition: transform .16s ease;
-    }
-    .status-step:active em { transform: scale(.93); }
-    .status-step em.zero { color: #c7c4c2; font-weight: 700; }
-    .status-step strong {
-      min-height: 28px;
-      color: #6a6c74;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: -.045em;
-      line-height: 1.35;
-      text-align: center;
-    }
-    .status-step.hot em { background: #ffe9ee; color: var(--brand); }
-    .status-step.hot strong { color: var(--brand); font-weight: 700; }
-    .status-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 6px;
-    }
-    .status-grid button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 13px 4px;
-      border: 1px solid #e5dcd8;
-      border-radius: 5px;
-      background: #fff;
-      color: #5f6169;
-      font-family: inherit;
-      font-size: 12.5px;
-      font-weight: 600;
-      letter-spacing: -.035em;
-      cursor: pointer;
-    }
-    .status-grid i {
-      color: #2b2f37;
-      font-size: 13px;
-      font-style: normal;
-      font-weight: 800;
-    }
-    .status-grid i.zero { color: #c4c1bf; }
-    .status-grid button.hot { color: var(--brand); font-weight: 700; }
-    .status-grid button.hot i { color: var(--brand); }
     .seller {
       font-size: 11px;
     }
@@ -1081,33 +980,8 @@
         </div>
       </section>
 
-      <!-- 나의 거래 현황 -->
-      <section aria-labelledby="shopping-status-title">
-        <div class="shopping-head">
-          <h2 id="shopping-status-title">나의 거래 현황</h2>
-          <span class="status-period">최근 6개월 기준</span>
-          <a class="status-more" href="mobile_mainlist.html" aria-label="거래 현황 전체보기">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-        <div class="status-board">
-          <div class="status-steps">
-            <button class="status-step" type="button" data-status="auction-bid" data-label="입찰/구매신청"><em>10</em><strong>입찰/<br>구매신청</strong></button>
-            <button class="status-step hot" type="button" data-status="first-payment-wait" data-label="1차 결제대기"><em>5</em><strong>1차<br>결제대기</strong></button>
-            <button class="status-step" type="button" data-status="local-arrived" data-label="현지도착"><em>5</em><strong>현지도착</strong></button>
-            <button class="status-step hot" type="button" data-status="second-payment-wait" data-label="2차 결제대기"><em>5</em><strong>2차<br>결제대기</strong></button>
-            <button class="status-step" type="button" data-status="international-shipping" data-label="국제배송"><em>3</em><strong>국제배송</strong></button>
-          </div>
-          <div class="status-grid">
-            <button type="button" data-status="first-payment-complete" data-label="1차 결제완료">1차 결제완료 <i>5</i></button>
-            <button type="button" data-status="second-payment-complete" data-label="2차 결제완료">2차 결제완료 <i>5</i></button>
-            <button class="hot" type="button" data-status="shipping-wait" data-label="배송대기">배송대기 <i>5</i></button>
-            <button type="button" data-status="cancel-return" data-label="취소/반품">취소/반품 <i class="zero">0</i></button>
-            <button type="button" data-status="trade-complete" data-label="거래완료">거래완료 <i>12</i></button>
-            <button type="button" data-status="shipping-request" data-label="배송신청/변경">배송신청/변경 <i>3</i></button>
-          </div>
-        </div>
-      </section>
+      <!-- ── 나의 거래 현황 (mobile_mainlist와 동일 공유 컴포넌트) ── -->
+      <script src="bb-trade-status-mobile.js"></script>
 
       <!-- 결제 대기 물품 목록 -->
       <section class="mini-section" aria-labelledby="payment-wait-title">
@@ -1279,18 +1153,6 @@
   });
 
   renderAuthState();
-
-  // 쇼핑 현황 → 관련 목록 페이지로 이동
-  const statusDestinations = {
-    "auction-bid": "mobile_auction_bid_list.html",
-    "cancel-return": "mobile_mainlist.html?status=trade-cancel",
-    "shipping-request": "mobile_bundle_shipping_management.html"
-  };
-  document.querySelectorAll(".status-board [data-status]").forEach(el => {
-    const status = el.dataset.status;
-    const dest = statusDestinations[status] || `mobile_mainlist.html?status=${encodeURIComponent(status)}`;
-    el.addEventListener("click", () => { location.href = dest; });
-  });
 </script>
 <script src="bb-common-mobile.js"></script>
 <script src="bb-search-modal-mobile.js"></script>
