@@ -21,40 +21,28 @@
   button{cursor:pointer}
   a{text-decoration:none;color:inherit}
   .m-header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200}
-  /* ── 상단: 커진 검색 ── */
-  .start-search{background:#fff;border-bottom:1px solid var(--border);padding:22px 16px 20px}
-  .start-search h1{font-size:18px;font-weight:700;text-align:center;line-height:1.4}
+  /* ── 상단: 커진 통합/URL 검색 ── */
+  .start-search{background:#fff;border-bottom:1px solid var(--border);padding:26px 16px 24px}
+  .start-search h1{font-size:19px;font-weight:700;text-align:center;line-height:1.4}
   .start-search .lead{margin-top:6px;text-align:center;font-size:12px;color:var(--ts)}
-  .ss-tabs{display:flex;gap:6px;margin:16px 0 12px;overflow-x:auto;scrollbar-width:none}
-  .ss-tabs::-webkit-scrollbar{display:none}
-  .ss-tab{flex:0 0 auto;padding:6px 12px;border:1.5px solid var(--border);border-radius:999px;background:#fff;font-size:12px;font-weight:600;color:var(--ts);font-family:inherit}
-  .ss-tab.active{border-color:var(--rose);background:var(--rose);color:#fff}
-  .ss-form{display:flex;align-items:center;border:2.5px solid var(--rose);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 18px rgba(232,56,90,.13)}
-  .ss-form i.lead-ico{padding:0 4px 0 14px;color:var(--rose);font-size:14px}
+  .ss-form{margin-top:18px;display:flex;align-items:center;border:2.5px solid var(--rose);border-radius:999px;overflow:hidden;background:#fff;box-shadow:0 6px 18px rgba(232,56,90,.13)}
+  .ss-form i.lead-ico{padding:0 4px 0 16px;color:var(--rose);font-size:15px}
   .ss-form input{flex:1;border:none;outline:none;background:none;padding:14px 8px;font-size:14px;font-family:inherit;color:var(--tp);min-width:0}
   .ss-form input::placeholder{color:var(--tm)}
-  .ss-form button{flex-shrink:0;border:none;background:var(--rose);color:#fff;font-size:13px;font-weight:700;font-family:inherit;padding:0 16px;align-self:stretch;display:flex;align-items:center;gap:5px}
-  .ss-note{margin-top:12px;text-align:center}
-  .ss-note span{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--tp)}
-  .ss-note span::before{content:"";width:22px;height:18px;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='22' fill='none'%3E%3Cpath d='M3 19c6-1 12-5 13-12M16 7l-1 8 7-3' stroke='%231A1A2E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
-  /* ── 히어로 배너 ── */
+  .ss-form button{flex-shrink:0;border:none;background:var(--rose);color:#fff;font-size:13px;font-weight:700;font-family:inherit;padding:0 18px;align-self:stretch;display:flex;align-items:center;gap:5px}
+  .ss-form button:hover{background:var(--rose-h)}
+  /* ── 밑: 히어로 배너 ── */
   .hero{padding:16px}
   .hero-card{overflow:hidden;border-radius:16px;background:#fff}
   .hero-banner{display:block;width:100%;height:auto}
   /* ── 진행 안내 ── */
-  .steps{padding:8px 16px 20px}
-  .steps h2{font-size:15px;font-weight:700;text-align:center;margin-bottom:14px}
-  .step{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;margin-bottom:8px}
-  .step-no{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#FFF1F4;color:var(--rose);font-weight:800;font-family:var(--font-num);display:flex;align-items:center;justify-content:center;font-size:13px}
-  .step-t{font-size:13px;font-weight:700;margin-bottom:3px}
+  .steps{padding:8px 16px 28px}
+  .steps h2{font-size:16px;font-weight:700;text-align:center;margin-bottom:16px}
+  .step-grid{display:grid;grid-template-columns:1fr;gap:10px}
+  .step{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px 16px;text-align:center}
+  .step-no{width:32px;height:32px;margin:0 auto 10px;border-radius:50%;background:#FFF1F4;color:var(--rose);font-weight:800;font-family:var(--font-num);display:flex;align-items:center;justify-content:center;font-size:14px}
+  .step-t{font-size:14px;font-weight:700;margin-bottom:5px}
   .step-d{font-size:12px;color:var(--ts);line-height:1.6}
-  /* ── 지원 스토어 ── */
-  .stores{padding:0 16px 28px}
-  .stores h2{font-size:13px;font-weight:700;text-align:center;color:var(--ts);margin-bottom:14px}
-  .store-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 8px}
-  .store-row a{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:11px;color:var(--ts)}
-  .store-row .badge{width:48px;height:48px;border:1px solid var(--border);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.07);display:flex;align-items:center;justify-content:center;overflow:hidden}
-  .store-row .badge img{width:100%;height:100%;object-fit:contain}
   /* ── 푸터 ── */
   .m-footer{background:var(--tp);color:#fff;padding:24px 16px 32px}
   .m-footer-logo{font-size:20px;font-weight:700;color:var(--rose);margin-bottom:12px}
@@ -79,25 +67,14 @@
 <!-- 상단: 커진 검색창 -->
 <section class="start-search">
   <h1>구매대행, URL 하나로 바로 시작하세요</h1>
-  <p class="lead">키워드로 검색하거나, 상품 페이지 URL을 그대로 붙여넣으세요.</p>
-
-  <div class="ss-tabs" id="ssTabs">
-    <button class="ss-tab active" type="button" data-scope="all">통합검색</button>
-    <button class="ss-tab" type="button" data-scope="yahoo_auction">야후옥션</button>
-    <button class="ss-tab" type="button" data-scope="mercari">메루카리</button>
-    <button class="ss-tab" type="button" data-scope="rakuten">라쿠텐</button>
-    <button class="ss-tab" type="button" data-scope="ebay_us">미국이베이</button>
-    <button class="ss-tab" type="button" data-scope="ebay_uk">영국이베이</button>
-  </div>
+  <p class="lead">키워드로 검색하거나, 구매하고 싶은 상품 페이지 URL을 그대로 붙여넣으면 됩니다.</p>
 
   <form class="ss-form" id="ssForm" action="mobile_totalsearch.html" method="get" role="search">
     <i class="fas fa-magnifying-glass lead-ico" aria-hidden="true"></i>
-    <input type="search" name="q" id="ssInput" placeholder="키워드 또는 구매신청 URL을 입력해주세요" aria-label="검색어 또는 URL 입력" autocomplete="off">
+    <input type="search" name="q" id="ssInput" placeholder="키워드 또는 구매신청을 원하시는 URL을 입력해주세요" aria-label="검색어 또는 URL 입력" autocomplete="off">
     <input type="hidden" name="scope" id="ssScope" value="all">
     <button type="submit">검색 <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
   </form>
-
-  <div class="ss-note"><span>URL 입력으로 구매대행 시작!</span></div>
 </section>
 
 <!-- 밑: 히어로 배너 -->
@@ -110,32 +87,22 @@
 <!-- 진행 안내 -->
 <section class="steps">
   <h2>이렇게 진행돼요</h2>
-  <div class="step">
-    <div class="step-no">1</div>
-    <div><div class="step-t">URL 붙여넣기</div><div class="step-d">야후옥션·메루카리·이베이 등 상품 페이지 주소를 그대로 입력</div></div>
-  </div>
-  <div class="step">
-    <div class="step-no">2</div>
-    <div><div class="step-t">예상 비용 확인</div><div class="step-d">상품가·대행 수수료·국제 배송비를 실시간 환율로 미리 계산</div></div>
-  </div>
-  <div class="step">
-    <div class="step-no">3</div>
-    <div><div class="step-t">구매신청 완료</div><div class="step-d">1차 결제 후 현지 구매, 검수·합포장 거쳐 국내 배송</div></div>
-  </div>
-</section>
-
-<!-- 지원 스토어 -->
-<section class="stores">
-  <h2>이런 사이트를 지원해요</h2>
-  <div class="store-row">
-    <a href="mobile_purchase_url.html"><span class="badge"><img src="storeicon/store_yahoo_auction.png" alt=""></span>야후옥션</a>
-    <a href="mobile_purchase_merukari.html"><span class="badge"><img src="storeicon/store_mercari.png" alt=""></span>메루카리</a>
-    <a href="mobile_purchase_store.html"><span class="badge"><img src="storeicon/store_rakuten.png" alt=""></span>라쿠텐</a>
-    <a href="mobile_purchase_store.html"><span class="badge"><img src="storeicon/store_rakuma.png" alt=""></span>라쿠마</a>
-    <a href="mobile_purchase_url.html"><span class="badge"><img src="storeicon/store_yahoo_shopping.png" alt=""></span>야후쇼핑</a>
-    <a href="mobile_purchase_store.html"><span class="badge"><img src="storeicon/store_yahoo_furima.png" alt=""></span>야후프리마</a>
-    <a href="mobile_purchase_url.html"><span class="badge"><img src="storeicon/store_ebay_us.png" alt=""></span>미국이베이</a>
-    <a href="mobile_purchase_url.html"><span class="badge"><img src="storeicon/store_ebay_uk.png" alt=""></span>영국이베이</a>
+  <div class="step-grid">
+    <div class="step">
+      <div class="step-no">1</div>
+      <div class="step-t">URL 붙여넣기</div>
+      <div class="step-d">아마존·스루가야 등 일본,미국 구매 사이트의<br>상품 URL을 검색창에 입력</div>
+    </div>
+    <div class="step">
+      <div class="step-no">2</div>
+      <div class="step-t">번역된 상품 정보 확인</div>
+      <div class="step-d">입력한 URL의 번역된 창에서<br>상품 정보와 금액 확인</div>
+    </div>
+    <div class="step">
+      <div class="step-no">3</div>
+      <div class="step-t">구매신청 및 결제</div>
+      <div class="step-d">번역된 창에서 구매신청 버튼을 누르면<br>결제창으로 이동</div>
+    </div>
   </div>
 </section>
 
@@ -150,18 +117,8 @@
 
 <script>
 (function () {
-  var tabs = document.getElementById('ssTabs');
-  var scope = document.getElementById('ssScope');
   var form = document.getElementById('ssForm');
   var input = document.getElementById('ssInput');
-
-  tabs.addEventListener('click', function (e) {
-    var btn = e.target.closest('.ss-tab');
-    if (!btn) return;
-    tabs.querySelectorAll('.ss-tab').forEach(function (t) { t.classList.remove('active'); });
-    btn.classList.add('active');
-    scope.value = btn.dataset.scope;
-  });
 
   form.addEventListener('submit', function (e) {
     var v = input.value.trim();
