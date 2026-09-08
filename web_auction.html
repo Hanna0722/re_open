@@ -168,7 +168,8 @@ a{text-decoration:none;color:inherit}
 .cost-subtitle:first-child{margin-top:0}
 .cost-total-row{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;margin-top:12px;display:flex;justify-content:space-between;align-items:center}
 .cost-total-label{font-size:12px;font-weight:700;color:var(--ts)}
-.cost-total-val{font-family:var(--font-num);font-size:20px;font-weight:700;color:var(--rose)}
+.cost-total-val{font-family:var(--font-num);font-size:20px;font-weight:700;color:var(--rose);display:flex;flex-direction:column;align-items:flex-end;line-height:1.25;text-align:right}
+.cost-total-note{font-family:var(--font-sans);font-size:10px;font-weight:500;color:var(--tm)}
 
 /* ── 경매 타이틀 영역 ── */
 .btn-wish-reg{display:flex;align-items:center;gap:6px;padding:8px 16px;border:1.5px solid var(--border);border-radius:5px;background:#fff;font-size:12px;font-weight:600;color:var(--ts);cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s;flex-shrink:0}
@@ -709,7 +710,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
                   <input type="number" class="bid-input bid-qty-input" id="bidQtyInput" value="1" min="1">
                   <span class="bid-unit">개</span>
                 </div>
-                <div class="bid-hint" style="padding:10px 90px 10px"><strong id="bidHintAmount" class="text-danger">13,900엔</strong> 이상으로 입찰 가능합니다.</div>
+                <div class="bid-hint" style="padding:8px 0 0;white-space:nowrap"><strong id="bidHintAmount" class="text-danger">13,900엔</strong> 이상으로 입찰 가능합니다.</div>
               </div>
               <div class="bid-form-row" style="margin-bottom:0">
                 <span class="bid-section-label">포장 방법</span>
@@ -786,7 +787,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
                 <option value="sea">선편특송</option>
                 <option value="air">비바항공특송</option>
               </select>
-              <select class="form-select" id="shippingWeightSelect"><option value="0.5">0.5kg</option><option value="1">1kg</option><option value="2">2kg</option></select>
+              <select class="form-select" id="shippingWeightSelect"><option value="" selected>무게 선택</option><option value="0.5">0.5kg</option><option value="1">1kg</option><option value="2">2kg</option></select>
             </div>
             <div class="cost-rows" style="flex:1">
               <div class="cost-subtitle">1차 결제 비용</div>
@@ -795,14 +796,14 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
               <div class="cost-subtitle">2차 결제 비용</div>
             <div class="cost-row"><span class="cost-label"><span class="cost-sign">+</span> 현지배송료</span><span class="cost-val roboto" id="localShippingValue">(810엔) ₩7,533</span></div>
             <div class="cost-row"><span class="cost-label"><span class="cost-sign">+</span> 소비세 (10%)</span><span class="cost-val roboto" id="localTaxValue">(150엔) ₩1,395</span></div>
-            <div class="cost-row"><span class="cost-label"><span class="cost-sign">+</span> 국제운송료</span><span class="cost-val roboto" id="intlShippingValue">(2,400엔) ₩22,320</span></div>
+            <div class="cost-row"><span class="cost-label"><span class="cost-sign">+</span> 국제운송료</span><span class="cost-val roboto" id="intlShippingValue">무게 선택 후 계산</span></div>
             <div class="cost-row"><span class="cost-label"><span class="cost-sign">+</span> 기타비용</span><span class="cost-val roboto" id="otherFeeValue">(300엔) ₩2,790</span></div>
             </div>
             <div style="margin-top:auto">
               <p style="font-size:11px;color:var(--tm);line-height:1.5;margin:0 0 8px;border-top:1px dashed var(--border);padding-top:8px;width:100%"><i class="fa-solid fa-circle-info" style="color:var(--ts);margin-right:3px"></i>예상 비용이며 실제 무게·운임에 따라 변동될 수 있습니다.</p>
               <div class="cost-total-row" style="margin-top:0">
-                <span class="cost-total-label">예상 경매대행 구입가</span>
-                <span class="cost-total-val roboto" id="estimateTotalValue">₩46,593</span>
+                <span class="cost-total-label">예상 구입가</span>
+                <span class="cost-total-val roboto" id="estimateTotalValue">₩24,273(2,610엔)<span class="cost-total-note">(국제 운송료 제외)</span></span>
               </div>
             </div>
           </div>
@@ -1683,17 +1684,26 @@ function updateEstimateCosts(){
   const serviceFee = Math.round(primaryAmount * 0.1);
   const localTax = Math.round(primaryAmount * 0.1);
   const localShipping = 810;
-  const intlShipping = getInternationalShippingCost();
+  const intlMethod = document.getElementById('shippingMethodSelect')?.value || '';
+  const intlWeight = document.getElementById('shippingWeightSelect')?.value || '';
+  const intlExcluded = !intlMethod || !intlWeight;
+  const intlShipping = intlExcluded ? 0 : getInternationalShippingCost();
   const otherFee = getCostRowYen('otherFeeValue', 300);
-  const totalKrw = Math.round((primaryAmount + serviceFee + localTax + localShipping + intlShipping + otherFee) * 9.3);
+  const totalYen = primaryAmount + serviceFee + localTax + localShipping + intlShipping + otherFee;
+  const totalKrw = Math.round(totalYen * 9.3);
 
   const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
   set('primaryAmountValue',  formatCostPair(primaryAmount));
   set('serviceFeeValue',     formatCostPair(serviceFee));
   set('localShippingValue',  formatCostPair(localShipping));
   set('localTaxValue',       formatCostPair(localTax));
-  set('intlShippingValue',   formatCostPair(intlShipping));
-  set('estimateTotalValue',  `₩${totalKrw.toLocaleString('ko-KR')}`);
+  set('intlShippingValue',   intlExcluded ? '무게 선택 후 계산' : formatCostPair(intlShipping));
+  const totalEl = document.getElementById('estimateTotalValue');
+  if(totalEl){
+    totalEl.innerHTML = intlExcluded
+      ? `₩${totalKrw.toLocaleString('ko-KR')}(${formatYen(totalYen)})<span class="cost-total-note">(국제 운송료 제외)</span>`
+      : `₩${totalKrw.toLocaleString('ko-KR')}`;
+  }
   const qty = Number(document.getElementById('bidQtyInput')?.value || 1);
   const krwAmt = Math.round(primaryAmount * qty * 9.3);
   set('bidAmountKrw', formatKoreanWon(krwAmt));
