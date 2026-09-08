@@ -63,9 +63,36 @@ body{ font: 400 14px/1 var(--font-sans); }
 - Pretendard: `<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">` (never the Google Fonts `css2?family=Pretendard` URL — Google Fonts does not serve Pretendard).
 - Roboto: Google Fonts (`family=Roboto:wght@400;500;700`).
 
-### Weight & spacing
+### Weight
 
-Weight hierarchy: **400** body · **600** interactive elements · **700** headings and emphasis (avoid other weights). Font sizes run 10px (micro-copy) to 14px (primary content); apply negative letter-spacing (-0.22px to -0.36px) to text below 12px. Line heights stay tight, close to the font size, for compact mobile layouts.
+- **400** — body copy
+- **500** — secondary / supporting text
+- **600** — labels, interactive elements, list rows
+- **700** — section titles, most headings, emphasis
+- **800 / 900** — hero and page-level titles only (e.g. the product `h1` on `web_auction`)
+
+Apply negative letter-spacing (-0.22px to -0.36px) to text below 12px. Line heights stay tight, close to the font size, for compact mobile layouts.
+
+### Title scale
+
+Titles do **not** share one size across web and mobile — each platform keeps its own scale.
+
+| Role | Web | Mobile |
+|---|---|---|
+| Home section title (`.sec-title` — "실시간 베스트" etc.) | `18px / 700` | `15px / 700` |
+| Product / item title in agent flows (`.item-title`) | `19px / 700`, `var(--tp)`, `line-height 1.5`, `margin-bottom 5px` | — |
+| Auction detail `h1` (`web_auction .item-title`) | `20px / 900`, `#111`, `margin 0`, `line-height 1.5` | — |
+| Mobile item title (`.m-title-ko`) | — | `15px / 700`, `var(--tp)`, `line-height 1.5`, `margin-bottom 4px` |
+| Source-language name under the title (`.item-title-jp` / `.m-title-jp`) | `12px`, `var(--tm)`, `line-height 1.5`, `margin-bottom 14px` | `11px`, `var(--tm)`, `line-height 1.5` |
+
+### Status colors (거래 현황)
+
+The trade-status board and order-card chips use two accent colors, nothing else:
+
+- **결제대기** (1·2차 결제대기): `#E8385A` (`var(--rose)` / `var(--brand)`)
+- **배송대기** (현지도착·배송대기, shipping-wait): `#F5A623` (`var(--amber)`)
+
+All other statuses (완료, 취소/반품, 국제배송 등) use neutral text (`#111` / `#1A1A2E` / muted grey).
 
 ## Elevation
 
