@@ -461,9 +461,11 @@
       background: #fff;
     }
 
-    .benefit-col.current-grade {
-      border: 2px solid var(--grade-vip);
-    }
+    /* 시안: 전 등급 컬럼을 각 등급 색으로 하이라이트 (실서비스는 로그인 등급 컬럼만) */
+    .benefit-col-standard { border: 2px solid var(--grade-std); }
+    .benefit-col-premium  { border: 2px solid var(--grade-pre); }
+    .benefit-col-vip      { border: 2px solid var(--grade-vip); }
+    .benefit-col-prestige { border: 2px solid var(--grade-prs); }
 
     .benefit-col-head {
       height: 80px;
@@ -473,11 +475,10 @@
       background: #fbf7f5;
     }
 
-    .benefit-col.current-grade .benefit-col-head {
-      margin: 0px 0px 0;
-      border-bottom-color: var(--grade-vip);
-      background: var(--grade-vip);
-    }
+    .benefit-col-standard .benefit-col-head { background: var(--grade-std); border-bottom-color: var(--grade-std); }
+    .benefit-col-premium  .benefit-col-head { background: var(--grade-pre); border-bottom-color: var(--grade-pre); }
+    .benefit-col-vip      .benefit-col-head { background: var(--grade-vip); border-bottom-color: var(--grade-vip); }
+    .benefit-col-prestige .benefit-col-head { background: var(--grade-prs); border-bottom-color: var(--grade-prs); }
 
     .bc-name {
       font-size: 18px;
@@ -518,12 +519,12 @@
       line-height: 1.1;
     }
 
-    .benefit-col.current-grade .bc-name {
+    .benefit-col-head .bc-name {
       color: #fff;
     }
 
-    .benefit-col.current-grade .bc-sub {
-      color: rgba(255,255,255,.78);
+    .benefit-col-head .bc-sub {
+      color: rgba(255,255,255,.82);
     }
 
     .bc-name-standard {
