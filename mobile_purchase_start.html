@@ -39,13 +39,8 @@
   .ss-note span::before{content:"";width:22px;height:18px;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='22' fill='none'%3E%3Cpath d='M3 19c6-1 12-5 13-12M16 7l-1 8 7-3' stroke='%231A1A2E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
   /* ── 히어로 배너 ── */
   .hero{padding:16px}
-  .hero-card{position:relative;overflow:hidden;border-radius:16px;background:linear-gradient(135deg,#FFF3F5,#FFE8DC 60%,#FFF6E9);border:1px solid #FBD9D0;padding:24px 20px;text-align:center}
-  .hero-tag{display:inline-block;background:var(--rose);color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:5px;margin-bottom:12px}
-  .hero-title{font-size:24px;font-weight:800;line-height:1.3}
-  .hero-title b{color:var(--rose)}
-  .hero-accent{margin-top:8px;font-size:15px;font-weight:800;color:var(--rose)}
-  .hero-sub{margin-top:12px;font-size:12px;color:var(--ts);line-height:1.7}
-  .hero-cta{margin-top:16px;display:inline-flex;align-items:center;gap:7px;background:var(--tp);color:#fff;border:none;border-radius:8px;padding:12px 20px;font-size:13px;font-weight:700;font-family:inherit}
+  .hero-card{overflow:hidden;border-radius:16px;background:#fff}
+  .hero-banner{display:block;width:100%;height:auto}
   /* ── 진행 안내 ── */
   .steps{padding:8px 16px 20px}
   .steps h2{font-size:15px;font-weight:700;text-align:center;margin-bottom:14px}
@@ -108,11 +103,7 @@
 <!-- 밑: 히어로 배너 -->
 <section class="hero">
   <div class="hero-card">
-    <span class="hero-tag">RENEWAL OPEN EVENT</span>
-    <h2 class="hero-title">일본 직구, 지금은 <b>0원</b> 혜택!</h2>
-    <div class="hero-accent">대행 수수료 0원 + 첫 국제 배송비 0원</div>
-    <p class="hero-sub">첫 구매대행 고객이라면 대행 수수료와 첫 국제 배송비를<br>비드바이가 부담합니다. URL만 넣으면 견적부터 결제까지 한 번에.</p>
-    <button class="hero-cta" type="button" onclick="document.getElementById('ssInput').focus()"><i class="fas fa-link" aria-hidden="true"></i> URL 붙여넣고 견적 받기</button>
+    <img class="hero-banner" src="urlbanner.png" width="2167" height="726" alt="원하는 일본 상품 URL을 입력해 주세요. 상품 검색창에 URL을 입력하면 간편하게 구매대행을 시작할 수 있습니다.">
   </div>
 </section>
 
