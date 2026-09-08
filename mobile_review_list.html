@@ -28,23 +28,23 @@ button,select{cursor:pointer}
 .bs-meta span:first-of-type,.rv-meta span:first-child{font-family:var(--font-num)}
 
 /* ── 페이지 타이틀 ── */
-.page-head{padding:16px 16px 14px;background:#fff;border-bottom:1px solid var(--border)}
-.page-head h1{font-size:18px;font-weight:800}
-.page-head p{margin-top:3px;font-size:13px;color:var(--ts)}
+.page-head{padding:22px 16px 0}
+.page-head h1{font-size:24px;font-weight:800;letter-spacing:-.3px}
+.page-head p{margin-top:6px;font-size:13px;color:var(--ts)}
 
 /* ══ BEST 후기 캐러셀 ══ */
-.best-sec{position:relative;background:#fff;margin-bottom:10px;padding-bottom:14px}
-.best-bar{display:flex;align-items:center;gap:8px;padding:14px 16px 10px}
-.best-bar .bb-crown{width:22px;height:22px;border-radius:50%;background:var(--amber);color:#fff;display:grid;place-items:center;font-size:10px;flex-shrink:0}
-.best-bar h2{font-size:15px;font-weight:800}
-.best-bar .bb-sub{font-size:13px;color:var(--tm)}
+.best-sec{position:relative;background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;margin:20px 16px 24px;padding-bottom:14px}
+.best-bar{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border);background:linear-gradient(90deg,#FFF7F9,#fff)}
+.best-bar .bb-crown{width:26px;height:26px;border-radius:50%;background:var(--amber);color:#fff;display:grid;place-items:center;font-size:12px;flex-shrink:0}
+.best-bar h2{font-size:16px;font-weight:800;white-space:nowrap;flex-shrink:0}
+.best-bar .bb-sub{font-size:13px;color:var(--tm);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 /* 좌우 스크롤 + 양옆 후기가 살짝 보이며 가장자리로 페이드아웃 */
 .best-viewport{
   overflow-x:auto;overflow-y:hidden;
   scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling:touch;
   scrollbar-width:none;-ms-overflow-style:none;
-  padding:4px 0 6px;
+  padding:16px 0 6px;background:#FAFBFC;
   -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%);
   mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%);
 }
@@ -77,9 +77,6 @@ button,select{cursor:pointer}
 .bs-meta .dot{width:3px;height:3px;border-radius:50%;background:#D5D9E0}
 .bs-meta .bs-grade{color:var(--navy);font-weight:700}
 
-.best-arrow{position:absolute;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.96);color:var(--ts);display:grid;place-items:center;font-size:9px;box-shadow:0 1px 5px rgba(0,0,0,.12);z-index:2;padding:0}
-.best-arrow.prev{left:3px}
-.best-arrow.next{right:3px}
 .best-dots{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px}
 .best-dot{width:6px;height:6px;border-radius:50%;border:0;background:#DDE1E8;padding:0;transition:all .18s}
 .best-dot.active{width:16px;border-radius:3px;background:var(--rose)}
@@ -106,8 +103,8 @@ button,select{cursor:pointer}
 /* 후기 본문은 2~5줄로 작성되며 3줄을 넘으면 생략 */
 .rv-text{font-size:13px;color:var(--ts);line-height:1.55;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
 .rv-thumb{grid-area:thumb;width:84px;height:84px;border-radius:8px;overflow:hidden;background:var(--bg);transition:width .2s ease,height .2s ease}
-/* 사진 없는 텍스트 후기: 같은 1열에 텍스트 리뷰 placeholder를 둔다 */
-.rv-row.no-photo::before{content:"일반후기";grid-area:thumb;width:84px;height:84px;border-radius:8px;border:1px solid #E7ECF3;background:#F7F9FC;color:#9AA6B5;display:flex;align-items:center;justify-content:center;font-family:var(--font-num);font-size:12px;font-weight:700;letter-spacing:.08em;box-sizing:border-box}
+/* 사진 없는 텍스트 후기: 이미지 열을 없앤다 */
+.rv-row.no-photo{grid-template-columns:minmax(0,1fr);grid-template-areas:"body" "side"}
 .rv-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .rv-row.is-open{background:#FCFCFD}
 .rv-row.is-open:not(.no-photo){grid-template-columns:118px minmax(0,1fr)}
@@ -132,7 +129,7 @@ button,select{cursor:pointer}
   <div class="best-bar">
     <span class="bb-crown"><i class="fas fa-crown" aria-hidden="true"></i></span>
     <h2>BEST 후기</h2>
-    <span class="bb-sub">비드바이가 선정한 추천 후기</span>
+    <span class="bb-sub">베스트 후기로 선정되면 대행수수료 1만 원 쿠폰을 드려요!</span>
   </div>
 
   <div class="best-viewport">
@@ -200,9 +197,6 @@ button,select{cursor:pointer}
 
     </div>
   </div>
-
-  <button class="best-arrow prev" type="button" id="bestPrev" aria-label="이전 후기"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
-  <button class="best-arrow next" type="button" id="bestNext" aria-label="다음 후기"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
 
   <div class="best-dots" id="bestDots"></div>
 </section>
@@ -327,6 +321,20 @@ button,select{cursor:pointer}
 <button class="btn-more" type="button">후기 더보기 <i class="fa-solid fa-chevron-down"></i></button>
 
 <script>
+/* 국기 아이콘: 미/영/일 랜덤 (캐러셀 복제 전에 실행) */
+(function () {
+  var flags = [
+    { src: 'flagicon/us_circle.png', alt: '미국' },
+    { src: 'flagicon/uk_circle.png', alt: '영국' },
+    { src: 'flagicon/jp_circle.png', alt: '일본' }
+  ];
+  document.querySelectorAll('.country-badge img').forEach(function (img) {
+    var f = flags[Math.floor(Math.random() * flags.length)];
+    img.src = f.src;
+    img.alt = f.alt;
+  });
+})();
+
 /* ── BEST 후기 캐러셀 ──
    가로 스크롤(스냅) + 자동 순환. 양옆 후기가 살짝 보이고 가장자리에서 페이드아웃.
    원본을 앞뒤로 한 벌씩 복제해 3세트를 만들어, 끝에서 처음으로 되감기지 않고
@@ -464,9 +472,6 @@ button,select{cursor:pointer}
     slide.classList.toggle('is-open', shouldOpen);
     restart();
   });
-
-  document.getElementById('bestPrev').addEventListener('click', function () { step(-1); restart(); });
-  document.getElementById('bestNext').addEventListener('click', function () { step(1); restart(); });
 
   paint();
   scrollToPos(pos, false);

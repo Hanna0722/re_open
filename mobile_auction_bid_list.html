@@ -7,6 +7,7 @@
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="bb-trade-status-mobile.css">
 <style>
   /* 폰트 토큰 (DESIGN.md 기준) */
   :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
@@ -49,29 +50,6 @@ button,select{cursor:pointer}
 /* ── 페이지 타이틀 ── */
 
 /* ── 나의 거래 현황 ── */
-.shopping-head{margin:24px 10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:42px;padding-bottom:7px;border-bottom:1.5px solid var(--brand)}
-.shopping-head h3{margin:0;color:var(--brand);font-size:15px;font-weight:700}
-.status-period{color:#9aa3b2;font-size:12px;font-weight:500}
-.status-more{margin-left:auto;display:flex;padding:4px;border:0;background:none;color:#c3c0bd;cursor:pointer}
-.status-more svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.4}
-.status-board{margin:0 10px 18px}
-.status-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;padding:8px 4px 16px}
-.status-step{display:flex;flex-direction:column;align-items:center;gap:8px;padding:0;border:0;background:none;font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;text-decoration:none}
-.status-step em{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#f4f1ef;color:#2b2f37;font-size:18px;font-style:normal;font-weight:800;letter-spacing:-.03em;transition:transform .16s ease}
-.status-step:active em{transform:scale(.93)}
-.status-step em.zero{color:#c7c4c2;font-weight:700}
-.status-step strong{min-height:28px;color:#6a6c74;font-size:11px;font-weight:600;letter-spacing:-.045em;line-height:1.35;text-align:center}
-.status-step.hot em{background:#ffe9ee;color:var(--brand)}
-.status-step.hot strong{color:var(--brand);font-weight:700}
-.status-step.active em{box-shadow:0 0 0 2px rgba(232,56,90,.18);background:#ffe9ee;color:var(--brand)}
-.status-step.active strong{color:var(--brand);font-weight:700}
-.status-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
-.status-grid a{display:flex;align-items:center;justify-content:center;gap:6px;padding:13px 4px;border:1px solid #e5dcd8;border-radius:5px;background:#fff;color:#5f6169;font-family:inherit;font-size:12.5px;font-weight:600;letter-spacing:-.035em;cursor:pointer;text-decoration:none}
-.status-grid i{color:#2b2f37;font-size:13px;font-style:normal;font-weight:800}
-.status-grid i.zero{color:#c4c1bf}
-.status-grid a.hot{color:var(--brand);font-weight:700}
-.status-grid a.hot i{color:var(--brand)}
-
 /* ── 입찰/유찰 목록 (web_auction_bid_list 기준) ── */
 .bid-area{border-top:8px solid #f0f2f5;margin-top:4px}
 .bid-head{margin:18px 10px 14px;min-height:42px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:7px;border-bottom:1.5px solid var(--rose)}
@@ -84,7 +62,7 @@ button,select{cursor:pointer}
 .bid-toolbar{display:flex;flex-wrap:wrap;gap:8px;padding:0 10px;margin-bottom:12px}
 .bid-count-select{
   width:100%;height:32px;padding:0 24px 0 12px;border:1px solid #e5dbd7;border-radius:6px;background:#fff;
-  color:var(--text,#33363d);font-size:12px;font-weight:700;line-height:1;outline:0;
+  color:#33363d;font-size:12px;font-weight:700;line-height:1;outline:0;
   appearance:none;-webkit-appearance:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='6'%3E%3Cpath d='M0 0l4.5 6 4.5-6z' fill='%235d6470'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 10px center;
@@ -92,8 +70,8 @@ button,select{cursor:pointer}
 .bid-search{display:flex;gap:6px;width:100%}
 .bid-search input{flex:1;min-width:0;height:32px;padding:0 12px;border:1px solid #e5dbd7;border-radius:6px;font-size:12px;outline:0}
 .bid-search input:focus{border-color:var(--rose)}
-.btn-search{height:32px;padding:0 16px;border:0;border-radius:5px;background:var(--rose);color:#fff;font-size:12px;font-weight:800;white-space:nowrap}
-.btn-bulk{height:32px;padding:0 14px;border:1px solid #1675cf;border-radius:5px;background:#fff;color:#1675cf;font-size:12px;font-weight:800;white-space:nowrap}
+.btn-search{height:32px;padding:0 16px;border:0;border-radius:15px;background:var(--navy);color:#fff;font-size:12px;font-weight:600;white-space:nowrap}
+.btn-bulk{height:32px;padding:0 14px;border:1px solid #1675cf;border-radius:15px;background:#fff;color:#1675cf;font-size:12px;font-weight:600;white-space:nowrap}
 
 /* ── 입찰 카드 (web bid-row 이식) ── */
 .bid-list{display:flex;flex-direction:column;gap:14px;padding:0 10px}
@@ -104,7 +82,7 @@ button,select{cursor:pointer}
 .bid-row[data-status="auction-bid"] .bid-status,
 .bid-row[data-status="successful-bid"] .bid-status{color:var(--navy)}
 .bid-row[data-status="failed-bid"] .bid-status{color:#aaa}
-.bid-oid{color:#999;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bid-oid{display:block;margin-bottom:4px;color:#999;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* 웹의 가로 4컬럼 body를 모바일에서 세로 스택 */
 .bid-body{display:flex;flex-direction:column}
@@ -120,8 +98,8 @@ button,select{cursor:pointer}
 .bid-meta-row .ml{flex:0 0 96px;color:#9aa3b2;font-size:12px;font-weight:700}
 .bid-meta-row .mv{color:#33363d;font-size:12px;font-weight:700;min-width:0}
 .bidder-status-win{color:var(--rose) !important}
-.bid-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:10px 14px;border-top:1px solid #eee6e2}
-.btn-view,.btn-rebid{min-width:96px;height:36px;padding:0 12px;border-radius:5px;font-size:12px;font-weight:800}
+.bid-actions{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.btn-view,.btn-rebid{min-width:auto;height:32px;padding:0 12px;border-radius:15px;font-size:12px;font-weight:600}
 .btn-view{border:1px solid #1675cf;background:#fff;color:#1675cf}
 .btn-rebid{border:0;background:var(--rose);color:#fff}
 .bid-list .empty{display:flex;min-height:84px;align-items:center;justify-content:center;border:1px solid #e5dbd7;border-radius:11px;color:#9da2af;font-size:13px;font-weight:800;background:#fff}
@@ -155,31 +133,7 @@ button,select{cursor:pointer}
 </header>
 
 <!-- ── 나의 거래 현황 ── -->
-<div class="shopping-head">
-  <h3>나의 거래 현황</h3>
-  <span class="status-period">최근 6개월 기준</span>
-  <a class="status-more" href="mobile_mainlist.html" aria-label="거래 현황 전체보기">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
-  </a>
-</div>
-
-<div class="status-board">
-  <div class="status-steps">
-    <a class="status-step active" href="mobile_auction_bid_list.html" data-status="auction-bid" data-label="입찰/구매신청"><em>10</em><strong>입찰/<br>구매신청</strong></a>
-    <a class="status-step hot" href="mobile_mainlist.html?status=first-payment-wait" data-status="first-payment-wait" data-label="1차 결제대기"><em>5</em><strong>1차<br>결제대기</strong></a>
-    <a class="status-step" href="mobile_mainlist.html?status=local-arrived" data-status="local-arrived" data-label="현지도착"><em>5</em><strong>현지도착</strong></a>
-    <a class="status-step hot" href="mobile_mainlist.html?status=second-payment-wait" data-status="second-payment-wait" data-label="2차 결제대기"><em>5</em><strong>2차<br>결제대기</strong></a>
-    <a class="status-step" href="mobile_mainlist.html?status=international-shipping" data-status="international-shipping" data-label="국제배송"><em>3</em><strong>국제배송</strong></a>
-  </div>
-  <div class="status-grid">
-    <a href="mobile_mainlist.html?status=first-payment-complete" data-status="first-payment-complete" data-label="1차 결제완료">1차 결제완료 <i>5</i></a>
-    <a href="mobile_mainlist.html?status=second-payment-complete" data-status="second-payment-complete" data-label="2차 결제완료">2차 결제완료 <i>5</i></a>
-    <a class="hot" href="mobile_mainlist.html?status=shipping-wait" data-status="shipping-wait" data-label="배송대기">배송대기 <i>5</i></a>
-    <a href="mobile_mainlist.html?status=trade-cancel" data-status="trade-cancel" data-label="취소/반품">취소/반품 <i class="zero">0</i></a>
-    <a href="mobile_mainlist.html?status=trade-complete" data-status="trade-complete" data-label="거래완료">거래완료 <i>12</i></a>
-    <a href="mobile_bundle_shipping_management.html" data-status="shipping-request" data-label="배송신청/변경">배송신청/변경 <i>3</i></a>
-  </div>
-</div>
+<script src="bb-trade-status-mobile.js" data-current-status="auction-bid"></script>
 
 <!-- ── 입찰/유찰 목록 (web_auction_bid_list 동일 내용) ── -->
 <div class="bid-area">
@@ -210,12 +164,15 @@ button,select{cursor:pointer}
     <article class="bid-row" data-market="JP" data-status="failed-bid">
       <div class="bid-row-head">
         <span class="bid-status">유찰</span>
-        <span class="bid-oid">야후경매 · a2024032210</span>
+        <div class="bid-actions">
+          <button class="btn-view" type="button" onclick="location.href='mobile_payment_detail.html'">조회</button>
+        </div>
       </div>
       <div class="bid-body">
         <div class="bid-product">
           <div class="bid-thumb"><img src="https://images.unsplash.com/photo-1585011664466-b7bbf827d51d?auto=format&fit=crop&w=200&q=80" alt="닌텐도 스위치 게임 카트리지"></div>
           <div class="bid-title-wrap">
+            <span class="bid-oid">야후경매 · a2024032210</span>
             <p class="bid-title">닌텐도 스위치 게임 카트리지 젤다의 전설 왕국의 눈물</p>
             <span class="bid-title-origin">ニンテンドースイッチ ゲームカートリッジ ゼルダの伝説 王国の涙</span>
           </div>
@@ -227,9 +184,6 @@ button,select{cursor:pointer}
         <div class="bid-meta">
           <div class="bid-meta-row"><span class="ml">입찰금액</span><span class="mv">1개 / 4,500 엔</span></div>
           <div class="bid-meta-row"><span class="ml">낙찰가/입찰수</span><span class="mv">6,200 엔 / 3명</span></div>
-        </div>
-        <div class="bid-actions">
-          <button class="btn-view" type="button" onclick="location.href='mobile_payment_detail.html'">조회</button>
         </div>
       </div>
     </article>
@@ -307,12 +261,16 @@ function renderBiddingItems() {
       <article class="bid-row" data-bid-index="${originalIndex}" data-market="${item.market}" data-status="auction-bid">
         <div class="bid-row-head">
           <span class="bid-status">입찰중 · 종료 ${formatTimeLeft(item.hoursLeft)} 전</span>
-          <span class="bid-oid">${item.site} · ${item.code}</span>
+          <div class="bid-actions">
+            <button class="btn-view" type="button" data-check-bid>조회</button>
+            <button class="btn-rebid" type="button">재입찰</button>
+          </div>
         </div>
         <div class="bid-body">
           <div class="bid-product">
             <div class="bid-thumb"><img src="${item.image}" alt=""></div>
             <div class="bid-title-wrap">
+              <span class="bid-oid">${item.site} · ${item.code}</span>
               <p class="bid-title">[${item.market}] ${item.title}</p>
               ${item.origin ? `<span class="bid-title-origin">${item.origin}</span>` : ""}
             </div>
@@ -326,10 +284,6 @@ function renderBiddingItems() {
             <div class="bid-meta-row"><span class="ml">현재가격/입찰수</span><span class="mv" data-current-price>-</span></div>
             <div class="bid-meta-row"><span class="ml">입찰예약가</span><span class="mv">${item.reserve}</span></div>
             <div class="bid-meta-row"><span class="ml">최고입찰여부</span><span class="mv" data-bidder-status>-</span></div>
-          </div>
-          <div class="bid-actions">
-            <button class="btn-view" type="button" data-check-bid>조회</button>
-            <button class="btn-rebid" type="button">재입찰</button>
           </div>
         </div>
       </article>
