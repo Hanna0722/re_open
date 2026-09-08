@@ -8,6 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Inter:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
+  /* 폰트 토큰 (DESIGN.md 기준) */
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
+
 :root {
   --rose:#E8385A; --rose-h:#C42F4C;
   --amber:#F5A623; --navy:#1A3C6E;
@@ -26,7 +29,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{width:100%;overflow-x:hidden;overscroll-behavior-x:none}
 body{
-  font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;
+  font-family:var(--font-sans);
   background:var(--bg);
   min-height:100vh;
   width:100%;
@@ -340,7 +343,7 @@ body{
 .best-meta{font-size:9px;color:var(--ts);margin-bottom:1px}
 .best-price{
   font-size:12px;font-weight:700;color:var(--tp);
-  font-family:Pretendard,'Inter','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  font-family:var(--font-sans);
 }
 .best-price strong{font-size:12px}
 .review-scroll{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory;padding:0 0 2px;-webkit-overflow-scrolling:touch}
@@ -375,18 +378,18 @@ body{
 .rate-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;min-height:38px;padding:0 12px;background:#F7F8FA;border-radius:8px;font-size:12px}
 .rate-currency{display:flex;align-items:center;gap:7px;color:var(--tp);font-weight:700}
 .rate-flag{width:18px;height:13px;object-fit:cover;display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
-.rate-value{font-family:Roboto,Arial,sans-serif;color:var(--tp);font-weight:700;font-size:13px;white-space:nowrap}
+.rate-value{font-family:var(--font-num);color:var(--tp);font-weight:700;font-size:13px;white-space:nowrap}
 .cs-duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;align-items:stretch}
 .cs-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:14px 12px}
 .cs-card-hd{font-size:16px;font-weight:700;color:var(--tp);text-align:center;padding-bottom:10px;border-bottom:1px solid var(--border);margin-bottom:12px}
 .cs-ico{display:block;width:60px;height:auto;margin:5px auto 10px}
 .cs-rep-label{font-size:15px;color:var(--tm);text-align:center;margin-bottom:2px}
-.cs-rep-num{font-size:20px;font-weight:800;color:var(--navy);font-family:'Roboto',Arial,sans-serif;text-align:center;letter-spacing:-.01em}
+.cs-rep-num{font-size:20px;font-weight:800;color:var(--navy);font-family:var(--font-num);text-align:center;letter-spacing:-.01em}
 .cs-div{height:1px;background:var(--border);margin:12px 0}
 .cs-field{margin-bottom:9px}
 .cs-field:last-child{margin-bottom:0}
 .cs-field-k{font-size:13px;font-weight:600;color:var(--ts);margin-bottom:2px}
-.cs-field-v{font-size:14px;font-weight:800;color:#000;font-family:'Roboto',Arial,sans-serif;word-break:break-all;line-height:1.5}
+.cs-field-v{font-size:14px;font-weight:800;color:#000;font-family:var(--font-num);word-break:break-all;line-height:1.5}
 .cs-note{font-size:12px;color:var(--tm);line-height:1.5;margin:0 0 10px}
 .cs-call-check-btn{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 auto;background:#fff5ed;color:#f47920;border:0.2px solid #f47920;padding:5px 30px;border-radius:5px;cursor:pointer;font-size:12px;font-weight:400}
 .cs-contact{display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid #F2F4F7}
@@ -395,7 +398,7 @@ body{
 .cs-contact-ico{width:18px;text-align:center;font-size:13px;flex:0 0 auto;margin-top:1px}
 .cs-contact-body{min-width:0}
 .cs-contact-name{font-size:12px;font-weight:700;color:var(--tp);line-height:1.35}
-.cs-contact-num{font-size:12px;color:var(--ts);font-family:'Roboto',Arial,sans-serif;line-height:1.35}
+.cs-contact-num{font-size:12px;color:var(--ts);font-family:var(--font-num);line-height:1.35}
 .home-indicator{ display:none; }
 .home-bar{width:120px;height:4px;background:var(--tp);border-radius:2px;opacity:.15}
 .drawer-ov{position:absolute;inset:0;background:rgba(0,0,0,0);z-index:100;pointer-events:none;transition:background .3s}
@@ -463,7 +466,7 @@ body{
 .user-status-grid{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #e5e7eb;background:#fff;}
 .user-status-grid div{min-height:70px;display:grid;place-items:center;align-content:center;gap:4px;text-align:center;}
 .user-status-grid div+div{border-left:1px solid #e5e7eb;}
-.user-status-grid strong{color:#151b29;font-family:Roboto,sans-serif;font-size:26px;line-height:1;font-weight:700;}
+.user-status-grid strong{color:#151b29;font-family:var(--font-num);font-size:26px;line-height:1;font-weight:700;}
 .user-status-grid div:nth-child(2) strong{color:var(--rose);}
 .user-status-grid span{color:#9aa3b2;font-size:10px;font-weight:700;}
 .user-menu-list{padding:0 0 12px;}

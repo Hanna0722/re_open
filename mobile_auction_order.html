@@ -9,6 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Roboto:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+  /* 폰트 토큰 (DESIGN.md 기준) */
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
+
     :root {
       --rose: #E8385A;
       --rose-h: #C42F4C;
@@ -36,7 +39,7 @@
       margin: 0 auto;
       color: var(--tp);
       background: var(--bg);
-      font-family: Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;
+      font-family:var(--font-sans);
       font-size: 14px;
       line-height: 1.5;
       overflow-x: hidden;
@@ -87,7 +90,7 @@
       border: 1px solid var(--border);
       background: var(--white);
       color: var(--tm);
-      font-family: Roboto, sans-serif;
+      font-family:var(--font-num);
       font-size: 12px; font-weight:700;
     }
     .step-label { color: var(--tm); font-size: 12px; font-weight: 700; }
@@ -127,7 +130,7 @@
       border-bottom: 1px solid var(--border);
       color: var(--tp); font-size: 15px; font-weight:700;
     }
-    .sec-title .sec-no { color: var(--rose); font-family: Roboto, sans-serif; font-size: 13px; font-weight:700; }
+    .sec-title .sec-no { color: var(--rose); font-family:var(--font-num); font-size: 13px; font-weight:700; }
 
     /* 입찰 확인 */
     .confirm-box { border-bottom: 1px solid var(--border); }
@@ -210,7 +213,7 @@
     .confirm-modal .confirm-row:first-child { padding-top: 0; }
     .confirm-modal .confirm-row:last-child { padding-bottom: 0; border-bottom: 0; }
     .confirm-modal .confirm-row span { color: var(--ts); font-size: 12px; font-weight: 700; }
-    .confirm-modal .confirm-row strong { color: var(--tp); font-family: Roboto, sans-serif; font-size: 15px; font-weight:700; }
+    .confirm-modal .confirm-row strong { color: var(--tp); font-family:var(--font-num); font-size: 15px; font-weight:700; }
     .confirm-modal .confirm-row strong.amount { color: var(--rose); font-size: 18px; }
     .confirm-note { margin: 0 0 18px; color: var(--rose); font-size: 12px; font-weight:700; line-height: 1.7; }
     .confirm-actions { display: flex; justify-content: flex-end; gap: 8px; }

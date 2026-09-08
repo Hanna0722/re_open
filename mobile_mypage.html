@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="bb-trade-status-mobile.css">
   <style>
+  /* 폰트 토큰 (DESIGN.md 기준) */
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
+
     :root {
       --brand: #E8385A;
       --brand-hot: #ff4969;
@@ -158,7 +161,7 @@
       .seller { color: #707070; font-size: 12px; margin-bottom: 4px; }
       .product-title { color: #333; font-size: 13px; font-weight: 600; line-height: 1.5; margin-bottom: 8px; }
       .price-row { display: flex; align-items: baseline; gap: 3px; }
-      .price-main { color: #111; font-size: 16px; font-weight:700; font-family: Roboto, sans-serif; }
+      .price-main { color: #111; font-size: 16px; font-weight:700; font-family:var(--font-num); }
       .price-main.bid { color: var(--brand); }
       .btn {
         height: 34px; padding: 0 14px; border-radius: 15px;
@@ -472,7 +475,7 @@
     }
     .my-quick-value strong {
       color: #1f232a;
-      font-family: Roboto, Pretendard, sans-serif;
+      font-family:var(--font-num);
       font-size: 13px;
       font-weight: 700;
       line-height: 1;
@@ -682,7 +685,7 @@
     .user-status-grid div + div { border-left: 1px solid #e5e7eb; }
     .user-status-grid strong {
       color: #151b29;
-      font-family: Roboto, sans-serif;
+      font-family:var(--font-num);
     }
     .user-status-grid div:nth-child(2) strong { color: var(--brand); }
     .user-status-grid span { color: #9aa3b2; }
@@ -779,12 +782,12 @@
   <style>
     /* mobile_main 타이포 스케일 동기화 */
     body {
-      font-family: Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;
+      font-family:var(--font-sans);
       font-size: 14px;
       line-height: 1.45;
     }
     .page {
-      font-family: Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;
+      font-family:var(--font-sans);
     }
     .tab {
       font-size: 13px;
@@ -800,7 +803,7 @@
       line-height: 1.4;
     }
     .price-main {
-      font-family: "Roboto", sans-serif;
+      font-family:var(--font-num);
       font-size: 16px;
       font-weight:700;
     }

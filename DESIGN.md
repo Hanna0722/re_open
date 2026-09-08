@@ -65,7 +65,8 @@ The design uses minimal shadows and relies primarily on subtle background color 
 ## Do's and Don'ts
 - Do use rose red (#E8385A) as the primary brand accent for buttons, active states, and key highlights
 - Do maintain consistent 12px border radius for primary interactive elements
-- Do use Pretendard font family exclusively for brand consistency
+- Do drive every `font-family` from `var(--font-sans)` / `var(--font-num)` — never write a literal font stack in page CSS
+- Do keep numerals (prices, counts, phone) on `var(--font-num)` and everything else on `var(--font-sans)`
 - Don't use font weights other than 400, 600, and 700 to maintain hierarchy clarity
 - Do apply negative letter-spacing to text smaller than 12px for better readability
 - Don't use heavy shadows - rely on color contrast and subtle backgrounds for depth

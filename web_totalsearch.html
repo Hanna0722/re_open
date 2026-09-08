@@ -7,6 +7,9 @@
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
+  /* 폰트 토큰 (DESIGN.md 기준) */
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
+
     :root {
       --rose: #E8385A;
       --rose-h: #C42F4C;
@@ -42,7 +45,7 @@
       zoom: 1;
       background: #fff;
       color: var(--ink);
-      font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;
+      font-family:var(--font-sans);
       font-size:14px;
       line-height:1.5;
       letter-spacing: 0;
@@ -485,11 +488,11 @@
       color: #111;
       font-size: 17px;
       font-weight: 800;
-      font-family: 'Roboto', sans-serif;
+      font-family:var(--font-num);
     }
 
     .buy-now-price { flex: 0 0 auto; margin: 0 0 2px; color: #111; font-size: 12px; font-weight: 600; white-space: nowrap; }
-    .buy-now-price strong { font-family: 'Roboto', sans-serif; font-weight: 600; }
+    .buy-now-price strong { font-family:var(--font-num); font-weight: 600; }
     .auction-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 14px; color: #7c8490; font-size: 12px; font-weight: 600; }
     .auction-meta > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .bids { color: var(--muted); font-size: 12px; font-weight: 600; white-space: nowrap; }

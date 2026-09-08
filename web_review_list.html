@@ -8,6 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Inter:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
+  /* 폰트 토큰 (DESIGN.md 기준) */
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
+
 :root{
   --rose:#E8385A;--rose-h:#C42F4C;--amber:#F5A623;
   --navy:#1A3C6E;--green:#3AAD4E;
@@ -15,12 +18,12 @@
   --tp:#1A1A2E;--ts:#666680;--tm:#999BAA;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;background:var(--bg);color:var(--tp);font-size:14px;line-height:1.5}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--tp);font-size:14px;line-height:1.5}
 a{text-decoration:none;color:inherit}
 button,input,select{font:inherit}
 button,select{cursor:pointer}
 /* 숫자·날짜·시간은 Roboto (브랜드 타이포 규칙) */
-.bs-meta span:first-of-type,.rv-meta span:first-child,.pager button{font-family:'Roboto',sans-serif}
+.bs-meta span:first-of-type,.rv-meta span:first-child,.pager button{font-family:var(--font-num)}
 
 .rvp{max-width:1140px;margin:0 auto;padding:28px 0 64px}
 
@@ -89,7 +92,7 @@ button,select{cursor:pointer}
 .list-head h2{font-size:18px;font-weight:800}
 .list-head .lh-left{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .list-head .lh-total{font-size:13px;color:var(--ts)}
-.list-head .lh-total b{font-family:'Roboto',sans-serif;color:var(--tp)}
+.list-head .lh-total b{font-family:var(--font-num);color:var(--tp)}
 
 .rv-list{background:#fff;border:1px solid var(--border);border-top:0;border-radius:0 0 12px 12px}
 /* 1열 사진 · 2열 상품명+후기내용 · 3열 아이디/평점/작성일 */
@@ -99,17 +102,17 @@ button,select{cursor:pointer}
 .rv-row:focus-visible{outline:2px solid rgba(232,56,90,.35);outline-offset:-2px}
 .rv-body{min-width:0}
 .rv-side{display:flex;flex-direction:column;align-items:flex-end;gap:7px;padding-top:2px;text-align:right}
-.rv-side-id{font-family:'Roboto',sans-serif;font-size:13px;font-weight:700;color:var(--tp)}
+.rv-side-id{font-family:var(--font-num);font-size:13px;font-weight:700;color:var(--tp)}
 .rv-stars{color:#F59E0B;font-size:14px;letter-spacing:1px;line-height:1}
-.rv-side-date{font-family:'Roboto',sans-serif;font-size:13px;color:var(--tm)}
+.rv-side-date{font-family:var(--font-num);font-size:13px;color:var(--tm)}
 .rv-top{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
 .tag-new{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:5px;background:var(--rose);color:#fff;font-size:13px;font-weight:600;letter-spacing:0}
 .rv-title{font-size:14px;font-weight:700;line-height:1.45;margin-bottom:5px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 /* 후기 본문은 2~5줄로 작성되며 3줄을 넘으면 생략 */
 .rv-text{font-size:13px;color:var(--ts);line-height:1.6;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
 .rv-thumb{grid-column:1;grid-row:1;width:132px;height:132px;border-radius:8px;overflow:hidden;background:var(--bg);transition:width .2s ease,height .2s ease}
-/* 사진 없는 텍스트 후기: 이미지 열을 없앤다 */
-.rv-row.no-photo{grid-template-columns:minmax(0,1fr) 172px}
+/* 사진 없는 텍스트 후기: 같은 1열에 텍스트 리뷰 placeholder를 둔다 */
+.rv-row.no-photo::before{content:"일반후기";grid-column:1;grid-row:1;width:132px;height:132px;border-radius:8px;border:1px solid #E7ECF3;background:#F7F9FC;color:#9AA6B5;display:flex;align-items:center;justify-content:center;font-family:var(--font-num);font-size:13px;font-weight:700;letter-spacing:.08em;box-sizing:border-box}
 .rv-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .rv-row.is-open{background:#fff}
 .rv-row.is-open:not(.no-photo){grid-template-columns:220px minmax(0,1fr) 172px}
@@ -128,7 +131,7 @@ button,select{cursor:pointer}
   .bs-medal{width:46px;height:46px;font-size:19px}
   .rv-row{grid-template-columns:96px minmax(0,1fr) 128px;gap:14px;padding:16px}
   .rv-thumb{width:96px;height:96px}
-  .rv-row.no-photo{grid-template-columns:minmax(0,1fr) 128px}
+  .rv-row.no-photo::before{width:96px;height:96px}
   .rv-row.is-open:not(.no-photo){grid-template-columns:140px minmax(0,1fr) 128px}
   .rv-row.is-open .rv-thumb{width:140px;height:140px}
 }
@@ -149,7 +152,7 @@ button,select{cursor:pointer}
     <div class="best-bar">
       <span class="bb-crown"><i class="fas fa-crown" aria-hidden="true"></i></span>
       <h2>BEST 후기</h2>
-      <span class="bb-sub">베스트 후기로 선정되면 대행수수료 1만 원 쿠폰을 드려요!</span>
+      <span class="bb-sub">비드바이가 선정한 추천 후기</span>
     </div>
 
     <div class="best-viewport">
@@ -369,20 +372,6 @@ button,select{cursor:pointer}
 </div>
 
 <script>
-/* 국기 아이콘: 미/영/일 랜덤 (캐러셀 복제 전에 실행) */
-(function () {
-  var flags = [
-    { src: 'flagicon/us_circle.png', alt: '미국' },
-    { src: 'flagicon/uk_circle.png', alt: '영국' },
-    { src: 'flagicon/jp_circle.png', alt: '일본' }
-  ];
-  document.querySelectorAll('.country-badge img').forEach(function (img) {
-    var f = flags[Math.floor(Math.random() * flags.length)];
-    img.src = f.src;
-    img.alt = f.alt;
-  });
-})();
-
 /* ── BEST 후기 캐러셀 ──
    가로 스크롤(스냅) + 자동 순환. 양옆 후기가 살짝 보이고 가장자리에서 페이드아웃.
    원본을 앞뒤로 한 벌씩 복제해 3세트를 만들어, 끝에서 처음으로 되감기지 않고

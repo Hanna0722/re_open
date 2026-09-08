@@ -7,6 +7,9 @@
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+  /* 폰트 토큰 (DESIGN.md 기준) */
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
+
     :root {
       --rose: var(--rose);
       --rose-h: #C42F4C;
@@ -38,7 +41,7 @@
       min-width: 320px;
       color: var(--text);
       background: #fff;
-      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
+      font-family:var(--font-sans);
       font-size: 14px;
       line-height: 1.5;
     }
@@ -153,8 +156,8 @@
     .product-market { display: block; margin-bottom: 4px; color: #59606d; font-size: 11px; font-weight: 700; }
     .product-market .flag { display: inline-block; width: 16px; height: 11px; border-radius: 2px; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08); vertical-align: -1px; margin-right: 5px; background: #fff center / cover no-repeat; }
     .product-market .flag.jp { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'%3E%3Crect width='30' height='20' fill='%23ffffff'/%3E%3Ccircle cx='15' cy='10' r='6' fill='%23bc002d'/%3E%3C/svg%3E"); }
-    .order-table .price-cell { font-family: 'Roboto', sans-serif; font-weight: 700; color: var(--navy); font-size: 14px; white-space: nowrap; }
-    .order-table .date-cell { font-family: 'Roboto', sans-serif; font-size: 12px; color: #666; white-space: nowrap; }
+    .order-table .price-cell { font-family:var(--font-num); font-weight: 700; color: var(--navy); font-size: 14px; white-space: nowrap; }
+    .order-table .date-cell { font-family:var(--font-num); font-size: 12px; color: #666; white-space: nowrap; }
     .thumb-placeholder { width: 60px; height: 60px; background: #3a4a6b; border-radius: 4px; display: inline-block; }
     .price-link { color: var(--rose); font-weight: 700; text-decoration: none; }
     .price-link:hover { text-decoration: none; }
@@ -210,7 +213,7 @@
     .ship-compare-table .feature-cell .note { color: #888; }
     .ship-compare-table .size-cell { font-size: 12px; line-height: 1.8; color: #444; text-align: left; }
     .ship-compare-table .days-cell {
-      font-family: 'Roboto', sans-serif;
+      font-family:var(--font-num);
       font-weight: 700;
       text-align: center;
       color: var(--navy);
@@ -279,8 +282,8 @@
       font-weight: 800;
       white-space: nowrap;
     }
-    .big-btn.primary { border: none; background: var(--rose); color: #fff; }
-    .big-btn.primary:hover { background: var(--rose-h); }
+    .big-btn.primary { border: none; background: #1a7fcf; color: #fff; }
+    .big-btn.primary:hover { background: #1567b0; }
     .big-btn.line { border: 1px solid var(--line); background: #fff; color: #626672; }
     .big-btn.line:hover { border-color: #b9b2ad; color: #41454f; }
 
@@ -698,9 +701,9 @@
         </div>
       </div>
 
-      <!-- 신청하기 / 목록보기 -->
+      <!-- 저장하기 / 목록보기 -->
       <div class="form-actions">
-        <button class="big-btn primary" type="button">신청하기</button>
+        <button class="big-btn primary" type="button">저장하기</button>
         <button class="big-btn line" type="button" onclick="history.back()">목록보기</button>
       </div>
 

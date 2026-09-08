@@ -7,6 +7,9 @@
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
+  /* 폰트 토큰 (DESIGN.md 기준) */
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
+
     :root {
       --rose: #E8385A;
       --rose-h: #C42F4C;
@@ -22,7 +25,7 @@
 
     html, body {
       margin: 0; min-width: 320px; background: #fff; color: var(--text);
-      font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;
+      font-family:var(--font-sans);
       font-size:14px; line-height:1.5;
     }
 
@@ -139,7 +142,7 @@
     .site-flag-uk { width: 16px; height: 12px; border-radius: 2px; flex: 0 0 auto; background: linear-gradient(45deg, #153f8f 0 38%, #fff 38% 44%, #d6223b 44% 56%, #fff 56% 62%, #153f8f 62%); }
     .product-name { margin: 10px 14px 0; overflow: hidden; color: #1a1a1a; font-size: 14px; font-weight: 600; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; min-height: 41px; }
     .price-row { display: block; margin: 12px 14px 16px; }
-    .price { color: #111; font-size: 17px; font-weight: 800; font-family: 'Roboto', sans-serif; }
+    .price { color: #111; font-size: 17px; font-weight: 800; font-family:var(--font-num); }
     .auction-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 14px; color: #7c8490; font-size: 12px; font-weight: 600; }
     .auction-meta > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .bids { flex: 0 0 auto; color: var(--muted); font-size: 12px; font-weight: 600; white-space: nowrap; }

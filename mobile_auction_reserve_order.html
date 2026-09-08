@@ -9,6 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Roboto:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+  /* 폰트 토큰 (DESIGN.md 기준) */
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
+
     :root {
       --rose: #E8385A;
       --rose-h: #C42F4C;
@@ -33,7 +36,7 @@
       max-width: 480px;
       color: var(--tp);
       background: var(--bg);
-      font-family: Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;
+      font-family:var(--font-sans);
       font-size: 14px;
       line-height: 1.5;
       overflow-x: hidden;
@@ -81,7 +84,7 @@
       width: 24px; height: 24px; border-radius: 50%;
       display: grid; place-items: center;
       border: 1px solid var(--border); background: var(--white);
-      color: var(--tm); font-family: Roboto, sans-serif; font-size: 12px; font-weight:700;
+      color: var(--tm); font-family:var(--font-num); font-size: 12px; font-weight:700;
     }
     .step-label { color: var(--tm); font-size: 12px; font-weight: 700; }
     .step.active .step-num { border-color: var(--rose); background: var(--rose); color: #fff; }
@@ -128,7 +131,7 @@
       border-bottom: 1px solid var(--border);
       color: var(--tp); font-size: 15px; font-weight:700;
     }
-    .sec-title .sec-no { color: var(--rose); font-family: Roboto, sans-serif; font-size: 13px; font-weight:700; }
+    .sec-title .sec-no { color: var(--rose); font-family:var(--font-num); font-size: 13px; font-weight:700; }
 
     /* 입찰확인 */
     .confirm-box { border-bottom: 1px solid var(--border); }

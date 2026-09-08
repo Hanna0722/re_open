@@ -7,6 +7,9 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
+  /* 폰트 토큰 (DESIGN.md 기준) */
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
+
     :root {
       --green: #2e8b57;
       --ink: #20242b;
@@ -29,7 +32,7 @@
     body {
       margin: 0;
       background: #fff;
-      font-family: Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family:var(--font-sans);
     }
 
     button,
@@ -369,7 +372,7 @@
       color: #fff;
     }
     .stamp-date {
-      font-family: Roboto, 'Malgun Gothic', sans-serif;
+      font-family:var(--font-num);
       font-size: 13px; font-weight: 500; letter-spacing: -.4px; line-height: 1;
     }
 
@@ -379,7 +382,7 @@
       border-style: dashed;
     }
     .rw-amt {
-      font-family: Roboto, 'Malgun Gothic', sans-serif;
+      font-family:var(--font-num);
       font-size: 13px; font-weight: 500; line-height: 1; letter-spacing: -.6px;
     }
     .rw-amt small { font-size: 9px; font-weight: 500; margin-left: 1px; letter-spacing: 0; }
@@ -497,7 +500,7 @@
       font-size: 10.5px; font-weight: 700;
     }
     .coupon-card .cc-amount {
-      font-family: Roboto, 'Malgun Gothic', sans-serif;
+      font-family:var(--font-num);
       font-size: 34px; font-weight: 700; color: var(--brand); line-height: 1;
     }
     .coupon-card .cc-amount small { font-size: 16px; font-weight: 700; margin-left: 2px; }
@@ -1166,7 +1169,7 @@
     .user-status-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid #e5e7eb; background: #fff; }
     .user-status-grid div { min-height: 70px; display: grid; place-items: center; align-content: center; gap: 4px; text-align: center; }
     .user-status-grid div + div { border-left: 1px solid #e5e7eb; }
-    .user-status-grid strong { color: #151b29; font-family: Roboto, sans-serif; font-size: 26px; line-height: 1; font-weight:700; }
+    .user-status-grid strong { color: #151b29; font-family:var(--font-num); font-size: 26px; line-height: 1; font-weight:700; }
     .user-status-grid div:nth-child(2) strong { color: var(--brand); }
     .user-status-grid span { color: #9aa3b2; font-size: 10px; font-weight: 700; }
     .user-menu-list { padding: 0 0 12px; }

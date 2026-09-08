@@ -8,6 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
+  /* 폰트 토큰 (DESIGN.md 기준) */
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
+
 :root{
   --rose:#E8385A;--rose-h:#C42F4C;--amber:#F5A623;
   --navy:#1A3C6E;--green:#3AAD4E;
@@ -16,7 +19,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 /* 네이버 모바일 기본 타이포그래피: 시스템 한글 폰트 스택 / 14px / line-height 1.5, 여백 8px 그리드 */
-body{font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;background:var(--bg);color:var(--tp);font-size:14px;line-height:1.5;max-width:480px;margin:0 auto;padding-top:81px}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--tp);font-size:14px;line-height:1.5;max-width:480px;margin:0 auto;padding-top:81px}
 a{text-decoration:none;color:inherit}
 
 /* ── 공통 앱 헤더 (모바일 상태바 + 앱바) ── */
@@ -47,7 +50,7 @@ a{text-decoration:none;color:inherit}
 .country-tabs{display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border-bottom:1px solid var(--border);position:sticky;top:159px;z-index:190}
 .country-tab{position:relative;height:44px;border:none;background:none;color:var(--tm);display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;white-space:nowrap;line-height:1.2}
 .country-tab .ct-name{display:inline-flex;align-items:center;gap:5px}
-.country-tab small{font-size:10px;font-weight:700;color:inherit;opacity:.75;font-family:'Roboto',sans-serif}
+.country-tab small{font-size:10px;font-weight:700;color:inherit;opacity:.75;font-family:var(--font-num)}
 .country-tab::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:transparent}
 .country-tab.active{color:var(--rose)}
 .country-tab.active::after{background:var(--rose)}
@@ -68,7 +71,7 @@ a{text-decoration:none;color:inherit}
 .bundle-info-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;flex:1}
 .bundle-info-list li{display:flex;flex-direction:column;gap:2px}
 .bi-label{font-size:10px;color:#999}
-.bi-val{font-size:13px;font-weight:700;color:#151922;font-family:'Roboto',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bi-val{font-size:13px;font-weight:700;color:#151922;font-family:var(--font-num);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bi-val.hot{color:var(--rose)}
 .group-check{display:flex;align-items:center;flex-shrink:0;padding-top:2px}
 .group-check input[type=checkbox]{width:18px;height:18px;cursor:pointer;accent-color:var(--rose);pointer-events:none}
@@ -80,7 +83,7 @@ a{text-decoration:none;color:inherit}
 .group-utils-meta b{color:var(--tp);font-weight:700}
 .btn-group-pay{border:none;background:var(--rose);color:#fff;border-radius:var(--r-sm,5px);padding:8px 11px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;gap:5px}
 .btn-group-pay:active{background:var(--rose-h)}
-.btn-group-pay .pay-amount{font-family:'Roboto',sans-serif;font-weight:700}
+.btn-group-pay .pay-amount{font-family:var(--font-num);font-weight:700}
 
 .cancel-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--border);z-index:200;display:flex;gap:8px}
 .btn-cancel-bar{flex:1;padding:13px;background:#fff;border:1px solid var(--border);color:#b3b8c2;border-radius:5px;font-size:14px;font-weight:700;cursor:default;font-family:inherit}
@@ -94,14 +97,14 @@ a{text-decoration:none;color:inherit}
 .order-status-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
 .order-status{font-size:11px;font-weight:700;color:var(--tp);white-space:nowrap}
 .order-status.hot{color:var(--rose)}
-.order-date{font-size:10px;color:var(--tm);font-family:'Roboto',sans-serif}
+.order-date{font-size:10px;color:var(--tm);font-family:var(--font-num)}
 .order-market{font-size:10px;color:var(--ts);font-weight:600;margin-bottom:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .order-market .flag{width:14px;height:9px;vertical-align:-1px;margin-right:4px}
 .order-name{font-size:12px;color:var(--tp);line-height:1.45;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin-bottom:4px}
 .order-figures{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:7px 9px;background:var(--bg);border-radius:7px}
 .order-figure{display:flex;flex-direction:column;gap:1px;min-width:0}
 .order-figure span{font-size:9px;color:var(--tm);font-weight:600;white-space:nowrap}
-.order-figure b{font-size:11px;color:var(--tp);font-family:'Roboto',sans-serif;font-weight:700;white-space:nowrap}
+.order-figure b{font-size:11px;color:var(--tp);font-family:var(--font-num);font-weight:700;white-space:nowrap}
 .order-figure b.hot{color:var(--rose)}
 .btn-row-pay{margin-top:8px;width:100%;border:1px solid var(--rose);background:#fff;color:var(--rose);border-radius:var(--r-sm,5px);padding:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
 .btn-row-pay:active{background:#fff3f5}

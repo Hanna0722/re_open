@@ -8,6 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
+  /* 폰트 토큰 (DESIGN.md 기준) */
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
+
 :root{
   --rose:#E8385A;--rose-h:#C42F4C;--amber:#F5A623;
   --navy:#1A3C6E;--green:#3AAD4E;
@@ -17,9 +20,9 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 /* 네이버 모바일 기본 타이포그래피: 시스템 한글 폰트 스택 / 14px / line-height 1.5, 여백 8px 그리드 */
-body{font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;background:var(--bg);color:var(--tp);font-size:14px;line-height:1.5;max-width:480px;margin:0 auto}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--tp);font-size:14px;line-height:1.5;max-width:480px;margin:0 auto}
 a{text-decoration:none;color:inherit}
-.roboto{font-family:'Roboto',sans-serif}
+.roboto{font-family:var(--font-num)}
 
 /* ── 헤더 (메인 동일 구조) ── */
 .m-header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200}
@@ -59,7 +62,7 @@ a{text-decoration:none;color:inherit}
 .m-gallery-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--tm)}
 .m-gallery-placeholder i{font-size:48px}
 .m-gallery-placeholder span{font-size:13px}
-.m-gallery-counter{position:absolute;bottom:10px;right:12px;background:rgba(0,0,0,.5);color:#fff;font-size:11px;padding:3px 8px;border-radius:10px;font-family:'Roboto',sans-serif}
+.m-gallery-counter{position:absolute;bottom:10px;right:12px;background:rgba(0,0,0,.5);color:#fff;font-size:11px;padding:3px 8px;border-radius:10px;font-family:var(--font-num)}
 .m-gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;background:rgba(0,0,0,.35);border:none;border-radius:50%;color:#fff;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .m-gallery-nav.prev{left:10px}
 .m-gallery-nav.next{right:10px}
@@ -73,11 +76,11 @@ a{text-decoration:none;color:inherit}
 
 /* ── 가격 ── */
 .m-price-section{background:#fff;padding:14px 16px;border-bottom:1px solid var(--border)}
-.m-price-original{font-size:13px;color:var(--tm);text-decoration:line-through;font-family:'Roboto',sans-serif}
-.m-price-current{font-size:26px;font-weight:700;font-family:'Roboto',sans-serif;line-height:1.2}
+.m-price-original{font-size:13px;color:var(--tm);text-decoration:line-through;font-family:var(--font-num)}
+.m-price-current{font-size:26px;font-weight:700;font-family:var(--font-num);line-height:1.2}
 .m-price-current .sale{color:var(--rose);font-size:18px;margin-right:6px}
 .m-price-current .unit{font-size:15px}
-.m-price-krw{font-size:13px;color:var(--ts);font-family:'Roboto',sans-serif;margin-top:2px}
+.m-price-krw{font-size:13px;color:var(--ts);font-family:var(--font-num);margin-top:2px}
 .m-state-badges{display:flex;gap:5px;margin-top:9px;flex-wrap:wrap}
 .m-badge{font-size:10px;font-weight:600;color:var(--navy);background:#EEF2F9;border:1px solid #C5D0E6;padding:2px 7px;border-radius:4px}
 .m-badge.point{color:var(--amber);background:#FFF6E5;border-color:#FFE0A0}
@@ -102,7 +105,7 @@ a{text-decoration:none;color:inherit}
 .m-form-row:last-child{margin-bottom:0}
 .m-form-label{font-size:12px;font-weight:700;color:var(--ts);margin-bottom:6px;display:block}
 .m-form-input-wrap{display:flex;gap:8px}
-.m-input{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:11px 14px;font-size:15px;font-family:'Roboto',sans-serif;font-weight:700;outline:none;background:#fff}
+.m-input{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:11px 14px;font-size:15px;font-family:var(--font-num);font-weight:700;outline:none;background:#fff}
 .m-input:focus{border-color:var(--navy)}
 .m-qty-btn{width:44px;border:1.5px solid var(--border);border-radius:10px;background:#fff;font-size:18px;font-weight:700;cursor:pointer;flex-shrink:0}
 .m-qty-input{flex:1;text-align:center}
@@ -115,11 +118,11 @@ a{text-decoration:none;color:inherit}
 .m-cost-label{color:var(--ts);display:flex;align-items:center;gap:5px}
 .m-cost-sign{font-size:10px;font-weight:700;color:var(--ts);background:#F0F2F5;padding:1px 5px;border-radius:3px}
 .m-cost-sign.minus{color:var(--green);background:#EDF7F0}
-.m-cost-val{font-family:'Roboto',sans-serif;font-weight:600;font-size:13px}
+.m-cost-val{font-family:var(--font-num);font-weight:600;font-size:13px}
 .m-cost-defer{font-size:11px;color:var(--ts);font-weight:400;font-family:inherit}
 .m-cost-total{background:#FFF5F7;border:1.5px solid var(--rose);border-radius:10px;padding:12px 14px;margin-top:12px;display:flex;justify-content:space-between;align-items:center}
 .m-cost-total-label{font-size:13px;font-weight:700}
-.m-cost-total-val{font-size:18px;font-weight:700;color:var(--rose);font-family:'Roboto',sans-serif}
+.m-cost-total-val{font-size:18px;font-weight:700;color:var(--rose);font-family:var(--font-num)}
 .m-btn-notice{font-size:11px;color:var(--tm);padding:10px 16px 12px;background:#FAFBFC;line-height:1.6;border-top:1px solid var(--border)}
 .m-cost-subtitle{font-size:12px;font-weight:700;color:var(--tp);margin:10px 0 4px;padding-bottom:5px;border-bottom:1px solid var(--border)}
 .m-cost-subtitle:first-child{margin-top:0}
@@ -185,7 +188,7 @@ a{text-decoration:none;color:inherit}
 .m-rel-thumb-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--tm);font-size:20px}
 .m-rel-info{padding:7px 8px}
 .m-rel-name{font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:2px}
-.m-rel-price{font-size:13px;font-weight:700;font-family:'Roboto',sans-serif}
+.m-rel-price{font-size:13px;font-weight:700;font-family:var(--font-num)}
 .m-rel-krw{font-size:10px;color:var(--ts)}
 
 /* ── 구매 버튼 (경매대행 실시간입찰/예약입찰 버튼과 동일 스타일) ── */

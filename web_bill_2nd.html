@@ -8,11 +8,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
+  /* 폰트 토큰 (DESIGN.md 기준) */
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
   :root{--rose:#E8385A;--rose-h:#C42F4C;--navy:#1A3C6E;--green:#3AAD4E;--r-sm:5px;}
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;
+    font-family:var(--font-sans);
     font-size:14px;
     color: #222;
     background: #fff;
@@ -103,7 +105,7 @@
   }
   .thumb-cell { width: 80px; }
   .price-cell {
-    font-family: 'Roboto', sans-serif;
+    font-family:var(--font-num);
     font-weight: 700;
     color: var(--navy);
     font-size: 14px;
@@ -260,18 +262,18 @@
     text-align: left;
   }
   .payment-table .amount-display {
-    font-family: 'Roboto', sans-serif;
+    font-family:var(--font-num);
     font-weight: 700;
     color: var(--rose);
     font-size: 15px;
   }
   .payment-table .amount-neutral {
-    font-family: 'Roboto', sans-serif;
+    font-family:var(--font-num);
     font-size: 13px;
     color: #333;
   }
   .payment-table .formula {
-    font-family: 'Roboto', sans-serif;
+    font-family:var(--font-num);
     font-size: 13px;
     color: #555;
     margin-right: 6px;
@@ -294,7 +296,7 @@
     margin-bottom: 7px;
   }
   .dep-title { font-size: 13px; color: var(--navy); }
-  .dep-available { font-family: 'Roboto', monospace; font-size: 13px; color: var(--navy); white-space: nowrap; }
+  .dep-available { font-family:var(--font-num); font-size: 13px; color: var(--navy); white-space: nowrap; }
   .dep-input-row {
     display: grid;
     grid-template-columns: minmax(120px, 1fr) auto;
@@ -313,7 +315,7 @@
     font-size: 13px;
     width: 100%;
     height: 34px;
-    font-family: 'Roboto', monospace;
+    font-family:var(--font-num);
     color: #111;
     font-weight: 700;
     text-align: right;
@@ -343,7 +345,7 @@
   .dep-reset[hidden] { display: none; }
   .dep-feedback { grid-column: 1 / -1; font-size: 12px; display: flex; align-items: center; gap: 6px; min-height: 0; }
   .dep-remain { color: var(--navy); display: none; }
-  .dep-remain span { font-family: 'Roboto', monospace; font-weight: 500; }
+  .dep-remain span { font-family:var(--font-num); font-weight: 500; }
   .dep-warn { color: var(--rose); display: none; }
   .dep-apply-btn {
     width: 74px;
@@ -455,7 +457,7 @@
     font-weight: 700;
     line-height: 1;
     cursor: pointer;
-    font-family: 'Roboto', sans-serif;
+    font-family:var(--font-num);
   }
   .tooltip-box {
     position: absolute;
@@ -543,7 +545,7 @@
   .fee-row:last-child { border-bottom: none; }
   .fee-row-left { display: flex; align-items: center; min-width: 0; }
   .fee-row-label { font-size: 13px; color: #333; font-weight: 600; white-space: nowrap; }
-  .fee-row-val { font-family: 'Roboto', Pretendard, sans-serif; font-size: 13px; font-weight: 700; color: #222; text-align: right; white-space: nowrap; }
+  .fee-row-val { font-family:var(--font-num); font-size: 13px; font-weight: 700; color: #222; text-align: right; white-space: nowrap; }
   .fee-row-val.is-red { color: var(--rose); }
   .fee-toggle-btn { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 20px; width: 20px; height: 20px; border: 0; background: transparent; color: var(--navy); cursor: pointer; padding: 0; }
   .fee-toggle-btn i { font-size: 12px; transition: transform .18s ease; }
@@ -555,7 +557,7 @@
   .fee-detail-list { border-left: 0; padding: 4px 0 0 8px; }
   .fee-extra-item { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 28px; font-size: 12px; color: #666; border-bottom: 1px dashed #d6dce6; }
   .fee-extra-item:last-child { border-bottom: none; }
-  .fee-extra-item strong { font-family: 'Roboto', Pretendard, sans-serif; font-size: 12px; color: #222; font-weight: 500; white-space: nowrap; }
+  .fee-extra-item strong { font-family:var(--font-num); font-size: 12px; color: #222; font-weight: 500; white-space: nowrap; }
   .fee-extra-item strong.is-active { color: #222; }
   .fee-extra-item strong.is-free { color: var(--green); }
   .fee-section-title { padding: 14px 18px 8px; border-top: 1px solid var(--navy); border-bottom: 1px solid #f0f2f5; color: var(--navy); font-size: 13px; line-height: 1.2; font-weight: 700; background: #fff; }
@@ -569,7 +571,7 @@
   .panel-earn-body.is-open { display: block; }
   .benefit-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 3px 0; font-size: 12px; }
   .benefit-row-lbl { display: flex; align-items: center; gap: 6px; color: #333; font-weight: 500; }
-  .benefit-row-val { font-family: 'Roboto', sans-serif; color: #9aa0aa; font-weight: 500; white-space: nowrap; text-decoration: line-through; }
+  .benefit-row-val { font-family:var(--font-num); color: #9aa0aa; font-weight: 500; white-space: nowrap; text-decoration: line-through; }
   .benefit-row-val.is-discount { color: var(--rose); font-weight: 700; text-decoration: none; }
   .grade-badge-free { display: inline-flex; align-items: center; height: 16px; padding: 0 6px; border-radius: 3px; background: #eaf7ed; color: var(--green); font-family: inherit; font-size: 10px; font-weight: 700; }
   .fee-badge-rate { display: inline-flex; align-items: center; height: 16px; margin-left: 6px; padding: 0 6px; border-radius: 3px; background: #FCEBEB; color: var(--rose); font-family: inherit; font-size: 10px; font-weight: 700; vertical-align: middle; }
@@ -578,7 +580,7 @@
   .fee-summary-row.is-discount .fee-summary-val { color: var(--rose); }
   .fee-summary-divider { border-top: 1px dashed #bfc9d8; margin: 8px 0; }
   .fee-summary-total { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 2px; color: var(--navy); font-size: 15px; font-weight: 700; }
-  .fee-summary-total .fee-summary-val { font-family: 'Roboto', Pretendard, sans-serif; color: var(--rose); font-size: 20px; font-weight: 700; white-space: nowrap; }
+  .fee-summary-total .fee-summary-val { font-family:var(--font-num); color: var(--rose); font-size: 20px; font-weight: 700; white-space: nowrap; }
   .amount-won-sub { margin-left: 3px; color: #8b929c; font-size: 13px; font-weight: 600; vertical-align: baseline; }
   .panel-coupon-btn { height: 28px; min-width: 86px; padding: 0 12px; border: 1px solid var(--navy); border-radius: 5px; background: #fff; color: var(--navy); font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
   .panel-coupon-btn:hover { background: var(--navy); color: #fff; }

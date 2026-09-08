@@ -7,6 +7,9 @@
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+  /* 폰트 토큰 (DESIGN.md 기준) */
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
+
     :root {
       --rose: var(--rose);
       --rose-h: #C42F4C;
@@ -40,7 +43,7 @@
       min-width: 320px;
       color: var(--text);
       background: #fff;
-      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
+      font-family:var(--font-sans);
       font-size:14px;
       line-height:1.5;
     }
@@ -322,15 +325,15 @@
     }
 
     .group-info b { color: #6b7280; font-weight: 700; margin-right: 5px; }
-    .group-info span { color: #151922; font-weight: 700; }
+    .group-info span { color: #151922; font-weight: 800; }
     .group-info .hot { color: var(--rose); }
     .group-info li,
     .group-info b,
     .group-info span { white-space: nowrap; }
 
     .group-utils { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-    .group-pay-btn { border-radius: 5px; min-width: 128px; min-height: 30px;}
-    .group-pay-btn .pay-amount { color: #fff; font-size: 14px; font-weight: 600;}
+    .group-pay-btn { border-radius: 5px; min-width: 128px; }
+    .group-pay-btn .pay-amount { color: var(--rose); }
 
     .bundle-head, .bundle-row {
       display: grid;
@@ -344,7 +347,7 @@
       border-bottom: 1px solid var(--line-soft);
       color: #5a5e66;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       text-align: center;
     }
 
@@ -366,7 +369,7 @@
 
     .bundle-row > div { padding: 12px 6px; display: flex; align-items: center; justify-content: center; }
 
-    .row-status { font-weight: 700; color: #2b2f37; white-space: nowrap; }
+    .row-status { font-weight: 800; color: #2b2f37; white-space: nowrap; }
     .row-status.hot { color: var(--rose); }
     .row-date { color: #59606d; white-space: nowrap; }
     .row-thumb { padding: 12px 4px !important; }
@@ -484,19 +487,18 @@
       height: 24px;
       margin-top: 3px;
       padding: 0 14px;
-      border: 1px solid var(--rose);
+      border: 1px solid #cfd4dc;
       border-radius: 5px;
-      background: #fff;
-      color: var(--rose);
+      background: linear-gradient(180deg, #fff 0%, #f1f3f6 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 1px 2px rgba(21,25,34,.08);
+      color: #343942;
       font-family: inherit;
-      font-size: 13px;
-      font-weight: 700;
+      font-size: 12px;
+      font-weight: 800;
       line-height: 1;
       cursor: pointer;
     }
-    .row-pay-btn:hover { background: #fff5f7; }
-    .row-pay-btn.group-pay-btn { background: var(--rose); color: #fff; }
-    .row-pay-btn.group-pay-btn:hover { background: var(--rose-h); }
+    .row-pay-btn:hover { border-color: #b8bec8; background: #fff; }
 
     /* 체크박스 */
     .check {

@@ -7,6 +7,8 @@
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+  /* 폰트 토큰 (DESIGN.md 기준) */
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
     :root {
       --rose: #E8385A;
       --rose-h: #C42F4C;
@@ -45,7 +47,7 @@
       min-width: 320px;
       color: var(--text);
       background: #fff;
-      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
+      font-family:var(--font-sans);
       font-size:14px;
       line-height:1.5;
     }
@@ -744,7 +746,7 @@
       color: #fff;
     }
     .stamp-date {
-      font-family: Roboto, "Noto Sans KR", sans-serif;
+      font-family:var(--font-num);
       font-size: 13px; font-weight: 500; letter-spacing: -.4px; line-height: 1;
     }
 
@@ -755,7 +757,7 @@
       border-style: dashed;
     }
     .rw-amt {
-      font-family: Roboto, "Noto Sans KR", sans-serif;
+      font-family:var(--font-num);
       font-size: 13px; font-weight: 500; line-height: 1; letter-spacing: -.6px;
     }
     .rw-amt small { font-size: 9px; font-weight: 500; margin-left: 1px; letter-spacing: 0; }
@@ -874,7 +876,7 @@
       font-size: 10.5px; font-weight: 700;
     }
     .coupon-card .cc-amount {
-      font-family: Roboto, "Noto Sans KR", sans-serif;
+      font-family:var(--font-num);
       font-size: 34px; font-weight: 700; color: var(--rose); line-height: 1;
     }
     .coupon-card .cc-amount small { font-size: 16px; font-weight: 700; margin-left: 2px; }
@@ -1202,7 +1204,7 @@
       border-radius: 12px;
       background: #fff;
       box-shadow: 0 10px 24px rgba(26, 60, 110, .10);
-      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
+      font-family:var(--font-sans);
       transform: translateY(8px);
       transition: transform .18s ease;
     }

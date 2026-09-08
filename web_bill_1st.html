@@ -8,11 +8,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
+  /* 폰트 토큰 (DESIGN.md 기준) */
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
   :root{--rose:#E8385A;--rose-h:#C42F4C;--navy:#1A3C6E;--green:#3AAD4E;--r-sm:5px;}
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;
+    font-family:var(--font-sans);
     font-size:14px;
     color: #222;
     background: #fff;
@@ -84,14 +86,14 @@
   .order-table .product-info .item-id  { font-size: 12px; color: #666; margin-bottom: 4px; }
   .order-table .product-info .item-name{ font-size: 13px; color: #222; line-height: 1.5; }
   .order-table .price-cell {
-    font-family: 'Roboto', sans-serif;
+    font-family:var(--font-num);
     font-weight: 700;
     color: var(--navy);
     font-size: 14px;
     white-space: nowrap;
   }
   .order-table .date-cell {
-    font-family: 'Roboto', sans-serif;
+    font-family:var(--font-num);
     font-size: 12px;
     color: #666;
     white-space: nowrap;
@@ -127,7 +129,7 @@
     border: 1px solid #dde1e7;
     padding: 8px 6px;
     font-size: 13px;
-    font-family: 'Roboto', sans-serif;
+    font-family:var(--font-num);
     color: #333;
   }
   .ship-fee-grid .active {
@@ -198,7 +200,7 @@
     cursor: pointer;
   }
   .ship-compare-table .days-cell {
-    font-family: 'Roboto', sans-serif;
+    font-family:var(--font-num);
     font-weight: 700;
     text-align: center;
     color: var(--navy);
@@ -406,7 +408,7 @@
   }
   .photo-card-badge--premium { background: #F5A623; }
   .photo-card-title { font-size: 13px; font-weight: 500; color: #333; margin-bottom: 6px; }
-  .photo-card-price { font-family: 'Roboto', sans-serif; font-size: 13px; color: #888; }
+  .photo-card-price { font-family:var(--font-num); font-size: 13px; color: #888; }
   .photo-yen { font-size: 17px; font-weight: 700; color: var(--navy); }
 
   /* 사진 플랜 안내 표 */

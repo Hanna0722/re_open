@@ -8,6 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
+  /* 폰트 토큰 (DESIGN.md 기준) */
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
 :root{
   --rose:#E8385A;--rose-h:#C42F4C;--amber:#F5A623;
   --navy:#1A3C6E;--green:#3AAD4E;
@@ -16,9 +18,9 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{background:#fff}
-body{font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;background:linear-gradient(to bottom,#fff 0 20px,var(--bg) 20px);color:var(--tp);font-size:14px;line-height:1.5;}
+body{font-family:var(--font-sans);background:linear-gradient(to bottom,#fff 0 20px,var(--bg) 20px);color:var(--tp);font-size:14px;line-height:1.5;}
 a{text-decoration:none;color:inherit}
-.roboto{font-family:'Roboto',sans-serif}
+.roboto{font-family:var(--font-num)}
 
 /* ── 헤더 ── */
 
@@ -111,11 +113,11 @@ a{text-decoration:none;color:inherit}
 .cost-row .cost-label{display:flex;align-items:center;gap:4px}
 .cost-row .cost-sign{font-size:10px;font-weight:700;color:var(--ts);background:#F0F2F5;padding:1px 5px;border-radius:4px;flex-shrink:0}
 .cost-row .cost-sign.minus{color:var(--green);background:#EDF7F0}
-.cost-row .cost-val{font-family:'Roboto',sans-serif;font-weight:600;color:var(--tp);text-align:right;font-size:13px}
+.cost-row .cost-val{font-family:var(--font-num);font-weight:600;color:var(--tp);text-align:right;font-size:13px}
 .cost-row .cost-val .defer{font-size:11px;color:var(--ts);font-weight:400;font-family:inherit}
 .cost-total-row{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;margin-top:12px;display:flex;justify-content:space-between;align-items:center}
 .cost-total-label{font-size:12px;font-weight:700;color:var(--ts)}
-.cost-total-val{font-family:'Roboto',sans-serif;font-size:20px;font-weight:700;color:var(--rose)}
+.cost-total-val{font-family:var(--font-num);font-size:20px;font-weight:700;color:var(--rose)}
 
 /* ── 이미지 하단 정보 패널 ── */
 .related-thumb{width:100%;height:110px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;color:var(--tm);font-size:24px}

@@ -8,6 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Inter:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
+  /* 폰트 토큰 (DESIGN.md 기준) */
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
 :root{
   --rose:#E8385A;--rose-h:#C42F4C;--amber:#F5A623;
   --navy:#1A3C6E;--green:#3AAD4E;
@@ -18,7 +20,7 @@
   --header-h:0px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;background:var(--bg);color:var(--tp);font-size:14px;zoom:1;line-height:1.5;padding-top:calc(var(--notice-h) + var(--header-h))}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--tp);font-size:14px;zoom:1;line-height:1.5;padding-top:calc(var(--notice-h) + var(--header-h))}
 a{text-decoration:none;color:inherit}
 
 /* ? ═ 공 ? ?? ═ */
@@ -102,13 +104,13 @@ header{background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 4p
 .pu-st-label::before{content:"";width:6px;height:6px;border-radius:50%;background:#22C55E}
 .pu-st:nth-child(2) .pu-st-label::before{background:#E8385A}
 .pu-st:nth-child(3) .pu-st-label::before{background:#22C55E}
-.pu-st-num{font-size:13px;font-weight:900;color:var(--tp);font-family:'Roboto',sans-serif}
+.pu-st-num{font-size:13px;font-weight:900;color:var(--tp);font-family:var(--font-num)}
 .pu-st-num.red{color:var(--rose)}
 .pu-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:auto}
 .pu-btn{height:32px;border:1px solid var(--border);border-radius:5px;background:#fff;font-size:11px;font-weight:800;color:#5D6675;cursor:pointer;font-family:inherit;text-align:center;position:relative}
 .pu-btn:hover{background:var(--bg);color:var(--tp)}
 /* 신규 소식 표시: 오른쪽 위 N (1:1 문의내역과 동일) */
-.new-n{color:var(--rose);font-family:Roboto,sans-serif;font-size:9px;font-weight:900;line-height:1;vertical-align:super;margin-left:2px}
+.new-n{color:var(--rose);font-family:var(--font-num);font-size:9px;font-weight:900;line-height:1;vertical-align:super;margin-left:2px}
 k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 
 /* ? ═ 멤버??배너 ? ═ */
@@ -194,7 +196,7 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 .office-country{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#111827;margin-bottom:4px}
 .office-country .flag{width:18px;height:13px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
 .office-country .flag img{width:100%;height:100%;display:block;object-fit:cover;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
-.office-time{font-family:pretendard,Arial,sans-serif;font-size:13px;color:#1d74ff;white-space:nowrap}
+.office-time{font-family:var(--font-sans);font-size:13px;color:#1d74ff;white-space:nowrap}
 
 @media (max-width:720px){
   .market-info-body{grid-template-columns:1fr}
@@ -264,10 +266,10 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 .live-source::before{content:"";width:7px;height:7px;border-radius:50%;background:#E60026}
 .live-name{min-height:34px;color:#111827;font-size:12px;font-weight:700;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .live-price-line{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;min-width:0;margin-top:8px}
-.live-price{margin-top:8px;color:#111827;font-size:17px;font-weight:900;font-family:'Roboto',sans-serif}
+.live-price{margin-top:8px;color:#111827;font-size:17px;font-weight:900;font-family:var(--font-num)}
 .live-price-line .live-price{margin-top:0}
 .live-buy-now{flex:0 0 auto;margin:0 0 2px;color:#111;font-size:12px;font-weight:600;white-space:nowrap}
-.live-buy-now strong{font-family:'Roboto',sans-serif;font-weight:600}
+.live-buy-now strong{font-family:var(--font-num);font-weight:600}
 .live-meta{display:flex;justify-content:space-between;gap:8px;margin-top:8px;color:#8B94A3;font-size:12px;font-weight:600}
 .live-meta span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
@@ -300,8 +302,8 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 .rate-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;min-height:42px;padding:0 14px;background:#F7F8FA;border-radius:8px;font-size:13px}
 .rate-currency{display:flex;align-items:center;gap:8px;color:var(--tp);font-weight:700}
 .rate-flag{width:20px;height:14px;object-fit:cover;display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
-.rate-value{font-family:Roboto,Arial,sans-serif;color:var(--tp);font-weight:800;font-size:14px;white-space:nowrap}
-.cs-num{font-size:30px;font-weight:900;color:var(--rose);font-family:'Roboto',sans-serif;line-height:1.1;margin-bottom:14px}
+.rate-value{font-family:var(--font-num);color:var(--tp);font-weight:800;font-size:14px;white-space:nowrap}
+.cs-num{font-size:30px;font-weight:900;color:var(--rose);font-family:var(--font-num);line-height:1.1;margin-bottom:14px}
 .cs-hours{display:grid;grid-template-columns:auto 1fr;column-gap:14px;row-gap:4px;margin-bottom:14px;color:#8B94A3;font-size:12px;line-height:1.45}
 .cs-hours strong{color:#8B94A3;font-weight:900;white-space:nowrap}
 .cs-shortcuts{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
