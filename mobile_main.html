@@ -224,11 +224,11 @@ body{
   cursor:pointer;transition:all .3s;
 }
 .mb-dot.active{width:18px;background:var(--rose)}
-.shortcut-wrap{
+.sc-bar{
   background:#fff;border-bottom:1px solid var(--border);
   padding:16px 14px;
 }
-.shortcut-grid{
+.sc-inner{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:12px 4px;
@@ -239,20 +239,16 @@ body{
   color:inherit;text-decoration:none;
 }
 .sc-item:hover{opacity:.75}
-.sc-circle{
-  width:44px;height:44px;border-radius:12px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:1px;overflow:hidden;
-  font-size:20px;
+.sc-icon{
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
 }
-.sc-circle i {
-  font-size:18px;
-  color:#fff;
-}
-.si-1{background:#6C63FF}.si-2{background:#EC4899}.si-3{background:#F59E0B}
-.si-4{background:#10B981}.si-5{background:#3B82F6}.si-6{background:#F97316}
-.si-7{background:#8B5CF6}.si-8{background:#06B6D4}.si-9{background:#14B8A6}.si-10{background:#64748B}
-.sc-label{font-size:10px;color:var(--ts);font-weight:500;white-space:nowrap;text-align:center}
+.sc-icon i{font-size:16px}
+.si1{background:#EEF0FF;color:#6C63FF}.si2{background:#FDE9F1;color:#E84C8A}.si3{background:#FFF3E0;color:#EF9F27}
+.si4{background:#E4F6EE;color:#12A87B}.si5{background:#E9F1FD;color:#3B82F6}.si6{background:#FFEEE2;color:#F97316}
+.si7{background:#F1EBFD;color:#8B5CF6}.si8{background:#E3F5FA;color:#0EA5C4}.si9{background:#E2F4F1;color:#14B8A6}.si10{background:#FCE9EE;color:#E8385A}
+.sc-lbl{font-size:10px;color:var(--ts);font-weight:500;white-space:nowrap;text-align:center}
 .convenience-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(17,24,39,.46);z-index:910}
 .convenience-overlay.open{display:flex}
 .convenience-popup{width:min(742px,calc(100vw - 28px));max-width:430px;background:#fff;border:1px solid var(--border);box-shadow:0 18px 48px rgba(15,23,42,.2);position:relative}
@@ -589,18 +585,18 @@ button.user-menu-item{
       </div>
     </div>
 
-    <div class="shortcut-wrap">
-      <div class="shortcut-grid">
-        <div class="sc-item" role="button" tabindex="0" onclick="openCustomsTaxPopup()" onkeydown="handleShortcutKey(event, openCustomsTaxPopup)"><div class="sc-circle si-1"><i class="fas fa-table-cells-large"></i></div><span class="sc-label">예상 세금계산기</span></div>
-        <div class="sc-item" role="button" tabindex="0" onclick="openWishlistPopup()" onkeydown="handleShortcutKey(event, openWishlistPopup)"><div class="sc-circle si-2"><i class="fas fa-heart"></i></div><span class="sc-label">관심상품</span></div>
-        <a class="sc-item" href="mobile_auction_bid_list.html"><div class="sc-circle si-3"><i class="fas fa-gavel"></i></div><span class="sc-label">나의 경매</span></a>
-        <a class="sc-item" href="mobile_bundle_shipping_management.html"><div class="sc-circle si-4"><i class="fas fa-box-open"></i></div><span class="sc-label">배송 신청 관리</span></a>
-        <a class="sc-item" href="https://www.bidbuy.co.kr/cs"><div class="sc-circle si-5"><i class="fas fa-thumbs-up"></i></div><span class="sc-label">고객센터</span></a>
-        <div class="sc-item" role="button" tabindex="0" onclick="openConvenienceToolsPopup()" onkeydown="handleShortcutKey(event, openConvenienceToolsPopup)"><div class="sc-circle si-6"><i class="fas fa-toolbox"></i></div><span class="sc-label">편의도구</span></div>
-        <a class="sc-item" href="mobile_mileage.html"><div class="sc-circle si-7"><i class="fas fa-ticket"></i></div><span class="sc-label">마일리지/쿠폰</span></a>
-        <div class="sc-item" role="button" tabindex="0" onclick="openbidbuycsPopup()" onkeydown="handleShortcutKey(event, openbidbuycsPopup)"><div class="sc-circle si-8"><i class="fas fa-clipboard-list"></i></div><span class="sc-label">자주하는질문</span></div>
-        <div class="sc-item" onclick="location.href='mobile_mainlist.html?status=international-shipping'"><div class="sc-circle si-9"><i class="fas fa-plane-departure"></i></div><span class="sc-label">배송조회</span></div>
-        <a class="sc-item" href="https://m.blog.naver.com/bidbuykr?tab=1"><div class="sc-circle si-10"><i class="fas fa-users"></i></div><span class="sc-label">블로그</span></a>
+    <div class="sc-bar">
+      <div class="sc-inner">
+        <div class="sc-item" role="button" tabindex="0" onclick="openCustomsTaxPopup()" onkeydown="handleShortcutKey(event, openCustomsTaxPopup)"><div class="sc-icon si1"><i class="fas fa-table-cells-large"></i></div><span class="sc-lbl">예상 세금계산기</span></div>
+        <div class="sc-item" role="button" tabindex="0" onclick="openWishlistPopup()" onkeydown="handleShortcutKey(event, openWishlistPopup)"><div class="sc-icon si2"><i class="fas fa-heart"></i></div><span class="sc-lbl">관심상품</span></div>
+        <a class="sc-item" href="mobile_auction_bid_list.html"><div class="sc-icon si3"><i class="fas fa-gavel"></i></div><span class="sc-lbl">나의 경매</span></a>
+        <a class="sc-item" href="mobile_bundle_shipping_management.html"><div class="sc-icon si4"><i class="fas fa-box-open"></i></div><span class="sc-lbl">배송 신청 관리</span></a>
+        <a class="sc-item" href="https://www.bidbuy.co.kr/cs"><div class="sc-icon si5"><i class="fas fa-thumbs-up"></i></div><span class="sc-lbl">고객센터</span></a>
+        <div class="sc-item" role="button" tabindex="0" onclick="openConvenienceToolsPopup()" onkeydown="handleShortcutKey(event, openConvenienceToolsPopup)"><div class="sc-icon si6"><i class="fas fa-toolbox"></i></div><span class="sc-lbl">편의도구</span></div>
+        <a class="sc-item" href="mobile_mileage.html"><div class="sc-icon si7"><i class="fas fa-ticket"></i></div><span class="sc-lbl">마일리지/쿠폰</span></a>
+        <div class="sc-item" role="button" tabindex="0" onclick="openbidbuycsPopup()" onkeydown="handleShortcutKey(event, openbidbuycsPopup)"><div class="sc-icon si8"><i class="fas fa-clipboard-list"></i></div><span class="sc-lbl">자주하는질문</span></div>
+        <div class="sc-item" onclick="location.href='mobile_mainlist.html?status=international-shipping'"><div class="sc-icon si9"><i class="fas fa-plane-departure"></i></div><span class="sc-lbl">배송조회</span></div>
+        <a class="sc-item" href="mobile_purchase_start.html"><div class="sc-icon si10"><i class="fas fa-bag-shopping"></i></div><span class="sc-lbl">구매신청</span></a>
       </div>
     </div>
 
