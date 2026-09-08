@@ -132,6 +132,9 @@
       '--btn-h-sm:36px;--btn-h-md:44px;--btn-h-lg:52px;' +
       '--label-col-w:230px;' +
     '}',
+    /* 공통 폰트 토큰 (DESIGN.md 기준) — 페이지 인라인 :root의 백업 */
+    ":root{--font-sans:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;--font-num:Roboto,var(--font-sans)}",
+    'body{font-family:var(--font-sans)}',
     '.req{color:var(--rose);font-weight:700;margin-left:2px}',
     '.required-note{color:#666680;font-size:12px}',
 
@@ -241,12 +244,7 @@
     '.channel-icons::-webkit-scrollbar{display:none}',
     '.ch-icon-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:4px 14px;cursor:pointer;min-width:80px;flex-shrink:0;transition:opacity .15s;text-decoration:none}',
     '.ch-icon-item:hover{opacity:.8}',
-    '.ch-circle{width:55px;height:55px;border-radius:20px;background:#fff;border:1px solid #E0E4EB;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);transition:box-shadow .15s;flex:none}',
-    '.ch-icon-item:hover .ch-circle{box-shadow:0 4px 14px rgba(0,0,0,.13)}',
-    '.ch-circle img{width:100%;height:100%;object-fit:contain}',
-    '.ch-circle img.ch-logo{width:100%;height:100%;object-fit:contain;border-radius:0}',
-    '.ch-label{font-size:14px;color:#666B75;font-weight:500;white-space:nowrap}',
-    '.ch-circle.active{border-color:#E8385A;box-shadow:0 0 0 3px rgba(232,56,90,.14)}',
+    '.ch-label{font-size:19px;color:#666B75;font-weight:500;white-space:nowrap}',
     '.ch-label.active{color:#E8385A;font-weight:700}',
 
     /* -- 서브/카테고리/통합검색 상단 스토어 바 (채널 바와 동일 모양) -- */
@@ -296,12 +294,12 @@
   var STORES = [
     { label: '야후옥션',   barLabel: '야후 옥션',   logo: 'store_yahoo_auction.png',  href: 'web_sub_main.html',          barHref: 'web_sub_main.html' },
     { label: '메루카리',   barLabel: '메루카리',    logo: 'store_mercari.png',        href: 'web_purchase_merukari.html', barHref: 'web_sub_main.html' },
-    { label: '라쿠텐',     barLabel: '일본 라쿠텐', logo: 'store_rakuten.png',        href: 'web_purchase_store.html',    barHref: 'web_sub_main.html' },
-    { label: '라쿠마',     barLabel: '일본 라쿠마', logo: 'store_rakuma.png',         href: 'web_purchase_store.html',    barHref: 'web_sub_main.html' },
+    { label: '라쿠텐',     barLabel: '라쿠텐', logo: 'store_rakuten.png',        href: 'web_purchase_store.html',    barHref: 'web_sub_main.html' },
+    { label: '라쿠마',     barLabel: '라쿠마', logo: 'store_rakuma.png',         href: 'web_purchase_store.html',    barHref: 'web_sub_main.html' },
     { label: '야후쇼핑',   barLabel: '야후 쇼핑',   logo: 'store_yahoo_shopping.png', href: 'web_purchase_url.html',      barHref: 'web_sub_main.html' },
     { label: '야후프리마', barLabel: '야후 프리마', logo: 'store_yahoo_furima.png',   href: 'web_purchase_store.html',    barHref: 'web_sub_main.html' },
     { label: '미국이베이', barLabel: '미국 이베이', logo: 'store_ebay_us.png',        href: 'web_sub_main.html',          barHref: 'web_sub_main.html' },
-    { label: '영국이베이', barLabel: '영국 이베이', logo: 'store_ebay_uk.png',        href: 'web_sub_main.html',          barHref: 'web_sub_main.html' }
+    { label: '영국이베이', barLabel: '영국 이베이', logo: 'store_ebay_uk.png',        href: 'web_sub_main.html',          barHref: 'web_sub_main.html' },
   ];
   window.BB_STORES = STORES;
   window.BB_STORE_LOGO_DIR = STORE_LOGO_DIR;
@@ -309,7 +307,6 @@
   function storeChannelBarHTML() {
     return STORES.map(function (st) {
       return '<div class="ch-icon-item" style="cursor:pointer" onclick="location.href=' + "'" + st.barHref + "'" + '">' +
-        '<div class="ch-circle"><img class="ch-logo" src="' + STORE_LOGO_DIR + st.logo + '" alt="' + st.barLabel + '"></div>' +
         '<span class="ch-label">' + st.barLabel + '</span>' +
       '</div>';
     }).join('');

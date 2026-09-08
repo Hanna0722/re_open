@@ -164,6 +164,9 @@
       '--r-sm:5px;--r-md:8px;--r-lg:12px;--r-pill:999px;' +
       '--btn-h-sm:36px;--btn-h-md:44px;--btn-h-lg:48px;' +
     '}',
+    /* 공통 폰트 토큰 (DESIGN.md 기준) — 페이지 인라인 :root의 백업 */
+    ":root{--font-sans:Pretendard,'Apple SD Gothic Neo','Helvetica Neue','Malgun Gothic','맑은 고딕',sans-serif;--font-num:Roboto,var(--font-sans)}",
+    'body{font-family:var(--font-sans)}',
     '.req{color:var(--rose);font-weight:700;margin-left:2px}',
     '.required-note{color:#666680;font-size:12px}',
     '.grade-img{background:none!important;box-shadow:none!important;border:0!important;border-radius:0!important;overflow:visible!important;padding:0!important}',

@@ -21,11 +21,35 @@ Uses a 4px base grid with scale: 1, 2, 3, 4, 5, 6, 8, 10.
 - **Notice Bar** (#F1F3F5): Top notice bar background
 
 ## Typography
-- **Headline Font**: Pretendard
-- **Body Font**: Pretendard
-- **Label Font**: Pretendard
 
-The typography system is built entirely on the Pretendard font family, creating consistency across all text elements. Weight conventions follow a clear hierarchy: 400 for body text, 600 for interactive elements, and 700 for headings and emphasis. Font sizes range from 10px for micro-copy to 14px for primary content, with negative letter-spacing (-0.22px to -0.36px) applied to smaller text for improved readability. Line heights are generally tight, matching font sizes for compact mobile layouts.
+### Font tokens (single source of truth)
+
+Every page defines these two custom properties at the top of its first
+`<style>` block, and `bb-common.js` / `bb-common-mobile.js` inject the same
+`:root` declaration as a backstop. All `font-family` declarations in page
+CSS reference the tokens — never a literal stack.
+
+```css
+:root{
+  --font-sans: Pretendard, 'Apple SD Gothic Neo', 'Helvetica Neue', 'Malgun Gothic', '맑은 고딕', sans-serif;
+  --font-num:  Roboto, var(--font-sans);
+}
+body{ font-family: var(--font-sans); }
+```
+
+- **`--font-sans`** — headlines, body, labels, buttons, everything textual (Korean + Latin).
+- **`--font-num`** — numerals only: prices, amounts, counts, phone numbers, dates. Roboto gives even tabular digits; it falls back to `--font-sans` so Korean characters in the same element still render in Pretendard.
+- Components that inherit correctly use `font-family: inherit` (unchanged).
+- Icon fonts (`"Font Awesome …"`) are exempt.
+
+### Loading
+
+- Pretendard: `<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">` (never the Google Fonts `css2?family=Pretendard` URL — Google Fonts does not serve Pretendard).
+- Roboto: Google Fonts (`family=Roboto:wght@400;500;700`).
+
+### Weight & spacing
+
+Weight hierarchy: **400** body · **600** interactive elements · **700** headings and emphasis (avoid other weights). Font sizes run 10px (micro-copy) to 14px (primary content); apply negative letter-spacing (-0.22px to -0.36px) to text below 12px. Line heights stay tight, close to the font size, for compact mobile layouts.
 
 ## Elevation
 
