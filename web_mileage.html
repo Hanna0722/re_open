@@ -1569,7 +1569,7 @@
         <section class="panel stamp-panel" aria-label="포인트 스탬프">
           <div class="stamp-head">
             <div>
-              <h2>혜택 스탬프</h2>
+              <h2 id="stampTitle">혜택 스탬프</h2>
               <p id="stampSummary">이번 달 구매 0건</p>
             </div>
             <span class="stamp-badge">VIP</span>
@@ -2074,6 +2074,10 @@
       }, 4000);
     });
 
+    (function () {
+      const t = document.getElementById("stampTitle");
+      if (t) t.textContent = (new Date().getMonth() + 1) + "월 혜택 스탬프";
+    })();
     renderStamps();
 
     const historyTabs = document.querySelectorAll(".history-tab");
