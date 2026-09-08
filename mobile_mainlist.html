@@ -7,17 +7,16 @@
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="bb-trade-status-mobile.css">
 <style>
   /* 폰트 토큰 (DESIGN.md 기준) */
-  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}
+  :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans);--tp:#1A1A2E;--ts:#666680;--tm:#999BAA}
 
 :root{
   --rose:#E8385A;--rose-h:#C42F4C;--amber:#F5A623;
   --brand:#E8385A;
   --navy:#1A3C6E;--green:#3AAD4E;
   --bg:#F5F7FA;--white:#fff;--border:#E0E4EB;--line:#e0e4eb;--line-soft:#eee6e2;
-  --tp:#1A1A2E;--ts:#666680;--tm:#999BAA;--muted:#666680;--faint:#999baa;
+  --muted:#666680;--faint:#999baa;
   --warm:#fbf7f5;
   --frame-w:480px;
 }
@@ -50,93 +49,72 @@ button,select{cursor:pointer}
 /* ── 페이지 타이틀 ── */
 
 /* ── 나의 거래 현황 ── */
+.shopping-head{margin:24px 10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:42px;padding-bottom:7px;border-bottom:1.5px solid var(--brand)}
+.shopping-head h3{margin:0;color:var(--brand);font-size:15px;font-weight:700}
+.status-period{color:#9aa3b2;font-size:12px;font-weight:500}
+.status-more{margin-left:auto;display:flex;padding:4px;border:0;background:none;color:#c3c0bd;cursor:pointer}
+.status-more svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.4}
+.status-board{margin:0 10px 18px}
+.status-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;padding:8px 4px 16px}
+.status-step{display:flex;flex-direction:column;align-items:center;gap:8px;padding:0;border:0;background:none;font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;text-decoration:none}
+.status-step em{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#f4f1ef;color:#2b2f37;font-size:18px;font-style:normal;font-weight:800;letter-spacing:-.03em;transition:transform .16s ease}
+.status-step:active em{transform:scale(.93)}
+.status-step em.zero{color:#c7c4c2;font-weight:700}
+.status-step strong{min-height:28px;color:#6a6c74;font-size:11px;font-weight:600;letter-spacing:-.045em;line-height:1.35;text-align:center}
+.status-step.hot em{background:#ffe9ee;color:var(--brand)}
+.status-step.hot strong{color:var(--brand);font-weight:700}
+.status-step.status-active em{box-shadow:0 0 0 2px rgba(232,56,90,.18);background:#ffe9ee;color:var(--brand)}
+.status-step.status-active strong{color:var(--brand);font-weight:700}
+.status-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.status-grid a{display:flex;align-items:center;justify-content:center;gap:6px;padding:13px 4px;border:1px solid #e5dcd8;border-radius:5px;background:#fff;color:#5f6169;font-family:inherit;font-size:12.5px;font-weight:600;letter-spacing:-.035em;cursor:pointer;text-decoration:none}
+.status-grid i{color:#2b2f37;font-size:13px;font-style:normal;font-weight:800}
+.status-grid i.zero{color:#c4c1bf}
+.status-grid a.hot{color:var(--brand);font-weight:700}
+.status-grid a.hot i{color:var(--brand)}
+.status-grid a.status-active{border-color:var(--brand);box-shadow:0 0 0 2px rgba(232,56,90,.12);color:var(--brand);font-weight:700}
+.status-grid a.status-active i{color:var(--brand)}
+
 /* ── 거래 목록 필터 (web_mainlist 기준) ── */
 .trade-area{border-top:8px solid #f0f2f5;margin-top:4px}
 .trade-head{min-height:42px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 10px 10px}
 .trade-head .list-title{margin:0;color:#222831;font-size:18px;font-weight:900}
-.shipping-wait-link{display:inline-flex;align-items:center;gap:6px;flex-shrink:0;min-height:30px;padding:0 12px;border:1px solid #e5dcd8;border-radius:999px;color:#5f6169;background:#fff;font-size:12px;text-decoration:none}
-.shipping-wait-link[hidden]{display:none}
-.shipping-wait-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.5}
 .filter-row{display:flex;flex-wrap:wrap;gap:10px;padding:0 10px 12px;align-items:center}
 .filter-group{display:flex;gap:18px;flex:1 1 auto}
 .tab{position:relative;height:34px;padding:0 0 7px;border:0;background:transparent;color:#7f8794;font-size:13px;font-weight:700;white-space:nowrap}
 .tab.active{color:var(--rose)}
 .tab.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--rose);border-radius:999px}
 .utility-group{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:100%}
-.search-group{display:grid;grid-template-columns:92px minmax(0,1fr) auto;gap:6px;width:100%;margin-top:2px}
-.search-group .dd-select{height:34px}
-.search-input{height:34px;min-width:0;padding:0 10px;border:1px solid #e5dbd7;border-radius:8px;background:#fff;color:var(--tp);font-size:12px;outline:none}
-.search-input::placeholder{color:#a7a29e}
-.search-btn{height:34px;padding:0 18px;border:0;border-radius:15px;background:var(--navy);color:#fff;font-size:12px;font-weight:600}
 .dd-select{
   height:32px;padding:0 8px;border:1px solid #e5dbd7;border-radius:8px;background:#fff;
-  color:#33363d;font-size:11px;font-weight:700;outline:none;
-  appearance:none;-webkit-appearance:none;text-align:left;
+  color:var(--navy);font-size:11px;font-weight:700;outline:none;
+  appearance:none;-webkit-appearance:none;text-align:center;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='6'%3E%3Cpath d='M0 0l4.5 6 4.5-6z' fill='%235d6470'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 6px center;
 }
-#ddPeriodBtn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:18px}
-
-/* ══ 조회 기간 바텀시트 (mobile_totalsearch 시트 패턴 이식) ══ */
-.sheet-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:300;opacity:0;transition:opacity .25s}
-.sheet-overlay.open{display:block;opacity:1}
-.period-sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:var(--frame-w);max-height:92vh;background:#fff;border-radius:16px 16px 0 0;z-index:400;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.32,0,.07,1);overflow:hidden}
-.period-sheet.open{transform:translateX(-50%) translateY(0)}
-.sheet-handle{width:38px;height:5px;margin:10px auto 2px;border-radius:999px;background:#d5d9df;flex-shrink:0}
-.sheet-header{display:flex;align-items:center;justify-content:space-between;padding:8px 16px 10px;flex-shrink:0}
-.sheet-title{font-size:15px;font-weight:700}
-.btn-sheet-close{width:30px;height:30px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:20px;background:none;border:none}
-.sheet-body{overflow-y:auto;flex:1;min-height:0;padding:4px 16px 12px}
-.sheet-actions{display:flex;gap:8px;padding:12px 16px 20px;border-top:1px solid var(--line);flex-shrink:0;background:#fff}
-.btn-sheet-reset{padding:13px 20px;border:1px solid var(--line);border-radius:15px;font-size:14px;font-weight:600;color:var(--muted);background:#fff}
-.btn-sheet-apply{flex:1;padding:13px;background:var(--brand);border-radius:15px;font-size:14px;font-weight:600;color:#fff;border:none}
-
-.preset-row{display:flex;align-items:center;gap:6px;margin-bottom:12px}
-.preset-row button{flex:1;height:34px;border:1px solid var(--line);border-radius:15px;background:#fff;color:#6b717d;font-size:12px;font-weight:600}
-.preset-row button.active{border-color:var(--rose);background:var(--rose);color:#fff}
-.preset-row .year-list{flex:1;display:flex;gap:6px}
-.calendar-range{display:flex;align-items:center;gap:6px;margin-bottom:14px}
-.calendar-range .range-field{flex:1;display:flex;align-items:center;justify-content:space-between;gap:6px;height:38px;padding:0 10px;border:1px solid var(--line);border-radius:5px;background:#fff;color:#252a32;font-size:13px;font-weight:700}
-.calendar-range .range-field.active{border-color:var(--rose)}
-.calendar-range .range-field i{color:#9ca1ad;font-size:12px}
-.calendar-range .range-dash{color:#9ca1ad}
-.calendar-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;color:#252a32;font-size:15px;font-weight:700}
-.calendar-head button{width:32px;height:32px;border:1px solid var(--line);border-radius:5px;background:#fff;color:#59606d;font-size:16px;line-height:1}
-.calendar-week,.calendar-days{display:grid;grid-template-columns:repeat(7,1fr);text-align:center}
-.calendar-week{margin-bottom:6px;color:#9ca1ad;font-size:11px;font-weight:900}
-.calendar-days{gap:4px}
-.calendar-days button{height:40px;border:0;border-radius:5px;background:transparent;color:#505762;font-size:13px;font-weight:700}
-.calendar-days button.in-range{background:#fdeef1;color:#c4304b}
-.calendar-days button.selected{background:var(--rose);color:#fff}
-.calendar-days button.is-muted{color:#c1c5cf}
 
 /* ── 거래 카드 (web_mainlist order-card 이식) ── */
 .trade-table{display:flex;flex-direction:column;gap:10px;padding:0 10px}
 .order-card{border:1px solid #e5dbd7;border-radius:7px;overflow:hidden;background:#fff}
 
 /* 카드 상단 헤더 바 */
-.tr-header{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:6px 12px 6px 14px;background:#FBF7F5;border-bottom:1px solid #DED8D4}
-.tr-chip{font-size:13px;font-weight:600;color:#1A1A2E;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.tr-header{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:42px;padding:8px 14px;background:#FBF7F5;border-bottom:1px solid #DED8D4}
+.tr-chip{font-size:13px;font-weight:700;color:#3d4452;display:flex;align-items:center;gap:6px;white-space:nowrap}
 .tr-chip::before{content:'';width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;flex-shrink:0}
-.tr-header .btn-pay-row{height:32px;min-width:auto;padding:0 14px;font-size:12px;flex-shrink:0}
-.tr-header .tr-pay-note{flex-shrink:0}
-.tr-header-btns{display:flex;gap:6px;flex-shrink:0}
-.btn-pay-row.btn-line{background:#fff;color:#6b717d;border:1px solid var(--line)}
-.tr-oid{display:block;font-size:11px;color:#999;margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tr-oid{font-size:11px;color:#999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* 상태별 chip 색상 (web 기준) */
 .order-card[data-status="first-payment-wait"] .tr-chip,
 .order-card[data-status="second-payment-wait"] .tr-chip{color:var(--rose)}
-.order-card[data-status="auction-bid"] .tr-chip{color:#1A1A2E}
-.order-card[data-status="shipping-wait"] .tr-chip{color:#f5a623}
-.order-card[data-status="local-arrived"] .tr-chip{color:#1A1A2E}
-.order-card[data-status="international-shipping"] .tr-chip{color:#1A1A2E}
-.order-card[data-status="second-payment-complete"] .tr-chip{color:#1A1A2E}
+.order-card[data-status="auction-bid"] .tr-chip{color:var(--navy)}
+.order-card[data-status="shipping-wait"] .tr-chip{color:#d97706}
+.order-card[data-status="local-arrived"] .tr-chip{color:#059669}
+.order-card[data-status="international-shipping"] .tr-chip{color:#2563eb}
+.order-card[data-status="second-payment-complete"] .tr-chip{color:#059669}
 .order-card[data-status="first-payment-complete"] .tr-chip{color:#3d4452}
 .order-card[data-status="failed-bid"] .tr-chip,
 .order-card[data-status="trade-cancel"] .tr-chip{color:#aaa}
 .order-card[data-status="purchase-request"] .tr-chip{color:#6b7280}
-.order-card[data-status="trade-complete"] .tr-chip{color:#1A1A2E}
+.order-card[data-status="trade-complete"] .tr-chip{color:#059669}
 
 /* 거래행 — 웹 3컬럼을 모바일에서 세로 스택 */
 .trade-row{display:flex;flex-direction:column;border-bottom:1px solid #eee6e2}
@@ -157,15 +135,15 @@ button,select{cursor:pointer}
 
 .tr-pay{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:10px 14px;background:#fff;border-top:1px solid #eee6e2}
 .tr-pay:empty{display:none}
-.btn-pay-row{display:inline-flex;align-items:center;justify-content:center;height:38px;min-width:96px;padding:0 16px;border:0;border-radius:15px;background:var(--rose);color:#fff;font-size:13px;font-weight:600;white-space:nowrap;text-decoration:none}
+.btn-pay-row{display:inline-flex;align-items:center;justify-content:center;height:38px;min-width:96px;padding:0 16px;border:0;border-radius:5px;background:var(--rose);color:#fff;font-size:13px;font-weight:700;white-space:nowrap;text-decoration:none}
+.btn-pay-row.btn-outline{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
 .tr-pay-note{font-size:12px;color:#aaa;font-weight:700}
 
 /* 묶음배송 그룹 */
 .bundle-group-wrap{border:1px solid #e5dbd7;border-radius:8px;overflow:hidden;background:#fff}
 .order-card.bundle-group-start{border:0;border-radius:0;border-bottom:1px solid #eee6e2}
 .order-card.bundle-group-end{border:0;border-radius:0}
-.bundle-nav-header{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;min-height:42px;padding:8px 14px;background:#FBF7F5;border-bottom:1px solid #DED8D4}
-.bnh-metas{width:100%;display:flex;align-items:center;flex-wrap:wrap;gap:5px 10px}
+.bundle-nav-header{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;min-height:42px;padding:8px 14px;background:#FBF7F5;border-bottom:1px solid #DED8D4}
 .bnh-chip{font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;color:var(--rose);white-space:nowrap}
 .bnh-chip::before{content:'';width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;flex-shrink:0}
 .bnh-sep{width:1px;height:14px;background:#ccc;flex-shrink:0}
@@ -173,8 +151,8 @@ button,select{cursor:pointer}
 .bnh-ml{font-size:11px;color:#999}
 .bnh-mv{font-size:12px;font-weight:800;color:var(--navy)}
 .bundle-group-end .trade-row .tr-pay{display:none}
-.btn-bundle-pay{height:32px;min-width:auto;padding:0 14px;border:1px solid #1675cf;border-radius:15px;background:#fff;color:#1675cf;font-size:12px;font-weight:600;white-space:nowrap}
-.bundle-nav-header .btn-bundle-pay{margin-left:auto}
+.bundle-group-pay{display:flex;align-items:center;justify-content:flex-end;padding:10px 14px;background:#fff;border-top:1px solid #eee6e2}
+.btn-bundle-pay{height:38px;min-width:110px;padding:0 18px;border:1px solid #1675cf;border-radius:5px;background:#fff;color:#1675cf;font-size:13px;font-weight:700;white-space:nowrap}
 
 /* 필터 표시 제어 (web 동일) */
 .order-card.status-extra{display:none}
@@ -218,11 +196,35 @@ button,select{cursor:pointer}
 </header>
 
 <!-- ── 나의 거래 현황 ── -->
-<script src="bb-trade-status-mobile.js"></script>
+<div class="shopping-head">
+  <h3>나의 거래 현황</h3>
+  <span class="status-period">최근 6개월 기준</span>
+  <a class="status-more" href="mobile_mainlist.html" aria-label="거래 현황 전체보기">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+  </a>
+</div>
+
+<div class="status-board">
+  <div class="status-steps">
+    <a class="status-step" href="mobile_auction_bid_list.html" data-status="auction-bid" data-label="입찰/구매신청"><em>10</em><strong>입찰/<br>구매신청</strong></a>
+    <a class="status-step hot" href="mobile_mainlist.html?status=first-payment-wait" data-status="first-payment-wait" data-label="1차 결제대기"><em>5</em><strong>1차<br>결제대기</strong></a>
+    <a class="status-step" href="mobile_mainlist.html?status=local-arrived" data-status="local-arrived" data-label="현지도착"><em>5</em><strong>현지도착</strong></a>
+    <a class="status-step hot" href="mobile_mainlist.html?status=second-payment-wait" data-status="second-payment-wait" data-label="2차 결제대기"><em>5</em><strong>2차<br>결제대기</strong></a>
+    <a class="status-step" href="mobile_mainlist.html?status=international-shipping" data-status="international-shipping" data-label="국제배송"><em>3</em><strong>국제배송</strong></a>
+  </div>
+  <div class="status-grid">
+    <a href="mobile_mainlist.html?status=first-payment-complete" data-status="first-payment-complete" data-label="1차 결제완료">1차 결제완료 <i>5</i></a>
+    <a href="mobile_mainlist.html?status=second-payment-complete" data-status="second-payment-complete" data-label="2차 결제완료">2차 결제완료 <i>5</i></a>
+    <a class="hot" href="mobile_mainlist.html?status=shipping-wait" data-status="shipping-wait" data-label="배송대기">배송대기 <i>5</i></a>
+    <a href="mobile_mainlist.html?status=trade-cancel" data-status="trade-cancel" data-label="취소/반품">취소/반품 <i class="zero">0</i></a>
+    <a href="mobile_mainlist.html?status=trade-complete" data-status="trade-complete" data-label="거래완료">거래완료 <i>12</i></a>
+    <a href="mobile_bundle_shipping_management.html" data-status="shipping-request" data-label="배송신청/변경">배송신청/변경 <i>3</i></a>
+  </div>
+</div>
 
 <!-- ── 거래 목록 (web_mainlist 동일 내용) ── -->
 <div class="trade-area">
-  <div class="trade-head"><h3 class="list-title" id="trade-list-title">거래 전체 목록</h3><a class="shipping-wait-link" id="shipping-wait-link" href="mobile_mainlist.html?status=shipping-wait" hidden>배송대기 목록<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></a></div>
+  <div class="trade-head"><h3 class="list-title" id="trade-list-title">거래 전체 목록</h3></div>
 
   <div class="filter-row">
     <div class="filter-group" aria-label="거래 유형">
@@ -237,29 +239,25 @@ button,select{cursor:pointer}
         <option value="us">미국</option>
         <option value="uk">영국</option>
       </select>
-      <button class="dd-select" id="ddPeriodBtn" type="button" aria-haspopup="dialog" aria-label="조회 기간" onclick="openPeriodSheet()">최근 1개월</button>
+      <select class="dd-select" id="ddPeriod" aria-label="조회 기간">
+        <option>1주일</option>
+        <option selected>최근 1개월</option>
+        <option>6개월</option>
+        <option>1년</option>
+      </select>
       <select class="dd-select" id="ddStatus" aria-label="진행 단계">
-        <option value="">진행 단계</option>
-        <option value="auction-bid">입찰/유찰</option>
-        <option value="failed-bid">구매신청</option>
+        <option value="">전체</option>
+        <option value="auction-bid">입찰중</option>
+        <option value="failed-bid">유찰</option>
         <option value="trade-cancel">거래취소</option>
         <option value="first-payment-wait">1차 결제대기</option>
         <option value="first-payment-complete">1차 결제완료</option>
         <option value="local-arrived">현지도착</option>
-        <option value="shipping-wait">배송대기</option>
         <option value="second-payment-wait">2차 결제대기</option>
         <option value="second-payment-complete">2차 결제완료</option>
         <option value="international-shipping">국제배송</option>
         <option value="trade-complete">거래완료</option>
       </select>
-    </div>
-    <div class="search-group" role="search">
-      <select class="dd-select" id="searchField" aria-label="검색 대상">
-        <option value="oid">물품아이디</option>
-        <option value="name">상품명</option>
-      </select>
-      <input type="search" class="search-input" id="searchKeyword" placeholder="검색어 입력" aria-label="검색어">
-      <button type="button" class="search-btn" id="searchBtn">검색</button>
     </div>
   </div>
 
@@ -269,13 +267,12 @@ button,select{cursor:pointer}
     <div class="order-card" data-trade-type="auction" data-country="jp" data-status="auction-bid">
       <div class="tr-header">
         <span class="tr-chip">입찰중 · 종료 2시간 14분 전</span>
-        <button class="btn-pay-row" type="button">재입찰</button>
+        <span class="tr-oid">야후경매 · a2024041701</span>
       </div>
       <div class="trade-row">
         <div class="tr-product">
           <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
           <div class="tr-prod-info">
-            <span class="tr-oid">야후경매 · a2024041701</span>
             <a class="tr-prod-name" href="mobile_payment_detail.html">닌텐도 스위치 OLED 화이트 본체 풀박스 중고</a>
             <span class="tr-prod-origin">Nintendo Switch 有機ELモデル ホワイト 本体 フルボックス 中古</span>
           </div>
@@ -285,6 +282,7 @@ button,select{cursor:pointer}
           <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">-</span>
           <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
         </div>
+        <div class="tr-pay"><button class="btn-pay-row" type="button">재입찰</button></div>
       </div>
     </div>
 
@@ -292,13 +290,12 @@ button,select{cursor:pointer}
     <div class="order-card" data-trade-type="auction" data-country="jp" data-status="first-payment-wait">
       <div class="tr-header">
         <span class="tr-chip">1차 결제대기</span>
-        <a class="btn-pay-row" href="mobile_bill_1st.html">결제하기</a>
+        <span class="tr-oid">야후경매 · e2024041702</span>
       </div>
       <div class="trade-row">
         <div class="tr-product">
           <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
           <div class="tr-prod-info">
-            <span class="tr-oid">야후경매 · e2024041702</span>
             <a class="tr-prod-name" href="mobile_payment_detail.html">소니 워크맨 빈티지 카세트 플레이어 한정 컬러</a>
             <span class="tr-prod-origin">ソニー ウォークマン ヴィンテージ カセットプレーヤー 限定カラー</span>
           </div>
@@ -308,32 +305,7 @@ button,select{cursor:pointer}
           <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">82,450원</span>
           <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
         </div>
-      </div>
-    </div>
-
-    <!-- 1차 결제대기 (구매건 · 결제하기 + 구매취소) -->
-    <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="first-payment-wait">
-      <div class="tr-header">
-        <span class="tr-chip">1차 결제대기</span>
-        <div class="tr-header-btns">
-          <button class="btn-pay-row btn-line" type="button" onclick="confirm('구매를 취소하시겠습니까?')">구매취소</button>
-          <a class="btn-pay-row" href="mobile_bill_1st.html">결제하기</a>
-        </div>
-      </div>
-      <div class="trade-row">
-        <div class="tr-product">
-          <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
-          <div class="tr-prod-info">
-            <span class="tr-oid">야후구매 · BJP2024041615</span>
-            <a class="tr-prod-name" href="mobile_payment_detail.html">무인양품 아로마 디퓨저 리필 오일 세트</a>
-            <span class="tr-prod-origin">無印良品 アロマディフューザー リフィルオイルセット</span>
-          </div>
-        </div>
-        <div class="tr-amount">
-          <span class="trl">상품금액</span><span class="trv">1개 / 9,800 엔</span><span class="trl">총상품가격</span><span class="trv accent">9,800 엔</span>
-          <span class="trl">주문일자</span><span class="trv">2024.04.16</span><span class="trl">결제금액</span><span class="trv">117,600원</span>
-          <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
-        </div>
+        <div class="tr-pay"><a class="btn-pay-row" href="mobile_bill_1st.html">결제하기</a></div>
       </div>
     </div>
 
@@ -342,14 +314,10 @@ button,select{cursor:pointer}
       <div class="order-card bundle-group-start" data-trade-type="purchase" data-country="jp" data-status="second-payment-wait">
         <div class="bundle-nav-header">
           <span class="bnh-chip">2차 결제대기</span>
-          <button class="btn-bundle-pay" type="button" onclick="location.href='mobile_bill_2nd.html'">통합결제</button>
-          <div class="bnh-metas">
-            <span class="bnh-meta"><span class="bnh-ml">대표주문번호</span><span class="bnh-mv">BJP2024041703</span></span>
-            <span class="bnh-sep"></span>
-            <span class="bnh-meta"><span class="bnh-ml">묶음상품</span><span class="bnh-mv">2건</span></span>
-            <span class="bnh-sep"></span>
-            <span class="bnh-meta"><span class="bnh-ml">총상품가격</span><span class="bnh-mv">57,000 엔</span></span>
-          </div>
+          <span class="bnh-sep"></span>
+          <span class="bnh-meta"><span class="bnh-ml">대표주문번호</span><span class="bnh-mv">BJP2024041703</span></span>
+          <span class="bnh-meta"><span class="bnh-ml">묶음상품</span><span class="bnh-mv">2건</span></span>
+          <span class="bnh-meta"><span class="bnh-ml">총상품가격</span><span class="bnh-mv">57,000 엔</span></span>
         </div>
         <div class="trade-row">
           <div class="tr-product">
@@ -391,18 +359,21 @@ button,select{cursor:pointer}
           <div class="tr-pay"></div>
         </div>
       </div>
+      <div class="bundle-group-pay">
+        <button class="btn-bundle-pay" type="button" onclick="location.href='mobile_bill_2nd.html'">통합결제</button>
+      </div>
     </div>
 
     <!-- 현지도착 711 (단독/개별) -->
     <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="local-arrived">
       <div class="tr-header">
         <span class="tr-chip">현지도착 · 보관 D+3</span>
+        <span class="tr-oid">야후구매 · BJP2024041711</span>
       </div>
       <div class="trade-row">
         <div class="tr-product">
           <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
           <div class="tr-prod-info">
-            <span class="tr-oid">야후구매 · BJP2024041711</span>
             <a class="tr-prod-name" href="mobile_payment_detail.html">스타벅스 재팬 사쿠라 플레이트 한정 컬렉션</a>
             <span class="tr-prod-origin">スターバックス ジャパン 桜 プレート 限定コレクション</span>
           </div>
@@ -412,6 +383,7 @@ button,select{cursor:pointer}
           <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">-</span>
           <span class="trl">현지도착일</span><span class="trv">2024.04.20</span><span class="trl">국제배송일</span><span class="trv">-</span>
         </div>
+        <div class="tr-pay"><button class="btn-pay-row" type="button">결제하기</button></div>
       </div>
     </div>
 
@@ -419,12 +391,12 @@ button,select{cursor:pointer}
     <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="local-arrived">
       <div class="tr-header">
         <span class="tr-chip">현지도착 · 보관 D+1</span>
+        <span class="tr-oid">메루카리 · BJP2024041706</span>
       </div>
       <div class="trade-row">
         <div class="tr-product">
           <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
           <div class="tr-prod-info">
-            <span class="tr-oid">메루카리 · BJP2024041706</span>
             <a class="tr-prod-name" href="mobile_payment_detail.html">스투시 재팬 로고 반팔 티셔츠 블랙</a>
             <span class="tr-prod-origin">ステューシー ジャパン ロゴ 半袖Tシャツ ブラック</span>
           </div>
@@ -434,6 +406,7 @@ button,select{cursor:pointer}
           <span class="trl">주문일자</span><span class="trv">2024.04.18</span><span class="trl">결제금액</span><span class="trv">-</span>
           <span class="trl">현지도착일</span><span class="trv">2024.04.21</span><span class="trl">국제배송일</span><span class="trv">-</span>
         </div>
+        <div class="tr-pay"><button class="btn-pay-row" type="button">결제하기</button></div>
       </div>
     </div>
 
@@ -441,13 +414,12 @@ button,select{cursor:pointer}
     <div class="order-card" data-trade-type="auction" data-country="us" data-status="international-shipping">
       <div class="tr-header">
         <span class="tr-chip">국제배송중</span>
-        <button class="btn-pay-row" type="button">배송조회</button>
+        <span class="tr-oid">미국이베이 · g2024041705</span>
       </div>
       <div class="trade-row">
         <div class="tr-product">
           <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
           <div class="tr-prod-info">
-            <span class="tr-oid">미국이베이 · g2024041705</span>
             <a class="tr-prod-name" href="mobile_payment_detail.html">애플 매직키보드 일본어 배열 실버 모델</a>
           </div>
         </div>
@@ -456,6 +428,7 @@ button,select{cursor:pointer}
           <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">286,740원</span>
           <span class="trl">현지도착일</span><span class="trv">2024.04.20</span><span class="trl">국제배송일</span><span class="trv">2024.04.24</span>
         </div>
+        <div class="tr-pay"><button class="btn-pay-row" type="button">배송조회</button></div>
       </div>
     </div>
 
@@ -463,13 +436,12 @@ button,select{cursor:pointer}
     <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="purchase-request">
       <div class="tr-header">
         <span class="tr-chip">구매신청 접수</span>
-        <span class="tr-pay-note">확인중</span>
+        <span class="tr-oid">구매대행 · BJP2024041606</span>
       </div>
       <div class="trade-row">
         <div class="tr-product">
           <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
           <div class="tr-prod-info">
-            <span class="tr-oid">구매대행 · BJP2024041606</span>
             <a class="tr-prod-name" href="mobile_payment_detail.html">산리오 쿠로미 한정 아크릴 키링 랜덤 박스</a>
             <span class="tr-prod-origin">サンリオ クロミ 限定 アクリルキーホルダー ランダムボックス</span>
           </div>
@@ -479,20 +451,20 @@ button,select{cursor:pointer}
           <span class="trl">주문일자</span><span class="trv">2024.04.16</span><span class="trl">결제금액</span><span class="trv">-</span>
           <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
         </div>
+        <div class="tr-pay"><span class="tr-pay-note">진행중</span></div>
       </div>
     </div>
 
     <!-- 1차 결제완료 - 송금준비중 -->
     <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="first-payment-complete">
       <div class="tr-header">
-        <span class="tr-chip">1차 결제완료</span>
-        <button class="btn-pay-row" type="button" onclick="if(confirm('개별배송신청을 진행하시겠습니까?')) location.href='mobile_individual_shipping_order.html'">배송신청</button>
+        <span class="tr-chip">배송신청 가능</span>
+        <span class="tr-oid">야후경매 · BJP2024041607</span>
       </div>
       <div class="trade-row">
         <div class="tr-product">
           <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
           <div class="tr-prod-info">
-            <span class="tr-oid">야후경매 · BJP2024041607</span>
             <a class="tr-prod-name" href="mobile_payment_detail.html">요코하마 기념 한정 우표 앨범 컬렉션</a>
             <span class="tr-prod-origin">横浜記念 限定切手アルバム コレクション</span>
           </div>
@@ -502,6 +474,7 @@ button,select{cursor:pointer}
           <span class="trl">주문일자</span><span class="trv">2024.04.16</span><span class="trl">결제금액</span><span class="trv">226,800원</span>
           <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
         </div>
+        <div class="tr-pay"><a class="btn-pay-row btn-outline" href="mobile_bundle_shipping_management.html">배송신청/변경</a></div>
       </div>
     </div>
 
@@ -509,13 +482,12 @@ button,select{cursor:pointer}
     <div class="order-card status-extra" data-trade-type="auction" data-country="jp" data-status="first-payment-complete">
       <div class="tr-header">
         <span class="tr-chip">1차 결제완료</span>
-        <button class="btn-pay-row" type="button" onclick="if(confirm('개별배송신청을 진행하시겠습니까?')) location.href='mobile_individual_shipping_order.html'">배송신청</button>
+        <span class="tr-oid">야후경매 · i2024041608</span>
       </div>
       <div class="trade-row">
         <div class="tr-product">
           <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
           <div class="tr-prod-info">
-            <span class="tr-oid">야후경매 · i2024041608</span>
             <a class="tr-prod-name" href="mobile_payment_detail.html">원피스 월드콜렉터블 피규어 루피 스페셜</a>
             <span class="tr-prod-origin">ワンピース ワールドコレクタブルフィギュア ルフィ スペシャル</span>
           </div>
@@ -525,6 +497,7 @@ button,select{cursor:pointer}
           <span class="trl">주문일자</span><span class="trv">2024.04.16</span><span class="trl">결제금액</span><span class="trv">150,000원</span>
           <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
         </div>
+        <div class="tr-pay"></div>
       </div>
     </div>
 
@@ -532,13 +505,12 @@ button,select{cursor:pointer}
     <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="first-payment-complete">
       <div class="tr-header">
         <span class="tr-chip">1차 결제완료</span>
-        <button class="btn-pay-row" type="button" onclick="if(confirm('개별배송신청을 진행하시겠습니까?')) location.href='mobile_individual_shipping_order.html'">배송신청</button>
+        <span class="tr-oid">구매대행 · BJP2024041609</span>
       </div>
       <div class="trade-row">
         <div class="tr-product">
           <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
           <div class="tr-prod-info">
-            <span class="tr-oid">구매대행 · BJP2024041609</span>
             <a class="tr-prod-name" href="mobile_payment_detail.html">파이오니어 빈티지 오디오 앰프 부품 세트</a>
             <span class="tr-prod-origin">パイオニア ヴィンテージ オーディオアンプ 部品セット</span>
           </div>
@@ -548,20 +520,20 @@ button,select{cursor:pointer}
           <span class="trl">주문일자</span><span class="trv">2024.04.16</span><span class="trl">결제금액</span><span class="trv">106,800원</span>
           <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
         </div>
+        <div class="tr-pay"></div>
       </div>
     </div>
 
     <!-- 배송대기 1 -->
     <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="shipping-wait">
       <div class="tr-header">
-        <span class="tr-chip">배송대기 · 보관 D+30</span>
-        <a class="btn-pay-row" href="mobile_bundle_shipping_order.html">배송신청</a>
+        <span class="tr-chip">배송신청 가능 · 보관 D+30</span>
+        <span class="tr-oid">메루카리 · BJP2024041510</span>
       </div>
       <div class="trade-row">
         <div class="tr-product">
           <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
           <div class="tr-prod-info">
-            <span class="tr-oid">메루카리 · BJP2024041510</span>
             <a class="tr-prod-name" href="mobile_payment_detail.html">미개봉 포켓몬 카드 프로모 팩 10매 묶음</a>
             <span class="tr-prod-origin">未開封 ポケモンカード プロモパック 10枚 まとめ</span>
           </div>
@@ -571,20 +543,20 @@ button,select{cursor:pointer}
           <span class="trl">주문일자</span><span class="trv">2024.04.15</span><span class="trl">결제금액</span><span class="trv">104,400원</span>
           <span class="trl">현지도착일</span><span class="trv">2024.04.16</span><span class="trl">국제배송일</span><span class="trv">-</span>
         </div>
+        <div class="tr-pay"><a class="btn-pay-row" href="mobile_bundle_shipping_order.html">배송신청</a></div>
       </div>
     </div>
 
     <!-- 배송대기 2 -->
     <div class="order-card status-extra" data-trade-type="auction" data-country="jp" data-status="shipping-wait">
       <div class="tr-header">
-        <span class="tr-chip">배송대기 · 보관 D+12</span>
-        <a class="btn-pay-row" href="mobile_bundle_shipping_order.html">배송신청</a>
+        <span class="tr-chip">배송신청 가능 · 보관 D+12</span>
+        <span class="tr-oid">야후경매 · j2024041511</span>
       </div>
       <div class="trade-row">
         <div class="tr-product">
           <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
           <div class="tr-prod-info">
-            <span class="tr-oid">야후경매 · j2024041511</span>
             <a class="tr-prod-name" href="mobile_payment_detail.html">캐논 필름카메라 AE-1 렌즈 포함 세트</a>
             <span class="tr-prod-origin">キヤノン フィルムカメラ AE-1 レンズ付きセット</span>
           </div>
@@ -594,20 +566,20 @@ button,select{cursor:pointer}
           <span class="trl">주문일자</span><span class="trv">2024.04.15</span><span class="trl">결제금액</span><span class="trv">226,800원</span>
           <span class="trl">현지도착일</span><span class="trv">2024.04.16</span><span class="trl">국제배송일</span><span class="trv">-</span>
         </div>
+        <div class="tr-pay"><a class="btn-pay-row" href="mobile_bundle_shipping_order.html">배송신청</a></div>
       </div>
     </div>
 
     <!-- 배송대기 3 -->
     <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="shipping-wait">
       <div class="tr-header">
-        <span class="tr-chip">배송대기 · 보관 D+7</span>
-        <a class="btn-pay-row" href="mobile_bundle_shipping_order.html">배송신청</a>
+        <span class="tr-chip">배송신청 가능 · 보관 D+7</span>
+        <span class="tr-oid">구매대행 · BJP2024041512</span>
       </div>
       <div class="trade-row">
         <div class="tr-product">
           <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
           <div class="tr-prod-info">
-            <span class="tr-oid">구매대행 · BJP2024041512</span>
             <a class="tr-prod-name" href="mobile_payment_detail.html">건담 메탈빌드 한정판 피규어 미개봉</a>
             <span class="tr-prod-origin">ガンダム メタルビルド 限定版フィギュア 未開封</span>
           </div>
@@ -617,6 +589,7 @@ button,select{cursor:pointer}
           <span class="trl">주문일자</span><span class="trv">2024.04.15</span><span class="trl">결제금액</span><span class="trv">148,800원</span>
           <span class="trl">현지도착일</span><span class="trv">2024.04.17</span><span class="trl">국제배송일</span><span class="trv">-</span>
         </div>
+        <div class="tr-pay"><a class="btn-pay-row" href="mobile_bundle_shipping_order.html">배송신청</a></div>
       </div>
     </div>
 
@@ -624,12 +597,12 @@ button,select{cursor:pointer}
     <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="second-payment-complete">
       <div class="tr-header">
         <span class="tr-chip">2차 결제완료</span>
+        <span class="tr-oid">야후경매 · BJP2024041413</span>
       </div>
       <div class="trade-row">
         <div class="tr-product">
           <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
           <div class="tr-prod-info">
-            <span class="tr-oid">야후경매 · BJP2024041413</span>
             <a class="tr-prod-name" href="mobile_payment_detail.html">다이슨 슈퍼소닉 드라이어 니켈 코퍼</a>
             <span class="tr-prod-origin">ダイソン スーパーソニック ドライヤー ニッケル/コッパー</span>
           </div>
@@ -639,6 +612,7 @@ button,select{cursor:pointer}
           <span class="trl">주문일자</span><span class="trv">2024.04.14</span><span class="trl">결제금액</span><span class="trv">372,000원</span>
           <span class="trl">현지도착일</span><span class="trv">2024.04.17</span><span class="trl">국제배송일</span><span class="trv">2024.04.22</span>
         </div>
+        <div class="tr-pay"><button class="btn-pay-row" type="button">배송조회</button></div>
       </div>
     </div>
 
@@ -646,13 +620,12 @@ button,select{cursor:pointer}
     <div class="order-card status-extra" data-trade-type="auction" data-country="uk" data-status="international-shipping">
       <div class="tr-header">
         <span class="tr-chip">국제배송중</span>
-        <button class="btn-pay-row" type="button">배송조회</button>
+        <span class="tr-oid">일본라쿠텐 · o2024041314</span>
       </div>
       <div class="trade-row">
         <div class="tr-product">
           <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
           <div class="tr-prod-info">
-            <span class="tr-oid">일본라쿠텐 · o2024041314</span>
             <a class="tr-prod-name" href="mobile_payment_detail.html">일본 한정 레고 미니피규어 시리즈 묶음</a>
             <span class="tr-prod-origin">日本限定 レゴ ミニフィギュアシリーズ まとめ</span>
           </div>
@@ -662,6 +635,7 @@ button,select{cursor:pointer}
           <span class="trl">주문일자</span><span class="trv">2024.04.13</span><span class="trl">결제금액</span><span class="trv">530,400원</span>
           <span class="trl">현지도착일</span><span class="trv">2024.04.16</span><span class="trl">국제배송일</span><span class="trv">2024.04.20</span>
         </div>
+        <div class="tr-pay"><button class="btn-pay-row" type="button">배송조회</button></div>
       </div>
     </div>
 
@@ -669,12 +643,12 @@ button,select{cursor:pointer}
     <div class="order-card status-extra" data-trade-type="auction" data-country="jp" data-status="failed-bid">
       <div class="tr-header">
         <span class="tr-chip">유찰</span>
+        <span class="tr-oid">야후경매 · q2024041315</span>
       </div>
       <div class="trade-row">
         <div class="tr-product">
           <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
           <div class="tr-prod-info">
-            <span class="tr-oid">야후경매 · q2024041315</span>
             <a class="tr-prod-name" href="mobile_payment_detail.html">슈퍼패미컴 본체 컨트롤러 게임팩 세트</a>
             <span class="tr-prod-origin">スーパーファミコン 本体 コントローラー ゲームパックセット</span>
           </div>
@@ -684,6 +658,7 @@ button,select{cursor:pointer}
           <span class="trl">주문일자</span><span class="trv">2024.04.13</span><span class="trl">결제금액</span><span class="trv">-</span>
           <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
         </div>
+        <div class="tr-pay"></div>
       </div>
     </div>
 
@@ -691,13 +666,12 @@ button,select{cursor:pointer}
     <div class="order-card status-extra" data-trade-type="auction" data-country="jp" data-status="first-payment-wait">
       <div class="tr-header">
         <span class="tr-chip">1차 결제대기</span>
-        <a class="btn-pay-row" href="mobile_bill_1st.html">결제하기</a>
+        <span class="tr-oid">야후경매 · s2024041316</span>
       </div>
       <div class="trade-row">
         <div class="tr-product">
           <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
           <div class="tr-prod-info">
-            <span class="tr-oid">야후경매 · s2024041316</span>
             <a class="tr-prod-name" href="mobile_payment_detail.html">마블 아이언맨 프리미엄 액션 피규어 미개봉</a>
             <span class="tr-prod-origin">マーベル アイアンマン プレミアムアクションフィギュア 未開封</span>
           </div>
@@ -707,6 +681,7 @@ button,select{cursor:pointer}
           <span class="trl">주문일자</span><span class="trv">2024.04.13</span><span class="trl">결제금액</span><span class="trv">-</span>
           <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
         </div>
+        <div class="tr-pay"><a class="btn-pay-row" href="mobile_bill_1st.html">결제하기</a></div>
       </div>
     </div>
 
@@ -714,12 +689,12 @@ button,select{cursor:pointer}
     <div class="order-card status-extra" data-trade-type="purchase" data-country="jp" data-status="trade-cancel">
       <div class="tr-header">
         <span class="tr-chip">거래취소</span>
+        <span class="tr-oid">구매대행 · BJP2024041217</span>
       </div>
       <div class="trade-row">
         <div class="tr-product">
           <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
           <div class="tr-prod-info">
-            <span class="tr-oid">구매대행 · BJP2024041217</span>
             <a class="tr-prod-name" href="mobile_payment_detail.html">아식스 젤카야노 한정 컬러 운동화</a>
             <span class="tr-prod-origin">アシックス ゲルカヤノ 限定カラー スニーカー</span>
           </div>
@@ -729,6 +704,7 @@ button,select{cursor:pointer}
           <span class="trl">주문일자</span><span class="trv">2024.04.12</span><span class="trl">결제금액</span><span class="trv">-</span>
           <span class="trl">현지도착일</span><span class="trv">-</span><span class="trl">국제배송일</span><span class="trv">-</span>
         </div>
+        <div class="tr-pay"></div>
       </div>
     </div>
 
@@ -750,48 +726,6 @@ button,select{cursor:pointer}
 
 <div class="bottom-safe"></div>
 
-<div class="sheet-overlay" id="periodOverlay" onclick="closePeriodSheet()"></div>
-<div class="period-sheet" id="periodSheet" role="dialog" aria-label="조회 기간 선택" aria-hidden="true">
-  <div class="sheet-handle" aria-hidden="true"></div>
-  <div class="sheet-header">
-    <span class="sheet-title">조회 기간</span>
-    <button class="btn-sheet-close" type="button" onclick="closePeriodSheet()" aria-label="닫기"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-  </div>
-  <div class="sheet-body">
-    <div class="calendar-range">
-      <button type="button" class="range-field active" data-range-field="start">
-        <span data-range-start>2024-03-17</span><i class="far fa-calendar" aria-hidden="true"></i>
-      </button>
-      <span class="range-dash">–</span>
-      <button type="button" class="range-field" data-range-field="end">
-        <span data-range-end>2024-04-17</span><i class="far fa-calendar" aria-hidden="true"></i>
-      </button>
-    </div>
-    <div class="preset-row" aria-label="빠른 기간 선택">
-      <button type="button" data-preset="week">1주일</button>
-      <button class="active" type="button" data-preset="month">1개월</button>
-      <button type="button" data-preset="6month">6개월</button>
-      <button type="button" data-preset="year">1년</button>
-    </div>
-    <div class="preset-row year-row" aria-label="년도별 선택">
-      <span class="year-list" data-year-list></span>
-    </div>
-    <div class="calendar-head">
-      <button type="button" data-cal-nav="month-prev" aria-label="이전 달">‹</button>
-      <strong data-cal-title>2024.04</strong>
-      <button type="button" data-cal-nav="month-next" aria-label="다음 달">›</button>
-    </div>
-    <div class="calendar-week" aria-hidden="true">
-      <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
-    </div>
-    <div class="calendar-days" aria-label="날짜 선택"></div>
-  </div>
-  <div class="sheet-actions">
-    <button class="btn-sheet-reset" type="button" data-calendar-reset>초기화</button>
-    <button class="btn-sheet-apply" type="button" data-calendar-apply>적용</button>
-  </div>
-</div>
-
 <script>
 const statusLabels = {
   'auction-bid': '경매입찰',
@@ -811,7 +745,6 @@ const statusLabels = {
 const tradeTable = document.querySelector('.trade-table');
 const orderCards = Array.from(document.querySelectorAll('.order-card[data-status]'));
 const tradeTitle = document.getElementById('trade-list-title');
-const defaultTradeTitle = tradeTitle.textContent;
 const tradeEmpty = document.getElementById('tradeEmpty');
 const ddCountry = document.getElementById('ddCountry');
 const ddStatus = document.getElementById('ddStatus');
@@ -819,29 +752,16 @@ const ddStatus = document.getElementById('ddStatus');
 let activeStatus = '';
 let activeType = '';
 let activeCountry = '';
-let activeSearch = '';
-
-const searchField = document.getElementById('searchField');
-const searchKeyword = document.getElementById('searchKeyword');
-
-function matchesSearch(card) {
-  if (!activeSearch) return true;
-  const source = searchField.value === 'name'
-    ? (card.querySelector('.tr-prod-name')?.textContent || '')
-    : (card.querySelector('.tr-oid')?.textContent || '');
-  return source.toLowerCase().includes(activeSearch.toLowerCase());
-}
 
 function applyTradeFilters() {
-  const isFiltered = Boolean(activeStatus || activeType || activeCountry || activeSearch);
+  const isFiltered = Boolean(activeStatus || activeType || activeCountry);
   tradeTable.classList.toggle('status-filtered', isFiltered);
 
   let visibleCount = 0;
   orderCards.forEach((card) => {
     const show = (!activeStatus || card.dataset.status === activeStatus)
       && (!activeType || card.dataset.tradeType === activeType)
-      && (!activeCountry || card.dataset.country === activeCountry)
-      && matchesSearch(card);
+      && (!activeCountry || card.dataset.country === activeCountry);
     card.classList.toggle('is-hidden', !show);
     if (show) visibleCount += 1;
   });
@@ -857,20 +777,12 @@ function applyTradeFilters() {
   });
 
   tradeEmpty.classList.toggle('is-visible', visibleCount === 0);
-  const relatedListLink = document.getElementById('shipping-wait-link');
-  const relatedStatus = activeStatus === 'local-arrived' ? 'shipping-wait'
-    : activeStatus === 'shipping-wait' ? 'local-arrived' : '';
-  relatedListLink.hidden = !relatedStatus;
-  if (relatedStatus) {
-    relatedListLink.href = `mobile_mainlist.html?status=${relatedStatus}`;
-    relatedListLink.firstChild.textContent = `${statusLabels[relatedStatus]} 목록`;
-  }
-  const stageLabel = statusLabels[activeStatus];
-  tradeTitle.textContent = stageLabel
-    ? `${stageLabel.replace(/\s+/g, '')} 목록`
-    : defaultTradeTitle;
 
-
+  const parts = [];
+  if (activeCountry) parts.push(ddCountry.selectedOptions[0].textContent);
+  if (activeType) parts.push(activeType === 'auction' ? '경매' : '구매');
+  if (activeStatus) parts.push(statusLabels[activeStatus] || ddStatus.selectedOptions[0].textContent);
+  tradeTitle.textContent = parts.length ? `${parts.join(' ')} 목록` : '거래 전체 목록';
 }
 
 document.querySelectorAll('.filter-group .tab').forEach((tab) => {
@@ -885,185 +797,11 @@ document.querySelectorAll('.filter-group .tab').forEach((tab) => {
 ddCountry.addEventListener('change', () => { activeCountry = ddCountry.value; applyTradeFilters(); });
 ddStatus.addEventListener('change', () => { activeStatus = ddStatus.value; applyTradeFilters(); });
 
-function runSearch() { activeSearch = searchKeyword.value.trim(); applyTradeFilters(); }
-document.getElementById('searchBtn').addEventListener('click', runSearch);
-searchKeyword.addEventListener('keydown', (e) => { if (e.key === 'Enter') runSearch(); });
-
 activeStatus = new URLSearchParams(location.search).get('status') || '';
 if (activeStatus && [...ddStatus.options].some((o) => o.value === activeStatus)) {
   ddStatus.value = activeStatus;
 }
 applyTradeFilters();
-
-/* ══ 조회 기간 바텀시트 ══ */
-const periodSheet = document.getElementById('periodSheet');
-const periodOverlay = document.getElementById('periodOverlay');
-const ddPeriodBtn = document.getElementById('ddPeriodBtn');
-
-function openPeriodSheet() {
-  periodOverlay.classList.add('open');
-  periodSheet.classList.add('open');
-  periodSheet.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-}
-function closePeriodSheet() {
-  periodOverlay.classList.remove('open');
-  periodSheet.classList.remove('open');
-  periodSheet.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-}
-
-(function initPeriodCalendar() {
-  const calTitle = periodSheet.querySelector('[data-cal-title]');
-  const calDaysWrap = periodSheet.querySelector('.calendar-days');
-  const yearListWrap = periodSheet.querySelector('[data-year-list]');
-  const fieldStart = periodSheet.querySelector("[data-range-field='start']");
-  const fieldEnd = periodSheet.querySelector("[data-range-field='end']");
-  const rangeStartText = periodSheet.querySelector('[data-range-start]');
-  const rangeEndText = periodSheet.querySelector('[data-range-end]');
-  const presetButtons = periodSheet.querySelectorAll(".preset-row:not(.year-row) button");
-
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const DEFAULT_PRESET = 'month';
-
-  function presetStart(key) {
-    const d = new Date(today);
-    if (key === 'week') d.setDate(d.getDate() - 7);
-    else if (key === 'month') d.setMonth(d.getMonth() - 1);
-    else if (key === '6month') d.setMonth(d.getMonth() - 6);
-    else if (key === 'year') d.setFullYear(d.getFullYear() - 1);
-    return d;
-  }
-  function presetLabelText(key) {
-    return { week: '최근 1주일', month: '최근 1개월', '6month': '최근 6개월', year: '최근 1년' }[key] || '최근 1개월';
-  }
-  function fmt(d) {
-    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-  }
-  function sameDay(a, b) {
-    return a && b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
-  }
-
-  let rangeStart, rangeEnd, activeField, viewYear, viewMonth, activePreset, activeYear;
-
-  const baseYear = today.getFullYear();
-  for (let y = baseYear; y >= baseYear - 4; y--) {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.textContent = y;
-    b.dataset.year = y;
-    b.addEventListener('click', () => applyYear(y));
-    yearListWrap.appendChild(b);
-  }
-
-  function renderCalendar() {
-    calTitle.textContent = viewYear + '.' + String(viewMonth).padStart(2, '0');
-    const startDow = new Date(viewYear, viewMonth - 1, 1).getDay();
-    const daysInMonth = new Date(viewYear, viewMonth, 0).getDate();
-    const prevMonthDays = new Date(viewYear, viewMonth - 1, 0).getDate();
-    let html = '';
-    for (let i = startDow; i > 0; i--) {
-      html += '<button class="is-muted" type="button">' + (prevMonthDays - i + 1) + '</button>';
-    }
-    for (let d = 1; d <= daysInMonth; d++) {
-      const cur = new Date(viewYear, viewMonth - 1, d);
-      let cls = '';
-      if (sameDay(cur, rangeStart) || sameDay(cur, rangeEnd)) cls = 'selected';
-      else if (cur > rangeStart && cur < rangeEnd) cls = 'in-range';
-      html += '<button' + (cls ? ' class="' + cls + '"' : '') + ' type="button">' + d + '</button>';
-    }
-    const trailing = (7 - ((startDow + daysInMonth) % 7)) % 7;
-    for (let d = 1; d <= trailing; d++) {
-      html += '<button class="is-muted" type="button">' + d + '</button>';
-    }
-    calDaysWrap.innerHTML = html;
-  }
-
-  function syncUI() {
-    rangeStartText.textContent = fmt(rangeStart);
-    rangeEndText.textContent = fmt(rangeEnd);
-    fieldStart.classList.toggle('active', activeField === 'start');
-    fieldEnd.classList.toggle('active', activeField === 'end');
-    presetButtons.forEach((b) => b.classList.toggle('active', b.dataset.preset === activePreset));
-    yearListWrap.querySelectorAll('button').forEach((b) => b.classList.toggle('active', Number(b.dataset.year) === activeYear));
-    renderCalendar();
-  }
-
-  function applyPreset(key) {
-    activePreset = key;
-    activeYear = null;
-    rangeEnd = new Date(today);
-    rangeStart = presetStart(key);
-    activeField = 'start';
-    viewYear = rangeEnd.getFullYear();
-    viewMonth = rangeEnd.getMonth() + 1;
-    syncUI();
-  }
-
-  function applyYear(y) {
-    activeYear = y;
-    activePreset = null;
-    rangeStart = new Date(y, 0, 1);
-    rangeEnd = new Date(y, 11, 31);
-    activeField = 'start';
-    viewYear = y;
-    viewMonth = 1;
-    syncUI();
-  }
-
-  calDaysWrap.addEventListener('click', (event) => {
-    const btn = event.target.closest('button');
-    if (!btn || btn.classList.contains('is-muted')) return;
-    const picked = new Date(viewYear, viewMonth - 1, parseInt(btn.textContent, 10));
-    if (activeField === 'start') {
-      rangeStart = picked;
-      if (rangeEnd < rangeStart) rangeEnd = picked;
-      activeField = 'end';
-    } else {
-      rangeEnd = picked;
-      if (rangeEnd < rangeStart) rangeStart = picked;
-      activeField = 'start';
-    }
-    activePreset = null;
-    activeYear = null;
-    syncUI();
-  });
-
-  [fieldStart, fieldEnd].forEach((field) => {
-    field.addEventListener('click', () => {
-      activeField = field.dataset.rangeField;
-      const target = activeField === 'start' ? rangeStart : rangeEnd;
-      viewYear = target.getFullYear();
-      viewMonth = target.getMonth() + 1;
-      syncUI();
-    });
-  });
-
-  periodSheet.querySelectorAll('[data-cal-nav]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      viewMonth += btn.dataset.calNav === 'month-next' ? 1 : -1;
-      if (viewMonth > 12) { viewMonth = 1; viewYear += 1; }
-      if (viewMonth < 1) { viewMonth = 12; viewYear -= 1; }
-      syncUI();
-    });
-  });
-
-  presetButtons.forEach((btn) => {
-    btn.addEventListener('click', () => applyPreset(btn.dataset.preset));
-  });
-
-  periodSheet.querySelector('[data-calendar-reset]').addEventListener('click', () => applyPreset(DEFAULT_PRESET));
-
-  periodSheet.querySelector('[data-calendar-apply]').addEventListener('click', () => {
-    ddPeriodBtn.textContent = activePreset ? presetLabelText(activePreset)
-      : activeYear ? activeYear + '년'
-      : fmt(rangeStart) + ' ~ ' + fmt(rangeEnd);
-    closePeriodSheet();
-  });
-
-  applyPreset(DEFAULT_PRESET);
-})();
 </script>
 <script src="bb-common-mobile.js"></script>
 <script src="bb-search-modal-mobile.js"></script>

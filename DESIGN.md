@@ -2,19 +2,20 @@
 
 Clean, modern Korean e-commerce platform with a bold and energetic personality. The design feels fresh and dynamic with its rose red accent color, while maintaining high readability and mobile-first usability. The overall tone is professional yet vibrant, suitable for a broad consumer audience.
 
-Mobile-first responsive design with generous spacing (20px, 15px, 12px system). Content is organized in clear sections with consistent padding. The layout uses a single-column approach optimized for mobile viewing, with clear visual hierarchy through typography and color contrast.
+Two delivery tracks share one visual language: **web** pages are fixed-width desktop shells (`min-width: 1200px`, content column `--page-w: 1140px`) that collapse to a mobile layout via one media query; **mobile** pages are separate `.phone` fragments (`max-width: 390px`). Content is organized in clear sections with consistent padding and a single-column reading order.
 
-Uses a 4px base grid with scale: 1, 2, 3, 4, 5, 6, 8, 10.
+Spacing follows a 4px base grid — common steps 4 / 8 / 12 / 16 / 20 / 24px.
 
 ## Colors
-- **Rose Red** (#E8385A): Brand accent, primary actions, CTA buttons, badges — main brand color
-- **Rose Red Hover** (#C42F4C): Hover state for primary actions
-- **Navy** (#1A3C6E): Secondary text emphasis, channel navigation links
-- **Amber** (#F5A623): Grade badges, highlight accents
-- **Green** (#3AAD4E): Success states, positive indicators
-- **Primary Text** (#1A1A2E): Primary text content, headings
-- **Secondary Text** (#666680): Secondary text, descriptions, labels
-- **Muted Text** (#999BAA): Placeholder, disabled, hint text
+- **Rose Red** (#E8385A): brand accent, primary actions, CTA buttons, badges, active states. Aliased in `:root` as `--rose` / `--brand` / `--blue` (and `--red` on mobile) — all the same value.
+- **Rose Red Hover** (#C42F4C): hover / pressed state for primary actions (`--rose-h` / `--brand-dark`)
+- **Navy** (#1A3C6E): CS phone number, "사업자 전환" affordance, a few dark accents (`--navy`)
+- **Amber** (#F5A623): 배송대기 status, warning callouts (left border on a `#FFF8EC` panel), the avatar gradient stop (`--amber`)
+- **Green** (#3AAD4E): success states, positive indicators (`--green`)
+- **Primary Text** (#333): body copy — the default text color
+- **Strong Text** (#1A1A2E / #111827): headings and high-emphasis text (`--tp`)
+- **Secondary Text** (#666680): descriptions, supporting labels (`--ts`)
+- **Muted Text** (#999BAA): placeholder, disabled, hint text (`--tm`)
 - **Background White** (#ffffff): Main background, cards, content areas
 - **Background Gray Light** (#F5F7FA): Section backgrounds, subtle dividers
 - **Border Gray** (#E0E4EB): Card borders, input borders, dividers
@@ -49,12 +50,16 @@ CSS reference the tokens — never a literal stack.
 :root{
   --font-sans: 'Pretendard', 'Malgun Gothic', '돋움', 'Dotum', Arial, sans-serif;
   --font-num:  Roboto, var(--font-sans);
+  --tp: #1A1A2E;   /* strong text  */
+  --ts: #666680;   /* secondary    */
+  --tm: #999BAA;   /* muted        */
 }
 body{ font: 400 14px/1 var(--font-sans); }
 ```
 
 - **`--font-sans`** — headlines, body, labels, buttons, everything textual (Korean + Latin).
 - **`--font-num`** — numerals only: prices, amounts, counts, phone numbers, dates. Roboto gives even tabular digits; it falls back to `--font-sans` so Korean characters in the same element still render in Pretendard.
+- **`--tp` / `--ts` / `--tm`** — the text-color tokens, defined once in the shared `:root` (no per-page redefinition).
 - Components that inherit correctly use `font-family: inherit` (unchanged).
 - Icon fonts (`"Font Awesome …"`) are exempt.
 
@@ -94,23 +99,30 @@ The trade-status board and order-card chips use two accent colors, nothing else:
 
 All other statuses (완료, 취소/반품, 국제배송 등) use neutral text (`#111` / `#1A1A2E` / muted grey).
 
-## Elevation
+## Corner radius
 
-The design uses minimal shadows and relies primarily on subtle background color changes and rounded corners to create depth. Elevation is achieved through color contrast rather than dramatic shadow effects, maintaining a clean, flat-adjacent aesthetic with gentle dimensionality.
+| Token | Value | Use |
+|---|---|---|
+| `--r-btn` | **12px** | buttons and button-shaped controls (primary interactive) |
+| `--r-sm` | **5px** | chips, tiles, dense UI — the 나의 거래 현황 grid, filter pills, small cards |
+| `--r-md` | 8px | mid-size cards |
+| `--r-lg` | 12px | large cards / panels |
+| `--r-pill` | 999px | fully rounded pills, avatars, progress tracks |
 
 ## Components
-- **Navigation Bar**: White background header with rose red accent (search button, active states, badges). Logo on the left, search bar center, utility icons right.
-- **Hero Section**: Large promotional banner with Korean text, illustration, and call-to-action elements
-- **Card Components**: Rounded corner cards (12px radius) with subtle shadows for content organization
-- **Button System**: Consistent button styling with rose red as primary and navy as secondary, 12px rounded corners
-- **Typography Hierarchy**: Clear text hierarchy using Pretendard font with consistent weight and spacing patterns
+- **Navigation Bar**: white header, rose red only for the search button / active states / badges. Injected by `bb-common(.js)` — logo left, search center, utility icons right.
+- **Shared shell** (`bb-common.js` / `bb-common-mobile.js`): header, left category drawer + right user-menu drawer, notice-bar handling, mobile phone status bar, product-image fallbacks. `bb-trade-status-mobile.js` + `.css` render the shared "나의 거래 현황" board.
+- **Card Components**: white surface, `--r-md`/`--r-lg` radius, hairline border, no heavy shadow
+- **Button System**: rose red primary / white-outline secondary, `--r-btn` (12px) radius. Heights: `--btn-h-sm 36px` · `--btn-h-md 44px` · `--btn-h-lg 48px` (same on web and mobile).
+- **Elevation**: only three sanctioned shadows — hairline `0 1px 0 rgba(32,36,43,.04)`, modal `0 20px 60px rgba(0,0,0,.18)`, bottom sheet `0 -2px 10px rgba(0,0,0,.08)`. Otherwise lean on color contrast.
 
 ## Do's and Don'ts
 - Do use rose red (#E8385A) as the primary brand accent for buttons, active states, and key highlights
-- Do maintain consistent 12px border radius for primary interactive elements
+- Do use `--r-btn` (12px) for buttons and `--r-sm` (5px) for chips / dense tiles — don't hand-pick radii
 - Do drive every `font-family` from `var(--font-sans)` / `var(--font-num)` — never write a literal font stack in page CSS
 - Do keep numerals (prices, counts, phone) on `var(--font-num)` and everything else on `var(--font-sans)`
-- Don't use font weights other than 400, 600, and 700 to maintain hierarchy clarity
+- Do drive text color from `var(--tp)` / `var(--ts)` / `var(--tm)`; don't redefine them per page
+- Do reserve weights 800 / 900 for page-level titles; use 400 / 500 / 600 / 700 elsewhere
 - Do apply negative letter-spacing to text smaller than 12px for better readability
 - Don't use heavy shadows - rely on color contrast and subtle backgrounds for depth
 - Do maintain generous spacing (minimum 8px) between interactive elements for mobile usability

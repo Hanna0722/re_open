@@ -128,12 +128,12 @@
       '--brand:#E8385A;--brand-dark:#C42F4C;' +
       '--blue:#E8385A;--blue-dark:#C42F4C;' +
       '--navy:#1A3C6E;' +
-      '--r-sm:5px;--r-md:8px;--r-lg:12px;--r-pill:999px;' +
-      '--btn-h-sm:36px;--btn-h-md:44px;--btn-h-lg:52px;' +
+      '--r-sm:5px;--r-md:8px;--r-lg:12px;--r-btn:12px;--r-pill:999px;' +
+      '--btn-h-sm:36px;--btn-h-md:44px;--btn-h-lg:48px;' +
       '--label-col-w:230px;' +
     '}',
-    /* 공통 폰트 토큰 (DESIGN.md 기준) — 페이지 인라인 :root의 백업 */
-    ":root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans)}",
+    /* 공통 폰트·텍스트 토큰 (DESIGN.md 기준) — 페이지 인라인 :root의 백업 */
+    ":root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans);--tp:#1A1A2E;--ts:#666680;--tm:#999BAA}",
     'body{font-family:var(--font-sans)}',
     '.req{color:var(--rose);font-weight:700;margin-left:2px}',
     '.required-note{color:#666680;font-size:12px}',
