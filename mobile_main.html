@@ -240,13 +240,16 @@ body{
 }
 .sc-item:hover{opacity:.75}
 .sc-icon{
-  width:44px;height:44px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
-  background:linear-gradient(145deg,#FDEEF3,#F7DCE7);color:#EC4A6E;
+  width:54px;height:54px;border-radius:50%;
+  background:#fff;border:1px solid var(--border);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1px;overflow:hidden;
+  box-shadow:0 2px 6px rgba(0,0,0,.07);
+  font-size:20px;
 }
-.sc-icon i{font-size:16px}
-.si1,.si2,.si3,.si4,.si5,.si6,.si7,.si8,.si9,.si10{background:linear-gradient(145deg,#FDEEF3,#F7DCE7);color:#EC4A6E}
+.sc-icon i{font-size:22px;color:rgb(233,59,95)}
+.si1{background:rgb(255,249,249)}.si2{background:rgb(245,255,246)}.si3{background:rgb(245,248,255)}
+.si4{background:rgb(248,245,255)}.si5{background:rgb(255,245,245)}.si10{background:rgb(255,245,248)}
 .sc-lbl{font-size:10px;color:var(--ts);font-weight:500;white-space:nowrap;text-align:center}
 .convenience-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(17,24,39,.46);z-index:910}
 .convenience-overlay.open{display:flex}
