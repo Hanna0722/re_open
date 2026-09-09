@@ -261,8 +261,8 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
               <select class="form-select" id="purchaseShippingMethod">
                 <option value="">국제운송 선택</option>
                 <option>EMS</option>
-                <option>선편특송</option>
-                <option>비바항공특송</option>
+                <option>비드바이선편특송</option>
+                <option>비드바이항공특송</option>
               </select>
               <select class="form-select" id="purchaseShippingWeight">
                 <option value="" selected>무게 선택</option>
@@ -432,8 +432,8 @@ var PURCHASE_REMITTANCE_FEE = 300;
 var PURCHASE_LOCAL_TAX = 0;
 var PURCHASE_SHIPPING_TABLE = {
   EMS: { '0.5': 2400, '1': 3200, '2': 4800 },
-  '선편특송': { '0.5': 1200, '1': 1700, '2': 2500 },
-  '비바항공특송': { '0.5': 1800, '1': 2600, '2': 3900 }
+  '비드바이선편특송': { '0.5': 1200, '1': 1700, '2': 2500 },
+  '비드바이항공특송': { '0.5': 1800, '1': 2600, '2': 3900 }
 };
 
 function parsePurchaseNumber(value) {

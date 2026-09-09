@@ -368,8 +368,8 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
               <select class="form-select">
                 <option value="">국제운송 선택</option>
                 <option>EMS</option>
-                <option>선편특송</option>
-                <option>비바항공특송</option>
+                <option>비드바이선편특송</option>
+                <option>비드바이항공특송</option>
               </select>
               <select class="form-select">
                 <option value="" selected>무게 선택</option>
@@ -691,7 +691,7 @@ if (orderRequest) {
   var sels=document.querySelectorAll('.cost-select-row .form-select');
   if(!box||!row||sels.length<2) return;
   var ms=sels[0], ws=sels[1], RATE=9.1, BASE_WON=894530, BASE_YEN=98300;
-  var T={'EMS':{'0.5':2400,'1':3200,'2':4800},'선편특송':{'0.5':1200,'1':1700,'2':2500},'비바항공특송':{'0.5':1800,'1':2600,'2':3900}};
+  var T={'EMS':{'0.5':2400,'1':3200,'2':4800},'비드바이선편특송':{'0.5':1200,'1':1700,'2':2500},'비드바이항공특송':{'0.5':1800,'1':2600,'2':3900}};
   function won(y){return '₩'+Math.round(y).toLocaleString('ko-KR');}
   function upd(){
     var e=T[ms.value]&&T[ms.value][ws.value];
