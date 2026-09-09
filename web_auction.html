@@ -169,7 +169,7 @@ a{text-decoration:none;color:inherit}
 .cost-total-row{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;margin-top:12px;display:flex;justify-content:space-between;align-items:center}
 .cost-total-label{font-size:12px;font-weight:700;color:var(--ts)}
 .cost-total-val{font-family:var(--font-num);font-size:20px;font-weight:700;color:var(--rose);display:flex;flex-direction:column;align-items:flex-end;line-height:1.25;text-align:right}
-.cost-total-yen{font-size:18px}
+.cost-total-yen{font-size:18px;margin-left:3px}
 .cost-total-note{font-family:var(--font-sans);font-size:12px;font-weight:500;color:var(--tm)}
 
 /* ── 경매 타이틀 영역 ── */
@@ -804,7 +804,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
               <p style="font-size:11px;color:var(--tm);line-height:1.5;margin:0 0 8px;border-top:1px dashed var(--border);padding-top:8px;width:100%"><i class="fa-solid fa-circle-info" style="color:var(--ts);margin-right:3px"></i>예상 비용이며 실제 무게·운임에 따라 변동될 수 있습니다.</p>
               <div class="cost-total-row" style="margin-top:0">
                 <span class="cost-total-label">예상 구입가</span>
-                <span class="cost-total-val roboto" id="estimateTotalValue">₩24,273<span class="cost-total-yen">(2,610엔)</span><span class="cost-total-note">(국제 운송료 제외)</span></span>
+                <span class="cost-total-val roboto" id="estimateTotalValue"><span class="cost-total-main">₩24,273<span class="cost-total-yen">(2,610엔)</span></span><span class="cost-total-note">(국제 운송료 제외)</span></span>
               </div>
             </div>
           </div>
@@ -1702,7 +1702,7 @@ function updateEstimateCosts(){
   const totalEl = document.getElementById('estimateTotalValue');
   if(totalEl){
     totalEl.innerHTML = intlExcluded
-      ? `₩${totalKrw.toLocaleString('ko-KR')}<span class="cost-total-yen">(${formatYen(totalYen)})</span><span class="cost-total-note">(국제 운송료 제외)</span>`
+      ? `<span class="cost-total-main">₩${totalKrw.toLocaleString('ko-KR')}<span class="cost-total-yen">(${formatYen(totalYen)})</span></span><span class="cost-total-note">(국제 운송료 제외)</span>`
       : `₩${totalKrw.toLocaleString('ko-KR')}`;
   }
   const qty = Number(document.getElementById('bidQtyInput')?.value || 1);
