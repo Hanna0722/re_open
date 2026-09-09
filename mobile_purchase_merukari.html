@@ -109,7 +109,9 @@ a{text-decoration:none;color:inherit}
 .m-cost-defer{font-size:11px;color:var(--ts);font-weight:400;font-family:inherit}
 .m-cost-total{background:#FFF5F7;border:1.5px solid var(--rose);border-radius:10px;padding:12px 14px;margin-top:12px;display:flex;justify-content:space-between;align-items:center}
 .m-cost-total-label{font-size:13px;font-weight:700}
-.m-cost-total-val{font-size:18px;font-weight:700;color:var(--rose);font-family:var(--font-num)}
+.m-cost-total-val{font-size:18px;font-weight:700;color:var(--rose);font-family:var(--font-num);display:flex;flex-direction:column;align-items:flex-end;line-height:1.25;text-align:right}
+.m-cost-total-yen{font-size:15px;margin-left:3px}
+.m-cost-total-note{font-family:var(--font-sans);font-size:11px;font-weight:500;color:var(--tm)}
 .m-btn-notice{font-size:11px;color:var(--tm);padding:10px 16px 12px;background:#FAFBFC;line-height:1.6;border-top:1px solid var(--border)}
 .m-cost-subtitle{font-size:12px;font-weight:700;color:var(--tp);margin:10px 0 4px;padding-bottom:5px;border-bottom:1px solid var(--border)}
 .m-cost-subtitle:first-child{margin-top:0}
@@ -321,11 +323,11 @@ a{text-decoration:none;color:inherit}
     <div class="m-cost-subtitle">2차 결제 비용</div>
     <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 현지운송료</span><span class="m-cost-val"><span class="m-cost-defer">무료 (판매자 부담)</span></span></div>
     <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 현지세금</span><span class="m-cost-val">(0엔) ₩0</span></div>
-    <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 국제운송료</span><span class="m-cost-val">(1,800엔) ₩16,740</span></div>
+    <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 국제운송료</span><span class="m-cost-val">무게 선택 후 계산</span></div>
     <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 기타비용</span><span class="m-cost-val">(300엔) ₩2,790</span></div>
     <div class="m-cost-total">
       <span class="m-cost-total-label">예상 구입가</span>
-      <span class="m-cost-total-val">₩73,237</span>
+      <span class="m-cost-total-val"><span class="m-cost-total-main">₩56,497<span class="m-cost-total-yen">(6,350엔)</span></span><span class="m-cost-total-note">*국제 운송료 제외</span></span>
     </div>
   </div>
 

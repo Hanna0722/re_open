@@ -117,7 +117,9 @@ a{text-decoration:none;color:inherit}
 .cost-row .cost-val .defer{font-size:11px;color:var(--ts);font-weight:400;font-family:inherit}
 .cost-total-row{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;margin-top:12px;display:flex;justify-content:space-between;align-items:center}
 .cost-total-label{font-size:12px;font-weight:700;color:var(--ts)}
-.cost-total-val{font-family:var(--font-num);font-size:20px;font-weight:700;color:var(--rose)}
+.cost-total-val{font-family:var(--font-num);font-size:20px;font-weight:700;color:var(--rose);display:flex;flex-direction:column;align-items:flex-end;line-height:1.25;text-align:right}
+.cost-total-yen{font-size:17px;margin-left:3px}
+.cost-total-note{font-family:var(--font-sans);font-size:12px;font-weight:500;color:var(--tm)}
 
 /* ── 이미지 하단 정보 패널 ── */
 .related-thumb{width:100%;height:110px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;color:var(--tm);font-size:24px}
@@ -263,8 +265,9 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
                 <option>비바항공특송</option>
               </select>
               <select class="form-select" id="purchaseShippingWeight">
+                <option value="" selected>무게 선택</option>
                 <option value="0.5">0.5kg</option>
-                <option value="1" selected>1kg</option>
+                <option value="1">1kg</option>
                 <option value="2">2kg</option>
               </select>
             </div>
@@ -274,7 +277,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
               <div class="cost-row"><span class="cost-label"><span class="cost-sign">+</span> 대행 수수료</span><span class="cost-val roboto" id="purchaseServiceFeeValue">-   원</span></div>
               <div class="cost-row"><span class="cost-label"><span class="cost-sign">+</span> 송금 수수료</span><span class="cost-val roboto" id="purchaseRemittanceValue">-   원</span></div>
               <div class="cost-subtitle">2차 결제 비용</div>
-              <div class="cost-row"><span class="cost-label"><span class="cost-sign">+</span> 국제 운송료</span><span class="cost-val roboto" id="purchaseIntlShippingValue">선택 후 계산</span></div>
+              <div class="cost-row"><span class="cost-label"><span class="cost-sign">+</span> 국제 운송료</span><span class="cost-val roboto" id="purchaseIntlShippingValue">무게 선택 후 계산</span></div>
               <div class="cost-row"><span class="cost-label"><span class="cost-sign">+</span> 현지 세금</span><span class="cost-val roboto" id="purchaseLocalTaxValue">(¥0) ₩0</span></div>
             </div>
             <div style="margin-top:auto">
@@ -450,10 +453,11 @@ function updatePurchaseUrlCosts() {
   var amount = parsePurchaseNumber(purchaseItemAmount && purchaseItemAmount.value);
   var qty = Math.max(1, parsePurchaseNumber(purchaseItemQty && purchaseItemQty.value) || 1);
   var method = document.getElementById('purchaseShippingMethod')?.value || '';
-  var weight = document.getElementById('purchaseShippingWeight')?.value || '0.5';
+  var weight = document.getElementById('purchaseShippingWeight')?.value || '';
+  var intlExcluded = !method || !weight;
   var primary = amount * qty;
   var serviceFee = Math.round(primary * PURCHASE_SERVICE_RATE);
-  var intlShipping = method && PURCHASE_SHIPPING_TABLE[method] ? (PURCHASE_SHIPPING_TABLE[method][weight] || 0) : 0;
+  var intlShipping = intlExcluded || !PURCHASE_SHIPPING_TABLE[method] ? 0 : (PURCHASE_SHIPPING_TABLE[method][weight] || 0);
   var totalYen = primary + serviceFee + PURCHASE_REMITTANCE_FEE + PURCHASE_LOCAL_TAX + intlShipping;
 
   var primaryValue = document.getElementById('purchasePrimaryValue');
@@ -466,9 +470,19 @@ function updatePurchaseUrlCosts() {
   if (primaryValue) primaryValue.textContent = amount ? formatPurchasePair(primary) : '-   원';
   if (serviceFeeValue) serviceFeeValue.textContent = amount ? formatPurchasePair(serviceFee) : '-   원';
   if (remittanceValue) remittanceValue.textContent = amount ? formatPurchasePair(PURCHASE_REMITTANCE_FEE) : '-   원';
-  if (intlShippingValue) intlShippingValue.textContent = intlShipping ? formatPurchasePair(intlShipping) : '선택 후 계산';
+  if (intlShippingValue) intlShippingValue.textContent = intlExcluded ? '무게 선택 후 계산' : formatPurchasePair(intlShipping);
   if (localTaxValue) localTaxValue.textContent = formatPurchasePair(PURCHASE_LOCAL_TAX);
-  if (totalValue) totalValue.textContent = amount ? formatPurchaseWon(totalYen * PURCHASE_RATE) : '-   원';
+  if (totalValue) {
+    if (!amount) {
+      totalValue.textContent = '-   원';
+    } else if (intlExcluded) {
+      totalValue.innerHTML = '<span class="cost-total-main">' + formatPurchaseWon(totalYen * PURCHASE_RATE)
+        + '<span class="cost-total-yen">(¥' + totalYen.toLocaleString('ko-KR') + ')</span></span>'
+        + '<span class="cost-total-note">*국제 운송료 제외</span>';
+    } else {
+      totalValue.textContent = formatPurchaseWon(totalYen * PURCHASE_RATE);
+    }
+  }
 }
 
 function getOrderRequestLength() {

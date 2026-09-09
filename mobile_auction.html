@@ -163,7 +163,9 @@ a{text-decoration:none;color:inherit}
 .m-cost-total-label{font-size:13px;font-weight:700;color:var(--tp);display:flex;flex-direction:column;gap:2px}
 .m-cost-total-rate{font-size:11px;font-weight:500;color:var(--tm)}
 .m-cost-total-rate span{font-weight:700;color:var(--ts);font-family:var(--font-num)}
-.m-cost-total-val{font-size:18px;font-weight:700;color:var(--rose);font-family:var(--font-num)}
+.m-cost-total-val{font-size:18px;font-weight:700;color:var(--rose);font-family:var(--font-num);display:flex;flex-direction:column;align-items:flex-end;line-height:1.25;text-align:right}
+.m-cost-total-yen{font-size:15px;margin-left:3px}
+.m-cost-total-note{font-family:var(--font-sans);font-size:11px;font-weight:500;color:var(--tm)}
 
 /* ── 입찰 버튼 ── */
 .m-bid-btn-wrap{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--border)}
@@ -600,14 +602,14 @@ a{text-decoration:none;color:inherit}
         <select class="m-form-select"><option value="">무게 선택</option><option>0.5kg</option><option>1kg</option><option>2kg</option></select>
       </div>
       <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 낙찰가 (현재가 기준)</span><span class="m-cost-val">(1,500엔) ₩13,950</span></div>
-      <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 국제 운송료</span><span class="m-cost-val">(2,400엔) ₩22,320</span></div>
+      <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 국제 운송료</span><span class="m-cost-val">무게 선택 후 계산</span></div>
       <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 현지 운송료</span><span class="m-cost-val"><span class="m-cost-defer">2차 결제 시 청구</span></span></div>
       <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 현지 세금</span><span class="m-cost-val"><span class="m-cost-defer">2차 결제 시 청구</span></span></div>
       <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 대행 수수료</span><span class="m-cost-val">(150엔) ₩1,395</span></div>
       <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 송금 수수료</span><span class="m-cost-val">(300엔) ₩2,790</span></div>
       <div class="m-cost-total">
-        <span class="m-cost-total-label">예상입찰비용<span class="m-cost-total-rate">적용 환율 <span>9.3</span>원</span></span>
-        <span class="m-cost-total-val">₩39,060</span>
+        <span class="m-cost-total-label">예상 구입가<span class="m-cost-total-rate">적용 환율 <span>9.3</span>원</span></span>
+        <span class="m-cost-total-val"><span class="m-cost-total-main">₩16,740<span class="m-cost-total-yen">(1,800엔)</span></span><span class="m-cost-total-note">*국제 운송료 제외</span></span>
       </div>
     </div>
 

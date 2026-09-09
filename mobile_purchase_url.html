@@ -185,7 +185,9 @@
       background: var(--white);
     }
     .cost-total-label { font-size: 12px; font-weight: 700; color: var(--ts); }
-    .cost-total-val { font-family:var(--font-num); font-size: 20px; font-weight: 700; color: var(--rose); }
+    .cost-total-val { font-family:var(--font-num); font-size: 20px; font-weight: 700; color: var(--rose); display:flex; flex-direction:column; align-items:flex-end; line-height:1.25; text-align:right; }
+    .cost-total-yen { font-size: 17px; margin-left: 3px; }
+    .cost-total-note { font-family: var(--font-sans); font-size: 12px; font-weight: 500; color: var(--tm); }
     .cost-note { font-size: 11px; color: var(--tm); line-height: 1.5; margin-top: 8px; }
     .cost-note i { color: var(--ts); margin-right: 3px; }
 
@@ -339,8 +341,9 @@
           <option value="비바항공특송">비바항공특송</option>
         </select>
         <select class="form-select" id="shippingWeight" onchange="updateCosts()">
+          <option value="" selected>무게 선택</option>
           <option value="0.5">0.5kg</option>
-          <option value="1" selected>1kg</option>
+          <option value="1">1kg</option>
           <option value="2">2kg</option>
         </select>
       </div>
@@ -349,7 +352,7 @@
       <div class="cost-row"><span class="cost-label-wrap"><span class="cost-sign">+</span> 대행 수수료</span><span class="cost-val" id="cService">-   원</span></div>
       <div class="cost-row"><span class="cost-label-wrap"><span class="cost-sign">+</span> 송금 수수료</span><span class="cost-val" id="cRemit">-   원</span></div>
       <div class="cost-section-title">2차 결제 비용</div>
-      <div class="cost-row"><span class="cost-label-wrap"><span class="cost-sign">+</span> 국제 운송료</span><span class="cost-val" id="cShip">선택 후 계산</span></div>
+      <div class="cost-row"><span class="cost-label-wrap"><span class="cost-sign">+</span> 국제 운송료</span><span class="cost-val" id="cShip">무게 선택 후 계산</span></div>
       <div class="cost-row"><span class="cost-label-wrap"><span class="cost-sign">+</span> 현지 세금</span><span class="cost-val" id="cTax">(¥0) ₩0</span></div>
       <div class="cost-total">
         <span class="cost-total-label">예상 구입가</span>
@@ -435,17 +438,28 @@ function updateCosts() {
   var qty = Math.max(1, parseNum(document.getElementById('itemQty').value)||1);
   var method = document.getElementById('shippingMethod').value;
   var weight = document.getElementById('shippingWeight').value;
+  var intlExcluded = !method || !weight;
 
   var primary = amt * qty;
   var service = Math.round(primary * SERVICE_RATE);
-  var ship = method && SHIP_TABLE[method] ? (SHIP_TABLE[method][weight]||0) : 0;
-  var total = (primary + service + REMIT_FEE + ship) * RATE;
+  var ship = intlExcluded || !SHIP_TABLE[method] ? 0 : (SHIP_TABLE[method][weight]||0);
+  var totalYen = primary + service + REMIT_FEE + ship;
+  var total = totalYen * RATE;
 
   document.getElementById('cPrimary').textContent = amt ? fmtPair(primary) : '-   원';
   document.getElementById('cService').textContent = amt ? fmtPair(service) : '-   원';
   document.getElementById('cRemit').textContent = amt ? fmtPair(REMIT_FEE) : '-   원';
-  document.getElementById('cShip').textContent = ship ? fmtPair(ship) : '선택 후 계산';
-  document.getElementById('cTotal').textContent = amt ? fmtWon(total) : '-   원';
+  document.getElementById('cShip').textContent = intlExcluded ? '무게 선택 후 계산' : fmtPair(ship);
+  var cTotal = document.getElementById('cTotal');
+  if (!amt) {
+    cTotal.textContent = '-   원';
+  } else if (intlExcluded) {
+    cTotal.innerHTML = '<span class="cost-total-main">' + fmtWon(total)
+      + '<span class="cost-total-yen">(¥' + totalYen.toLocaleString('ko-KR') + ')</span></span>'
+      + '<span class="cost-total-note">*국제 운송료 제외</span>';
+  } else {
+    cTotal.textContent = fmtWon(total);
+  }
 }
 
 // 갤러리
