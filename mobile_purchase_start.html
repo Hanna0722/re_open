@@ -6,7 +6,7 @@
   <title>구매대행 시작하기 | BidBuy Korea</title>
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Roboto:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
   :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans);--tp:#1A1A2E;--ts:#666680;--tm:#999BAA}
@@ -16,25 +16,26 @@
   }
   *{box-sizing:border-box}
   html{background:var(--bg)}
-  body{margin:0 auto;max-width:480px;min-width:320px;color:var(--tp);background:var(--bg);font-family:var(--font-sans);font-size:14px;line-height:1.5;overflow-x:hidden}
+  body{margin:0 auto;max-width:390px;min-width:320px;color:#333;background:var(--bg);font-family:var(--font-sans);font-size:14px;line-height:1.5;overflow-x:hidden}
   button,input,select{font:inherit}
   button{cursor:pointer}
   a{text-decoration:none;color:inherit}
   .m-header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200}
-  /* ── 상단: 안내 문구 ── */
-  .start-search{background:#fff;padding:26px 16px 14px}
-  .start-search h1{font-size:19px;font-weight:700;text-align:center;line-height:1.4}
-  .start-search .lead{margin-top:6px;text-align:center;font-size:12px;color:var(--ts)}
-  /* ── 밑: 히어로 배너 ── */
-  .hero{padding:0 16px 16px}
-  .hero-card{overflow:hidden;border-radius:12px;background:#fff;height:160px}
-  .hero-banner{display:block;width:100%;height:100%;object-fit:cover}
+  /* ── 상단: 스토어 채널 탭 ── */
+  .store-channel{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;background:#fff;border-bottom:1px solid var(--border);padding:0 8px}
+  .store-channel::-webkit-scrollbar{display:none}
+  .sc-tab{padding:11px 12px;font-size:12px;font-weight:700;color:var(--ts);white-space:nowrap;flex-shrink:0;letter-spacing:-0.28px}
+  .sc-tab.active{color:var(--rose);box-shadow:inset 0 -2px 0 var(--rose)}
+  /* ── 히어로 배너 ── */
+  .hero{padding:14px 16px 16px}
+  .hero-card{overflow:hidden;border-radius:12px;background:#fff}
+  .hero-banner{display:block;width:100%;height:auto}
   /* ── 진행 안내 ── */
   .steps{padding:8px 16px 28px}
   .steps h2{font-size:16px;font-weight:700;text-align:center;margin-bottom:16px}
   .step-grid{display:grid;grid-template-columns:1fr;gap:10px}
   .step{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center}
-  .step-no{width:32px;height:32px;margin:0 auto 10px;border-radius:50%;background:#FFF1F4;color:var(--rose);font-weight:800;font-family:var(--font-num);display:flex;align-items:center;justify-content:center;font-size:14px}
+  .step-no{width:32px;height:32px;margin:0 auto 10px;border-radius:50%;background:#F5F7FA;color:var(--rose);font-weight:700;font-family:var(--font-num);display:flex;align-items:center;justify-content:center;font-size:14px}
   .step-t{font-size:14px;font-weight:700;margin-bottom:5px}
   .step-d{font-size:12px;color:var(--ts);line-height:1.6}
   /* ── 푸터 ── */
@@ -43,7 +44,7 @@
   .m-footer-logo span{color:#fff}
   .m-footer-links{display:flex;flex-wrap:wrap;gap:8px 16px;margin-bottom:14px}
   .m-footer-links a{font-size:12px;color:rgba(255,255,255,.6)}
-  .m-footer-copy{font-size:11px;color:rgba(255,255,255,.4);line-height:1.7}
+  .m-footer-copy{font-size:11px;color:rgba(255,255,255,.4);line-height:1.7;letter-spacing:-0.28px}
   </style>
 </head>
 <body>
@@ -52,22 +53,28 @@
 <header class="m-header"></header>
 
 <!-- 브레드크럼 -->
-<div class="breadcrumb" style="display:flex;align-items:center;gap:5px;padding:10px 16px;font-size:11px;color:var(--ts);background:#fff;border-bottom:1px solid var(--border)">
+<div class="breadcrumb" style="display:flex;align-items:center;gap:5px;padding:10px 16px;font-size:11px;color:var(--ts);background:#fff;border-bottom:1px solid var(--border);letter-spacing:-0.28px">
   <a href="mobile_main.html" style="color:var(--navy)">홈</a>
-  <i class="fa-solid fa-chevron-right" style="font-size:8px;color:var(--tm)"></i>
+  <i class="fa-solid fa-chevron-right" style="font-size:8px;color:var(--tm);letter-spacing:-0.28px"></i>
   <span>구매신청</span>
 </div>
 
-<!-- 상단: 커진 검색창 -->
-<section class="start-search">
-  <h1>구매대행, URL 하나로 바로 시작하세요</h1>
-  <p class="lead">키워드로 검색하거나, 구매하고 싶은 상품 페이지 URL을 그대로 붙여넣으면 됩니다.</p>
-</section>
+<!-- 상단: 스토어 채널 탭 -->
+<nav class="store-channel" aria-label="스토어 바로가기">
+  <a class="sc-tab active" href="mobile_sub_main.html">야후 옥션</a>
+  <a class="sc-tab" href="mobile_purchase_merukari.html">메루카리</a>
+  <a class="sc-tab" href="mobile_purchase_store.html">일본 라쿠텐</a>
+  <a class="sc-tab" href="mobile_purchase_store.html">일본 라쿠마</a>
+  <a class="sc-tab" href="mobile_purchase_url.html">야후 쇼핑</a>
+  <a class="sc-tab" href="mobile_purchase_store.html">야후 프리마</a>
+  <a class="sc-tab" href="mobile_sub_main.html">미국 이베이</a>
+  <a class="sc-tab" href="mobile_sub_main.html">영국 이베이</a>
+</nav>
 
-<!-- 밑: 히어로 배너 -->
+<!-- 히어로 배너 -->
 <section class="hero">
   <div class="hero-card">
-    <img class="hero-banner" src="etc icon/urlbanner.png" width="1100" height="360" alt="원하는 일본 상품 URL을 입력해 주세요. 상품 검색창에 URL을 입력하면 간편하게 구매대행을 시작할 수 있습니다.">
+    <img class="hero-banner" src="etc icon/urlbanner_mobile.png" width="330" height="160" alt="원하는 일본 상품 URL을 입력해 주세요. 상품 검색창에 URL을 입력하면 간편하게 구매대행을 시작할 수 있습니다.">
   </div>
 </section>
 
@@ -77,18 +84,18 @@
   <div class="step-grid">
     <div class="step">
       <div class="step-no">1</div>
-      <div class="step-t">URL 붙여넣기</div>
-      <div class="step-d">아마존·스루가야 등 일본,미국 구매 사이트의<br>상품 URL을 검색창에 입력</div>
+      <div class="step-t">상품 URL 붙여넣기</div>
+      <div class="step-d">사고 싶은 일본·미국 쇼핑몰의 상품 주소를 검색창에 넣고, 수량·포장 옵션·요청사항까지 한 화면에서 작성하세요.</div>
     </div>
     <div class="step">
       <div class="step-no">2</div>
-      <div class="step-t">번역된 상품 정보 확인</div>
-      <div class="step-d">입력한 URL의 번역된 창에서<br>상품 정보와 금액 확인</div>
+      <div class="step-t">장바구니 담기 또는 바로 구매신청</div>
+      <div class="step-d">여러 건은 장바구니에 모아 한 번에, 급한 건 바로 신청. 신청이 접수되면 담당자가 재고와 금액을 확인합니다.</div>
     </div>
     <div class="step">
       <div class="step-no">3</div>
-      <div class="step-t">구매신청 및 결제</div>
-      <div class="step-d">번역된 창에서 구매신청 버튼을 누르면<br>결제창으로 이동</div>
+      <div class="step-t">1차 결제 후 구매 진행</div>
+      <div class="step-d">확인이 끝나면 1차 결제창을 안내드려요. 결제가 완료되면 현지에서 실제 구매가 시작됩니다.</div>
     </div>
   </div>
 </section>
