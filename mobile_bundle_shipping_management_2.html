@@ -14,7 +14,7 @@
 :root{
   --rose:#E8385A;--rose-h:#C42F4C;--amber:#F5A623;
   --navy:#1A3C6E;--green:#3AAD4E;
-  --bg:#fbf7f5;--white:#fff;--border:#e5dbd7;
+  --bg:#fbf7f5;--white:#fff;--border:#E0E4EB;
 
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -60,47 +60,41 @@ a{text-decoration:none;color:inherit}
 .flag.uk{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'%3E%3Crect width='30' height='20' fill='%23012169'/%3E%3Cpath d='M0 0 30 20M30 0 0 20' stroke='%23ffffff' stroke-width='4'/%3E%3Cpath d='M0 0 30 20M30 0 0 20' stroke='%23C8102E' stroke-width='2'/%3E%3Cpath d='M15 0v20M0 10h30' stroke='%23ffffff' stroke-width='6'/%3E%3Cpath d='M15 0v20M0 10h30' stroke='%23C8102E' stroke-width='3.6'/%3E%3C/svg%3E")}
 
 /* ── 패널 ── */
-.bundle-panel{display:none;padding:10px 0 24px}
+.bundle-panel{display:none;padding:40px 0 24px}
 .bundle-panel.active{display:block}
 
 /* ── 묶음 그룹 = 하나의 카드 ── */
 .bundle-group{
   background:#fff;
   margin:0 12px 16px;
-  border:1px solid var(--border);
+  border:1px solid var(--tm);
   border-radius:var(--r-lg,12px);
   overflow:hidden;
-  box-shadow:0 1px 0 rgba(32,36,43,.04);
+  box-shadow:0 1px 3px rgba(26,26,46,.06);
 }
 .bundle-group.selected{
   border-color:var(--rose);
   box-shadow:0 0 0 1px var(--rose);
 }
-.bundle-group-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:14px 15px;background:#fff;border-bottom:1px solid var(--border);border-radius:var(--r-lg,12px) var(--r-lg,12px) 0 0;cursor:pointer;user-select:none}
+.bundle-group-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:12px 10px;background:#fff;border-bottom:1px solid var(--border);border-radius:var(--r-lg,12px) var(--r-lg,12px) 0 0;cursor:pointer;user-select:none}
 .bundle-group[data-pay="true"] .bundle-group-head{cursor:default}
-/* 카드 헤더: 묶음 정보(2등분+구분선) + 통합결제(풀너비 버튼) */
-.bundle-info-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;row-gap:10px;flex:1;min-width:0}
-.bundle-info-list li{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:0;text-align:center}
-.bundle-info-list li:nth-child(2){border-left:1px solid var(--border)}
-.bundle-info-list li.bi-pay{grid-column:1 / -1;border-left:0;margin-top:2px}
-.bi-label{font-size:11px;font-weight:600;color:var(--tm);letter-spacing:-0.28px;white-space:nowrap}
-.bi-val{font-size:13px;font-weight:700;color:var(--tp);font-family:var(--font-num);white-space:nowrap}
+/* 카드 헤더: 묶음상품 · 배송방법 · 예상 수입신고금액 (3등분 1줄) */
+.bundle-info-list{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);flex:1;min-width:0}
+.bundle-info-list li{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:0;text-align:center;padding:2px 4px}
+.bundle-info-list li+li{border-left:1px solid var(--border)}
+.bi-label{font-size:11px;font-weight:600;color:var(--tp);letter-spacing:0.3px;line-height:1.2;word-break:keep-all}
+.bi-val{font-size:12px;font-weight:700;color:var(--tp);letter-spacing:0.3px;font-family:var(--font-num);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.bi-val.bi-val-txt{font-family:var(--font-sans);font-size:11px;white-space:normal;word-break:keep-all;line-height:1.2}
 .bi-val.hot{color:var(--rose)}
-.bi-pay-link{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;min-height:42px;padding:9px 14px;border-radius:var(--r-btn,12px);background:var(--rose);cursor:pointer}
-.bi-pay-link .bi-label{color:#fff;font-size:12px;font-weight:700}
-.bi-pay-link .bi-val,.bi-pay-link .bi-val.hot{color:#fff;font-size:14px;font-weight:700}
-.bi-pay-link:active{background:var(--rose-h)}
-.bi-pay-link:focus-visible,.btn-row-pay:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
-.group-check{display:flex;align-items:center;flex-shrink:0;padding-top:2px}
+.group-check{display:flex;align-items:center;flex-shrink:0;padding-top:10px}
 .group-check input[type=checkbox]{width:18px;height:18px;cursor:pointer;accent-color:var(--rose)}
 
-
-/* 그룹 요약 (수취인/배송방법) */
-.group-utils{display:flex;padding:9px 15px;background:#F5F7FA;border-bottom:1px solid var(--border)}
-.group-utils-meta{display:grid;grid-template-columns:1fr 1fr;width:100%;font-size:11px;font-weight:500;color:var(--ts);letter-spacing:-0.28px}
-.group-utils-meta span{display:flex;align-items:center;justify-content:center;gap:4px;text-align:center}
-.group-utils-meta span+span{border-left:1px solid var(--border)}
-.group-utils-meta b{color:var(--tp);font-weight:700}
+/* 통합결제 라인 (수취인 라인 대체) */
+.group-utils{display:flex;padding:8px 8px;background:#fff;border-bottom:1px solid var(--border)}
+.group-pay-line{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;min-height:20px;padding:9px 14px;border-radius:var(--r-btn,12px);background:var(--rose);color:#fff;font-size:13px;font-weight:600;letter-spacing:0.3px;font-family:inherit;cursor:pointer}
+.group-pay-line .pay-amount{font-family:var(--font-num);font-weight:600;letter-spacing:0.3px;}
+.group-pay-line:active{background:var(--rose-h)}
+.group-pay-line:focus-visible,.btn-row-pay:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
 
 .cancel-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--border);z-index:200;display:flex;gap:8px}
 .btn-cancel-bar{flex:1;padding:13px;background:#fff;border:1px solid var(--border);color:#b3b8c2;border-radius:var(--r-btn,12px);font-size:14px;font-weight:700;cursor:default;font-family:inherit}
@@ -114,19 +108,18 @@ a{text-decoration:none;color:inherit}
 .order-thumb{width:64px;height:64px;border-radius:var(--r-md,8px);background:#EBEBEB;display:flex;align-items:center;justify-content:center;color:var(--tm);font-size:20px;flex-shrink:0}
 .order-info{flex:1;min-width:0}
 .order-status-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
-.order-status{font-size:11px;font-weight:700;color:var(--tp);white-space:nowrap;letter-spacing:-0.28px}
+.order-status{font-size:11px;font-weight:700;color:var(--tp);white-space:nowrap;letter-spacing:0.3px}
 .order-status.hot{color:var(--rose)}
-.order-date{font-size:10px;color:var(--tm);font-family:var(--font-num);letter-spacing:-0.28px}
-.order-market{font-size:10px;color:var(--ts);font-weight:600;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:-0.28px}
+.order-date{font-size:10px;color:var(--tm);font-family:var(--font-num);letter-spacing:0.3px}
+.order-market{font-size:10px;color:var(--ts);font-weight:600;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:0.3px}
 .order-market .flag{width:14px;height:9px;vertical-align:-1px;margin-right:4px}
 .order-name{font-size:12px;color:var(--tp);line-height:1.45;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 
 /* 하단 상세: 상품가/수량 · 2차 결제금액 (라벨 좌 / 값 우) */
-.order-detail{display:flex;flex-direction:column;background:#fff}
-.order-line{display:flex;align-items:center;gap:10px;min-height:34px;padding:5px 0}
-.order-line+.order-line{border-top:1px solid var(--border)}
-.order-line>span{font-size:11px;color:var(--ts);font-weight:600;letter-spacing:-0.3px;white-space:nowrap}
-.order-line>b{flex:1;text-align:right;font-size:13px;color:var(--tp);font-family:var(--font-num);font-weight:700;white-space:nowrap}
+.order-detail{display:flex;flex-direction:column;background:#F5F7FA;border-radius:var(--r-md,8px);padding:2px 12px}
+.order-line{display:flex;align-items:center;gap:10px;min-height:34px;padding:6px 0}
+.order-line>span{font-size:12px;color:var(--ts);font-weight:600;letter-spacing:0.3px;white-space:nowrap}
+.order-line>b{flex:1;text-align:right;font-size:13px;color:var(--tp);font-family:var(--font-num);font-weight:600;white-space:nowrap}
 .order-line>b.hot{color:var(--rose);font-size:14px}
 .btn-row-pay{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;min-height:32px;padding:6px 14px;border:1px solid var(--rose);border-radius:var(--r-btn,12px);background:#fff;color:var(--rose);font-size:12px;font-weight:700;line-height:1.4;white-space:nowrap;cursor:pointer;font-family:inherit}
 .btn-row-pay:active{background:#fff3f5}
@@ -202,16 +195,13 @@ a{text-decoration:none;color:inherit}
     <div class="bundle-group-head">
       <ul class="bundle-info-list">
         <li><span class="bi-label">묶음상품</span><span class="bi-val">4건</span></li>
-        <li><span class="bi-label">총 예상 수입신고금액</span><span class="bi-val">717,000원</span></li>
-        <li class="bi-pay"><a class="bi-pay-link" href="mobile_bill_2nd.html" onclick="event.stopPropagation()"><span class="bi-label">통합결제</span><span class="bi-val hot">129,000원</span></a></li>
+        <li><span class="bi-label">배송방법</span><span class="bi-val bi-val-txt">비드바이항공특송</span></li>
+        <li><span class="bi-label">예상 수입신고금액</span><span class="bi-val hot">717,000원</span></li>
       </ul>
       <label class="group-check" aria-label="묶음 선택"><input type="checkbox" class="group-check-input" aria-label="묶음 선택"></label>
     </div>
     <div class="group-utils">
-      <div class="group-utils-meta">
-        <span>수취인 <b>박길동</b></span>
-        <span>배송방법 <b>비드바이항공특송</b></span>
-      </div>
+      <a class="group-pay-line" href="mobile_bill_2nd.html" onclick="event.stopPropagation()">통합결제 <span class="pay-amount">129,000원</span></a>
     </div>
     <div class="order-item">
       <div class="order-head">
@@ -276,16 +266,13 @@ a{text-decoration:none;color:inherit}
     <div class="bundle-group-head">
       <ul class="bundle-info-list">
         <li><span class="bi-label">묶음상품</span><span class="bi-val">4건</span></li>
-        <li><span class="bi-label">총 예상 수입신고금액</span><span class="bi-val hot">734,000원</span></li>
-        <li class="bi-pay"><a class="bi-pay-link" href="mobile_bill_2nd.html" onclick="event.stopPropagation()"><span class="bi-label">통합결제</span><span class="bi-val hot">102,000원</span></a></li>
+        <li><span class="bi-label">배송방법</span><span class="bi-val bi-val-txt">비드바이선편특송</span></li>
+        <li><span class="bi-label">예상 수입신고금액</span><span class="bi-val hot">734,000원</span></li>
       </ul>
       <label class="group-check" aria-label="묶음 선택"><input type="checkbox" class="group-check-input" aria-label="묶음 선택"></label>
     </div>
     <div class="group-utils">
-      <div class="group-utils-meta">
-        <span>수취인 <b>박비드</b></span>
-        <span>배송방법 <b>비드바이선편특송</b></span>
-      </div>
+      <a class="group-pay-line" href="mobile_bill_2nd.html" onclick="event.stopPropagation()">통합결제 <span class="pay-amount">102,000원</span></a>
     </div>
     <div class="order-item">
       <div class="order-head">
@@ -350,15 +337,10 @@ a{text-decoration:none;color:inherit}
     <div class="bundle-group-head">
       <ul class="bundle-info-list">
         <li><span class="bi-label">묶음상품</span><span class="bi-val">3건</span></li>
-        <li><span class="bi-label">총 예상 수입신고금액</span><span class="bi-val hot">260,000원</span></li>
+        <li><span class="bi-label">배송방법</span><span class="bi-val bi-val-txt">EMS</span></li>
+        <li><span class="bi-label">예상 수입신고금액</span><span class="bi-val hot">260,000원</span></li>
       </ul>
       <label class="group-check" aria-label="묶음배송 신청해지 선택"><input type="checkbox" class="group-check-input" aria-label="묶음배송 신청해지 선택"></label>
-    </div>
-    <div class="group-utils">
-      <div class="group-utils-meta">
-        <span>수취인 <b>박비드</b></span>
-        <span>배송방법 <b>EMS</b></span>
-      </div>
     </div>
     <div class="order-item">
       <div class="order-head">
@@ -412,16 +394,13 @@ a{text-decoration:none;color:inherit}
     <div class="bundle-group-head">
       <ul class="bundle-info-list">
         <li><span class="bi-label">묶음상품</span><span class="bi-val">2건</span></li>
-        <li><span class="bi-label">총 예상 수입신고금액</span><span class="bi-val hot">447,000원</span></li>
-        <li class="bi-pay"><a class="bi-pay-link" href="mobile_bill_2nd.html" onclick="event.stopPropagation()"><span class="bi-label">통합결제</span><span class="bi-val hot">0원</span></a></li>
+        <li><span class="bi-label">배송방법</span><span class="bi-val bi-val-txt">판토스</span></li>
+        <li><span class="bi-label">예상 수입신고금액</span><span class="bi-val hot">447,000원</span></li>
       </ul>
       <label class="group-check" aria-label="묶음 선택"><input type="checkbox" class="group-check-input" aria-label="묶음 선택"></label>
     </div>
     <div class="group-utils">
-      <div class="group-utils-meta">
-        <span>수취인 <b>박비드</b></span>
-        <span>배송방법 <b>판토스</b></span>
-      </div>
+      <a class="group-pay-line" href="mobile_bill_2nd.html" onclick="event.stopPropagation()">통합결제 <span class="pay-amount">0원</span></a>
     </div>
     <div class="order-item">
       <div class="order-head">
@@ -461,15 +440,10 @@ a{text-decoration:none;color:inherit}
     <div class="bundle-group-head">
       <ul class="bundle-info-list">
         <li><span class="bi-label">묶음상품</span><span class="bi-val">2건</span></li>
-        <li><span class="bi-label">총 예상 수입신고금액</span><span class="bi-val hot">343,000원</span></li>
+        <li><span class="bi-label">배송방법</span><span class="bi-val bi-val-txt">판토스</span></li>
+        <li><span class="bi-label">예상 수입신고금액</span><span class="bi-val hot">343,000원</span></li>
       </ul>
       <label class="group-check" aria-label="묶음배송 신청해지 선택"><input type="checkbox" class="group-check-input" aria-label="묶음배송 신청해지 선택"></label>
-    </div>
-    <div class="group-utils">
-      <div class="group-utils-meta">
-        <span>수취인 <b>박비드</b></span>
-        <span>배송방법 <b>판토스</b></span>
-      </div>
     </div>
     <div class="order-item">
       <div class="order-head">
