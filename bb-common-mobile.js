@@ -140,7 +140,7 @@
     '.psb-icons{display:flex;align-items:center;gap:6px;font-size:14px;color:#0A0A0A}',
     '.psb-icons i{line-height:1}',
     '.psb-battery{display:flex;align-items:center;gap:2px}',
-    '.psb-battery-body{width:22px;height:11px;border:1.3px solid #0A0A0A;border-radius:3px;padding:1.5px;position:relative}',
+    '.psb-battery-body{width:22px;height:11px;border:1.3px solid #0A0A0A;border-radius:5px;padding:1.5px;position:relative}',
     '.psb-battery-body::after{content:"";position:absolute;right:-3.5px;top:50%;transform:translateY(-50%);width:2px;height:4px;background:#0A0A0A;border-radius:0 1px 1px 0}',
     '.psb-battery-fill{display:block;width:80%;height:100%;background:#0A0A0A;border-radius:1px}',
     // 스크롤해도 시간/네트워크/배터리 바는 항상 최상단에 붙어 있는다.
@@ -161,7 +161,7 @@
       '--red:#E8385A;--red-h:#C42F4C;' +
       '--blue:#E8385A;--blue-dark:#C42F4C;' +
       '--navy:#1A3C6E;' +
-      '--r-sm:5px;--r-md:8px;--r-lg:12px;--r-btn:12px;--r-pill:999px;' +
+      '--r-thumb:2px;--r-sm:5px;--r-md:8px;--r-card:10px;--r-lg:12px;--r-btn:12px;--r-pill:999px;' +
       '--btn-h-sm:36px;--btn-h-md:44px;--btn-h-lg:48px;' +
     '}',
     /* 공통 폰트 토큰 (DESIGN.md 기준) — 페이지 인라인 :root의 백업 */
@@ -264,7 +264,7 @@
     'header.topbar .login-btn-sm{min-width:66px;height:32px;background:#E8385A;color:#fff;border:none;padding:0 14px;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit}',
     'header.topbar .icon-btn{width:34px;height:34px;border-radius:5px;background:none;border:none;cursor:pointer;color:#333;display:flex;align-items:center;justify-content:center;position:relative;padding:0}',
     'header.topbar .icon-btn i{font-size:19px;line-height:19px}',
-    'header.topbar .i-badge{position:absolute;top:3px;right:2px;background:#E8385A;color:#fff;font-size:7px;font-weight:700;min-width:13px;height:13px;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:0 2px}',
+    'header.topbar .i-badge{position:absolute;top:3px;right:2px;background:#E8385A;color:#fff;font-size:7px;font-weight:700;min-width:13px;height:13px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 2px}',
     'header.topbar .topbar-search{display:flex;align-items:center;height:40px;background:#F4EEEA;border:1px solid #E6DDDA;border-radius:10px;overflow:hidden}',
     'header.topbar .topbar-search input{flex:1;min-width:0;height:100%;border:0;outline:0;background:transparent;padding:0 12px;font-size:13px;font-family:inherit;color:#333}',
     'header.topbar .topbar-search input::placeholder{color:#99A2B0}',

@@ -37,7 +37,7 @@ button,select{cursor:pointer}
 .header-actions{display:flex;align-items:center;justify-content:flex-end;gap:4px}
 .icon-btn{width:34px;height:34px;border-radius:5px;background:none;border:0;color:#333;display:flex;align-items:center;justify-content:center;position:relative;padding:0}
 .icon-btn i{font-size:19px;line-height:19px}
-.i-badge{position:absolute;top:3px;right:2px;min-width:13px;height:13px;padding:0 2px;border-radius:7px;background:var(--brand);color:#fff;font-size:7px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.i-badge{position:absolute;top:3px;right:2px;min-width:13px;height:13px;padding:0 2px;border-radius:8px;background:var(--brand);color:#fff;font-size:7px;font-weight:700;display:flex;align-items:center;justify-content:center}
 .user-avatar-sm{width:30px;height:30px;border:0;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--amber));color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:inherit}
 .search-bar{display:flex;align-items:center;min-width:0;height:40px;margin:0 14px 10px;border:1px solid #e6ddda;border-radius:10px;overflow:hidden;background:#f4eeea;color:var(--muted)}
 .search-bar input{flex:1;min-width:0;height:100%;padding:0 12px;border:0;outline:0;background:transparent;color:var(--tp);font-size:14px}
@@ -75,7 +75,7 @@ button,select{cursor:pointer}
 /* ══ 조회 기간 바텀시트 (mobile_totalsearch 시트 패턴 이식) ══ */
 .sheet-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:300;opacity:0;transition:opacity .25s}
 .sheet-overlay.open{display:block;opacity:1}
-.period-sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:var(--frame-w);max-height:92vh;background:#fff;border-radius:12px 16px 0 0;z-index:400;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.32,0,.07,1);overflow:hidden}
+.period-sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:var(--frame-w);max-height:92vh;background:#fff;border-radius:12px 12px 0 0;z-index:400;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.32,0,.07,1);overflow:hidden}
 .period-sheet.open{transform:translateX(-50%) translateY(0)}
 .sheet-handle{width:38px;height:5px;margin:10px auto 2px;border-radius:999px;background:#d5d9df;flex-shrink:0}
 .sheet-header{display:flex;align-items:center;justify-content:space-between;padding:8px 16px 10px;flex-shrink:0}
@@ -106,7 +106,7 @@ button,select{cursor:pointer}
 .calendar-days button.is-muted{color:#c1c5cf}
 /* ── 거래 카드 (web_mainlist order-card 이식) ── */
 .trade-table{display:flex;flex-direction:column;gap:10px;padding:0 10px}
-.order-card{border:1px solid #e5dbd7;border-radius:7px;overflow:hidden;background:#fff}
+.order-card{border:1px solid #e5dbd7;border-radius:8px;overflow:hidden;background:#fff}
 /* 카드 상단 헤더 바 */
 .tr-header{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:6px 12px 6px 14px;background:#FBF7F5;border-bottom:1px solid #DED8D4}
 .tr-chip{font-size:13px;font-weight:600;color:var(--tp);display:flex;align-items:center;gap:6px;white-space:nowrap}
@@ -170,7 +170,7 @@ button,select{cursor:pointer}
 .trade-table.status-filtered .order-card.status-extra{display:block}
 .order-card.is-hidden{display:none !important}
 .bundle-group-wrap.is-hidden{display:none !important}
-.trade-empty{display:none;min-height:84px;align-items:center;justify-content:center;border:1px solid #e5dbd7;border-radius:11px;color:var(--tm);font-size:13px;font-weight:800;background:#fff}
+.trade-empty{display:none;min-height:84px;align-items:center;justify-content:center;border:1px solid #e5dbd7;border-radius:10px;color:var(--tm);font-size:13px;font-weight:800;background:#fff}
 .trade-empty.is-visible{display:flex}
 /* 페이저 */
 .pager{display:flex;justify-content:center;gap:5px;margin-top:16px}

@@ -127,13 +127,16 @@ Spacing follows a 4px base grid — common steps 4 / 8 / 12 / 16 / 20 / 24px.
 
 ## Corner radius
 
+The scale has **six steps** — `2 / 5 / 8 / 10 / 12 / 999`. Nothing in between; don't hand-pick `3` / `4` / `6` / `7` / `9` / `11` / `14` / `16`px.
+
 | Token | Value | Use |
 |---|---|---|
-| `--r-btn` | **12px** | buttons and button-shaped controls (primary interactive) |
-| `--r-sm` | **5px** | chips, tiles, dense UI — the 나의 거래 현황 grid, filter pills, small cards |
-| `--r-md` | 8px | mid-size cards |
-| `--r-lg` | 12px | large cards / panels |
-| `--r-pill` | 999px | fully rounded pills, avatars, progress tracks |
+| `--r-thumb` | **2px** | flag / tiny thumbnail images only (exception — everything else starts at 5) |
+| `--r-sm` | **5px** | chips, filter pills, dense UI (나의 거래 현황 grid), small controls, tags |
+| `--r-md` | **8px** | mid-size cards, inputs, list tiles |
+| `--r-card` | **10px** | standard content cards — product / related / review / live cards |
+| `--r-btn` / `--r-lg` | **12px** | buttons and button-shaped controls; large cards, panels, modals, bottom sheets |
+| `--r-pill` | **999px** | fully rounded pills, avatars, progress tracks, badges |
 
 ## Buttons
 

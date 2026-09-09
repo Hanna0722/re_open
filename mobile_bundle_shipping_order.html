@@ -31,7 +31,7 @@
   .app-header-right { display:flex; gap:4px; align-items:center; justify-self:end; }
   .icon-btn { width:34px; height:34px; border-radius:5px; background:none; border:none; cursor:pointer; color:#333; display:flex; align-items:center; justify-content:center; position:relative; padding:0; }
   .icon-btn i { font-size:19px; }
-  .i-badge { position:absolute; top:3px; right:2px; background:var(--red); color:#fff; font-size:7px; font-weight:700; min-width:13px; height:13px; border-radius:7px; display:flex; align-items:center; justify-content:center; padding:0 2px; }
+  .i-badge { position:absolute; top:3px; right:2px; background:var(--red); color:#fff; font-size:7px; font-weight:700; min-width:13px; height:13px; border-radius:8px; display:flex; align-items:center; justify-content:center; padding:0 2px; }
   .user-avatar-sm { width:30px; height:30px; border-radius:50%; background:linear-gradient(135deg,var(--red),var(--amber)); display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:700; cursor:pointer; border:0; font-family:inherit; }
   /* 페이지 헤더 */
   .page-header { background:#fff; padding:16px 16px 12px; border-bottom:1px solid var(--border); margin-bottom:8px; }
@@ -49,10 +49,10 @@
   /* 상품 아이템 */
   .order-item { display:flex; gap:12px; align-items:flex-start; padding-bottom:14px; border-bottom:1px solid var(--border); margin-bottom:14px; }
   .order-item:last-child { padding-bottom:0; border-bottom:none; margin-bottom:0; }
-  .order-thumb { width:60px; height:60px; flex-shrink:0; border-radius:6px; overflow:hidden; background:#e8e4e0; border:1px solid #ebe7e3; }
+  .order-thumb { width:60px; height:60px; flex-shrink:0; border-radius:8px; overflow:hidden; background:#e8e4e0; border:1px solid #ebe7e3; }
   .order-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
   .order-info { flex:1; min-width:0; }
-  .order-badge { display:inline-block; font-size:10px; font-weight:700; color:var(--ts); background:#f0f1f3; border-radius:4px; padding:2px 7px; margin-bottom:4px; }
+  .order-badge { display:inline-block; font-size:10px; font-weight:700; color:var(--ts); background:#f0f1f3; border-radius:5px; padding:2px 7px; margin-bottom:4px; }
   .order-id { font-size:11px; color:var(--text-sub); margin-bottom:3px; }
   .order-id .flag { display:inline-block; width:15px; height:10px; border-radius:2px; box-shadow:inset 0 0 0 1px rgba(0,0,0,.08); vertical-align:-1px; margin-right:4px; background:#fff center/cover no-repeat; }
   .order-id .flag.jp { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'%3E%3Crect width='30' height='20' fill='%23ffffff'/%3E%3Ccircle cx='15' cy='10' r='6' fill='%23bc002d'/%3E%3C/svg%3E"); }
@@ -99,7 +99,7 @@
   .domestic-fields { display:block; }
   .domestic-fields.hide { display:none; }
   /* 개인통관 접기 */
-  .customs-notice { background:#FFF0F0; border-radius:6px; margin-top:8px; font-size:11px; line-height:1.7; color:#A00; overflow:hidden; }
+  .customs-notice { background:#FFF0F0; border-radius:8px; margin-top:8px; font-size:11px; line-height:1.7; color:#A00; overflow:hidden; }
   .customs-notice summary { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:10px 12px; cursor:pointer; list-style:none; }
   .customs-notice summary::-webkit-details-marker { display:none; }
   .customs-notice summary::after { content:'펼쳐보기'; flex-shrink:0; color:var(--navy); font-size:11px; font-weight:700; }
@@ -124,7 +124,7 @@
   .option-body p + ul { margin-top:6px; }
   .option-body ul { margin:0; padding-left:18px; }
   .option-body li { margin-bottom:3px; }
-  .paid-option-detail { height:30px; padding:0 12px; border:1px solid var(--navy); border-radius:4px; background:#fff; color:var(--navy); font-family:var(--font-sans); font-size:12px; font-weight:700; cursor:pointer; }
+  .paid-option-detail { height:30px; padding:0 12px; border:1px solid var(--navy); border-radius:5px; background:#fff; color:var(--navy); font-family:var(--font-sans); font-size:12px; font-weight:700; cursor:pointer; }
   .paid-option-detail + .paid-option-detail { margin-left:6px; }
   .paid-option-common-note { margin:0 0 10px; font-size:12px; font-weight:700; color:var(--red); line-height:1.6; }
   .packing-choice-list { display:flex; flex-wrap:wrap; gap:8px 14px; padding:12px 14px; background:#F5F7FA; border-bottom:1px solid var(--border); }
@@ -356,7 +356,7 @@
 </div>
 
 <!-- 관·부가세 안내 -->
-<div style="background:#FFF8EC; border-left:3px solid #F5A623; border-radius:0 4px 4px 0; padding:14px 16px; margin-bottom:8px; font-size:13px; line-height:1.75; color:#664400;">
+<div style="background:#FFF8EC; border-left:3px solid #F5A623; border-radius:0 5px 5px 0; padding:14px 16px; margin-bottom:8px; font-size:13px; line-height:1.75; color:#664400;">
   <div style="display:flex; align-items:flex-start; gap:8px;">
     <span style="color:#D4891A; font-size:15px; flex-shrink:0; margin-top:1px;">&#9888;</span>
     <div>

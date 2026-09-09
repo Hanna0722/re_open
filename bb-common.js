@@ -140,7 +140,7 @@
       '--brand:#E8385A;--brand-dark:#C42F4C;' +
       '--blue:#E8385A;--blue-dark:#C42F4C;' +
       '--navy:#1A3C6E;' +
-      '--r-sm:5px;--r-md:8px;--r-lg:12px;--r-btn:12px;--r-pill:999px;' +
+      '--r-thumb:2px;--r-sm:5px;--r-md:8px;--r-card:10px;--r-lg:12px;--r-btn:12px;--r-pill:999px;' +
       '--btn-h-sm:36px;--btn-h-md:44px;--btn-h-lg:48px;' +
       '--label-col-w:230px;' +
     '}',
@@ -166,7 +166,7 @@
     '.bbh-ibtn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 10px;border-radius:5px;cursor:pointer;color:var(--ts);font-size:10px;border:none;background:none;font-family:inherit;position:relative}',
     '.bbh-ibtn:hover{background:#F5F7FA}',
     '.bbh-ibtn i{font-size:20px}',
-    '.bbh-badge{position:absolute;top:4px;right:4px;background:#E8385A;color:#fff;font-size:8px;font-weight:700;min-width:14px;height:14px;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:0 2px}',
+    '.bbh-badge{position:absolute;top:4px;right:4px;background:#E8385A;color:#fff;font-size:8px;font-weight:700;min-width:14px;height:14px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 2px}',
     '.bbh-btn-login{background:#E8385A;color:#fff;border:none;padding:8px 18px;border-radius:5px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;white-space:nowrap}',
     '.bbh-btn-login:hover{background:#C42F4C}',
     '.bbh-btn-join{background:#fff;color:var(--ts);border:1.5px solid #E0E4EB;padding:8px 16px;border-radius:5px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;margin-right:6px}',
