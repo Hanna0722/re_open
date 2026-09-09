@@ -278,7 +278,7 @@
 
     .bundle-head, .bundle-row {
       display: grid;
-      grid-template-columns: 52px 92px 84px 84px minmax(0, 1fr) 64px 120px;
+      grid-template-columns: 52px 92px 84px 84px minmax(0, 1fr) 128px;
       align-items: center;
     }
 
@@ -782,7 +782,7 @@
           <div class="bundle-panel active" data-panel-id="jp">
             <div class="bundle-actions">
               <button class="big-btn line js-individual-btn" type="button" onclick="handleIndividualSubmit()" disabled>선택건 개별배송 신청</button>
-              <button class="big-btn primary js-bundle-btn" type="button" onclick="handleBundleSubmit()" disabled>선택건 묶음 신청</button>
+              <button class="big-btn primary js-bundle-btn" type="button" onclick="handleBundleSubmit()" disabled>선택건 묶음배송 신청</button>
             </div>
             <div class="bundle-table">
               <div class="bundle-head">
@@ -793,8 +793,7 @@
                 <div>주문일자</div>
                 <div>이미지</div>
                 <div>상품정보</div>
-                <div>수취인</div>
-                <div>상품가<br>예상 수입신고금액</div>
+                <div>상품가/수량<br>예상 수입신고금액</div>
               </div>
 
               <div class="bundle-row">
@@ -810,8 +809,7 @@
                     <a href="web_auction.html" class="product-name">Nintendo Switch OLED 본체 화이트 Joy-Con 세트 미사용 보관품</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>92,000 엔</b><span>78,000원</span></div>
+                <div class="row-price"><b>92,000 엔 / 1개</b><span>78,000원</span></div>
               </div>
 
               <div class="bundle-row">
@@ -827,8 +825,7 @@
                     <a href="web_auction.html" class="product-name">SONY WH-1000XM5 블랙 노이즈캔슬링 헤드폰 박스 포함</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>38,500 엔</b><span>108,000원</span></div>
+                <div class="row-price"><b>38,500 엔 / 2개</b><span>108,000원</span></div>
               </div>
 
               <div class="bundle-row">
@@ -844,8 +841,7 @@
                     <a href="web_auction.html" class="product-name">PORTER TANKER 숄더백 세이지 그린 빈티지 상태 양호</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>21,800 엔</b><span>73,000원</span></div>
+                <div class="row-price"><b>21,800 엔 / 1개</b><span>73,000원</span></div>
               </div>
 
               <div class="bundle-row">
@@ -861,8 +857,7 @@
                     <a href="web_auction.html" class="product-name">BANDAI METAL BUILD 건담 아스트레이 레드프레임 피규어</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>64,200 엔</b><span>142,000원</span></div>
+                <div class="row-price"><b>64,200 엔 / 3개</b><span>142,000원</span></div>
               </div>
 
               <div class="bundle-row">
@@ -878,8 +873,7 @@
                     <a href="web_auction.html" class="product-name">Canon EF 50mm F1.4 USM 단렌즈 후드 포함 정상 작동</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>29,700 엔</b><span>89,000원</span></div>
+                <div class="row-price"><b>29,700 엔 / 1개</b><span>89,000원</span></div>
               </div>
 
               <div class="bundle-row">
@@ -895,8 +889,7 @@
                     <a href="web_auction.html" class="product-name">Snow Peak 티타늄 머그 450ml 2개 세트 캠핑 용품</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>12,400 엔</b><span>61,000원</span></div>
+                <div class="row-price"><b>12,400 엔 / 2개</b><span>61,000원</span></div>
               </div>
 
               <div class="bundle-row">
@@ -912,8 +905,7 @@
                     <a href="web_auction.html" class="product-name">SEIKO Prospex 다이버 워치 솔라 충전식 SBDJ 모델</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>46,900 엔</b><span>121,000원</span></div>
+                <div class="row-price"><b>46,900 엔 / 1개</b><span>121,000원</span></div>
               </div>
 
               <div class="bundle-row">
@@ -929,8 +921,7 @@
                     <a href="web_auction.html" class="product-name">Apple Magic Keyboard JIS 배열 화이트 중고품 상태 양호</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>9,800 엔</b><span>44,000원</span></div>
+                <div class="row-price"><b>9,800 엔 / 1개</b><span>44,000원</span></div>
               </div>
 
               <div class="bundle-row">
@@ -946,8 +937,7 @@
                     <a href="web_auction.html" class="product-name">YAMAHA AG03 MK2 오디오 인터페이스 화이트 방송 장비</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>18,600 엔</b><span>72,000원</span></div>
+                <div class="row-price"><b>18,600 엔 / 2개</b><span>72,000원</span></div>
               </div>
 
               <div class="bundle-row">
@@ -963,8 +953,7 @@
                     <a href="web_auction.html" class="product-name">MUJI 스테인리스 유닛 선반 소형 파츠 포함 세트</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>15,300 엔</b><span>66,000원</span></div>
+                <div class="row-price"><b>15,300 엔 / 1개</b><span>66,000원</span></div>
               </div>
 
               <div class="bundle-row">
@@ -980,8 +969,7 @@
                     <a href="web_auction.html" class="product-name">Panasonic 나노케어 헤어드라이어 EH-NA0J 딥네이비</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>24,900 엔</b><span>82,000원</span></div>
+                <div class="row-price"><b>24,900 엔 / 3개</b><span>82,000원</span></div>
               </div>
 
               <div class="bundle-row">
@@ -997,8 +985,7 @@
                     <a href="web_auction.html" class="product-name">Pokemon Card 게임 스칼렛 바이올렛 프로모 카드 묶음</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>33,200 엔</b><span>104,000원</span></div>
+                <div class="row-price"><b>33,200 엔 / 2개</b><span>104,000원</span></div>
               </div>
 
               <div class="bundle-foot">
@@ -1040,8 +1027,7 @@
                 <div>주문일자</div>
                 <div>이미지</div>
                 <div>상품정보</div>
-                <div>수취인</div>
-                <div>상품가<br>예상 수입신고금액</div>
+                <div>상품가/수량<br>예상 수입신고금액</div>
               </div>
 
               <div class="bundle-row">
@@ -1057,8 +1043,7 @@
                     <a href="web_auction.html" class="product-name">Vintage Levi's 501 Denim Jacket 1980s Made in USA Size L</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>920.00 달러</b><span>85,000원</span></div>
+                <div class="row-price"><b>920.00 달러 / 1개</b><span>85,000원</span></div>
               </div>
 
               <div class="bundle-row">
@@ -1074,8 +1059,7 @@
                     <a href="web_auction.html" class="product-name">Vintage Levi's 501 Denim Jacket 1980s Made in USA Size L</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>920.00 달러</b><span>129,000원</span></div>
+                <div class="row-price"><b>920.00 달러 / 2개</b><span>129,000원</span></div>
               </div>
 
               <div class="bundle-row">
@@ -1091,8 +1075,7 @@
                     <a href="web_auction.html" class="product-name">Vintage Levi's 501 Denim Jacket 1980s Made in USA Size L</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>920.00 달러</b><span>147,000원</span></div>
+                <div class="row-price"><b>920.00 달러 / 1개</b><span>147,000원</span></div>
               </div>
 
               <div class="bundle-row">
@@ -1108,8 +1091,7 @@
                     <a href="web_auction.html" class="product-name">Vintage Levi's 501 Denim Jacket 1980s Made in USA Size L</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>920.00 달러</b><span>136,000원</span></div>
+                <div class="row-price"><b>920.00 달러 / 2개</b><span>136,000원</span></div>
               </div>
 
               <div class="bundle-foot">
@@ -1151,8 +1133,7 @@
                 <div>주문일자</div>
                 <div>이미지</div>
                 <div>상품정보</div>
-                <div>수취인</div>
-                <div>상품가<br>예상 수입신고금액</div>
+                <div>상품가/수량<br>예상 수입신고금액</div>
               </div>
 
               <div class="bundle-row">
@@ -1168,8 +1149,7 @@
                     <a href="web_auction.html" class="product-name">Vintage Burberry Check Scarf Made in England Classic Nova Pattern</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>132.00 파운드</b><span>252,000원</span></div>
+                <div class="row-price"><b>132.00 파운드 / 3개</b><span>252,000원</span></div>
               </div>
 
               <div class="bundle-row">
@@ -1185,8 +1165,7 @@
                     <a href="web_auction.html" class="product-name">Royal Doulton Tea Cup and Saucer Pair Fine Bone China Set</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>47.00 파운드</b><span>91,000원</span></div>
+                <div class="row-price"><b>47.00 파운드 / 1개</b><span>91,000원</span></div>
               </div>
 
               <div class="bundle-row">
@@ -1202,8 +1181,7 @@
                     <a href="web_auction.html" class="product-name">Barbour Bedale Wax Jacket Olive Green Size 38 Made in England</a>
                   </div>
                 </div>
-                <div>박비드</div>
-                <div class="row-price"><b>86.00 파운드</b><span>164,000원</span></div>
+                <div class="row-price"><b>86.00 파운드 / 2개</b><span>164,000원</span></div>
               </div>
 
               <div class="bundle-foot">
