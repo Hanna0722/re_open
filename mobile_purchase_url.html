@@ -337,8 +337,8 @@
         <select class="form-select" id="shippingMethod" onchange="updateCosts()">
           <option value="">국제운송 선택</option>
           <option value="EMS">EMS</option>
-          <option value="선편특송">선편특송</option>
-          <option value="비바항공특송">비바항공특송</option>
+          <option value="비드바이선편특송">비드바이선편특송</option>
+          <option value="비드바이항공특송">비드바이항공특송</option>
         </select>
         <select class="form-select" id="shippingWeight" onchange="updateCosts()">
           <option value="" selected>무게 선택</option>
@@ -425,8 +425,8 @@ var SERVICE_RATE = 0.1;
 var REMIT_FEE = 300;
 var SHIP_TABLE = {
   'EMS': {'0.5':2400,'1':3200,'2':4800},
-  '선편특송': {'0.5':1200,'1':1700,'2':2500},
-  '비바항공특송': {'0.5':1800,'1':2600,'2':3900}
+  '비드바이선편특송': {'0.5':1200,'1':1700,'2':2500},
+  '비드바이항공특송': {'0.5':1800,'1':2600,'2':3900}
 };
 
 function parseNum(v) { return parseInt(String(v||'').replace(/[^\d]/g,''),10)||0; }
