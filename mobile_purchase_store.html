@@ -119,7 +119,7 @@ a{text-decoration:none;color:inherit}
 .m-cost-sign.minus{color:var(--green);background:#EDF7F0}
 .m-cost-val{font-family:var(--font-num);font-weight:600;font-size:13px}
 .m-cost-defer{font-size:11px;color:var(--ts);font-weight:400;font-family:inherit}
-.m-cost-total{background:#FFF5F7;border:1.5px solid var(--rose);border-radius:10px;padding:12px 14px;margin-top:12px;display:flex;justify-content:space-between;align-items:center}
+.m-cost-total{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;margin-top:12px;display:flex;justify-content:space-between;align-items:center}
 .m-cost-total-label{font-size:13px;font-weight:700}
 .m-cost-total-val{font-size:18px;font-weight:700;color:var(--rose);font-family:var(--font-num);display:flex;flex-direction:column;align-items:flex-end;line-height:1.25;text-align:right}
 .m-cost-total-yen{font-size:15px;margin-left:3px}
@@ -330,20 +330,20 @@ a{text-decoration:none;color:inherit}
 
   <div class="m-buy-pane" id="mtab-cost">
     <div class="m-cost-select-row">
-      <select class="m-form-select"><option value="">국제운송 선택</option><option>EMS</option><option>항공</option><option>선박</option></select>
-      <select class="m-form-select"><option value="">무게 선택</option><option>1kg</option><option>2kg</option><option>3kg</option></select>
+      <select class="m-form-select" id="mStoreShipMethod"><option value="">국제운송 선택</option><option value="ems">EMS</option><option value="air">항공</option><option value="sea">선박</option></select>
+      <select class="m-form-select" id="mStoreShipWeight"><option value="">무게 선택</option><option value="1">1kg</option><option value="2">2kg</option><option value="3">3kg</option></select>
     </div>
     <div class="m-cost-subtitle">1차 결제 비용</div>
     <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 상품가격</span><span class="m-cost-val">(136,000엔) ₩1,264,800</span></div>
     <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 대행 수수료</span><span class="m-cost-val">(13,600엔) ₩126,480</span></div>
     <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 송금 수수료</span><span class="m-cost-val">(300엔) ₩2,790</span></div>
     <div class="m-cost-subtitle">2차 결제 비용</div>
-    <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 국제 운송료</span><span class="m-cost-val">무게 선택 후 계산</span></div>
+    <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 국제 운송료</span><span class="m-cost-val" id="mStoreIntlRow">무게 선택 후 계산</span></div>
     <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 현지 운송료</span><span class="m-cost-val"><span class="m-cost-defer">2차 결제 시 청구</span></span></div>
     <div class="m-cost-row"><span class="m-cost-label"><span class="m-cost-sign">+</span> 관·부가세</span><span class="m-cost-val"><span class="m-cost-defer">$150 초과 — 수령 시 부과</span></span></div>
     <div class="m-cost-total">
       <span class="m-cost-total-label">예상 구입가</span>
-      <span class="m-cost-total-val"><span class="m-cost-total-main">₩1,330,830<span class="m-cost-total-yen">(149,900엔)</span></span><span class="m-cost-total-note">*국제 운송료 제외</span></span>
+      <span class="m-cost-total-val" id="mStoreCostTotal"><span class="m-cost-total-main">₩1,330,830<span class="m-cost-total-yen">(149,900엔)</span></span><span class="m-cost-total-note">*국제 운송료 제외</span></span>
     </div>
   </div>
 
@@ -536,6 +536,25 @@ function stepQty(d){
   input.value = Math.max(1, (parseInt(input.value,10)||1) + d);
 }
 function toggleMAcc(id){ document.getElementById(id).classList.toggle('open'); }
+(function(){
+  var box=document.getElementById('mStoreCostTotal'), row=document.getElementById('mStoreIntlRow');
+  var ms=document.getElementById('mStoreShipMethod'), ws=document.getElementById('mStoreShipWeight');
+  if(!box||!row||!ms||!ws) return;
+  var RATE=9.3, BASE_WON=1330830, BASE_YEN=149900;
+  var T={ems:{'1':3200,'2':4800,'3':6400},air:{'1':2600,'2':3900,'3':5200},sea:{'1':1700,'2':2500,'3':3300}};
+  function won(y){return '₩'+Math.round(y).toLocaleString('ko-KR');}
+  function upd(){
+    var e=T[ms.value]&&T[ms.value][ws.value];
+    if(e){
+      row.textContent='('+e.toLocaleString('ko-KR')+'엔) '+won(e*RATE);
+      box.textContent=won(BASE_WON+e*RATE);
+    }else{
+      row.textContent='무게 선택 후 계산';
+      box.innerHTML='<span class="m-cost-total-main">₩'+BASE_WON.toLocaleString('ko-KR')+'<span class="m-cost-total-yen">('+BASE_YEN.toLocaleString('ko-KR')+'엔)</span></span><span class="m-cost-total-note">*국제 운송료 제외</span>';
+    }
+  }
+  ms.addEventListener('change',upd); ws.addEventListener('change',upd); upd();
+})();
 </script>
 <script src="bb-common-mobile.js"></script>
 <script src="bb-search-modal-mobile.js"></script>
