@@ -19,7 +19,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 /* 네이버 모바일 기본 타이포그래피: 시스템 한글 폰트 스택 / 14px / line-height 1.5, 여백 8px 그리드 */
-body{font-family:var(--font-sans);background:#fff;color:var(--tp);font-size:14px;line-height:1.5;max-width:390px;margin:0 auto;padding-top:81px}
+body{font-family:var(--font-sans);background:#fff;color:#333;font-size:14px;line-height:1.5;max-width:390px;margin:0 auto;padding-top:81px}
 a{text-decoration:none;color:inherit}
 
 /* ── 공통 앱 헤더 (모바일 상태바 + 앱바) ── */
@@ -32,7 +32,7 @@ a{text-decoration:none;color:inherit}
 .app-logo{display:inline-flex;align-items:center;width:76px;line-height:0;}
 .app-logo img{display:block;width:100%;height:auto;}
 .app-header-right{margin-left:0;display:flex;gap:8px;align-items:center;justify-self:end}
-.login-btn-sm{min-width:66px;height:36px;background:var(--rose);color:#fff;border:none;padding:0 14px;border-radius:var(--r-btn,12px);font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:-0.28px}
+.login-btn-sm{min-width:66px;height:36px;background:var(--rose);color:#fff;border:none;padding:0 14px;border-radius:var(--r-btn,12px);font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:-0.1px}
 .icon-btn{width:34px;height:34px;border-radius:5px;background:none;border:none;cursor:pointer;color:var(--tp);display:flex;align-items:center;justify-content:center;position:relative;padding:0}
 .icon-btn i{font-size:19px;line-height:19px}
 .i-badge{position:absolute;top:3px;right:2px;background:var(--rose);color:#fff;font-size:7px;font-weight:700;min-width:13px;height:13px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 2px}
@@ -40,17 +40,17 @@ a{text-decoration:none;color:inherit}
 
 /* ── 페이지 헤더 ── */
 .page-header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:107px;z-index:200;display:flex;align-items:center;padding:0 16px;height:52px;gap:8px}
-.m-back-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:none;border-radius:5px;background:none;color:var(--tp);font-size:18px;cursor:pointer;margin-left:-8px}
+.m-back-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:none;border-radius:var(--r-btn,12px);background:none;color:var(--tp);font-size:18px;cursor:pointer;margin-left:-8px}
 .m-hdr-title{flex:1;min-width:0;font-size:16px;font-weight:700;color:var(--tp);display:flex;flex-direction:column;line-height:1.15;white-space:nowrap}
-.m-hdr-sub{font-size:11px;font-weight:700;color:var(--tm);margin-top:2px;letter-spacing:-0.28px}
+.m-hdr-sub{font-size:11px;font-weight:700;color:var(--tm);margin-top:2px;letter-spacing:-0.1px}
 .m-hdr-link{font-size:12px;font-weight:600;color:var(--ts);display:flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0}
-.m-hdr-link i{font-size:10px}
+.m-hdr-link i{font-size:11px}
 
 /* ── 국가 탭 (1/3 균등) ── */
 .country-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:159px;z-index:190}
 .country-tab{position:relative;height:44px;border:none;background:none;color:var(--tm);display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;white-space:nowrap;line-height:1.2}
 .country-tab .ct-name{display:inline-flex;align-items:center;justify-content:center;gap:4px;white-space:normal;word-break:keep-all}
-.country-tab small{font-size:10px;font-weight:700;color:inherit;opacity:.75;font-family:var(--font-num);letter-spacing:-0.28px}
+.country-tab small{font-size:11px;font-weight:700;color:inherit;opacity:.75;font-family:var(--font-num);letter-spacing:-0.1px}
 .country-tab::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:transparent}
 .country-tab.active{color:var(--rose)}
 .country-tab.active::after{background:var(--rose)}
@@ -73,22 +73,22 @@ a{text-decoration:none;color:inherit}
 .order-card{background:#fff;margin:0 12px 16px;border:1px solid var(--tm);border-radius:var(--r-lg,12px);box-shadow:none;overflow:hidden;padding:12px 14px 14px}
 .order-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .order-status-wrap{display:flex;align-items:center;gap:8px}
-.order-status{font-size:11px;font-weight:700;color:var(--tp);white-space:nowrap;letter-spacing:-0.28px}
+.order-status{font-size:11px;font-weight:700;color:var(--tp);white-space:nowrap;letter-spacing:-0.1px}
 .order-status.hot{color:var(--rose)}
-.order-date{font-size:10px;color:var(--tm);font-family:var(--font-num);letter-spacing:-0.28px}
+.order-date{font-size:11px;color:var(--tm);font-family:var(--font-num);letter-spacing:-0.1px}
 .order-body{display:flex;gap:10px}
 .order-thumb{width:64px;height:64px;border-radius:var(--r-md,8px);background:#F5F7FA;display:flex;align-items:center;justify-content:center;color:var(--tm);font-size:20px;flex-shrink:0}
 .order-info{flex:1;min-width:0}
-.order-market{font-size:10px;color:var(--ts);font-weight:600;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:-0.28px}
+.order-market{font-size:11px;color:var(--ts);font-weight:600;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:-0.1px}
 .order-market .flag{width:14px;height:9px;vertical-align:-1px;margin-right:4px}
 .order-market--with-badge{display:flex;align-items:center;gap:6px}
 .order-market-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
-.order-market-badge{flex-shrink:0;display:inline-flex;align-items:center;height:18px;padding:0 6px;border-radius:5px;background:#F5F7FA;color:#185FA5;font-size:10px;font-weight:700}
+.order-market-badge{flex-shrink:0;display:inline-flex;align-items:center;height:18px;padding:0 6px;border-radius:5px;background:#F5F7FA;color:#185FA5;font-size:11px;font-weight:700}
 .order-name{font-size:12px;color:var(--tp);line-height:1.45;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .order-meta-grid{display:grid;grid-template-columns:repeat(3,1fr);margin-top:10px;padding:8px 4px;background:#F5F7FA;border-radius:var(--r-md,8px)}
 .order-meta-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:0;text-align:center;padding:2px 4px}
 .order-meta-item+.order-meta-item{border-left:1px solid var(--border)}
-.order-meta-label{font-size:11px;color:var(--ts);font-weight:600;letter-spacing:-0.28px;white-space:nowrap}
+.order-meta-label{font-size:11px;color:var(--ts);font-weight:600;letter-spacing:-0.1px;white-space:nowrap}
 .order-meta-val{font-size:12px;font-weight:700;color:var(--tp);font-family:var(--font-num);letter-spacing:0.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 
 /* 체크박스 */
@@ -105,10 +105,10 @@ a{text-decoration:none;color:inherit}
 .sum-label{font-size:13px;font-weight:700;color:var(--ts);letter-spacing:0.3px}
 .sum-label .cnt{color:var(--tm);font-weight:600;font-size:12px;margin-left:3px}
 .sum-val{font-size:17px;font-weight:700;color:var(--tp);font-family:var(--font-num);letter-spacing:0.3px;white-space:nowrap;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;line-height:1.25}
-.sum-val .sum-usd{font-size:11px;font-weight:700;color:var(--tm);letter-spacing:-0.28px}
+.sum-val .sum-usd{font-size:11px;font-weight:700;color:var(--tm);letter-spacing:-0.1px}
 .sum-bar.caution .sum-val .sum-krw{color:var(--amber)}
 .sum-bar.danger .sum-val .sum-krw{color:var(--rose)}
-.duty-note{font-size:11px;color:var(--tm);margin-top:5px;letter-spacing:-0.28px}
+.duty-note{font-size:11px;color:var(--tm);margin-top:5px;letter-spacing:-0.1px}
 .duty-flag{display:none;margin-top:6px;font-size:11px;font-weight:700;color:var(--rose)}
 .sum-bar.danger .duty-flag{display:block}
 
@@ -120,9 +120,9 @@ a{text-decoration:none;color:inherit}
 /* ── 빈 상태 ── */
 
 /* ── 하단 고정 바 ── */
-.m-sticky-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:390px;background:#fff;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;z-index:100;box-shadow:0 -2px 10px rgba(0,0,0,.08)}
-.m-sticky-line{background:#fff;color:var(--tp);border:none;border-right:1px solid var(--border);padding:16px 8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
-.m-sticky-primary{background:var(--rose);color:#fff;border:none;padding:16px 8px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.m-sticky-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:390px;background:#fff;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;z-index:100;box-shadow:0 -2px 10px rgba(0,0,0,.08);gap:8px;padding:8px}
+.m-sticky-line{background:#fff;color:var(--tp);border:none;border-right:1px solid var(--border);padding:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;min-height:48px;border-radius:var(--r-btn,12px);border:1px solid var(--border)}
+.m-sticky-primary{background:var(--rose);color:#fff;border:none;padding:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;min-height:48px;border-radius:var(--r-btn,12px)}
 .m-sticky-line:disabled{color:var(--tm);background:#F5F7FA;cursor:default}
 .m-sticky-primary:disabled{background:#d0d4db;cursor:default}
 .page-bottom-spacer{height:76px}

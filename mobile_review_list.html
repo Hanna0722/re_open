@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>이용후기 | BidBuy Korea</title>
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
   /* 폰트 토큰 (DESIGN.md 기준) */
@@ -19,7 +19,7 @@
   --frame-w:480px;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:var(--font-sans);background:var(--bg);color:var(--tp);font-size:14px;line-height:1.5;max-width:var(--frame-w);margin:0 auto}
+body{font-family:var(--font-sans);background:var(--bg);color:#333;font-size:14px;line-height:1.5;max-width:var(--frame-w);margin:0 auto}
 a{text-decoration:none;color:inherit}
 button,input,select{font:inherit}
 button,select{cursor:pointer}
@@ -31,9 +31,9 @@ button,select{cursor:pointer}
 .page-head p{margin-top:6px;font-size:13px;color:var(--ts)}
 /* ══ BEST 후기 캐러셀 ══ */
 .best-sec{position:relative;background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:20px 16px 24px;padding-bottom:14px}
-.best-bar{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border);background:linear-gradient(90deg,#FFF7F9,#fff)}
+.best-bar{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border);background:linear-gradient(90deg,#F5F7FA,#fff)}
 .best-bar .bb-crown{width:26px;height:26px;border-radius:50%;background:var(--amber);color:#fff;display:grid;place-items:center;font-size:12px;flex-shrink:0}
-.best-bar h2{font-size:16px;font-weight:800;white-space:nowrap;flex-shrink:0}
+.best-bar h2{font-size:16px;font-weight:700;white-space:nowrap;flex-shrink:0}
 .best-bar .bb-sub{font-size:13px;color:var(--tm);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 /* 좌우 스크롤 + 양옆 후기가 살짝 보이며 가장자리로 페이드아웃 */
 .best-viewport{
@@ -58,10 +58,10 @@ button,select{cursor:pointer}
 .best-slide.is-open{opacity:1}
 .bs-head{display:flex;align-items:center;gap:7px;margin-bottom:9px;flex-wrap:wrap}
 .bs-rank-label{display:inline-flex;align-items:center;gap:4px;height:23px;padding:0 9px;border-radius:5px;background:linear-gradient(135deg,#FFD874,#F5A623);color:#fff;font-size:12px;font-weight:600;flex-shrink:0}
-.country-badge{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border:1px solid var(--border);border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.06);overflow:hidden;flex:0 0 auto}
+.country-badge{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border:1px solid var(--border);border-radius:50%;background:#fff;box-shadow:none;overflow:hidden;flex:0 0 auto}
 .country-badge img{width:100%;height:100%;object-fit:cover;display:block}
-.rv-badge{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:2px 9px;border-radius:5px;background:#EAF1FB;color:var(--navy)}
-.rv-badge.buy{background:#FFF5F7;color:var(--rose)}
+.rv-badge{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:2px 9px;border-radius:5px;background:#F5F7FA;color:var(--navy)}
+.rv-badge.buy{background:#F5F7FA;color:var(--rose)}
 .bs-main{display:flex;gap:11px}
 .bs-body{min-width:0;flex:1}
 .bs-title{font-size:13px;font-weight:700;line-height:1.45;margin-bottom:5px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
@@ -75,18 +75,18 @@ button,select{cursor:pointer}
 .bs-meta .bs-grade{color:var(--navy);font-weight:700}
 
 .best-dots{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px}
-.best-dot{width:6px;height:6px;border-radius:50%;border:0;background:#DDE1E8;padding:0;transition:all .18s}
+.best-dot{width:6px;height:6px;border-radius:50%;border:0;background:#F5F7FA;padding:0;transition:all .18s}
 .best-dot.active{width:16px;border-radius:5px;background:var(--rose)}
 /* ══ 통합 후기 목록 ══ */
 .list-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px 10px;background:#fff;border-top:1px solid var(--border);flex-wrap:wrap}
-.list-head h2{font-size:15px;font-weight:800}
+.list-head h2{font-size:15px;font-weight:700}
 .lh-left{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .lh-total{margin-left:auto;font-size:13px;color:var(--ts)}
 .lh-total b{font-family:var(--font-num);color:var(--tp)}
 
 .rv-list{background:#fff;border-top:1px solid var(--border)}
 /* 1열 사진 · 2열 상품명+후기내용 · 3열 아이디/평점/작성일 */
-.rv-row{display:grid;grid-template-columns:84px minmax(0,1fr);grid-template-areas:"thumb body" "thumb side";align-items:flex-start;gap:4px 12px;padding:16px;border-bottom:1px solid #F0F2F5;cursor:pointer;background:#fff;transition:background .15s,grid-template-columns .2s ease}
+.rv-row{display:grid;grid-template-columns:84px minmax(0,1fr);grid-template-areas:"thumb body" "thumb side";align-items:flex-start;gap:4px 12px;padding:16px;border-bottom:1px solid var(--border);cursor:pointer;background:#fff;transition:background .15s,grid-template-columns .2s ease}
 .rv-row:last-child{border-bottom:0}
 .rv-body{grid-area:body;min-width:0}
 .rv-side{grid-area:side;display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin-top:8px;min-width:0}
@@ -102,12 +102,12 @@ button,select{cursor:pointer}
 /* 사진 없는 텍스트 후기: 이미지 열을 없앤다 */
 .rv-row.no-photo{grid-template-columns:minmax(0,1fr);grid-template-areas:"body" "side"}
 .rv-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.rv-row.is-open{background:#FCFCFD}
+.rv-row.is-open{background:#F5F7FA}
 .rv-row.is-open:not(.no-photo){grid-template-columns:118px minmax(0,1fr)}
 .rv-row.is-open .rv-thumb{width:118px;height:118px}
 .rv-row.is-open .rv-title,.rv-row.is-open .rv-text{display:block;overflow:visible;-webkit-line-clamp:unset;-webkit-box-orient:initial}
 /* 더보기 */
-.btn-more{display:flex;align-items:center;justify-content:center;gap:7px;margin:12px 16px 28px;padding:13px;border:1px solid var(--border);border-radius:5px;background:#fff;color:var(--ts);font-size:13px;font-weight:700;font-family:inherit;width:calc(100% - 32px)}
+.btn-more{display:flex;align-items:center;justify-content:center;gap:7px;margin:12px 16px 28px;padding:13px;border:1px solid var(--border);border-radius:var(--r-btn,12px);background:#fff;color:var(--ts);font-size:13px;font-weight:700;font-family:inherit;width:calc(100% - 32px);min-height:36px}
 .btn-more i{font-size:11px}
 </style>
 </head>

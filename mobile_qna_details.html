@@ -6,7 +6,7 @@
   <title>Bidbuy | 1:1 문의 상세</title>
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Roboto:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
   /* 폰트 토큰 (DESIGN.md 기준) */
@@ -16,15 +16,15 @@
       --rose:#E8385A; --rose-h:#C42F4C;
       --navy:#1A3C6E;
       --bg:#F5F7FA; --white:#fff;
-      --border:#E0E4EB; --border-soft:#F0EDE9;
-      --bg-warm:#FBF7F5;
+      --border:#E0E4EB; --border-soft:#F5F7FA;
+      --bg-warm:#F5F7FA;
       --green:#3AAD4E;
     }
     *{box-sizing:border-box}
     html{background:var(--bg)}
     body{
-      margin:0 auto; max-width:480px; min-width:320px;
-      color:var(--tp); background:var(--bg);
+      margin:0 auto; max-width:390px; min-width:320px;
+      color:#333; background:var(--bg);
       font-family:var(--font-sans);
       font-size:14px; line-height:1.5; overflow-x:hidden;
     }
@@ -43,16 +43,16 @@
     .hb span{display:block;width:18px;height:2px;background:var(--tp);border-radius:999px}
     .m-logo{display:inline-flex; align-items:center;width:76px;line-height:0;}
 .m-logo img{width:100%;height:auto;display:block;}
-    .m-header-right{display:flex; gap:4px; align-items:center; justify-self:end}
+    .m-header-right{display:flex; gap:8px; align-items:center; justify-self:end}
     .m-icon-btn{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:none;background:none;color:var(--tp);font-size:16px;border-radius:5px;cursor:pointer;position:relative}
     .m-icon-btn .badge{position:absolute;top:3px;right:2px;background:var(--rose);color:#fff;font-size:7px;font-weight:700;min-width:13px;height:13px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 2px}
-    .m-login-btn{min-width:62px;height:30px;background:var(--rose);color:#fff;border:none;padding:0 14px;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit}
+    .m-login-btn{min-width:62px;height:36px;background:var(--rose);color:#fff;border:none;padding:0 14px;border-radius:var(--r-btn,12px);font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:-0.1px}
     .m-user-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--rose),#F5A623);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;cursor:pointer;border:none;font-family:inherit;flex-shrink:0}
-    .m-header-search{display:flex;align-items:center;height:38px;background:#F4EEEA;border:1px solid #E6DDDA;border-radius:10px;overflow:hidden;margin:0 14px 10px}
+    .m-header-search{display:flex;align-items:center;height:38px;background:#F5F7FA;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:0 14px 10px}
     .m-header-search::before{content:"";width:15px;height:15px;margin-left:12px;flex:0 0 auto;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238b95a5' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m16.5 16.5 4 4'/%3E%3C/svg%3E") center/contain no-repeat}
-    .m-header-search input{flex:1;min-width:0;height:100%;border:0;outline:0;background:transparent;padding:0 8px 0 8px;color:#333;font-size:13px;font-family:inherit}
+    .m-header-search input{flex:1;min-width:0;height:100%;border:0;outline:0;background:transparent;padding:0 8px 0 8px;color:var(--tp);font-size:13px;font-family:inherit}
     .m-header-search input::placeholder{color:var(--tm)}
-    .m-header-search button{width:40px;height:100%;border:0;background:var(--rose);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+    .m-header-search button{width:40px;height:100%;border:0;background:var(--rose);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:var(--r-btn,12px)}
     .m-header-search button i{font-size:13px}
 
     /* ── 페이지 타이틀 ── */
@@ -84,28 +84,27 @@
     .item-tag{color:var(--rose); font-weight:700}
     .new-n{
       color:var(--rose); font-family:var(--font-num);
-      font-size:9px; font-weight:700; vertical-align:super; margin-left:1px;
-    }
+      font-size:11px; font-weight:700; vertical-align:super; margin-left:1px;letter-spacing:-0.1px}
 
     /* ── 대화 스레드 ── */
     .thread{display:flex; flex-direction:column; gap:0}
 
     .msg{padding:14px 16px; border-bottom:1px solid var(--border-soft)}
     .msg.agent{background:var(--bg-warm)}
-    .msg.is-new{background:#fff5f7}
+    .msg.is-new{background:#F5F7FA}
 
     .msg-head{display:flex; align-items:baseline; gap:6px; margin-bottom:8px}
-    .msg-label{font-size:11px; font-weight:700; color:var(--tm)}
+    .msg-label{font-size:11px; font-weight:700; color:var(--tm);letter-spacing:-0.1px}
     .msg.agent .msg-label{color:var(--navy)}
     .msg.is-new .msg-label{color:var(--rose)}
     .msg-who{font-size:13px; font-weight:700; color:var(--tp)}
     .msg.agent .msg-who{color:var(--navy)}
     .msg.is-new .msg-who{color:var(--rose)}
-    .msg-date{font-size:11px; color:var(--tm); margin-left:auto}
+    .msg-date{font-size:11px; color:var(--tm); margin-left:auto;letter-spacing:-0.1px}
 
     .msg-bubble{font-size:13px; color:var(--ts); line-height:1.75}
     .msg.agent .msg-bubble{
-      padding-left:12px; border-left:2px solid #dde4ee;
+      padding-left:12px; border-left:2px solid var(--border);
     }
     .msg-bubble p{margin:0 0 6px}
     .msg-bubble p:last-child{margin-bottom:0}
@@ -141,12 +140,12 @@
     .file-btn-sm{
       display:inline-flex; align-items:center; gap:6px;
       height:36px; padding:0 14px;
-      border:1px solid var(--border); border-radius:5px;
+      border:1px solid var(--border); border-radius:var(--r-btn,12px);
       background:var(--white); color:var(--ts); font-size:12px; font-weight:700;
     }
     .send-btn{
       height:36px; padding:0 18px;
-      border:none; border-radius:5px;
+      border:none; border-radius:var(--r-btn,12px);
       background:var(--rose); color:#fff;
       font-size:13px; font-weight:700;
       display:flex; align-items:center; gap:6px;
@@ -159,7 +158,7 @@
       border-top:1px solid var(--border);
     }
     .cta-btn{
-      width:100%; height:48px; border-radius:5px;
+      width:100%; height:48px; border-radius:var(--r-btn,12px);
       border:1px solid var(--border); background:var(--white); color:var(--ts);
       font-size:15px; font-weight:700;
       display:flex; align-items:center; justify-content:center; gap:7px;
@@ -200,7 +199,7 @@
 <!-- 페이지 타이틀 -->
 <div class="page-title-bar">
   <h2>1:1 문의 상세</h2>
-  <a class="list-link" href="mobile_qna.html"><i class="fa-solid fa-list" style="font-size:11px"></i> 목록</a>
+  <a class="list-link" href="mobile_qna.html"><i class="fa-solid fa-list" style="font-size:11px;letter-spacing:-0.1px"></i> 목록</a>
 </div>
 
 <!-- 문의 헤더 -->
@@ -313,7 +312,7 @@
   <textarea class="textarea" placeholder="추가로 문의하실 내용을 입력하세요. 등록하시면 동일 문의에 이어서 답변을 받으실 수 있습니다."></textarea>
   <div class="reinquiry-foot">
     <button class="file-btn-sm" type="button"><i class="fa-solid fa-camera"></i> 사진 첨부</button>
-    <button class="send-btn" type="button"><i class="fa-solid fa-paper-plane" style="font-size:11px"></i> 재문의 등록</button>
+    <button class="send-btn" type="button"><i class="fa-solid fa-paper-plane" style="font-size:11px;letter-spacing:-0.1px"></i> 재문의 등록</button>
   </div>
 </div>
 
