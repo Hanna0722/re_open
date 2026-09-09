@@ -107,7 +107,11 @@ Applied to recurring components:
 - **User name, tier / VIP chips** (`.user-name-strong`, `.user-vip-chip`): **500**.
 - **Numeric emphasis** — status counts (`.user-status-grid strong`), amounts, mileage / 예치금: **600–700**, on `var(--font-num)`.
 
-Apply negative letter-spacing (-0.22px to -0.36px) to text below 12px. Line heights stay tight, close to the font size, for compact layouts.
+**Mobile font floor: 11px.** No body / content / label text below 11px — the only exceptions are corner badges and legal fine print. (Raised from 9–10px: at 390px those clump and fail outdoor legibility, benchmarked against Malltail-class mobile commerce.)
+
+Letter-spacing on text below 12px stays **light: -0.1px to 0** (previously -0.22 ~ -0.36px — that tighter tracking clumped 한글 받침 at 9–10px). Line heights stay tight, close to the font size, for compact layouts.
+
+Transaction-info hierarchy: in a product card the price must out-size the product name — e.g. **name 12px, price 14–15px / 700**, so the number reads first.
 
 ### Title scale
 
@@ -216,7 +220,9 @@ Header, category + user-menu drawers, notice-bar handling, mobile phone status b
 - Do keep numerals (prices, counts, phone) on `var(--font-num)` and everything else on `var(--font-sans)`
 - Do drive text color from `var(--tp)` / `var(--ts)` / `var(--tm)`; don't redefine them per page
 - Do reserve weights 800 / 900 for page-level titles; use 400 / 500 / 600 / 700 elsewhere
-- Do apply negative letter-spacing to text smaller than 12px for better readability
+- Do keep mobile body / content / label text at **11px or larger** (badges and legal fine print excepted)
+- Do keep letter-spacing light (**-0.1px to 0**) on text smaller than 12px — avoid tighter tracking that clumps 한글 받침
+- Do make the price out-size the product name in a card (name ~12px, price ~14–15px / 700)
 - Don't use heavy shadows — rely on color contrast and subtle backgrounds for depth
 - Do maintain generous spacing (minimum 8px) between interactive elements for mobile usability
 - Don't mix the rose red and navy primary colors in the same interactive element
