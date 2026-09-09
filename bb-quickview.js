@@ -8,7 +8,7 @@
   var css = [
     '.qv-overlay{position:fixed;inset:0;z-index:1200;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(15,23,42,.55);font-family:Pretendard,"Apple SD Gothic Neo","Helvetica Neue","Malgun Gothic",sans-serif}',
     '.qv-overlay.is-open{display:flex}',
-    '.qv-modal{width:min(640px,100%);max-height:90vh;display:flex;flex-direction:column;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 18px 60px rgba(15,23,42,.24)}',
+    '.qv-modal{width:min(640px,100%);max-height:90vh;display:flex;flex-direction:column;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.18)}',
     '.qv-head{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#1A3C6E;color:#fff}',
     '.qv-title{margin:0;font-size:16px;font-weight:900;color:#fff}',
     '.qv-close{width:30px;height:30px;border:0;border-radius:5px;background:transparent;color:#fff;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}',

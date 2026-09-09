@@ -45,7 +45,7 @@ a{text-decoration:none;color:inherit}
 
 /* 좌측: 이미지 갤러리 */
 .gallery-area{display:flex;flex-direction:column}
-.gallery-main{width:100%;height:420px;background:#F0F0F0;border-radius:14px;border:1px solid var(--border);overflow:hidden;position:relative;margin-bottom:10px;cursor:zoom-in}
+.gallery-main{width:100%;height:420px;background:#F0F0F0;border-radius:12px;border:1px solid var(--border);overflow:hidden;position:relative;margin-bottom:10px;cursor:zoom-in}
 .gallery-main-img{width:100%;height:100%;object-fit:cover;display:block}
 .gallery-main:hover .gallery-zoom-icon{opacity:1}
 .gallery-zoom-icon{position:absolute;bottom:12px;right:12px;width:32px;height:32px;background:rgba(0,0,0,.45);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none}
@@ -59,7 +59,7 @@ a{text-decoration:none;color:inherit}
 /* 이미지 라이트박스 */
 .lightbox-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9000;display:flex;align-items:center;justify-content:center;cursor:zoom-out;opacity:0;transition:opacity .25s}
 .lightbox-overlay.open{opacity:1}
-.lightbox-img{max-width:90vw;max-height:88vh;object-fit:contain;border-radius:6px;box-shadow:0 8px 48px rgba(0,0,0,.6)}
+.lightbox-img{max-width:90vw;max-height:88vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.18)}
 .lightbox-close{position:fixed;top:20px;right:24px;width:40px;height:40px;background:rgba(255,255,255,.15);border:none;border-radius:50%;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
 .lightbox-close:hover{background:rgba(255,255,255,.3)}
 
@@ -68,7 +68,7 @@ a{text-decoration:none;color:inherit}
 
 /* ── 주문 패널 (좌: 주문폼 / 우: 비용계산) ── */
 .item-info-area{display:flex;flex-direction:column;height:100%;min-height:0}
-.purchase-order-panel{display:grid;grid-template-columns:minmax(0,3fr) minmax(320px,2fr);gap:0;border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:16px;background:#fff;flex:1}
+.purchase-order-panel{display:grid;grid-template-columns:minmax(0,3fr) minmax(320px,2fr);gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px;background:#fff;flex:1}
 .purchase-order-panel .order-form-area{padding:0;background:#fff;display:flex;flex-direction:column;border-right:none}
 .purchase-order-panel .cost-panel{padding:0;background:#fff;border-left:1px solid var(--border);display:flex;flex-direction:column}
 
@@ -100,7 +100,7 @@ a{text-decoration:none;color:inherit}
 
 /* 우: 비용 계산 패널 */
 .cost-panel{display:flex;flex-direction:column}
-.rp-tab-header{display:flex;align-items:center;padding:16px 20px;min-height:67px;box-sizing:border-box;border-bottom:1px solid var(--border);background:#FAFBFC;gap:16px;flex-shrink:0}
+.rp-tab-header{display:flex;align-items:center;padding:16px 20px;min-height:67px;box-sizing:border-box;border-bottom:1px solid var(--border);background:#F5F7FA;gap:16px;flex-shrink:0}
 .rp-tab-btn{flex:0 1 auto;padding:0;border:none;background:none;font-size:13px;font-weight:700;color:var(--tp);cursor:default;font-family:inherit;text-align:left;display:flex;align-items:center;gap:8px}
 .rp-tab-btn i{color:var(--ts);font-size:12px}
 .rp-tab-rate{font-size:11px;font-weight:500;color:var(--tm);padding:0;white-space:nowrap;margin-left:auto}
@@ -111,7 +111,7 @@ a{text-decoration:none;color:inherit}
 .cost-subtitle:first-child{margin-top:0}
 .cost-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--ts);padding:10px 0}
 .cost-row .cost-label{display:flex;align-items:center;gap:4px}
-.cost-row .cost-sign{font-size:10px;font-weight:700;color:var(--ts);background:#F0F2F5;padding:1px 5px;border-radius:4px;flex-shrink:0}
+.cost-row .cost-sign{font-size:10px;font-weight:700;color:var(--ts);background:#F5F7FA;padding:1px 5px;border-radius:4px;flex-shrink:0}
 .cost-row .cost-sign.minus{color:var(--green);background:#EDF7F0}
 .cost-row .cost-val{font-family:var(--font-num);font-weight:600;color:var(--tp);text-align:right;font-size:13px}
 .cost-row .cost-val .defer{font-size:11px;color:var(--ts);font-weight:400;font-family:inherit}
@@ -137,12 +137,12 @@ a{text-decoration:none;color:inherit}
 /* ── 확인 모달 ── */
 .confirm-modal{position:fixed;inset:0;background:rgba(17,24,39,.45);display:none;align-items:center;justify-content:center;z-index:500}
 .confirm-modal.open{display:flex}
-.confirm-modal-card{width:min(420px,calc(100vw - 32px));background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.18);overflow:hidden}
+.confirm-modal-card{width:min(420px,calc(100vw - 32px));background:#fff;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.18);overflow:hidden}
 .confirm-modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .confirm-modal-head strong{font-size:15px;color:var(--tp)}
 .confirm-modal-close{border:none;background:none;font-size:18px;color:var(--tm);cursor:pointer}
 .confirm-modal-body{padding:20px}
-.confirm-amount-box{background:#FAFBFC;border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:14px;text-align:center}
+.confirm-amount-box{background:#F5F7FA;border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:14px;text-align:center}
 .confirm-amount-main{font-size:15px;font-weight:700;color:var(--tp);line-height:1.6}
 .confirm-amount-sub{margin-top:4px;font-size:12px;color:var(--ts)}
 .confirm-modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}

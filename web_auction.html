@@ -44,7 +44,7 @@ a{text-decoration:none;color:inherit}
 
 /* 좌측: 이미지 갤러리 */
 .gallery-area{display:flex;flex-direction:column}
-.gallery-main{width:100%;height:420px;background:#F0F0F0;border-radius:14px;border:1px solid var(--border);overflow:hidden;position:relative;margin-bottom:10px;cursor:zoom-in}
+.gallery-main{width:100%;height:420px;background:#F0F0F0;border-radius:12px;border:1px solid var(--border);overflow:hidden;position:relative;margin-bottom:10px;cursor:zoom-in}
 .gallery-main-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease}
 .gallery-main:hover .gallery-zoom-icon{opacity:1}
 .gallery-zoom-icon{position:absolute;bottom:12px;right:12px;width:32px;height:32px;background:rgba(0,0,0,.45);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none}
@@ -53,7 +53,7 @@ a{text-decoration:none;color:inherit}
 .lightbox-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9000;display:flex;align-items:center;justify-content:center;cursor:zoom-out;opacity:0;transition:opacity .25s}
 .lightbox-overlay.open{opacity:1}
 .lightbox-img-wrap{position:relative;max-width:90vw;max-height:90vh;display:flex;align-items:center;justify-content:center}
-.lightbox-img{max-width:90vw;max-height:88vh;object-fit:contain;border-radius:6px;box-shadow:0 8px 48px rgba(0,0,0,.6);cursor:default;transform:scale(1);transition:transform .2s}
+.lightbox-img{max-width:90vw;max-height:88vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.18);cursor:default;transform:scale(1);transition:transform .2s}
 .lightbox-close{position:fixed;top:20px;right:24px;width:40px;height:40px;background:rgba(255,255,255,.15);border:none;border-radius:50%;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
 .lightbox-close:hover{background:rgba(255,255,255,.3)}
 .lightbox-prev,.lightbox-next{position:fixed;top:50%;transform:translateY(-50%);width:44px;height:44px;background:rgba(255,255,255,.15);border:none;border-radius:50%;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
@@ -83,7 +83,7 @@ a{text-decoration:none;color:inherit}
 /* 감정 팝업 */
 .appraisal-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:3000;align-items:center;justify-content:center}
 .appraisal-modal-overlay.open{display:flex}
-.appraisal-modal{background:#fff;border-radius:16px;width:740px;max-width:92vw;max-height:90vh;overflow-y:auto;box-shadow:0 8px 40px rgba(0,0,0,.2)}
+.appraisal-modal{background:#fff;border-radius:12px;width:740px;max-width:92vw;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.18)}
 .appraisal-modal-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border)}
 .appraisal-modal-header span{font-size:15px;font-weight:700;color:var(--tp)}
 .appraisal-modal-close{border:none;background:none;font-size:20px;cursor:pointer;color:var(--ts);line-height:1;padding:0}
@@ -107,7 +107,7 @@ a{text-decoration:none;color:inherit}
 .rating-view-btn:hover{border-color:var(--navy);color:var(--navy)}
 
 /* 우측: 상품 정보 */
-.item-title{margin:0;color:#111;font-size:20px;font-weight:900;line-height:1.5}
+.item-title{margin:0;color:var(--tp);font-size:20px;font-weight:900;line-height:1.5}
 .item-title-jp{font-size:12px;color:var(--tm);margin-bottom:14px;line-height:1.5}
 .meta-chip .val{font-weight:700;color:var(--tp)}
 
@@ -133,7 +133,7 @@ a{text-decoration:none;color:inherit}
 .action-btn.wish-act i{color:var(--rose)}
 
 /* ── 주문 패널 (좌: 상품정보+주문폼 / 우: 비용계산) ── */
-.auction-order-panel{display:grid;grid-template-columns:minmax(0,3fr) minmax(320px,2fr);gap:0;border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:16px;background:#fff;flex:1}
+.auction-order-panel{display:grid;grid-template-columns:minmax(0,3fr) minmax(320px,2fr);gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px;background:#fff;flex:1}
 .auction-order-panel .order-form-area{padding:0;background:#fff;display:flex;flex-direction:column}
 .auction-order-panel .cost-panel{padding:0;background:#fff;border-left:1px solid var(--border);display:flex;flex-direction:column}
 
@@ -151,7 +151,7 @@ a{text-decoration:none;color:inherit}
 .opt-chip i{font-size:10px}
 
 /* 우: 비용 계산 패널 */
-.cost-panel{padding:20px;background:#FAFBFC;display:flex;flex-direction:column}
+.cost-panel{padding:20px;background:#F5F7FA;display:flex;flex-direction:column}
 .cost-panel.is-open .cost-panel-arrow{transform:rotate(180deg);color:var(--navy);border-color:var(--navy)}
 .cost-panel.is-open .cost-panel-body{display:block}
 .cost-select-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
@@ -159,7 +159,7 @@ a{text-decoration:none;color:inherit}
 .cost-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--ts);padding:10px 0}
 .cost-row:last-child{border-bottom:none}
 .cost-row .cost-label{display:flex;align-items:center;gap:4px}
-.cost-row .cost-sign{font-size:10px;font-weight:700;color:var(--ts);background:#F0F2F5;padding:1px 5px;border-radius:4px;flex-shrink:0}
+.cost-row .cost-sign{font-size:10px;font-weight:700;color:var(--ts);background:#F5F7FA;padding:1px 5px;border-radius:4px;flex-shrink:0}
 .cost-row .cost-sign.minus{color:var(--green);background:#EDF7F0}
 .cost-row .cost-val{font-family:var(--font-num);font-weight:600;color:var(--tp);text-align:right;font-size:13px}
 .cost-row .cost-val .orig{font-size:10px;color:var(--tm);display:block;text-align:right}
@@ -179,12 +179,12 @@ a{text-decoration:none;color:inherit}
 .btn-wish-reg.active i{color:var(--rose)}
 
 /* ── 우측 패널 탭 (입찰내역/예상입찰비용) ── */
-.rp-tab-header{display:flex;align-items:center;padding:13px 25px; border-bottom:1px solid var(--border);background:#FAFBFC;flex-shrink:0}
+.rp-tab-header{display:flex;align-items:center;padding:13px 25px; border-bottom:1px solid var(--border);background:#F5F7FA;flex-shrink:0}
 .rp-tab-btn{flex:1;padding:13px 8px;border:none;background:none;font-size:12px;font-weight:700;color:var(--ts);cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;white-space:nowrap}
 .rp-tab-btn:hover{color:var(--tp);background:#F5F5F8}
 .rp-tab-active{color:var(--navy) !important;border-bottom-color:var(--navy) !important}
 .rp-tab-rate{font-size:11px;font-weight:500;color:var(--tm);padding:0 14px;white-space:nowrap;margin-left:auto}
-.auction-cost-panel .rp-tab-header{padding:16px 20px;min-height:67px;box-sizing:border-box;border-bottom:1px solid var(--border);background:#FAFBFC;gap:16px}
+.auction-cost-panel .rp-tab-header{padding:16px 20px;min-height:67px;box-sizing:border-box;border-bottom:1px solid var(--border);background:#F5F7FA;gap:16px}
 .auction-cost-panel .rp-tab-btn{flex:0 1 auto;padding:0;border-bottom:none !important;background:none;font-size:13px;font-weight:700;color:var(--tp) !important;cursor:default;text-align:left;display:flex;align-items:center;gap:8px}
 .auction-cost-panel .rp-tab-btn:hover{background:none;color:var(--tp)}
 .auction-cost-panel .rp-tab-btn i{color:var(--ts);font-size:12px}
@@ -195,7 +195,7 @@ a{text-decoration:none;color:inherit}
 .bid-status-card--win{background:#F0FBF2;border-color:#B8ECC4}
 .bid-status-card--lose{background:#FFF0F3;border-color:#F5C0CC}
 .bid-status-card--reserve{background:#EEF2FF;border-color:#C5D0F5}
-.bid-status-card--none{background:#F7F8FA;border-color:#E0E4EA}
+.bid-status-card--none{background:#F5F7FA;border-color:#E0E4EA}
 .bid-status-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
 .bid-status-card--win .bid-status-icon{background:#D1F5DC;color:var(--green)}
 .bid-status-card--lose .bid-status-icon{background:#FFD8E0;color:var(--rose)}
@@ -223,7 +223,7 @@ a{text-decoration:none;color:inherit}
 .bid-status-card--none .bid-status-nav-btn{border-color:#D0D5DE;color:var(--ts)}
 .bid-status-nav-count{font-size:10px;font-weight:600;color:var(--tm);min-width:28px;text-align:center}
 .bid-hist-table{width:100%;border-collapse:collapse;font-size:12px}
-.bid-hist-table th{padding:5px 6px;text-align:left;font-size:12px;font-weight:700;color:var(--ts);border-bottom:2px solid var(--border);background:#FAFBFC}
+.bid-hist-table th{padding:5px 6px;text-align:left;font-size:12px;font-weight:700;color:var(--ts);border-bottom:2px solid var(--border);background:#F5F7FA}
 .bid-hist-table td{padding:5px 6px;border-bottom:1px solid #F0F2F5;vertical-align:top}
 .bid-hist-table tr:last-child td{border-bottom:none}
 .bid-history-modal-card .bid-hist-table{border:0;background:transparent}
@@ -274,7 +274,7 @@ a{text-decoration:none;color:inherit}
 .bp-shipping-nav-btn{width:22px;height:22px;border-radius:50%;border:1.5px solid #D0D5DE;background:#fff;color:var(--ts);font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;padding:0}
 .bp-shipping-nav-btn:hover{border-color:var(--navy);color:var(--navy)}
 .bp-shipping-nav-count{font-size:10px;font-weight:600;color:var(--tm);min-width:28px;text-align:center}
-.fee-tooltip{position:relative;display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-left:5px;border-radius:50%;background:#F0F2F5;color:var(--ts);font-size:11px;font-weight:800;cursor:help;vertical-align:middle}
+.fee-tooltip{position:relative;display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-left:5px;border-radius:50%;background:#F5F7FA;color:var(--ts);font-size:11px;font-weight:800;cursor:help;vertical-align:middle}
 .bp-badge.fee-tooltip{width:auto;height:auto;margin-left:0;border-radius:5px;background:#EEF2F9;color:var(--navy)}
 .bp-yahoobadge.fee-tooltip{width:auto;height:auto;margin-left:0;border-radius:5px;background:#faeded;color:var(--rose)}
 .fee-tooltip::after{content:attr(data-tooltip);position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);width:max-content;max-width:260px;padding:8px 10px;border-radius:8px;background:#273142;color:#fff;font-size:12px;font-weight:500;line-height:1.45;white-space:normal;box-shadow:0 8px 24px rgba(0,0,0,.16);opacity:0;visibility:hidden;transition:opacity .15s,visibility .15s;z-index:20}
@@ -299,7 +299,7 @@ a{text-decoration:none;color:inherit}
 .bid-static-amount{display:inline-flex;align-items:center;width:90px;min-height:39px;flex:none;line-height:1}
 
 /* ④ 입찰 방식 탭 */
-.bp-tab-header{display:flex;border-bottom:2px solid var(--border);background:#FAFBFC;min-height:57px;box-sizing:border-box}
+.bp-tab-header{display:flex;border-bottom:2px solid var(--border);background:#F5F7FA;min-height:57px;box-sizing:border-box}
 .bp-tab-btn{flex:1;padding:9px 16px;border:none;background:none;font-size:13px;font-weight:700;color:var(--ts);cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:7px;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s}
 .bp-tab-btn:hover{color:var(--tp);background:#F5F5F8}
 .bp-tab-btn.active{color:var(--rose);border-bottom-color:var(--rose);background:#fff}
@@ -310,7 +310,7 @@ a{text-decoration:none;color:inherit}
 .bp-action-wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
 .bp-btn-bid{background:#E8385A;color:#fff;border:none;padding:14px;border-radius:5px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;display:flex;align-items:center;justify-content:center;gap:8px}
 .bp-btn-bid:hover{background:#2d2d3e}
-.bp-btn-wish{background:#fff;color:#111;border:1.5px solid #111;padding:14px;border-radius:5px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:8px}
+.bp-btn-wish{background:#fff;color:var(--tp);border:1.5px solid #111;padding:14px;border-radius:5px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:8px}
 .bp-btn-wish:hover{background:#111;color:#fff}
 .bp-btn-wish.active{border-color:var(--rose);color:var(--rose)}
 .bp-btn-wish.active i{font-weight:900}
@@ -319,12 +319,12 @@ a{text-decoration:none;color:inherit}
 
 .confirm-modal{position:fixed;inset:0;background:rgba(17,24,39,.45);display:none;align-items:center;justify-content:center;z-index:500}
 .confirm-modal.open{display:flex}
-.confirm-modal-card{width:min(420px,calc(100vw - 32px));background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.18);overflow:hidden}
+.confirm-modal-card{width:min(420px,calc(100vw - 32px));background:#fff;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.18);overflow:hidden}
 .confirm-modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .confirm-modal-head strong{font-size:15px;color:var(--tp)}
 .confirm-modal-close{border:none;background:none;font-size:18px;color:var(--tm);cursor:pointer}
 .confirm-modal-body{padding:20px}
-.confirm-amount-box{background:#FAFBFC;border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.confirm-amount-box{background:#F5F7FA;border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:14px}
 .confirm-amount-label{font-size:12px;color:var(--ts);margin-bottom:6px}
 .confirm-amount-main{font-family:var(--font-num);font-size:28px;font-weight:700;color:var(--tp)}
 .confirm-amount-sub{margin-top:4px;font-size:13px;color:var(--navy);font-weight:700}
@@ -339,7 +339,7 @@ a{text-decoration:none;color:inherit}
 .reserve-label{font-size:13px;font-weight:800;color:var(--ts)}
 .reserve-select,.reserve-date{width:100%;height:42px;border:1.5px solid var(--border);border-radius:8px;background:#fff;color:var(--tp);font-family:inherit;font-size:13px;padding:0 12px;outline:none}
 .reserve-select:focus{border-color:var(--navy)}
-.reserve-date{display:flex;align-items:center;gap:6px;font-weight:800;background:#FAFBFC}
+.reserve-date{display:flex;align-items:center;gap:6px;font-weight:800;background:#F5F7FA}
 .reserve-date-wrap{display:flex;align-items:center;gap:8px}
 .reserve-date-wrap .reserve-date{flex:1}
 .reserve-date-offset{font-size:12px;font-weight:600;color:var(--ts)}
@@ -374,7 +374,7 @@ a{text-decoration:none;color:inherit}
 .acc-info-col+.acc-info-col{border-left:1px solid var(--border);padding-left:24px;margin-left:24px}
 
 .item-specifics-card{margin-top:10px}
-.item-specifics-panel{position:relative;border:1px solid var(--border);border-radius:14px;background:#fff;overflow:hidden}
+.item-specifics-panel{position:relative;border:1px solid var(--border);border-radius:12px;background:#fff;overflow:hidden}
 .item-specifics-head{height:48px;padding:0 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;color:var(--tp);font-size:14px;font-weight:800}
 .item-specifics-head i{color:var(--ts);font-size:13px}
 .item-specifics-body{max-height:118px;overflow:hidden;transition:max-height .25s ease}
@@ -383,10 +383,10 @@ a{text-decoration:none;color:inherit}
 .item-specifics-col{min-width:0;padding-right:24px}
 .item-specifics-col+.item-specifics-col{border-left:1px solid var(--border);padding-right:0;padding-left:24px}
 .item-specific-row{display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:11px 0;border-bottom:1px solid #eef0f4;font-size:13px;line-height:1.55}
-.item-specific-row b{color:#6b7280;font-weight:800}
+.item-specific-row b{color:var(--ts);font-weight:800}
 .item-specific-row span{color:var(--tp);font-weight:500}
-.item-specific-toggle{position:relative;z-index:1;width:100%;height:44px;border:0;border-top:1px solid var(--border);background:#FAFBFC;color:var(--navy);font-family:inherit;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer}
-.item-specific-toggle:hover{background:#FAFBFC}
+.item-specific-toggle{position:relative;z-index:1;width:100%;height:44px;border:0;border-top:1px solid var(--border);background:#F5F7FA;color:var(--navy);font-family:inherit;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer}
+.item-specific-toggle:hover{background:#F5F7FA}
 .item-specific-toggle i{font-size:11px;transition:transform .2s}
 .item-specifics-card.expanded .item-specific-toggle i{transform:rotate(180deg)}
 
@@ -394,7 +394,7 @@ a{text-decoration:none;color:inherit}
 
 /* ── 이미지 하단 좌우 정보 패널 ── */
 .info-panels{max-width:1140px;margin:0 auto;padding:10px 0 0;display:grid;grid-template-columns:1fr;gap:10px;align-items:stretch}
-.info-panel-card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.info-panel-card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
 .info-panel-card .info-panel-body{flex:1;display:flex;flex-direction:column}
 .info-panel-card .cost-rows{flex:1;display:flex;flex-direction:column;justify-content:space-between}
 .info-panel-card .cost-row{padding:10px 0}
@@ -450,7 +450,7 @@ a{text-decoration:none;color:inherit}
 /* Q&A */
 
 .seller-qna-table{border:1px solid var(--border);border-radius:10px;background:#fff;overflow:hidden}
-.seller-qna-row-head{display:grid;grid-template-columns:48px 120px 1fr 90px 70px;gap:12px;padding:12px 20px;font-size:13px;font-weight:700;color:var(--tp);border-bottom:1px solid var(--border);background:#FAFBFC}
+.seller-qna-row-head{display:grid;grid-template-columns:48px 120px 1fr 90px 70px;gap:12px;padding:12px 20px;font-size:13px;font-weight:700;color:var(--tp);border-bottom:1px solid var(--border);background:#F5F7FA}
 .seller-qna-row-head span:nth-child(4),.seller-qna-row-head span:nth-child(5){text-align:right}
 .seller-qna-group{border-bottom:1px solid #F0F2F5}
 .seller-qna-group:last-child{border-bottom:none}
@@ -465,14 +465,14 @@ button.seller-qna-status{border:0;background:none;font-family:inherit;padding:0;
 button.seller-qna-status[aria-expanded="true"] i{transform:rotate(180deg)}
 .seller-qna-status-done{color:var(--green)}
 .seller-qna-status-wait{color:#5B7AE0}
-.seller-qna-answer{display:none;gap:8px;padding:12px 20px;background:#F7F9FC;border-top:1px dashed var(--border);font-size:12px;color:var(--ts);line-height:1.6}
+.seller-qna-answer{display:none;gap:8px;padding:12px 20px;background:#F5F7FA;border-top:1px dashed var(--border);font-size:12px;color:var(--ts);line-height:1.6}
 .seller-qna-answer.open{display:flex}
 .seller-qna-answer i{color:var(--navy);margin-top:2px}
 .seller-qna-ask-btn{border:0;background:#5B9BD5;color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font-sans);padding:8px 16px;border-radius:5px}
 .seller-qna-ask-btn:hover{opacity:.9}
 
 .public-qna-table{border:1px solid var(--border);border-radius:10px;background:#fff;overflow:hidden}
-.public-qna-row-head{display:grid;grid-template-columns:1fr 140px;gap:12px;padding:12px 20px;font-size:13px;font-weight:700;color:var(--tp);border-bottom:1px solid var(--border);background:#FAFBFC}
+.public-qna-row-head{display:grid;grid-template-columns:1fr 140px;gap:12px;padding:12px 20px;font-size:13px;font-weight:700;color:var(--tp);border-bottom:1px solid var(--border);background:#F5F7FA}
 .public-qna-row-head span:nth-child(2){text-align:center}
 .public-qna-row{display:grid;grid-template-columns:1fr 140px;gap:12px;align-items:center;padding:14px 20px;border-bottom:1px solid #F0F2F5}
 .public-qna-row:last-child{border-bottom:none}
@@ -488,8 +488,8 @@ button.seller-qna-status[aria-expanded="true"] i{transform:rotate(180deg)}
 
 /* 우측 사이드 (판매자 상품) */
 .related-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.related-card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;transition:box-shadow .15s}
-.related-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.related-card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;transition:border-color .15s}
+.related-card:hover{border-color:var(--rose)}
 .related-thumb{width:100%;height:110px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;color:var(--tm);font-size:24px}
 .related-info{padding:8px 10px}
 .related-name{font-size:11px;color:var(--tp);font-weight:500;margin-bottom:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -503,8 +503,8 @@ button.seller-qna-status[aria-expanded="true"] i{transform:rotate(180deg)}
 .section-title{font-size:17px;font-weight:700;color:var(--tp)}
 .section-more{font-size:12px;color:var(--navy);display:flex;align-items:center;gap:4px;cursor:pointer}
 .product-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
-.product-card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;transition:box-shadow .15s}
-.product-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.product-card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;transition:border-color .15s}
+.product-card:hover{border-color:var(--rose)}
 .product-thumb{width:100%;padding-top:100%;background:#F0F0F0;position:relative;display:flex;align-items:center;justify-content:center}
 .product-thumb-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--tm);font-size:30px}
 .product-info{padding:10px}

@@ -21,25 +21,19 @@
   button{cursor:pointer}
   a{text-decoration:none;color:inherit}
   .m-header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200}
-  /* ── 상단: 커진 통합/URL 검색 ── */
-  .start-search{background:#fff;border-bottom:1px solid var(--border);padding:26px 16px 24px}
+  /* ── 상단: 안내 문구 ── */
+  .start-search{background:#fff;padding:26px 16px 14px}
   .start-search h1{font-size:19px;font-weight:700;text-align:center;line-height:1.4}
   .start-search .lead{margin-top:6px;text-align:center;font-size:12px;color:var(--ts)}
-  .ss-form{margin-top:18px;display:flex;align-items:center;border:2.5px solid var(--rose);border-radius:999px;overflow:hidden;background:#fff;box-shadow:0 6px 18px rgba(232,56,90,.13)}
-  .ss-form i.lead-ico{padding:0 4px 0 16px;color:var(--rose);font-size:15px}
-  .ss-form input{flex:1;border:none;outline:none;background:none;padding:14px 8px;font-size:14px;font-family:inherit;color:var(--tp);min-width:0}
-  .ss-form input::placeholder{color:var(--tm)}
-  .ss-form button{flex-shrink:0;border:none;background:var(--rose);color:#fff;font-size:13px;font-weight:700;font-family:inherit;padding:0 18px;align-self:stretch;display:flex;align-items:center;gap:5px}
-  .ss-form button:hover{background:var(--rose-h)}
   /* ── 밑: 히어로 배너 ── */
-  .hero{padding:16px}
-  .hero-card{overflow:hidden;border-radius:16px;background:#fff}
-  .hero-banner{display:block;width:100%;height:auto}
+  .hero{padding:0 16px 16px}
+  .hero-card{overflow:hidden;border-radius:12px;background:#fff;height:160px}
+  .hero-banner{display:block;width:100%;height:100%;object-fit:cover}
   /* ── 진행 안내 ── */
   .steps{padding:8px 16px 28px}
   .steps h2{font-size:16px;font-weight:700;text-align:center;margin-bottom:16px}
   .step-grid{display:grid;grid-template-columns:1fr;gap:10px}
-  .step{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px 16px;text-align:center}
+  .step{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center}
   .step-no{width:32px;height:32px;margin:0 auto 10px;border-radius:50%;background:#FFF1F4;color:var(--rose);font-weight:800;font-family:var(--font-num);display:flex;align-items:center;justify-content:center;font-size:14px}
   .step-t{font-size:14px;font-weight:700;margin-bottom:5px}
   .step-d{font-size:12px;color:var(--ts);line-height:1.6}
@@ -68,19 +62,12 @@
 <section class="start-search">
   <h1>구매대행, URL 하나로 바로 시작하세요</h1>
   <p class="lead">키워드로 검색하거나, 구매하고 싶은 상품 페이지 URL을 그대로 붙여넣으면 됩니다.</p>
-
-  <form class="ss-form" id="ssForm" action="mobile_totalsearch.html" method="get" role="search">
-    <i class="fas fa-magnifying-glass lead-ico" aria-hidden="true"></i>
-    <input type="search" name="q" id="ssInput" placeholder="키워드 또는 구매신청을 원하시는 URL을 입력해주세요" aria-label="검색어 또는 URL 입력" autocomplete="off">
-    <input type="hidden" name="scope" id="ssScope" value="all">
-    <button type="submit">검색 <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
-  </form>
 </section>
 
 <!-- 밑: 히어로 배너 -->
 <section class="hero">
   <div class="hero-card">
-    <img class="hero-banner" src="urlbanner.png" width="2167" height="726" alt="원하는 일본 상품 URL을 입력해 주세요. 상품 검색창에 URL을 입력하면 간편하게 구매대행을 시작할 수 있습니다.">
+    <img class="hero-banner" src="urlbanner.png" width="2022" height="778" alt="원하는 일본 상품 URL을 입력해 주세요. 상품 검색창에 URL을 입력하면 간편하게 구매대행을 시작할 수 있습니다.">
   </div>
 </section>
 
@@ -115,21 +102,6 @@
   <div class="m-footer-copy">© 2025 BidBuy Korea. All rights reserved.<br>해외 경매·구매대행 서비스</div>
 </footer>
 
-<script>
-(function () {
-  var form = document.getElementById('ssForm');
-  var input = document.getElementById('ssInput');
-
-  form.addEventListener('submit', function (e) {
-    var v = input.value.trim();
-    if (!v) { e.preventDefault(); input.focus(); return; }
-    if (/^https?:\/\//i.test(v)) {
-      e.preventDefault();
-      location.href = 'mobile_purchase_url.html?url=' + encodeURIComponent(v);
-    }
-  });
-})();
-</script>
 <script src="bb-common-mobile.js"></script>
 <script src="bb-search-modal-mobile.js"></script>
 </body>

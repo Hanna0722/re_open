@@ -15,7 +15,7 @@
   --rose:#E8385A;--rose-h:#C42F4C;--amber:#F5A623;
   --brand:#E8385A;
   --navy:#1A3C6E;--green:#3AAD4E;
-  --bg:#F5F7FA;--white:#fff;--border:#E0E4EB;--line:#e0e4eb;
+  --bg:#F5F7FA;--white:#fff;--border:#E0E4EB;--line:#E0E4EB;
   --muted:#666680;--faint:#999baa;
   --frame-w:480px;
 }
@@ -29,7 +29,7 @@ button,select{cursor:pointer}
 /* ══════════════════════════════
    헤더 (mobile_sub main 이식)
 ══════════════════════════════ */
-.header{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid #d9e0e9;box-shadow:0 1px 0 rgba(32,36,43,.04)}
+.header{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid #E0E4EB;box-shadow:0 1px 0 rgba(32,36,43,.04)}
 .header-top{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:1px;min-height:56px;}
 .brand-area{display:flex;align-items:center;gap:10px;min-width:0}
 .menu-button{width:34px;height:34px;border-radius:5px;border:0;background:transparent;padding:0;display:grid;place-items:center;flex-shrink:0}
@@ -51,7 +51,7 @@ button,select{cursor:pointer}
 /* 검색 채널 탭 */
 .channel-tabs{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 8px;-webkit-overflow-scrolling:touch;background:#fff}
 .channel-tabs::-webkit-scrollbar{display:none}
-.ch-tab{padding:10px 12px 11px;font-size:12px;font-weight:700;color:#707070;white-space:nowrap;cursor:pointer;border:0;border-bottom:2px solid transparent;background:transparent;flex-shrink:0;font-family:inherit}
+.ch-tab{padding:10px 12px 11px;font-size:12px;font-weight:700;color:var(--ts);white-space:nowrap;cursor:pointer;border:0;border-bottom:2px solid transparent;background:transparent;flex-shrink:0;font-family:inherit}
 .ch-tab.active{color:var(--rose);border-bottom-color:var(--rose)}
 .ch-tab small{font-weight:600;color:var(--tm);font-size:11px;margin-left:2px;font-family:var(--font-num)}
 .ch-tab.active small{color:var(--rose)}
@@ -104,7 +104,7 @@ button,select{cursor:pointer}
 ══════════════════════════════ */
 .sheet-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:300;opacity:0;transition:opacity .25s}
 .sheet-overlay.open{display:block;opacity:1}
-.filter-sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:var(--frame-w);height:68vh;max-height:68vh;background:#fff;border-radius:16px 16px 0 0;z-index:400;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.32,0,.07,1);overflow:hidden}
+.filter-sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:var(--frame-w);height:68vh;max-height:68vh;background:#fff;border-radius:12px 16px 0 0;z-index:400;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.32,0,.07,1);overflow:hidden}
 .filter-sheet.open{transform:translateX(-50%) translateY(0)}
 .sheet-handle{width:38px;height:5px;margin:10px auto 2px;border-radius:999px;background:#d5d9df;flex-shrink:0}
 .sheet-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 12px;flex-shrink:0}
@@ -131,7 +131,7 @@ button,select{cursor:pointer}
 .sheet-section:last-child{border-bottom:none}
 .sheet-section-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
 .sheet-btn-group{display:flex;flex-wrap:wrap;gap:6px}
-.sheet-opt{padding:6px 16px;border:1px solid var(--line);border-radius:20px;font-size:13px;color:var(--muted);background:#fff;transition:all .12s}
+.sheet-opt{padding:6px 16px;border:1px solid var(--line);border-radius:12px;font-size:13px;color:var(--muted);background:#fff;transition:all .12s}
 .sheet-opt.active{background:var(--navy);color:#fff;border-color:var(--navy);font-weight:700}
 .price-radios{display:flex;gap:16px;margin-bottom:14px}
 .price-radio-label{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--tp)}

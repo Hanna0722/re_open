@@ -12,7 +12,7 @@
     :root {
       --rose: #E8385A;
       --rose-h: #C42F4C;
-      --border: #e0e4eb;
+      --border: #E0E4EB;
       --text: #20242b;
       --muted: #777985;
       --soft: #f8f4f1;
@@ -137,7 +137,7 @@
       transform: translateY(-50%);
       border: 1px solid #9c9c9c;
       border-radius: 50%;
-      color: #888;
+      color: var(--tm);
       display: inline-grid;
       place-items: center;
       font-size: 10px;
@@ -171,7 +171,7 @@
       border: 1px solid #ded6d2;
       border-radius: 5px;
       background: #fff;
-      color: #555;
+      color: var(--ts);
       font-size: 12px;
       font-weight: 800;
       cursor: pointer;
@@ -181,7 +181,7 @@
       margin: 0 0 18px;
       padding: 0 0 17px;
       border-bottom: 1px solid #d8d3d0;
-      color: #111;
+      color: var(--tp);
       font-size: 16px;
       font-weight: 900;
     }
@@ -257,7 +257,7 @@
       min-height: 0;
       padding: 16px 20px 14px;
       border: 1px solid var(--border);
-      border-radius: 15px;
+      border-radius:12px;
       background: #fff;
     }
 
@@ -346,7 +346,7 @@
       align-self: stretch;
       padding: 16px 20px 14px;
       border: 1px solid var(--border);
-      border-radius: 15px;
+      border-radius:12px;
       background: #fff;
     }
 
@@ -381,7 +381,7 @@
       min-height: 25px;
       padding: 4px 15px;
       border: 1px solid var(--grade-vip);
-      border-radius: 50px;
+      border-radius:999px;
       background: #fff;
       color: var(--grade-vip);
       font-size: 12px;
@@ -555,7 +555,7 @@
       border-top: 0.5px solid var(--line-soft);
       border-bottom: 0.5px solid var(--line-soft);
       background: #faf7f5;
-      color: #5a5e66;
+      color: var(--ts);
       font-size: 15px;
       font-weight: 700;
       line-height: 1;
@@ -577,7 +577,7 @@
 
     .br-label {
       margin-bottom: 5px;
-      color: #5a5e66;
+      color: var(--ts);
       font-size: 13px;
       font-weight: 600;
       line-height: 1.1;
@@ -608,7 +608,7 @@
 
     .br-sub {
       margin-top: 7px;
-      color: #8b8f99;
+      color: var(--tm);
       font-size: 12px;
       font-weight: 500;
       line-height: 1.35;
@@ -624,7 +624,7 @@
     .downgrade-notice p {
       position: relative;
       padding-left: 13px;
-      color: #555;
+      color: var(--ts);
       font-size: 12px;
       line-height: 1.75;
     }
@@ -640,7 +640,7 @@
     .member-tier-icon i { line-height:1; }
   .profile-id { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .profile-id .profile-name { display: inline; margin: 0; }
-  .profile-id .profile-tier { display: inline-flex; align-items: center; margin: 0; padding: 2px 9px; border-radius: 5px; background: #f1f2f4; color: var(--grade-vip); font-size: 12px; font-weight: 700; line-height: 1.4; }
+  .profile-id .profile-tier { display: inline-flex; align-items: center; margin: 0; padding: 2px 9px; border-radius: 5px; background:#F5F7FA; color: var(--grade-vip); font-size: 12px; font-weight: 700; line-height: 1.4; }
   .profile-id + .vip-copy { margin: 4px 0 0; padding-right: 0; }
   </style>
 </head>

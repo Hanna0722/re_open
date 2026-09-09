@@ -150,7 +150,7 @@
 
     .stamp-head h2 {
       margin: 0 0 4px;
-      color: #33363d;
+      color: var(--tp);
       font-weight: 700;
     }
 
@@ -209,10 +209,10 @@
       width: 100%;
       max-width: 320px;
       padding: 26px 20px 28px;
-      border-radius: 18px;
+      border-radius:12px;
       background: #fffdf5;
       text-align: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
     }
 
     .roulette-modal-close {
@@ -465,9 +465,9 @@
     .reward-modal-overlay[hidden] { display: none; }
     .reward-modal {
       position: relative; width: 100%; max-width: 330px;
-      padding: 26px 22px 22px; border-radius: 18px;
+      padding: 26px 22px 22px; border-radius:12px;
       background: #fff; text-align: center;
-      box-shadow: 0 20px 50px rgba(0,0,0,.3);
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
       animation: reward-pop .22s ease-out;
     }
     @keyframes reward-pop {
@@ -490,7 +490,7 @@
     .coupon-card {
       position: relative;
       margin: 0 auto 16px; padding: 20px 16px;
-      border-radius: 14px;
+      border-radius:12px;
       background: linear-gradient(135deg, #fff2f5 0%, #ffe7ee 100%);
       border: 1.5px dashed var(--brand);
     }
@@ -534,13 +534,13 @@
       background: #fffafb;
     }
     .coupon-table .history-type {
-      color: #111;
+      color: var(--tp);
       font-size: 11px;
       font-weight: 700;
       white-space: nowrap;
     }
     .coupon-discount {
-      color: #111;
+      color: var(--tp);
       font-size: 15px;
       font-weight: 700;
       white-space: nowrap;
@@ -818,7 +818,7 @@
       padding: 4px 12px 3px;
       border-radius: 999px;
       background: #ffd521;
-      color: #111827;
+      color: var(--tp);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -864,14 +864,14 @@
     }
 
     .mileage-popup-summary-label {
-      color: #111827;
+      color: var(--tp);
       font-size: 14px;
       font-weight:700;
       white-space: nowrap;
     }
 
     .mileage-popup-summary-value {
-      color: #111827;
+      color: var(--tp);
       font-size: 14px;
       font-weight:700;
       text-align: right;
@@ -1147,42 +1147,42 @@
       width: min(78vw, 280px);
       max-height: calc(100vh - 60px);
       overflow-y: auto;
-      border-radius: 15px;
+      border-radius:12px;
       background: #fff;
-      box-shadow: 0 18px 44px rgba(0,0,0,.35);
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
       scrollbar-width: none;
     }
     .user-drawer::-webkit-scrollbar { display: none; }
     .user-drawer-head { padding: 18px 14px 12px; background: #fff8f5; border-bottom: 1px solid #efe6e2; }
     .user-member-row { display: flex; align-items: center; gap: 12px; }
     .user-crown { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; background: #ffe6ef; font-size: 26px; flex: 0 0 auto; }
-    .user-name-strong { display: block; color: #111827; font-size: 18px; font-weight:700; }
+    .user-name-strong { display: block; color: var(--tp); font-size: 18px; font-weight:700; }
     .user-vip-chip { display: inline-flex; margin-top: 5px; padding: 2px 12px; border-radius: 999px; background: var(--brand); color: #fff; font-size: 11px; font-weight:700; }
     .user-vip-copy { margin: 13px 0 4px; color: var(--brand); font-size: 11px; font-weight:700; }
     .user-vip-bar { height: 5px; border-radius: 999px; background: #eee2de; overflow: hidden; }
     .user-vip-bar span { display: block; width: 100%; height: 100%; background: var(--brand); }
-    .user-asset-box { display: grid; grid-template-columns: 1fr 1fr; margin-top: 12px; border: 1px solid #d9e0e9; border-radius: 8px; background: #fff; overflow: hidden; }
+    .user-asset-box { display: grid; grid-template-columns: 1fr 1fr; margin-top: 12px; border: 1px solid #E0E4EB; border-radius: 8px; background: #fff; overflow: hidden; }
     .user-asset-box div { padding: 8px 12px; }
-    .user-asset-box div + div { border-left: 1px solid #d9e0e9; }
-    .user-asset-box span { display: block; color: #a4acb8; font-size: 10px; font-weight: 700; }
-    .user-asset-box strong { display: block; color: #151b29; font-size: 16px; font-weight:700; }
-    .user-status-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid #e5e7eb; background: #fff; }
+    .user-asset-box div + div { border-left: 1px solid #E0E4EB; }
+    .user-asset-box span { display: block; color: var(--tm); font-size: 10px; font-weight: 700; }
+    .user-asset-box strong { display: block; color: var(--tp); font-size: 16px; font-weight:700; }
+    .user-status-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid #E0E4EB; background: #fff; }
     .user-status-grid div { min-height: 70px; display: grid; place-items: center; align-content: center; gap: 4px; text-align: center; }
-    .user-status-grid div + div { border-left: 1px solid #e5e7eb; }
-    .user-status-grid strong { color: #151b29; font-family:var(--font-num); font-size: 26px; line-height: 1; font-weight:700; }
+    .user-status-grid div + div { border-left: 1px solid #E0E4EB; }
+    .user-status-grid strong { color: var(--tp); font-family:var(--font-num); font-size: 26px; line-height: 1; font-weight:700; }
     .user-status-grid div:nth-child(2) strong { color: var(--brand); }
-    .user-status-grid span { color: #9aa3b2; font-size: 10px; font-weight: 700; }
+    .user-status-grid span { color: var(--tm); font-size: 10px; font-weight: 700; }
     .user-menu-list { padding: 0 0 12px; }
-    .user-menu-item { min-height: 45px; padding: 0 18px 0 14px; display: flex; align-items: center; gap: 12px; color: #111827; font-size: 14px; font-weight:700; border-bottom: 0; text-decoration: none; }
+    .user-menu-item { min-height: 45px; padding: 0 18px 0 14px; display: flex; align-items: center; gap: 12px; color: var(--tp); font-size: 14px; font-weight:700; border-bottom: 0; text-decoration: none; }
     button.user-menu-item { width: 100%; border-top: 0; border-right: 0; border-left: 0; background: #fff; text-align: left; font-family: inherit; }
     .user-menu-item .emoji, .user-menu-item .user-menu-icon { width: 22px; text-align: center; font-size: 17px; flex: 0 0 auto; }
-    .user-menu-item .chev { margin-left: auto; color: #a8b0bd; font-weight: 700; font-size: 15px; line-height: 1; }
+    .user-menu-item .chev { margin-left: auto; color: var(--tm); font-weight: 700; font-size: 15px; line-height: 1; }
     .user-menu-section { border-bottom: 0; }
     .user-menu-panel { display: none; padding: 0 0 8px 56px; }
     .user-menu-section.is-open .user-menu-panel { display: grid; gap: 0; }
-    .user-menu-link { min-height: 33px; display: flex; align-items: center; color: #666b75; font-size: 14px; font-weight: 500; text-decoration: none; }
-    .user-menu-link.danger { color: #8f949f; }
-    .user-menu-item.logout { margin-top: 6px; border-top: 1px solid #e5e7eb; color: #9aa3b2; font-weight: 700; }
+    .user-menu-link { min-height: 33px; display: flex; align-items: center; color: var(--ts); font-size: 14px; font-weight: 500; text-decoration: none; }
+    .user-menu-link.danger { color: var(--tm); }
+    .user-menu-item.logout { margin-top: 6px; border-top: 1px solid #E0E4EB; color: var(--tm); font-weight: 700; }
 
     .main {
       padding: 0 0 24px;
@@ -1447,7 +1447,7 @@
       flex: 1; min-width: 0; height: 100%;
       border: 0; outline: 0; background: transparent; color: #333; font-size: 13px;
     }
-    .search input::placeholder { color: #99a2b0; }
+    .search input::placeholder { color: var(--tm); }
     .search button {
       width: 42px; height: 100%; border: 0; background: var(--brand);
       color: #fff; place-items: center; gap: 0; font-size: 0;
@@ -1467,11 +1467,11 @@
     .mobile-channel-tabs span {
       flex: 0 0 auto; padding: 9px 12px 10px; border: 0;
       border-bottom: 2px solid transparent; background: transparent;
-      color: #707070; font-size: 11px; font-weight: 700; white-space: nowrap;
+      color: var(--ts); font-size: 11px; font-weight: 700; white-space: nowrap;
       font-family: inherit;
     }
     .mobile-channel-tabs .active { color: var(--brand); border-bottom-color: var(--brand); }
-    .drawer-action-btn.secondary { background: #fff; color: #4b5563; border-color: #d9e0e9; }
+    .drawer-action-btn.secondary { background: #fff; color: var(--ts); border-color: #E0E4EB; }
     /* Mileage mobile screen refinement */
     html,
     body {
@@ -1493,7 +1493,7 @@
     }
 
     .topbar {
-      border-bottom: 1px solid #d9e0e9;
+      border-bottom: 1px solid #E0E4EB;
       box-shadow: 0 1px 0 rgba(32, 36, 43, .04);}
 
     .mobile-channel-tabs {
@@ -1589,7 +1589,7 @@
     }
 
     .balance-box strong {
-      color: #151922;
+      color: var(--tp);
       font-size: 18px;
       font-weight:700;
       line-height: 1;
@@ -1600,12 +1600,12 @@
     }
 
     .balance-box strong.muted {
-      color: #9aa0ae;
+      color: var(--tm);
     }
 
     .balance-box small {
       margin-left: 2px;
-      color: #151922;
+      color: var(--tp);
       font-size: 12px;
       font-weight:700;
     }
@@ -1615,7 +1615,7 @@
     }
 
     .balance-box strong.muted small {
-      color: #9aa0ae;
+      color: var(--tm);
     }
 
     .balance-box[data-summary-tooltip],
@@ -1750,7 +1750,7 @@
       width: max-content;
       gap: 22px;
       padding-bottom: 1px;
-      border-bottom: 1px solid #d9e0e9;
+      border-bottom: 1px solid #E0E4EB;
     }
 
     .history-tab {
@@ -1863,7 +1863,7 @@
     .history-meta {
       display: block;
       overflow: hidden;
-      color: #707070;
+      color: var(--ts);
       font-size: 12px;
       line-height: 1.2;
       text-overflow: ellipsis;

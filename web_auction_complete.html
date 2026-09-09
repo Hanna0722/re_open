@@ -49,7 +49,7 @@
     }
 
     .page-head { margin: 0 0 18px; }
-    .page-head h2 { margin: 0; color: #111; font-size: 20px; font-weight: 900; }
+    .page-head h2 { margin: 0; color: var(--tp); font-size: 20px; font-weight: 900; }
 
     .steps { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
     .step { display: flex; align-items: center; gap: 8px; }
@@ -65,7 +65,7 @@
     }
     .step-label { color: var(--faint); font-size: 12px; font-weight: 700; }
     .step.active .step-num { border-color: var(--rose); background: var(--rose); color: #fff; }
-    .step.active .step-label { color: #151922; font-weight: 800; }
+    .step.active .step-label { color: var(--tp); font-weight: 800; }
     .step.done .step-num { border-color: var(--navy); background: var(--navy); color: #fff; }
     .step.done .step-label { color: var(--navy); }
     .step-arrow { color: #d4cdc8; font-size: 11px; }
@@ -86,7 +86,7 @@
       display: grid; place-items: center;
       font-size: 24px;
     }
-    .done-title { margin: 0 0 6px; color: #111; font-size: 20px; font-weight: 900; }
+    .done-title { margin: 0 0 6px; color: var(--tp); font-size: 20px; font-weight: 900; }
     .done-title b { color: var(--rose); }
     .done-time { margin: 0; color: var(--faint); font-size: 12px; }
 
@@ -106,8 +106,8 @@
     }
     .result-row:last-child { border-bottom: 0; }
     .result-row.qty-result-row { padding-bottom: 24px; }
-    .result-row b { color: #5a5e66; font-size: 12px; font-weight: 800; }
-    .result-row .val { color: #151922; font-weight: 700; }
+    .result-row b { color: var(--ts); font-size: 12px; font-weight: 800; }
+    .result-row .val { color: var(--tp); font-weight: 700; }
     .result-row .val.amount { color: var(--rose); font-size: 16px; font-weight: 900; }
     .result-row .val .sub { color: var(--muted); font-size: 12px; font-weight: 500; }
 
@@ -115,7 +115,7 @@
       margin: 0 0 28px;
       padding: 13px 16px;
       background: var(--warm);
-      color: #41454f;
+      color: var(--ts);
       font-size: 12px;
       line-height: 1.7;
     }
@@ -124,7 +124,7 @@
     /* ── 물품 카드 ── */
     .sec-title {
       margin: 0;
-      color: #111; font-size: 15px; font-weight: 900;
+      color: var(--tp); font-size: 15px; font-weight: 900;
     }
     .section-head {
       margin-bottom: 12px;
@@ -148,10 +148,10 @@
       font-size: 26px;
     }
     .item-info { min-width: 0; }
-    .item-name { color: #151922; font-size: 14px; font-weight: 800; margin: 0 0 8px; }
+    .item-name { color: var(--tp); font-size: 14px; font-weight: 800; margin: 0 0 8px; }
     .item-meta { display: grid; gap: 3px; color: var(--muted); font-size: 12px; }
-    .item-meta b { color: #5a5e66; font-weight: 800; margin-right: 6px; }
-    .seller-eval { display: inline-flex; align-items: center; gap: 8px; margin-left: 10px; vertical-align: middle; font-size: 12px; color: #111; }
+    .item-meta b { color: var(--ts); font-weight: 800; margin-right: 6px; }
+    .seller-eval { display: inline-flex; align-items: center; gap: 8px; margin-left: 10px; vertical-align: middle; font-size: 12px; color: var(--tp); }
     .seller-eval__item { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
     .seller-eval__item i { font-size: 14px; line-height: 1; }
     .seller-eval__item.good i { color: #19bfb4; }
@@ -177,8 +177,8 @@
     .big-btn.primary:hover { background: #d62f54; }
     .big-btn.navy { border: 1px solid var(--navy); background: var(--navy); color: #fff; }
     .big-btn.navy:hover { background: #102c50; }
-    .big-btn.line { border: 1px solid var(--line); background: #fff; color: #626672; }
-    .big-btn.line:hover { border-color: #b9b2ad; color: #41454f; }
+    .big-btn.line { border: 1px solid var(--line); background: #fff; color: var(--ts); }
+    .big-btn.line:hover { border-color: var(--tm); color: var(--ts); }
     .item-actions {
       display: grid;
       gap: 8px;
@@ -192,7 +192,7 @@
       border-radius: 5px;
       border: 1px solid #d8dce3;
       background: #fff;
-      color: #41454f;
+      color: var(--ts);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -201,8 +201,8 @@
       font-weight: 800;
       white-space: nowrap;
     }
-    .item-action-btn:hover { border-color: #b9b2ad; color: #151922; }
-    .item-action-btn i { font-size: 12px; color: #626672; }
+    .item-action-btn:hover { border-color: var(--tm); color: var(--tp); }
+    .item-action-btn i { font-size: 12px; color: var(--ts); }
     .item-action-btn.primary {
       border-color: var(--navy);
       background: var(--navy);
@@ -223,7 +223,7 @@
     /* ── 재입찰 팝업 ── */
     .rebid-modal { position: fixed; inset: 0; background: rgba(17,24,39,.45); display: none; align-items: center; justify-content: center; z-index: 500; }
     .rebid-modal.open { display: flex; }
-    .rebid-modal-card { width: min(360px, calc(100vw - 32px)); background: #fff; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,.18); overflow: hidden; }
+    .rebid-modal-card { width: min(360px, calc(100vw - 32px)); background: #fff; border-radius:12px; box-shadow: 0 20px 60px rgba(0,0,0,.18); overflow: hidden; }
     .rebid-modal-head { padding: 16px 20px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; }
     .rebid-modal-head strong { font-size: 15px; color: var(--ink); }
     .rebid-modal-close { border: none; background: none; font-size: 18px; color: var(--faint); cursor: pointer; }
@@ -249,7 +249,7 @@
       display: grid;
       gap: 6px;
       background: var(--warm);
-      color: #6b7280;
+      color: var(--ts);
       font-size: 12px;
       line-height: 1.6;
     }

@@ -39,8 +39,8 @@
 
 
 
-    .search-chip { height: 24px; padding: 0 10px; border: 0; border-radius: 3px; background: #f2f0ec; color: #111; display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 900; white-space: nowrap; }
-    .search-chip button { width: 14px; height: 14px; padding: 0; border: 0; background: transparent; color: #111; font-size: 13px; line-height: 1; }
+    .search-chip { height: 24px; padding: 0 10px; border: 0; border-radius: 3px; background: #f2f0ec; color: var(--tp); display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 900; white-space: nowrap; }
+    .search-chip button { width: 14px; height: 14px; padding: 0; border: 0; background: transparent; color: var(--tp); font-size: 13px; line-height: 1; }
 
 
     /* ── Main ── */
@@ -61,7 +61,7 @@
 
 
     .category-more-wrap { display: none; }
-    .all-category-button { width: 100%; height: 36px; padding: 0 14px; border: 1px solid #e8e8e8; border-radius: 4px; background: #f5f5f5; color: #111; font-size: 12px; font-weight: 600; text-align: right; }
+    .all-category-button { width: 100%; height: 36px; padding: 0 14px; border: 1px solid #e8e8e8; border-radius: 4px; background: #f5f5f5; color: var(--tp); font-size: 12px; font-weight: 600; text-align: right; }
 
     /* Category search bar */
     .category-search-bar { display: grid; grid-template-columns: 320px 420px 140px minmax(0, 1fr); align-items: center; height: 48px; margin: 0; border-top: 1px solid #d4dce8; background: #f7f7f7; overflow: hidden; }
@@ -78,17 +78,17 @@
     .filter-block:last-of-type { margin: 0; }
     .filter-block-title { margin-bottom: 7px; color: #000; font-size: 13px; font-weight: 800; }
     .price-range-fields { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: center; gap: 8px; }
-    .range-sep { color: #111; font-size: 13px; text-align: center; }
+    .range-sep { color: var(--tp); font-size: 13px; text-align: center; }
     .filter-text-input, .filter-select {
       width: 100%; height: 36px; padding: 0 11px; border: 1px solid #d9d9d9; border-radius: 5px;
       background: #fff; color: var(--text); font-size: 13px; outline: 0;
     }
-    .filter-text-input::placeholder { color: #9aa3b2; }
+    .filter-text-input::placeholder { color: var(--tm); }
     .filter-text-input:focus, .filter-select:focus { border-color: var(--rose); }
     /* 제목 줄에 체크박스를 함께 두어 필터 항목들이 같은 높이에 정렬되도록 한다 */
     .filter-block-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
     .filter-block-head .filter-block-title { margin-bottom: 0; white-space: nowrap; }
-    .filter-checkbox-row { display: inline-flex; align-items: center; gap: 7px; margin: 0; color: #111827; font-size: 13px; font-weight: 700; white-space: nowrap; }
+    .filter-checkbox-row { display: inline-flex; align-items: center; gap: 7px; margin: 0; color: var(--tp); font-size: 13px; font-weight: 700; white-space: nowrap; }
     .filter-checkbox-row input { width: 15px; height: 15px; margin: 0; accent-color: var(--rose); }
     .filter-submit { width: 100%; height: 36px; border: 0; border-radius: 5px; background: var(--rose); color: #fff; font-size: 14px; font-weight: 900; }
     @media (max-width: 1100px) {
@@ -102,15 +102,15 @@
     /* ── Result section (검색 모드) ── */
     .result-title-row { display: grid; grid-template-columns: minmax(280px, 1fr) minmax(360px, 595px); align-items: center; gap: 24px; padding: 0 0 12px; border-bottom: 1px solid #111; }
     .result-title-wrap { min-width: 0; display: flex; align-items: center; gap: 10px; }
-    .result-title { margin: 0; color: #111827; font-size: 17px; font-weight: 700; line-height: 1.25; word-break: keep-all; }
-    .favorite-search { width: 22px; height: 22px; padding: 0; border: 0; background: transparent; color: #111; display: grid; place-items: center; }
+    .result-title { margin: 0; color: var(--tp); font-size: 17px; font-weight: 700; line-height: 1.25; word-break: keep-all; }
+    .favorite-search { width: 22px; height: 22px; padding: 0; border: 0; background: transparent; color: var(--tp); display: grid; place-items: center; }
     .favorite-search svg { width: 17px; height: 17px; stroke-width: 1.8; }
     .result-rescan { height: 34px; display: grid; grid-template-columns: minmax(0, 1fr) 124px; }
     .result-rescan input { min-width: 0; padding: 0 14px; border: 1px solid var(--line); border-right: 0; outline: 0; background: #fff; color: var(--text); font-size: 13px; }
     .result-rescan button { border: 0; background: var(--rose); color：#fff; font-size: 13px; font-weight: 700; }
     .result-control-row { min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
     .result-tabs { display: flex; align-items: center; gap: 32px; padding-left: 14px; }
-    .result-tab { padding: 0; border: 0; background: transparent; color: #111; font-size: 12px; font-weight: 700; }
+    .result-tab { padding: 0; border: 0; background: transparent; color: var(--tp); font-size: 12px; font-weight: 700; }
     .result-tab.active { color: var(--rose); text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 2px; }
     .filter-actions { display: flex; align-items: center; gap: 12px; }
     .sort-select { width: 112px; height: 30px; padding: 0 28px 0 12px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: #1f497a; font-size: 12px; font-weight: 700; }
@@ -142,7 +142,7 @@
     .site-flag-uk { width: 16px; height: 12px; border-radius: 2px; flex: 0 0 auto; background: linear-gradient(45deg, #153f8f 0 38%, #fff 38% 44%, #d6223b 44% 56%, #fff 56% 62%, #153f8f 62%); }
     .product-name { margin: 10px 14px 0; overflow: hidden; color: #1a1a1a; font-size: 14px; font-weight: 600; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; min-height: 41px; }
     .price-row { display: block; margin: 12px 14px 16px; }
-    .price { color: #111; font-size: 17px; font-weight: 800; font-family:var(--font-num); }
+    .price { color: var(--tp); font-size: 17px; font-weight: 800; font-family:var(--font-num); }
     .auction-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 14px; color: #7c8490; font-size: 12px; font-weight: 600; }
     .auction-meta > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .bids { flex: 0 0 auto; color: var(--muted); font-size: 12px; font-weight: 600; white-space: nowrap; }

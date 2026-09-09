@@ -20,7 +20,7 @@
       --line-soft: #eee6e2;
       --warm: #fbf7f5;
       --warm-2: #f7f3f0;
-      --border: #e0e4eb;
+      --border: #E0E4EB;
       --green: #3AAD4E;
       --sidebar-w: 231px;
       --main-w: 885px;
@@ -79,11 +79,11 @@
       background: #ffe7ef; color: var(--rose);
       font-size: 22px; font-weight: 800;
     }
-    .profile-name { display: block; margin-bottom: 3px; color: #262a31; font-size: 16px; font-weight: 800; }
+    .profile-name { display: block; margin-bottom: 3px; color: var(--tp); font-size: 16px; font-weight: 800; }
     .profile-tier { color: var(--grade-vip); font-size: 12px; font-weight: 800; }
 
-    .vip-copy { margin: 18px 0 6px; color: #5c6270; font-size: 12px; font-weight: 600; }
-    .vip-copy b { color: #454b58; font-weight: 800; }
+    .vip-copy { margin: 18px 0 6px; color: var(--ts); font-size: 12px; font-weight: 600; }
+    .vip-copy b { color: var(--ts); font-weight: 800; }
     .vip-row { display: grid; grid-template-columns: 1fr 16px; align-items: center; gap: 8px; }
     .vip-progress { height: 8px; border-radius: 999px; background: #eee2de; overflow: hidden; }
     .vip-progress span {
@@ -92,25 +92,25 @@
     }
     .help-dot {
       width: 16px; height: 16px; border: 1.5px solid #9ea1aa; border-radius: 50%;
-      display: inline-grid; place-items: center; color: #838793; font-size: 11px; font-weight: 900;
+      display: inline-grid; place-items: center; color: var(--tm); font-size: 11px; font-weight: 900;
     }
     .profile-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 11px; }
     .soft-btn {
       height: 26px; border: 1px solid var(--line); border-radius: 5px;
-      background: #fff; color: #5c606b; font-size: 12px; font-weight: 700;
+      background: #fff; color: var(--ts); font-size: 12px; font-weight: 700;
     }
 
     .side-nav { padding-top: 33px; }
     .side-title {
       margin: 0 0 18px; padding: 0 15px 17px;
       border-bottom: 1px solid #dcd9d6;
-      color: #111; font-size: 16px; font-weight: 900;
+      color: var(--tp); font-size: 16px; font-weight: 900;
     }
     .nav-section { padding: 0 20px; margin-bottom: 14px; }
-    .nav-section strong { display: block; margin-bottom: 11px; color: #292d35; font-size: 14px; font-weight: 900; }
+    .nav-section strong { display: block; margin-bottom: 11px; color: var(--tp); font-size: 14px; font-weight: 900; }
     .nav-list { display: grid; gap: 13px; }
-    .nav-list a { color: #666b75; text-decoration: none; font-size: 12px; font-weight: 500; }
-    .nav-list a:hover, .nav-list a.active { color: var(--rose); font-weight: 800; }
+    .nav-list a { color: var(--ts); text-decoration: none; font-size: 12px; font-weight: 600; }
+    .nav-list a:hover, .nav-list a.active { color: var(--rose); font-weight: 700; }
 
     /* 사업자 전환 배너 (사이드바) */
     .biz-convert-section { margin-top: 6px; padding: 0 12px 20px; }
@@ -118,9 +118,9 @@
       display: block; text-decoration: none; border-radius: 10px;
       background: linear-gradient(135deg, #eef3fb 0%, #e6edf8 100%);
       border: 2px solid #1a3c6e;
-      overflow: hidden; transition: box-shadow 0.16s;
+      overflow: hidden; transition: border-color 0.16s;
     }
-    .biz-convert-link:hover { box-shadow: 0 2px 10px rgba(26,60,110,0.18); }
+    .biz-convert-link:hover { border-color: var(--navy); }
     .biz-convert-inner { display: flex; align-items: center; gap: 10px; padding: 12px 12px 12px 14px; }
     .biz-convert-icon {
       width: 32px; height: 32px; border-radius: 8px;
@@ -160,7 +160,7 @@
       background: var(--navy); display: grid; place-items: center;
       color: #fff; font-size: 18px; flex-shrink: 0;
     }
-    .page-title-area h1 { margin: 0 0 3px; font-size: 20px; font-weight: 900; color: #1a1a2e; }
+    .page-title-area h1 { margin: 0 0 3px; font-size: 20px; font-weight: 900; color: var(--tp); }
     .page-title-area p { margin: 0; font-size: 13px; color: var(--ts); }
 
     /* ── 혜택 테이블 ── */
@@ -215,7 +215,7 @@
     .bt-val.navy { color: var(--navy); }
 
     .bt-empty-row td {
-      background: #fafbfc;
+      background:#F5F7FA;
     }
 
     /* 구 benefit-grid 제거됨 */
@@ -234,7 +234,7 @@
     /* ───── 신청 폼 섹션 ───── */
     .form-section {
       background: #fff; border: 1px solid var(--border);
-      border-radius: 14px; padding: 28px;
+      border-radius:12px; padding: 28px;
       margin-bottom: 20px;
     }
 
@@ -243,7 +243,7 @@
 
     .form-label {
       display: block; font-size: 13px; font-weight: 700;
-      color: #2b2f37; margin-bottom: 7px;
+      color: var(--tp); margin-bottom: 7px;
     }
     .form-label .req {
       color: var(--rose); font-size: 12px; margin-left: 3px;
@@ -313,7 +313,7 @@
     .file-preview i { color: var(--navy); font-size: 18px; }
     .file-name { flex: 1; font-size: 12px; font-weight: 600; color: #2e4a7a; word-break: break-all; }
     .file-remove {
-      background: none; border: none; color: #aaa; font-size: 16px; padding: 0;
+      background: none; border: none; color: var(--tm); font-size: 16px; padding: 0;
       line-height: 1; flex-shrink: 0;
     }
     .file-remove:hover { color: var(--rose); }
@@ -337,7 +337,7 @@
 
     /* 제출 버튼 영역 */
     .submit-area {
-      border: 1px solid var(--border); border-radius: 14px;
+      border: 1px solid var(--border); border-radius:12px;
       padding: 24px 28px; background: var(--warm);
     }
 
@@ -371,7 +371,7 @@
       display: none;
       flex-direction: column; align-items: center;
       text-align: center; padding: 60px 40px;
-      border: 1px solid var(--border); border-radius: 14px;
+      border: 1px solid var(--border); border-radius:12px;
     }
     .complete-screen.show { display: flex; }
     .complete-icon {
@@ -379,7 +379,7 @@
       background: #e8f7ec; display: grid; place-items: center;
       font-size: 32px; margin-bottom: 20px;
     }
-    .complete-title { font-size: 20px; font-weight: 900; color: #1a1a2e; margin-bottom: 8px; }
+    .complete-title { font-size: 20px; font-weight: 900; color: var(--tp); margin-bottom: 8px; }
     .complete-desc { font-size: 13px; color: var(--ts); line-height: 1.7; margin-bottom: 28px; }
     .complete-steps {
       display: grid; grid-template-columns: repeat(3, 1fr);
@@ -395,7 +395,7 @@
       font-size: 11px; font-weight: 800;
       display: inline-grid; place-items: center; margin-bottom: 8px;
     }
-    .step-label { font-size: 11px; font-weight: 700; color: #2b2f37; margin-bottom: 2px; }
+    .step-label { font-size: 11px; font-weight: 700; color: var(--tp); margin-bottom: 2px; }
     .step-sub { font-size: 10px; color: var(--tm); }
     .back-btn {
       height: 44px; padding: 0 28px;
@@ -411,7 +411,7 @@
 
   .profile-id { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .profile-id .profile-name { display: inline; margin: 0; }
-  .profile-id .profile-tier { display: inline-flex; align-items: center; margin: 0; padding: 2px 9px; border-radius: 5px; background: #f1f2f4; color: var(--grade-vip); font-size: 12px; font-weight: 700; line-height: 1.4; }
+  .profile-id .profile-tier { display: inline-flex; align-items: center; margin: 0; padding: 2px 9px; border-radius: 5px; background:#F5F7FA; color: var(--grade-vip); font-size: 12px; font-weight: 700; line-height: 1.4; }
   .profile-id + .vip-copy { margin: 4px 0 0; padding-right: 0; }
   </style>
 </head>
@@ -676,7 +676,7 @@
             <div class="agree-box">
               <div class="agree-item">
                 <input type="checkbox" id="agreeAll" onchange="toggleAll(this)">
-                <span class="agree-text" style="font-weight:700;color:#2b2f37">전체 동의</span>
+                <span class="agree-text" style="font-weight:700;color:var(--tp)">전체 동의</span>
               </div>
               <div class="agree-item">
                 <input type="checkbox" id="agree1" class="agree-check" onchange="updateAll(); checkForm()">

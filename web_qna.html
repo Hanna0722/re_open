@@ -64,13 +64,13 @@
     .side-title strong { display: block; color: var(--navy); font-size: 22px; font-weight: 900; }
     .side-title span { display: block; color: var(--navy); font-size: 11px; font-weight: 700; letter-spacing: .06em; margin-top: 1px; }
     .nav-list { display: grid; gap: 0; margin-top: 6px; }
-    .nav-list a { display: block; padding: 9px 20px; color: #4a4f5a; font-size: 13px; font-weight: 500; border-left: 3px solid transparent; }
+    .nav-list a { display: block; padding: 9px 20px; color: var(--ts); font-size: 13px; font-weight: 600; border-left: 3px solid transparent; }
     .nav-list a:hover { color: var(--rose); }
-    .nav-list a.active { color: var(--rose); font-weight: 800; border-left-color: var(--rose); background: #fff5f7; }
+    .nav-list a.active { color: var(--rose); font-weight: 700; border-left-color: var(--rose); background: #fff5f7; }
 
     /* ── 메인 ── */
     .page-head { display: flex; align-items: center; justify-content: space-between; margin: 0 0 18px; }
-    .page-head h2 { margin: 0; color: #111; font-size: 20px; font-weight: 900; }
+    .page-head h2 { margin: 0; color: var(--tp); font-size: 20px; font-weight: 900; }
     .outline-pill {
       display: inline-flex; align-items: center; gap: 6px;
       height: 34px; padding: 0 14px;
@@ -85,7 +85,7 @@
     .status-tab {
       height: 34px; padding: 0 16px;
       border: 1px solid var(--line); border-radius: 4px;
-      background: #fff; color: #5c606b;
+      background: #fff; color: var(--ts);
       font-size: 12px; font-weight: 700;
     }
     .status-tab small { font-weight: 700; color: var(--faint); margin-left: 2px; }
@@ -102,7 +102,7 @@
     .qna-head {
       min-height: 40px;
       border-bottom: 1px solid var(--line);
-      color: #5a5e66;
+      color: var(--ts);
       font-size: 12px;
       font-weight: 800;
       text-align: center;
@@ -113,17 +113,17 @@
       border-bottom: 1px solid var(--line-soft);
       text-align: center;
       font-size: 13px;
-      color: #383b40;
+      color: var(--tp);
       transition: background .15s ease;
     }
     .qna-row:last-child { border-bottom: 0; }
     .qna-row:hover { background: var(--warm); }
 
     .qna-row > div { padding: 12px 8px; }
-    .qna-date { color: #59606d; font-size: 12px; }
-    .qna-cat { color: #59606d; font-size: 12px; font-weight: 600; }
+    .qna-date { color: var(--ts); font-size: 12px; }
+    .qna-cat { color: var(--ts); font-size: 12px; font-weight: 600; }
     .qna-title-cell { text-align: left; min-width: 0; display: flex; align-items: center; gap: 7px; }
-    .qna-title-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #151922; font-weight: 600; }
+    .qna-title-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--tp); font-weight: 600; }
     .qna-row:hover .qna-title-text { color: var(--rose); }
     .reply-count {
       flex-shrink: 0;
@@ -137,7 +137,7 @@
       font-size: 12px;
       font-weight: 800;
     }
-    .status-text.waiting { color: #999; }
+    .status-text.waiting { color: var(--tm); }
     .status-text.done { color: var(--rose); }
 
     /* 페이지네이션 */
@@ -145,12 +145,12 @@
     .page-btn {
       width: 32px; height: 32px;
       border: 1px solid var(--line); border-radius: 4px;
-      background: #fff; color: #5c606b;
+      background: #fff; color: var(--ts);
       font-size: 12px; font-weight: 700;
       display: grid; place-items: center;
     }
     .page-btn.active { border-color: var(--rose); background: var(--rose); color: #fff; }
-    .page-btn:hover:not(.active) { border-color: #b9b2ad; }
+    .page-btn:hover:not(.active) { border-color: var(--tm); }
   </style>
 </head>
 <body>

@@ -15,7 +15,7 @@
   --rose:#E8385A;--rose-h:#C42F4C;--amber:#F5A623;
   --brand:#E8385A;
   --navy:#1A3C6E;--green:#3AAD4E;
-  --bg:#F5F7FA;--white:#fff;--border:#E0E4EB;--line:#e0e4eb;
+  --bg:#F5F7FA;--white:#fff;--border:#E0E4EB;--line:#E0E4EB;
   --muted:#666680;--faint:#999baa;
   --frame-w:480px;
 }
@@ -26,7 +26,7 @@ button,input,select{font:inherit}
 button,select{cursor:pointer}
 
 /* ══ 헤더 ══ */
-.header{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid #d9e0e9;box-shadow:0 1px 0 rgba(32,36,43,.04)}
+.header{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid #E0E4EB;box-shadow:0 1px 0 rgba(32,36,43,.04)}
 .brand-area{display:flex;align-items:center;gap:10px;min-width:0}
 .menu-button{width:34px;height:34px;border-radius:5px;border:0;background:transparent;padding:0;display:grid;place-items:center;flex-shrink:0}
 .logo-link{display:inline-flex;align-items:center;width:76px;line-height:0;}
@@ -39,12 +39,12 @@ button,select{cursor:pointer}
 /* ── 스토어 바로가기 (검색 채널 탭) ── */
 .channel-tabs{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 8px;-webkit-overflow-scrolling:touch;background:#fff}
 .channel-tabs::-webkit-scrollbar{display:none}
-.ch-tab{display:inline-flex;align-items:center;gap:5px;padding:10px 12px 11px;font-size:12px;font-weight:700;color:#707070;white-space:nowrap;cursor:pointer;border:0;border-bottom:2px solid transparent;background:transparent;flex-shrink:0;font-family:inherit}
+.ch-tab{display:inline-flex;align-items:center;gap:5px;padding:10px 12px 11px;font-size:12px;font-weight:700;color:var(--ts);white-space:nowrap;cursor:pointer;border:0;border-bottom:2px solid transparent;background:transparent;flex-shrink:0;font-family:inherit}
 .ch-tab.active{color:var(--rose);border-bottom-color:var(--rose)}
 .ch-tab small{font-weight:600;color:var(--tm);font-size:11px;margin-left:2px;font-family:var(--font-num)}
 .ch-tab.active small{color:var(--rose)}
 .ch-dot{width:6px;height:6px;border-radius:50%;background:var(--rose);flex:0 0 auto}
-.ch-tab i{font-size:13px;color:#707070}
+.ch-tab i{font-size:13px;color:var(--ts)}
 .ch-tab.active i{color:var(--rose)}
 
 /* ── 카테고리 결과 헤더 ── */
@@ -104,7 +104,7 @@ button,select{cursor:pointer}
 /* ══ 필터 바텀시트 ══ */
 .sheet-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:300;opacity:0;transition:opacity .25s}
 .sheet-overlay.open{display:block;opacity:1}
-.filter-sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:var(--frame-w);height:68vh;max-height:68vh;background:#fff;border-radius:16px 16px 0 0;z-index:400;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.32,0,.07,1);overflow:hidden}
+.filter-sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:var(--frame-w);height:68vh;max-height:68vh;background:#fff;border-radius:12px 16px 0 0;z-index:400;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.32,0,.07,1);overflow:hidden}
 .filter-sheet.open{transform:translateX(-50%) translateY(0)}
 .sheet-handle{width:38px;height:5px;margin:10px auto 2px;border-radius:999px;background:#d5d9df;flex-shrink:0}
 .sheet-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 12px;flex-shrink:0}
@@ -114,14 +114,14 @@ button,select{cursor:pointer}
 /* 필터 항목 (m-inline-filter) */
 .m-filter-block{padding:16px 0;border-bottom:1px solid var(--line)}
 .m-filter-block:last-child{border-bottom:none}
-.m-filter-block label,.m-filter-label{display:block;margin-bottom:8px;color:#111827;font-size:13px;font-weight:800}
+.m-filter-block label,.m-filter-label{display:block;margin-bottom:8px;color:var(--tp);font-size:13px;font-weight:800}
 .m-price-fields{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:10px}
 .m-price-fields span{color:var(--muted);font-size:13px;text-align:center}
-.m-filter-input,.m-filter-select{width:100%;height:38px;border:1px solid #d9dfe8;border-radius:6px;background:#fff;padding:0 11px;color:#111827;font-size:13px;outline:none;font-family:inherit}
+.m-filter-input,.m-filter-select{width:100%;height:38px;border:1px solid #d9dfe8;border-radius:6px;background:#fff;padding:0 11px;color:var(--tp);font-size:13px;outline:none;font-family:inherit}
 .m-filter-input::placeholder{color:#9ca6b5}
 .m-filter-input:focus,.m-filter-select:focus{border-color:var(--rose)}
 .m-filter-select{appearance:none;-webkit-appearance:none;-moz-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23909AA8'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:30px}
-.m-filter-checkbox{display:flex;align-items:center;gap:8px;height:22px;margin-bottom:8px;color:#111827;font-size:13px;font-weight:700}
+.m-filter-checkbox{display:flex;align-items:center;gap:8px;height:22px;margin-bottom:8px;color:var(--tp);font-size:13px;font-weight:700}
 .m-filter-checkbox input{width:16px;height:16px;accent-color:var(--rose)}
 .sheet-actions{display:flex;gap:8px;padding:12px 16px 20px;border-top:1px solid var(--line);flex-shrink:0;background:#fff}
 .btn-sheet-reset{padding:13px 20px;border:1px solid var(--line);border-radius:5px;font-size:14px;color:var(--muted);background:#fff}

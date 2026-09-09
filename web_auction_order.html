@@ -49,7 +49,7 @@
 
     .page-head { display: flex; align-items: center; gap: 8px; margin: 0 0 18px; }
     .page-back { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; border: 1px solid var(--line); background: #fff; color: var(--navy); font-size: 14px; border-radius: 50%; }
-    .page-head h2 { margin: 0; color: #111; font-size: 20px; font-weight: 900; }
+    .page-head h2 { margin: 0; color: var(--tp); font-size: 20px; font-weight: 900; }
 
     /* ── 단계 표시 ── */
     .steps { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
@@ -66,7 +66,7 @@
     }
     .step-label { color: var(--faint); font-size: 12px; font-weight: 700; }
     .step.active .step-num { border-color: var(--rose); background: var(--rose); color: #fff; }
-    .step.active .step-label { color: #151922; font-weight: 800; }
+    .step.active .step-label { color: var(--tp); font-weight: 800; }
     .step.done .step-num { border-color: var(--navy); background: var(--navy); color: #fff; }
     .step.done .step-label { color: var(--navy); }
     .step-arrow { color: #d4cdc8; font-size: 11px; }
@@ -83,11 +83,11 @@
       margin-bottom: 26px;
     }
     .item-summary-row { display: grid; grid-template-columns: 120px minmax(0,1fr); gap: 4px 14px; padding: 4px 0; font-size: 13px; }
-    .item-summary-row b { color: #5a5e66; font-size: 12px; font-weight: 800; padding-top: 1px; }
-    .item-summary-row .val { color: #151922; }
+    .item-summary-row b { color: var(--ts); font-size: 12px; font-weight: 800; padding-top: 1px; }
+    .item-summary-row .val { color: var(--tp); }
     .item-summary-row .val strong { color: var(--rose); font-weight: 900; }
     .item-summary-row .val .krw { color: var(--muted); font-weight: 500; font-size: 12px; }
-    .seller-eval { display: inline-flex; align-items: center; gap: 8px; margin-left: 10px; vertical-align: middle; font-size: 12px; color: #111; }
+    .seller-eval { display: inline-flex; align-items: center; gap: 8px; margin-left: 10px; vertical-align: middle; font-size: 12px; color: var(--tp); }
     .seller-eval__item { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
     .seller-eval__item i { font-size: 14px; line-height: 1; }
     .seller-eval__item.good i { color: #19bfb4; }
@@ -103,7 +103,7 @@
       margin: 0 0 12px;
       padding-bottom: 10px;
       border-bottom: 1px solid var(--line);
-      color: #111; font-size: 15px; font-weight: 900;
+      color: var(--tp); font-size: 15px; font-weight: 900;
     }
     .sec-title .sec-no { color: var(--rose); font-family:var(--font-num); font-size: 13px; font-weight: 900; }
 
@@ -112,7 +112,7 @@
       margin: 0;
       padding: 14px 16px;
       background: var(--warm);
-      color: #6b7280;
+      color: var(--ts);
       font-size: 12px;
       line-height: 1.8;
     }
@@ -124,7 +124,7 @@
       display: flex; align-items: center; gap: 8px;
       padding: 13px 4px;
       border-bottom: 1px solid var(--line-soft);
-      font-size: 13px; font-weight: 700; color: #151922;
+      font-size: 13px; font-weight: 700; color: var(--tp);
       cursor: pointer;
     }
     .agree-row input { width: 16px; height: 16px; accent-color: var(--rose); margin: 0; cursor: pointer; }
@@ -145,8 +145,8 @@
       font-size: 13px;
     }
     .confirm-row:last-child { border-bottom: 0; }
-    .confirm-row b { color: #5a5e66; font-size: 12px; font-weight: 800; }
-    .confirm-row .val { color: #151922; font-weight: 700; }
+    .confirm-row b { color: var(--ts); font-size: 12px; font-weight: 800; }
+    .confirm-row .val { color: var(--tp); font-weight: 700; }
     .confirm-row .val.amount { color: var(--rose); font-size: 16px; font-weight: 900; }
     .confirm-row .val .sub { color: var(--muted); font-size: 12px; font-weight: 500; }
     .confirm-box > .confirm-row.confirm-packing-row { align-items: center; padding: 12px 4px 24px; }
@@ -154,7 +154,7 @@
     .confirm-warn {
       margin: 0;
       text-align: center;
-      color: #41454f;
+      color: var(--ts);
       font-size: 12px;
     }
     .confirm-warn b { color: var(--rose); font-weight: 800; }
@@ -175,17 +175,17 @@
       font-weight: 800;
       white-space: nowrap;
     }
-    .big-btn.line { border: 1px solid var(--line); background: #fff; color: #626672; }
-    .big-btn.line:hover { border-color: #b9b2ad; color: #41454f; }
+    .big-btn.line { border: 1px solid var(--line); background: #fff; color: var(--ts); }
+    .big-btn.line:hover { border-color: var(--tm); color: var(--ts); }
     .big-btn.primary { border: 1px solid var(--rose); background: var(--rose); color: #fff; }
     .big-btn.primary:hover { background: #d62f54; }
     .big-btn.primary:disabled { border-color: #e8c9d1; background: #e8c9d1; cursor: not-allowed; }
 
     .confirm-modal { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; background: rgba(17, 24, 39, .45); padding: 20px; }
     .confirm-modal.open { display: flex; }
-    .confirm-modal-card { width: min(420px, 100%); background: #fff; border-radius: 14px; box-shadow: 0 20px 60px rgba(0,0,0,.18); overflow: hidden; }
+    .confirm-modal-card { width: min(420px, 100%); background: #fff; border-radius:12px; box-shadow: 0 20px 60px rgba(0,0,0,.18); overflow: hidden; }
     .confirm-modal-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; border-bottom: 1px solid var(--line); }
-    .confirm-modal-head strong { color: #111; font-size: 15px; font-weight: 900; }
+    .confirm-modal-head strong { color: var(--tp); font-size: 15px; font-weight: 900; }
     .confirm-modal-close { border: 0; background: none; color: var(--faint); font-size: 20px; line-height: 1; }
     .confirm-modal-body { padding: 20px; }
     .confirm-amount-box { background: var(--warm); border: 1px solid var(--line-soft); border-radius: 10px; padding: 14px 16px; margin-bottom: 14px; }
@@ -193,12 +193,12 @@
     .confirm-modal .confirm-row:first-child { padding-top: 0; }
     .confirm-modal .confirm-row:last-child { padding-bottom: 0; border-bottom: 0; }
     .confirm-modal .confirm-row span { color: var(--muted); font-size: 12px; font-weight: 700; }
-    .confirm-modal .confirm-row strong { color: #151922; font-family:var(--font-num); font-size: 16px; font-weight: 900; }
+    .confirm-modal .confirm-row strong { color: var(--tp); font-family:var(--font-num); font-size: 16px; font-weight: 900; }
     .confirm-modal .confirm-row strong.amount { color: var(--rose); font-size: 20px; }
     .confirm-note { margin: 0 0 18px; color: var(--rose); font-size: 12px; font-weight: 800; line-height: 1.7; }
     .confirm-actions { display: flex; justify-content: flex-end; gap: 8px; }
     .confirm-btn { height: 40px; padding: 0 18px; border-radius: 5px; font-size: 13px; font-weight: 800; }
-    .confirm-btn.line { border: 1px solid var(--line); background: #fff; color: #626672; }
+    .confirm-btn.line { border: 1px solid var(--line); background: #fff; color: var(--ts); }
     .confirm-btn.primary { border: 1px solid var(--rose); background: var(--rose); color: #fff; }
   </style>
 </head>

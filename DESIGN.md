@@ -2,23 +2,39 @@
 
 Clean, modern Korean e-commerce platform with a bold and energetic personality. The design feels fresh and dynamic with its rose red accent color, while maintaining high readability and mobile-first usability. The overall tone is professional yet vibrant, suitable for a broad consumer audience.
 
-Two delivery tracks share one visual language: **web** pages are fixed-width desktop shells (`min-width: 1200px`, content column `--page-w: 1140px`) that collapse to a mobile layout via one media query; **mobile** pages are separate `.phone` fragments (`max-width: 390px`). Content is organized in clear sections with consistent padding and a single-column reading order.
+Two delivery tracks share one visual language:
 
-Spacing follows a 4px base grid — common steps 4 / 8 / 12 / 16 / 20 / 24px.
+- **Web** pages are fixed-width desktop shells — content column **1140px** (`--page-w` / `--bb-page-w`), page floored at `min-width: 1200px` so the column always keeps ≥30px gutters — that collapse to a mobile layout via one media query.
+- **Mobile** pages are separate `.phone` fragments (`max-width: 390px`).
+
+Content is organized in clear sections with consistent padding and a single-column reading order.
+
+This document is split into three parts: **Common** (one value, identical on both tracks), **Web**, and **Mobile**. When a rule is not repeated in a platform section, the Common value applies.
+
+---
+
+# Common
+
+Applies to both web and mobile. Values here are defined once — never redefine per page or per platform.
 
 ## Colors
+
+### Token naming
+
+The **hex value is the contract, not the variable name.** A page (or the live site) may expose the same color under a different alias — `--color-rose`, `--col_white`, `--mr-rose`, `--red` — and that is fine as long as the value matches this palette. Do not introduce a *new hex* just because it arrives under a new name. Preferred names in this repo: `--rose` / `--brand` / `--blue` (accent, one value), `--navy`, `--amber`, `--green`, `--tp` / `--ts` / `--tm` (text), `--border` (also seen as `--line` / `--line-soft`), `--bg`.
+
 - **Rose Red** (#E8385A): brand accent, primary actions, CTA buttons, badges, active states. Aliased in `:root` as `--rose` / `--brand` / `--blue` (and `--red` on mobile) — all the same value.
 - **Rose Red Hover** (#C42F4C): hover / pressed state for primary actions (`--rose-h` / `--brand-dark`)
 - **Navy** (#1A3C6E): CS phone number, "사업자 전환" affordance, a few dark accents (`--navy`)
 - **Amber** (#F5A623): 배송대기 status, warning callouts (left border on a `#FFF8EC` panel), the avatar gradient stop (`--amber`)
 - **Green** (#3AAD4E): success states, positive indicators (`--green`)
 - **Primary Text** (#333): body copy — the default text color
-- **Strong Text** (#1A1A2E / #111827): headings and high-emphasis text (`--tp`)
+- **Strong Text** (#1A1A2E / #111827): headings and high-emphasis text (`--tp`). Collapse near-blacks like #151B29 to this.
 - **Secondary Text** (#666680): descriptions, supporting labels (`--ts`)
-- **Muted Text** (#999BAA): placeholder, disabled, hint text (`--tm`)
+- **Muted Text** (#999BAA): placeholder, disabled, hint text, chevrons, 10–11px meta labels (`--tm`). **One muted grey only** — collapse any near-neighbours (#9AA3B2, #A8B0BD, #A4ACB8) to this.
 - **Background White** (#ffffff): Main background, cards, content areas
-- **Background Gray Light** (#F5F7FA): Section backgrounds, subtle dividers
-- **Border Gray** (#E0E4EB): Card borders, input borders, dividers
+- **Background Gray Light** (#F5F7FA): Section backgrounds, subtle dividers, row hover (not #F9FAFB)
+- **Border Gray** (#E0E4EB): Card borders, input borders, dividers — **the single border color**. Collapse #E5E7EB / #DDE3EB / #D9E0E9 / #EEEEEE to this.
 - **Notice Bar** (#F1F3F5): Top notice bar background
 
 ### Grade colors
@@ -36,6 +52,15 @@ accents and the current-grade highlight.
   --grade-prs: #E8385A;  /* Prestige — rose (== brand) */
 }
 ```
+
+### Status colors (거래 현황)
+
+The trade-status board and order-card chips use two accent colors, nothing else:
+
+- **결제대기** (1·2차 결제대기): `#E8385A` (`var(--rose)` / `var(--brand)`)
+- **배송대기** (현지도착·배송대기, shipping-wait): `#F5A623` (`var(--amber)`)
+
+All other statuses (완료, 취소/반품, 국제배송 등) use neutral text (`#111` / `#1A1A2E` / muted grey).
 
 ## Typography
 
@@ -76,7 +101,13 @@ body{ font: 400 14px/1 var(--font-sans); }
 - **700** — section titles, most headings, emphasis
 - **800 / 900** — hero and page-level titles only (e.g. the product `h1` on `web_auction`)
 
-Apply negative letter-spacing (-0.22px to -0.36px) to text below 12px. Line heights stay tight, close to the font size, for compact mobile layouts.
+Applied to recurring components:
+
+- **Menu / list rows** (user-menu drawer, category list, `.user-menu-item`): **600**. Never 800 / 900 for a menu label.
+- **User name, tier / VIP chips** (`.user-name-strong`, `.user-vip-chip`): **500**.
+- **Numeric emphasis** — status counts (`.user-status-grid strong`), amounts, mileage / 예치금: **600–700**, on `var(--font-num)`.
+
+Apply negative letter-spacing (-0.22px to -0.36px) to text below 12px. Line heights stay tight, close to the font size, for compact layouts.
 
 ### Title scale
 
@@ -90,14 +121,9 @@ Titles do **not** share one size across web and mobile — each platform keeps i
 | Mobile item title (`.m-title-ko`) | — | `15px / 700`, `var(--tp)`, `line-height 1.5`, `margin-bottom 4px` |
 | Source-language name under the title (`.item-title-jp` / `.m-title-jp`) | `12px`, `var(--tm)`, `line-height 1.5`, `margin-bottom 14px` | `11px`, `var(--tm)`, `line-height 1.5` |
 
-### Status colors (거래 현황)
+## Spacing
 
-The trade-status board and order-card chips use two accent colors, nothing else:
-
-- **결제대기** (1·2차 결제대기): `#E8385A` (`var(--rose)` / `var(--brand)`)
-- **배송대기** (현지도착·배송대기, shipping-wait): `#F5A623` (`var(--amber)`)
-
-All other statuses (완료, 취소/반품, 국제배송 등) use neutral text (`#111` / `#1A1A2E` / muted grey).
+Spacing follows a 4px base grid — common steps 4 / 8 / 12 / 16 / 20 / 24px.
 
 ## Corner radius
 
@@ -109,14 +135,78 @@ All other statuses (완료, 취소/반품, 국제배송 등) use neutral text (`
 | `--r-lg` | 12px | large cards / panels |
 | `--r-pill` | 999px | fully rounded pills, avatars, progress tracks |
 
-## Components
-- **Navigation Bar**: white header, rose red only for the search button / active states / badges. Injected by `bb-common(.js)` — logo left, search center, utility icons right.
-- **Shared shell** (`bb-common.js` / `bb-common-mobile.js`): header, left category drawer + right user-menu drawer, notice-bar handling, mobile phone status bar, product-image fallbacks. `bb-trade-status-mobile.js` + `.css` render the shared "나의 거래 현황" board.
-- **Card Components**: white surface, `--r-md`/`--r-lg` radius, hairline border, no heavy shadow
-- **Button System**: rose red primary / white-outline secondary, `--r-btn` (12px) radius. Heights: `--btn-h-sm 36px` · `--btn-h-md 44px` · `--btn-h-lg 48px` (same on web and mobile).
-- **Elevation**: only three sanctioned shadows — hairline `0 1px 0 rgba(32,36,43,.04)`, modal `0 20px 60px rgba(0,0,0,.18)`, bottom sheet `0 -2px 10px rgba(0,0,0,.08)`. Otherwise lean on color contrast.
+## Buttons
 
-## Do's and Don'ts
+Rose red primary / white-outline secondary, `--r-btn` (12px) radius. Heights are the **same on web and mobile**: `--btn-h-sm 36px` · `--btn-h-md 44px` · `--btn-h-lg 48px`.
+
+## Elevation
+
+Three base shadows, one exact value each — do not hand-tune the blur / spread / color:
+
+| Role | Value |
+|---|---|
+| Hairline (sticky header, thin separators) | `0 1px 0 rgba(32,36,43,.04)` |
+| Modal / centered dialog / popover panel | `0 20px 60px rgba(0,0,0,.18)` |
+| Bottom sheet (mobile, sheet slides up from bottom) | `0 -2px 10px rgba(0,0,0,.08)` |
+
+### Sanctioned exceptions
+
+These are **rings, not drop shadows** — a 1–4px `0 0 0` spread that traces an element. Allowed:
+
+| Role | Value |
+|---|---|
+| Focus ring (input / selectable card `:focus`, `:hover`) | `0 0 0 2px`–`0 0 0 4px` of a tinted accent — `rgba(232,56,90,.08–.20)` (rose), `rgba(26,60,110,.12)` (navy), `rgba(245,166,35,.20)` (amber) |
+| Selected / active card or option | `0 0 0 2px var(--rose)` / `0 0 0 2px rgba(232,56,90,.12)` |
+| Brand-emphasis affordance (active store chip, active thumb) | `0 0 0 3px rgba(232,56,90,.14)` |
+| Flag / tiny thumbnail inner hairline | `inset 0 0 0 1px rgba(0,0,0,.08)` |
+
+Anything else — card-hover drop shadows, receipt paper, colored glows, `0 4px 16px …` and friends — is **not** sanctioned. Use `border-color: var(--rose)` for hover feedback instead.
+
+## Cards
+
+White surface, `--r-md` / `--r-lg` radius, hairline border, no drop shadow. Hover = `border-color: var(--rose)` (optionally `color` shift), never a shadow.
+
+---
+
+# Web
+
+## Layout shell
+
+- Content column **1140px** wide, centered (`--page-w` / `--bb-page-w`; per-page sections commonly use `max-width: 1140px; margin: 0 auto` or `--stage-left: max(16px, calc((100vw - 1140px) / 2))`).
+- `body { min-width: 1200px }` — the page never narrows below this; it scrolls horizontally instead of reflowing, so the 1140 column always has ≥30px gutters.
+- One media query collapses the desktop shell to the mobile layout.
+
+## Navigation bar
+
+White header, rose red only for the search button / active states / badges. Injected by `bb-common.js` — logo left, search center, utility icons right.
+
+## Shared shell (`bb-common.js`)
+
+Header, left category drawer + right user-menu drawer, notice-bar handling, product-image fallbacks. `bb-trade-status-mobile.js` + `.css` render the shared "나의 거래 현황" board.
+
+---
+
+# Mobile
+
+## Layout shell
+
+- Separate `.phone` fragments, `max-width: 390px`.
+- Single-column reading order, compact vertical rhythm.
+
+## Mobile-only UI
+
+- Phone status bar, bottom sheets (shadow `0 -2px 10px rgba(0,0,0,.08)`), drawers.
+- `--red` is an extra alias for the brand rose on mobile pages.
+- Maintain generous spacing (minimum 8px) between interactive elements for touch usability.
+
+## Shared shell (`bb-common-mobile.js`)
+
+Header, category + user-menu drawers, notice-bar handling, mobile phone status bar, product-image fallbacks.
+
+---
+
+# Do's and Don'ts
+
 - Do use rose red (#E8385A) as the primary brand accent for buttons, active states, and key highlights
 - Do use `--r-btn` (12px) for buttons and `--r-sm` (5px) for chips / dense tiles — don't hand-pick radii
 - Do drive every `font-family` from `var(--font-sans)` / `var(--font-num)` — never write a literal font stack in page CSS
@@ -124,7 +214,7 @@ All other statuses (완료, 취소/반품, 국제배송 등) use neutral text (`
 - Do drive text color from `var(--tp)` / `var(--ts)` / `var(--tm)`; don't redefine them per page
 - Do reserve weights 800 / 900 for page-level titles; use 400 / 500 / 600 / 700 elsewhere
 - Do apply negative letter-spacing to text smaller than 12px for better readability
-- Don't use heavy shadows - rely on color contrast and subtle backgrounds for depth
+- Don't use heavy shadows — rely on color contrast and subtle backgrounds for depth
 - Do maintain generous spacing (minimum 8px) between interactive elements for mobile usability
 - Don't mix the rose red and navy primary colors in the same interactive element
 - Do keep the navigation bar background white (#ffffff) with rose red used only for accents

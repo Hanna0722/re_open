@@ -10,12 +10,10 @@
 <style>
   /* 폰트 토큰 (DESIGN.md 기준) */
   :root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans);--tp:#1A1A2E;--ts:#666680;--tm:#999BAA}
-
 :root{
   --rose:#E8385A;--rose-h:#C42F4C;--amber:#F5A623;
   --navy:#1A3C6E;--green:#3AAD4E;
   --bg:#F5F7FA;--white:#fff;--border:#E0E4EB;
-
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--font-sans);background:var(--bg);color:var(--tp);font-size:14px;line-height:1.5}
@@ -26,14 +24,12 @@ button,select{cursor:pointer}
 .bs-meta span:first-of-type,.rv-meta span:first-child,.pager button{font-family:var(--font-num)}
 
 .rvp{max-width:1140px;margin:0 auto;padding:28px 0 64px}
-
 /* ── 페이지 타이틀 ── */
 .rvp-head{margin-bottom:20px}
 .rvp-head h1{font-size:24px;font-weight:800;letter-spacing:-.3px}
 .rvp-head p{margin-top:6px;font-size:13px;color:var(--ts)}
-
 /* ══ BEST 후기 캐러셀 ══ */
-.best-sec{position:relative;background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:36px}
+.best-sec{position:relative;background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:36px}
 .best-bar{display:flex;align-items:center;gap:10px;padding:14px 20px;border-bottom:1px solid var(--border);background:linear-gradient(90deg,#FFF7F9,#fff)}
 .best-bar .bb-crown{width:26px;height:26px;border-radius:50%;background:var(--amber);color:#fff;display:grid;place-items:center;font-size:12px;flex-shrink:0}
 .best-bar h2{font-size:16px;font-weight:800}
@@ -43,7 +39,7 @@ button,select{cursor:pointer}
   overflow-x:auto;overflow-y:hidden;
   scroll-snap-type:x mandatory;
   scrollbar-width:none;-ms-overflow-style:none;
-  padding:20px 0 6px;background:#FAFBFC;
+  padding:20px 0 6px;background:#F5F7FA;
   -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%);
   mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%);
 }
@@ -55,7 +51,7 @@ button,select{cursor:pointer}
   display:grid;grid-template-columns:76px minmax(0,1fr) 140px;align-items:center;gap:18px;
   padding:20px 22px;
   border:1px solid var(--border);border-radius:12px;background:#fff;
-  box-shadow:0 1px 4px rgba(0,0,0,.04);
+  box-shadow:0 1px 0 rgba(32,36,43,.04);
   opacity:.45;cursor:pointer;transition:opacity .3s ease,grid-template-columns .2s ease;
 }
 .best-slide.is-active{opacity:1}
@@ -86,7 +82,6 @@ button,select{cursor:pointer}
 .best-dots{display:flex;align-items:center;justify-content:center;gap:7px;padding:14px 0 18px}
 .best-dot{width:7px;height:7px;border-radius:50%;border:0;background:#DDE1E8;padding:0;transition:all .18s}
 .best-dot.active{width:20px;border-radius:4px;background:var(--rose)}
-
 /* ══ 통합 후기 목록 ══ */
 .list-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding-bottom:12px;border-bottom:2px solid var(--tp);flex-wrap:wrap}
 .list-head h2{font-size:18px;font-weight:800}
@@ -111,14 +106,13 @@ button,select{cursor:pointer}
 /* 후기 본문은 2~5줄로 작성되며 3줄을 넘으면 생략 */
 .rv-text{font-size:13px;color:var(--ts);line-height:1.6;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
 .rv-thumb{grid-column:1;grid-row:1;width:132px;height:132px;border-radius:8px;overflow:hidden;background:var(--bg);transition:width .2s ease,height .2s ease}
-/* 사진 없는 텍스트 후기: 같은 1열에 텍스트 리뷰 placeholder를 둔다 */
-.rv-row.no-photo::before{content:"일반후기";grid-column:1;grid-row:1;width:132px;height:132px;border-radius:8px;border:1px solid #E7ECF3;background:#F7F9FC;color:#9AA6B5;display:flex;align-items:center;justify-content:center;font-family:var(--font-num);font-size:13px;font-weight:700;letter-spacing:.08em;box-sizing:border-box}
+/* 사진 없는 텍스트 후기: 이미지 열을 없앤다 */
+.rv-row.no-photo{grid-template-columns:minmax(0,1fr) 172px}
 .rv-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .rv-row.is-open{background:#fff}
 .rv-row.is-open:not(.no-photo){grid-template-columns:220px minmax(0,1fr) 172px}
 .rv-row.is-open .rv-title,.rv-row.is-open .rv-text{display:block;overflow:visible;-webkit-line-clamp:unset;-webkit-box-orient:initial}
 .rv-row.is-open .rv-thumb{width:220px;height:220px}
-
 /* 페이지네이션 */
 .pager{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:28px}
 .pager button{min-width:34px;height:34px;padding:0 10px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--ts);font-size:13px;font-weight:600}
@@ -131,7 +125,7 @@ button,select{cursor:pointer}
   .bs-medal{width:46px;height:46px;font-size:19px}
   .rv-row{grid-template-columns:96px minmax(0,1fr) 128px;gap:14px;padding:16px}
   .rv-thumb{width:96px;height:96px}
-  .rv-row.no-photo::before{width:96px;height:96px}
+  .rv-row.no-photo{grid-template-columns:minmax(0,1fr) 128px}
   .rv-row.is-open:not(.no-photo){grid-template-columns:140px minmax(0,1fr) 128px}
   .rv-row.is-open .rv-thumb{width:140px;height:140px}
 }
@@ -152,7 +146,7 @@ button,select{cursor:pointer}
     <div class="best-bar">
       <span class="bb-crown"><i class="fas fa-crown" aria-hidden="true"></i></span>
       <h2>BEST 후기</h2>
-      <span class="bb-sub">비드바이가 선정한 추천 후기</span>
+      <span class="bb-sub">베스트 후기로 선정되면 대행수수료 1만 원 쿠폰을 드려요!</span>
     </div>
 
     <div class="best-viewport">
@@ -372,6 +366,19 @@ button,select{cursor:pointer}
 </div>
 
 <script>
+/* 국기 아이콘: 미/영/일 랜덤 (캐러셀 복제 전에 실행) */
+(function () {
+  var flags = [
+    { src: 'flagicon/us_circle.png', alt: '미국' },
+    { src: 'flagicon/uk_circle.png', alt: '영국' },
+    { src: 'flagicon/jp_circle.png', alt: '일본' }
+  ];
+  document.querySelectorAll('.country-badge img').forEach(function (img) {
+    var f = flags[Math.floor(Math.random() * flags.length)];
+    img.src = f.src;
+    img.alt = f.alt;
+  });
+})();
 /* ── BEST 후기 캐러셀 ──
    가로 스크롤(스냅) + 자동 순환. 양옆 후기가 살짝 보이고 가장자리에서 페이드아웃.
    원본을 앞뒤로 한 벌씩 복제해 3세트를 만들어, 끝에서 처음으로 되감기지 않고
@@ -431,7 +438,6 @@ button,select{cursor:pointer}
       viewport.scrollLeft = left;
     }
   }
-
   /* 복제 구간까지 흘러가면 같은 그림의 가운데 세트로 티 안 나게 옮겨 놓는다 */
   function normalize() {
     var p = pos;
@@ -453,7 +459,6 @@ button,select{cursor:pointer}
     }
     return nearest;
   }
-
   /* 같은 카드의 가운데 세트 위치로 즉시(애니메이션 없이) 되돌린다 */
   function recenter() {
     var mid = N + (((pos % N) + N) % N);
@@ -463,7 +468,6 @@ button,select{cursor:pointer}
     scrollToPos(pos, false);
     requestAnimationFrame(function () { isJumping = false; });
   }
-
   /* 한 칸 이동. 화살표를 연타해 복제 구간 끝까지 가더라도
      배열 밖으로 나가기 전에 가운데 세트로 옮겨 계속 이어지게 한다. */
   function step(delta) {
@@ -518,7 +522,6 @@ button,select{cursor:pointer}
   scrollToPos(pos, false);
   start();
 })();
-
 /* 전체 후기: 클릭 시 본문 전체 펼치기 */
 (function () {
   var rows = document.querySelectorAll('#rvList .rv-row');

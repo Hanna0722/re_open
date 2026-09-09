@@ -50,7 +50,7 @@
 
     .notice-bar {
       background: #F1F3F5;
-      color: #111;
+      color: var(--tp);
       text-align: center;
       font-size: 13px;
       padding: 9px 16px;
@@ -94,7 +94,7 @@
     }
     .avatar i { line-height: 1; }
     .avatar.tier-vip { background: #fff7e6; color: #f5a623; }
-    .profile-name { display: block; margin-bottom: 3px; color: #262a31; font-size: 16px; font-weight: 800; line-height: 1.25; }
+    .profile-name { display: block; margin-bottom: 3px; color: var(--tp); font-size: 16px; font-weight: 800; line-height: 1.25; }
     .profile-tier {
       color: var(--grade-vip);
       font-size: 12px;
@@ -102,11 +102,11 @@
     }
     .vip-copy {
       margin: 18px 0 6px;
-      color: #5c6270;
+      color: var(--ts);
       font-size: 12px;
       font-weight: 600;
     }
-    .vip-copy b { color: #454b58; font-weight: 800; }
+    .vip-copy b { color: var(--ts); font-weight: 800; }
     .vip-row {
       display: grid;
       grid-template-columns: 1fr 16px;
@@ -133,7 +133,7 @@
       border-radius: 50%;
       display: inline-grid;
       place-items: center;
-      color: #838793;
+      color: var(--tm);
       font-size: 11px;
       font-weight: 900;
     }
@@ -143,20 +143,20 @@
       border: 1px solid var(--line);
       border-radius: 5px;
       background: #fff;
-      color: #5c606b;
+      color: var(--ts);
       font-size: 12px;
       font-weight: 700;
     }
     .soft-btn.primary { border-color: var(--rose); background: var(--rose); color: #fff; }
 
     .side-nav { padding-top: 33px; }
-    .side-title { margin: 0 0 18px; padding: 0 15px 17px; border-bottom: 1px solid #dcd9d6; color: #111; font-size: 16px; font-weight: 900; }
+    .side-title { margin: 0 0 18px; padding: 0 15px 17px; border-bottom: 1px solid #dcd9d6; color: var(--tp); font-size: 16px; font-weight: 900; }
     .side-title a { color: inherit; text-decoration: none; }
     .nav-section { padding: 0 20px; margin-bottom: 14px; }
     .nav-section strong {
 display: block;
       margin-bottom: 11px;
-      color: #292d35;
+      color: var(--tp);
       font-size: 14px;
       font-weight: 900;
     }
@@ -165,7 +165,7 @@ display: grid;
       gap: 13px;
     }
     .nav-list a {
-color: #666b75;
+color: var(--ts);
       text-decoration: none;
       font-size: 12px;
       font-weight: 500;
@@ -178,8 +178,8 @@ color: #666b75;
     .biz-convert-inner { display: flex; align-items: center; gap: 10px; }
     .biz-convert-icon { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: #eef5ff; color: #1a3c6e; flex: 0 0 auto; }
     .biz-convert-text { display: grid; gap: 2px; min-width: 0; font-size: 11px; color: #777985; line-height: 1.35; }
-    .biz-convert-text strong { margin: 0; color: #292d35; font-size: 12px; }
-    .biz-chev { margin-left: auto; color: #a8b0bd; font-size: 11px; }
+    .biz-convert-text strong { margin: 0; color: var(--tp); font-size: 12px; }
+    .biz-chev { margin-left: auto; color: var(--tm); font-size: 11px; }
 
     .page { min-width: 0; }
 
@@ -246,7 +246,7 @@ height: 31px;
       border: 1px solid #ded8d5;
       border-radius: 7px;
       background: #fff;
-      color: #383b40;
+      color: var(--tp);
       text-align: center;
       overflow: hidden;
       transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
@@ -264,7 +264,7 @@ height: 31px;
     .status-card strong { display: block; color: #3e4249; font-size: 13px; font-weight: 600; line-height: 1.45; word-break: keep-all; overflow-wrap: break-word; }
 
     .section[aria-labelledby="bid-list-title"] .section-head { padding-bottom: 0; border-bottom: 0; }
-    #bid-list-title { color: #222831; font-size: 18px; font-weight: 900; }
+    #bid-list-title { color: var(--tp); font-size: 18px; font-weight: 900; }
     .status-card.status-active { border-color: var(--rose); box-shadow: 0 0 0 2px rgba(240, 59, 99, .12); }
     .empty { padding: 36px 18px; border: 1px solid var(--line); border-radius: 7px; color: var(--muted); text-align: center; }
     /* 입찰/유찰 탭 */
@@ -310,7 +310,7 @@ height: 28px;
       border: 1px solid var(--line);
       border-radius: 5px;
       background-color: #fff;
-      color: #4b5563;
+      color: var(--ts);
       font-size: 12px;
       font-weight: 700;
       appearance: none;
@@ -397,10 +397,10 @@ height: 28px;
       gap: 6px;
     }
     .bid-status::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; display: inline-block; }
-    .bid-oid { font-size: 11px; color: #999; }
+    .bid-oid { font-size: 11px; color: var(--tm); }
     .bid-row[data-status="auction-bid"] .bid-status { color: var(--navy); }
     .bid-row[data-status="successful-bid"] .bid-status { color: var(--navy); }
-    .bid-row[data-status="failed-bid"] .bid-status { color: #aaa; }
+    .bid-row[data-status="failed-bid"] .bid-status { color: var(--tm); }
     .bid-body {
       display: grid;
       grid-template-columns: 335px 448px 100px;
@@ -426,7 +426,7 @@ height: 28px;
     .bid-title-wrap { min-width: 0; }
     .bid-title {
       margin: 0 0 5px;
-      color: #222;
+      color: var(--tp);
       font-size: 13px;
       font-weight: 700;
       line-height: 1.42;
@@ -437,7 +437,7 @@ height: 28px;
       overflow: hidden;
     }
     .bid-title-origin {
-      display: block; margin-top: -2px; margin-bottom: 5px; color: #999; font-size: 11px; font-weight: 400;
+      display: block; margin-top: -2px; margin-bottom: 5px; color: var(--tm); font-size: 11px; font-weight: 400;
     }
     .bid-meta {
       display: grid;
@@ -452,10 +452,10 @@ height: 28px;
       display: contents;
     }
     .bid-meta-row .ml {
-      color: #9aa3b2; font-size: 12px; font-weight: 600; white-space: nowrap;
+      color: var(--tm); font-size: 12px; font-weight: 600; white-space: nowrap;
     }
     .bid-meta-row .mv {
-      color: #222; font-size: 12px; font-weight: 600; overflow-wrap: anywhere;
+      color: var(--tp); font-size: 12px; font-weight: 600; overflow-wrap: anywhere;
     }
     .bidder-status-win { color: var(--rose) !important; }
     .bid-actions {
@@ -494,7 +494,7 @@ height: 28px;
     }
   .profile-id { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .profile-id .profile-name { display: inline; margin: 0; }
-  .profile-id .profile-tier { display: inline-flex; align-items: center; margin: 0; padding: 2px 9px; border-radius: 5px; background: #f1f2f4; color: var(--grade-vip); font-size: 12px; font-weight: 700; line-height: 1.4; }
+  .profile-id .profile-tier { display: inline-flex; align-items: center; margin: 0; padding: 2px 9px; border-radius: 5px; background:#F5F7FA; color: var(--grade-vip); font-size: 12px; font-weight: 700; line-height: 1.4; }
   .profile-id + .vip-copy { margin: 4px 0 0; padding-right: 0; }
   </style>
 </head>

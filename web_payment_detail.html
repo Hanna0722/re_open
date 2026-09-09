@@ -14,7 +14,7 @@
     :root {
       --rose: #E8385A;
       --rose-h: #C42F4C;
-      --border: #e0e4eb;
+      --border: #E0E4EB;
       --navy: #1A3C6E;
       --text: #33363d;
       --line: #e5dbd7;
@@ -63,24 +63,24 @@
     .profile-card { height: 120px; padding: 19px 22px 12px; background: #fbf7f5; }
     .profile-main { display: flex; align-items: center; gap: 13px; }
     .avatar { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; flex: 0 0 auto; background: #ffe7ef; color: var(--rose); font-size: 22px; font-weight: 800; }
-    .profile-name { display: block; margin-bottom: 3px; color: #262a31; font-size: 16px; font-weight: 800; line-height: 1.25; }
+    .profile-name { display: block; margin-bottom: 3px; color: var(--tp); font-size: 16px; font-weight: 800; line-height: 1.25; }
     .profile-tier { color: var(--grade-vip); font-size: 12px; font-weight: 800; }
-    .vip-copy { margin: 18px 0 6px; color: #5c6270; font-size: 12px; font-weight: 600; }
-    .vip-copy b { color: #454b58; font-weight: 800; }
+    .vip-copy { margin: 18px 0 6px; color: var(--ts); font-size: 12px; font-weight: 600; }
+    .vip-copy b { color: var(--ts); font-weight: 800; }
     .vip-row { display: grid; grid-template-columns: 1fr 16px; align-items: center; gap: 8px; }
     .vip-progress { height: 8px; border-radius: 999px; background: #eee2de; overflow: hidden; }
     .vip-progress span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #ff8499 0%, var(--rose) 100%); }
-    .help-dot { width: 16px; height: 16px; border: 1.5px solid #9ea1aa; border-radius: 50%; display: inline-grid; place-items: center; color: #838793; font-size: 11px; font-weight: 900; }
+    .help-dot { width: 16px; height: 16px; border: 1.5px solid #9ea1aa; border-radius: 50%; display: inline-grid; place-items: center; color: var(--tm); font-size: 11px; font-weight: 900; }
     .profile-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 11px; }
-    .soft-btn { height: 26px; border: 1px solid #e5dbd7; border-radius: 5px; background: #fff; color: #5c606b; font-size: 12px; font-weight: 700; }
+    .soft-btn { height: 26px; border: 1px solid #e5dbd7; border-radius: 5px; background: #fff; color: var(--ts); font-size: 12px; font-weight: 700; }
     .side-nav { padding-top: 33px; }
-    .side-title { margin: 0 0 18px; padding: 0 15px 17px; border-bottom: 1px solid #dcd9d6; color: #111; font-size: 16px; font-weight: 900; }
+    .side-title { margin: 0 0 18px; padding: 0 15px 17px; border-bottom: 1px solid #dcd9d6; color: var(--tp); font-size: 16px; font-weight: 900; }
     .side-title a, .side-title a:visited { color: inherit; text-decoration: none; }
     .nav-section { padding: 0 20px; margin-bottom: 14px; }
-    .nav-section strong { display: block; margin-bottom: 11px; color: #292d35; font-size: 14px; font-weight: 900; }
+    .nav-section strong { display: block; margin-bottom: 11px; color: var(--tp); font-size: 14px; font-weight: 900; }
     .nav-list { display: grid; gap: 13px; }
-    .nav-list a { color: #666b75; text-decoration: none; font-size: 12px; font-weight: 500; }
-    .nav-list a:hover, .nav-list a.active { color: var(--rose); font-weight: 800; }
+    .nav-list a { color: var(--ts); text-decoration: none; font-size: 12px; font-weight: 600; }
+    .nav-list a:hover, .nav-list a.active { color: var(--rose); font-weight: 700; }
     .biz-convert-section { padding: 0 12px 20px; }
     .biz-convert-link { display:block;text-decoration:none;border-radius:10px;background:linear-gradient(135deg,#eef3fb,#e6edf8);border:1px solid #c8d8ef;overflow:hidden; }
     .biz-convert-inner { display:flex;align-items:center;gap:10px;padding:12px 12px 12px 14px; }
@@ -124,7 +124,7 @@
     }
     .order-page-head__link {
       text-align: right;
-      font-size: 14px; color: #666;
+      font-size: 14px; color: var(--ts);
       text-decoration: none;
       background: none; border: 0; cursor: pointer; padding: 0;
     }
@@ -146,7 +146,7 @@
     .confirm-modal-card {
       width: min(420px, calc(100vw - 32px));
       background: #fff;
-      border-radius: 16px;
+      border-radius:12px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, .18);
       overflow: hidden;
     }
@@ -175,7 +175,7 @@
       font-weight: 700;
       color: var(--ts);
       border-bottom: 2px solid var(--border);
-      background: #FAFBFC;
+      background:#F5F7FA;
     }
     .bid-hist-table th:last-child { padding-right: 34px; }
     .bid-hist-table td {
@@ -228,7 +228,7 @@
       width: 220px; height: 220px; flex-shrink: 0;
       border-radius: 6px; overflow: hidden;
       border: 1px solid #eee; background: #f5f5f5;
-      display: grid; place-items: center; color: #ccc; font-size: 42px;
+      display: grid; place-items: center; color: var(--tm); font-size: 42px;
     }
     .order-item__image i { opacity: .45; }
     .order-item__image img { width: 100%; height: 100%; object-fit: cover; }
@@ -289,12 +289,12 @@
       line-height: 1.55;
       margin-bottom: 0;
     }
-    .order-item__name-ko { font-size: 15px; font-weight: 900; color: #101827; letter-spacing: 0; line-height: 1.45; }
+    .order-item__name-ko { font-size: 15px; font-weight: 900; color: var(--tp); letter-spacing: 0; line-height: 1.45; }
     .order-item__name-origin { font-size: 12px; font-weight: 500; color: #9ca3af; }
     .order-item__meta-list { display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 16px 18px; margin: 0; }
     .order-item__meta-list dt { position: relative; font-size: 13px; font-weight: 700; color: #6d7481; }
     .order-item__meta-list dt::before { content: ""; margin: 0; }
-    .order-item__meta-list dd { margin: 0; font-size: 13px; color: #263142; }
+    .order-item__meta-list dd { margin: 0; font-size: 13px; color: var(--tp); }
     .order-item__meta-list a { display: block; width: fit-content; color: #2584ff; font-size: 13px; font-weight: 700; text-decoration: none; margin: 2px 0 0; }
     .order-status-card {
       grid-area: status;
@@ -316,11 +316,11 @@
       gap: 16px 18px;
       margin: 0;
       font-size: 14px;
-      color: #263142;
+      color: var(--tp);
     }
     .order-status-card__list dt { font-weight: 700; color: #6d7481; }
     .order-status-card__list dt::before { content: ""; margin: 0; }
-    .order-status-card__list dd { margin: 0; font-family:var(--font-num); font-weight: 500; color: #263142; }
+    .order-status-card__list dd { margin: 0; font-family:var(--font-num); font-weight: 500; color: var(--tp); }
     .order-status-card__list dd strong { font-weight: 900; }
 
     /* 2컬럼 컨테이너 */
@@ -334,7 +334,7 @@
     .order-title b { font-weight: 900; }
     .order-title__left { display: flex; align-items: center; gap: 12px; }
     .order-title__sub {
-      font-size: 12px; font-weight: 600; color: #666;
+      font-size: 12px; font-weight: 600; color: var(--ts);
       border: 0; background: none; padding: 0; cursor: pointer;
       text-decoration: none;
     }
@@ -402,16 +402,16 @@
     .pay-badge { font-size: 16px; font-weight: 800; padding: 0; border-radius: 0; background: transparent; }
     .pay-badge.first  { color: var(--navy); }
     .pay-badge.second { color: var(--navy); }
-    .pay-card__date { font-size: 12px; color: #444444; font-family:var(--font-sans); }
-    .pay-card__receipt { border: 0; background: none; padding: 0; color: #444444; font: inherit; font-size: 12px; cursor: pointer; }
+    .pay-card__date { font-size: 12px; color: var(--ts); font-family:var(--font-sans); }
+    .pay-card__receipt { border: 0; background: none; padding: 0; color: var(--ts); font: inherit; font-size: 12px; cursor: pointer; }
     .pay-card__receipt:hover { color: var(--navy); text-decoration: underline; }
 
     .receipt-modal-card { width: min(506px, calc(100vw - 24px)); border-radius: 8px; }
-    .receipt-modal-body { max-height: 88vh; overflow: auto; padding: 28px 30px; background: #fafafa; color: #111; }
+    .receipt-modal-body { max-height: 88vh; overflow: auto; padding: 28px 30px; background:#F5F7FA; color: var(--tp); }
     .receipt-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
     .receipt-head h2 { margin: 0; font-size: 28px; font-weight: 900; letter-spacing: 0; }
     .receipt-actions { display: inline-flex; align-items: center; gap: 10px; }
-    .receipt-icon-btn { border: 0; background: none; color: #555; font-size: 24px; cursor: pointer; line-height: 1; }
+    .receipt-icon-btn { border: 0; background: none; color: var(--ts); font-size: 24px; cursor: pointer; line-height: 1; }
     .receipt-icon-btn:hover { color: var(--navy); }
     .receipt-tools { display: grid; grid-template-columns: 176px 1fr 30px; gap: 12px; margin-bottom: 24px; }
     .receipt-tools select,
@@ -420,15 +420,15 @@
     .receipt-paper { padding: 30px 26px; border-radius: 6px; background: #fff; box-shadow: 0 5px 18px rgba(0, 0, 0, .08); }
     .receipt-list { display: grid; gap: 8px; margin: 0; }
     .receipt-row { display: grid; grid-template-columns: 96px 1fr; gap: 14px; align-items: start; font-size: 15px; line-height: 1.35; }
-    .receipt-row dt { color: #111; font-weight: 500; }
-    .receipt-row dd { margin: 0; text-align: right; font-weight: 800; color: #111; word-break: keep-all; }
+    .receipt-row dt { color: var(--tp); font-weight: 500; }
+    .receipt-row dd { margin: 0; text-align: right; font-weight: 800; color: var(--tp); word-break: keep-all; }
     .receipt-row.receipt-total { margin: 14px 0; padding: 14px 0; border-top: 1px solid #d9d9d9; border-bottom: 1px solid #d9d9d9; color: #005bc4; }
     .receipt-row.receipt-total dt,
     .receipt-row.receipt-total dd { color: #005bc4; }
     .receipt-company { margin-top: 14px; padding-top: 12px; border-top: 1px solid #d9d9d9; }
-    .receipt-note { margin: 16px 0 20px; color: #666; font-size: 12px; }
+    .receipt-note { margin: 16px 0 20px; color: var(--ts); font-size: 12px; }
     .receipt-nice { color: #a5a5a5; font-size: 20px; font-weight: 900; letter-spacing: 0; }
-    .receipt-footer { margin-top: 10px; color: #555; font-size: 11px; line-height: 1.7; }
+    .receipt-footer { margin-top: 10px; color: var(--ts); font-size: 11px; line-height: 1.7; }
     .receipt-footer strong { display: block; margin-bottom: 6px; color: #333; font-size: 12px; }
     @media (max-width: 560px) {
       .receipt-modal-body { padding: 22px 18px; }
@@ -441,7 +441,7 @@
     .pay-rows { list-style: none; margin: 0; padding: 0; }
     .pay-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid #f6f6f6; }
     .pay-row--spacer { visibility: hidden; pointer-events: none; }
-    .pay-row .lbl { font-size: 14px; color: #555; }
+    .pay-row .lbl { font-size: 14px; color: var(--ts); }
     .pay-row .val { font-size: 14px; color: #000; font-family:var(--font-sans); }
     .pay-row .val.muted { color: #000000; }
     .pay-row .val.discount { color: var(--rose); }
@@ -449,7 +449,7 @@
 
     .tooltip-wrap { position: relative; display: inline-flex; align-items: center; margin-left: 4px; vertical-align: middle; }
     .tooltip-icon { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border: 1px solid #2b8cff; border-radius: 2px; background: #fff; color: #2b8cff; font-size: 12px; font-weight: 700; line-height: 1; cursor: pointer; font-family:var(--font-num); }
-    .tooltip-box { position: absolute; left: 50%; bottom: calc(100% + 8px); z-index: 20; display: none; min-width: 138px; padding: 8px 10px; border: 1px solid #1d78ff; background: #fff; color: #111; font-size: 11px; font-weight: 400; line-height: 1.45; text-align: center; white-space: nowrap; transform: translateX(-50%); box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
+    .tooltip-box { position: absolute; left: 50%; bottom: calc(100% + 8px); z-index: 20; display: none; min-width: 138px; padding: 8px 10px; border: 1px solid #1d78ff; background: #fff; color: var(--tp); font-size: 11px; font-weight: 400; line-height: 1.45; text-align: center; white-space: nowrap; transform: translateX(-50%); box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
     .tooltip-box::after { content: ""; position: absolute; left: 50%; top: 100%; width: 8px; height: 8px; border-right: 1px solid #1d78ff; border-bottom: 1px solid #1d78ff; background: #fff; transform: translate(-50%, -4px) rotate(45deg); }
     .tooltip-grid { display: grid; grid-template-columns: 64px 1fr; gap: 4px 12px; text-align: center; }
     .tooltip-wrap:hover .tooltip-box, .tooltip-wrap:focus-within .tooltip-box { display: block; }
@@ -460,14 +460,14 @@
     .pay-etc > summary {
       list-style: none; cursor: pointer;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 9px 0; font-size: 14px; color: #555;
+      padding: 9px 0; font-size: 14px; color: var(--ts);
     }
     .pay-etc > summary::-webkit-details-marker { display: none; }
-    .pay-etc > summary .chev { font-size: 11px; color: #aaa; transition: transform .2s; }
+    .pay-etc > summary .chev { font-size: 11px; color: var(--tm); transition: transform .2s; }
     .pay-etc[open] > summary .chev { transform: rotate(180deg); }
     .pay-etc__inner { padding: 2px 0 8px; }
     .pay-etc__inner .pay-row { padding: 7px 12px; border-bottom: 0; background: #fff; border-radius: 6px; margin-top: 4px; }
-    .pay-etc__inner .pay-row .lbl { font-size: 14px; color: #777; }
+    .pay-etc__inner .pay-row .lbl { font-size: 14px; color: var(--ts); }
 
     /* 합계 영역: margin-top:auto 로 카드 바닥에 고정 → 좌우 같은 평행선 */
     .pay-foot { margin-top: auto; padding-top: 10px; }
@@ -491,13 +491,13 @@
     .pay-grandtotal .val { font-size: 20px; font-weight: 800; color: #000; font-family:var(--font-num); }
     .pay-grandtotal .val-sm { font-size: 13px; font-weight: 600; color: rgba(28, 28, 28, .6); font-family:var(--font-num); }
     .payment-switch { display: inline-flex; align-items: center; gap: 8px; }
-    .payment-switch__label { min-width: 72px; text-align: center; color: #555; font-size: 14px; font-weight: 800; }
+    .payment-switch__label { min-width: 72px; text-align: center; color: var(--ts); font-size: 14px; font-weight: 800; }
     .payment-switch__btn {
       width: 30px; height: 30px; border: 1px solid var(--line); border-radius: 50%;
       background: #fff; color: var(--navy); font-size: 16px; font-weight: 900; cursor: pointer;
       display: inline-flex; align-items: center; justify-content: center;
     }
-    .payment-switch__btn:hover { border-color: var(--navy); background: #f7f9fc; }
+    .payment-switch__btn:hover { border-color: var(--navy); background:#F5F7FA; }
 
     /* 본문 풀폭 스택에서 우측 메모/묶음 카드 기본 패딩 보정 */
     .order__stack .order-list-box { padding: 24px; }
@@ -536,15 +536,15 @@
     /* 묶음배송 구성 상품 테이블 - 5행 초과 시 스크롤 */
     .bundle-table-wrap { max-height: 494px; overflow-y: auto; border: 1px solid #dde1e7; border-radius: 8px; }
     .bundle-order-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    .bundle-order-table thead th { position: sticky; top: 0; z-index: 1; background: #fbf7f5; border-bottom: 1px solid #dde1e7; padding: 10px 12px; text-align: center; font-weight: 500; color: #444; white-space: nowrap; }
+    .bundle-order-table thead th { position: sticky; top: 0; z-index: 1; background: #fbf7f5; border-bottom: 1px solid #dde1e7; padding: 10px 12px; text-align: center; font-weight: 500; color: var(--ts); white-space: nowrap; }
     .bundle-order-table tbody td { border-bottom: 1px solid #dde1e7; padding: 10px 12px; vertical-align: middle; color: #333; text-align: center; }
     .bundle-order-table tbody tr:last-child td { border-bottom: none; }
     .bundle-order-table .product-info { text-align: left; }
-    .bundle-order-table .item-tag { display: block; font-size: 12px; color: #666; margin-bottom: 4px; }
-    .bundle-order-table .item-name { font-size: 13px; color: #222; line-height: 1.5; }
+    .bundle-order-table .item-tag { display: block; font-size: 12px; color: var(--ts); margin-bottom: 4px; }
+    .bundle-order-table .item-name { font-size: 13px; color: var(--tp); line-height: 1.5; }
     .bundle-order-table .price-cell { font-family:var(--font-num); font-weight: 700; color: #333; font-size: 14px; white-space: nowrap; }
-    .bundle-order-table .date-cell { font-family:var(--font-num); font-size: 12px; color: #666; white-space: nowrap; }
-    .bundle-thumb { width: 60px; height: 60px; flex-shrink: 0; border-radius: 6px; overflow: hidden; border: 1px solid #eee; background: #f5f5f5; display: grid; place-items: center; color: #ccc; font-size: 20px; }
+    .bundle-order-table .date-cell { font-family:var(--font-num); font-size: 12px; color: var(--ts); white-space: nowrap; }
+    .bundle-thumb { width: 60px; height: 60px; flex-shrink: 0; border-radius: 6px; overflow: hidden; border: 1px solid #eee; background: #f5f5f5; display: grid; place-items: center; color: var(--tm); font-size: 20px; }
     .bundle-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
     /* 메모 */
@@ -569,10 +569,10 @@
     .order-memo-list .msg-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
     .order-memo-list .msg-label { font-size: 12px; font-weight: 900; color: var(--faint); }
     .order-memo-list .msg.agent .msg-label { color: var(--navy); }
-    .order-memo-list .msg-who { font-size: 13px; font-weight: 800; color: #151922; }
+    .order-memo-list .msg-who { font-size: 13px; font-weight: 800; color: var(--tp); }
     .order-memo-list .msg.agent .msg-who { color: var(--navy); }
     .order-memo-list .msg-date { color: var(--faint); font-size: 11px; }
-    .order-memo-list .msg-bubble { font-size: 13px; color: #383b40; line-height: 1.7; }
+    .order-memo-list .msg-bubble { font-size: 13px; color: var(--tp); line-height: 1.7; }
     .order-memo-list .msg.agent .msg-bubble { padding-left: 14px; border-left: 2px solid #dde4ee; }
     .order-memo-list .msg-bubble p { margin: 0 0 8px; }
     .order-memo-list .msg-bubble p:last-child { margin-bottom: 0; }
@@ -594,10 +594,10 @@
       margin-bottom: 8px;
       font-size: 13px; font-weight: 700; color: var(--navy);
     }
-    .admin-memo-head time { color: #999; font-weight: 600; font-family:var(--font-num); }
+    .admin-memo-head time { color: var(--tm); font-weight: 600; font-family:var(--font-num); }
     .admin-memo-content { font-size: 13px; line-height: 1.85; color: #333; }
     .admin-memo-content p { margin: 0 0 4px; }
-    .admin-memo-content .admin-memo-highlight { margin-top: 16px; font-weight: 700; color: #222; }
+    .admin-memo-content .admin-memo-highlight { margin-top: 16px; font-weight: 700; color: var(--tp); }
 
     /* 문의 버튼 */
     .inquiry-wrap { display: flex; justify-content: center; gap: 24px; margin-top: 6px; }
@@ -615,7 +615,7 @@
     .member-tier-icon i { line-height:1; }
   .profile-id { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .profile-id .profile-name { display: inline; margin: 0; }
-  .profile-id .profile-tier { display: inline-flex; align-items: center; margin: 0; padding: 2px 9px; border-radius: 5px; background: #f1f2f4; color: var(--grade-vip); font-size: 12px; font-weight: 700; line-height: 1.4; }
+  .profile-id .profile-tier { display: inline-flex; align-items: center; margin: 0; padding: 2px 9px; border-radius: 5px; background:#F5F7FA; color: var(--grade-vip); font-size: 12px; font-weight: 700; line-height: 1.4; }
   .profile-id + .vip-copy { margin: 4px 0 0; padding-right: 0; }
   </style>
 </head>
@@ -748,7 +748,7 @@
               <dt>낙찰가</dt>
               <dd>￥ 46,000</dd>
               <dt>낙찰상품</dt>
-              <dd style="display:flex;flex-direction:column;align-items:flex-start;gap:5px">비공개<button type="button" style="height:24px;padding:0 10px;border:1px solid var(--line);border-radius:5px;background:#fff;color:#555;font-size:11px;font-weight:700;cursor:pointer">공개로 변경</button></dd>
+              <dd style="display:flex;flex-direction:column;align-items:flex-start;gap:5px">비공개<button type="button" style="height:24px;padding:0 10px;border:1px solid var(--line);border-radius:5px;background:#fff;color:var(--ts);font-size:11px;font-weight:700;cursor:pointer">공개로 변경</button></dd>
             </dl>
           </div>
           <aside class="order-status-card">
@@ -897,11 +897,11 @@
                 </tr>
                 <tr>
                   <th>개인통관고유부호<br>(사업자번호)</th><td class="mono">P932150008388</td>
-                  <th class="rgroup">안심케어플러스</th><td><span data-care-plus-toggle data-care-active="true" style="display:flex;align-items:center;gap:8px"><strong data-care-plus-status style="color:red">신청</strong><button data-care-plus-button class="order-info-action-btn" type="button" style="height:24px;padding:0 10px;border:1px solid var(--line);border-radius:5px;background:#fff;color:#555;font-size:11px;font-weight:700;cursor:pointer">신청 해제</button></span></td>
+                  <th class="rgroup">안심케어플러스</th><td><span data-care-plus-toggle data-care-active="true" style="display:flex;align-items:center;gap:8px"><strong data-care-plus-status style="color:red">신청</strong><button data-care-plus-button class="order-info-action-btn" type="button" style="height:24px;padding:0 10px;border:1px solid var(--line);border-radius:5px;background:#fff;color:var(--ts);font-size:11px;font-weight:700;cursor:pointer">신청 해제</button></span></td>
                 </tr>
                 <tr>
                   <th rowspan="3">배송지</th><td rowspan="3">06234<br>서울특별시 강남구 테헤란로 123<br>비드바이빌딩 401호</td>
-                  <th class="rgroup">묶음상태</th><td>묶음배송 <button class="order-info-action-btn" type="button" style="height:24px;padding:0 10px;border:1px solid var(--line);border-radius:5px;background:#fff;color:#555;font-size:11px;font-weight:700;cursor:pointer">묶음 해제</button></td>
+                  <th class="rgroup">묶음상태</th><td>묶음배송 <button class="order-info-action-btn" type="button" style="height:24px;padding:0 10px;border:1px solid var(--line);border-radius:5px;background:#fff;color:var(--ts);font-size:11px;font-weight:700;cursor:pointer">묶음 해제</button></td>
                 </tr>
                 <tr>
                   <th class="rgroup">발송방법</th><td>비바항공특송</td>
@@ -911,7 +911,7 @@
                 </tr>
                 <tr>
                   <th>연락처</th><td class="mono">010-1234-5678</td>
-                  <th class="rgroup">운송장번호</th><td class="mono">EJ123456789JP <button class="order-info-action-btn" type="button" style="height:24px;padding:0 10px;border:1px solid var(--line);border-radius:5px;background:rgb(201, 201, 201);color:#555;font-size:11px;font-weight:700;cursor:pointer">배송조회</button></td>
+                  <th class="rgroup">운송장번호</th><td class="mono">EJ123456789JP <button class="order-info-action-btn" type="button" style="height:24px;padding:0 10px;border:1px solid var(--line);border-radius:5px;background:rgb(201, 201, 201);color:var(--ts);font-size:11px;font-weight:700;cursor:pointer">배송조회</button></td>
                 </tr>
               </tbody>
             </table>

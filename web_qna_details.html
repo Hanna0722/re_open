@@ -64,18 +64,18 @@
     .side-title strong { display: block; color: var(--navy); font-size: 22px; font-weight: 900; }
     .side-title span { display: block; color: var(--navy); font-size: 11px; font-weight: 700; letter-spacing: .06em; margin-top: 1px; }
     .nav-list { display: grid; gap: 0; margin-top: 6px; }
-    .nav-list a { display: block; padding: 9px 20px; color: #4a4f5a; font-size: 13px; font-weight: 500; border-left: 3px solid transparent; }
+    .nav-list a { display: block; padding: 9px 20px; color: var(--ts); font-size: 13px; font-weight: 600; border-left: 3px solid transparent; }
     .nav-list a:hover { color: var(--rose); }
-    .nav-list a.active { color: var(--rose); font-weight: 800; border-left-color: var(--rose); background: #fff5f7; }
+    .nav-list a.active { color: var(--rose); font-weight: 700; border-left-color: var(--rose); background: #fff5f7; }
 
     /* ── 메인 ── */
     .page-head { display: flex; align-items: center; justify-content: space-between; margin: 0 0 18px; }
-    .page-head h2 { margin: 0; color: #111; font-size: 20px; font-weight: 900; }
+    .page-head h2 { margin: 0; color: var(--tp); font-size: 20px; font-weight: 900; }
     .outline-pill {
       display: inline-flex; align-items: center; gap: 6px;
       height: 34px; padding: 0 14px;
       border: 1px solid var(--line); border-radius: 999px;
-      background: #fff; color: #5c606b;
+      background: #fff; color: var(--ts);
       font-size: 12px; font-weight: 700;
     }
     .outline-pill:hover { border-color: var(--rose); color: var(--rose); }
@@ -95,17 +95,17 @@
       padding: 16px 4px;
       border-bottom: 1px solid var(--line-soft);
     }
-    .detail-title { color: #151922; font-size: 16px; font-weight: 800; min-width: 0; }
+    .detail-title { color: var(--tp); font-size: 16px; font-weight: 800; min-width: 0; }
     .status-text { color: #2e9e4f; font-size: 12px; font-weight: 800; flex-shrink: 0; }
     .detail-meta {
       display: flex;
       flex-wrap: wrap;
       gap: 6px 22px;
       padding: 11px 4px;
-      color: #6b7280;
+      color: var(--ts);
       font-size: 12px;
     }
-    .detail-meta b { color: #41454f; font-weight: 800; margin-right: 5px; }
+    .detail-meta b { color: var(--ts); font-weight: 800; margin-right: 5px; }
     .detail-meta .item-tag { color: var(--rose); font-weight: 800; }
 
     /* ── 문의/답변 목록 ── */
@@ -117,7 +117,7 @@
     .msg-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
     .msg-label { font-size: 12px; font-weight: 900; color: var(--faint); }
     .msg.agent .msg-label { color: var(--navy); }
-    .msg-who { font-size: 13px; font-weight: 800; color: #151922; }
+    .msg-who { font-size: 13px; font-weight: 800; color: var(--tp); }
     .msg.agent .msg-who { color: var(--navy); }
     .msg-date { color: var(--faint); font-size: 11px; }
 
@@ -136,7 +136,7 @@
 
     .msg-bubble {
       font-size: 13px;
-      color: #383b40;
+      color: var(--tp);
       line-height: 1.7;
     }
     .msg.agent .msg-bubble { padding-left: 14px; border-left: 2px solid #dde4ee; }
@@ -152,7 +152,7 @@
       border: 1px solid var(--line);
       border-radius: 4px;
       background: #fff;
-      color: #5c606b;
+      color: var(--ts);
       font-size: 12px;
       font-weight: 600;
     }
@@ -167,7 +167,7 @@
       padding: 16px 18px;
       margin-bottom: 22px;
     }
-    .reinquiry-title { display: flex; align-items: center; gap: 7px; color: #151922; font-size: 14px; font-weight: 800; margin-bottom: 10px; }
+    .reinquiry-title { display: flex; align-items: center; gap: 7px; color: var(--tp); font-size: 14px; font-weight: 800; margin-bottom: 10px; }
     .reinquiry-title i { color: var(--rose); font-size: 13px; }
     .textarea {
       width: 100%;
@@ -187,7 +187,7 @@
       display: inline-flex; align-items: center; gap: 7px;
       height: 36px; padding: 0 14px;
       border: 1px solid var(--line); border-radius: 5px;
-      background: #fff; color: #5c606b;
+      background: #fff; color: var(--ts);
       font-size: 12px; font-weight: 700;
     }
     .file-btn:hover { border-color: var(--rose); color: var(--rose); }
@@ -218,8 +218,8 @@
       font-weight: 800;
       white-space: nowrap;
     }
-    .big-btn.line { border: 1px solid var(--line); background: #fff; color: #626672; }
-    .big-btn.line:hover { border-color: #b9b2ad; color: #41454f; }
+    .big-btn.line { border: 1px solid var(--line); background: #fff; color: var(--ts); }
+    .big-btn.line:hover { border-color: var(--tm); color: var(--ts); }
   </style>
 </head>
 <body>

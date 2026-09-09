@@ -44,7 +44,7 @@ body{
 }
 .phone-notch{ display:none; }
 .notch-island{
-  background:#000;width:120px;height:28px;border-radius:14px;
+  background:#000;width:120px;height:28px;border-radius:12px;
   display:flex;align-items:center;justify-content:center;gap:8px;
 }
 .notch-cam{width:10px;height:10px;background:#1a1a1a;border-radius:50%;border:1.5px solid #333}
@@ -58,7 +58,7 @@ body{
 .app-body::-webkit-scrollbar{display:none}
 .app-header{
   background:#fff;
-  border-bottom:1px solid #D9E0E9;
+  border-bottom:1px solid #E0E4EB;
   position:sticky;top:0;z-index:80;
   box-shadow:0 1px 0 rgba(32,36,43,.04);
 }
@@ -124,7 +124,7 @@ body{
   padding:0 10px 0 8px;color:#333;font-size:13px;
   font-family:inherit;
 }
-.app-search input::placeholder{color:#99A2B0}
+.app-search input::placeholder{color:var(--tm)}
 .app-search button{
   width:42px;height:100%;
   border:0;background:var(--rose);color:#fff;
@@ -140,7 +140,7 @@ body{
 .channel-tabs::-webkit-scrollbar{display:none}
 .ch-tab{
   display:flex;align-items:center;gap:5px;
-  padding:9px 12px 10px;font-size:11px;font-weight:700;color:#707070;
+  padding:9px 12px 10px;font-size:11px;font-weight:700;color:var(--ts);
   white-space:nowrap;cursor:pointer;border:0;border-bottom:2px solid transparent;background:transparent;
   flex-shrink:0;font-family:inherit;
   scroll-snap-align:start;
@@ -253,20 +253,20 @@ body{
 .sc-lbl{font-size:10px;color:var(--ts);font-weight:500;white-space:nowrap;text-align:center}
 .convenience-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(17,24,39,.46);z-index:910}
 .convenience-overlay.open{display:flex}
-.convenience-popup{width:min(742px,calc(100vw - 28px));max-width:430px;background:#fff;border:1px solid var(--border);box-shadow:0 18px 48px rgba(15,23,42,.2);position:relative}
+.convenience-popup{width:min(742px,calc(100vw - 28px));max-width:430px;background:#fff;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.18);position:relative}
 .convenience-head{height:50px;padding:0 46px 0 16px;border-bottom:1px solid var(--border);display:flex;align-items:center}
-.convenience-title{font-size:15px;font-weight:900;color:#111827}
-.convenience-close{position:absolute;top:10px;right:10px;width:28px;height:28px;border:0;background:#F5F7FA;color:#697386;border-radius:4px;display:grid;place-items:center;z-index:2}
+.convenience-title{font-size:15px;font-weight:900;color:var(--tp)}
+.convenience-close{position:absolute;top:10px;right:10px;width:28px;height:28px;border:0;background:#F5F7FA;color:var(--ts);border-radius:4px;display:grid;place-items:center;z-index:2}
 .convenience-tabs{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);background:#fbfcfd}
-.convenience-tab{min-height:44px;padding:8px;border:0;border-right:1px solid var(--border);border-bottom:1px solid var(--border);background:transparent;color:#5D6675;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer;word-break:keep-all;line-height:1.25}
+.convenience-tab{min-height:44px;padding:8px;border:0;border-right:1px solid var(--border);border-bottom:1px solid var(--border);background:transparent;color:var(--ts);font-family:inherit;font-size:12px;font-weight:800;cursor:pointer;word-break:keep-all;line-height:1.25}
 .convenience-tab:nth-child(2){border-right:0}
 .convenience-tab:hover,.convenience-tab.active{background:#fff;color:var(--rose)}
 .convenience-tab.active{box-shadow:inset 0 -3px 0 var(--rose)}
 .convenience-body{padding:16px;min-height:150px;background:#fff}
 .convenience-panel{display:none}
 .convenience-panel.active{display:block}
-.convenience-panel-title{font-size:14px;font-weight:900;color:#111827;margin-bottom:6px}
-.convenience-panel-desc{font-size:12px;color:#6B7280;line-height:1.6}
+.convenience-panel-title{font-size:14px;font-weight:900;color:var(--tp);margin-bottom:6px}
+.convenience-panel-desc{font-size:12px;color:var(--ts);line-height:1.6}
 .section{padding:14px}
 .sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .sec-title{font-size:16px;font-weight:700;color:var(--tp)}
@@ -288,7 +288,7 @@ body{
 .brand-scroll::-webkit-scrollbar{display:none}
 .brand-chip{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:58px;cursor:pointer;flex-shrink:0;scroll-snap-align:start}
 .brand-img{
-  width:52px;height:52px;border-radius:14px;
+  width:52px;height:52px;border-radius:12px;
   background:#FFFFFF;border:1px solid var(--border);
   display:flex;align-items:center;justify-content:center;
   font-size:9px;font-weight:700;color:var(--ts);overflow:hidden;
@@ -308,7 +308,7 @@ body{
 }
 .best-card{
   background:#fff;border:1px solid #E8ECF2;border-radius:0;
-  overflow:hidden;cursor:pointer;box-shadow:0 1px 4px rgba(17,24,39,.04);
+  overflow:hidden;cursor:pointer;box-shadow:0 1px 0 rgba(32,36,43,.04);
 }
 .best-thumb{
   position:relative;
@@ -367,10 +367,10 @@ body{
 .notice-txt{flex:1;font-size:11px;color:var(--tp);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .notice-date{font-size:10px;color:var(--tm);white-space:nowrap}
 .rate-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:14px;margin-top:10px}
-.rate-title{font-size:16px;font-weight:700;color:#111827;margin-bottom:8px}
+.rate-title{font-size:16px;font-weight:700;color:var(--tp);margin-bottom:8px}
 .rate-desc{font-size:11px;color:var(--ts);line-height:1.55;margin-bottom:10px}
 .rate-list{display:grid;gap:6px}
-.rate-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;min-height:38px;padding:0 12px;background:#F7F8FA;border-radius:8px;font-size:12px}
+.rate-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;min-height:38px;padding:0 12px;background:#F5F7FA;border-radius:8px;font-size:12px}
 .rate-currency{display:flex;align-items:center;gap:7px;color:var(--tp);font-weight:700}
 .rate-flag{width:18px;height:13px;object-fit:cover;display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
 .rate-value{font-family:var(--font-num);color:var(--tp);font-weight:700;font-size:13px;white-space:nowrap}
@@ -412,7 +412,7 @@ body{
 }
 .drawer::-webkit-scrollbar{display:none}
 .drawer.open{transform:translateX(0);visibility:visible;pointer-events:auto;transition:transform .3s cubic-bezier(.4,0,.2,1)}
-.dr-action-btn.secondary{background:#fff;color:#4B5563;border-color:#D9E0E9}
+.dr-action-btn.secondary{background:#fff;color:var(--ts);border-color:#E0E4EB}
 .dr-mypage-sub a.active{color:var(--rose);font-weight:700}
 .user-drawer-ov{
   position:absolute;inset:0;background:rgba(0,0,0,0);
@@ -440,7 +440,7 @@ body{
   border-radius:50%;background:#ffe6ef;
   font-size:26px;flex:0 0 auto;
 }
-.user-name-strong{display:block;color:#111827;font-size:18px;font-weight:700;}
+.user-name-strong{display:block;color:var(--tp);font-size:18px;font-weight:700;}
 .user-vip-chip{
   display:inline-flex;margin-top:5px;
   padding:2px 12px;border-radius:999px;
@@ -451,24 +451,24 @@ body{
 .user-vip-bar span{display:block;width:100%;height:100%;background:var(--rose);}
 .user-asset-box{
   display:grid;grid-template-columns:1fr 1fr;
-  margin-top:12px;border:1px solid #d9e0e9;
+  margin-top:12px;border:1px solid #E0E4EB;
   border-radius:8px;background:#fff;overflow:hidden;
 }
 .user-asset-box div{padding:8px 12px;}
-.user-asset-box div+div{border-left:1px solid #d9e0e9;}
-.user-asset-box span{display:block;color:#a4acb8;font-size:10px;font-weight:700;}
-.user-asset-box strong{display:block;color:#151b29;font-size:16px;font-weight:700;}
-.user-status-grid{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #e5e7eb;background:#fff;}
+.user-asset-box div+div{border-left:1px solid #E0E4EB;}
+.user-asset-box span{display:block;color:var(--tm);font-size:10px;font-weight:700;}
+.user-asset-box strong{display:block;color:var(--tp);font-size:16px;font-weight:700;}
+.user-status-grid{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #E0E4EB;background:#fff;}
 .user-status-grid div{min-height:70px;display:grid;place-items:center;align-content:center;gap:4px;text-align:center;}
-.user-status-grid div+div{border-left:1px solid #e5e7eb;}
-.user-status-grid strong{color:#151b29;font-family:var(--font-num);font-size:26px;line-height:1;font-weight:700;}
+.user-status-grid div+div{border-left:1px solid #E0E4EB;}
+.user-status-grid strong{color:var(--tp);font-family:var(--font-num);font-size:26px;line-height:1;font-weight:700;}
 .user-status-grid div:nth-child(2) strong{color:var(--rose);}
-.user-status-grid span{color:#9aa3b2;font-size:10px;font-weight:700;}
+.user-status-grid span{color:var(--tm);font-size:10px;font-weight:700;}
 .user-menu-list{padding:0 0 12px;}
 .user-menu-item{
   min-height:45px;padding:0 18px 0 14px;
   display:flex;align-items:center;gap:12px;
-  color:#111827;font-size:14px;font-weight:700;border-bottom:0;
+  color:var(--tp);font-size:14px;font-weight:700;border-bottom:0;
 }
 button.user-menu-item{
   width:100%;border-top:0;border-right:0;border-left:0;
@@ -476,13 +476,13 @@ button.user-menu-item{
 }
 .user-menu-item .emoji,
 .user-menu-item .user-menu-icon{width:22px;text-align:center;font-size:17px;flex:0 0 auto;}
-.user-menu-item .chev{margin-left:auto;color:#a8b0bd;font-weight:700;font-size:15px;line-height:1;}
+.user-menu-item .chev{margin-left:auto;color:var(--tm);font-weight:700;font-size:15px;line-height:1;}
 .user-menu-section{border-bottom:0;}
 .user-menu-panel{display:none;padding:0 0 8px 56px;}
 .user-menu-section.is-open .user-menu-panel{display:grid;gap:0;}
-.user-menu-link{min-height:33px;display:flex;align-items:center;color:#666b75;font-size:14px;font-weight:500; text-decoration: none;}
-.user-menu-link.danger{color:#8f949f;}
-.user-menu-item.logout{margin-top:6px;border-top:1px solid #e5e7eb;color:#9aa3b2;font-weight:700;}
+.user-menu-link{min-height:33px;display:flex;align-items:center;color:var(--ts);font-size:14px;font-weight:500; text-decoration: none;}
+.user-menu-link.danger{color:var(--tm);}
+.user-menu-item.logout{margin-top:6px;border-top:1px solid #E0E4EB;color:var(--tm);font-weight:700;}
 .user-menu-item.logout .emoji{font-size:15px;}
 </style>
 </head>
@@ -852,8 +852,8 @@ button.user-menu-item{
         <div class="cs-card">
           <div class="cs-card-hd">편의연락정보</div>
           <div class="cs-contact"><span class="cs-contact-ico" style="color:var(--navy)"><i class="fas fa-landmark" aria-hidden="true"></i></span><div class="cs-contact-body"><div class="cs-contact-name">관세청</div><div class="cs-contact-num">125</div></div></div>
-          <div class="cs-contact"><span class="cs-contact-ico" style="color:#6B7280"><i class="fas fa-user-tie" aria-hidden="true"></i></span><div class="cs-contact-body"><div class="cs-contact-name">대교관세사</div><div class="cs-contact-num">032-719-2196</div></div></div>
-          <div class="cs-contact"><span class="cs-contact-ico" style="color:#6B7280"><i class="fas fa-user-tie" aria-hidden="true"></i></span><div class="cs-contact-body"><div class="cs-contact-name">정운관세사</div><div class="cs-contact-num">032-752-5926</div></div></div>
+          <div class="cs-contact"><span class="cs-contact-ico" style="color:var(--ts)"><i class="fas fa-user-tie" aria-hidden="true"></i></span><div class="cs-contact-body"><div class="cs-contact-name">대교관세사</div><div class="cs-contact-num">032-719-2196</div></div></div>
+          <div class="cs-contact"><span class="cs-contact-ico" style="color:var(--ts)"><i class="fas fa-user-tie" aria-hidden="true"></i></span><div class="cs-contact-body"><div class="cs-contact-name">정운관세사</div><div class="cs-contact-num">032-752-5926</div></div></div>
           <div class="cs-contact"><span class="cs-contact-ico" style="color:var(--green)"><i class="fas fa-globe" aria-hidden="true"></i></span><div class="cs-contact-body"><div class="cs-contact-name">관세법인 천지인</div><div class="cs-contact-num">032-887-5144</div></div></div>
           <div class="cs-contact grp"><span class="cs-contact-ico" style="color:var(--amber)"><i class="fas fa-truck" aria-hidden="true"></i></span><div class="cs-contact-body"><div class="cs-contact-name">판토스</div><div class="cs-contact-num">032-744-1528</div></div></div>
           <div class="cs-contact"><span class="cs-contact-ico" style="color:var(--amber)"><i class="fas fa-envelope" aria-hidden="true"></i></span><div class="cs-contact-body"><div class="cs-contact-name">EMS</div><div class="cs-contact-num">1588-1300</div></div></div>

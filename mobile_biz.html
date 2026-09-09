@@ -19,7 +19,7 @@
       --text: #33363d;
       --line: #e5dbd7;
       --warm: #fbf7f5;
-      --border: #e0e4eb;
+      --border: #E0E4EB;
       --green: #3aad4e;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,7 +45,7 @@
       z-index: 90;
       width: 100%;
       background: #fff;
-      border-bottom: 1px solid #d9e0e9;
+      border-bottom: 1px solid #E0E4EB;
       box-shadow: 0 1px 0 rgba(32, 36, 43, .04);
     }
     .app-header-top {
@@ -103,7 +103,7 @@
       display: flex; align-items: center; gap: 14px;
     }
     .biz-hero-icon {
-      width: 52px; height: 52px; border-radius: 14px;
+      width: 52px; height: 52px; border-radius:12px;
       background: rgba(255,255,255,0.15);
       display: grid; place-items: center;
       font-size: 26px; flex-shrink: 0;
@@ -114,7 +114,7 @@
     /* 섹션 헤더 */
     .section-head {
       padding: 18px 16px 12px;
-      font-size: 15px; font-weight:700; color: #1a1a2e;
+      font-size: 15px; font-weight:700; color: var(--tp);
       border-bottom: 1px solid #f0ebe8;
       display: flex; align-items: center; gap: 8px;
     }
@@ -141,7 +141,7 @@
     .bt-label { padding: 11px 14px; color: var(--text); font-weight: 500; border-top: 1px solid #f0f0f4; font-size: 13px; }
     .bt-val { padding: 11px 14px; font-weight: 700; border-top: 1px solid #f0f0f4; color: var(--text); text-align: right; }
     .bt-val.navy { color: var(--navy); }
-    .bt-empty td { background: #fafbfc; }
+    .bt-empty td { background:#F5F7FA; }
 
     /* 안내 배너 */
     .info-banner {
@@ -161,7 +161,7 @@
     .form-wrap { padding: 0 16px 16px; }
 
     .form-row { margin-top: 20px; }
-    .form-label { display: block; font-size: 13px; font-weight: 700; color: #2b2f37; margin-bottom: 7px; }
+    .form-label { display: block; font-size: 13px; font-weight: 700; color: var(--tp); margin-bottom: 7px; }
     .form-label .req { color: var(--brand); font-size: 12px; margin-left: 3px; }
     .form-hint { display: block; font-size: 11px; color: var(--tm); margin-top: 5px; line-height: 1.45; }
     .form-input {
@@ -213,7 +213,7 @@
     .file-preview.show { display: flex; }
     .file-icon { color: var(--navy); font-size: 18px; }
     .file-name { flex: 1; font-size: 12px; font-weight: 600; color: #2e4a7a; word-break: break-all; }
-    .file-remove { background: none; border: none; color: #aaa; font-size: 20px; padding: 0; line-height: 1; flex-shrink: 0; }
+    .file-remove { background: none; border: none; color: var(--tm); font-size: 20px; padding: 0; line-height: 1; flex-shrink: 0; }
 
     /* 동의 체크 */
     .agree-box {
@@ -231,7 +231,7 @@
     }
     .agree-text { font-size: 13px; color: var(--ts); line-height: 1.5; }
     .agree-text a { color: var(--navy); text-decoration: underline; }
-    .agree-all-text { font-weight:700; color: #2b2f37; }
+    .agree-all-text { font-weight:700; color: var(--tp); }
 
     /* 제출 영역 */
     .submit-section { padding: 0 16px 16px; }
@@ -266,7 +266,7 @@
       background: #e8f7ec; display: grid; place-items: center;
       font-size: 32px; margin-bottom: 20px;
     }
-    .complete-title { font-size: 20px; font-weight:700; color: #1a1a2e; margin-bottom: 8px; }
+    .complete-title { font-size: 20px; font-weight:700; color: var(--tp); margin-bottom: 8px; }
     .complete-desc { font-size: 13px; color: var(--ts); line-height: 1.7; margin-bottom: 28px; }
 
     .step-list { width: 100%; display: grid; gap: 1px; background: var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 28px; }
@@ -277,7 +277,7 @@
       font-size: 12px; font-weight:700;
       display: inline-grid; place-items: center; flex-shrink: 0;
     }
-    .step-label { font-size: 13px; font-weight: 700; color: #2b2f37; }
+    .step-label { font-size: 13px; font-weight: 700; color: var(--tp); }
     .step-sub { font-size: 11px; color: var(--tm); margin-top: 1px; }
 
     .back-to-mypage {
