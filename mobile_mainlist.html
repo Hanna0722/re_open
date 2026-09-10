@@ -49,7 +49,7 @@ button,select{cursor:pointer}
 /* ── 거래 목록 필터 (web_mainlist 기준) ── */
 .trade-area{border-top:8px solid var(--border);margin-top:4px}
 .trade-head{min-height:42px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 10px 10px}
-.trade-head .list-title{margin:0;color:var(--tp);font-size:18px;font-weight:900}
+.trade-head .list-title{margin:0;color:#222831;font-size:18px;font-weight:700}
 .shipping-wait-link{display:inline-flex;align-items:center;gap:6px;flex-shrink:0;min-height:30px;padding:0 12px;border:1px solid var(--border);border-radius:999px;color:var(--ts);background:#fff;font-size:12px;text-decoration:none}
 .shipping-wait-link[hidden]{display:none}
 .shipping-wait-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.5}
@@ -113,7 +113,7 @@ button,select{cursor:pointer}
 .tr-header .btn-pay-row{height:36px;min-width:auto;padding:0 14px;font-size:12px;flex-shrink:0;border-radius:var(--r-btn,12px)}
 .tr-header .tr-pay-note{flex-shrink:0}
 .tr-header-btns{display:flex;gap:6px;flex-shrink:0}
-.btn-pay-row.btn-line{background:#fff;color:var(--ts);border:1px solid var(--line);border-radius:var(--r-btn,12px);min-height:36px}
+.btn-pay-row.btn-line{background:#fff;color:#1675cf;border:1px solid #1675cf;border-radius:var(--r-btn,12px);min-height:36px}
 .tr-oid{display:block;font-size:11px;color:var(--tm);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-0.1px}
 /* 상태별 chip 색상 (web 기준) */
 .order-card[data-status="first-payment-wait"] .tr-chip,
@@ -141,7 +141,7 @@ button,select{cursor:pointer}
 .tr-prod-origin{display:block;margin-top:-2px;color:var(--tm);font-size:11px;font-weight:400;line-height:1.4;letter-spacing:-0.1px}
 
 .tr-amount{display:grid;grid-template-columns:auto minmax(0,1fr) auto minmax(0,1fr);align-content:center;gap:7px 8px;padding:12px 14px;background:#fff}
-.trl{font-size:11px;font-weight:700;color:var(--tm);white-space:nowrap;letter-spacing:-0.1px}
+.trl{font-size:11px;font-weight:700;color:var(--tp);white-space:nowrap;letter-spacing:-0.1px}
 .trv{font-size:11px;font-weight:700;color:var(--tp);white-space:nowrap;letter-spacing:-0.1px}
 .trv.accent{color:var(--tp);font-weight:700}
 
@@ -159,7 +159,7 @@ button,select{cursor:pointer}
 .bnh-chip::before{content:'';width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;flex-shrink:0}
 .bnh-sep{width:1px;height:14px;background:#ccc;flex-shrink:0}
 .bnh-meta{display:flex;align-items:center;gap:5px;white-space:nowrap}
-.bnh-ml{font-size:11px;color:var(--tm);letter-spacing:-0.1px}
+.bnh-ml{font-size:11px;font-weight:700;color:var(--tp);letter-spacing:-0.1px}
 .bnh-mv{font-size:12px;font-weight:700;color:var(--navy)}
 .bundle-group-end .trade-row .tr-pay{display:none}
 .btn-bundle-pay{height:36px;min-width:auto;padding:0 14px;border:1px solid var(--rose);border-radius:var(--r-btn,12px);background:#fff;color:var(--rose);font-size:12px;font-weight:600;white-space:nowrap}
@@ -331,8 +331,6 @@ button,select{cursor:pointer}
           <span class="bnh-chip">2차 결제대기</span>
           <button class="btn-bundle-pay" type="button" onclick="location.href='mobile_bill_2nd.html'">통합결제</button>
           <div class="bnh-metas">
-            <span class="bnh-meta"><span class="bnh-ml">대표주문번호</span><span class="bnh-mv">BJP2024041703</span></span>
-            <span class="bnh-sep"></span>
             <span class="bnh-meta"><span class="bnh-ml">묶음상품</span><span class="bnh-mv">2건</span></span>
             <span class="bnh-sep"></span>
             <span class="bnh-meta"><span class="bnh-ml">총상품가격</span><span class="bnh-mv">57,000 엔</span></span>
