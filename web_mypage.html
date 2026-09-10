@@ -435,6 +435,7 @@
       line-height: 1;
     }
     .status-card em.hot { color: var(--rose); }
+    .status-card em.status-shipping-wait { color: #f5a623; }
     .status-card strong {
       display: block;
       color: #3e4249;
@@ -671,7 +672,7 @@
                 <div><em>5</em><strong>현지도착</strong></div>
               </a>
               <a class="status-card" href="web_mainlist.html" data-status="shipping-wait" data-label="배송대기">
-                <div><em>3</em><strong>배송대기</strong></div>
+                <div><em class="status-shipping-wait">3</em><strong>배송대기</strong></div>
               </a>
             </div>
             <div class="status-step">
@@ -686,7 +687,7 @@
             </div>
             <div class="status-step">
               <a class="status-card" href="web_mainlist.html" data-status="international-shipping" data-label="국제배송">
-                <div><em class="hot">5</em><strong>국제배송</strong></div>
+                <div><em>5</em><strong>국제배송</strong></div>
               </a>
             </div>
           </div>
