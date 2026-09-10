@@ -73,7 +73,7 @@ CSS reference the tokens — never a literal stack.
 
 ```css
 :root{
-  --font-sans: 'Pretendard', 'Malgun Gothic', '돋움', 'Dotum', Arial, sans-serif;
+  --font-sans: 'Pretendard', 'Malgun Gothic', '돋움', 'Dotum', 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', 'Noto Sans CJK JP', Arial, sans-serif;
   --font-num:  Roboto, var(--font-sans);
   --tp: #1A1A2E;   /* strong text  */
   --ts: #666680;   /* secondary    */

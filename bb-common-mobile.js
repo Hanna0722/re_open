@@ -165,7 +165,7 @@
       '--btn-h-sm:36px;--btn-h-md:44px;--btn-h-lg:48px;' +
     '}',
     /* 공통 폰트 토큰 (DESIGN.md 기준) — 페이지 인라인 :root의 백업 */
-    ":root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum',Arial,sans-serif;--font-num:Roboto,var(--font-sans);--tp:#1A1A2E;--ts:#666680;--tm:#999BAA}",
+    ":root{--font-sans:'Pretendard','Malgun Gothic','돋움','Dotum','Hiragino Sans','Yu Gothic UI','Meiryo','Noto Sans CJK JP',Arial,sans-serif;--font-num:Roboto,var(--font-sans);--tp:#1A1A2E;--ts:#666680;--tm:#999BAA}",
     'body{font-family:var(--font-sans);color:#333}',
     '.req{color:var(--rose);font-weight:700;margin-left:2px}',
     '.required-note{color:var(--ts);font-size:12px}',
