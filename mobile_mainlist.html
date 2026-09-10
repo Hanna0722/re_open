@@ -149,26 +149,42 @@ button,select{cursor:pointer}
 .tr-pay:empty{display:none}
 .btn-pay-row{display:inline-flex;align-items:center;justify-content:center;height:44px;min-width:96px;padding:0 16px;border:0;border-radius:var(--r-btn,12px);background:var(--rose);color:#fff;font-size:13px;font-weight:600;white-space:nowrap;text-decoration:none}
 .tr-pay-note{font-size:12px;color:var(--tm);font-weight:700}
-/* 묶음배송 그룹 */
-.bundle-group-wrap{border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#fff}
-.order-card.bundle-group-start{border:0;border-radius:0;border-bottom:1px solid var(--border)}
-.order-card.bundle-group-end{border:0;border-radius:0}
-.bundle-nav-header{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;min-height:42px;padding:8px 14px;background:#F5F7FA;border-bottom:1px solid var(--border)}
-.bnh-metas{width:100%;display:flex;align-items:center;flex-wrap:wrap;gap:5px 10px}
-.bnh-chip{font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;color:var(--rose);white-space:nowrap}
-.bnh-chip::before{content:'';width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;flex-shrink:0}
-.bnh-sep{width:1px;height:14px;background:#ccc;flex-shrink:0}
-.bnh-meta{display:flex;align-items:center;gap:5px;white-space:nowrap}
-.bnh-ml{font-size:11px;font-weight:700;color:var(--tp);letter-spacing:-0.1px}
-.bnh-mv{font-size:12px;font-weight:700;color:var(--navy)}
-.bundle-group-end .trade-row .tr-pay{display:none}
-.btn-bundle-pay{height:36px;min-width:auto;padding:0 14px;border:1px solid var(--rose);border-radius:var(--r-btn,12px);background:#fff;color:var(--rose);font-size:12px;font-weight:600;white-space:nowrap}
-.bundle-nav-header .btn-bundle-pay{margin-left:auto}
+/* 묶음배송 그룹 (배송신청 완료목록 포맷) */
+.order-card.bundle-group{border-color:var(--tm);padding:0}
+.bundle-group-head{display:flex;align-items:flex-start;gap:10px;padding:12px 10px;background:#F5F7FA;border-bottom:1px solid var(--border)}
+.bundle-info-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);flex:1;min-width:0}
+.bundle-info-list li{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:0;text-align:center;padding:2px 4px}
+.bundle-info-list li+li{border-left:1px solid var(--border)}
+.bi-label{font-size:11px;font-weight:700;color:var(--tp);letter-spacing:-0.1px;line-height:1.2;word-break:keep-all}
+.bi-val{font-size:12px;font-weight:700;color:var(--tp);letter-spacing:0.3px;font-family:var(--font-num);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.bi-val.bi-val-txt{font-family:var(--font-sans);font-size:11px;white-space:normal;word-break:keep-all;line-height:1.2;letter-spacing:-0.1px}
+.group-utils{display:flex;padding:8px;background:#fff;border-bottom:1px solid var(--border)}
+.group-pay-line{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;min-height:36px;padding:9px 14px;border-radius:var(--r-btn,12px);background:var(--rose);color:#fff;font-size:13px;font-weight:600;letter-spacing:0.3px;cursor:pointer}
+.group-pay-line .pay-amount{font-family:var(--font-num);font-weight:600;letter-spacing:0.3px}
+.group-pay-line:active{background:var(--rose-h)}
+.order-item{display:flex;flex-direction:column;gap:10px;padding:14px 15px;margin:0 8px;border-bottom:1px solid var(--border)}
+.order-item:last-child{border-bottom:none}
+.order-head{display:flex;align-items:flex-start;gap:10px}
+.order-thumb{width:64px;height:64px;border-radius:var(--r-md,8px);background:#F5F7FA;display:flex;align-items:center;justify-content:center;color:var(--tm);font-size:20px;flex-shrink:0}
+.order-info{flex:1;min-width:0}
+.order-status-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.order-status{font-size:11px;font-weight:700;color:var(--tp);white-space:nowrap;letter-spacing:-0.1px}
+.order-status.hot{color:var(--rose)}
+.order-date{font-size:11px;color:var(--tm);font-family:var(--font-num);letter-spacing:-0.1px}
+.order-market{font-size:11px;color:var(--ts);font-weight:600;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:-0.1px}
+.order-name{font-size:12px;color:var(--tp);line-height:1.45;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.order-detail{display:flex;flex-direction:column;background:#FFFFFF;border-radius:var(--r-md,8px);padding:2px 12px}
+.order-detail .order-line + .order-line{border-top:1px solid #EEF0F3}
+.order-line{display:flex;align-items:center;gap:10px;min-height:34px;padding:6px 0}
+.order-line>span{font-size:12px;color:var(--tp);font-weight:700;letter-spacing:0.3px;white-space:nowrap}
+.order-line>b{flex:1;text-align:right;font-size:13px;color:var(--tp);font-family:var(--font-num);font-weight:600;white-space:nowrap}
+.order-line>b.hot{color:var(--rose);font-size:14px}
+.btn-row-pay{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;min-height:36px;padding:6px 14px;border:1px solid var(--rose);border-radius:var(--r-btn,12px);background:#fff;color:var(--rose);font-size:12px;font-weight:700;line-height:1.4;white-space:nowrap;cursor:pointer}
 /* 필터 표시 제어 (web 동일) */
 .order-card.status-extra{display:none}
 .trade-table.status-filtered .order-card.status-extra{display:block}
 .order-card.is-hidden{display:none !important}
-.bundle-group-wrap.is-hidden{display:none !important}
+.order-card.bundle-group.is-hidden{display:none !important}
 .trade-empty{display:none;min-height:84px;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:10px;color:var(--tm);font-size:13px;font-weight:700;background:#fff}
 .trade-empty.is-visible{display:flex}
 /* 페이저 */
@@ -324,56 +340,44 @@ button,select{cursor:pointer}
       </div>
     </div>
 
-    <!-- 묶음배송 그룹 (BJP2024041703 + 04) -->
-    <div class="bundle-group-wrap">
-      <div class="order-card bundle-group-start" data-trade-type="purchase" data-country="jp" data-status="second-payment-wait">
-        <div class="bundle-nav-header">
-          <span class="bnh-chip">2차 결제대기</span>
-          <button class="btn-bundle-pay" type="button" onclick="location.href='mobile_bill_2nd.html'">통합결제</button>
-          <div class="bnh-metas">
-            <span class="bnh-meta"><span class="bnh-ml">묶음상품</span><span class="bnh-mv">2건</span></span>
-            <span class="bnh-sep"></span>
-            <span class="bnh-meta"><span class="bnh-ml">총상품가격</span><span class="bnh-mv">57,000 엔</span></span>
+    <!-- 묶음배송 그룹 (2차 결제대기) -->
+    <div class="order-card bundle-group" data-trade-type="purchase" data-country="jp" data-status="second-payment-wait" data-pay="true">
+      <div class="bundle-group-head">
+        <ul class="bundle-info-list">
+          <li><span class="bi-label">묶음상품</span><span class="bi-val">2건</span></li>
+          <li><span class="bi-label">배송방법</span><span class="bi-val bi-val-txt">비드바이항공특송</span></li>
+          <li><span class="bi-label">총상품가격</span><span class="bi-val">57,000 엔</span></li>
+        </ul>
+      </div>
+      <div class="group-utils">
+        <a class="group-pay-line" href="mobile_bill_2nd.html">통합결제 <span class="pay-amount">70,000원</span></a>
+      </div>
+      <div class="order-item">
+        <div class="order-head">
+          <a class="order-thumb" href="mobile_payment_detail.html" aria-label="상품 보기"><i class="fa-regular fa-image" aria-hidden="true"></i></a>
+          <div class="order-info">
+            <div class="order-status-row"><span class="order-status">2차결제대기</span><span class="order-date">2024.04.17</span></div>
+            <div class="order-market tr-oid">야후구매 · BJP2024041703</div>
+            <a class="order-name tr-prod-name" href="mobile_payment_detail.html">스타벅스 재팬 사쿠라 머그컵 텀블러 세트</a>
           </div>
         </div>
-        <div class="trade-row">
-          <div class="tr-product">
-            <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
-            <div>
-              <div class="tr-prod-src">야후구매 · BJP2024041703</div>
-              <div class="tr-prod-info">
-                <a class="tr-prod-name" href="mobile_payment_detail.html">스타벅스 재팬 사쿠라 머그컵 텀블러 세트</a>
-                <span class="tr-prod-origin">スターバックス ジャパン 桜 マグカップ タンブラーセット</span>
-              </div>
-            </div>
-          </div>
-          <div class="tr-amount">
-            <span class="trl">상품금액</span><span class="trv">2개 / 28,500 엔</span><span class="trl">총상품가격</span><span class="trv accent">28,500 엔</span>
-            <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">-</span>
-            <span class="trl">현지도착일</span><span class="trv">2024.04.20</span><span class="trl">국제배송일</span><span class="trv">-</span>
-          </div>
-          <div class="tr-pay"></div>
+        <div class="order-detail">
+          <div class="order-line"><span>상품가/수량</span><b>28,500 엔 / 2개</b></div>
+          <div class="order-line"><span>2차 결제금액</span><b class="hot">35,000원</b><button class="btn-row-pay" type="button" onclick="location.href='mobile_bill_2nd.html'">결제하기</button></div>
         </div>
       </div>
-
-      <div class="order-card bundle-group-end" data-trade-type="purchase" data-country="jp" data-status="second-payment-wait">
-        <div class="trade-row">
-          <div class="tr-product">
-            <a href="mobile_payment_detail.html" aria-label="결제상세내역"><div class="thumb"></div></a>
-            <div>
-              <div class="tr-prod-src">야후구매 · BJP2024041704</div>
-              <div class="tr-prod-info">
-                <a class="tr-prod-name" href="mobile_payment_detail.html">무인양품 원목 수납박스 데스크 정리함 묶음</a>
-                <span class="tr-prod-origin">無印良品 木製収納ボックス デスク整理ケース まとめ</span>
-              </div>
-            </div>
+      <div class="order-item">
+        <div class="order-head">
+          <a class="order-thumb" href="mobile_payment_detail.html" aria-label="상품 보기"><i class="fa-regular fa-image" aria-hidden="true"></i></a>
+          <div class="order-info">
+            <div class="order-status-row"><span class="order-status">2차결제대기</span><span class="order-date">2024.04.17</span></div>
+            <div class="order-market tr-oid">야후구매 · BJP2024041704</div>
+            <a class="order-name tr-prod-name" href="mobile_payment_detail.html">무인양품 원목 수납박스 데스크 정리함 묶음</a>
           </div>
-          <div class="tr-amount">
-            <span class="trl">상품금액</span><span class="trv">2개 / 28,500 엔</span><span class="trl">총상품가격</span><span class="trv accent">28,500 엔</span>
-            <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">-</span>
-            <span class="trl">현지도착일</span><span class="trv">2024.04.22</span><span class="trl">국제배송일</span><span class="trv">-</span>
-          </div>
-          <div class="tr-pay"></div>
+        </div>
+        <div class="order-detail">
+          <div class="order-line"><span>상품가/수량</span><b>28,500 엔 / 2개</b></div>
+          <div class="order-line"><span>2차 결제금액</span><b class="hot">35,000원</b><button class="btn-row-pay" type="button" onclick="location.href='mobile_bill_2nd.html'">결제하기</button></div>
         </div>
       </div>
     </div>
@@ -829,12 +833,6 @@ function applyTradeFilters() {
       && matchesSearch(card);
     card.classList.toggle('is-hidden', !show);
     if (show) visibleCount += 1;
-  });
-
-  // 묶음 그룹은 내부 카드가 모두 숨겨지면 래퍼째 숨김
-  document.querySelectorAll('.bundle-group-wrap').forEach((wrap) => {
-    const anyVisible = wrap.querySelector('.order-card:not(.is-hidden)');
-    wrap.classList.toggle('is-hidden', !anyVisible);
   });
 
   document.querySelectorAll('.status-board [data-status]').forEach((card) => {
