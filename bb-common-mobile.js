@@ -150,7 +150,7 @@
   var DRAWER_CSS = [
     '.drawer-ov{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:5000;pointer-events:none;transition:background .3s}',
     '.drawer-ov.open{background:rgba(0,0,0,.45);pointer-events:all}',
-    '.drawer{position:fixed;top:0;left:0;bottom:0;width:88%;max-width:340px;background:#fff;z-index:5001;overflow-y:auto;scrollbar-width:none;transform:translateX(-100%);visibility:hidden;pointer-events:none;transition:transform .3s cubic-bezier(.4,0,.2,1), visibility 0s linear .3s;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.18);border-top-right-radius:12px;border-bottom-right-radius:12px}',
+    '.drawer{position:fixed;top:0;left:0;bottom:0;width:88%;max-width:340px;background:#fff;z-index:5001;overflow-y:auto;scrollbar-width:none;transform:translateX(-100%);visibility:hidden;pointer-events:none;transition:transform .3s cubic-bezier(.4,0,.2,1), visibility 0s linear .3s;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.18);border-top-right-radius:16px;border-bottom-right-radius:16px}',
     '.drawer::-webkit-scrollbar{display:none}',
     '.drawer.open{transform:translateX(0);visibility:visible;pointer-events:auto;transition:transform .3s cubic-bezier(.4,0,.2,1)}',
     ':root{--grade-std:#7A828C;--grade-pre:#28705F;--grade-vip:#174F8A;--grade-prs:#E8385A}',
@@ -172,68 +172,52 @@
     '.grade-img{background:none!important;box-shadow:none!important;border:0!important;border-radius:0!important;overflow:visible!important;padding:0!important}',
     'img.grade-icon{width:100%!important;height:100%!important;object-fit:contain!important;display:block;border-radius:0!important;transform:none!important}',
     '.bbd-head{display:flex;align-items:center;justify-content:space-between;min-height:58px;padding:12px 16px;border-bottom:1px solid var(--border);background:#fff}',
-    '#drUserHd.bbd-head{padding-top:32px;padding-bottom:32px}',
-    '.bbd-user-mini{display:flex;align-items:center;gap:10px}',
-    '.bbd-uav{width:38px;height:38px;border-radius:50%;background:#F5F7FA;color:#E8385A;display:grid;place-items:center;font-size:18px;font-weight:700}',
-    '.bbd-uname{font-size:14px;font-weight:500;line-height:14px;color:var(--tp)}',
-    '.bbd-ugrade{font-size:11px;color:var(--grade-vip);font-weight:700;margin-top:2px;letter-spacing:-0.28px}',
     '.bbd-guest-card{padding:14px 16px 16px;background:#F5F7FA;border-bottom:1px solid var(--border)}',
     '.bbd-guest-title{font-size:16px;font-weight:700;color:var(--tp);margin-bottom:4px}',
     '.bbd-guest-copy{font-size:12px;color:var(--ts);line-height:1.45;margin-bottom:12px}',
     '.bbd-login-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}',
     '.bbd-action-btn{height:36px;border-radius:var(--r-btn,12px);border:1px solid #E8385A;background:#E8385A;color:#fff;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer}',
     '.bbd-action-btn.secondary{background:#fff;color:var(--tp);border-color:var(--border)}',
-    '.bbd-close{width:32px;height:32px;border:0;border-radius:50%;background:#F5F7FA;color:var(--tp);font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit}',
-    '.bbd-close:hover{background:#F5F7FA}',
-    '.bbd-sec{padding:0;border-bottom:1px solid var(--border);background:#fff}',
-    '.bbd-sec:last-child{border-bottom:none}',
-    '.bbd-sec-title{height:38px;padding:0 16px;display:flex;align-items:center;background:#F5F7FA;color:var(--ts);font-size:12px;font-weight:700;line-height:12px}',
-    '.bbd-quick,.bbd-guide-list{display:flex;flex-direction:column;padding:6px 0}',
-    '.bbd-quick-item,.bbd-guide-item{min-height:56px;display:flex;align-items:center;gap:14px;padding:8px 16px 8px 24px;color:var(--tp);cursor:pointer;text-decoration:none}',
-    '.bbd-quick-icon,.bbd-guide-icon{width:22px;display:flex;align-items:center;justify-content:center;color:var(--tp);font-size:16px;flex-shrink:0}',
-    '.bbd-quick-text,.bbd-guide-text{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}',
-    '.bbd-quick-label,.bbd-guide-label{font-size:15px;color:var(--tp);font-weight:600;line-height:1.2}',
-    '.bbd-quick-desc,.bbd-guide-desc{font-size:11px;color:var(--tm);font-weight:500;line-height:1.25;letter-spacing:-0.28px}',
-    '.bbd-cat-arrow{font-size:12px;color:var(--tm)}',
-    '.bbd-link-grid{display:grid;grid-template-columns:repeat(2,1fr);row-gap:14px;column-gap:24px;padding:14px 16px}',
-    '.bbd-link-grid a{font-size:14px;color:var(--ts);text-decoration:none}',
+    '.bbd-close{width:32px;height:32px;border:0;border-radius:50%;background:#F5F7FA;color:var(--tp);font-size:18px;font-weight:900;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit}',
+    '.bbd-close:hover{background:#EEF1F5}',
     '.bbd-cs-card{margin:22px 26px 34px;padding:18px 14px;background:#F5F7FA;text-align:center}',
     '.bbd-cs-tel{color:#1A3C6E;font-family:var(--font-num);font-size:26px;font-weight:700}',
     '.bbd-cs-time{margin:8px 0 16px;color:var(--ts);font-size:11px;letter-spacing:-0.28px}',
     '.bbd-cs-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}',
     '.bbd-cs-actions button{height:36px;border:1px solid var(--border);border-radius:var(--r-btn,12px);background:#fff;color:var(--tp);font-size:12px;font-weight:700;font-family:inherit}',
     '.bbd-cs-actions button:first-child{border-color:#E8385A;background:#E8385A;color:#fff;border-radius:var(--r-btn,12px);min-height:36px}',
-    '.user-drawer-ov{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:5002;pointer-events:none;transition:background .3s}',
-    '.user-drawer-ov.open{background:rgba(0,0,0,.45);pointer-events:all}',
-    '.user-drawer{position:fixed;top:0;right:0;bottom:0;width:84%;max-width:300px;background:#fff;z-index:5003;overflow-y:auto;scrollbar-width:none;transform:translateX(100%);visibility:hidden;pointer-events:none;transition:transform .28s cubic-bezier(.4,0,.2,1), visibility 0s linear .28s}',
-    '.user-drawer::-webkit-scrollbar{display:none}',
-    '.user-drawer.open{transform:translateX(0);visibility:visible;pointer-events:auto;transition:transform .28s cubic-bezier(.4,0,.2,1)}',
-    '.bbu-avatar{width:50px;height:50px;flex:0 0 auto;display:grid;place-items:center;border-radius:50%;background:#fff;overflow:hidden;box-shadow:none}',
     '.m-user-avatar,.user-avatar-sm{width:30px;height:30px;flex:0 0 auto;border-radius:50%;display:grid;place-items:center;background:#fff;overflow:hidden;border:0;cursor:pointer;font-family:inherit;box-shadow:none;padding:0}',
-    '.bbu-avatar img,.m-user-avatar img,.user-avatar-sm img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;transform:scale(1.65)}',
-    '.user-avatar-icon{width:100%;height:100%;display:block;border-radius:50%;overflow:hidden}',
+    '.m-user-avatar img,.user-avatar-sm img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;transform:scale(1.65)}',
     '.user-avatar-sm.plain-user,.m-user-avatar.plain-user{background:none!important;box-shadow:none!important;border:0!important;border-radius:0!important;color:var(--ts)!important;display:grid;place-items:center;padding:0!important}',
     '.user-avatar-sm.plain-user i,.m-user-avatar.plain-user i{font-size:19px;line-height:1}',
-    '.user-drawer-head{padding:38px 14px 12px;background:#F5F7FA;border-bottom:1px solid var(--border)}',
+    '.user-drawer-head{position:relative;padding:38px 16px 12px;background:#fff8f5;border-bottom:1px solid var(--border)}',
+    '.bbd-head-actions{margin-left:auto;display:flex;align-items:center;gap:8px}',
+    '.bbd-logout-btn{width:32px;height:32px;border:0;border-radius:50%;background:transparent;color:#1A3C6E;font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit}',
+    '.bbd-logout-btn:hover{color:#E8385A}',
+    '.user-name-line{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;height:44px;gap:6px}',
+    '.user-name-line .user-vip-chip{margin-top:0}',
     '.user-member-row{display:flex;align-items:center;gap:12px}',
-    '.user-crown{width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:#fff;overflow:hidden;flex:0 0 auto;box-shadow:none}',
-    '.user-crown img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;transform:scale(1.65)}',
-    '.user-name-strong{display:block;color:var(--tp);font-size:14px;font-weight:500;line-height:14px}',
-    '.user-vip-chip{display:inline-flex;margin-top:5px;padding:2px 12px;border-radius:999px;background:var(--grade-vip);color:#fff;font-size:11px;font-weight:500;letter-spacing:-0.28px}',
-    '.user-vip-copy{margin:13px 0 4px;color:var(--rose,#E8385A);font-size:11px;font-weight:500;letter-spacing:-0.28px}',
-    '.user-vip-bar{height:5px;border-radius:999px;background:#F5F7FA;overflow:hidden}',
+    '.user-crown{width:44px;height:44px;display:grid;place-items:center;flex:0 0 auto}',
+    '.user-name-strong{display:block;color:var(--tp);font-size:16px;font-weight:600;line-height:14px}',
+    '.user-vip-chip{display:inline-flex;margin-top:0;padding:0;border:0;border-radius:0;background:transparent;color:var(--grade-vip);font-size:16px;font-weight:500;line-height:14px}',
+    '.user-vip-chip.tier-standard{color:var(--grade-std)}',
+    '.user-vip-chip.tier-premium{color:var(--grade-pre)}',
+    '.user-vip-chip.tier-vip{color:var(--grade-vip)}',
+    '.user-vip-chip.tier-prestige{color:var(--grade-prs)}',
+    '.user-vip-copy{margin:13px 0 4px;color:var(--rose,#E8385A);font-size:13px;font-weight:500}',
+    '.user-vip-bar{height:5px;border-radius:999px;background:#eee2de;overflow:hidden}',
     '.user-vip-bar span{display:block;height:100%;background:var(--rose,#E8385A)}',
-    '.user-asset-box{display:grid;grid-template-columns:1fr 1fr;margin-top:12px;border:1px solid var(--border);border-radius:8px;background:#fff;overflow:hidden}',
-    '.user-asset-box div{padding:8px 12px}',
+    '.user-asset-box{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);background:#fff}',
+    '.user-asset-box div{min-height:55px;display:grid;place-items:center;align-content:center;gap:4px;text-align:center}',
     '.user-asset-box div+div{border-left:1px solid var(--border)}',
-    '.user-asset-box span{display:block;color:var(--tm);font-size:10px;font-weight:500;letter-spacing:-0.28px}',
-    '.user-asset-box strong{display:block;color:var(--tp);font-size:16px;font-weight:600;font-family:var(--font-num)}',
+    '.user-asset-box strong{color:var(--tp);font-size:16px;font-weight:600;font-family:var(--font-num)}',
+    '.user-asset-box span{color:var(--tm);font-size:13px;font-weight:500}',
     '.user-status-grid{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border);background:#fff}',
-    '.user-status-grid div{min-height:70px;display:grid;place-items:center;align-content:center;gap:8px;text-align:center}',
+    '.user-status-grid div{min-height:64px;display:grid;place-items:center;align-content:center;gap:4px;text-align:center}',
     '.user-status-grid div+div{border-left:1px solid var(--border)}',
-    '.user-status-grid strong{color:var(--tp);font-family:var(--font-num);font-size:26px;line-height:1;font-weight:700}',
+    '.user-status-grid strong{color:var(--tp);font-family:var(--font-num);font-size:22px;line-height:1;font-weight:700}',
     '.user-status-grid div:nth-child(2) strong{color:var(--rose,#E8385A)}',
-    '.user-status-grid span{color:var(--tm);font-size:10px;font-weight:500;letter-spacing:-0.28px}',
+    '.user-status-grid span{color:var(--tm);font-size:13px;font-weight:500}',
     '.user-menu-list{padding:0 0 12px}',
     '.user-menu-item{min-height:45px;padding:0 18px 0 14px;display:flex;align-items:center;gap:12px;color:var(--tp);font-size:14px;font-weight:600;border-bottom:0}',
     'button.user-menu-item{width:100%;border-top:0;border-right:0;border-left:0;background:#fff;text-align:left;font-family:inherit;cursor:pointer;border-radius:var(--r-btn,12px);min-height:36px}',
@@ -242,8 +226,7 @@
     '.user-menu-panel{display:none;padding:0 0 8px 56px}',
     '.user-menu-section.is-open .user-menu-panel{display:grid;gap:0}',
     '.user-menu-link{min-height:33px;display:flex;align-items:center;color:var(--ts);font-size:14px;font-weight:500;text-decoration:none}',
-    '.user-menu-link.danger{color:var(--tm)}',
-    '.user-menu-item.logout{margin-top:6px;border-top:1px solid var(--border);color:var(--tm);font-weight:600}'
+    '.user-menu-link.danger{color:var(--tm)}'
   ].join('\n');
 
   // 상단 헤더(햄버거+로고+검색창+알림/장바구니/회원 아이콘). web의 bb-common.js와
@@ -376,62 +359,39 @@
   window.BB_STORES = STORES;
   window.BB_STORE_LOGO_DIR = STORE_LOGO_DIR;
 
-  function leftDrawerHTML() {
-    var header = isLoggedIn()
-      ? '<div id="drUserHd" class="bbd-head"><div class="bbd-user-mini">' + gradeIconHTML('bbd-uav', USER_GRADE) + '<div><div class="bbd-uname">홍길동님</div><div class="bbd-ugrade">VIP 회원</div></div></div><button class="bbd-close" type="button" aria-label="메뉴 닫기" onclick="closeDrawer()">×</button></div>'
-      : '<div id="drGuestHd" class="bbd-head"><span></span><button class="bbd-close" type="button" aria-label="메뉴 닫기" onclick="closeDrawer()">×</button></div><div id="drGuestPanel" class="bbd-guest-card"><div class="bbd-guest-title">비드바이 로그인</div><div class="bbd-guest-copy">로그인하고 입찰 현황, 마일리지, 관심 상품을 빠르게 확인하세요.</div><div class="bbd-login-actions"><button class="bbd-action-btn" type="button" onclick="toggleLogin();closeDrawer()">로그인</button><button class="bbd-action-btn secondary" type="button" onclick="location.href=\'mobile_index.html\'">회원가입</button></div></div>';
-
+  function drawerCsCardHTML() {
     return (
-      header +
-      '<div class="bbd-sec"><div class="bbd-sec-title">빠른 메뉴</div><div class="bbd-quick">' +
-        '<a class="bbd-quick-item" href="mobile_purchase_start.html"><span class="bbd-quick-icon"><i class="fas fa-link"></i></span><span class="bbd-quick-text"><span class="bbd-quick-label">URL로 구매신청하기</span><span class="bbd-quick-desc">일본/미국 상품 구매대행 신청</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
-        '<a class="bbd-quick-item" href="#"><span class="bbd-quick-icon"><i class="fas fa-calculator"></i></span><span class="bbd-quick-text"><span class="bbd-quick-label">비용 계산기</span><span class="bbd-quick-desc">예상 소요 비용 계산기</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
-        '<a class="bbd-quick-item" href="mobile_bundle_shipping_management.html"><span class="bbd-quick-icon"><i class="fas fa-box"></i></span><span class="bbd-quick-text"><span class="bbd-quick-label">배송 신청 전 상품</span><span class="bbd-quick-desc">현지 도착 후 배송대기로 지정된 상품</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
-        '<a class="bbd-quick-item" href="mobile_bundle_shipping_management_2.html"><span class="bbd-quick-icon"><i class="fas fa-truck-fast"></i></span><span class="bbd-quick-text"><span class="bbd-quick-label">국제 배송중인 상품</span><span class="bbd-quick-desc">출고된 상품의 배송 현황 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
-      '</div></div>' +
-      '<div class="bbd-sec"><div class="bbd-sec-title">이용가이드</div><div class="bbd-guide-list">' +
-        '<a class="bbd-guide-item" href="#"><span class="bbd-guide-icon"><i class="fas fa-book-open"></i></span><span class="bbd-guide-text"><span class="bbd-guide-label">경매대행 이용안내</span><span class="bbd-guide-desc">서비스 이용 절차 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
-        '<a class="bbd-guide-item" href="#"><span class="bbd-guide-icon"><i class="fas fa-shopping-bag"></i></span><span class="bbd-guide-text"><span class="bbd-guide-label">구매대행 이용안내</span><span class="bbd-guide-desc">구매대행 진행 방식 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
-        '<a class="bbd-guide-item" href="#"><span class="bbd-guide-icon"><i class="fas fa-coins"></i></span><span class="bbd-guide-text"><span class="bbd-guide-label">수수료 및 관부가세</span><span class="bbd-guide-desc">예상 비용과 세금 안내</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
-      '</div></div>' +
-      '<div class="bbd-sec" style="border-bottom:none"><div class="bbd-sec-title">고객센터</div><div class="bbd-link-grid">' +
-        '<a href="#">공지사항</a><a href="mobile_qna.html">자주하는질문</a><a href="mobile_qna_form.html">1:1문의</a><a href="mobile_qna.html">커뮤니티</a>' +
-      '</div></div>' +
       '<div class="bbd-cs-card">' +
         '<div class="bbd-cs-tel">1544-5224</div>' +
         '<p class="bbd-cs-time">평일 AM 10:00 - PM 17:00 (점심 PM 12:30 - 13:30)</p>' +
-        '<div class="bbd-cs-actions"><button type="button" onclick="location.href=\'mobile_qna_form.html\'">1:1 문의</button><button type="button" onclick="location.href=\'mobile_qna.html\'">FAQ</button><button type="button">공지사항</button></div>' +
+        '<div class="bbd-cs-actions"><button type="button" onclick="location.href=\'mobile_qna_form.html\'">1:1 문의</button><button type="button" onclick="location.href=\'mobile_qna.html\'">이용가이드</button><button type="button">공지사항</button></div>' +
       '</div>' +
       '<div style="height:24px"></div>'
     );
   }
 
-  function userMenuSection(icon, label, id, links) {
-    return (
-      '<div class="user-menu-section">' +
-        '<button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="' + id + '">' +
-          '<span class="user-menu-icon"><i class="fas ' + icon + '" aria-hidden="true"></i></span><span>' + label + '</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>' +
-        '</button>' +
-        '<div class="user-menu-panel" id="' + id + '">' + links + '</div>' +
-      '</div>'
-    );
-  }
+  function leftDrawerHTML() {
+    if (!isLoggedIn()) {
+      return (
+        '<div id="drGuestHd" class="bbd-head"><span></span><button class="bbd-close" type="button" aria-label="메뉴 닫기" onclick="closeDrawer()">×</button></div>' +
+        '<div id="drGuestPanel" class="bbd-guest-card"><div class="bbd-guest-title">비드바이 로그인</div><div class="bbd-guest-copy">로그인하고 입찰 현황, 마일리지, 관심 상품을 빠르게 확인하세요.</div><div class="bbd-login-actions"><button class="bbd-action-btn" type="button" onclick="toggleLogin();closeDrawer()">로그인</button><button class="bbd-action-btn secondary" type="button" onclick="location.href=\'mobile_index.html\'">회원가입</button></div></div>' +
+        drawerCsCardHTML()
+      );
+    }
 
-  function userMenuLink(label, href, danger) {
-    return '<a class="user-menu-link' + (danger ? ' danger' : '') + '" href="' + href + '">' + label + '</a>';
-  }
-
-  function rightDrawerHTML() {
     return (
       '<div class="user-drawer-head">' +
         '<div class="user-member-row">' +
           gradeIconHTML('user-crown', USER_GRADE) +
-          '<div><strong class="user-name-strong">홍길동님</strong><span class="user-vip-chip">VIP</span></div>' +
+          '<div class="user-name-line"><span class="user-vip-chip tier-' + USER_GRADE + '">' + USER_GRADE.toUpperCase() + '</span><strong class="user-name-strong">홍길동님</strong></div>' +
+          '<div class="bbd-head-actions">' +
+            '<button class="bbd-logout-btn" type="button" aria-label="로그아웃" onclick="toggleLogin();closeDrawer()"><i class="fas fa-right-from-bracket" aria-hidden="true"></i></button>' +
+          '</div>' +
         '</div>' +
         '<p class="user-vip-copy">Prestige까지 80% 남음</p>' +
         '<div class="user-vip-bar"><span style="width:20%"></span></div>' +
-        '<div class="user-asset-box"><div><span>마일리지</span><strong>4,500원</strong></div><div><span>예치금</span><strong>29,870원</strong></div></div>' +
       '</div>' +
+      '<div class="user-asset-box"><div><span>마일리지</span><strong>4,500원</strong></div><div><span>예치금</span><strong>29,870원</strong></div></div>' +
       '<div class="user-status-grid"><div><strong>3</strong><span>입찰 진행 중</span></div><div><strong>1</strong><span>1차 결제 대기</span></div><div><strong>0</strong><span>2차 결제 대기</span></div></div>' +
       '<nav class="user-menu-list">' +
         '<a class="user-menu-item" href="mobile_mypage.html"><span class="user-menu-icon"><i class="fas fa-house-user" aria-hidden="true"></i></span><span>마이페이지</span></a>' +
@@ -457,9 +417,25 @@
           userMenuLink('회원정보 수정', '#') +
           userMenuLink('비밀번호 변경', '#') +
           userMenuLink('회원 탈퇴', '#', true)) +
-        '<button class="user-menu-item logout" type="button" onclick="toggleLogin();closeUserDrawer()"><span class="emoji">🔒</span><span>로그아웃</span></button>' +
-      '</nav>'
+        '<a class="user-menu-item" href="mobile_purchase_start.html"><span class="user-menu-icon"><i class="fas fa-link" aria-hidden="true"></i></span><span>URL로 구매신청하기</span><span class="chev"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></a>' +
+      '</nav>' +
+      drawerCsCardHTML()
     );
+  }
+
+  function userMenuSection(icon, label, id, links) {
+    return (
+      '<div class="user-menu-section">' +
+        '<button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="' + id + '">' +
+          '<span class="user-menu-icon"><i class="fas ' + icon + '" aria-hidden="true"></i></span><span>' + label + '</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>' +
+        '</button>' +
+        '<div class="user-menu-panel" id="' + id + '">' + links + '</div>' +
+      '</div>'
+    );
+  }
+
+  function userMenuLink(label, href, danger) {
+    return '<a class="user-menu-link' + (danger ? ' danger' : '') + '" href="' + href + '">' + label + '</a>';
   }
 
   function bindUserMenu() {
@@ -486,7 +462,7 @@
       ? '<div class="topbar-actions" id="userArea">' +
           '<button class="icon-btn" type="button" aria-label="알림"><i class="fa-regular fa-bell" aria-hidden="true"></i><span class="i-badge">3</span></button>' +
           '<button class="icon-btn" type="button" aria-label="장바구니"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></button>' +
-          '<button class="icon-btn user-avatar-sm plain-user" type="button" aria-label="회원 메뉴" onclick="openUserDrawer()"><i class="fa-regular fa-user" aria-hidden="true"></i></button>' +
+          '<button class="icon-btn user-avatar-sm plain-user" type="button" aria-label="마이페이지" onclick="location.href=\'mobile_mypage.html\'"><i class="fa-regular fa-user" aria-hidden="true"></i></button>' +
         '</div>'
       : '<div class="topbar-actions" id="guestArea">' +
           '<button class="login-btn-sm" type="button" onclick="toggleLogin()">로그인</button>' +
@@ -557,21 +533,21 @@
     return node;
   }
 
-  // 우측 상단 회원 아이콘을 사람 아이콘으로 통일하고 우측 회원 드로어에 연결한다.
+  // 우측 상단 회원 아이콘을 사람 아이콘으로 통일하고 마이페이지 홈으로 연결한다.
   // 페이지마다 onclick이 없거나("," alert 같은 미구현 placeholder여도) 여기서
   // 무조건 실제 동작으로 덮어써서 모든 페이지에서 동일하게 동작하도록 한다.
   function bindAvatarTrigger() {
-    document.querySelectorAll('[aria-label="회원 메뉴"], [aria-label="PREMIUM 등급 회원 메뉴"]').forEach(function (btn) {
+    document.querySelectorAll('[aria-label="회원 메뉴"], [aria-label="마이페이지"], [aria-label="PREMIUM 등급 회원 메뉴"]').forEach(function (btn) {
       if (btn.classList.contains('m-user-avatar') || btn.classList.contains('user-avatar-sm')) {
         btn.classList.remove('grade-img', 'standard', 'premium', 'vip', 'prestige',
           'tier-premium', 'tier-standard', 'tier-vip', 'tier-prestige', 'member-tier-icon');
         btn.classList.add('plain-user');
-        btn.setAttribute('aria-label', '회원 메뉴');
+        btn.setAttribute('aria-label', '마이페이지');
         btn.innerHTML = '<i class="fa-regular fa-user" aria-hidden="true"></i>';
       }
       btn.onclick = function (e) {
         e.preventDefault();
-        openUserDrawer();
+        location.href = 'mobile_mypage.html';
       };
     });
   }
@@ -595,13 +571,9 @@
 
     var drawerOv = ensureNode('drawerOv', 'div', 'drawer-ov');
     var drawer = ensureNode('drawer', 'div', 'drawer');
-    var userDrawerOv = ensureNode('userDrawerOv', 'div', 'user-drawer-ov');
-    var userDrawer = ensureNode('userDrawer', 'div', 'user-drawer');
 
     drawerOv.onclick = closeDrawer;
-    userDrawerOv.onclick = closeUserDrawer;
     drawer.innerHTML = leftDrawerHTML();
-    userDrawer.innerHTML = rightDrawerHTML();
     bindAvatarTrigger();
     bindUserMenu();
     hydrateProductImages();
@@ -615,32 +587,19 @@
     document.querySelector('.hb')?.setAttribute('aria-expanded', 'false');
   }
 
-  function closeUserDrawer() {
-    document.getElementById('userDrawer')?.classList.remove('open');
-    document.getElementById('userDrawerOv')?.classList.remove('open');
-  }
-
   window.bbIsLoggedIn = isLoggedIn;
   window.toggleLogin = function () {
     if (isLoggedIn()) localStorage.removeItem(LOGIN_KEY);
     else localStorage.setItem(LOGIN_KEY, '1');
     closeDrawer();
-    closeUserDrawer();
     render();
   };
   window.openDrawer = function () {
-    closeUserDrawer();
     document.getElementById('drawer')?.classList.add('open');
     document.getElementById('drawerOv')?.classList.add('open');
     document.querySelector('.hb')?.setAttribute('aria-expanded', 'true');
   };
   window.closeDrawer = closeDrawer;
-  window.openUserDrawer = function () {
-    closeDrawer();
-    document.getElementById('userDrawer')?.classList.add('open');
-    document.getElementById('userDrawerOv')?.classList.add('open');
-  };
-  window.closeUserDrawer = closeUserDrawer;
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', render);

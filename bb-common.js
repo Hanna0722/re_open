@@ -8,6 +8,14 @@
   'use strict';
 
   var LOGIN_KEY = 'bb_logged_in';
+  var GRADE_ICON_DIR = 'gradeicon/';
+  var GRADE_ICONS = {
+    standard: 'grade_standard.png',
+    premium: 'grade_premium.png',
+    vip: 'grade_vip.png',
+    prestige: 'grade_prestige.png'
+  };
+  var USER_GRADE = (window.bbUserGrade || 'vip').toLowerCase();
 
   function isLoggedIn() {
     if (window.bbForceGuestHeader) return false;
@@ -176,20 +184,12 @@
 
     '.bbd-ov{position:fixed;inset:0;background:rgba(0,0,0,0);pointer-events:none;transition:background .3s;z-index:1000}',
     '.bbd-ov.open{background:rgba(0,0,0,.45);pointer-events:all}',
-    '.bbd{position:fixed;top:0;bottom:0;left:-100%;width:88%;max-width:340px;z-index:1001;background:#fff;overflow-y:auto;scrollbar-width:none;font-family:var(--font-sans);font-size:14px;color:var(--tp);transition:left .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:4px 0 20px rgba(0,0,0,.12)}',
+    '.bbd{position:fixed;top:0;bottom:0;left:-100%;width:88%;max-width:340px;z-index:1001;background:#fff;overflow-y:auto;scrollbar-width:none;font-family:var(--font-sans);font-size:14px;color:var(--tp);transition:left .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:4px 0 20px rgba(0,0,0,.12);border-top-right-radius:16px;border-bottom-right-radius:16px}',
     '.bbd::-webkit-scrollbar{display:none}',
     '.bbd.open{left:0}',
-    '.bbu{position:fixed;top:64px;right:24px;width:320px;max-width:calc(100vw - 32px);max-height:calc(100vh - 88px);z-index:1002;background:linear-gradient(#FFF5F1 0 192px,#fff 192px 100%);overflow-y:auto;scrollbar-width:none;font-family:var(--font-sans);font-size:14px;color:var(--tp);border:1px solid #E0E4EB;border-radius:12px;box-shadow:0 18px 42px rgba(17,24,39,.16);opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .18s ease,transform .18s ease,visibility .18s}',
-    '.bbu::-webkit-scrollbar{display:none}',
-    '.bbu.open{opacity:1;visibility:visible;transform:translateY(0)}',
 
     ':root{--grade-std:#7A828C;--grade-pre:#28705F;--grade-vip:#174F8A;--grade-prs:#E8385A}',
     '.bbd-head{display:flex;align-items:center;justify-content:space-between;min-height:58px;padding:12px 16px;border-bottom:1px solid #E0E4EB;background:#fff}',
-    '#drUserHd.bbd-head{padding-top:32px;padding-bottom:32px}',
-    '.bbd-user-mini{display:flex;align-items:center;gap:10px}',
-    '.bbd-uav{width:38px;height:38px;border-radius:50%;background:#FFE7EF;color:#E8385A;display:grid;place-items:center;font-size:18px;font-weight:800}',
-    '.bbd-uname{font-size:14px;font-weight:400;line-height:14px;color:#000}',
-    '.bbd-ugrade{font-size:11px;color:var(--grade-vip);font-weight:700;margin-top:2px}',
     '.bbd-guest-card{padding:14px 16px 16px;background:#FFF8F5;border-bottom:1px solid #E0E4EB}',
     '.bbd-guest-title{font-size:16px;font-weight:700;color:var(--tp);margin-bottom:4px}',
     '.bbd-guest-copy{font-size:12px;color:#6B7280;line-height:1.45;margin-bottom:12px}',
@@ -198,56 +198,51 @@
     '.bbd-action-btn.secondary{background:#fff;color:#4B5563;border-color:#E0E4EB}',
     '.bbd-close{width:32px;height:32px;border:0;border-radius:50%;background:#F5F7FA;color:var(--tp);font-size:18px;font-weight:900;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit}',
     '.bbd-close:hover{background:#EEF1F5}',
-    '.bbd-sec{padding:0;border-bottom:1px solid #E0E4EB;background:#fff}',
-    '.bbd-sec:last-child{border-bottom:none}',
-    '.bbd-sec-title{height:38px;padding:0 16px;display:flex;align-items:center;background:#F5F7FA;color:#7D8796;font-size:12px;font-weight:700;line-height:12px}',
-    '.bbd-quick,.bbd-guide-list{display:flex;flex-direction:column;padding:6px 0}',
-    '.bbd-quick-item,.bbd-guide-item{min-height:56px;display:flex;align-items:center;gap:14px;padding:8px 16px 8px 24px;color:var(--tp);cursor:pointer;text-decoration:none}',
-    '.bbd-quick-icon,.bbd-guide-icon{width:22px;display:flex;align-items:center;justify-content:center;color:#000;font-size:16px;flex-shrink:0}',
-    '.bbd-quick-text,.bbd-guide-text{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}',
-    '.bbd-quick-label,.bbd-guide-label{font-size:15px;color:var(--tp);font-weight:700;line-height:1.2}',
-    '.bbd-quick-desc,.bbd-guide-desc{font-size:11px;color:#8B94A3;font-weight:500;line-height:1.25}',
-    '.bbd-cat-arrow{font-size:12px;color:var(--tm)}',
-    '.bbd-link-grid{display:grid;grid-template-columns:repeat(2,1fr);row-gap:14px;column-gap:24px;padding:14px 16px}',
-    '.bbd-link-grid a{font-size:14px;color:var(--ts);text-decoration:none}',
-    '.bbd-cs-card{margin:22px 26px 34px;padding:18px 14px;background:#fcfcfd;text-align:center}',
+    '.bbd-cs-card{margin:5px 10px 5px;padding:5px;background:#fcfcfd;text-align:center}',
     '.bbd-cs-tel{color:#1A3C6E;font-family:var(--font-num);font-size:26px;font-weight:700}',
-    '.bbd-cs-time{margin:8px 0 16px;color:#7b8494;font-size:11px}',
+    '.bbd-cs-time{margin:8px 0 16px;color:#7b8494;font-size:13px}',
     '.bbd-cs-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}',
     '.bbd-cs-actions button{height:34px;border:1px solid #E0E4EB;border-radius:5px;background:#fff;color:#1f2530;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer}',
     '.bbd-cs-actions button:first-child{border-color:#E8385A;background:#E8385A;color:#fff}',
 
-    '.user-drawer-head{padding:38px 16px 12px;background:#fff8f5;border-bottom:1px solid #E0E4EB}',
+    '.user-drawer-head{position:relative;padding:38px 16px 12px;background:#fff8f5;border-bottom:1px solid #E0E4EB}',
+    '.bbd-head-actions{margin-left:auto;display:flex;align-items:center;gap:8px}',
+    '.bbd-logout-btn{width:32px;height:32px;border:0;border-radius:50%;background:transparent;color:#1A3C6E;font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit}',
+    '.bbd-logout-btn:hover{color:#E8385A}',
+    '.user-name-line{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;height:44px;gap:6px}',
+    '.user-name-line .user-vip-chip{margin-top:0}',
     '.user-member-row{display:flex;align-items:center;gap:12px}',
     '.user-crown{width:44px;height:44px;display:grid;place-items:center;flex:0 0 auto}',
-    '.user-name-strong{display:block;color:var(--tp);font-size:14px;font-weight:400;line-height:14px}',
-    '.user-vip-chip{display:inline-flex;margin-top:5px;padding:2px 12px;border-radius:999px;background:var(--grade-vip);color:#fff;font-size:11px;font-weight:500}',
-    '.user-vip-copy{margin:13px 0 4px;color:#E8385A;font-size:11px;font-weight:500}',
+    '.user-name-strong{display:block;color:var(--tp);font-size:16px;font-weight:600;line-height:14px}',
+    '.user-vip-chip{display:inline-flex;margin-top:0;padding:0;border:0;border-radius:0;background:transparent;color:var(--grade-vip);font-size:16px;font-weight:500;line-height:14px}',
+    '.user-vip-chip.tier-standard{color:var(--grade-std)}',
+    '.user-vip-chip.tier-premium{color:var(--grade-pre)}',
+    '.user-vip-chip.tier-vip{color:var(--grade-vip)}',
+    '.user-vip-chip.tier-prestige{color:var(--grade-prs)}',
+    '.user-vip-copy{margin:13px 0 4px;color:#E8385A;font-size:13px;font-weight:500}',
     '.user-vip-bar{height:5px;border-radius:999px;background:#eee2de;overflow:hidden}',
     '.user-vip-bar span{display:block;height:100%;background:#E8385A}',
-    '.user-asset-box{display:grid;grid-template-columns:1fr 1fr;margin-top:12px;border:1px solid #E0E4EB;border-radius:8px;background:#fff;overflow:hidden}',
-    '.user-asset-box div{padding:8px 12px;text-align:center}',
+    '.user-asset-box{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #E0E4EB;background:#fff}',
+    '.user-asset-box div{min-height:55px;display:grid;place-items:center;align-content:center;gap:4px;text-align:center}',
     '.user-asset-box div+div{border-left:1px solid #E0E4EB}',
-    '.user-asset-box span{display:block;color:var(--tm);font-size:10px;font-weight:500}',
-    '.user-asset-box strong{display:block;color:var(--tp);font-size:15px;font-weight:600}',
+    '.user-asset-box strong{color:var(--tp);font-size:15px;font-weight:600}',
+    '.user-asset-box span{color:var(--tm);font-size:13px;font-weight:500}',
     '.user-status-grid{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #E0E4EB;background:#fff}',
     '.user-status-grid div{min-height:64px;display:grid;place-items:center;align-content:center;gap:4px;text-align:center}',
     '.user-status-grid div+div{border-left:1px solid #E0E4EB}',
     '.user-status-grid strong{color:var(--tp);font-family:var(--font-num);font-size:22px;line-height:1;font-weight:700}',
     '.user-status-grid div:nth-child(2) strong{color:#E8385A}',
-    '.user-status-grid span{color:var(--tm);font-size:10px;font-weight:500}',
+    '.user-status-grid span{color:var(--tm);font-size:13px;font-weight:500}',
     '.user-menu-list{padding:0 0 10px;background:#fff}',
     '.user-menu-item{min-height:46px;width:100%;padding:0 18px;display:flex;align-items:center;gap:12px;color:var(--tp);font-size:14px;font-weight:600;border:0;background:#fff;text-align:left;text-decoration:none;font-family:inherit;cursor:pointer}',
     '.user-menu-item:hover{background:#F5F7FA}',
-    '.user-menu-icon,.bbu-emoji{width:20px;text-align:center;font-size:16px;color:var(--ts);flex:0 0 auto}',
+    '.user-menu-icon{width:20px;text-align:center;font-size:16px;color:var(--ts);flex:0 0 auto}',
     '.user-menu-item .chev{margin-left:auto;color:var(--tm);font-weight:500;font-size:15px;line-height:1}',
     '.user-menu-section{border-bottom:0}',
     '.user-menu-panel{display:none;padding:0 0 8px 52px}',
     '.user-menu-section.is-open .user-menu-panel{display:grid;gap:0}',
     '.user-menu-link{min-height:32px;display:flex;align-items:center;color:#666b75;font-size:13px;font-weight:500;text-decoration:none}',
     '.user-menu-link.danger{color:#8f949f}',
-    '.user-menu-item.logout{margin-top:4px;border-top:1px solid #E0E4EB;color:var(--tm);font-weight:600}',
-    '.new-n{color:#E8385A;font-family:var(--font-num);font-size:9px;font-weight:700;line-height:1;vertical-align:super;margin-left:2px}',
 
     /* -- 상단 스토어 채널 바 (모든 페이지 공통) -- */
     '.channel-bar{background:#fff;border-bottom:1px solid #E0E4EB;padding:14px 0}',
@@ -255,9 +250,12 @@
     '.channel-icons{display:grid;grid-template-columns:repeat(8,1fr);gap:16px;width:min(calc(100vw - 60px),900px);margin:0 auto}',
     '.channel-icons::-webkit-scrollbar{display:none}',
     '.ch-icon-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:4px 14px;cursor:pointer;min-width:80px;flex-shrink:0;transition:opacity .15s;text-decoration:none}',
-    '.ch-icon-item:hover .ch-label{color:#222831}',
-    '.ch-label{font-size:14.7px;color:#666B75;font-weight:500;white-space:nowrap;transition:color .15s}',
-    '.ch-label.active{color:#E8385A;font-weight:700}',
+    '.ch-icon-item:hover .ch-label{color:#E8385A}',
+    '.ch-label{position:relative;font-size:16px;color:#666B75;font-weight:800;white-space:nowrap;transition:color .15s}',
+    '.ch-label::after{content:\'\';position:absolute;left:50%;bottom:-8px;width:100%;height:2px;border-radius:999px;background:currentColor;transform:translateX(-50%) scaleX(0);opacity:0;transition:transform .35s ease-out,opacity .35s ease-out}',
+    '.ch-icon-item:hover .ch-label::after{transform:translateX(-50%) scaleX(1);opacity:1}',
+    '.ch-label.active{color:#E8385A}',
+    '.ch-label.active::after{transform:translateX(-50%) scaleX(1);opacity:1}',
 
     /* -- 서브/카테고리/통합검색 상단 스토어 바 (채널 바와 동일 모양) -- */
     '.store-strip{background:#fff;border-bottom:1px solid #E0E4EB;padding:14px 0;width:auto;overflow:visible}',
@@ -282,7 +280,7 @@
           '<div class="bbh-right">' +
             '<button class="bbh-ibtn" type="button" aria-label="알림"><i class="far fa-bell"></i><span class="bbh-badge">3</span></button>' +
             '<button class="bbh-ibtn" type="button" aria-label="장바구니"><i class="fas fa-shopping-cart"></i></button>' +
-            '<button class="bbh-ibtn" id="bbhUserTrig" type="button" aria-label="회원 메뉴" aria-haspopup="true" aria-expanded="false" onclick="toggleUserDrawer()"><i class="far fa-user"></i></button>' +
+            '<button class="bbh-ibtn" type="button" aria-label="마이페이지" onclick="location.href=\'web_mypage.html\'"><i class="far fa-user"></i></button>' +
           '</div>' +
         '</div>'
       );
@@ -316,10 +314,15 @@
   window.BB_STORES = STORES;
   window.BB_STORE_LOGO_DIR = STORE_LOGO_DIR;
 
+  var CHANNEL_ACTIVE_KEY = 'bbChannelActiveIdx';
+
   function storeChannelBarHTML() {
-    return STORES.map(function (st) {
-      return '<div class="ch-icon-item" style="cursor:pointer" onclick="location.href=' + "'" + st.barHref + "'" + '">' +
-        '<span class="ch-label">' + st.barLabel + '</span>' +
+    var activeIdx = sessionStorage.getItem(CHANNEL_ACTIVE_KEY);
+    var isSubMain = (location.pathname.split('/').pop() || '').toLowerCase() === 'web_sub_main.html';
+    return STORES.map(function (st, idx) {
+      var active = isSubMain && String(idx) === activeIdx;
+      return '<div class="ch-icon-item" style="cursor:pointer" onclick="bbSetActiveChannel(' + idx + ',' + "'" + st.barHref + "'" + ')">' +
+        '<span class="ch-label' + (active ? ' active' : '') + '">' + st.barLabel + '</span>' +
       '</div>';
     }).join('');
   }
@@ -345,62 +348,39 @@
     bar.innerHTML = '<div class="channel-inner"><div class="channel-icons">' + storeChannelBarHTML() + '</div></div>';
   }
 
-  function leftDrawerHTML() {
-    var header = isLoggedIn()
-      ? '<div id="drUserHd" class="bbd-head"><div class="bbd-user-mini"><div class="bbd-uav grade-img"><img class="grade-icon" src="gradeicon/grade_vip.png" alt="VIP 등급"></div><div><div class="bbd-uname">홍길동님</div><div class="bbd-ugrade">VIP 회원</div></div></div><button class="bbd-close" type="button" aria-label="메뉴 닫기" onclick="closeDrawer()">×</button></div>'
-      : '<div id="drGuestHd" class="bbd-head"><span></span><button class="bbd-close" type="button" aria-label="메뉴 닫기" onclick="closeDrawer()">×</button></div><div id="drGuestPanel" class="bbd-guest-card"><div class="bbd-guest-title">비드바이 로그인</div><div class="bbd-guest-copy">로그인하고 입찰 현황, 마일리지, 관심 상품을 빠르게 확인하세요.</div><div class="bbd-login-actions"><button class="bbd-action-btn" type="button" onclick="doLogin();closeDrawer()">로그인</button><button class="bbd-action-btn secondary" type="button">회원가입</button></div></div>';
-
+  function drawerCsCardHTML() {
     return (
-      header +
-      '<div class="bbd-sec"><div class="bbd-sec-title">빠른 메뉴</div><div class="bbd-quick">' +
-        '<a class="bbd-quick-item" href="web_purchase_start.html"><span class="bbd-quick-icon"><i class="fas fa-link"></i></span><span class="bbd-quick-text"><span class="bbd-quick-label">URL로 구매신청하기</span><span class="bbd-quick-desc">일본/미국 상품 구매대행 신청</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
-        '<a class="bbd-quick-item" href="#"><span class="bbd-quick-icon"><i class="fas fa-calculator"></i></span><span class="bbd-quick-text"><span class="bbd-quick-label">비용 계산기</span><span class="bbd-quick-desc">예상 소요 비용 계산기</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
-        '<a class="bbd-quick-item" href="web_bundle_shipping_management.html"><span class="bbd-quick-icon"><i class="fas fa-box"></i></span><span class="bbd-quick-text"><span class="bbd-quick-label">배송 신청 전 상품</span><span class="bbd-quick-desc">현지 도착 후 배송대기로 지정된 상품</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
-        '<a class="bbd-quick-item" href="web_bundle_shipping_management_2.html"><span class="bbd-quick-icon"><i class="fas fa-truck-fast"></i></span><span class="bbd-quick-text"><span class="bbd-quick-label">국제 배송중인 상품</span><span class="bbd-quick-desc">출고된 상품의 배송 현황 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
-      '</div></div>' +
-      '<div class="bbd-sec"><div class="bbd-sec-title">이용가이드</div><div class="bbd-guide-list">' +
-        '<a class="bbd-guide-item" href="#"><span class="bbd-guide-icon"><i class="fas fa-book-open"></i></span><span class="bbd-guide-text"><span class="bbd-guide-label">경매대행 이용안내</span><span class="bbd-guide-desc">서비스 이용 절차 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
-        '<a class="bbd-guide-item" href="#"><span class="bbd-guide-icon"><i class="fas fa-shopping-bag"></i></span><span class="bbd-guide-text"><span class="bbd-guide-label">구매대행 이용안내</span><span class="bbd-guide-desc">구매대행 진행 방식 확인</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
-        '<a class="bbd-guide-item" href="#"><span class="bbd-guide-icon"><i class="fas fa-coins"></i></span><span class="bbd-guide-text"><span class="bbd-guide-label">수수료 및 관부가세</span><span class="bbd-guide-desc">예상 비용과 세금 안내</span></span><i class="fas fa-chevron-right bbd-cat-arrow"></i></a>' +
-      '</div></div>' +
-      '<div class="bbd-sec" style="border-bottom:none"><div class="bbd-sec-title">고객센터</div><div class="bbd-link-grid">' +
-        '<a href="#">공지사항<sup class="new-n" aria-label="새 소식">N</sup></a><a href="web_qna.html">자주하는질문</a><a href="web_qna_form.html">1:1문의<sup class="new-n" aria-label="새 답변">N</sup></a><a href="web_qna.html">커뮤니티</a>' +
-      '</div></div>' +
       '<div class="bbd-cs-card">' +
         '<div class="bbd-cs-tel">1544-5224</div>' +
-        '<p class="bbd-cs-time">평일 AM 10:00 - PM 17:00 (점심 PM 12:30 - 13:30)</p>' +
-        '<div class="bbd-cs-actions"><button type="button" onclick="location.href=\'web_qna.html\'">1:1 문의</button><button type="button" onclick="location.href=\'https://www.bidbuy.co.kr/cs/faq\'">FAQ</button><button type="button" onclick="location.href=\'https://www.bidbuy.co.kr/cs/notice\'">공지사항</button></div>' +
+        '<p class="bbd-cs-time">평일 AM 10:00 - PM 17:00<br>(점심 PM 12:30 - 13:30)</p>' +
+        '<div class="bbd-cs-actions"><button type="button" onclick="location.href=\'web_qna.html\'">1:1 문의</button><button type="button" onclick="location.href=\'https://www.bidbuy.co.kr/cs/faq\'">이용가이드</button><button type="button" onclick="location.href=\'https://www.bidbuy.co.kr/cs/notice\'">공지사항</button></div>' +
       '</div>' +
       '<div style="height:24px"></div>'
     );
   }
 
-  function userMenuSection(icon, label, id, links) {
-    return (
-      '<div class="user-menu-section">' +
-        '<button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="' + id + '">' +
-          '<span class="user-menu-icon"><i class="fas ' + icon + '" aria-hidden="true"></i></span><span>' + label + '</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>' +
-        '</button>' +
-        '<div class="user-menu-panel" id="' + id + '">' + links + '</div>' +
-      '</div>'
-    );
-  }
+  function leftDrawerHTML() {
+    if (!isLoggedIn()) {
+      return (
+        '<div id="drGuestHd" class="bbd-head"><span></span><button class="bbd-close" type="button" aria-label="메뉴 닫기" onclick="closeDrawer()">×</button></div>' +
+        '<div id="drGuestPanel" class="bbd-guest-card"><div class="bbd-guest-title">비드바이 로그인</div><div class="bbd-guest-copy">로그인하고 입찰 현황, 마일리지, 관심 상품을 빠르게 확인하세요.</div><div class="bbd-login-actions"><button class="bbd-action-btn" type="button" onclick="doLogin();closeDrawer()">로그인</button><button class="bbd-action-btn secondary" type="button">회원가입</button></div></div>' +
+        drawerCsCardHTML()
+      );
+    }
 
-  function userMenuLink(label, href, danger) {
-    return '<a class="user-menu-link' + (danger ? ' danger' : '') + '" href="' + href + '">' + label + '</a>';
-  }
-
-  function rightDrawerHTML() {
     return (
       '<div class="user-drawer-head">' +
         '<div class="user-member-row">' +
-          '<div class="user-crown grade-img"><img class="grade-icon" src="gradeicon/grade_vip.png" alt="VIP 등급"></div>' +
-          '<div><strong class="user-name-strong">홍길동님</strong><span class="user-vip-chip">VIP</span></div>' +
+          '<div class="user-crown grade-img"><img class="grade-icon" src="' + GRADE_ICON_DIR + (GRADE_ICONS[USER_GRADE] || GRADE_ICONS.vip) + '" alt="' + USER_GRADE.toUpperCase() + ' 등급"></div>' +
+          '<div class="user-name-line"><span class="user-vip-chip tier-' + USER_GRADE + '">' + USER_GRADE.toUpperCase() + '</span><strong class="user-name-strong">홍길동님</strong></div>' +
+          '<div class="bbd-head-actions">' +
+            '<button class="bbd-logout-btn" type="button" aria-label="로그아웃" onclick="toggleLogin();closeDrawer()"><i class="fas fa-right-from-bracket" aria-hidden="true"></i></button>' +
+          '</div>' +
         '</div>' +
-        '<p class="user-vip-copy">Prestige까지 80% 남음</p>' +
-        '<div class="user-vip-bar"><span style="width:20%"></span></div>' +
-        '<div class="user-asset-box"><div><span>마일리지</span><strong>4,500원</strong></div><div><span>예치금</span><strong>29,870원</strong></div></div>' +
+        '<p class="user-vip-copy">Prestige까지 80% 달성</p>' +
+        '<div class="user-vip-bar"><span style="width:80%"></span></div>' +
       '</div>' +
+      '<div class="user-asset-box"><div><span>마일리지</span><strong>4,500원</strong></div><div><span>예치금</span><strong>29,870원</strong></div></div>' +
       '<div class="user-status-grid"><div><strong>3</strong><span>입찰 진행 중</span></div><div><strong>1</strong><span>1차 결제 대기</span></div><div><strong>0</strong><span>2차 결제 대기</span></div></div>' +
       '<nav class="user-menu-list">' +
         '<a class="user-menu-item" href="web_mypage.html"><span class="user-menu-icon"><i class="fas fa-house-user" aria-hidden="true"></i></span><span>마이페이지</span></a>' +
@@ -426,9 +406,25 @@
           userMenuLink('회원정보 수정', '#') +
           userMenuLink('비밀번호 변경', '#') +
           userMenuLink('회원 탈퇴', '#', true)) +
-        '<button class="user-menu-item logout" type="button" onclick="toggleLogin();closeUserDrawer()"><span class="user-menu-icon"><i class="fas fa-right-from-bracket" aria-hidden="true"></i></span><span>로그아웃</span></button>' +
-      '</nav>'
+         '<a class="user-menu-item" href="web_purchase_start.html"><span class="user-menu-icon"><i class="fas fa-link" aria-hidden="true"></i></span><span>URL로 구매신청하기</span><span class="chev"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></a>' +
+      '</nav>' +
+      drawerCsCardHTML()
     );
+  }
+
+  function userMenuSection(icon, label, id, links) {
+    return (
+      '<div class="user-menu-section">' +
+        '<button class="user-menu-item user-menu-trigger" type="button" aria-expanded="false" aria-controls="' + id + '">' +
+          '<span class="user-menu-icon"><i class="fas ' + icon + '" aria-hidden="true"></i></span><span>' + label + '</span><span class="chev"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>' +
+        '</button>' +
+        '<div class="user-menu-panel" id="' + id + '">' + links + '</div>' +
+      '</div>'
+    );
+  }
+
+  function userMenuLink(label, href, danger) {
+    return '<a class="user-menu-link' + (danger ? ' danger' : '') + '" href="' + href + '">' + label + '</a>';
   }
 
   function bindUserMenu() {
@@ -488,11 +484,9 @@
 
     var leftOv = ensureNode('bbDrawerOv', 'div', 'bbd-ov');
     var left = ensureNode('bbDrawer', 'aside', 'bbd');
-    var right = ensureNode('bbUserDrawer', 'aside', 'bbu');
 
     leftOv.onclick = closeDrawer;
     left.innerHTML = leftDrawerHTML();
-    right.innerHTML = rightDrawerHTML();
     bindUserMenu();
     hydrateProductImages();
 
@@ -512,13 +506,16 @@
   }
 
   window.bbIsLoggedIn = isLoggedIn;
+  window.bbSetActiveChannel = function (idx, href) {
+    try { sessionStorage.setItem(CHANNEL_ACTIVE_KEY, String(idx)); } catch (e) {}
+    location.href = href;
+  };
   window.doLogin = function () {
     localStorage.setItem(LOGIN_KEY, '1');
     render();
   };
   window.doLogout = function () {
     localStorage.removeItem(LOGIN_KEY);
-    closeUserDrawer();
     closeDrawer();
     if (isMyPage()) {
       location.href = 'web_login.html';
@@ -531,46 +528,18 @@
     else window.doLogin();
   };
   window.openDrawer = function () {
-    closeUserDrawer();
     document.getElementById('bbDrawerOv').classList.add('open');
     document.getElementById('bbDrawer').classList.add('open');
   };
   window.closeDrawer = closeDrawer;
-  window.openUserDrawer = function () {
-    if (!isLoggedIn()) return;
-    closeDrawer();
-    document.getElementById('bbUserDrawer').classList.add('open');
-    var trig = document.getElementById('bbhUserTrig');
-    if (trig) { trig.classList.add('open'); trig.setAttribute('aria-expanded', 'true'); }
-  };
-  window.closeUserDrawer = closeUserDrawer;
-  window.toggleUserDrawer = function () {
-    var right = document.getElementById('bbUserDrawer');
-    if (right && right.classList.contains('open')) closeUserDrawer();
-    else window.openUserDrawer();
-  };
 
   function closeDrawer() {
     document.getElementById('bbDrawerOv')?.classList.remove('open');
     document.getElementById('bbDrawer')?.classList.remove('open');
   }
 
-  function closeUserDrawer() {
-    document.getElementById('bbUserDrawer')?.classList.remove('open');
-    var trig = document.getElementById('bbhUserTrig');
-    if (trig) { trig.classList.remove('open'); trig.setAttribute('aria-expanded', 'false'); }
-  }
-
-  document.addEventListener('click', function (e) {
-    var right = document.getElementById('bbUserDrawer');
-    var trig = document.getElementById('bbhUserTrig');
-    if (!right || !right.classList.contains('open')) return;
-    if (right.contains(e.target) || (trig && trig.contains(e.target))) return;
-    closeUserDrawer();
-  });
-
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeUserDrawer();
+    if (e.key === 'Escape') closeDrawer();
   });
 
   if (document.readyState === 'loading') {
