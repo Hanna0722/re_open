@@ -173,9 +173,9 @@
     '.bbd-action-btn.secondary{background:#fff;color:var(--tp);border-color:var(--border)}',
     '.bbd-close{width:32px;height:32px;border:0;border-radius:50%;background:#F5F7FA;color:var(--tp);font-size:18px;font-weight:900;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit}',
     '.bbd-close:hover{background:#EEF1F5}',
-    '.bbd-cs-card{margin:22px 26px 34px;padding:18px 14px;background:#F5F7FA;text-align:center}',
+    '.bbd-cs-card{margin:5px 10px 5px;padding:5px;background:#fcfcfd;text-align:center}',
     '.bbd-cs-tel{color:#1A3C6E;font-family:var(--font-num);font-size:26px;font-weight:700}',
-    '.bbd-cs-time{margin:8px 0 16px;color:var(--ts);font-size:11px;letter-spacing:-0.28px}',
+    '.bbd-cs-time{margin:8px 0 16px;color:#7b8494;font-size:13px}',
     '.bbd-cs-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}',
     '.bbd-cs-actions button{height:36px;border:1px solid var(--border);border-radius:var(--r-btn,12px);background:#fff;color:var(--tp);font-size:12px;font-weight:700;font-family:inherit}',
     '.bbd-cs-actions button:first-child{border-color:#E8385A;background:#E8385A;color:#fff;border-radius:var(--r-btn,12px);min-height:36px}',
@@ -214,7 +214,7 @@
     '.user-status-item strong{font-size:14px;font-weight:600;color:var(--tp);font-family:var(--font-num)}',
     '.user-status-item strong.rose{color:#E8385A}',
     '.user-menu-list{padding:0 0 12px}',
-    '.user-menu-item{min-height:45px;padding:0 18px 0 14px;display:flex;align-items:center;gap:12px;color:var(--tp);font-size:14px;font-weight:600;border-bottom:0}',
+    '.user-menu-item{min-height:45px;padding:0 18px 0 14px;display:flex;align-items:center;gap:12px;color:var(--tp);font-size:14px;font-weight:600;border-bottom:0;text-decoration:none}',
     'button.user-menu-item{width:100%;border-top:0;border-right:0;border-left:0;background:#fff;text-align:left;font-family:inherit;cursor:pointer;border-radius:var(--r-btn,12px);min-height:36px}',
     '.user-menu-item .user-menu-icon{width:22px;text-align:center;font-size:17px;flex:0 0 auto}',
     '.user-menu-item .chev{margin-left:auto;color:var(--tm);font-weight:600;font-size:17px;line-height:1}',
@@ -358,7 +358,7 @@
     return (
       '<div class="bbd-cs-card">' +
         '<div class="bbd-cs-tel">1544-5224</div>' +
-        '<p class="bbd-cs-time">평일 AM 10:00 - PM 17:00 (점심 PM 12:30 - 13:30)</p>' +
+        '<p class="bbd-cs-time">평일 AM 10:00 - PM 17:00<br>(점심 PM 12:30 - 13:30)</p>' +
         '<div class="bbd-cs-actions"><button type="button" onclick="location.href=\'mobile_qna_form.html\'">1:1 문의</button><button type="button" onclick="location.href=\'mobile_qna.html\'">이용가이드</button><button type="button">공지사항</button></div>' +
       '</div>' +
       '<div style="height:24px"></div>'
