@@ -205,34 +205,36 @@
     '.bbd-cs-actions button{height:34px;border:1px solid #E0E4EB;border-radius:5px;background:#fff;color:#1f2530;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer}',
     '.bbd-cs-actions button:first-child{border-color:#E8385A;background:#E8385A;color:#fff}',
 
-    '.user-drawer-head{position:relative;padding:38px 16px 12px;background:#fff8f5;border-bottom:1px solid #E0E4EB}',
+    '.user-drawer-head{position:relative;padding:25px 16px 12px;background:linear-gradient(180deg,#FFF9F9,#fff)}',
     '.bbd-head-actions{margin-left:auto;display:flex;align-items:center;gap:8px}',
     '.bbd-logout-btn{width:32px;height:32px;border:0;border-radius:50%;background:transparent;color:#1A3C6E;font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit}',
     '.bbd-logout-btn:hover{color:#E8385A}',
     '.user-name-line{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;height:44px;gap:6px}',
-    '.user-name-line .user-vip-chip{margin-top:0}',
     '.user-member-row{display:flex;align-items:center;gap:12px}',
-    '.user-crown{width:44px;height:44px;display:grid;place-items:center;flex:0 0 auto}',
+    '.user-crown{position:relative;width:56px;height:56px;flex:0 0 auto}',
+    '.user-crown-ring{position:absolute;inset:0;transform:rotate(-90deg)}',
+    '.user-crown img.grade-icon{position:absolute;top:10px;left:11px;width:34px;height:37px;object-fit:contain;display:block}',
     '.user-name-strong{display:block;color:var(--tp);font-size:16px;font-weight:600;line-height:14px}',
     '.user-vip-chip{display:inline-flex;margin-top:0;padding:0;border:0;border-radius:0;background:transparent;color:var(--grade-vip);font-size:16px;font-weight:500;line-height:14px}',
     '.user-vip-chip.tier-standard{color:var(--grade-std)}',
     '.user-vip-chip.tier-premium{color:var(--grade-pre)}',
     '.user-vip-chip.tier-vip{color:var(--grade-vip)}',
     '.user-vip-chip.tier-prestige{color:var(--grade-prs)}',
-    '.user-vip-copy{margin:13px 0 4px;color:#E8385A;font-size:13px;font-weight:500}',
-    '.user-vip-bar{height:5px;border-radius:999px;background:#eee2de;overflow:hidden}',
-    '.user-vip-bar span{display:block;height:100%;background:#E8385A}',
-    '.user-asset-box{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #E0E4EB;background:#fff}',
-    '.user-asset-box div{min-height:55px;display:grid;place-items:center;align-content:center;gap:4px;text-align:center}',
-    '.user-asset-box div+div{border-left:1px solid #E0E4EB}',
-    '.user-asset-box strong{color:var(--tp);font-size:15px;font-weight:600}',
-    '.user-asset-box span{color:var(--tm);font-size:13px;font-weight:500}',
-    '.user-status-grid{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #E0E4EB;background:#fff}',
-    '.user-status-grid div{min-height:64px;display:grid;place-items:center;align-content:center;gap:4px;text-align:center}',
-    '.user-status-grid div+div{border-left:1px solid #E0E4EB}',
-    '.user-status-grid strong{color:var(--tp);font-family:var(--font-num);font-size:22px;line-height:1;font-weight:700}',
-    '.user-status-grid div:nth-child(2) strong{color:#E8385A}',
-    '.user-status-grid span{color:var(--tm);font-size:13px;font-weight:500}',
+    '.user-stat-title{padding:5px 16px 5px;font-size:14px;font-weight:700;color:var(--tp);background:#fff}',
+    '.user-asset-split{display:grid;grid-template-columns:1fr 1fr;padding:10px 0 6px;background:linear-gradient(180deg,#FFF9F9,#fff)}',
+    '.user-asset-col{padding-right:14px}',
+    '.user-asset-col+.user-asset-col{padding-left:14px;padding-right:0;border-left:1px solid #E0E4EB}',
+    '.user-asset-col-title{display:flex;align-items:center;justify-content:space-between;padding-bottom:8px;font-size:14px;font-weight:700;color:var(--tp)}',
+    '.user-asset-col-title i{font-size:11px;color:var(--tm)}',
+    '.user-asset-line{display:flex;align-items:baseline;justify-content:space-between;gap:6px;padding:6px 0}',
+    '.user-asset-line span{color:var(--tm);font-size:13px;font-weight:500;white-space:nowrap}',
+    '.user-asset-line strong{color:var(--tp);font-size:14px;font-weight:700;white-space:nowrap}',
+    '.user-asset-divider{height:1px;background:#E0E4EB;margin:0 16px}',
+    '.user-status-grid{display:flex;align-items:baseline;justify-content:space-between;background:#fff;padding:0 16px 16px;border-bottom:1px solid #E0E4EB}',
+    '.user-status-item{display:flex;align-items:baseline;gap:6px}',
+    '.user-status-item span{font-size:14px;font-weight:600;color:var(--tm);white-space:nowrap}',
+    '.user-status-item strong{font-size:14px;font-weight:600;color:var(--tp);font-family:var(--font-num)}',
+    '.user-status-item strong.rose{color:#E8385A}',
     '.user-menu-list{padding:0 0 10px;background:#fff}',
     '.user-menu-item{min-height:46px;width:100%;padding:0 18px;display:flex;align-items:center;gap:12px;color:var(--tp);font-size:14px;font-weight:600;border:0;background:#fff;text-align:left;text-decoration:none;font-family:inherit;cursor:pointer}',
     '.user-menu-item:hover{background:#F5F7FA}',
@@ -371,17 +373,35 @@
     return (
       '<div class="user-drawer-head">' +
         '<div class="user-member-row">' +
-          '<div class="user-crown grade-img"><img class="grade-icon" src="' + GRADE_ICON_DIR + (GRADE_ICONS[USER_GRADE] || GRADE_ICONS.vip) + '" alt="' + USER_GRADE.toUpperCase() + ' 등급"></div>' +
-          '<div class="user-name-line"><span class="user-vip-chip tier-' + USER_GRADE + '">' + USER_GRADE.toUpperCase() + '</span><strong class="user-name-strong">홍길동님</strong></div>' +
+          '<div class="user-crown grade-img" role="img" aria-label="Prestige까지 80% 달성">' +
+            '<svg class="user-crown-ring" width="56" height="56" viewBox="0 0 56 56"><circle cx="28" cy="28" r="24" fill="none" stroke="#FBEEF0" stroke-width="4"/><circle cx="28" cy="28" r="24" fill="none" stroke="#E8385A" stroke-width="4" stroke-linecap="round" stroke-dasharray="150.8" stroke-dashoffset="30.2"/></svg>' +
+            '<img class="grade-icon" src="' + GRADE_ICON_DIR + (GRADE_ICONS[USER_GRADE] || GRADE_ICONS.vip) + '" alt="' + USER_GRADE.toUpperCase() + ' 등급">' +
+          '</div>' +
+          '<div class="user-name-line"><span class="user-vip-chip tier-' + USER_GRADE + '">' + USER_GRADE.toUpperCase() + ' MEMBER</span><strong class="user-name-strong">홍길동님</strong></div>' +
           '<div class="bbd-head-actions">' +
             '<button class="bbd-logout-btn" type="button" aria-label="로그아웃" onclick="toggleLogin();closeDrawer()"><i class="fas fa-right-from-bracket" aria-hidden="true"></i></button>' +
           '</div>' +
         '</div>' +
-        '<p class="user-vip-copy">Prestige까지 80% 달성</p>' +
-        '<div class="user-vip-bar"><span style="width:80%"></span></div>' +
+        '<div class="user-asset-split">' +
+          '<div class="user-asset-col">' +
+            '<div class="user-asset-col-title"><span>보유 자산</span><i class="fas fa-chevron-right" aria-hidden="true"></i></div>' +
+            '<div class="user-asset-line"><span>예치금</span><strong>50,000원</strong></div>' +
+            '<div class="user-asset-line"><span>마일리지</span><strong>5,000원</strong></div>' +
+          '</div>' +
+          '<div class="user-asset-col">' +
+            '<div class="user-asset-col-title"><span>보증금 관리</span><i class="fas fa-chevron-right" aria-hidden="true"></i></div>' +
+            '<div class="user-asset-line"><span>야후 보증금</span><strong>30,000원</strong></div>' +
+            '<div class="user-asset-line"><span>이베이 보증금</span><strong>100,000원</strong></div>' +
+          '</div>' +
+        '</div>' +
       '</div>' +
-      '<div class="user-asset-box"><div><span>마일리지</span><strong>4,500원</strong></div><div><span>예치금</span><strong>29,870원</strong></div></div>' +
-      '<div class="user-status-grid"><div><strong>3</strong><span>입찰 진행 중</span></div><div><strong>1</strong><span>1차 결제 대기</span></div><div><strong>0</strong><span>2차 결제 대기</span></div></div>' +
+      '<div class="user-asset-divider"></div>' +
+      '<div class="user-stat-title">거래 현황</div>' +
+      '<div class="user-status-grid">' +
+        '<div class="user-status-item"><span>입찰중</span><strong>3건</strong></div>' +
+        '<div class="user-status-item"><span>1차 결제 대기</span><strong class="rose">1건</strong></div>' +
+        '<div class="user-status-item"><span>2차 결제 대기</span><strong>0건</strong></div>' +
+      '</div>' +
       '<nav class="user-menu-list">' +
         '<a class="user-menu-item" href="web_mypage.html"><span class="user-menu-icon"><i class="fas fa-house-user" aria-hidden="true"></i></span><span>마이페이지</span></a>' +
         userMenuSection('fa-gavel', '나의 거래 현황', 'wm-menu-trade',
