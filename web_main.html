@@ -89,8 +89,8 @@ header{background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 0 
 .panel-user-top{padding:0 0 10px;border-bottom:1px solid #F0F2F5}
 .panel-user-row{display:flex;align-items:center;gap:9px;margin-bottom:10px}
 .pu-crown{width:30px;height:30px;border-radius:50%;background:#FFF4D6;color:#F5A623;display:grid;place-items:center;font-size:15px;flex-shrink:0}
-.pu-name{font-size:14px;font-weight:500;color:var(--tp)}
-.pu-grade{display:inline-block;color:var(--tm);font-size:11px;font-weight:700;margin-top:1px}
+.pu-name{font-size:15px;font-weight:500;color:var(--tp)}
+.pu-grade{display:inline-block;color:var(--tm);font-size:13px;font-weight:700;margin-top:1px}
 .pu-manage-card{background:#FFF7F0;border:1px solid #FFE2C6;border-radius:8px;padding:8px 10px;margin-bottom:10px}
 .pu-manage-row{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;font-weight:800;color:#F08A24}
 .pu-grade-progress{height:5px;margin-top:7px;border-radius:999px;background:#FFE2C6;overflow:hidden}
@@ -99,14 +99,14 @@ header{background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 0 
 .pu-manage-sub:hover{color:var(--rose)}
 .pu-status{display:grid;gap:6px;padding:10px 0}
 .pu-st{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:22px}
-.pu-st-label{display:flex;align-items:center;gap:6px;color:var(--ts);font-size:12px;font-weight:700}
+.pu-st-label{display:flex;align-items:center;gap:6px;color:var(--ts);font-size:13px;font-weight:700}
 .pu-st-label::before{content:"";width:6px;height:6px;border-radius:50%;background:#22C55E}
 .pu-st:nth-child(2) .pu-st-label::before{background:#E8385A}
 .pu-st:nth-child(3) .pu-st-label::before{background:#22C55E}
 .pu-st-num{font-size:13px;font-weight:900;color:var(--tp);font-family:var(--font-num)}
 .pu-st-num.red{color:var(--rose)}
 .pu-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:auto}
-.pu-btn{height:32px;border:1px solid var(--border);border-radius:5px;background:#fff;font-size:11px;font-weight:800;color:var(--ts);cursor:pointer;font-family:inherit;text-align:center;position:relative}
+.pu-btn{height:32px;border:1px solid var(--border);border-radius:5px;background:#fff;font-size:13px;font-weight:700;color:var(--ts);cursor:pointer;font-family:inherit;text-align:center;position:relative}
 .pu-btn:hover{background:var(--bg);color:var(--tp)}
 /* 신규 소식 표시: 오른쪽 위 N (1:1 문의내역과 동일) */
 .new-n{color:var(--rose);font-family:var(--font-num);font-size:9px;font-weight:900;line-height:1;vertical-align:super;margin-left:2px}
@@ -179,7 +179,7 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 .sc-item:hover{opacity:.75}
 .sc-icon{width:54px;height:54px;border-radius:50%;background:#FFF9F9;border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.07);font-size:20px}
 .sc-icon i{font-size:22px;color:rgb(233,59,95)}
-.sc-lbl{font-size:10px;color:var(--ts);font-weight:500;white-space:nowrap;text-align:center}
+.sc-lbl{font-size:12px;color:var(--ts);font-weight:500;white-space:nowrap;text-align:center}
 
 /* 환율/근무시간 팝업 */
 .market-info-overlay.open{display:flex}
@@ -243,7 +243,7 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 .br-img{width:65px;height:65px;border-radius:12px;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--tp);overflow:hidden;transition:border-color .15s}
 .br-chip:hover .br-img{border-color:var(--rose)}
 .br-img img{width:100%;height:100%;object-fit:contain;padding:10px}
-.br-name{font-size:11px;color:var(--ts);font-weight:500;text-align:center;line-height:1.35}
+.br-name{font-size:12px;color:var(--ts);font-weight:500;text-align:center;line-height:1.35}
 
 /* 실시간 베스트 */
 .live-best-section{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:34px 0}
@@ -515,7 +515,7 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
     <div class="sc-item" role="button" tabindex="0" onclick="openWishlistPopup()" onkeydown="handleShortcutKey(event, openWishlistPopup)"><div class="sc-icon si2"><i class="fas fa-heart"></i></div><span class="sc-lbl">관심상품</span></div>
     <div class="sc-item" onclick="location.href='web_auction_bid_list.html'" style="cursor:pointer"><div class="sc-icon si3"><i class="fas fa-gavel"></i></div><span class="sc-lbl">나의 경매</span></div>
     <div class="sc-item" onclick="location.href='web_bundle_shipping_management.html'" style="cursor:pointer"><div class="sc-icon si4"><i class="fas fa-box-open"></i></div><span class="sc-lbl">배송 신청 관리</span></div>
-    <div class="sc-item" onclick="location.href='https://www.bidbuy.co.kr/cs'" style="cursor:pointer"><div class="sc-icon si5"><i class="fas fa-thumbs-up"></i></div><span class="sc-lbl">고객센터</span></div>
+    <div class="sc-item" onclick="window.open('https://docs.channel.io/bidbuyguide/ko/categories/%EC%9D%B4%EC%9A%A9%EA%B0%80%EC%9D%B4%EB%93%9C-b20b6706','_blank')" style="cursor:pointer"><div class="sc-icon si5"><i class="fas fa-thumbs-up"></i></div><span class="sc-lbl">이용가이드</span></div>
     <div class="sc-item" role="button" tabindex="0" onclick="openConvenienceToolsPopup()" onkeydown="handleShortcutKey(event, openConvenienceToolsPopup)"><div class="sc-icon si6"><i class="fas fa-toolbox"></i></div><span class="sc-lbl">편의도구</span></div>
     <div class="sc-item" onclick="location.href='web_mileage.html'" style="cursor:pointer"><div class="sc-icon si7"><i class="fas fa-ticket"></i></div><span class="sc-lbl">마일리지/쿠폰</span></div>
     <div class="sc-item" role="button" tabindex="0" onclick="openbidbuycsPopup()" onkeydown="handleShortcutKey(event, openbidbuycsPopup)"><div class="sc-icon si8"><i class="fas fa-clipboard-list"></i></div><span class="sc-lbl">자주하는질문</span></div>
@@ -561,7 +561,7 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
 <!-- 실시간 베스트 -->
 <div class="live-best-section">
   <div class="section" style="padding:0">
-    <div class="sec-hd"><h2 class="sec-title">실시간 베스트</h2><span class="sec-meta">2026-04-30 20:00 업데이트</span></div>
+    <div class="sec-hd"><div style="display:flex;align-items:baseline;gap:8px"><h2 class="sec-title">실시간 베스트</h2><span class="sec-meta">2026-04-30 20:00 업데이트</span></div><a href="web_auction.html" class="sec-more">더보기 <i class="fas fa-chevron-right"></i></a></div>
     <div class="live-best-grid">
       <div class="live-card"><div class="live-thumb"><img src="https://picsum.photos/seed/watch-best-1/360" alt=""><div class="live-fav"><i class="far fa-heart"></i></div></div><div class="live-info"><div class="live-source">야후 경매</div><div class="live-name">シチズン クォーツ 腕時計 メンズ 文字盤</div><div class="live-price">3,030엔</div><div class="live-meta"><span>2026-04-30 19:38:26</span><span>10 Bids</span></div></div></div>
       <div class="live-card"><div class="live-thumb"><img src="https://picsum.photos/seed/watch-best-2/360" alt=""><div class="live-fav"><i class="far fa-heart"></i></div></div><div class="live-info"><div class="live-source">야후 경매</div><div class="live-name">TISSOT ティソ PR100 P350/450 クォーツ</div><div class="live-price">1,100엔</div><div class="live-meta"><span>2026-04-30 18:27:54</span><span>2 Bids</span></div></div></div>
