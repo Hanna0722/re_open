@@ -149,7 +149,7 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 .hb-dot.active{background:var(--rose);width:16px;border-radius:5px}
 .hero-banner.is-tabbed{padding-bottom:0}
 .hero-banner.is-tabbed .hero-banner-inner{max-width:1140px;height:112px;margin:0 auto;display:grid;grid-template-columns:248px minmax(0,1fr)}
-.hero-banner.is-tabbed .hb-tabs{border-right:1px solid var(--border);display:grid;grid-template-rows:1fr 1fr;background:#fff}
+.hero-banner.is-tabbed .hb-tabs{border-right:1px solid var(--border);display:grid;grid-template-rows:1fr 1fr 1fr;background:#fff}
 .hero-banner.is-tabbed .hb-tab{display:flex;align-items:center;gap:10px;padding:0 28px;border:0;background:#fff;color:var(--tm);font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;text-align:left}
 .hero-banner.is-tabbed .hb-tab i{width:14px;text-align:center;font-size:13px;color:currentColor}
 .hero-banner.is-tabbed .hb-tab.active{color:var(--rose)}
@@ -502,9 +502,24 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
       </div>
     </div>
   </div>
+  <div class="hb-slide mb-slide event-slide">
+    <div class="member-bar">
+      <div class="member-inner">
+        <span class="mb-lbl">진행중인 이벤트</span>
+        <span class="mb-sub">전 회원 대상 · 첫 구매 시 마일리지 5% 추가 적립 이벤트 진행 중</span>
+        <div class="mb-tiers">
+          <div class="mb-tier"><div class="mb-tier-name">추가 적립</div><div class="mb-tier-desc">첫 구매 시<br>마일리지 5% 추가</div></div>
+          <div class="mb-tier"><div class="mb-tier-name" style="color:var(--amber)">이벤트 기간</div><div class="mb-tier-desc">2026.09.01<br>~ 2026.09.30</div></div>
+          <div class="mb-tier"><div class="mb-tier-name" style="color:var(--rose)">대상</div><div class="mb-tier-desc">전 회원<br>(등급 무관)</div></div>
+        </div>
+        <a class="mb-detail-btn" href="#" onclick="openbidbuynoticePopup();return false;">이벤트 보기</a>
+      </div>
+    </div>
+  </div>
   <div class="hb-dots">
     <button class="hb-dot active" type="button" onclick="hbGoTo(0)" aria-label="멤버십 배너 보기"></button>
     <button class="hb-dot" type="button" onclick="hbGoTo(1)" aria-label="공지사항 배너 보기"></button>
+    <button class="hb-dot" type="button" onclick="hbGoTo(2)" aria-label="진행중인 이벤트 배너 보기"></button>
   </div>
 </div>
 
@@ -804,7 +819,8 @@ function openbidbuynoticePopup(){
     tabs.setAttribute('aria-label', '공지 및 마일리지 안내');
     tabs.innerHTML =
       '<button class="hb-tab active" type="button" role="tab" aria-selected="true" onclick="hbGoTo(0)"><i class="fas fa-crown" aria-hidden="true"></i><span>등급별 마일리지 제도 오픈!</span></button>' +
-      '<button class="hb-tab" type="button" role="tab" aria-selected="false" onclick="hbGoTo(1)"><i class="fas fa-bullhorn" aria-hidden="true"></i><span>공지사항</span></button>';
+      '<button class="hb-tab" type="button" role="tab" aria-selected="false" onclick="hbGoTo(1)"><i class="fas fa-bullhorn" aria-hidden="true"></i><span>공지사항</span></button>' +
+      '<button class="hb-tab" type="button" role="tab" aria-selected="false" onclick="hbGoTo(2)"><i class="fas fa-gift" aria-hidden="true"></i><span>진행중인 이벤트</span></button>';
     const panels = document.createElement('div');
     panels.className = 'hb-panels';
     slides.forEach(slide => panels.appendChild(slide));
