@@ -1063,6 +1063,8 @@
     .trl { font-size: 13px; font-weight: 700; color: var(--tp); white-space: nowrap; }
     .trv { font-size: 12px; font-weight: 700; color: var(--tp); white-space: nowrap; }
     .trv.accent { color: var(--tp); font-weight: 700; }
+    .storage-day { display: block; margin-top: 2px; color: var(--tm); font-weight: 600; white-space: nowrap; }
+    .storage-day--warn { color: var(--rose); font-weight: 800; }
 
     .tr-pay {
       display: flex;
@@ -1839,7 +1841,7 @@
                 <div class="tr-amount">
                   <span class="trl">상품금액</span><span class="trv">2개 / 28,500 엔</span><span class="trl">총상품가격</span><span class="trv accent">28,500 엔</span>
                   <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">-</span>
-                  <span class="trl">현지도착일</span><span class="trv">2024.04.20</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                  <span class="trl">현지도착일</span><span class="trv">2024.04.20<span class="storage-day">(보관 D+31)</span></span><span class="trl">국제배송일</span><span class="trv">-</span>
                 </div>
                 <div class="tr-pay"></div>
               </div>
@@ -1861,7 +1863,7 @@
                 <div class="tr-amount">
                   <span class="trl">상품금액</span><span class="trv">2개 / 28,500 엔</span><span class="trl">총상품가격</span><span class="trv accent">28,500 엔</span>
                   <span class="trl">주문일자</span><span class="trv">2024.04.17</span><span class="trl">결제금액</span><span class="trv">-</span>
-                  <span class="trl">현지도착일</span><span class="trv">2024.04.22</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                  <span class="trl">현지도착일</span><span class="trv">2024.04.22<span class="storage-day">(보관 D+35)</span></span><span class="trl">국제배송일</span><span class="trv">-</span>
                 </div>
                 <div class="tr-pay"></div>
               </div>
@@ -1888,7 +1890,7 @@
                 <div class="tr-amount">
                   <span class="trl">상품금액</span><span class="trv">1개 / 39,000 엔</span><span class="trl">총상품가격</span><span class="trv accent">39,000 엔</span>
                   <span class="trl">주문일자</span><span class="trv">2024.04.16</span><span class="trl">결제금액</span><span class="trv">-</span>
-                  <span class="trl">현지도착일</span><span class="trv">2024.04.19</span><span class="trl">국제배송일</span><span class="trv">-</span>
+                  <span class="trl">현지도착일</span><span class="trv">2024.04.19<span class="storage-day">(보관 D+4)</span></span><span class="trl">국제배송일</span><span class="trv">-</span>
                 </div>
                 <div class="tr-pay"><button class="btn-pay-row" type="button" onclick="location.href='web_bill_2nd.html'">결제하기</button></div>
               </div>
@@ -2407,6 +2409,13 @@
 
 
   <script>
+    document.querySelectorAll(".storage-day").forEach((el) => {
+      const match = el.textContent.match(/D\+(\d+)/);
+      if (match && Number(match[1]) >= 31) {
+        el.classList.add("storage-day--warn");
+      }
+    });
+
     document.querySelectorAll(".filter-group").forEach((group) => {
       const tabs = group.querySelectorAll("button");
 
@@ -2763,12 +2772,11 @@
       });
     }
 
-    // 현지도착: 보관료 부과까지 남은 D-day (D-30 ~ D+10 랜덤)
+    // 현지도착: 현지도착일로부터 경과한 보관일 (D+1 ~ D+40 랜덤, 시간이 지날수록 증가)
     function randomizeStorageDday() {
       tradeTable.querySelectorAll('.order-card[data-status="local-arrived"] .tr-chip').forEach((chip) => {
-        const d = Math.floor(Math.random() * 41) - 30;
-        const label = d < 0 ? "D" + d : d === 0 ? "D-Day" : "D+" + d;
-        chip.textContent = "현지도착 (보관료 " + label + ")";
+        const d = Math.floor(Math.random() * 40) + 1;
+        chip.textContent = "현지도착 (보관료 D+" + d + ")";
       });
     }
 

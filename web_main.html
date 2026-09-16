@@ -92,7 +92,7 @@ header{background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 0 
 .pu-name{font-size:15px;font-weight:500;color:var(--tp)}
 .pu-grade{display:inline-block;color:var(--tm);font-size:13px;font-weight:700;margin-top:1px}
 .pu-manage-card{background:#FFF7F0;border:1px solid #FFE2C6;border-radius:8px;padding:8px 10px;margin-bottom:10px}
-.pu-manage-row{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;font-weight:800;color:#F08A24}
+.pu-manage-row{display:flex;flex-direction:column;gap:2px;font-size:12px;font-weight:800;color:#F08A24}
 .pu-grade-progress{height:5px;margin-top:7px;border-radius:999px;background:#FFE2C6;overflow:hidden}
 .pu-grade-progress span{display:block;width:0;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--rose),var(--amber));transition:width .2s ease}
 .pu-manage-sub{display:block;margin-top:6px;padding-top:5px;border-top:1px solid #FFE2C6;color:#B9A18D;font-size:10px;text-align:right;text-decoration:none}
@@ -433,11 +433,11 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
       <div class="panel-user" id="panelUser">
         <div class="panel-user-top">
           <div class="panel-user-row">
-            <div class="pu-crown grade-img"><img class="grade-icon" src="gradeicon/grade_vip.png" alt=""></div>
+            <div class="pu-crown grade-img"><img class="grade-icon" src="gradeicon/grade_standard.png" alt=""></div>
             <div><div class="pu-name">홍길동님</div><span class="pu-grade">마일리지 0원 · 예치금 339,119원</span></div>
           </div>
           <div class="pu-manage-card">
-            <div class="pu-manage-row"><span><i class="fas fa-star"></i> VIP</span><span class="pu-grade-remaining" data-remaining="80">Prestige까지 <strong style="color: #E8385A;">80%</strong> 남음</span></div>
+            <div class="pu-manage-row"><span><i class="fas fa-star"></i> Standard</span><span class="pu-grade-remaining" data-remaining="0">다음달 Premium 승급 조건 충족!</span></div>
             <div class="pu-grade-progress" aria-hidden="true"><span id="puGradeProgressFill"></span></div>
             <a class="pu-manage-sub" href="web_grade.html">등급 혜택 자세히보기</a>
           </div>
