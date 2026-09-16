@@ -369,6 +369,18 @@ height: 28px;
       font-weight: 800;
     }
 
+    .btn-bulk-del {
+      height: 28px;
+      padding: 0 14px;
+      border: 0;
+      border-radius: 5px;
+      background: var(--rose);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .btn-bulk-del:hover { background: var(--rose-h); }
+
     .bid-list {
       display: grid;
       gap: 10px;
@@ -387,6 +399,20 @@ height: 28px;
       padding: 8px 18px;
       background: #FBF7F5;
       border-bottom: 1px solid #DED8D4;
+    }
+    .bid-row-head-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .bid-row-check {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--tm);
+      cursor: pointer;
     }
     .bid-status {
       font-size: 13px;
@@ -668,7 +694,8 @@ height: 28px;
             <div class="bid-search">
               <input type="search" id="auctionCodeSearch" placeholder="경매코드 검색" aria-label="경매코드 검색">
               <button class="btn-search" type="button" id="auctionCodeSearchBtn">검색</button>
-              <button class="btn-bulk" type="button">일괄조회</button>
+              <button class="btn-bulk" type="button" id="bulkLookupBtn">일괄조회</button>
+              <button class="btn-bulk-del" type="button" id="failedBulkDeleteBtn" style="display:none">선택삭제</button>
             </div>
           </div>
         </div>
@@ -678,7 +705,10 @@ height: 28px;
         <div class="bid-list" data-bid-panel="failed" id="failedList" style="display:none">
           <article class="bid-row" data-market="US" data-code="297609052814" data-status="failed-bid">
             <div class="bid-row-head">
-              <span class="bid-status">유찰</span>
+              <div class="bid-row-head-left">
+                <label class="bid-row-check"><input type="checkbox" class="chk" data-bid-chk> 선택</label>
+                <span class="bid-status">유찰</span>
+              </div>
               <span class="bid-oid">EBAY · 297609052814</span>
             </div>
             <div class="bid-body">
@@ -700,7 +730,10 @@ height: 28px;
           </article>
           <article class="bid-row" data-market="UK" data-code="UK5526090618" data-status="failed-bid">
             <div class="bid-row-head">
-              <span class="bid-status">유찰</span>
+              <div class="bid-row-head-left">
+                <label class="bid-row-check"><input type="checkbox" class="chk" data-bid-chk> 선택</label>
+                <span class="bid-status">유찰</span>
+              </div>
               <span class="bid-oid">EBAY UK · UK5526090618</span>
             </div>
             <div class="bid-body">
@@ -722,7 +755,10 @@ height: 28px;
           </article>
           <article class="bid-row" data-market="UK" data-code="6090639271" data-status="failed-bid">
             <div class="bid-row-head">
-              <span class="bid-status">유찰</span>
+              <div class="bid-row-head-left">
+                <label class="bid-row-check"><input type="checkbox" class="chk" data-bid-chk> 선택</label>
+                <span class="bid-status">유찰</span>
+              </div>
               <span class="bid-oid">EBAY UK · 6090639271</span>
             </div>
             <div class="bid-body">
@@ -988,6 +1024,10 @@ height: 28px;
       bidPanels.forEach((panel) => {
         panel.style.display = panel.dataset.bidPanel === target ? "grid" : "none";
       });
+      const bulkLookupBtn = document.getElementById("bulkLookupBtn");
+      const failedBulkDeleteBtn = document.getElementById("failedBulkDeleteBtn");
+      if (bulkLookupBtn) bulkLookupBtn.style.display = target === "bidding" ? "" : "none";
+      if (failedBulkDeleteBtn) failedBulkDeleteBtn.style.display = target === "failed" ? "" : "none";
       document.querySelectorAll('.status-card[data-status="auction-bid"]').forEach((card) => {
         const selected = target === "bidding";
         card.classList.toggle("status-active", selected);
@@ -1012,6 +1052,16 @@ height: 28px;
       });
     });
     selectBidTab(location.hash === "#failedList" ? "failed" : "bidding");
+
+    document.getElementById("failedBulkDeleteBtn")?.addEventListener("click", () => {
+      const failedList = document.getElementById("failedList");
+      const checked = Array.from(failedList.querySelectorAll(".bid-row")).filter((row) => row.querySelector("[data-bid-chk]")?.checked);
+      if (!checked.length) { alert("삭제할 항목을 선택해 주세요."); return; }
+      if (!confirm(`선택한 ${checked.length}건을 삭제하시겠습니까?`)) return;
+      checked.forEach((row) => row.remove());
+      updateMarketFilterCounts();
+      applyFailedMarketFilter();
+    });
 
   </script>
   <script src="bb-common.js"></script>

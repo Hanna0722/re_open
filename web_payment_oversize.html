@@ -1061,7 +1061,7 @@
                 </tr>
                 <tr>
                   <th>개인통관고유부호<br>(사업자번호)</th><td class="mono">P932150008388</td>
-                  <th class="rgroup">안심케어플러스</th><td><span data-care-plus-toggle data-care-active="true" style="display:flex;align-items:center;gap:8px"><strong data-care-plus-status style="color:red">신청</strong><button data-care-plus-button type="button" style="height:24px;padding:0 10px;border:1px solid var(--line);border-radius:5px;background:#fff;color:var(--ts);font-size:11px;font-weight:700;cursor:pointer">신청 해제</button></span></td>
+                  <th class="rgroup">포장 옵션</th><td>튼튼포장</td>
                 </tr>
                 <tr>
                   <th rowspan="3">배송지</th><td rowspan="3">06234<br>서울특별시 강남구 테헤란로 123<br>비드바이빌딩 401호</td>
@@ -1481,28 +1481,6 @@ function setupPaymentSwitch() {
   render();
 }
 
-function setupCarePlusToggle() {
-  document.querySelectorAll('[data-care-plus-toggle]').forEach(row => {
-    const status = row.querySelector('[data-care-plus-status]');
-    const button = row.querySelector('[data-care-plus-button]');
-    if (!status || !button) return;
-
-    const render = () => {
-      const isActive = row.dataset.careActive === 'true';
-      status.textContent = isActive ? '신청' : '미신청';
-      status.style.color = isActive ? 'red' : '#999';
-      button.textContent = isActive ? '신청 해제' : '신청';
-    };
-
-    button.addEventListener('click', () => {
-      row.dataset.careActive = row.dataset.careActive === 'true' ? 'false' : 'true';
-      render();
-    });
-
-    render();
-  });
-}
-
 function closePaymentReceipt(event) {
   if (event && event.target !== event.currentTarget) return;
   const modal = document.getElementById('paymentReceiptModal');
@@ -1536,7 +1514,6 @@ function openPaymentReceipt(trigger) {
 
 updatePaymentTotals();
 setupPaymentSwitch();
-setupCarePlusToggle();
 
 /* ── 오버사이즈 국제운송료 계산 (일본 요금표 기준) ── */
 const OVERSIZE_RATE_TABLE = [

@@ -289,6 +289,7 @@
       font-weight: 700;
     }
     .country-tab.active span { color: rgba(255,255,255,.82); }
+    .country-tabs .panel-foot { margin: 0 0 0 auto; }
 
     .fav-table-wrap {
       overflow-x: auto;
@@ -539,7 +540,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-top: 12px;
+      margin: 12px 0;
     }
     .bulk-del {
       height: 32px;
@@ -558,7 +559,7 @@
       color: var(--muted);
     }
     .bulk-del.ghost:hover { border-color: var(--rose); background: #fff; color: var(--rose); }
-    .foot-hint { color: var(--faint); font-size: 12px; }
+    .foot-hint { color: var(--faint); font-size: 12px; font-weight: 400; }
 
     .pager {
       display: flex;
@@ -674,7 +675,7 @@
             <a href="web_qna_form.html">1:1 문의하기</a>
           </div>
         </div>
-        <div class="nav-section biz-convert-section">
+        <div class="nav-section biz-convert-section" hidden>
           <a href="web_biz.html" class="biz-convert-link">
             <span class="biz-convert-inner">
               <span class="biz-convert-icon"><i class="fas fa-building"></i></span>
@@ -705,6 +706,9 @@
         <div class="panel-head">
           <h2><i class="fa-solid fa-location-dot" aria-hidden="true"></i>관심판매자 목록</h2>
           <span class="total">전체 <b data-total>0</b>건</span>
+        </div>
+        <div class="panel-foot">
+          <button class="bulk-del" type="button" data-bulk>선택삭제</button>
         </div>
         <div class="fav-table-wrap">
           <table class="fav-table">
@@ -767,9 +771,6 @@
             등록된 관심 출품자가 없습니다.
           </div>
         </div>
-        <div class="panel-foot">
-          <button class="bulk-del" type="button" data-bulk>선택삭제</button>
-        </div>
         <div class="pager" aria-label="페이지 이동">
           <button class="pager-btn" type="button" data-page-prev aria-label="이전 페이지"><i class="fa-solid fa-chevron-left"></i></button>
           <span class="pager-info" data-page-info>1 / 1</span>
@@ -788,6 +789,11 @@
           <button class="country-tab" type="button" data-country="jp">일본<span data-country-cnt="jp">0</span></button>
           <button class="country-tab" type="button" data-country="us">미국<span data-country-cnt="us">0</span></button>
           <button class="country-tab" type="button" data-country="uk">영국<span data-country-cnt="uk">0</span></button>
+          <div class="panel-foot">
+            <button class="bulk-del" type="button" data-bulk>선택삭제</button>
+            <button class="bulk-del ghost" type="button" data-bulk-ended>종료된 물품삭제</button>
+            <button class="bulk-del ghost" type="button" data-bulk-refresh>현재가 일괄조회</button>
+          </div>
         </div>
         <div class="fav-table-wrap">
           <table class="fav-table">
@@ -977,10 +983,6 @@
             해당 국가의 경매 관심물품이 없습니다.
           </div>
         </div>
-        <div class="panel-foot">
-          <button class="bulk-del" type="button" data-bulk>선택삭제</button>
-          <button class="bulk-del ghost" type="button" data-bulk-ended>종료 물품삭제</button>
-        </div>
         <div class="pager" aria-label="페이지 이동">
           <button class="pager-btn" type="button" data-page-prev aria-label="이전 페이지"><i class="fa-solid fa-chevron-left"></i></button>
           <span class="pager-info" data-page-info>1 / 1</span>
@@ -993,6 +995,9 @@
         <div class="panel-head">
           <h2><i class="fa-solid fa-location-dot" aria-hidden="true"></i>구매 관심물품 목록</h2>
           <span class="total">전체 <b data-total>0</b>건</span>
+        </div>
+        <div class="panel-foot">
+          <button class="bulk-del" type="button" data-bulk>선택삭제</button>
         </div>
         <div class="fav-table-wrap">
           <table class="fav-table">
@@ -1080,9 +1085,6 @@
             등록된 구매 관심물품이 없습니다.
           </div>
         </div>
-        <div class="panel-foot">
-          <button class="bulk-del" type="button" data-bulk>선택삭제</button>
-        </div>
         <div class="pager" aria-label="페이지 이동">
           <button class="pager-btn" type="button" data-page-prev aria-label="이전 페이지"><i class="fa-solid fa-chevron-left"></i></button>
           <span class="pager-info" data-page-info>1 / 1</span>
@@ -1095,6 +1097,9 @@
         <div class="panel-head">
           <h2><i class="fa-solid fa-location-dot" aria-hidden="true"></i>관심키워드 목록</h2>
           <span class="total">전체 <b data-total>0</b>건</span>
+        </div>
+        <div class="panel-foot">
+          <button class="bulk-del" type="button" data-bulk>선택삭제</button>
         </div>
         <div class="fav-table-wrap">
           <table class="fav-table">
@@ -1157,9 +1162,6 @@
             등록된 관심 키워드가 없습니다.
           </div>
         </div>
-        <div class="panel-foot">
-          <button class="bulk-del" type="button" data-bulk>선택삭제</button>
-        </div>
         <div class="pager" aria-label="페이지 이동">
           <button class="pager-btn" type="button" data-page-prev aria-label="이전 페이지"><i class="fa-solid fa-chevron-left"></i></button>
           <span class="pager-info" data-page-info>1 / 1</span>
@@ -1170,8 +1172,11 @@
       <!-- ── 바로가기 ── -->
       <section class="fav-panel" data-panel="shortcut" role="tabpanel" hidden>
         <div class="panel-head">
-          <h2><i class="fa-solid fa-location-dot" aria-hidden="true"></i>바로가기 목록</h2>
+          <h2><i class="fa-solid fa-location-dot" aria-hidden="true"></i>바로가기 목록<span class="foot-hint">자주 찾는 목록 페이지를 저장해 두고 바로 이동할 수 있습니다.</span></h2>
           <span class="total">전체 <b data-total>0</b>건</span>
+        </div>
+        <div class="panel-foot">
+          <button class="bulk-del" type="button" data-bulk>선택 삭제</button>
         </div>
         <div class="fav-table-wrap">
           <table class="fav-table">
@@ -1220,10 +1225,6 @@
             <i class="fa-solid fa-link"></i>
             등록된 바로가기가 없습니다.
           </div>
-        </div>
-        <div class="panel-foot">
-          <button class="bulk-del" type="button" data-bulk>선택 삭제</button>
-          <span class="foot-hint">자주 찾는 목록 페이지를 저장해 두고 바로 이동할 수 있습니다.</span>
         </div>
         <div class="pager" aria-label="페이지 이동">
           <button class="pager-btn" type="button" data-page-prev aria-label="이전 페이지"><i class="fa-solid fa-chevron-left"></i></button>
@@ -1379,6 +1380,13 @@
             }, 900);
           });
         });
+
+        const bulkRefresh = panel.querySelector('[data-bulk-refresh]');
+        if (bulkRefresh) {
+          bulkRefresh.addEventListener('click', () => {
+            panel.querySelectorAll('[data-refresh]:not(:disabled)').forEach((btn) => btn.click());
+          });
+        }
 
         panel.querySelectorAll('.country-tab').forEach((tab) => {
           tab.addEventListener('click', () => {
