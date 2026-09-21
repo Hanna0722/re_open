@@ -1570,7 +1570,7 @@
           <div class="stamp-head">
             <div>
               <h2 id="stampTitle">혜택 스탬프</h2>
-              <p id="stampSummary">이번 달 구매 0건</p>
+              <p id="stampSummary">이번 달 현지도착 0건</p>
             </div>
             <span class="stamp-badge">VIP</span>
           </div>
@@ -1819,24 +1819,20 @@
     }
 
     /* ===== 혜택 스탬프 v2 ===== */
-    const STAMP_TOTAL = 20;
-    const REWARD_MAP = {
-      3:  { type: "coupon",   amount: 1000 },
-      5:  { type: "roulette" },
-      8:  { type: "coupon",   amount: 2000 },
-      10: { type: "roulette" },
-      13: { type: "coupon",   amount: 3000 },
-      15: { type: "roulette" },
-      18: { type: "coupon",   amount: 5000 },
-      20: { type: "roulette" }
-    };
+    /* 쿠폰: 3·8·13·18건 / 룰렛: 20건까지 5건마다, 20건 이후 10건마다 */
+    const COUPON_REWARDS = { 3: 1000, 8: 2000, 13: 3000, 18: 5000 };
+    function getReward(n) {
+      if (COUPON_REWARDS[n]) return { type: "coupon", amount: COUPON_REWARDS[n] };
+      if ((n <= 20 && n % 5 === 0) || (n > 20 && n % 10 === 0)) return { type: "roulette" };
+      return null;
+    }
+    /* 표시 칸 수: 기본 20, 20건 달성 후엔 다음 룰렛(10건 단위)까지 확장 */
+    function stampTotal() { return Math.max(20, Math.ceil((stampState.count + 1) / 10) * 10); }
     const ROULETTE_PRIZES = [1000, 2000, 3000, 4000, 5000];
 
     /* 데모 상태 — 실제 연동 시 서버 값으로 대체 */
     const stampState = {
       count: 12,
-      /* 각 스탬프의 1차 결제 완료일 (index 0 = 1번 스탬프) */
-      paidDates: ["2026-08-01","2026-08-01","2026-08-02","2026-08-03","2026-08-05","2026-08-06","2026-08-07","2026-08-08","2026-08-09","2026-08-10","2026-08-11","2026-08-12"],
       claimed: { 3: 1000, 5: 3000 },           // { 3: 1000 } 수령 완료 금액
       expired: {}            // { 3: true } 전월 미수령 소멸
     };
@@ -1845,10 +1841,6 @@
     const stampSummary = document.getElementById("stampSummary");
 
     const won = (n) => n.toLocaleString("ko-KR");
-    const fmtDate = (iso) => {
-      const d = new Date(iso);
-      return (d.getMonth() + 1) + "." + d.getDate();
-    };
 
     function rewardStatus(step) {
       if (stampState.expired[step]) return "expired";
@@ -1859,7 +1851,7 @@
 
     function rewardCircleHTML(step, reward, st) {
       if (st === "claimed") {
-        return '<span class="rw-claimed-text">수령<br>완료</span>';
+        return '<span class="rw-claimed-text">' + step + '건<br>달성</span>';
       }
       if (reward.type === "coupon" && st !== "expired") {
         return '<span class="rw-action">혜택<br>받기</span>';
@@ -1882,8 +1874,8 @@
     function renderStamps() {
       if (!stampGrid) return;
       stampGrid.innerHTML = "";
-      for (let n = 1; n <= STAMP_TOTAL; n++) {
-        const reward = REWARD_MAP[n];
+      for (let n = 1; n <= stampTotal(); n++) {
+        const reward = getReward(n);
         const paid = stampState.count >= n;
         const cell = document.createElement("div");
         cell.className = "stamp";
@@ -1918,8 +1910,7 @@
           }
         } else if (paid) {
           cell.classList.add("paid");
-          const iso = stampState.paidDates[n - 1];
-          circle.innerHTML = '<span class="stamp-date">' + (iso ? fmtDate(iso) : n) + '</span>';
+          circle.innerHTML = '<span class="stamp-date">' + n + '건</span>';
         } else {
           circle.textContent = n;
         }
@@ -1938,26 +1929,20 @@
 
     function renderSummary() {
       if (!stampSummary) return;
-      let claimed = 0, next = null;
-      Object.keys(REWARD_MAP).map(Number).sort((a, b) => a - b).forEach((step) => {
-        const st = rewardStatus(step);
-        if (st === "claimed") claimed++;
-        if (st === "locked" && next === null) next = step;
-      });
-      let html = "이번 달 결제 <b>" + stampState.count + "건</b>";
-      if (claimed > 0) {
-        html += '<span class="stamp-summary-sep">·</span><span class="stamp-summary-hi">혜택 ' + claimed + "건 수령</span>";
-      } else if (next !== null) {
-        html += '<span class="stamp-summary-sep">·</span>다음 혜택까지 ' + (next - stampState.count) + "건";
-      } else {
-        html += '<span class="stamp-summary-sep">·</span>이번 달 혜택 전부 획득 🎉';
+      let next = null;
+      for (let step = 1; step <= stampTotal(); step++) {
+        if (getReward(step) && rewardStatus(step) === "locked") { next = step; break; }
+      }
+      let html = "이번 달 현지도착 <b>" + stampState.count + "건</b>";
+      if (next !== null) {
+        html += '<span class="stamp-summary-sep">·</span>다음 혜택까지 <span class="stamp-summary-hi">' + (next - stampState.count) + "건</span>";
       }
       stampSummary.innerHTML = html;
     }
 
     /* ---- 배지 클릭 ---- */
     function claimReward(step) {
-      const reward = REWARD_MAP[step];
+      const reward = getReward(step);
       if (!reward || rewardStatus(step) !== "ready") return;
       if (reward.type === "coupon") openCouponModal(step, reward.amount);
       else openRouletteModal(step);
