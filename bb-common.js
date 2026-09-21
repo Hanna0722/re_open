@@ -426,7 +426,15 @@
           userMenuLink('회원정보 수정', '#') +
           userMenuLink('비밀번호 변경', '#') +
           userMenuLink('회원 탈퇴', '#', true)) +
+        userMenuSection('fa-headset', '고객센터', 'wm-menu-cs',
+          userMenuLink('사용자메모', 'web_user_memo.html') +
+          userMenuLink('1:1문의내역', 'web_qna.html') +
+          userMenuLink('1:1문의하기', 'web_qna_form.html')) +
+        userMenuSection('fa-comments', '커뮤니티', 'wm-menu-community',
+          userMenuLink('진행중인 이벤트', '#') +
+          userMenuLink('이용후기', 'web_review_list.html')) +
          '<a class="user-menu-item" href="web_purchase_start.html"><span class="user-menu-icon"><i class="fas fa-link" aria-hidden="true"></i></span><span>URL로 구매신청하기</span><span class="chev"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></a>' +
+         '<a class="user-menu-item" href="#"><span class="user-menu-icon"><i class="fas fa-calculator" aria-hidden="true"></i></span><span>비용 계산기</span><span class="chev"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></a>' +
       '</nav>' +
       drawerCsCardHTML()
     );
