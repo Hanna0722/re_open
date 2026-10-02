@@ -52,9 +52,6 @@
     '.bbc-tabs button:first-child{border-left:0}',
     '.bbc-tabs button.active{outline:2px solid #E8385A;outline-offset:-2px;color:#1f2530}',
     '.bbc-tabs img{width:20px;height:20px;border-radius:50%;object-fit:cover}',
-    '.bbc-mode{display:flex;gap:6px;margin:10px 0 2px}',
-    '.bbc-mode button{flex:1;height:36px;border:1px solid #E0E4EB;border-radius:18px;background:#fff;color:#666b75;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer}',
-    '.bbc-mode button.active{background:#E8385A;border-color:#E8385A;color:#fff}',
     '.bbc-panel{display:none}.bbc-panel.active{display:block}',
     '.bbc-form{list-style:none;margin:0;padding:0}',
     '.bbc-form>li{display:grid;grid-template-columns:62px minmax(0,1fr);align-items:center;column-gap:8px;margin-top:14px}',
@@ -78,14 +75,13 @@
     '.bbc-group{margin:0;padding:12px;border:1px solid #E0E4EB;border-radius:10px;background:#F8F9FB;list-style:none}',
     '.bbc-group li{display:flex;justify-content:space-between;gap:8px;padding:3px 0;font-size:13px}',
     '.bbc-group li:first-child{padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid #E0E4EB;font-size:14px;font-weight:700}',
-    '.bbc-group li:last-child{margin-top:4px;padding-top:6px;border-top:1px solid #E0E4EB}',
+    '.bbc-group li.sum-first{margin-top:4px;padding-top:6px;border-top:1px solid #E0E4EB}',
     '.bbc-empty{margin:0;padding:18px 0;text-align:center;font-size:13px;color:#6B7280}',
     '.bbc-tariff{margin-top:16px;padding:12px;border-radius:8px;background:#F5F7FA;font-size:12px;line-height:1.55;color:#4B5563}',
     '.bbc-tariff b{display:block;margin-bottom:4px;color:#1f2530}',
     '.bbc-tariff a{display:block;margin-top:10px;height:34px;line-height:32px;text-align:center;border:1px solid #D5D9E0;border-radius:5px;background:#fff;color:#1f2530;font-weight:600;text-decoration:none}'
   ].join('\n');
 
-  var state = { mode: 'buy' };
   var view = null;
 
   function el(html) { var d = document.createElement('div'); d.innerHTML = html; return d.firstChild; }
@@ -99,12 +95,12 @@
     var weightCtl = c.lbs
       ? '<div class="bbc-wrap lbs"><input type="text" placeholder="00" inputmode="decimal" data-role="weight"><select data-role="weightUnit"><option value="lbs" selected>Lbs</option><option value="kg">Kg</option></select><small data-role="weightPound"></small></div>'
       : '<div class="bbc-wrap"><input type="text" placeholder="00" inputmode="decimal" data-role="weight"><small>kg</small></div>';
-    var mode = c.id === 'JP'
-      ? '<div class="bbc-mode" role="group" aria-label="일본 구매 유형"><button type="button" class="active" data-mode="buy">구매대행</button><button type="button" data-mode="auction">경매,메루카리</button></div>'
-      : '';
     return (
-      '<div class="bbc-panel' + (idx === 0 ? ' active' : '') + '" data-idx="' + idx + '" data-country="' + c.id + '">' + mode +
+      '<div class="bbc-panel' + (idx === 0 ? ' active' : '') + '" data-idx="' + idx + '" data-country="' + c.id + '">' +
       '<ul class="bbc-form">' +
+        (c.id === 'JP' ? '<li><span class="t">구매유형</span><div class="bbc-chk">' +
+          '<label><input type="radio" name="bbc-type-JP" value="buy" data-role="jpType" checked>구매대행</label>' +
+          '<label><input type="radio" name="bbc-type-JP" value="auction" data-role="jpType">경매/메루카리</label></div></li>' : '') +
         '<li><span class="t">소비세</span><div class="bbc-chk">' +
           '<label><input type="radio" name="bbc-tax-' + c.id + '" value="' + c.tax + '" data-role="tax" checked>소비세 적용(' + c.tax + '%)</label>' +
           '<label><input type="radio" name="bbc-tax-' + c.id + '" value="0" data-role="tax">미적용</label></div></li>' +
@@ -149,9 +145,9 @@
 
   var LEVEL_COL = { 8: 0, 5: 1, 4: 2, 3: 3 };
 
-  function agencyFee(c, level, buyCost, itemTotal) {
+  function agencyFee(c, level, buyCost, itemTotal, kind) {
     if (c.id === 'JP') {
-      var table = state.mode === 'auction' ? RATES.JP_auction : RATES.JP_buy;
+      var table = kind === 'auction' ? RATES.JP_auction : RATES.JP_buy;
       for (var i = 0; i < RATES.JP_tiers.length; i++) {
         if (itemTotal <= RATES.JP_tiers[i]) {
           var v = table[i][LEVEL_COL[level]];
@@ -192,33 +188,35 @@
       return;
     }
     var buyCost = price * qty * (1 + tax / 100) + local + remit;
-    var fee = agencyFee(c, level, buyCost, price * qty);
     var unit = c.lbs ? 'lbs' : 'kg';
-    var rows = function (label, sub, total, ship) {
-      return '<ul class="bbc-group">' +
-        '<li><span>' + label + '</span><span>₩ ' + fmt(Math.round(total * c.rate), 0) + '</span></li>' +
-        '<li><span>(+) 현지구매비용</span><span>' + c.sym + ' ' + fmt(buyCost, c.dec) + '</span></li>' +
-        '<li><span>(+) 대행수수료' + sub + '</span><span>' + c.sym + ' ' + fmt(fee, c.dec) + '</span></li>' +
-        '<li><span>적용무게</span><span>' + fmt(applied, applied % 1 ? 1 : 0) + ' ' + unit + '</span></li>' +
-        '<li><span>(+) 국제운송료</span><span>' + c.sym + ' ' + fmt(ship, c.dec) + '</span></li>' +
-        '<li><span>현지통화 합계</span><span>' + c.sym + ' ' + fmt(total, c.dec) + ' × ' + fmt(c.rate, c.rate % 1 ? 1 : 0) + '</span></li></ul>';
-    };
-    var sub = c.id === 'JP' ? (state.mode === 'auction' ? ' · 경매,메루카리' : ' · 구매대행') : '';
+    var money = function (n) { return c.sym + ' ' + fmt(n, c.dec); };
+    /* 일본은 구매유형 체크(구매대행 / 경매·메루카리)에 따라 대행수수료 요율표가 달라진다 */
+    var typeEl = panel.querySelector('[data-role="jpType"]:checked');
+    var kind = typeEl ? typeEl.value : '';
+    var sub = c.id === 'JP' ? (kind === 'auction' ? ' · 경매/메루카리' : ' · 구매대행') : '';
+    var fee = agencyFee(c, level, buyCost, price * qty, kind);
     box.innerHTML = c.methods.map(function (m) {
       var r = RATES.ship[m[0]];
       var ship = applied ? r.base + r.perUnit * applied : 0;
-      return rows(m[1], sub, buyCost + fee + ship, ship);
+      var total = buyCost + fee + ship;
+      return '<ul class="bbc-group">' +
+        '<li><span>' + m[1] + '</span><span>₩ ' + fmt(Math.round(total * c.rate), 0) + '</span></li>' +
+        '<li><span>(+) 현지구매비용</span><span>' + money(buyCost) + '</span></li>' +
+        '<li><span>(+) 대행수수료' + sub + '</span><span>' + money(fee) + '</span></li>' +
+        '<li><span>적용무게</span><span>' + fmt(applied, applied % 1 ? 1 : 0) + ' ' + unit + '</span></li>' +
+        '<li><span>(+) 국제운송료</span><span>' + money(ship) + '</span></li>' +
+        '<li class="sum-first"><span>현지통화 합계</span><span>' + money(total) + ' × ' + fmt(c.rate, c.rate % 1 ? 1 : 0) + '</span></li>' +
+        '</ul>';
     }).join('');
   }
 
   function calcAll() { view.querySelectorAll('.bbc-panel').forEach(calc); }
 
   function resetAll() {
-    state.mode = 'buy';
-    view.querySelectorAll('.bbc-mode button').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-mode') === 'buy'); });
     view.querySelectorAll('.bbc-panel').forEach(function (p) {
       p.querySelectorAll('input[type=text]:not([readonly])').forEach(function (i) { i.value = i.getAttribute('data-role') === 'quantity' ? '1' : ''; });
       p.querySelectorAll('[data-role="tax"]').forEach(function (r, i) { r.checked = i === 0; });
+      p.querySelectorAll('[data-role="jpType"]').forEach(function (r, i) { r.checked = i === 0; });
       q(p, 'level').value = DEFAULT_LEVEL;
       var u = q(p, 'weightUnit'); if (u) u.value = 'lbs';
     });
@@ -237,10 +235,6 @@
         var idx = t.getAttribute('data-idx');
         view.querySelectorAll('.bbc-tabs button').forEach(function (b) { b.classList.toggle('active', b === t); });
         view.querySelectorAll('.bbc-panel').forEach(function (p) { p.classList.toggle('active', p.getAttribute('data-idx') === idx); });
-      } else if (t.hasAttribute('data-mode')) {
-        state.mode = t.getAttribute('data-mode');
-        t.parentNode.querySelectorAll('button').forEach(function (b) { b.classList.toggle('active', b === t); });
-        calcAll();
       }
     });
     view.addEventListener('input', function (e) {
@@ -276,7 +270,6 @@
       if (d) d.classList.remove('is-calc');
       if (view.parentNode) view.parentNode.removeChild(view);
       view = null;
-      state.mode = 'buy';
     }
   };
 
