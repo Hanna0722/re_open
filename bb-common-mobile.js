@@ -438,7 +438,7 @@
           userMenuLink('진행중인 이벤트', '#') +
           userMenuLink('이용후기', 'mobile_review_list.html')) +
         '<a class="user-menu-item" href="mobile_purchase_start.html"><span class="user-menu-icon"><i class="fas fa-link" aria-hidden="true"></i></span><span>URL로 구매신청하기</span><span class="chev"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></a>' +
-        '<a class="user-menu-item" href="#"><span class="user-menu-icon"><i class="fas fa-calculator" aria-hidden="true"></i></span><span>비용 계산기</span><span class="chev"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></a>' +
+        '<a class="user-menu-item" href="#" data-bb-calc><span class="user-menu-icon"><i class="fas fa-calculator" aria-hidden="true"></i></span><span>비용 계산기</span><span class="chev"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></a>' +
       '</nav>' +
       drawerCsCardHTML()
     );
@@ -616,6 +616,7 @@
     render();
   };
   window.openDrawer = function () {
+    if (window.bbCalcReset) window.bbCalcReset();
     document.getElementById('drawer')?.classList.add('open');
     document.getElementById('drawerOv')?.classList.add('open');
     document.querySelector('.hb')?.setAttribute('aria-expanded', 'true');
@@ -627,4 +628,11 @@
   } else {
     render();
   }
+  /* 비용계산기(공용) 지연 로드 */
+  (function () {
+    var s = document.createElement('script');
+    s.src = 'bb-calculator.js';
+    document.head.appendChild(s);
+  })();
+
 })();
