@@ -27,16 +27,16 @@ a{text-decoration:none;color:inherit}
 .user-trig.open .u-chv{transform:rotate(180deg)}
 .user-dd.open{display:block}
 .breadcrumb-row{max-width:1140px;margin:0 auto;padding:12px 0;display:flex;align-items:center;justify-content:space-between}
-.breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ts)}
-.breadcrumb a{color:var(--navy)}
+.breadcrumb{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ts)}
+.breadcrumb a{color:var(--ts)}
 .breadcrumb a:hover{text-decoration:underline}
 .breadcrumb i{font-size:9px;color:var(--tm)}
-.top-title-wrap{max-width:1140px;margin:0 auto;padding:0 0 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.top-title-wrap{max-width:1140px;margin:0 auto;padding:0 0 24px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
 .top-title-text{flex:1;min-width:0}
 .top-title-actions{display:flex;align-items:center;gap:8px;flex-shrink:0;padding-top:3px}
-.title-action-btn{display:flex;align-items:center;gap:5px;padding:7px 13px;border:1.5px solid var(--border);border-radius:5px;background:#fff;font-size:12px;font-weight:600;color:var(--ts);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
+.title-action-btn{display:flex;align-items:center;gap:5px;padding:6px 12px;border:1px solid var(--border);border-radius:5px;background:#fff;font-size:11px;font-weight:500;color:var(--ts);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
 .title-action-btn:hover{border-color:var(--navy);color:var(--navy)}
-.title-action-btn i{font-size:12px}
+.title-action-btn i{font-size:11px}
 
 /* ── 메인 상품 레이아웃 (좌4 : 우6) ── */
 .item-wrapper{max-width:1140px;margin:0 auto;padding:0 0 32px;display:grid;grid-template-columns:4fr 6fr;gap:12px 16px;align-items:stretch}
@@ -69,46 +69,33 @@ a{text-decoration:none;color:inherit}
 .thumb-item.active,.thumb-item:hover{border-color:var(--rose)}
 .thumb-item i{font-size:20px;color:var(--tm)}
 
-/* 감정 배너 */
-.appraisal-banner{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
-.appraisal-banner-logo{width:50px;height:50px;border-radius:8px;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
-.appraisal-banner-logo img{width:100%;height:100%;object-fit:contain;padding:7px;display:block}
-.appraisal-banner-info{flex:1;min-width:0}
-.appraisal-banner-title{font-size:16px;color:var(--tp);font-weight:500;display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%}
-.appraisal-banner-title-text{min-width:0}
-.appraisal-banner-detail{font-size:14px;color:var(--rose);font-weight:700;cursor:pointer;text-decoration:underline;white-space:nowrap}
-.appraisal-banner-fee{font-size:14px;color:var(--ts);margin-top:10px}
-.appraisal-banner-fee strong{color:var(--tp);font-weight:700}
-
-/* 감정 팝업 */
-.appraisal-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:3000;align-items:center;justify-content:center}
-.appraisal-modal-overlay.open{display:flex}
-.appraisal-modal{background:#fff;border-radius:12px;width:740px;max-width:92vw;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.18)}
-.appraisal-modal-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border)}
-.appraisal-modal-header span{font-size:15px;font-weight:700;color:var(--tp)}
-.appraisal-modal-close{border:none;background:none;font-size:20px;cursor:pointer;color:var(--ts);line-height:1;padding:0}
-.appraisal-modal-body{padding:20px}
 
 /* 판매자 카드 (이미지 하단) */
-.seller-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px;margin-top:auto;margin-bottom:16px}
+.seller-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;margin-top:auto;margin-bottom:16px}
 .seller-card-top{display:flex;align-items:center;gap:12px}
-.seller-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#FFD0DC,#FF8FAD);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0}
+.best-store-card{display:flex;align-items:center;gap:14px;background:#FFF7DC;border-radius:10px;padding:12px 16px}
+.best-store-icon{width:45px;flex-shrink:0;text-align:center;font-size:26px;color:#E8B923}
+.best-store-title{font-size:14px;font-weight:700;color:var(--tp);margin-bottom:2px}
+.best-store-desc{font-size:13px;color:var(--ts);line-height:1.5}
+.seller-avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#FFD0DC,#FF8FAD);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;flex-shrink:0}
 .seller-name-group{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
-.seller-name{font-size:14px;font-weight:700;color:#185FA5;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.seller-name{font-size:14px;font-weight:700;color:var(--tp);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .seller-name-sub{font-weight:500;color:#5B87B8;font-size:12px;margin-left:4px}
 .seller-info-table{width:100%;border-collapse:collapse;font-size:12px}
-.seller-info-table th{color:var(--ts);font-weight:600;text-align:left;padding:4px 0;width:72px;white-space:nowrap}
-.seller-info-table td{color:var(--tp);font-weight:500;padding:4px 0}
+.seller-info-table th{color:var(--ts);font-weight:600;text-align:left;padding:6px 0;width:74px;white-space:nowrap}
+.seller-info-table td{color:var(--tp);font-weight:500;padding:6px 0;font-size:13px}
+.seller-card-top .seller-badge{font-size:11px;padding:4px 10px;border-radius:999px}
+.seller-rating-pct{color:var(--green);font-weight:700}
 .seller-badge{background:#EDF7F0;color:var(--green);font-size:10px;font-weight:700;padding:2px 8px;border-radius:5px}
-.btn-seller{background:#fff;border:1.5px solid var(--border);color:var(--ts);font-size:12px;font-weight:600;padding:7px 14px;border-radius:5px;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s;flex-shrink:0;margin-left:auto}
+.btn-seller{background:#fff;border:1px solid var(--border);color:var(--tp);font-size:13px;font-weight:500;padding:10px 18px;border-radius:8px;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s;flex-shrink:0;margin-left:auto}
 .btn-seller:hover{border-color:var(--navy);color:var(--navy)}
 .seller-rating-cell{display:flex;align-items:center;gap:8px}
-.rating-view-btn{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:600;color:var(--ts);border:1.5px solid var(--border);border-radius:5px;padding:4px 10px;background:#fff;cursor:pointer;text-decoration:none;transition:all .15s}
+.rating-view-btn{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:500;color:var(--tp);border:1px solid var(--border);border-radius:8px;padding:8px 12px;background:#fff;cursor:pointer;text-decoration:none;transition:all .15s}
 .rating-view-btn:hover{border-color:var(--navy);color:var(--navy)}
 
 /* 우측: 상품 정보 */
-.item-title{margin:0;color:var(--tp);font-size:20px;font-weight:900;line-height:1.5}
-.item-title-jp{font-size:12px;color:var(--tm);margin-bottom:14px;line-height:1.5}
+.item-title{margin:0;color:var(--tp);font-size:18px;font-weight:800;line-height:1.5}
+.item-title-jp{font-size:11px;color:var(--navy);margin-bottom:0;line-height:1.5}
 .meta-chip .val{font-weight:700;color:var(--tp)}
 
 /* 가격 블록 */
@@ -191,7 +178,7 @@ a{text-decoration:none;color:inherit}
 .auction-cost-panel .rp-tab-rate{padding:0;margin-left:auto}
 
 /* ── 입찰내역 탭 콘텐츠 ── */
-.bid-status-card{border-radius:10px;border:1.5px solid;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.bid-status-card{border-radius:10px;border:1px solid;padding:14px 16px;display:flex;align-items:center;gap:10px}
 .bid-status-card--win{background:#F0FBF2;border-color:#B8ECC4}
 .bid-status-card--lose{background:#FFF0F3;border-color:#F5C0CC}
 .bid-status-card--reserve{background:#EEF2FF;border-color:#C5D0F5}
@@ -201,12 +188,12 @@ a{text-decoration:none;color:inherit}
 .bid-status-card--lose .bid-status-icon{background:#FFD8E0;color:var(--rose)}
 .bid-status-card--reserve .bid-status-icon{background:#DDE5FF;color:#5B7AE0}
 .bid-status-card--none .bid-status-icon{background:#E8EBF0;color:var(--ts)}
-.bid-status-title{font-size:15px;font-weight:800;flex-shrink:0}
+.bid-status-title{font-size:13px;font-weight:700;flex-shrink:0}
 .bid-status-card--win .bid-status-title{color:#1A8A3A}
 .bid-status-card--lose .bid-status-title{color:#C0294A}
 .bid-status-card--reserve .bid-status-title{color:#3D5BC8}
 .bid-status-card--none .bid-status-title{color:var(--ts)}
-.bid-status-sub{font-size:12px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bid-status-sub{font-size:11px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bid-status-card--win .bid-status-sub{color:#1A8A3A}
 .bid-status-card--lose .bid-status-sub{color:#C0294A}
 .bid-status-card--reserve .bid-status-sub{color:#3D5BC8}
@@ -276,7 +263,6 @@ a{text-decoration:none;color:inherit}
 .bp-shipping-nav-count{font-size:10px;font-weight:600;color:var(--tm);min-width:28px;text-align:center}
 .fee-tooltip{position:relative;display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-left:5px;border-radius:50%;background:#F5F7FA;color:var(--ts);font-size:11px;font-weight:800;cursor:help;vertical-align:middle}
 .bp-badge.fee-tooltip{width:auto;height:auto;margin-left:0;border-radius:5px;background:#EEF2F9;color:var(--navy)}
-.bp-yahoobadge.fee-tooltip{width:auto;height:auto;margin-left:0;border-radius:5px;background:#faeded;color:var(--rose)}
 .fee-tooltip::after{content:attr(data-tooltip);position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);width:max-content;max-width:260px;padding:8px 10px;border-radius:8px;background:#273142;color:#fff;font-size:12px;font-weight:500;line-height:1.45;white-space:normal;box-shadow:0 8px 24px rgba(0,0,0,.16);opacity:0;visibility:hidden;transition:opacity .15s,visibility .15s;z-index:20}
 .fee-tooltip::before{content:'';position:absolute;left:50%;bottom:calc(100% + 3px);transform:translateX(-50%);border:5px solid transparent;border-top-color:#273142;opacity:0;visibility:hidden;transition:opacity .15s,visibility .15s;z-index:21}
 .fee-tooltip:hover::after,.fee-tooltip:hover::before{opacity:1;visibility:visible}
@@ -285,7 +271,6 @@ a{text-decoration:none;color:inherit}
 .bid-history-modal-card .confirm-modal-body{max-height:70vh;overflow:auto}
 .bid-history-modal-card .confirm-modal-body{padding-top:0}
 .bp-badge{font-size:11px;font-weight:600;color:var(--navy);background:#EEF2F9;border:1px solid #C5D0E6;padding:2px 3px;border-radius:5px;cursor:help}
-.bp-yahoobadge{font-size:11px;font-weight:600;color:var(--navy);background:#EEF2F9;border:1px solid var(--rose);padding:2px 3px;border-radius:5px;cursor:help}
 
 /* ④ 비딩금액 + 수량 */
 .bid-inline-row{display:flex;gap:12px;align-items:center;min-height:39px}
@@ -523,6 +508,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
 .footer-biz{font-size:11px;color:var(--tm);line-height:2}
 .footer-copy{font-size:11px;color:var(--tm);margin-top:12px}
 </style>
+<script src="bb-settings.js"></script>
 </head>
 <body>
 
@@ -548,7 +534,6 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
   </div>
   <div class="top-title-actions">
     <button class="title-action-btn" type="button"><i class="fa-solid fa-language"></i> 원문 페이지</button>
-    <button class="title-action-btn" type="button" id="kwWishBtn" onclick="toggleKwWish(this)"><i class="fa-regular fa-star"></i> 관심물품</button>
     <button class="title-action-btn" type="button"><i class="fa-solid fa-share-nodes"></i> 공유하기</button>
   </div>
 </div>
@@ -557,15 +542,15 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
 <div class="item-wrapper">
 
   <!-- 입찰 상태 카드 -->
-  <div id="bidStatusCard" class="bid-status-card bid-status-card--win">
-    <div class="bid-status-icon" id="bidStateIcon"><i class="fa-solid fa-crown"></i></div>
+  <div id="bidStatusCard" class="bid-status-card bid-status-card--none">
+    <div class="bid-status-icon" id="bidStateIcon"><i class="fa-solid fa-circle-info"></i></div>
     <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
-      <span class="bid-status-title" id="bidStateTitle">고객님은 현재 최고입찰자입니다!</span>
-      <span class="bid-status-sub" id="bidStateSub">자동 상한 입찰가 <strong style="font-weight:800">16,800엔</strong></span>
+      <span class="bid-status-title" id="bidStateTitle">아직 입찰 내역이 없습니다</span>
+      <span class="bid-status-sub" id="bidStateSub"><strong style="font-weight:700;color:var(--rose)">입찰하기</strong> 버튼을 통해 입찰에 도전해보세요</span>
     </div>
     <div class="bid-status-nav">
       <button class="bid-status-nav-btn" onclick="moveBidState(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-      <span class="bid-status-nav-count" id="bidStateCount">1 / 4</span>
+      <span class="bid-status-nav-count" id="bidStateCount">4 / 4</span>
       <button class="bid-status-nav-btn" onclick="moveBidState(1)"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
   </div>
@@ -588,37 +573,31 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
       <button class="gallery-nav" type="button" onclick="moveGallery(1)" aria-label="다음 이미지"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
 
-    <!-- 감정 배너 -->
-    <div class="appraisal-banner">
-      <div class="appraisal-banner-logo"><img src="yahoologo.png" alt="야후 안심 감정"></div>
-      <div class="appraisal-banner-info">
-        <div class="appraisal-banner-title">
-          <span class="appraisal-banner-title-text">야후 감정 신청이 가능한 상품입니다.</span>
-          <span class="appraisal-banner-detail" onclick="openAppraisalModal()">상세</span>
-        </div>
-        <div class="appraisal-banner-fee">감정료 <strong>2,500 엔</strong></div>
-      </div>
-    </div>
-
     <div class="seller-card">
       <div class="seller-card-top">
-        <div class="seller-avatar">正</div>
+        <div class="seller-avatar">お</div>
         <div class="seller-name-group">
-          <span class="seller-name">正直屋さん<span class="seller-name-sub">安さで注目の玩具屋</span></span>
+          <span class="seller-name">お酒市場JOYLAB</span>
           <span class="seller-badge">STORE</span>
         </div>
         <button class="btn-seller" type="button"><i class="fa-regular fa-heart"></i> 관심 출품자</button>
       </div>
       <table class="seller-info-table">
-        <tr><th>출품자위치</th><td>오사카부 오사카시 스미노에구</td></tr>
+        <tr><th>출품자위치</th><td>오사카부</td></tr>
         <tr><th>출품자평가</th><td>
           <div class="seller-rating-cell">
-            <span class="roboto">79,021</span> <span style="color:var(--ts);font-size:11px">(79,034 / 13)</span>
-            <span class="seller-badge">100%</span>
+            <span><span class="roboto">38,826</span> <span class="roboto" style="color:var(--ts)">(39,060 / 234)</span> <span class="roboto seller-rating-pct">99.4%</span></span>
             <a class="rating-view-btn" href="https://auctions.yahoo.co.jp/jp/show/rating?auc_user_id=3dzL2bpogs6E1ywnX9dXUr83tmteU" target="_blank" rel="noopener noreferrer">평가보기</a>
           </div>
         </td></tr>
       </table>
+      <div class="best-store-card">
+        <div class="best-store-icon"><i class="fa-solid fa-trophy"></i></div>
+        <div>
+          <div class="best-store-title">연간 베스트 스토어</div>
+          <div class="best-store-desc">Yahoo 옥션 Best Store Award에서<br>분야별 연간 베스트 스토어로 선정된 스토어입니다.</div>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -669,9 +648,6 @@ footer{background:#fff;border-top:1px solid var(--border);padding:32px 24px}
               <div style="display:flex;align-items:center;gap:3px">
                 <span class="roboto" style="font-size:13px;font-weight:700;color:var(--navy)">j1232333613</span>
                 <span class="bp-badge fee-tooltip" data-tooltip="출품자가 종료시간보다 앞당겨 경매를 끝내고 낙찰자를 즉시 확정할수 있는 경매건입니다.">조기종료</span>
-              </div>
-              <div style="display:flex;align-items:center;gap:3px">
-                <span class="bp-yahoobadge fee-tooltip" data-tooltip="낙찰후 감정서비스 신청시 야후 자체 감정후 배송을 시작하는 상품입니다.">야후 안심 감정</span>
               </div>
             </div>
             <!-- 즉결가격 행 다음에 추가 -->
@@ -1311,12 +1287,12 @@ function toggleActionWish(el){
   }
 }
 
-var _bidStateIndex = 0;
+var _bidStateIndex = 3;
 var _bidStates = [
   { type:'win',    icon:'fa-solid fa-crown',                title:'고객님은 현재 최고입찰자입니다!',           sub:'상한 입찰가 <strong style="font-weight:800">16,800엔</strong>' },
   { type:'lose',   icon:'fa-solid fa-triangle-exclamation', title:'고객님은 현재 <strong style="font-weight:800">최고입찰자가 아닙니다.</strong>', sub:'현재 최고가 <strong style="font-weight:800">16,800엔</strong>' },
   { type:'reserve',icon:'fa-solid fa-clock-rotate-left',    title:'예약입찰이 설정되어 있습니다',              sub:'예약 입찰가 <strong style="font-weight:800">16,800엔</strong>' },
-  { type:'none',   icon:'fa-solid fa-circle-info',          title:'아직 입찰 내역이 없습니다',                 sub:'<strong style="font-weight:800">실시간 입찰하기</strong> 버튼을 통해 입찰에 도전해보세요' }
+  { type:'none',   icon:'fa-solid fa-circle-info',          title:'아직 입찰 내역이 없습니다',                 sub:'<strong style="font-weight:700;color:var(--rose)">입찰하기</strong> 버튼을 통해 입찰에 도전해보세요' }
 ];
 function moveBidState(dir){
   _bidStateIndex = (_bidStateIndex + dir + _bidStates.length) % _bidStates.length;
@@ -1340,19 +1316,6 @@ function moveLocalShippingState(dir){
   _localShippingStateIndex = (_localShippingStateIndex + dir + _localShippingStates.length) % _localShippingStates.length;
   document.getElementById('localShippingStateValue').innerHTML = _localShippingStates[_localShippingStateIndex];
   document.getElementById('localShippingStateCount').textContent = (_localShippingStateIndex + 1) + ' / ' + _localShippingStates.length;
-}
-
-function toggleKwWish(el){
-  const icon = el.querySelector('i');
-  if(icon.className.includes('fa-solid')){
-    icon.className='fa-regular fa-star';
-    el.style.borderColor='';
-    el.style.color='';
-  } else {
-    icon.className='fa-solid fa-star';
-    el.style.borderColor='var(--amber)';
-    el.style.color='var(--amber)';
-  }
 }
 
 // 우측 패널 탭 전환 (입찰내역 / 예상입찰비용)
@@ -1672,7 +1635,7 @@ function goAuctionOrder(mode){
 function getInternationalShippingCost(){
   const method = document.getElementById('shippingMethodSelect')?.value || 'ems';
   const weight = document.getElementById('shippingWeightSelect')?.value || '0.5';
-  const shippingTable = {
+  const shippingTable = bbSetting('shipping.estimate', null) || {
     ems: { '0.5': 2400, '1': 3200, '2': 4800 },
     sea: { '0.5': 1200, '1': 1700, '2': 2500 },
     air: { '0.5': 1800, '1': 2600, '2': 3900 }
@@ -1682,7 +1645,7 @@ function getInternationalShippingCost(){
 
 function updateEstimateCosts(){
   const primaryAmount = getPrimaryAmount();
-  const serviceFee = Math.round(primaryAmount * 0.1);
+  const serviceFee = Math.round(primaryAmount * bbSetting('fees.serviceRate', 0.1));
   const localTax = Math.round(primaryAmount * 0.1);
   const localShipping = 810;
   const intlMethod = document.getElementById('shippingMethodSelect')?.value || '';
@@ -1898,26 +1861,6 @@ lockTabContainerHeight();
   <button class="lightbox-next" onclick="lbNext();event.stopPropagation()"><i class="fa-solid fa-chevron-right"></i></button>
   <div class="lightbox-counter" id="lbCounter">1 / 5</div>
 </div>
-<!-- 감정 팝업 모달 -->
-<div class="appraisal-modal-overlay" id="appraisalModal" onclick="closeAppraisalModal(event)">
-  <div class="appraisal-modal" onclick="event.stopPropagation()">
-    <div class="appraisal-modal-header">
-      <span>야후 감정 서비스 상세 안내</span>
-      <button class="appraisal-modal-close" onclick="closeAppraisalModal()">&times;</button>
-    </div>
-    <div class="appraisal-modal-body">
-      <a href="https://auctions.yahoo.co.jp/topic/promo/appraisal/card/index.html" target="_blank" rel="noopener noreferrer" style="display:block;text-decoration:none">
-        <img src="yahoovalue.png" alt="감정 대상·감정료" style="width: 700px;height: auto;border-radius:12px;display:block;cursor:pointer">
-      </a>
-    </div>
-  </div>
-</div>
-
-<script>
-function openAppraisalModal(){document.getElementById('appraisalModal').classList.add('open')}
-function closeAppraisalModal(e){if(!e||e.target===document.getElementById('appraisalModal'))document.getElementById('appraisalModal').classList.remove('open')}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('appraisalModal').classList.remove('open')})
-</script>
 <script src="bb-common.js"></script>
 <script src="bb-search-modal.js"></script>
 </body>
