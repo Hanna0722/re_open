@@ -149,7 +149,7 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 .hb-dot.active{background:var(--rose);width:16px;border-radius:5px}
 .hero-banner.is-tabbed{padding-bottom:0}
 .hero-banner.is-tabbed .hero-banner-inner{max-width:1140px;height:112px;margin:0 auto;display:grid;grid-template-columns:248px minmax(0,1fr)}
-.hero-banner.is-tabbed .hb-tabs{border-right:1px solid var(--border);display:grid;grid-template-rows:1fr 1fr 1fr;background:#fff}
+.hero-banner.is-tabbed .hb-tabs{border-right:1px solid var(--border);display:grid;grid-template-rows:1fr 1fr;background:#fff}
 .hero-banner.is-tabbed .hb-tab{display:flex;align-items:center;gap:10px;padding:0 28px;border:0;background:#fff;color:var(--tm);font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;text-align:left}
 .hero-banner.is-tabbed .hb-tab i{width:14px;text-align:center;font-size:13px;color:currentColor}
 .hero-banner.is-tabbed .hb-tab.active{color:var(--rose)}
@@ -244,6 +244,26 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 .br-chip:hover .br-img{border-color:var(--rose)}
 .br-img img{width:100%;height:100%;object-fit:contain;padding:10px}
 .br-name{font-size:12px;color:var(--ts);font-weight:500;text-align:center;line-height:1.35}
+
+/* quick_search_v2 : 지금 많이 찾는 곳 */
+.qs2-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.qs2-more{font-size:14px;color:var(--ts)}
+.qs2-more:hover{color:var(--tp);text-decoration:underline}
+.qs2-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.qs2-card{box-sizing:border-box;min-height:132px;padding:16px;display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid var(--border);border-radius:12px;color:var(--tp);transition:border-color .15s}
+a.qs2-card:hover{border-color:var(--tp)}
+.qs2-card-store{grid-column:span 2;border:1.5px solid var(--rose-h)}
+a.qs2-card-store:hover{border-color:var(--rose-h)}
+.qs2-tag{font-size:13px;font-weight:500;color:var(--ts)}
+.qs2-title{font-size:16px;font-weight:700;line-height:1.3;color:var(--tp)}
+.qs2-sub{margin-top:auto;font-size:13px;color:var(--ts)}
+.qs2-card-store .qs2-tag,.qs2-card-store .qs2-sub{color:var(--rose-h)}
+.qs2-card-store .qs2-title{font-size:18px}
+.qs2-card-store .qs2-sub{font-size:14px;font-weight:500}
+.qs2-brands{margin-top:auto;display:flex;flex-wrap:wrap;gap:4px 10px;font-size:14px}
+.qs2-brands a{color:var(--tp);text-decoration:underline}
+.qs2-brands a:hover{color:var(--rose-h)}
+@media (max-width:1100px){.qs2-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.qs2-card-store{grid-column:span 2}}
 
 /* 실시간 베스트 */
 .live-best-section{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:34px 0}
@@ -502,24 +522,9 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
       </div>
     </div>
   </div>
-  <div class="hb-slide mb-slide event-slide">
-    <div class="member-bar">
-      <div class="member-inner">
-        <span class="mb-lbl">진행중인 이벤트</span>
-        <span class="mb-sub">전 회원 대상 · 첫 구매 시 마일리지 5% 추가 적립 이벤트 진행 중</span>
-        <div class="mb-tiers">
-          <div class="mb-tier"><div class="mb-tier-name">추가 적립</div><div class="mb-tier-desc">첫 구매 시<br>마일리지 5% 추가</div></div>
-          <div class="mb-tier"><div class="mb-tier-name" style="color:var(--amber)">이벤트 기간</div><div class="mb-tier-desc">2026.09.01<br>~ 2026.09.30</div></div>
-          <div class="mb-tier"><div class="mb-tier-name" style="color:var(--rose)">대상</div><div class="mb-tier-desc">전 회원<br>(등급 무관)</div></div>
-        </div>
-        <a class="mb-detail-btn" href="#" onclick="openbidbuynoticePopup();return false;">이벤트 보기</a>
-      </div>
-    </div>
-  </div>
   <div class="hb-dots">
     <button class="hb-dot active" type="button" onclick="hbGoTo(0)" aria-label="멤버십 배너 보기"></button>
     <button class="hb-dot" type="button" onclick="hbGoTo(1)" aria-label="공지사항 배너 보기"></button>
-    <button class="hb-dot" type="button" onclick="hbGoTo(2)" aria-label="진행중인 이벤트 배너 보기"></button>
   </div>
 </div>
 
@@ -539,6 +544,11 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
   </div>
 </div>
 
+<!-- quick_search_v2 : 지금 많이 찾는 곳 -->
+<div class="section" id="qs2Root"></div>
+
+<!-- quick_search_v1 (롤백용 보존: QS2_ENABLED=false 이면 다시 표시) -->
+<div id="qs1Legacy" hidden>
 <!-- 인기 카테고리-->
 <div class="section" id="popularCategorySec">
   <div class="sec-hd"><h2 class="sec-title">인기 카테고리 빠른 검색</h2></div>
@@ -571,6 +581,8 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
     <a class="br-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Coach"><div class="br-img">COACH</div><span class="br-name">코치</span></a>
     <a class="br-chip" href="https://www.alpha.bidbuy.co.kr/search?q=Gucci"><div class="br-img">GUCCI</div><span class="br-name">구찌</span></a>
   </div>
+</div>
+
 </div>
 
 <!-- 실시간 베스트 -->
@@ -819,8 +831,7 @@ function openbidbuynoticePopup(){
     tabs.setAttribute('aria-label', '공지 및 마일리지 안내');
     tabs.innerHTML =
       '<button class="hb-tab active" type="button" role="tab" aria-selected="true" onclick="hbGoTo(0)"><i class="fas fa-crown" aria-hidden="true"></i><span>등급별 마일리지 제도 오픈!</span></button>' +
-      '<button class="hb-tab" type="button" role="tab" aria-selected="false" onclick="hbGoTo(1)"><i class="fas fa-bullhorn" aria-hidden="true"></i><span>공지사항</span></button>' +
-      '<button class="hb-tab" type="button" role="tab" aria-selected="false" onclick="hbGoTo(2)"><i class="fas fa-gift" aria-hidden="true"></i><span>진행중인 이벤트</span></button>';
+      '<button class="hb-tab" type="button" role="tab" aria-selected="false" onclick="hbGoTo(1)"><i class="fas fa-bullhorn" aria-hidden="true"></i><span>공지사항</span></button>';
     const panels = document.createElement('div');
     panels.className = 'hb-panels';
     slides.forEach(slide => panels.appendChild(slide));
@@ -1081,6 +1092,8 @@ document.querySelectorAll(".live-card").forEach((card, index) => {
   });
 });
 </script>
+<script src="bb-track.js"></script>
+<script src="bb-quick-search.js"></script>
 <script src="bb-common.js"></script>
 <script src="bb-search-modal.js"></script>
 </body>
