@@ -3,7 +3,7 @@
    - 칸 구성은 아래 QS2_ITEMS 한 곳에서만 바꾼다 (주 단위 교체: 포켓몬카드 칸 등)
    - QS2_ENABLED=false 로 두면 구 모듈(quick_search_v1)이 다시 보인다 (롤백)
    - 시안: 기본은 시안 A(스토어 / 카테고리 / 브랜드 3분할). 주소에 ?qs=b 를 붙이면 시안 B(스토어 1~10위 버튼형)
-     좌우 화살표로 두 시안을 번갈아 볼 수 있다(QS2_SWITCHER). 처음 보이는 시안은 QS2_VARIANT. 시안 B 의 측정 모듈명은 quick_search_v2b
+     좌우 화살표로 세 시안을 번갈아 볼 수 있다(QS2_SWITCHER). 시안 C = 스토어명을 빼고 카테고리 + 순위만 남긴 버전(?qs=c, 측정 모듈 quick_search_v2c). 처음 보이는 시안은 QS2_VARIANT. 시안 B 의 측정 모듈명은 quick_search_v2b
    - 측정: 클릭 quick_search_click / 노출 quick_search_impression
      모듈명 quick_search_v2 · 유형 store|category|brand · 라벨 · 위치(1부터)
    ============================================================ */
@@ -42,16 +42,16 @@
   /* 스토어 상품 목록 이동 대상: 임시로 야후 옥션 상품 목록 페이지. TODO: 스토어별 상품 목록 URL(출품자 고유ID 기반)로 교체 */
   var STORE_LIST_URL = 'web_category_main.html?store=' + encodeURIComponent('야후 옥션');
   var QS2B_TILES = [
-    { label: 'store_rere',          name: 'ReRe',               cat: '카메라',       rank: '종합 1위' },
-    { label: 'store_playmart',      name: 'PLAYMART',           cat: '음향기기',     rank: '종합 2위' },
-    { label: 'store_bookoff',       name: 'ブックオフ',          cat: '트레이딩카드', rank: '종합 3위' },
-    { label: 'store_toyking',       name: 'トイズキング',        cat: '피규어',       rank: '종합 4위' },
-    { label: 'store_secondstreet',  name: 'セカンドストリート',  cat: '슈즈·의류',    rank: '종합 5위' },
-    { label: 'store_wave',          name: 'ウェイブ',            cat: '낚시용품',     rank: '부문 1위' },
-    { label: 'store_golfpartner',   name: 'ゴルフパートナー',    cat: '골프',         rank: '부문 1위' },
-    { label: 'store_motobox',       name: 'MOTO BOX',           cat: '오토바이부품', rank: '부문 1위' },
-    { label: 'store_ecoplan',       name: 'ecoプラン',           cat: '시계',         rank: '부문 1위' },
-    { label: 'store_chuya',         name: 'chuya-online',       cat: '악기',         rank: '부문 2위' }
+    { label: 'store_rere', catKey: 'camera',          name: 'ReRe',               cat: '카메라',       rank: '종합 1위' },
+    { label: 'store_playmart', catKey: 'audio',      name: 'PLAYMART',           cat: '음향기기',     rank: '종합 2위' },
+    { label: 'store_bookoff', catKey: 'tradingcard',       name: 'ブックオフ',          cat: '트레이딩카드', rank: '종합 3위' },
+    { label: 'store_toyking', catKey: 'figure',       name: 'トイズキング',        cat: '피규어',       rank: '종합 4위' },
+    { label: 'store_secondstreet', catKey: 'shoes',  name: 'セカンドストリート',  cat: '슈즈·의류',    rank: '종합 5위' },
+    { label: 'store_wave', catKey: 'fishing',          name: 'ウェイブ',            cat: '낚시용품',     rank: '부문 1위' },
+    { label: 'store_golfpartner', catKey: 'golf',   name: 'ゴルフパートナー',    cat: '골프',         rank: '부문 1위' },
+    { label: 'store_motobox', catKey: 'motoparts',       name: 'MOTO BOX',           cat: '오토바이부품', rank: '부문 1위' },
+    { label: 'store_ecoplan', catKey: 'watch',       name: 'ecoプラン',           cat: '시계',         rank: '부문 1위' },
+    { label: 'store_chuya', catKey: 'instrument',         name: 'chuya-online',       cat: '악기',         rank: '부문 2위' }
   ];
 
   function esc(s) {
@@ -100,6 +100,20 @@
     return html + '</div></div>';
   }
 
+  /* 시안 C: 스토어명을 빼고 카테고리 + 순위만 남긴 버전 (클릭 -> 스토어 상품 목록) */
+  function buildC() {
+    var html = '<div class="qs2b"><div class="qs2b-hd"><span class="qs2b-title">' +
+      '<img class="qs2b-badge" src="best-store-awards-2025.png" alt="" width="32" height="32">' + esc(QS2_ITEMS[0].title) + '</span>' +
+      '<a class="qs2b-all" href="' + esc(QS2_ITEMS[0].url) + '"' + attrs('all', 'award_store_all', QS2B_TILES.length + 1) + '>수상 스토어 전체 보기 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>' +
+      '<div class="qs2b-grid">';
+    QS2B_TILES.forEach(function (t, i) {
+      html += '<a class="qs2b-tile qs2c-tile" href="' + esc(STORE_LIST_URL) + '"' + attrs('store', 'cat_' + t.catKey, i + 1) + '>' +
+        '<span class="qs2c-cat">' + esc(t.cat) + '</span>' +
+        '<span class="qs2b-rank' + (i === 0 ? ' is-first' : '') + '">' + esc(t.rank) + '</span></a>';
+    });
+    return html + '</div></div>';
+  }
+
   function currentSlide(root) { return root.querySelector('.qs2-slide:not([hidden])'); }
 
   var impressed = {};
@@ -134,20 +148,24 @@
     }
   }
 
-  /* 시안 비교용 좌우 화살표: 시안 A <-> 시안 B 전환 (확정 후 QS2_SWITCHER = false) */
+  /* 시안 비교용 좌우 화살표: 시안 A -> B -> C 순환 (확정 후 QS2_SWITCHER = false) */
+  var ORDER = ['a', 'b', 'c'];
   function wireSwitcher(root) {
     var slides = root.querySelectorAll('.qs2-slide');
+    var dots = root.querySelectorAll('.qs2-dots span');
     function show(v) {
       slides.forEach(function (s) { s.hidden = s.getAttribute('data-v') !== v; });
+      dots.forEach(function (d, n) { d.classList.toggle('is-on', ORDER[n] === v); });
       var cur = currentSlide(root);
       if (cur) impress(cur);
     }
-    root.querySelectorAll('.qs2-nav').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var cur = currentSlide(root);
-        show(cur && cur.getAttribute('data-v') === 'a' ? 'b' : 'a');
-      });
-    });
+    function step(dir) {
+      var cur = currentSlide(root);
+      var i = ORDER.indexOf(cur ? cur.getAttribute('data-v') : 'a');
+      show(ORDER[(i + dir + ORDER.length) % ORDER.length]);
+    }
+    root.querySelector('.qs2-prev').addEventListener('click', function () { step(-1); });
+    root.querySelector('.qs2-next').addEventListener('click', function () { step(1); });
   }
 
   function init() {
@@ -155,13 +173,16 @@
     var legacy = document.getElementById('qs1Legacy');
     if (!root) return;
     if (!QS2_ENABLED) { if (legacy) legacy.hidden = false; root.hidden = true; return; }
-    var start = (new URLSearchParams(location.search).get('qs') || QS2_VARIANT).toLowerCase() === 'b' ? 'b' : 'a';
-    root.innerHTML = '<div class="qs2-slides">' +
-      '<div class="qs2-slide" data-v="a" data-module="quick_search_v2"' + (start === 'a' ? '' : ' hidden') + '>' + buildA() + '</div>' +
-      '<div class="qs2-slide" data-v="b" data-module="quick_search_v2b"' + (start === 'b' ? '' : ' hidden') + '>' + buildB() + '</div></div>' +
+    var start = (new URLSearchParams(location.search).get('qs') || QS2_VARIANT).toLowerCase();
+    if (ORDER.indexOf(start) < 0) start = 'a';
+    function slide(v, build) {
+      return '<div class="qs2-slide" data-v="' + v + '" data-module="quick_search_v2' + (v === 'a' ? '' : v) + '"' + (start === v ? '' : ' hidden') + '>' + build() + '</div>';
+    }
+    root.innerHTML = '<div class="qs2-slides">' + slide('a', buildA) + slide('b', buildB) + slide('c', buildC) + '</div>' +
       (QS2_SWITCHER
         ? '<button type="button" class="qs2-nav qs2-prev" aria-label="이전 시안"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>' +
-          '<button type="button" class="qs2-nav qs2-next" aria-label="다음 시안"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>'
+          '<button type="button" class="qs2-nav qs2-next" aria-label="다음 시안"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>' +
+          '<div class="qs2-dots" aria-hidden="true">' + ORDER.map(function (v) { return '<span' + (v === start ? ' class="is-on"' : '') + '></span>'; }).join('') + '</div>'
         : '');
     wireTracking(root);
     if (QS2_SWITCHER) wireSwitcher(root);
