@@ -44,12 +44,12 @@
   var QS2B_TILES = [
     { label: 'store_rere', catKey: 'camera',          name: 'ReRe',               cat: '카메라',       rank: '종합 1위' },
     { label: 'store_playmart', catKey: 'audio',      name: 'PLAYMART',           cat: '음향기기',     rank: '종합 2위' },
-    { label: 'store_bookoff', catKey: 'tradingcard',       name: 'ブックオフ',          cat: '트레이딩카드', rank: '종합 3위' },
+    { label: 'store_bookoff', catKey: 'tradingcard',       name: 'ブックオフ',          cat: '트레이딩 카드', rank: '종합 3위' },
     { label: 'store_toyking', catKey: 'figure',       name: 'トイズキング',        cat: '피규어',       rank: '종합 4위' },
     { label: 'store_secondstreet', catKey: 'shoes',  name: 'セカンドストリート',  cat: '슈즈·의류',    rank: '종합 5위' },
     { label: 'store_wave', catKey: 'fishing',          name: 'ウェイブ',            cat: '낚시용품',     rank: '부문 1위' },
     { label: 'store_golfpartner', catKey: 'golf',   name: 'ゴルフパートナー',    cat: '골프',         rank: '부문 1위' },
-    { label: 'store_motobox', catKey: 'motoparts',       name: 'MOTO BOX',           cat: '오토바이부품', rank: '부문 1위' },
+    { label: 'store_motobox', catKey: 'motoparts',       name: 'MOTO BOX',           cat: '오토바이 부품', rank: '부문 1위' },
     { label: 'store_ecoplan', catKey: 'watch',       name: 'ecoプラン',           cat: '시계',         rank: '부문 1위' },
     { label: 'store_chuya', catKey: 'instrument',         name: 'chuya-online',       cat: '악기',         rank: '부문 2위' }
   ];
@@ -86,25 +86,21 @@
     return html + '</div>';
   }
 
+  /* 시안 B: 시안 C 의 카테고리 버튼 + 그 아래에 기존 "인기 카테고리 빠른 검색 / 인기 브랜드 빠른 검색" (페이지의 #qs1Legacy 마크업을 그대로 복제) */
+  function legacyHtml() {
+    var src = document.getElementById('qs1Legacy');
+    if (!src) return '';
+    return '<div class="qs2b-legacy">' + src.innerHTML.replace(/ id="popular(?:Category|Brand)Sec"/g, '') + '</div>';
+  }
   function buildB() {
-    var html = '<div class="qs2b"><div class="qs2b-hd"><span class="qs2b-title">' +
-      '<img class="qs2b-badge" src="best-store-awards-2025.png" alt="" width="32" height="32">' + esc(QS2_ITEMS[0].title) + '</span>' +
-      '<a class="qs2b-all" href="' + esc(QS2_ITEMS[0].url) + '"' + attrs('all', 'award_store_all', QS2B_TILES.length + 1) + '>수상 스토어 전체 보기 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>' +
-      '<div class="qs2b-grid">';
-    QS2B_TILES.forEach(function (t, i) {
-      html += '<a class="qs2b-tile" href="' + esc(STORE_LIST_URL) + '"' + attrs('store', t.label, i + 1) + '>' +
-        '<span class="qs2b-name">' + esc(t.name) + '</span>' +
-        '<span class="qs2b-cat">' + esc(t.cat) + '</span>' +
-        '<span class="qs2b-rank' + (i === 0 ? ' is-first' : '') + '">' + esc(t.rank) + '</span></a>';
-    });
-    return html + '</div></div>';
+    return buildC() + legacyHtml();
   }
 
   /* 시안 C: 스토어명을 빼고 카테고리 + 순위만 남긴 버전 (클릭 -> 스토어 상품 목록) */
   function buildC() {
     var html = '<div class="qs2b"><div class="qs2b-hd"><span class="qs2b-title">' +
       '<img class="qs2b-badge" src="best-store-awards-2025.png" alt="" width="32" height="32">' + esc(QS2_ITEMS[0].title) + '</span>' +
-      '<a class="qs2b-all" href="' + esc(QS2_ITEMS[0].url) + '"' + attrs('all', 'award_store_all', QS2B_TILES.length + 1) + '>수상 스토어 전체 보기 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>' +
+      '<a class="qs2b-all" href="' + esc(QS2_ITEMS[0].url) + '"' + attrs('all', 'award_store_all', QS2B_TILES.length + 1) + '>전체보기 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>' +
       '<div class="qs2b-grid">';
     QS2B_TILES.forEach(function (t, i) {
       html += '<a class="qs2b-tile qs2c-tile" href="' + esc(STORE_LIST_URL) + '"' + attrs('store', 'cat_' + t.catKey, i + 1) + '>' +
@@ -133,6 +129,21 @@
         window.bbTrack('quick_search_click', {
           module: slide ? slide.getAttribute('data-module') : QS2_MODULE, type: a.getAttribute('data-qs-type'),
           label: a.getAttribute('data-qs-label'), position: Number(a.getAttribute('data-qs-pos'))
+        });
+        return;
+      }
+      var chip = e.target.closest ? e.target.closest('.qs2b-legacy .br-chip, .qs2b-legacy .brand-chip') : null;
+      if (chip && root.contains(chip)) { /* 기존 빠른 검색 칩: 이동은 칩의 onclick 이 처리하고 여기서는 측정만 한다 */
+        var lslide = chip.closest('.qs2-slide');
+        var chips = [].slice.call(lslide.querySelectorAll('.qs2b-legacy .br-chip, .qs2b-legacy .brand-chip'));
+        var secs = [].slice.call(lslide.querySelectorAll('.qs2b-legacy .section'));
+        var nameEl = chip.querySelector('.br-name, .brand-name');
+        var ci = chips.indexOf(chip);
+        window.bbTrack('quick_search_click', {
+          module: lslide.getAttribute('data-module'),
+          type: secs.indexOf(chip.closest('.section')) === 0 ? 'legacy_category' : 'legacy_brand',
+          label: nameEl ? nameEl.textContent.trim() : 'legacy_chip_' + (ci + 1),
+          position: QS2B_TILES.length + 1 + ci + 1
         });
       }
     });
