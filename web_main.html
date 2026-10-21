@@ -245,25 +245,43 @@ k{margin-left:auto;font-size:12px;color:var(--navy);font-weight:700}
 .br-img img{width:100%;height:100%;object-fit:contain;padding:10px}
 .br-name{font-size:12px;color:var(--ts);font-weight:500;text-align:center;line-height:1.35}
 
-/* quick_search_v2 : 지금 많이 찾는 곳 */
-.qs2-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
-.qs2-more{font-size:14px;color:var(--ts)}
-.qs2-more:hover{color:var(--tp);text-decoration:underline}
-.qs2-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
-.qs2-card{box-sizing:border-box;min-height:132px;padding:16px;display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid var(--border);border-radius:12px;color:var(--tp);transition:border-color .15s}
-a.qs2-card:hover{border-color:var(--tp)}
-.qs2-card-store{grid-column:span 2;border:1.5px solid var(--rose-h)}
-a.qs2-card-store:hover{border-color:var(--rose-h)}
-.qs2-tag{font-size:13px;font-weight:500;color:var(--ts)}
-.qs2-title{font-size:16px;font-weight:700;line-height:1.3;color:var(--tp)}
-.qs2-sub{margin-top:auto;font-size:13px;color:var(--ts)}
-.qs2-card-store .qs2-tag,.qs2-card-store .qs2-sub{color:var(--rose-h)}
-.qs2-card-store .qs2-title{font-size:18px}
-.qs2-card-store .qs2-sub{font-size:14px;font-weight:500}
-.qs2-brands{margin-top:auto;display:flex;flex-wrap:wrap;gap:4px 10px;font-size:14px}
-.qs2-brands a{color:var(--tp);text-decoration:underline}
-.qs2-brands a:hover{color:var(--rose-h)}
-@media (max-width:1100px){.qs2-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.qs2-card-store{grid-column:span 2}}
+/* quick_search_v2 : 빠른검색 */
+#qs2Root a{text-decoration:none}
+.qs2-bar{display:grid;grid-template-columns:320px minmax(0,1fr) minmax(0,1fr);align-items:stretch;gap:12px 32px}
+.qs2-bar > *{min-width:0}
+.qs2-arrow{flex:none;margin-left:auto}
+.qs2-store{flex:0 0 auto;box-sizing:border-box;min-height:56px;padding:0 20px;display:flex;align-items:center;gap:16px;background:#fff;border:1.5px solid var(--rose-h);border-radius:12px;color:var(--tp)}
+.qs2-badge{flex:none;width:40px;height:40px;border-radius:50%;object-fit:cover;display:block;margin-right:-4px}
+.qs2-store .qs2-title{font-size:16px;font-weight:700;color:var(--tp)}
+.qs2-group{display:flex;flex-direction:column;justify-content:center;gap:8px;min-width:0;min-height:56px}
+.qs2-glabel{font-size:14px;font-weight:700;line-height:1.3;color:var(--tp);white-space:nowrap}
+.qs2-pills{display:flex;flex-wrap:wrap;gap:6px}
+.qs2-pills a{min-height:36px;padding:0 12px;display:inline-flex;align-items:center;border:1px solid var(--border);border-radius:5px;background:#fff;font-size:14px;color:var(--tp);white-space:nowrap;transition:border-color .15s}
+.qs2-pills a:hover{border-color:var(--tp)}
+
+/* 시안 비교용 좌우 화살표 */
+#qs2Root{position:relative;max-width:none;width:100%;box-sizing:border-box}
+.qs2-slides{max-width:1140px;margin:0 auto}
+.qs2-slide[hidden]{display:none}
+.qs2-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:40px;height:40px;padding:0;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:50%;background:#fff;color:var(--tp);cursor:pointer}
+.qs2-nav:hover{border-color:var(--tp)}
+.qs2-prev{left:max(12px,calc(25% - 305px))}
+.qs2-next{right:max(12px,calc(25% - 305px))}
+.qs2-nav:focus-visible{outline:2px solid var(--rose-h);outline-offset:3px}
+@media (max-width:1268px){#qs2Root{padding-left:64px;padding-right:64px}}
+/* quick_search_v2b : 시안 B (스토어 1~10위 버튼형) */
+.qs2b-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.qs2b-title{display:inline-flex;align-items:center;gap:10px;font-size:18px;font-weight:700;color:var(--tp)}
+.qs2b-badge{flex:none;width:32px;height:32px;border-radius:50%;object-fit:cover;display:block}
+.qs2b-all{display:inline-flex;align-items:center;gap:4px;font-size:14px;color:var(--ts)}
+.qs2b-all:hover{color:var(--tp)}
+.qs2b-grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:12px}
+.qs2b-tile{box-sizing:border-box;min-width:0;min-height:104px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;background:#fff;border:1px solid var(--border);border-radius:5px;color:var(--tp);transition:border-color .15s}
+.qs2b-tile:hover{border-color:var(--tp)}
+.qs2b-name{font-size:14px;font-weight:700;line-height:1.3;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.qs2b-cat{font-size:13px;color:var(--ts)}
+.qs2b-rank{font-size:13px;font-weight:700;color:var(--ts)}
+.qs2b-rank.is-first{color:var(--rose-h)}
 
 /* 실시간 베스트 */
 .live-best-section{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:34px 0}
@@ -544,7 +562,7 @@ footer{background:#1A1A2E;color:rgba(255,255,255,.6);padding:32px 0}
   </div>
 </div>
 
-<!-- quick_search_v2 : 지금 많이 찾는 곳 -->
+<!-- quick_search_v2 : 빠른검색 -->
 <div class="section" id="qs2Root"></div>
 
 <!-- quick_search_v1 (롤백용 보존: QS2_ENABLED=false 이면 다시 표시) -->

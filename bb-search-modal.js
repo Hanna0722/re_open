@@ -54,6 +54,11 @@
     '.bbsm-section+.bbsm-section{padding-top:18px;border-top:1px solid #eef1f5}',
     '.bbsm-row-head{width:100%;display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}',
     '.bbsm-title{font-size:14px;font-weight:700;line-height:14px;color:#111827}',
+    '.bbsm-store{display:flex;align-items:center;gap:10px;height:52px;padding:0 12px;border:1px solid #dfe4ec;border-radius:8px;background:#fff;color:#111827;font-size:14px;font-weight:700;text-decoration:none}',
+    '.bbsm-store:hover{border-color:#111827}',
+    '.bbsm-store img{flex:0 0 auto;width:32px;height:32px;border-radius:50%;object-fit:cover;display:block}',
+    '.bbsm-store span{flex:1 1 auto;min-width:0}',
+    '.bbsm-store svg{flex:0 0 auto;color:#6f7785}',
     '.bbsm-count{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;margin-left:4px;border-radius:50%;background:#ffe3eb;color:#ef3158;font-size:11px;font-weight:800;vertical-align:1px}',
     '.bbsm-clearall{border:0;background:none;color:#9aa3b2;font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;padding:0}',
     '.bbsm-scope-all{width:100%;height:42px;border:1px solid #dfe4ec;border-radius:8px;background:#fff;color:#6f7785;font-size:13px;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:7px;cursor:pointer;font-family:inherit}',
@@ -178,11 +183,27 @@
         '<div class="bbsm-viewed-strip" data-bbsm-viewed></div>' +
       '</div>' +
       '<div class="bbsm-section">' +
+        '<a class="bbsm-store" href="web_best_store.html" data-bbsm-store><img src="best-store-awards-2025.png" alt="" width="32" height="32"><span>2025 Yahoo 베스트 스토어</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>' +
+      '</div>' +
+      '<div class="bbsm-section">' +
         '<div class="bbsm-row-head"><span class="bbsm-title">추천 검색어</span></div>' +
         '<ol class="bbsm-suggest-list is-collapsed" data-bbsm-suggest></ol>' +
         '<button type="button" class="bbsm-suggest-toggle" data-bbsm-suggest-toggle hidden>더보기</button>' +
       '</div>';
     wrap.appendChild(panel);
+
+    /* 베스트 스토어 배너 클릭 측정 (bb-track.js 가 없는 페이지에서는 불러온다) */
+    if (!window.bbTrack) {
+      var trackScript = document.createElement('script');
+      trackScript.src = 'bb-track.js';
+      document.head.appendChild(trackScript);
+    }
+    var storeLink = panel.querySelector('[data-bbsm-store]');
+    if (storeLink) {
+      storeLink.addEventListener('click', function () {
+        if (window.bbTrack) window.bbTrack('quick_search_click', { module: 'search_panel', type: 'store', label: 'yahoo_best_store', position: 1 });
+      });
+    }
 
     var countEl = panel.querySelector('[data-bbsm-count]');
     var scopeAllEl = panel.querySelector('[data-bbsm-scope-all]');
@@ -196,7 +217,7 @@
     var suggestExpanded = false;
 
     function suggestVisibleLimit() {
-      return window.matchMedia('(max-width:720px)').matches ? 3 : 6;
+      return window.matchMedia('(max-width:720px)').matches ? 2 : 4;
     }
 
     function updateSuggestCollapse() {
