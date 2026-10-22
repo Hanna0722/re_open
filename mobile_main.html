@@ -423,7 +423,8 @@ body{
 .qs2-slides{transition:height .2s ease}
 .qs2-slide{flex:0 0 100%;box-sizing:border-box;min-width:0;padding:0 14px;scroll-snap-align:start;display:flex;flex-direction:column;gap:10px}
 .qs2-dots{display:flex;justify-content:center;gap:6px}
-.qs2-dots span{width:6px;height:6px;border-radius:3px;background:var(--border);transition:width .2s,background .2s}
+.qs2-dots span{position:relative;width:6px;height:6px;border-radius:3px;background:var(--border);transition:width .2s,background .2s;cursor:pointer}
+.qs2-dots span::before{content:'';position:absolute;inset:-19px -8px}
 .qs2-dots span.is-on{width:16px;background:var(--tp)}
 /* quick_search_v2b : 시안 B (스토어 1~10위 버튼형, 가로 스크롤) */
 .qs2b-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}

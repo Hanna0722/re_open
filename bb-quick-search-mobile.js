@@ -183,6 +183,9 @@
       dots.forEach(function (d, n) { d.classList.toggle('is-on', n === idx); });
       if (cur && idx > 0) impress(cur);
     }
+    dots.forEach(function (d, n) { /* 점을 누르면 해당 시안으로 이동 */
+      d.addEventListener('click', function () { track.scrollTo({ left: track.clientWidth * n, behavior: 'smooth' }); });
+    });
     track.addEventListener('scroll', function () {
       clearTimeout(timer);
       timer = setTimeout(sync, 90);
@@ -206,7 +209,7 @@
       '<div class="qs2-slide" data-v="a" data-module="quick_search_v2">' + buildA() + '</div>' +
       '<div class="qs2-slide" data-v="b" data-module="quick_search_v2b">' + buildB() + '</div>' +
       '<div class="qs2-slide" data-v="c" data-module="quick_search_v2c">' + buildC() + '</div></div>' +
-      (QS2_SWITCHER ? '<div class="qs2-dots" aria-hidden="true"><span class="is-on"></span><span></span><span></span></div>' : '');
+      (QS2_SWITCHER ? '<div class="qs2-dots"><span class="is-on"></span><span></span><span></span></div>' : '');
     wireTracking(root);
     if (QS2_SWITCHER) wireSwiper(root, start);
   }
