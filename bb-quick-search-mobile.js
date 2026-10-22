@@ -89,24 +89,37 @@
   }
 
   /* 시안 B: 시안 C 의 카테고리 버튼 + 그 아래에 기존 "인기 카테고리 빠른 검색 / 인기 브랜드 빠른 검색" (페이지의 #qs1Legacy 마크업을 그대로 복제) */
-  function legacyHtml() {
+  function legacyHtml(brandOnly) {
     var src = document.getElementById('qs1Legacy');
     if (!src) return '';
-    return '<div class="qs2b-legacy">' + src.innerHTML.replace(/ id="popular(?:Category|Brand)Sec"/g, '') + '</div>';
+    var box = document.createElement('div');
+    box.innerHTML = src.innerHTML.replace(/ id="popular(?:Category|Brand)Sec"/g, '');
+    var secs = box.querySelectorAll('.section');
+    if (secs[0]) secs[0].setAttribute('data-qs-legacy', 'category');
+    if (secs[1]) secs[1].setAttribute('data-qs-legacy', 'brand');
+    if (brandOnly && secs[0]) secs[0].parentNode.removeChild(secs[0]);
+    return '<div class="qs2b-legacy">' + box.innerHTML + '</div>';
   }
   function buildB() {
-    return buildC() + legacyHtml();
+    return buildC(true) + legacyHtml(false);
+  }
+
+  /* 시안 D: 시안 B 에서 "인기 카테고리 빠른 검색" 을 빼고 베스트 스토어 + 인기 브랜드 빠른 검색만 남긴 버전 */
+  function buildD() {
+    return buildC(true) + legacyHtml(true);
   }
 
   /* 시안 C: 시안 B 에서 스토어명을 빼고 카테고리명만 남긴 버전 (클릭 -> 스토어 상품 목록) */
-  function buildC() {
+  function buildC(withRank, grouped) { /* grouped: 줄마다 "종합 1위~5위 / 부문별 BEST" 소제목을 두고 순위 문구는 버튼에서 뺀다 (시안 C) */ /* withRank: 시안 B·D 는 웹처럼 "종합 1위" 같은 순위 문구도 함께 보여준다 */
     var html = '<div class="qs2b"><div class="qs2b-hd"><span class="qs2b-title">' +
       '<img class="qs2b-badge" src="best-store-awards-2025.png" alt="" width="32" height="32">' + esc(QS2_ITEMS[0].title) + '</span>' +
       '<a class="qs2b-all" href="' + esc(QS2_ITEMS[0].url) + '"' + attrs('all', 'award_store_all', QS2B_TILES.length + 1) + '>전체보기 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>' +
       '<div class="qs2b-grid">';
     QS2B_TILES.forEach(function (t, i) {
+      if (grouped && i % 5 === 0) html += '<span class="qs2c-sub' + (i ? ' is-second' : '') + '">' + (i ? '부문별 BEST' : '종합 1위~5위') + '</span>';
       html += '<a class="qs2b-tile qs2c-tile" href="' + esc(STORE_LIST_URL) + '"' + attrs('store', 'cat_' + t.catKey, i + 1) + '>' +
-        '<span class="qs2c-cat">' + esc(t.cat).replace('|', '<br>') + '</span></a>';
+        '<span class="qs2c-cat">' + esc(t.cat).replace('|', '<br>') + '</span>' +
+        (withRank ? '<span class="qs2b-rank' + (i === 0 ? ' is-first' : '') + '">' + esc(t.rank) + '</span>' : '') + '</a>';
     });
     return html + '</div></div>';
   }
@@ -143,12 +156,11 @@
       if (chip && root.contains(chip)) { /* 기존 빠른 검색 칩: 이동은 칩의 onclick 이 처리하고 여기서는 측정만 한다 */
         var lslide = chip.closest('.qs2-slide');
         var chips = [].slice.call(lslide.querySelectorAll('.qs2b-legacy .br-chip, .qs2b-legacy .brand-chip'));
-        var secs = [].slice.call(lslide.querySelectorAll('.qs2b-legacy .section'));
         var nameEl = chip.querySelector('.br-name, .brand-name');
         var ci = chips.indexOf(chip);
         window.bbTrack('quick_search_click', {
           module: lslide.getAttribute('data-module'),
-          type: secs.indexOf(chip.closest('.section')) === 0 ? 'legacy_category' : 'legacy_brand',
+          type: chip.closest('.section').getAttribute('data-qs-legacy') === 'brand' ? 'legacy_brand' : 'legacy_category',
           label: nameEl ? nameEl.textContent.trim() : 'legacy_chip_' + (ci + 1),
           position: QS2B_TILES.length + 1 + ci + 1
         });
@@ -167,7 +179,7 @@
   }
 
   /* 시안 비교용: 좌우 스와이프 + 위치 점 표시 (확정 후 QS2_SWITCHER = false) */
-  var ORDER = ['a', 'b', 'c'];
+  var ORDER = ['a', 'b', 'd', 'c'];
   function wireSwiper(root, start) {
     var track = root.querySelector('.qs2-slides');
     var dots = root.querySelectorAll('.qs2-dots span');
@@ -208,8 +220,9 @@
     root.innerHTML = '<div class="qs2-slides">' +
       '<div class="qs2-slide" data-v="a" data-module="quick_search_v2">' + buildA() + '</div>' +
       '<div class="qs2-slide" data-v="b" data-module="quick_search_v2b">' + buildB() + '</div>' +
-      '<div class="qs2-slide" data-v="c" data-module="quick_search_v2c">' + buildC() + '</div></div>' +
-      (QS2_SWITCHER ? '<div class="qs2-dots"><span class="is-on"></span><span></span><span></span></div>' : '');
+      '<div class="qs2-slide" data-v="d" data-module="quick_search_v2d">' + buildD() + '</div>' +
+      '<div class="qs2-slide" data-v="c" data-module="quick_search_v2c">' + buildC(false, true) + '</div></div>' +
+      (QS2_SWITCHER ? '<div class="qs2-dots"><span class="is-on"></span><span></span><span></span><span></span></div>' : '');
     wireTracking(root);
     if (QS2_SWITCHER) wireSwiper(root, start);
   }
