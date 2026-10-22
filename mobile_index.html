@@ -59,7 +59,11 @@ body{font-family:var(--font-sans);color:#333;font-size:14px;line-height:1.5;back
 .nav-group-items.collapsed{max-height:0;opacity:0}
 .nav-item{display:flex;align-items:center;gap:8px;width:100%;padding:8px 12px;border:none;background:none;border-radius:var(--r-btn,12px);font-family:inherit;font-size:13px;font-weight:500;color:var(--ts);cursor:pointer;text-align:left;transition:all .12s;line-height:1.5}
 .nav-item:hover{background:#F5F7FA;color:var(--rose)}
+.nav-item.done{background:#EAF7EF;color:#247A3D;font-weight:700}
+.nav-item.done .nav-file{color:#5E9E70}
+.nav-item.done:hover{background:#DDF2E5;color:#1F6F37}
 .nav-item.active{background:var(--rose);color:#fff;font-weight:700}
+.nav-item.done.active{background:var(--green,#3AAD4E);color:#fff}
 .nav-item.active .nav-file{color:rgba(255,255,255,.7)}
 .nav-item i{width:16px;text-align:center;font-size:13px;flex-shrink:0}
 .nav-item-label{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -82,7 +86,7 @@ body{font-family:var(--font-sans);color:#333;font-size:14px;line-height:1.5;back
         <button class="nav-item" data-page="mobile_sub_main.html"><i class="fa-solid fa-layer-group"></i><span class="nav-item-label">서브 메인<span class="nav-file">mobile_sub_main.html</span></span></button>
         <button class="nav-item" data-page="mobile_category_main.html"><i class="fa-solid fa-table-columns"></i><span class="nav-item-label">카테고리 메인<span class="nav-file">mobile_category_main.html</span></span></button>
         <button class="nav-item" data-page="mobile_totalsearch.html"><i class="fa-solid fa-magnifying-glass"></i><span class="nav-item-label">통합검색<span class="nav-file">mobile_totalsearch.html</span></span></button>
-        <button class="nav-item" data-page="mobile_best_store.html"><i class="fa-solid fa-trophy"></i><span class="nav-item-label">베스트 스토어<span class="nav-file">mobile_best_store.html</span></span></button>
+        <button class="nav-item done" data-page="mobile_best_store.html"><i class="fa-solid fa-trophy"></i><span class="nav-item-label">베스트 스토어<span class="nav-file">mobile_best_store.html</span></span></button>
         <button class="nav-item" data-page="mobile_login.html"><i class="fa-solid fa-right-to-bracket"></i><span class="nav-item-label">로그인<span class="nav-file">mobile_login.html</span></span></button>
       </div>
     </div>
